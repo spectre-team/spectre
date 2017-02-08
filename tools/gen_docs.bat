@@ -1,0 +1,1 @@
+call "doxygen/doxygen.exe" doxygen/default_config
