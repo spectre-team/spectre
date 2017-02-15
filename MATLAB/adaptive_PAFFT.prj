@@ -1,0 +1,153 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration file="C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\adaptive_PAFFT.prj" location="C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB" name="adaptive_PAFFT" target="target.ezdeploy.library" target-name="Library Compiler">
+    <param.appname>adaptive_PAFFT</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark>Michał Marczyk</param.authnamewatermark>
+    <param.email>Michal.Marczyk@polsl.pl</param.email>
+    <param.company>Silesian University of Technology</param.company>
+    <param.summary>Peak Alignment using Fast Fourier Transform</param.summary>
+    <param.description>Contains modified function performing PAFFT on spectra with common m/z axis.
+
+Published in:
+Marczyk M, Polanska J, Polanski A: Comparison of Algorithms for Profile-Based Alignment of Low Resolution MALDI-ToF Spectra. In Advances in Intelligent Systems and Computing, Vol. 242 of Man-Machine Interactions 3, Gruca A, Czachorski T, Kozielski S, editors. Springer Berlin Heidelberg 2014, p. 193-201 (ISBN: 978-3-319-02308-3), ICMMI 2013, 22-25.10.2013 Brenna, Poland
+
+Original implementation made by Jason H. W. Wong:
+J. W. Wong, C. Durante and H. M. Cartwright, "Application of fast Fourier transform cross-correlation for the alignment of large chromatographic and spectral datasets," Analytical Chemistry, vol. 77, no. 17, pp. 5655-5661, 2005.</param.description>
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>\Silesian University of Technology\adaptive_PAFFT\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\adaptive_PAFFT-compile\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\adaptive_PAFFT-compile\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\adaptive_PAFFT-compile\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\adaptive_PAFFT-compile</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.embed.ctf>true</param.embed.ctf>
+    <param.target.type>subtarget.net.component</param.target.type>
+    <param.support.packages />
+    <param.namespace>Matlab</param.namespace>
+    <param.classorg />
+    <param.web.mcr>false</param.web.mcr>
+    <param.package.mcr>true</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.user.only.registration>false</param.user.only.registration>
+    <param.net.framework>option.net.framework.default</param.net.framework>
+    <param.assembly.type>false</param.assembly.type>
+    <param.encryption.key.file />
+    <param.net.enable.remoting>false</param.net.enable.remoting>
+    <param.net.tsa.enable>false</param.net.tsa.enable>
+    <param.net.tsa.assembly />
+    <param.net.tsa.interface />
+    <param.net.tsa.namespace>Matlab</param.net.tsa.namespace>
+    <param.net.tsa.superclass>Algorithms</param.net.tsa.superclass>
+    <param.net.tsa.metadata />
+    <param.net.tsa.metadata.assembly>C:\WINDOWS\System32</param.net.tsa.metadata.assembly>
+    <param.net.saved.interface />
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.target.install.notes />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.embed.ctf />
+      <param.support.packages />
+      <param.classorg />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.user.only.registration />
+      <param.net.framework />
+      <param.assembly.type />
+      <param.encryption.key.file />
+      <param.net.enable.remoting />
+      <param.net.tsa.enable />
+      <param.net.tsa.assembly />
+      <param.net.tsa.interface />
+      <param.net.tsa.namespace />
+      <param.net.tsa.superclass />
+      <param.net.tsa.metadata />
+      <param.net.tsa.metadata.assembly />
+      <param.net.saved.interface />
+    </unset>
+    <fileset.exports>
+      <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
+    </fileset.exports>
+    <fileset.classes>
+      <entity.package name="">
+        <entity.class name="Algorithms">
+          <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
+        </entity.class>
+      </entity.package>
+    </fileset.classes>
+    <fileset.resources />
+    <fileset.depfun />
+    <fileset.package />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\adaptive_PAFFT-compile\for_testing" name="readme.txt" optional="true">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\adaptive_PAFFT-compile\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\adaptive_PAFFT-compile\for_testing" name="Matlab_overview.html" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\adaptive_PAFFT-compile\for_testing\Matlab_overview.html</file>
+      <file location="${PROJECT_ROOT}\adaptive_PAFFT-compile\for_testing" name="MatlabNative.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\adaptive_PAFFT-compile\for_testing\MatlabNative.dll</file>
+      <file location="${PROJECT_ROOT}\adaptive_PAFFT-compile\for_testing" name="Matlab.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\adaptive_PAFFT-compile\for_testing\Matlab.dll</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2016b</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="embeddedcoder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
