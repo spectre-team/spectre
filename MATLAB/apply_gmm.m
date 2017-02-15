@@ -9,10 +9,10 @@ function modelled = apply_gmm(mdl, data)
     KS=mdl.KS;
 
     modelled=zeros(size(data,1), KS);
-    parfor i=1:size(data,1)
-        y=data(i,:);
-        for kks=1:KS
-            y_gmm = w(kks)*normpdf(mz, mu(kks), sig(kks));
+    for kks=1:KS
+        y_gmm = w(kks)*normpdf(mz, mu(kks), sig(kks));
+        parfor i=1:size(data,1)
+            y=data(i,:);
             wid=y.*y_gmm;
             modelled(i, kks)=sum(wid);
         end
