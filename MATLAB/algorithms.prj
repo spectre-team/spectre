@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\algorithms.prj" location="C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB" name="algorithms" target="target.ezdeploy.library" target-name="Library Compiler">
+  <configuration file=".\algorithms.prj" location="." name="algorithms" target="target.ezdeploy.library" target-name="Library Compiler">
     <param.appname>MsiAlgorithms</param.appname>
     <param.icon />
     <param.icons />
