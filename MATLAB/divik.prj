@@ -6,12 +6,17 @@
     <param.version>1.0</param.version>
     <param.authnamewatermark>Grzegorz Mrukwa</param.authnamewatermark>
     <param.email>g.mrukwa@gmail.com</param.email>
-    <param.company>Politechnika Śląska</param.company>
-    <param.summary>DiviK algorithm implementation</param.summary>
-    <param.description>This library contains Divisive IK-means (DiviK) algorithm implementation.</param.description>
+    <param.company>Silesian University of Technology</param.company>
+    <param.summary>Divisive IK-means</param.summary>
+    <param.description>This library contains Divisive IK-means (DiviK) algorithm implementation.
+
+Published in:
+P. Widlak, G. Mrukwa, M. Kalinowska, M. Pietrowska, M. Chekan, J. Wierzgon, M. Gawin, G. Drazek and J. Polanska, "Detection of molecular signatures of oral squamous cell carcinoma and normal epithelium - application of a novel methodology for unsupervised segmentation of imaging mass spectrometry data," Proteomics, vol. 16, no. 11-12, pp. 1613-21, 2016.
+M. Pietrowska, H. C. Diehl, G. Mrukwa, M. Kalinowska-Herok, M. Gawin, M. Chekan, J. Elm, G. Drazek, A. Krawczyk, D. Lange, H. E. Meyer, J. Polanska, C. Henkel, P. Widlak, "Molecular profiles of thyroid cancer subtypes: Classification based on features of tissue revealed by mass spectrometry imaging," Biochimica et Biophysica Acta (BBA)-Proteins and Proteomics, 2016
+G. Mrukwa, G. Drazek, M. Pietrowska, P. Widlak and J. Polanska, "A Novel Divisive iK-Means Algorithm with Region-Driven Feature Selection as a Tool for Automated Detection of Tumour Heterogeneity in MALDI IMS Experiments," in International Conference on Bioinformatics and Biomedical Engineering, 2016.</param.description>
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>\Politechnika Śląska\divik\</param.installpath.string>
+    <param.installpath.string>\Silesian University of Technology\divik\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -25,7 +30,7 @@
     <param.embed.ctf>true</param.embed.ctf>
     <param.target.type>subtarget.net.component</param.target.type>
     <param.support.packages />
-    <param.namespace />
+    <param.namespace>Matlab</param.namespace>
     <param.classorg />
     <param.web.mcr>false</param.web.mcr>
     <param.package.mcr>true</param.package.mcr>
@@ -44,8 +49,8 @@
     <param.net.tsa.enable>false</param.net.tsa.enable>
     <param.net.tsa.assembly />
     <param.net.tsa.interface />
-    <param.net.tsa.namespace />
-    <param.net.tsa.superclass>Divik</param.net.tsa.superclass>
+    <param.net.tsa.namespace>Matlab</param.net.tsa.namespace>
+    <param.net.tsa.superclass>Algorithms</param.net.tsa.superclass>
     <param.net.tsa.metadata />
     <param.net.tsa.metadata.assembly>C:\WINDOWS\System32</param.net.tsa.metadata.assembly>
     <param.net.saved.interface />
@@ -63,7 +68,6 @@
       <param.user.defined.mcr.options />
       <param.embed.ctf />
       <param.support.packages />
-      <param.namespace />
       <param.classorg />
       <param.no.mcr />
       <param.web.mcr.name />
@@ -90,7 +94,7 @@
     </fileset.exports>
     <fileset.classes>
       <entity.package name="">
-        <entity.class name="Divik">
+        <entity.class name="Algorithms">
           <file>${PROJECT_ROOT}\DiviK\libs\divik_library\divik.m</file>
         </entity.class>
       </entity.package>
@@ -122,10 +126,10 @@
     </fileset.depfun>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\divik-compile\for_testing" name="divikNative.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\divik-compile\for_testing\divikNative.dll</file>
+      <file location="${PROJECT_ROOT}\divik-compile\for_testing" name="Matlab_overview.html" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\divik-compile\for_testing\Matlab_overview.html</file>
+      <file location="${PROJECT_ROOT}\divik-compile\for_testing" name="Matlab.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\divik-compile\for_testing\Matlab.dll</file>
       <file location="${PROJECT_ROOT}\divik-compile\for_testing" name="readme.txt" optional="true">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\divik-compile\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\divik-compile\for_testing" name="divik.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\divik-compile\for_testing\divik.dll</file>
-      <file location="${PROJECT_ROOT}\divik-compile\for_testing" name="divik_overview.html" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\divik-compile\for_testing\divik_overview.html</file>
+      <file location="${PROJECT_ROOT}\divik-compile\for_testing" name="MatlabNative.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\divik-compile\for_testing\MatlabNative.dll</file>
     </build-deliverables>
     <workflow />
     <matlab>
