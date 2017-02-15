@@ -92,17 +92,19 @@ J. W. Wong, C. Durante and H. M. Cartwright, "Application of fast Fourier transf
       <param.net.saved.interface />
     </unset>
     <fileset.exports>
-      <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
+      <file>${PROJECT_ROOT}\pafft.m</file>
     </fileset.exports>
     <fileset.classes>
       <entity.package name="">
         <entity.class name="Algorithms">
-          <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
+          <file>${PROJECT_ROOT}\pafft.m</file>
         </entity.class>
       </entity.package>
     </fileset.classes>
     <fileset.resources />
-    <fileset.depfun />
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
+    </fileset.depfun>
     <fileset.package />
     <build-deliverables>
       <file location="${PROJECT_ROOT}\adaptive_PAFFT-compile\for_testing" name="readme.txt" optional="true">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\adaptive_PAFFT-compile\for_testing\readme.txt</file>
