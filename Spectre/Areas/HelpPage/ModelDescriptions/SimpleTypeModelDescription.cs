@@ -1,0 +1,6 @@
+namespace Spectre.Areas.HelpPage.ModelDescriptions
+{
+    public class SimpleTypeModelDescription : ModelDescription
+    {
+    }
+}
