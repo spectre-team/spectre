@@ -6,6 +6,6 @@ before_build:
 
     nuget restore
 build:
-  project: ./Spectre.sln
+  project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
