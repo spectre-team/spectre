@@ -1,8 +1,11 @@
 version: 0.0.{build}
 services: iis
 before_build:
-- cmd: nuget restore
+- cmd: >-
+    cd src
+
+    nuget restore
 build:
-  project: ./Spectre.sln
+  project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
