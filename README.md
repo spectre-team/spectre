@@ -1,26 +1,30 @@
 # Spectre
 
-## What is this?
+Spectre is a versatile tool used for analysis of MALDI-MSI data sets.
 
-Aim of this project is to provide a versatile tool for MALDI-MSI data sets
-analysis.
+For the sake of simplicity, the toolset provided is available to be used 
+through interfacing with web application, which is currently a work-in-progress.
 
-This goal is realized by a web application, which will be easily accessible to
-anyone soon. If you would like to host it yourself - here are the sources, so
-you can build and run it.
+In order to build and run the application, please refer to the
+[installation](#install) section.
 
-## What can I do with this?
+## About
 
-This project is in its very early stage. However, we are implementing our own
-spectra modelling based on Gaussian Mixture Models, and Divisive IK-means
-algorithm for unsupervised segmentation, which can be used for efficient dataset
-compression as well as for knowledge discovery. Those algorithms have already
-been published, so for any details, please check [references](#references).
+The project is currently in its early stage. However, it comprises the 
+implementation of our own spectra modelling based on Gaussian Mixture Models, 
+and Divisive IK-means algorithm for unsupervised segmentation, which can be 
+used for efficient dataset compression as well as for knowledge discovery. 
+Aformentioned algorithms have already been published and links refering
+have been enclosed under [references](#references) section.
 
 Also, several classification and clusterization methods will be provided soon,
 along with supporting statistics.
 
-## How to use this?
+## Install
+
+Details will be added soon.
+
+## Exemplary usage
 
 Details will be added soon.
 
