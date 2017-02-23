@@ -20,34 +20,34 @@ namespace Spectre.Algorithms
             segmentation = new Segmentation();
         }
 
-        public void ApplyGmm()
+        public object ApplyGmm(object model, object data)
         {
-            
+            return gaussianMixtureModel.apply_gmm(model, data);
         }
 
-        public object[] EstimateGmm()
+        public object EstimateGmm(object mz, object data, object merge, object remove)
         {
-            return null;
+            return gaussianMixtureModel.estimate_gmm(mz, data, merge, remove);
         }
 
-        public void PeakAlignmentFFT()
+        public object PeakAlignmentFFT(object mz, object data)
         {
-            
+            return preprocessing.pafft(mz, data);
         }
 
-        public void RemoveBaseline()
+        public object RemoveBaseline(object mz, object data)
         {
-            
+            return preprocessing.remove_baseline(mz, data);
         }
 
-        public void TicNorm()
+        public object TicNorm(object data)
         {
-            
+            return preprocessing.ticnorm(data);
         }
 
-        public object[] Divik()
+        public object[] Divik(int numberOfOutputArgs, object data, object coordinates, params object[] varargin)
         {
-            return null;
+            return segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
         }
     }
 }
