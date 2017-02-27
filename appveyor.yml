@@ -27,3 +27,5 @@ test:
   assemblies: '*.Tests\bin\x64\*\*.Tests.dll'
 before_test:
   - dir
+  - dir Spectre.Tests
+  - dir SpectreService.Test
