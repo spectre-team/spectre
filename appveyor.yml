@@ -23,7 +23,3 @@ build:
   project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
-test:
-  assemblies: '**\$(configuration)\x64\*.Tests.dll'
-before_test:
-  - dir '**\$(configuration)\x64\*.Tests.dll'
