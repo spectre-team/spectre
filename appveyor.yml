@@ -9,7 +9,7 @@ assembly_info:
 platform: x64
 configuration:
   - Debug
-  - Release
+#  - Release
 services: iis
 install:
 - ps: >-
@@ -25,3 +25,5 @@ build:
   verbosity: normal
 test:
   assemblies: '*.Tests\bin\x64\*\*.Tests.dll'
+before_test:
+  - dir
