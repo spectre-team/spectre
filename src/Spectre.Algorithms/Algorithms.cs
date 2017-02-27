@@ -30,19 +30,19 @@ namespace Spectre.Algorithms
             return gaussianMixtureModel.estimate_gmm(mz, data, merge, remove);
         }
 
-        public object PeakAlignmentFFT(object mz, object data)
+        public System.Double[,] PeakAlignmentFFT(object mz, object data)
         {
-            return preprocessing.pafft(mz, data);
+            return (double[,])preprocessing.pafft(mz, data);
         }
 
-        public object RemoveBaseline(object mz, object data)
+        public System.Double[,] RemoveBaseline(double[] mz, double[,] data)
         {
-            return preprocessing.remove_baseline(mz, data);
+            return (double[,])preprocessing.remove_baseline(mz, data);
         }
 
-        public object TicNorm(object data)
+        public System.Double[,] TicNorm(double[,] data)
         {
-            return preprocessing.ticnorm(data);
+            return (double[,])preprocessing.ticnorm(data);
         }
 
         public object[] Divik(int numberOfOutputArgs, object data, object coordinates, params object[] varargin)
