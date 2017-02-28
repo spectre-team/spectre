@@ -16,7 +16,7 @@ end
 y(y<0) = 0;
 
 %run ms_gmm
-[ww_gmm,mu_gmm,sig_gmm]=ms_gmm(mz,y);
+[ww_gmm,mu_gmm,sig_gmm]=ms_gmm1(mz,y);
 
 %plot results
 if opts.draw; 

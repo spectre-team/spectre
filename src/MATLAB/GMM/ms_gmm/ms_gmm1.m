@@ -7,7 +7,7 @@
 % decomposition of the proteomic spectrum into Gaussian mixture model
 %
 %
-function [ww_gmm,mu_gmm,sig_gmm]=ms_gmm(mz,y_bas)
+function [ww_gmm,mu_gmm,sig_gmm]=ms_gmm1(mz,y_bas)
 
 %
 % INITIALIZATION
@@ -62,7 +62,7 @@ ww_mx_2=zeros(KSP1,Buf_size_seg_Par);
 sig_mx_2=zeros(KSP1,Buf_size_seg_Par);
 parfor ksp=1:KSP1    
 %    disp(['Seg Progress: ' num2str(ksp) ' of ' num2str(KSP1)]);
-   [ww_out,mu_out,sig_out]=gmm_decomp_segment(mz,y_bas,ww_mx_1,mu_mx_1,sig_mx_1,P,Splitt_v,Par_mcv,ksp-1);
+   [ww_out,mu_out,sig_out]=gmm_decomp_segment1(mz,y_bas,ww_mx_1,mu_mx_1,sig_mx_1,P,Splitt_v,Par_mcv,ksp-1);
    mu_mx_2(ksp,:)=mu_out;
    ww_mx_2(ksp,:)=ww_out;
    sig_mx_2(ksp,:)=sig_out;

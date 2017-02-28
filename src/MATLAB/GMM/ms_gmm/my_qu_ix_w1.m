@@ -3,7 +3,7 @@
 %        auxiliary function - computing quality index for dynamic programming
 %
 %
-function wyn=my_qu_ix_w(invec,yinwec,PAR,PAR_sig_min)
+function wyn=my_qu_ix_w1(invec,yinwec,PAR,PAR_sig_min)
 invec=invec(:);
 yinwec=yinwec(:);
 if (invec(length(invec))-invec(1))<=PAR_sig_min || sum(yinwec)<=1.0e-3

@@ -4,7 +4,7 @@
 %       dynamic programming initialization
 %
 %
-function [ww_dec,mu_dec,sig_dec]=gmm_decomp_segment(mz,y_bas,ww_mx_1,mu_mx_1,sig_mx_1,P,Splitt_v,Par_mcv,Fr_No)
+function [ww_dec,mu_dec,sig_dec]=gmm_decomp_segment1(mz,y_bas,ww_mx_1,mu_mx_1,sig_mx_1,P,Splitt_v,Par_mcv,Fr_No)
 
 % parameters
 DRAW=ms_gmm_params(1);
@@ -98,7 +98,7 @@ else
       
          %name=['dane_nr' num2str(ksp)];
          %save(name, 'mz_out', 'y_out', 'mz_out_b', 'y_out_b', 'QFPAR', 'PAR_sig_min', 'PAR_penet');   
-         aux_mx=dyn_pr_split_w_aux(mz_out_b,y_out_b,QFPAR,PAR_sig_min);    
+         aux_mx=dyn_pr_split_w_aux1(mz_out_b,y_out_b,QFPAR,PAR_sig_min);    
          while KS < Buf_size_seg_Par 
              KS=KS+1;
              kpen=kpen+1;
