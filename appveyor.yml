@@ -23,3 +23,8 @@ build:
   project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
+test:
+  assemblies:
+  - '**\*.tests.dll'
+  #hacking this option into AppVeyor
+  - /Platform:x64
