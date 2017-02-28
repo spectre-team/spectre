@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file=".\algorithms.prj" location="." name="algorithms" target="target.ezdeploy.library" target-name="Library Compiler">
+  <configuration file="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms.prj" location="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB" name="algorithms" target="target.ezdeploy.library" target-name="Library Compiler">
     <param.appname>MsiAlgorithms</param.appname>
     <param.icon />
     <param.icons />
@@ -113,60 +113,19 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
         </entity.class>
       </entity.package>
     </fileset.classes>
-    <fileset.resources />
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\DiviK\libs</file>
+      <file>${PROJECT_ROOT}\GMM</file>
+    </fileset.resources>
     <fileset.depfun>
       <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\divik_library\dunn.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\divik_library\k_means.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\divik_library\optimize_partition.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\default_gmm_opts.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\dyn_pr_split_w.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\dyn_pr_split_w_aux.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\EM_iter.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\g_mix_est_fast_lik.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\gauss_rem.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\gaussian_mixture_simple.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\Hubert_out.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\my_qu_ix_w.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\GMM_library\post_proc.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\any_dist.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\apply_user_configs.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\cacher.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\capture_diary.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\cell_settings.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\DataHash.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_centroids_from_partition.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\filthy_merge.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\gmm_sum_fun.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\gmm_uborder_fun.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\mkfiledir.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\partition_plotter.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\resize.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\bindata.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\emcor.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\f_par_mcv.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\fill_red.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\find_ranges.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\find_segment.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\find_split_peaks.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\find_split_segment.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\gmm_decomp_segment.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\gmm_decomp_split_segment.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\ms_gmm.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\ms_gmm_params.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\ms_gmm_run.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\my_EM_iter.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\plot_gmm.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\plot_res_new_scale.m</file>
-      <file>${PROJECT_ROOT}\GMM\ms_gmm\qua_scal.m</file>
     </fileset.depfun>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms.dll</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="readme.txt" optional="true">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\algorithms-compile\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms_overview.html" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms_overview.html</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithmsNative.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\msi-divik\MATLAB\algorithms-compile\for_testing\MatlabAlgorithmsNative.dll</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithmsNative.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithmsNative.dll</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms_overview.html" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms_overview.html</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms.dll</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="readme.txt" optional="true">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\readme.txt</file>
     </build-deliverables>
     <workflow />
     <matlab>
