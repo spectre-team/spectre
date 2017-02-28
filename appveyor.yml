@@ -25,4 +25,8 @@ build:
   verbosity: normal
 test_script:
 - cmd: >-
+    dir
+    
+    dir scripts\
+    
     scripts\run_tests.bat
