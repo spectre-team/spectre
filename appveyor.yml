@@ -13,7 +13,7 @@ configuration:
 services: iis
 install:
 - ps: >-
-    $registryPath = "HKLM\Software\Microsoft\Fusion"
+    $registryPath = "HKLM:\Software\Microsoft\Fusion"
     
     $name = "EnableLog"
     
