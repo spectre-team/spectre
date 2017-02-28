@@ -29,4 +29,4 @@ build:
   verbosity: normal
 test_script:
 - cmd: >-
-    scripts\run_tests.bat
+    scripts\run_not_excluded_tests.bat Spectre.Algorithms.Tests
