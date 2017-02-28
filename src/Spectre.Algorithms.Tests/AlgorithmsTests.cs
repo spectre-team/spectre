@@ -53,10 +53,10 @@ namespace Spectre.Algorithms.Tests
 		[TestMethod]
 		public void EstimateGmm()
 		{
-			double[] mz = new double[] { 1, 1.1, 1.2 };
-			double[,] data = new double[,] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+			double[] mz = new double[] { 1, 2, 3 };
+			double[,] data = new double[,] { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
 
-			object result = alg.EstimateGmm(mz, data, 1, 1);
+			object result = alg.EstimateGmm(mz, data, 0, 0);
 
 			Console.WriteLine(result);
 
@@ -72,24 +72,23 @@ namespace Spectre.Algorithms.Tests
 
 			object result = alg.ApplyGmm(mz, data);
 
-			// Assert
-			Assert.IsNotNull(result);
+            Console.WriteLine(result);
+
+            // Assert
+            Assert.IsNotNull(result);
 		}
 
 		[TestMethod]
 		public void Divik()
 		{
-			double[,] data = new double[,] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
-			double[] coordinates = new double[] { 1, 2 };
-			Dictionary<string, object> args = new Dictionary<string, object>();
-			args.Add("Verbose", false);
-			args.Add("UseLevels", false);
-			args.Add("OutPath", "ścieżka.txt");
+            double[,] data = new double[,] { { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 } };
+            int[,] coordinates = new int[,] { { 1, 1 }, { 1, 1 }, { 1, 1 }, { 1, 1 } };
+            object[] varargin = new object[] { "Cache", false, "VarianceFiltration", false, "AmplitudeFiltration", false, "Level", 1.0, "MaxK", 2, "Metric", "euclidean" };
 
-			object[] result = alg.Divik(2, data, coordinates, args);
-
-			// Assert
-			Assert.IsNotNull(result);
+            DivikResult result = alg.Divik(data, coordinates, varargin);
+            
+            // Assert
+            Assert.IsNotNull(result);
 		}
 	}
 }

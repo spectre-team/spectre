@@ -45,9 +45,11 @@ namespace Spectre.Algorithms
             return (double[,])preprocessing.ticnorm(data);
         }
 
-        public object[] Divik(int numberOfOutputArgs, object data, object coordinates, params object[] varargin)
+        public DivikResult Divik(double[,] data, int[,] coordinates, object[] varargin)
         {
-            return segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
+            const int numberOfOutputArgs = 2;
+            object tmp = segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
+            return new DivikResult();
         }
     }
 }
