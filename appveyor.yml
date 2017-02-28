@@ -15,7 +15,7 @@ install:
 - ps: >-
     scripts\enable_assembly_log.ps1
     
-    scripts\install_mcr.ps1
+#    scripts\install_mcr.ps1
 before_build:
 - cmd: >-
     cd src
