@@ -13,7 +13,7 @@ configuration:
 services: iis
 install:
 - ps: >-
-    prep\install_mcr.ps1
+    scripts\install_mcr.ps1
 before_build:
 - cmd: >-
     cd src
@@ -25,16 +25,4 @@ build:
   verbosity: normal
 test_script:
 - cmd: >-
-    @echo off
-
-    setlocal EnableDelayedExpansion
-
-    dir *.tests.dll /b /s | findstr /v obj > __tmp.txt
-
-    set dirs=
-
-    FOR /F %%i IN (__tmp.txt) DO set dirs=!dirs! %%i
-
-    del __tmp.txt
-
-    vstest.console /logger:Appveyor %dirs% /Platform:x64
+    scripts\run_tests.bat
