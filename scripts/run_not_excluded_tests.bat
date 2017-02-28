@@ -6,6 +6,7 @@ dir *.tests.dll /b /s | findstr /v obj %excluded% > __tmp.txt
 REM EXCLUSIONS
 :exclusions
 if "%1"=="" goto test
+appveyor AddMessage "Excluded tests from %1" -Category Information
 echo Excluding %1
 type __tmp.txt | findstr /v %1 > __tmp1.txt
 move __tmp1.txt __tmp.txt > nul 2>&1
