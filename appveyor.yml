@@ -19,14 +19,12 @@ before_build:
     cd src
 
     nuget restore
+    
+    cd ..
 build:
   project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
 test_script:
 - cmd: >-
-    dir
-    
-    dir scripts\
-    
     scripts\run_tests.bat
