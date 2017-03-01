@@ -1,19 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using Spectre.Algorithms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectre.Algorithms.Tests
 {
-	[TestClass()]
+	[TestFixture]
 	public class AlgorithmsTests
 	{
 		Spectre.Algorithms.Algorithms alg = new Spectre.Algorithms.Algorithms();
 
-		[TestMethod]
+		[Test]
 		public void RemoveBaseline()
 		{
 			double[] mz = new double[] { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 };
@@ -26,7 +23,7 @@ namespace Spectre.Algorithms.Tests
 			Assert.IsNotNull(result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void PeakAlignmentFFT()
 		{
 			double[] mz = new double[] { 1, 1, 1 };
@@ -38,7 +35,7 @@ namespace Spectre.Algorithms.Tests
 			Assert.IsNotNull(result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TicNorm()
 		{
 			double[,] data = new double[,] { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
@@ -50,7 +47,7 @@ namespace Spectre.Algorithms.Tests
 			Assert.IsNotNull(result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void EstimateGmm()
 		{
 			double[] mz = new double[] { 1, 2, 3 };
@@ -64,7 +61,7 @@ namespace Spectre.Algorithms.Tests
 			Assert.IsNotNull(result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void ApplyGmm()
 		{
 			object data = 0;
@@ -78,7 +75,7 @@ namespace Spectre.Algorithms.Tests
             Assert.IsNotNull(result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Divik()
 		{
             double[,] data = new double[,] { { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 } };

@@ -1,10 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Spectre.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Web.Mvc;
+using NUnit.Framework;
+using Spectre;
+using Spectre.Controllers;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Spectre.Tests.Models
 {

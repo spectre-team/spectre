@@ -27,6 +27,3 @@ build:
   project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
-test_script:
-- cmd: >-
-    scripts\run_not_excluded_tests.bat Spectre.Algorithms.Tests
