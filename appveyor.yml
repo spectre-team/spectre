@@ -9,3 +9,8 @@ build:
   project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
+cache:
+# preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+  - packages -> **\packages.config
+# project.json cache
+  - '%USERPROFILE%\.nuget\packages -> **\project.json'
