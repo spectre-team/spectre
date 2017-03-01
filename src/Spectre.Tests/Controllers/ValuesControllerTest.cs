@@ -3,7 +3,6 @@ using System.Linq;
 using NUnit.Framework;
 using Spectre;
 using Spectre.Controllers;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Spectre.Tests.Controllers
 {
