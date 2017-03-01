@@ -5,7 +5,7 @@ using System;
 
 namespace Spectre.Algorithms.Tests
 {
-	[TestFixture]
+	[TestFixture, Category("Algorithm")]
 	public class AlgorithmsTests
 	{
 		Spectre.Algorithms.Algorithms alg = new Spectre.Algorithms.Algorithms();

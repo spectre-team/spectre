@@ -27,3 +27,7 @@ build:
   project: ./src/Spectre.sln
   parallel: true
   verbosity: normal
+test:
+  categories:
+    except:
+      - Algorithm
