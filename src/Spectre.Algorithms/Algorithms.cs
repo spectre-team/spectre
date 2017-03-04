@@ -7,11 +7,13 @@ using MatlabAlgorithmsNative;
 
 namespace Spectre.Algorithms
 {
-    public class Algorithms
+    public class Algorithms:IDisposable
     {
         private Gmm gaussianMixtureModel;
         private Preprocessing preprocessing;
         private Segmentation segmentation;
+
+        private bool disposed = false;
 
         public Algorithms()
         {
@@ -23,6 +25,7 @@ namespace Spectre.Algorithms
         public object ApplyGmm(object model, object data)
         {
             return gaussianMixtureModel.apply_gmm(model, data);
+            
         }
 
         public object EstimateGmm(object mz, object data, object merge, object remove)
@@ -50,6 +53,27 @@ namespace Spectre.Algorithms
             const int numberOfOutputArgs = 2;
             object tmp = segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
             return new DivikResult();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    this.gaussianMixtureModel.Dispose();
+                    this.preprocessing.Dispose();
+                    this.segmentation.Dispose();
+                }
+                disposed = true;
+
+            }
         }
     }
 }
