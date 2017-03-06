@@ -4,7 +4,7 @@
 %        conditions for EM iterations
 %
 
-function [Q,opt_part]=dyn_pr_split_w(data,ygreki,K_gr,aux_mx,PAR,PAR_sig_min)
+function [Q,opt_part]=dyn_pr_split_w1(data,ygreki,K_gr,aux_mx,PAR,PAR_sig_min)
 
 % initialize
 Q=zeros(1,K_gr);
@@ -13,7 +13,7 @@ p_opt_idx=zeros(1,N);
 p_aux=zeros(1,N);
 opt_pals=zeros(K_gr,N);
 for kk=1:N;
-    p_opt_idx(kk)=my_qu_ix_w(data(kk:N),ygreki(kk:N),PAR,PAR_sig_min);
+    p_opt_idx(kk)=my_qu_ix_w1(data(kk:N),ygreki(kk:N),PAR,PAR_sig_min);
 end
 
 % aux_mx - already computed

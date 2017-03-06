@@ -1,4 +1,4 @@
-function [mdl_area,mdl_height,mdl_merge] = post_proc(mz,y,mdl,opts)
+function [mdl_area,mdl_height,mdl_merge] = post_proc1(mz,y,mdl,opts)
 
 if opts.if_merge
     %merging
