@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MatlabAlgorithmsNative;
 
 namespace Spectre.Algorithms
@@ -22,28 +18,28 @@ namespace Spectre.Algorithms
             segmentation = new Segmentation();
         }
 
-        public object ApplyGmm(object model, object data)
+        public double[,] ApplyGmm(object model, double[,] data, double[] mz)
         {
-            return gaussianMixtureModel.apply_gmm(model, data);
+            return (double[,])gaussianMixtureModel.apply_gmm(model, data, mz);
             
         }
 
-        public object EstimateGmm(object mz, object data, object merge, object remove)
+        public object EstimateGmm(object mz, double[,] data, bool merge, bool remove)
         {
             return gaussianMixtureModel.estimate_gmm(mz, data, merge, remove);
         }
 
-        public System.Double[,] PeakAlignmentFFT(object mz, object data)
+        public double[,] PeakAlignmentFFT(object mz, object data)
         {
             return (double[,])preprocessing.pafft(mz, data);
         }
 
-        public System.Double[,] RemoveBaseline(double[] mz, double[,] data)
+        public double[,] RemoveBaseline(double[] mz, double[,] data)
         {
             return (double[,])preprocessing.remove_baseline(mz, data);
         }
 
-        public System.Double[,] TicNorm(double[,] data)
+        public double[,] TicNorm(double[,] data)
         {
             return (double[,])preprocessing.ticnorm(data);
         }
@@ -72,8 +68,12 @@ namespace Spectre.Algorithms
                     this.segmentation.Dispose();
                 }
                 disposed = true;
-
             }
         }
+
+	    ~Algorithms()
+	    {
+		    Dispose(false);
+	    }
     }
 }

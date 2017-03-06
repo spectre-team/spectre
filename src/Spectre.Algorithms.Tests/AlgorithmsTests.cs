@@ -1,22 +1,35 @@
 ﻿using NUnit.Framework;
 using Spectre.Algorithms;
 using System;
+using System.Net.Configuration;
 
 namespace Spectre.Algorithms.Tests
 {
 	[TestFixture, Category("Algorithm")]
 	public class AlgorithmsTests
 	{
-		Spectre.Algorithms.Algorithms alg = new Spectre.Algorithms.Algorithms();
+		Spectre.Algorithms.Algorithms alg;
+
+		[OneTimeSetUp]
+		public void SetUpClass()
+		{
+			alg = new Algorithms();
+		}
+
+		[OneTimeTearDown]
+		public void TearDownClass()
+		{
+			alg.Dispose();
+		}
 
 		[Test]
 		public void RemoveBaseline()
 		{
-			double[] mz = new double[] { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 };
-			double[,] data = new double[,] { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
+			double[] mz = { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 };
+			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
 
-			System.Double[,] result = alg.RemoveBaseline(mz, data);
+			double[,] result = alg.RemoveBaseline(mz, data);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -25,10 +38,10 @@ namespace Spectre.Algorithms.Tests
 		[Test]
 		public void PeakAlignmentFFT()
 		{
-			double[] mz = new double[] { 1, 1, 1 };
-			double[,] data = new double[,] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+			double[] mz = { 1, 1, 1 };
+			double[,] data = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
 
-			System.Double[,] result = alg.PeakAlignmentFFT(mz, data);
+			double[,] result = alg.PeakAlignmentFFT(mz, data);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -37,10 +50,10 @@ namespace Spectre.Algorithms.Tests
 		[Test]
 		public void TicNorm()
 		{
-			double[,] data = new double[,] { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
+			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
 
-			System.Double[,] result = alg.TicNorm(data);
+			double[,] result = alg.TicNorm(data);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -49,10 +62,10 @@ namespace Spectre.Algorithms.Tests
 		[Test]
 		public void EstimateGmm()
 		{
-			double[] mz = new double[] { 1, 2, 3 };
-			double[,] data = new double[,] { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
+			double[] mz = { 1, 2, 3 };
+			double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
 
-			object result = alg.EstimateGmm(mz, data, 0, 0);
+			object result = alg.EstimateGmm(mz, data, false, false);
 
 			Console.WriteLine(result);
 
@@ -63,10 +76,11 @@ namespace Spectre.Algorithms.Tests
 		[Test]
 		public void ApplyGmm()
 		{
-			object data = 0;
-			double[] mz = new double[5] { 1.1, 1.2, 0.97, 1.07, 1.02 };
+			double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
+			double[] mz = { 1, 2, 3 };
+			var model = alg.EstimateGmm(mz, data, false, false);
 
-			object result = alg.ApplyGmm(mz, data);
+			double[,] result = alg.ApplyGmm(model, data, mz);
 
             Console.WriteLine(result);
 
@@ -77,9 +91,9 @@ namespace Spectre.Algorithms.Tests
 		[Test]
 		public void Divik()
 		{
-            double[,] data = new double[,] { { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 } };
-            int[,] coordinates = new int[,] { { 1, 1 }, { 1, 1 }, { 1, 1 }, { 1, 1 } };
-            object[] varargin = new object[] { "Cache", false, "VarianceFiltration", false, "AmplitudeFiltration", false, "Level", 1.0, "MaxK", 2, "Metric", "euclidean" };
+            double[,] data = { { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 } };
+            int[,] coordinates = { { 1, 1 }, { 1, 1 }, { 1, 1 }, { 1, 1 } };
+            object[] varargin = { "Cache", false, "VarianceFiltration", false, "AmplitudeFiltration", false, "Level", 1.0, "MaxK", 2, "Metric", "euclidean" };
 
             DivikResult result = alg.Divik(data, coordinates, varargin);
             
