@@ -23,7 +23,4 @@ test:
       - Algorithm
 cache:
 # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
-  - packages -> **\packages.config
-# project.json cache
-  - '%USERPROFILE%\.nuget\packages -> **\project.json'
   - dependencies.zip
