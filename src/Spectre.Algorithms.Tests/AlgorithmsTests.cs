@@ -18,6 +18,7 @@
 */
 using NUnit.Framework;
 using System;
+using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
 
 namespace Spectre.Algorithms.Tests
@@ -110,9 +111,13 @@ namespace Spectre.Algorithms.Tests
 		{
             double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
             int[,] coordinates = { { 1, 1 }, { 2, 2 }, { 1, 2 }, { 2, 1 } };
-            object[] varargin = { "Cache", false, "VarianceFiltration", false, "AmplitudeFiltration", false, "Level", 1.0, "MaxK", 2, "Metric", "euclidean" };
+			var options = DivikOptions.ForLevels(1);
+			options.UsingVarianceFiltration = false;
+			options.UsingAmplitudeFiltration = false;
+			options.MaxK = 2;
+			options.Metric = Metric.Euclidean;
 
-            DivikResult result = alg.Divik(data, coordinates, varargin);
+            DivikResult result = alg.Divik(data, coordinates, options);
             
             // Assert
             Assert.IsNotNull(result);

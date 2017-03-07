@@ -18,6 +18,7 @@
 */
 using System;
 using MatlabAlgorithmsNative;
+using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
 
 namespace Spectre.Algorithms
@@ -127,9 +128,9 @@ namespace Spectre.Algorithms
 		/// </summary>
 		/// <param name="data">The data.</param>
 		/// <param name="coordinates">Spatial coordinates.</param>
-		/// <param name="varargin">Configuration.</param>
+		/// <param name="options">Configuration.</param>
 		/// <returns>Segmentation result.</returns>
-		public DivikResult Divik(double[,] data, int[,] coordinates, object[] varargin)
+		public DivikResult Divik(double[,] data, int[,] coordinates, DivikOptions options)
         {
 			ValidateDispose();
 			//this is needed to not to make MCR go wild
@@ -139,6 +140,7 @@ namespace Spectre.Algorithms
 				for (int j = 0; j < coordinates.GetLength(1); ++j)
 					coords[i, j] = coordinates[i, j];
 
+			var varargin = options.ToVarargin();
 			var tmp = _segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
 			var result = new DivikResult(tmp);
             return result;

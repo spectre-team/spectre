@@ -2,7 +2,7 @@
  * DivikResult.cs
  * Contains structure organizing all the output from DiviK algorithm.
  * 
-   Copyright 2017 Wilgierz Wojciech
+   Copyright 2017 Wilgierz Wojciech, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,11 +20,18 @@
 
 namespace Spectre.Algorithms.Results
 {
-    public class DivikResult
+	/// <summary>
+	/// Wraps DiviK algorithm results.
+	/// </summary>
+	public class DivikResult
     {
 	    private object _matlabResultStruct;
 
-        internal DivikResult(object[] matlabResult)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="DivikResult"/> class.
+		/// </summary>
+		/// <param name="matlabResult">The results coming from MCR.</param>
+		internal DivikResult(object[] matlabResult)
         {
 	        _matlabResultStruct = matlabResult[1];
         }
