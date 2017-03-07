@@ -50,6 +50,7 @@ namespace Spectre.Algorithms.Methods
 		/// <param name="data">The data.</param>
 		/// <param name="mz">The mz axis ticks.</param>
 		/// <returns>Convolved data.</returns>
+		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
 		public double[,] ApplyGmm(GmmModel model, double[,] data, double[] mz)
 		{
 			ValidateDispose();
@@ -67,6 +68,7 @@ namespace Spectre.Algorithms.Methods
 		/// <param name="merge">if set to <c>true</c> merges components.</param>
 		/// <param name="remove">if set to <c>true</c> removes shaping components.</param>
 		/// <returns>Estimated model</returns>
+		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
 		public GmmModel EstimateGmm(object mz, double[,] data, bool merge, bool remove)
 		{
 			ValidateDispose();

@@ -51,6 +51,7 @@ namespace Spectre.Algorithms.Methods
 		/// <param name="coordinates">Spatial coordinates.</param>
 		/// <param name="options">Configuration.</param>
 		/// <returns>Segmentation result.</returns>
+		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
 		public DivikResult Divik(double[,] data, int[,] coordinates, DivikOptions options)
 		{
 			ValidateDispose();

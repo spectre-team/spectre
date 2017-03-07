@@ -48,6 +48,7 @@ namespace Spectre.Algorithms.Methods
 		/// <param name="mz">The mz axis ticks.</param>
 		/// <param name="data">The data.</param>
 		/// <returns>Aligned data.</returns>
+		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
 		public double[,] AlignPeaksFft(object mz, object data)
 		{
 			ValidateDispose();
@@ -61,6 +62,7 @@ namespace Spectre.Algorithms.Methods
 		/// <param name="mz">The mz axis ticks.</param>
 		/// <param name="data">The data.</param>
 		/// <returns>Data set without baseline.</returns>
+		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
 		public double[,] RemoveBaseline(double[] mz, double[,] data)
 		{
 			ValidateDispose();
@@ -73,6 +75,7 @@ namespace Spectre.Algorithms.Methods
 		/// </summary>
 		/// <param name="data">The data.</param>
 		/// <returns>Normalized data set.</returns>
+		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
 		public double[,] NormalizeByTic(double[,] data)
 		{
 			ValidateDispose();
