@@ -28,7 +28,8 @@ namespace Spectre.Algorithms
 	/// <seealso cref="System.IDisposable" />
 	public class Algorithms: IDisposable
     {
-        private readonly Gmm _gaussianMixtureModel;
+		#region Fields
+		private readonly Gmm _gaussianMixtureModel;
         private readonly Preprocessing _preprocessing;
         private readonly Segmentation _segmentation;
 
@@ -36,7 +37,9 @@ namespace Spectre.Algorithms
 		/// Indicates whether this instance has been disposed.
 		/// </summary>
 		private bool _disposed = false;
+		#endregion
 
+		#region Constructor
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Algorithms"/> class.
 		/// </summary>
@@ -46,6 +49,7 @@ namespace Spectre.Algorithms
             _preprocessing = new Preprocessing();
             _segmentation = new Segmentation();
         }
+		#endregion
 
 		#region MATLAB calls
 		/// <summary>

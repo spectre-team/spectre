@@ -18,6 +18,7 @@
 */
 using NUnit.Framework;
 using System;
+using Spectre.Algorithms.Results;
 
 namespace Spectre.Algorithms.Tests
 {
