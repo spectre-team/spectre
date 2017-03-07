@@ -22,9 +22,11 @@ namespace Spectre.Algorithms.Results
 {
     public class DivikResult
     {
-        public DivikResult()
-        {
+	    private object _matlabResultStruct;
 
+        internal DivikResult(object[] matlabResult)
+        {
+	        _matlabResultStruct = matlabResult[1];
         }
     }
 }

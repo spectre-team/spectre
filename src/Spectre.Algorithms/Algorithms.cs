@@ -132,9 +132,16 @@ namespace Spectre.Algorithms
 		public DivikResult Divik(double[,] data, int[,] coordinates, object[] varargin)
         {
 			ValidateDispose();
-            const int numberOfOutputArgs = 2;
-            object tmp = _segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
-            return new DivikResult();
+			//this is needed to not to make MCR go wild
+			const int numberOfOutputArgs = 2;
+			double[,] coords = new double[coordinates.GetLength(0),coordinates.GetLength(1)];
+			for(int i = 0; i<coordinates.GetLength(0); ++i)
+				for (int j = 0; j < coordinates.GetLength(1); ++j)
+					coords[i, j] = coordinates[i, j];
+
+			var tmp = _segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
+			var result = new DivikResult(tmp);
+            return result;
         }
 		#endregion
 

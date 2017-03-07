@@ -108,8 +108,8 @@ namespace Spectre.Algorithms.Tests
 		[Test]
 		public void Divik()
 		{
-            double[,] data = { { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 } };
-            int[,] coordinates = { { 1, 1 }, { 1, 1 }, { 1, 1 }, { 1, 1 } };
+            double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
+            int[,] coordinates = { { 1, 1 }, { 2, 2 }, { 1, 2 }, { 2, 1 } };
             object[] varargin = { "Cache", false, "VarianceFiltration", false, "AmplitudeFiltration", false, "Level", 1.0, "MaxK", 2, "Metric", "euclidean" };
 
             DivikResult result = alg.Divik(data, coordinates, varargin);
