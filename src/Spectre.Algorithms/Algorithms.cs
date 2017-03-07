@@ -18,6 +18,7 @@
 */
 using System;
 using MatlabAlgorithmsNative;
+using Spectre.Algorithms.Results;
 
 namespace Spectre.Algorithms
 {
@@ -36,15 +37,18 @@ namespace Spectre.Algorithms
             segmentation = new Segmentation();
         }
 
-        public double[,] ApplyGmm(object model, double[,] data, double[] mz)
+        public double[,] ApplyGmm(GmmModel model, double[,] data, double[] mz)
         {
-            return (double[,])gaussianMixtureModel.apply_gmm(model, data, mz);
+	        var matlabModel = model.MatlabStruct;
+            return (double[,])gaussianMixtureModel.apply_gmm(matlabModel, data, mz);
             
         }
 
-        public object EstimateGmm(object mz, double[,] data, bool merge, bool remove)
+        public GmmModel EstimateGmm(object mz, double[,] data, bool merge, bool remove)
         {
-            return gaussianMixtureModel.estimate_gmm(mz, data, merge, remove);
+			var matlabModel = gaussianMixtureModel.estimate_gmm(mz, data, merge, remove);
+			var model = new GmmModel(matlabModel);
+	        return model;
         }
 
         public double[,] PeakAlignmentFFT(object mz, object data)

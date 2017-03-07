@@ -18,12 +18,10 @@
 */
 
 
-namespace Spectre.Algorithms
+namespace Spectre.Algorithms.Results
 {
     public class DivikResult
     {
-        private double[] first;
-
         public DivikResult()
         {
 
