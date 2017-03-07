@@ -1,4 +1,4 @@
-function modelled = apply_gmm(mdl, data)
+function modelled = apply_gmm(mdl, data, mz)
 %APPLY_GMM applies estimated model on data
 %   modelled = APPLY_GMM(mdl, data) returns data modelled using estimated
 %   GMM parameters.

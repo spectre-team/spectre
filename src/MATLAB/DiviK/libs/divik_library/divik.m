@@ -71,6 +71,7 @@ function [ partition, res_struct ] = divik( data, xy, varargin )
 							'CachePath', settings.CachePath, ...
 	 						'Verbose', settings.Verbose, ...
 							'Metric', settings.Metric, ...
+                            'MaxIter', settings.KmeansMaxIters, ...
 							settings.KmeansOpts{:} };
 
 	percent_size_limit = settings.PercentSizeLimit;
@@ -238,6 +239,7 @@ function settings = get_defaults()
 	settings.Cache = true;
 	settings.Verbose = false;
 	settings.KmeansOpts = {};
+    settings.KmeansMaxIters = 100;
 	%invisibles
 	settings.TransposeData = true;
 	settings.PrimaryObjectsNumber = NaN;

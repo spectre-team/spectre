@@ -23,6 +23,6 @@ function mdl = estimate_gmm(mz, data, merge, remove)
     opts.if_merge = merge;  %if merge components
     opts.if_rem = remove;    %if remove additional components
 
-    mdl = ms_gmm_run(mz,meanspec,opts);
+    mdl = ms_gmm_run1(mz,meanspec,opts);
 
 end
