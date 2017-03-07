@@ -57,7 +57,7 @@ namespace Spectre.Algorithms.Tests
 			double[] mz = { 1, 1, 1 };
 			double[,] data = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
 
-			double[,] result = alg.PeakAlignmentFFT(mz, data);
+			double[,] result = alg.AlignPeaksFft(mz, data);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -69,7 +69,7 @@ namespace Spectre.Algorithms.Tests
 			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
 
-			double[,] result = alg.TicNorm(data);
+			double[,] result = alg.NormalizeByTic(data);
 
 			// Assert
 			Assert.IsNotNull(result);
