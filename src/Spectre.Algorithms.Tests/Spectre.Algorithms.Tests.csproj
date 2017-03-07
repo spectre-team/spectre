@@ -52,7 +52,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="AlgorithmsTests.cs" />
+    <Compile Include="Methods\GmmTests.cs" />
+    <Compile Include="Methods\PreprocessingTests.cs" />
+    <Compile Include="Methods\SegmentationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

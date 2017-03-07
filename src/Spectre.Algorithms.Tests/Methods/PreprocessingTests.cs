@@ -1,5 +1,5 @@
 ﻿/*
- * AlgorithmsTests.cs
+ * PreprocessingTests.cs
  * Checks, whether MCR is properly called and result may be obtained.
  * 
    Copyright 2017 Wilgierz Wojciech, Grzegorz Mrukwa
@@ -17,27 +17,25 @@
    limitations under the License.
 */
 using NUnit.Framework;
-using System;
-using Spectre.Algorithms.Parameterization;
-using Spectre.Algorithms.Results;
+using Spectre.Algorithms.Methods;
 
-namespace Spectre.Algorithms.Tests
+namespace Spectre.Algorithms.Tests.Methods
 {
 	[TestFixture, Category("Algorithm")]
-	public class AlgorithmsTests
+	public class PreprocessingTests
 	{
-		Algorithms alg;
+		Preprocessing _preprocessing;
 
 		[OneTimeSetUp]
 		public void SetUpClass()
 		{
-			alg = new Algorithms();
+			_preprocessing = new Preprocessing();
 		}
 
 		[OneTimeTearDown]
 		public void TearDownClass()
 		{
-			alg.Dispose();
+			_preprocessing.Dispose();
 		}
 
 		[Test]
@@ -47,7 +45,7 @@ namespace Spectre.Algorithms.Tests
 			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
 
-			double[,] result = alg.RemoveBaseline(mz, data);
+			double[,] result = _preprocessing.RemoveBaseline(mz, data);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -59,7 +57,7 @@ namespace Spectre.Algorithms.Tests
 			double[] mz = { 1, 1, 1 };
 			double[,] data = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
 
-			double[,] result = alg.AlignPeaksFft(mz, data);
+			double[,] result = _preprocessing.AlignPeaksFft(mz, data);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -71,56 +69,10 @@ namespace Spectre.Algorithms.Tests
 			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
 
-			double[,] result = alg.NormalizeByTic(data);
+			double[,] result = _preprocessing.NormalizeByTic(data);
 
 			// Assert
 			Assert.IsNotNull(result);
-		}
-
-		[Test]
-		public void EstimateGmm()
-		{
-			double[] mz = { 1, 2, 3 };
-			double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
-
-			object result = alg.EstimateGmm(mz, data, false, false);
-
-			Console.WriteLine(result);
-
-			// Assert
-			Assert.IsNotNull(result);
-		}
-
-		[Test]
-		public void ApplyGmm()
-		{
-			double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
-			double[] mz = { 1, 2, 3 };
-			var model = alg.EstimateGmm(mz, data, false, false);
-
-			double[,] result = alg.ApplyGmm(model, data, mz);
-
-            Console.WriteLine(result);
-
-            // Assert
-            Assert.IsNotNull(result);
-		}
-
-		[Test]
-		public void Divik()
-		{
-            double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
-            int[,] coordinates = { { 1, 1 }, { 2, 2 }, { 1, 2 }, { 2, 1 } };
-			var options = DivikOptions.ForLevels(1);
-			options.UsingVarianceFiltration = false;
-			options.UsingAmplitudeFiltration = false;
-			options.MaxK = 2;
-			options.Metric = Metric.Euclidean;
-
-            DivikResult result = alg.Divik(data, coordinates, options);
-            
-            // Assert
-            Assert.IsNotNull(result);
 		}
 	}
 }
