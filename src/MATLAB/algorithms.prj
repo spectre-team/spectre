@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2414090458" file="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms.prj" location="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB" name="algorithms" preferred-package-location="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
+  <configuration build-checksum="1298587968" file="${PROJECT_ROOT}\algorithms.prj" location="${PROJECT_ROOT}" name="algorithms" preferred-package-location="${PROJECT_ROOT}\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
     <param.appname>MsiAlgorithms</param.appname>
     <param.icon />
     <param.icons />
@@ -118,52 +118,14 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
       <file>${PROJECT_ROOT}\GMM</file>
     </fileset.resources>
     <fileset.depfun>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\divik_library\divik.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\divik_library\dunn.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\divik_library\k_means.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\divik_library\optimize_partition.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\anal_g_merge.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\default_gmm_opts.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\dyn_pr_split_w.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\dyn_pr_split_w_aux.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\EM_iter.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\find_ic.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\g_mix_est_fast_lik.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\gauss_rem.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\gaussian_mixture.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\gaussian_mixture_simple.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\Hubert_out.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\inv_cdf_init.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\my_qu_ix_w.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\par_vec.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\parfor_progress.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\peaks_part.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\plot_spect_vs_decomp.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\post_proc.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\proc_peakdetect.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\GMM_library\warp_down.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\any_dist.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\apply_user_configs.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\cacher.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\capture_diary.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\cell_settings.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\DataHash.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\fetch_centroids_from_partition.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\fetch_thresholds.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\filthy_merge.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\gmm_sum_fun.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\gmm_uborder_fun.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\mkfiledir.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\partition_plotter.m</file>
-      <file>C:\Users\Grzegorz\OneDrive\MSI\Repository\libs\miscellaneous\resize.m</file>
       <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
     </fileset.depfun>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithmsNative.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithmsNative.dll</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms_overview.html" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms_overview.html</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms.dll</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="readme.txt" optional="true">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithmsNative.dll" optional="false">${PROJECT_ROOT}\algorithms-compile\for_testing\MatlabAlgorithmsNative.dll</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms_overview.html" optional="false">${PROJECT_ROOT}\algorithms-compile\for_testing\MatlabAlgorithms_overview.html</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms.dll" optional="false">${PROJECT_ROOT}\algorithms-compile\for_testing\MatlabAlgorithms.dll</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="readme.txt" optional="true">${PROJECT_ROOT}\algorithms-compile\for_testing\readme.txt</file>
     </build-deliverables>
     <workflow />
     <matlab>
