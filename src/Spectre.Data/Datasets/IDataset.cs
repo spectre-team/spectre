@@ -24,6 +24,12 @@ namespace Spectre.Data.Datasets
 {
     public interface IDataset
     {
+        //TODO: To consult if leave this interface or make a base 
+        //TODO: class with initialization of basic parameters and 
+        //TODO: potentially implementing some interfaces (like IDisposable).
+
+        //TODO: To consult if LoadFromRawData is needed.
+
         #region Metadata
         /// <summary>
         /// Property containing metadata of the dataset.
@@ -67,6 +73,11 @@ namespace Spectre.Data.Datasets
         /// <param name="indexTo"></param>
         /// <returns></returns>
         DataPoint[] GetSub(uint indexFrom, uint indexTo);
+        /// <summary>
+        /// Returns size of the dataset.
+        /// </summary>
+        /// <returns>Amount of measurements present in dataset.</returns>
+        int GetSize();
         #endregion
 
     }

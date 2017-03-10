@@ -20,27 +20,14 @@ namespace Spectre.Data.Structures
 {
     public struct Metadata
     {
-        //TODO: Add more fields as more metadata will appear to be needed
+        //TODO: Fields of metadata for consultation.
 
-        /// <summary>
-        /// Spacial coordinate X.
-        /// </summary>
-        public int X;
-        /// <summary>
-        /// Spacial coordinate Y.
-        /// </summary>
-        public int Y;
-        /// <summary>
-        /// Spacial coordinate Z.
-        /// </summary>
-        public int Z;
+        public string Description;  // dummy
 
         public static Metadata Default()
         {
             Metadata metadata;
-            metadata.X = 0;
-            metadata.Y = 0;
-            metadata.Z = 0;
+            metadata.Description = "default";
             return metadata;
         }
     }

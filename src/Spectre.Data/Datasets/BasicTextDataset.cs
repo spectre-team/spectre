@@ -87,10 +87,8 @@ namespace Spectre.Data.Datasets
         {
             _streamReader = new StreamReader(filePath);
 
-            //TODO: Setting metadata
-            _metadata.X = 1;
-            _metadata.Y = 1;
-            _metadata.Z = 1;
+            //TODO: Parsing metadata
+            _metadata.Description = "text-parsed-dataset";  // dummy
 
             List<DataPoint> dataList = new List<DataPoint>();
             
@@ -135,14 +133,25 @@ namespace Spectre.Data.Datasets
         /// </summary>
         /// <param name="indexFrom">Starting index.</param>
         /// <param name="indexTo">Ending index.</param>
-        /// <returns></returns>
+        /// <exception cref="IndexOutOfRangeException">Thrown when 
+        /// starting index is larger or equal to ending index or
+        /// ending index larger or equal to data length.</exception>
+        /// <returns>Sub-array of original data array.</returns>
         public DataPoint[] GetSub(uint indexFrom, uint indexTo)
         {
             if (indexFrom >= indexTo || indexTo >= _data.Length)
                 throw new System.IndexOutOfRangeException();
-            DataPoint[] subArray = new DataPoint[indexTo - indexTo];
-            Array.Copy(_data, indexFrom, subArray, 0, indexTo - indexTo);
+            DataPoint[] subArray = new DataPoint[indexTo - indexFrom];
+            Array.Copy(_data, indexFrom, subArray, 0, indexTo - indexFrom);
             return subArray;
+        }
+        /// <summary>
+        /// Returns size of data array.
+        /// </summary>
+        /// <returns>Length of the array.</returns>
+        public int GetSize()
+        {
+            return _data.Length;
         }
         #endregion
     }

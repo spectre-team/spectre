@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Structures\DataPoint.cs" />
-    <Compile Include="Datasets\StreamedTextDataset.cs" />
+    <Compile Include="Datasets\BasicTextDataset.cs" />
     <Compile Include="Datasets\IDataset.cs" />
     <Compile Include="Structures\Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
