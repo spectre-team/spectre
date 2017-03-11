@@ -45,6 +45,7 @@
     <Compile Include="Datasets\IDataset.cs" />
     <Compile Include="Structures\Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structures\SpacialCoordinates.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,130 +28,255 @@ namespace Spectre.Data.Datasets
 {
     public class BasicTextDataset : IDataset
     {
+
+        //TODO: Because of not-so failsafe constructors, make the Datasets be eventually spitted out by some factory class.
+
         #region Fields
-        /// <summary>
-        /// Reader used for parsing the file.
-        /// </summary>
-        private StreamReader _streamReader;
-        /// <summary>
-        /// Array containing the dataset.
-        /// </summary>
-        private DataPoint[] _data;
+
         /// <summary>
         /// Metadata of the dataset.
         /// </summary>
         private Metadata _metadata;
+
+        /// <summary>
+        /// Container for storing spacial coordinates for every loaded spectrum.
+        /// </summary>
+        private List<SpacialCoordinates> _spatialCoordinates;
+
+        public List<SpacialCoordinates> SpacialCoordinates
+        {
+            get { return _spatialCoordinates; }
+            set { _spatialCoordinates = value; }
+        }
+        /// <summary>
+        /// Array of m/z values for all the spectras.
+        /// </summary>
+        private double[] _mz;
+
+        /// <summary>
+        /// Container for storing intensity values for every loaded spectrum.
+        /// </summary>
+        private List<double[]> _intensity;
+
         #endregion
 
         #region Constructors
-        /// <summary>
-        /// Base constructor, setting default metadata.
-        /// </summary>
-        public BasicTextDataset()
-        {
-            Metadata = Metadata.Default();
-        }
+
         /// <summary>
         /// Constructor with file initialization.
         /// </summary>
         /// <param name="textFilePath">Path to the text file.</param>
-        public BasicTextDataset(string textFilePath) : this()
+        public BasicTextDataset(string textFilePath)
         {
-            LoadFromFile(textFilePath);
+            CreateFromFile(textFilePath);
         }
+
+        public BasicTextDataset(double[] mz, double[,] data)
+        {
+            CreateFromRawData(mz, data);
+        }
+
         #endregion
 
         #region IDataset
+
         /// <summary>
         /// See <see cref="IDataset"/> for description.
         /// </summary>
         public Metadata Metadata
         {
-            get
-            {
-                return _metadata;
-            }
-            set
-            {
-                _metadata = value;
-                
-            }
+            get { return _metadata; }
+            set { _metadata = value; }
         }
+
+        public void CreateFromFile(string filePath)
+        {
+            try
+            {
+                StreamReader sr = new StreamReader(filePath);
+                var metadata = sr.ReadLine(); // global metadata
+                var mzValues = sr.ReadLine()?.Split(null);
+                _mz = new double[mzValues.Length];
+                for (int i = 0; i < _mz.Length; i++)
+                {
+                    try
+                    {
+                        _mz[i] = double.Parse(mzValues[i], CultureInfo.InvariantCulture);
+                    }
+                    catch
+                    {
+                        _mz[i] = double.NaN;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("File " + filePath + " could not be read.", e);
+            }
+
+            _intensity = new List<double[]>();
+            _spatialCoordinates = new List<SpacialCoordinates>();
+            AppendFromFile(filePath);
+        }
+
+        public void CreateFromRawData(double[] mz, double[,] data)
+        {
+            if (mz == null || data == null)
+                throw new InvalidDataException("The input data is null.");
+            if (mz.Length != data.GetLength(1))
+                throw new InvalidDataException("Length of the data must be equal to length of m/z values.");
+
+            _intensity = new List<double[]>();
+            _spatialCoordinates = new List<SpacialCoordinates>();
+            _mz = mz;
+            AppendFromRawData(data);
+        }
+
         /// <summary>
         /// Method parsing the whole text file and initializing the array
-        /// with found data. For now the data is assumed to be formatted in 
-        /// following manner: "[mz] [intensity]" per single line of text.
+        /// with found data.
         /// </summary>
         /// <param name="filePath">Path to the text file.</param>
-        public void LoadFromFile(string filePath)
+        public void AppendFromFile(string filePath)
         {
-            _streamReader = new StreamReader(filePath);
-
-            //TODO: Parsing metadata
-            _metadata.Description = "text-parsed-dataset";  // dummy
-
-            List<DataPoint> dataList = new List<DataPoint>();
-            
             //TODO: Specifying formalized format of data in text files.
-            string line;
-            while ((line = _streamReader.ReadLine()) != null)
+            //TODO: Safety check, format check
+            try
             {
-                var strings = line.Split(null);
-                try
+                using (StreamReader sr = new StreamReader(filePath))
                 {
-                    dataList.Add(new DataPoint(float.Parse(strings[0], CultureInfo.InvariantCulture),
-                    float.Parse(strings[1], CultureInfo.InvariantCulture)));
-                }
-                catch (Exception)
-                {
-                    dataList.Add(new DataPoint());
+                    sr.ReadLine(); // omit global metadata
+                    sr.ReadLine(); // omit m/z values
+                    while (sr.Peek() > -1)
+                    {
+                        var metadata = sr.ReadLine()?.Split(null);
+                        var intensities = sr.ReadLine()?.Split(null);
+                        if (metadata == null || intensities == null)
+                            continue;
+                        if (intensities.Length != _mz.Length)
+                            throw new InvalidDataException("Length of the data must be equal to length of m/z values.");
+
+                        int x, y, z;
+
+                        try { x = int.Parse(metadata[0], CultureInfo.InvariantCulture); }
+                        catch { x = -1; }
+                        try { y = int.Parse(metadata[0], CultureInfo.InvariantCulture); }
+                        catch { y = -1; }
+                        try { z = int.Parse(metadata[0], CultureInfo.InvariantCulture); }
+                        catch { z = -1; }
+
+                        _spatialCoordinates.Add(new SpacialCoordinates(x, y, z));
+                        _intensity.Add(new double[_mz.Length]);
+
+                        int backIdx = _intensity.Count - 1;
+                        for (int i = 0; i < intensities.Length; i++)
+                        {
+                            try
+                            {
+                                _intensity[backIdx][i] = double.Parse(intensities[i], CultureInfo.InvariantCulture);
+                            }
+                            catch (Exception)
+                            {
+                                _intensity[backIdx][i] = double.NaN;
+                            }
+                        }
+                            
+                    }
                 }
             }
-            
-            _data = dataList.ToArray();
-
+            catch (Exception e)
+            {
+                throw new InvalidDataException("Error while parsing " + filePath + " file.", e);
+            }
         }
         /// <summary>
         /// See <see cref="IDataset"/> for description.
         /// </summary>
         /// <param name="data"></param>
         /// <param name="mz"></param>
-        public void LoadFromRawData(double[,] data, double[] mz)
+        public void AppendFromRawData(double[,] data)
         {
-            throw new System.NotImplementedException();
+            if(data == null)
+                throw new InvalidDataException("The input data is null.");
+            if(_mz.Length != data.GetLength(1))
+                throw new InvalidDataException("The length of input data does not match the length of present data.");
+            for (int i = 0; i < data.GetLength(0); i++)
+            {
+                _intensity.Add(new double[data.GetLength(1)]);
+                _spatialCoordinates.Add(new SpacialCoordinates(-1, -1, -1));
+                int backIdx = _intensity.Count - 1;
+                for (int j = 0; j < data.GetLength(1); j++)
+                    _intensity[backIdx][j] = data[i, j];
+            }
         }
-        /// <summary>
-        /// See <see cref="IDataset"/> for description.
-        /// </summary>
+
         public DataPoint this[int index]
         {
-            get { return _data[index]; }
-            set { _data[index] = value; }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        /// <summary>
-        /// Method returning sub-array of loaded array of data.
-        /// </summary>
-        /// <param name="indexFrom">Starting index.</param>
-        /// <param name="indexTo">Ending index.</param>
-        /// <exception cref="IndexOutOfRangeException">Thrown when 
-        /// starting index is larger or equal to ending index or
-        /// ending index larger or equal to data length.</exception>
-        /// <returns>Sub-array of original data array.</returns>
+
         public DataPoint[] GetSub(uint indexFrom, uint indexTo)
         {
-            if (indexFrom >= indexTo || indexTo >= _data.Length)
-                throw new System.IndexOutOfRangeException();
-            DataPoint[] subArray = new DataPoint[indexTo - indexFrom];
-            Array.Copy(_data, indexFrom, subArray, 0, indexTo - indexFrom);
-            return subArray;
+            throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Returns size of data array.
+        /// Returns length of single spectrum.
         /// </summary>
-        /// <returns>Length of the array.</returns>
-        public int GetSize()
+        /// <returns>Length of spectrum.</returns>
+        public int GetSpectrumLength()
         {
-            return _data.Length;
+            return _mz.Length;
+        }
+
+        public int GetSpectrumCount()
+        {
+            return _intensity.Count;
+        }
+
+        public double[] GetRawMzArray()
+        {
+            return _mz;
+        }
+
+        public double GetRawMzValue(int index)
+        {
+            return _mz[index];
+        }
+
+        public double GetRawIntensityValue(int spectrumIdx, int valueIdx)
+        {
+            return _intensity[spectrumIdx][valueIdx];
+        }
+
+        public double[] GetRawIntensityArray(int spectrumIdx)
+        {
+            return _intensity[spectrumIdx];
+        }
+
+        public double[] GetRawIntensityRow(int valueIdx)
+        {
+            double[] result = new double[_intensity.Count];
+            for (int i = 0; i < _intensity.Count; i++)
+                result[i] = _intensity[i][valueIdx];
+            return result;
+        }
+
+        public double[,] GetRawIntensityRange(int spectrumIdxFrom, int spectrumIdxTo, int valueIdxFrom, int valueIdxTo)
+        {
+            if (spectrumIdxFrom >= spectrumIdxTo || valueIdxFrom >= valueIdxTo)
+                throw new IndexOutOfRangeException();
+            int spectrumCnt = spectrumIdxTo - spectrumIdxFrom;
+            int valueCnt = valueIdxTo - valueIdxFrom;
+
+            double[,] result = new double[spectrumCnt,valueCnt];
+
+            for (int i = 0; i < spectrumCnt; i++)
+                for (int j = 0; j < valueCnt; j++)
+                    result[i, j] = _intensity[spectrumIdxFrom + i][valueIdxFrom + j];
+
+            return result;
         }
         #endregion
     }

@@ -28,7 +28,10 @@ namespace Spectre.Data.Datasets
         //TODO: class with initialization of basic parameters and 
         //TODO: potentially implementing some interfaces (like IDisposable).
 
-        //TODO: To consult if LoadFromRawData is needed.
+        //TODO: Somehow divide the available functionalities to the
+        //TODO: external world (DataPoint accessible from higher
+        //TODO: levels of abstraction, raw data for algorithms.
+
 
         #region Metadata
         /// <summary>
@@ -42,17 +45,19 @@ namespace Spectre.Data.Datasets
         #endregion
 
         #region Data creation
+        void CreateFromFile(string filePath);
+        void CreateFromRawData(double[] mz, double[,] data);
         /// <summary>
         /// Abstract method for loading the dataset from a file.
         /// </summary>
         /// <param name="filePath">Path to a file.</param>
-        void LoadFromFile(string filePath);
+        void AppendFromFile(string filePath);
         /// <summary>
         /// Abstract method for loading the dataset from raw data arrays.
         /// </summary>
         /// <param name="data">Data representing intensities.</param>
         /// <param name="mz">Data reprezenting m/z values.</param>
-        void LoadFromRawData(double[,] data, double[] mz);
+        void AppendFromRawData(double[,] data);
         #endregion
 
         #region Data access
@@ -73,12 +78,17 @@ namespace Spectre.Data.Datasets
         /// <param name="indexTo"></param>
         /// <returns></returns>
         DataPoint[] GetSub(uint indexFrom, uint indexTo);
-        /// <summary>
-        /// Returns size of the dataset.
-        /// </summary>
-        /// <returns>Amount of measurements present in dataset.</returns>
-        int GetSize();
+        int GetSpectrumLength();
+        int GetSpectrumCount();
         #endregion
 
+        #region Raw data access
+        double[] GetRawMzArray();
+        double GetRawMzValue(int index);
+        double GetRawIntensityValue(int spectrumIdx, int valueIdx);
+        double[] GetRawIntensityArray(int spectrumIdx);
+        double[] GetRawIntensityRow(int valueIdx);
+        double[,] GetRawIntensityRange(int spectrumIdxFrom, int spectrumIdxTo, int valueIdxFrom, int valueIdxTo);
+        #endregion
     }
 }
