@@ -25,13 +25,11 @@ namespace Spectre.Data.Datasets
 {
     public interface IDataset
     {
-        //TODO: To consult if leave this interface or make a base 
-        //TODO: class with initialization of basic parameters and 
-        //TODO: potentially implementing some interfaces (like IDisposable).
-
         //TODO: Somehow divide the available functionalities to the
         //TODO: external world (DataPoint accessible from higher
         //TODO: levels of abstraction, raw data for algorithms).
+        //TODO: ...
+        //TODO: Derive a sub-interface?
 
 
         #region Metadata
@@ -41,13 +39,11 @@ namespace Spectre.Data.Datasets
         Metadata Metadata
         {
             get;
-            set;
         }
 
-        List<SpacialCoordinates> SpacialCoordinates
+        IEnumerable<SpatialCoordinates> SpacialCoordinates
         {
             get;
-            set;
         }
         #endregion
 

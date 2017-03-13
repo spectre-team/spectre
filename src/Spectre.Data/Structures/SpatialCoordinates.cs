@@ -1,5 +1,5 @@
 ﻿/*
- * SpacialCoordinates.cs
+ * SpatialCoordinates.cs
  * Struct used for storing the spacial coordinates of a spectrum.
  * 
    Copyright 2017 Dariusz Kuchta
@@ -19,13 +19,13 @@
 
 namespace Spectre.Data.Structures
 {
-    public struct SpacialCoordinates
+    public struct SpatialCoordinates
     {
         public int X;
         public int Y;
         public int Z;
 
-        public SpacialCoordinates(int x, int y, int z)
+        public SpatialCoordinates(int x, int y, int z)
         {
             X = x;
             Y = y;

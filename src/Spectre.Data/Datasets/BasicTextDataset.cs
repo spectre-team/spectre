@@ -29,7 +29,8 @@ namespace Spectre.Data.Datasets
     public class BasicTextDataset : IDataset
     {
 
-        //TODO: Because of not-so failsafe constructors, make the Datasets be eventually spitted out by some factory class.
+        //TODO: Because of not-so failsafe constructors, make the Datasets 
+        //TODO: be eventually spitted out by some factory class!!!
 
         #region Fields
 
@@ -41,7 +42,7 @@ namespace Spectre.Data.Datasets
         /// <summary>
         /// Container for storing spacial coordinates for every loaded spectrum.
         /// </summary>
-        private List<SpacialCoordinates> _spatialCoordinates;
+        private List<SpatialCoordinates> _spatialCoordinates;
 
         /// <summary>
         /// Array of m/z values for all the spectras.
@@ -81,13 +82,13 @@ namespace Spectre.Data.Datasets
         public Metadata Metadata
         {
             get { return _metadata; }
-            set { _metadata = value; }
+            private set { _metadata = value; }
         }
 
-        public List<SpacialCoordinates> SpacialCoordinates
+        public IEnumerable<SpatialCoordinates> SpacialCoordinates
         {
             get { return _spatialCoordinates; }
-            set { _spatialCoordinates = value; }
+            private set { _spatialCoordinates = value as List<SpatialCoordinates>; }
         }
 
         public void CreateFromFile(string filePath)
@@ -99,16 +100,8 @@ namespace Spectre.Data.Datasets
                 var mzValues = sr.ReadLine()?.Split(null);
                 _mz = new double[mzValues.Length];
                 for (int i = 0; i < _mz.Length; i++)
-                {
-                    try
-                    {
-                        _mz[i] = double.Parse(mzValues[i], CultureInfo.InvariantCulture);
-                    }
-                    catch
-                    {
+                    if (!double.TryParse(mzValues[i], out _mz[i]))
                         _mz[i] = double.NaN;
-                    }
-                }
             }
             catch (Exception e)
             {
@@ -116,7 +109,7 @@ namespace Spectre.Data.Datasets
             }
 
             _intensity = new List<double[]>();
-            _spatialCoordinates = new List<SpacialCoordinates>();
+            _spatialCoordinates = new List<SpatialCoordinates>();
             AppendFromFile(filePath);
         }
 
@@ -128,7 +121,7 @@ namespace Spectre.Data.Datasets
                 throw new InvalidDataException("Length of the data must be equal to length of m/z values.");
 
             _intensity = new List<double[]>();
-            _spatialCoordinates = new List<SpacialCoordinates>();
+            _spatialCoordinates = new List<SpatialCoordinates>();
             _mz = mz;
             AppendFromRawData(data);
         }
@@ -159,28 +152,20 @@ namespace Spectre.Data.Datasets
 
                         int x, y, z;
 
-                        try { x = int.Parse(metadata[0], CultureInfo.InvariantCulture); }
-                        catch { x = -1; }
-                        try { y = int.Parse(metadata[1], CultureInfo.InvariantCulture); }
-                        catch { y = -1; }
-                        try { z = int.Parse(metadata[2], CultureInfo.InvariantCulture); }
-                        catch { z = -1; }
+                        if (!int.TryParse(metadata[0], out x))
+                            x = -1;
+                        if (!int.TryParse(metadata[1], out y))
+                            y = -1;
+                        if (!int.TryParse(metadata[2], out z))
+                            z = -1;
 
-                        _spatialCoordinates.Add(new SpacialCoordinates(x, y, z));
+                        _spatialCoordinates.Add(new SpatialCoordinates(x, y, z));
                         _intensity.Add(new double[_mz.Length]);
 
                         int backIdx = _intensity.Count - 1;
                         for (int i = 0; i < intensities.Length; i++)
-                        {
-                            try
-                            {
-                                _intensity[backIdx][i] = double.Parse(intensities[i], CultureInfo.InvariantCulture);
-                            }
-                            catch (Exception)
-                            {
+                            if (!double.TryParse(intensities[i], out _intensity[backIdx][i]))
                                 _intensity[backIdx][i] = double.NaN;
-                            }
-                        }
                             
                     }
                 }
@@ -204,7 +189,7 @@ namespace Spectre.Data.Datasets
             for (int i = 0; i < data.GetLength(0); i++)
             {
                 _intensity.Add(new double[data.GetLength(1)]);
-                _spatialCoordinates.Add(new SpacialCoordinates(-1, -1, -1));
+                _spatialCoordinates.Add(new SpatialCoordinates(-1, -1, -1));
                 int backIdx = _intensity.Count - 1;
                 for (int j = 0; j < data.GetLength(1); j++)
                     _intensity[backIdx][j] = data[i, j];
