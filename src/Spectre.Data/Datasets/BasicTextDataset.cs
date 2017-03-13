@@ -43,11 +43,6 @@ namespace Spectre.Data.Datasets
         /// </summary>
         private List<SpacialCoordinates> _spatialCoordinates;
 
-        public List<SpacialCoordinates> SpacialCoordinates
-        {
-            get { return _spatialCoordinates; }
-            set { _spatialCoordinates = value; }
-        }
         /// <summary>
         /// Array of m/z values for all the spectras.
         /// </summary>
@@ -87,6 +82,12 @@ namespace Spectre.Data.Datasets
         {
             get { return _metadata; }
             set { _metadata = value; }
+        }
+
+        public List<SpacialCoordinates> SpacialCoordinates
+        {
+            get { return _spatialCoordinates; }
+            set { _spatialCoordinates = value; }
         }
 
         public void CreateFromFile(string filePath)
@@ -160,9 +161,9 @@ namespace Spectre.Data.Datasets
 
                         try { x = int.Parse(metadata[0], CultureInfo.InvariantCulture); }
                         catch { x = -1; }
-                        try { y = int.Parse(metadata[0], CultureInfo.InvariantCulture); }
+                        try { y = int.Parse(metadata[1], CultureInfo.InvariantCulture); }
                         catch { y = -1; }
-                        try { z = int.Parse(metadata[0], CultureInfo.InvariantCulture); }
+                        try { z = int.Parse(metadata[2], CultureInfo.InvariantCulture); }
                         catch { z = -1; }
 
                         _spatialCoordinates.Add(new SpacialCoordinates(x, y, z));
@@ -210,15 +211,21 @@ namespace Spectre.Data.Datasets
             }
         }
 
-        public DataPoint this[int index]
+        public DataPoint GetDataPoint(int spectrumIdx, int valueIdx)
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            return new DataPoint(_mz[valueIdx], _intensity[spectrumIdx][valueIdx]);
         }
 
-        public DataPoint[] GetSub(uint indexFrom, uint indexTo)
+        public DataPoint[] GetDataPoints(int spectrumIdx, int valueIdxFrom, int valueIdxTo)
         {
-            throw new NotImplementedException();
+            if (valueIdxFrom >= valueIdxTo)
+                throw new IndexOutOfRangeException();
+            int valueCnt = valueIdxTo - valueIdxFrom;
+
+            DataPoint[] result = new DataPoint[valueCnt];
+            for (int i = 0; i < valueCnt; i++)
+                result[i] = new DataPoint(_mz[valueIdxFrom + i], _intensity[spectrumIdx][valueIdxFrom + i]);
+            return result;
         }
 
         /// <summary>

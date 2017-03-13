@@ -18,6 +18,7 @@
    limitations under the License.
 */
 
+using System.Collections.Generic;
 using Spectre.Data.Structures;
 
 namespace Spectre.Data.Datasets
@@ -30,7 +31,7 @@ namespace Spectre.Data.Datasets
 
         //TODO: Somehow divide the available functionalities to the
         //TODO: external world (DataPoint accessible from higher
-        //TODO: levels of abstraction, raw data for algorithms.
+        //TODO: levels of abstraction, raw data for algorithms).
 
 
         #region Metadata
@@ -38,6 +39,12 @@ namespace Spectre.Data.Datasets
         /// Property containing metadata of the dataset.
         /// </summary>
         Metadata Metadata
+        {
+            get;
+            set;
+        }
+
+        List<SpacialCoordinates> SpacialCoordinates
         {
             get;
             set;
@@ -61,23 +68,9 @@ namespace Spectre.Data.Datasets
         #endregion
 
         #region Data access
-        /// <summary>
-        /// Returns measurement at given index.
-        /// </summary>
-        /// <param name="index">Input index.</param>
-        /// <returns></returns>
-        DataPoint this[int index]
-        {
-            get;
-            set;
-        }
-        /// <summary>
-        /// Returns array of measurements at given range.
-        /// </summary>
-        /// <param name="indexFrom"></param>
-        /// <param name="indexTo"></param>
-        /// <returns></returns>
-        DataPoint[] GetSub(uint indexFrom, uint indexTo);
+
+        DataPoint GetDataPoint(int spectrumIdx, int valueIdx);
+        DataPoint[] GetDataPoints(int spectrumIdx, int valueIdxFrom, int valueIdxTo);
         int GetSpectrumLength();
         int GetSpectrumCount();
         #endregion
