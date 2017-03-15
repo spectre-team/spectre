@@ -40,7 +40,7 @@ namespace Spectre.Data.Tests.Datasets
         [SetUp]
         public void SetUpClass()
         {
-            double[] mz = {1, 2, 3};
+            double[] mz = {1.0, 2.0, 3.0};
             double[,] data = {{1, 2.1, 3.2}, {4, 5.1, 6.2}, {7, 8.1, 9.2}};
 
             _dataset = new BasicTextDataset(mz, data);
@@ -209,14 +209,42 @@ namespace Spectre.Data.Tests.Datasets
         public void GetRawMzArrayTest()
         {
             double[] result = _dataset.GetRawMzArray();
-            Assert.AreEqual(result, new double[] { 1, 2, 3 }, "Dataset returned wrong m/z values");
+            Assert.AreEqual(result, new[] { 1.0, 2.0, 3.0 }, "Dataset returned wrong m/z array.");
         }
 
         [Test]
         public void GetRawMzValueTest()
         {
             double result = _dataset.GetRawMzValue(1);
-            Assert.AreEqual(result, 12312423542352344, "Dataset returned wrong m/z values");
+            Assert.AreEqual(result, 2, "Dataset returned wrong m/z value.");
+        }
+
+        [Test]
+        public void GetRawIntensityValueTest()
+        {
+            double result = _dataset.GetRawIntensityValue(1, 1);
+            Assert.AreEqual(result, 5.1, "Dataset returned wrong intensity value.");
+        }
+
+        [Test]
+        public void GetRawIntensityArrayTest()
+        {
+            double[] result = _dataset.GetRawIntensityArray(2);
+            Assert.AreEqual(result, new[] { 7, 8.1, 9.2 }, "Dataset returned wrong intensity array.");
+        }
+
+        [Test]
+        public void GetRawIntensityRowTest()
+        {
+            double[] result = _dataset.GetRawIntensityRow(1);
+            Assert.AreEqual(result, new[] { 2.1, 5.1, 8.1 }, "Dataset returned wrong intensity row.");
+        }
+
+        [Test]
+        public void GetRawIntensityRangeTest()
+        {
+            double[,] result = _dataset.GetRawIntensityRange(1, 3, 1, 3);
+            Assert.AreEqual(result, new[,] { {5.1, 6.2}, {8.1, 9.2} }, "Dataset returned wrong intensity row.");
         }
     }
 }
