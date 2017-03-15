@@ -25,6 +25,13 @@ namespace Spectre.Data.Structures
         public int Y;
         public int Z;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="SpatialCoordinates"/> struct with
+        /// user defined values of spatial coordinates.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
+        /// <param name="z">Z coordinate.</param>
         public SpatialCoordinates(int x, int y, int z)
         {
             X = x;

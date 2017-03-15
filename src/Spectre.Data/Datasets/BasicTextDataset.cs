@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using Spectre.Data.Structures;
 
@@ -66,7 +65,11 @@ namespace Spectre.Data.Datasets
         {
             CreateFromFile(textFilePath);
         }
-
+        /// <summary>
+        /// Constructor with raw value initialization.
+        /// </summary>
+        /// <param name="mz">Array of m/z values.</param>
+        /// <param name="data">Array of intensity values.</param>
         public BasicTextDataset(double[] mz, double[,] data)
         {
             CreateFromRawData(mz, data);
@@ -84,13 +87,19 @@ namespace Spectre.Data.Datasets
             get { return _metadata; }
             private set { _metadata = value; }
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public IEnumerable<SpatialCoordinates> SpacialCoordinates
         {
             get { return _spatialCoordinates; }
             private set { _spatialCoordinates = value as List<SpatialCoordinates>; }
         }
-
+        /// <summary>
+        /// Method for creating new dataset from text file, overwriting current data.
+        /// </summary>
+        /// <param name="filePath">Path to a text file.</param>
+        /// <exception cref="Exception">Thrown where there is a problem with file loading.</exception>
         public void CreateFromFile(string filePath)
         {
             try
@@ -112,7 +121,11 @@ namespace Spectre.Data.Datasets
             _spatialCoordinates = new List<SpatialCoordinates>();
             AppendFromFile(filePath);
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
+        /// <exception cref="InvalidDataException">Throws when the data is null or 
+        /// the length of data is not matching the dataset length.</exception>
         public void CreateFromRawData(double[] mz, double[,] data)
         {
             if (mz == null || data == null)
@@ -131,6 +144,7 @@ namespace Spectre.Data.Datasets
         /// with found data.
         /// </summary>
         /// <param name="filePath">Path to the text file.</param>
+        /// <exception cref="InvalidDataException">Thrown where there is a problem with file parsing.</exception>
         public void AppendFromFile(string filePath)
         {
             //TODO: Specifying formalized format of data in text files.
@@ -178,8 +192,8 @@ namespace Spectre.Data.Datasets
         /// <summary>
         /// See <see cref="IDataset"/> for description.
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="mz"></param>
+        /// <exception cref="InvalidDataException">Throws when the data is null or 
+        /// the length of data is not matching the dataset length.</exception>
         public void AppendFromRawData(double[,] data)
         {
             if(data == null)
@@ -195,12 +209,16 @@ namespace Spectre.Data.Datasets
                     _intensity[backIdx][j] = data[i, j];
             }
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public DataPoint GetDataPoint(int spectrumIdx, int valueIdx)
         {
             return new DataPoint(_mz[valueIdx], _intensity[spectrumIdx][valueIdx]);
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public DataPoint[] GetDataPoints(int spectrumIdx, int valueIdxFrom, int valueIdxTo)
         {
             if (valueIdxFrom >= valueIdxTo)
@@ -214,39 +232,50 @@ namespace Spectre.Data.Datasets
         }
 
         /// <summary>
-        /// Returns length of single spectrum.
+        /// See <see cref="IDataset"/> for description.
         /// </summary>
-        /// <returns>Length of spectrum.</returns>
         public int GetSpectrumLength()
         {
             return _mz.Length;
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public int GetSpectrumCount()
         {
             return _intensity.Count;
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public double[] GetRawMzArray()
         {
             return _mz;
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public double GetRawMzValue(int index)
         {
             return _mz[index];
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public double GetRawIntensityValue(int spectrumIdx, int valueIdx)
         {
             return _intensity[spectrumIdx][valueIdx];
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public double[] GetRawIntensityArray(int spectrumIdx)
         {
             return _intensity[spectrumIdx];
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public double[] GetRawIntensityRow(int valueIdx)
         {
             double[] result = new double[_intensity.Count];
@@ -254,7 +283,9 @@ namespace Spectre.Data.Datasets
                 result[i] = _intensity[i][valueIdx];
             return result;
         }
-
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
         public double[,] GetRawIntensityRange(int spectrumIdxFrom, int spectrumIdxTo, int valueIdxFrom, int valueIdxTo)
         {
             if (spectrumIdxFrom >= spectrumIdxTo || valueIdxFrom >= valueIdxTo)

@@ -22,10 +22,13 @@ namespace Spectre.Data.Structures
     public class DataPoint
     {
         #region Fields
-       
+
+        /// <summary>
+        /// Value of m/z.
+        /// </summary>
         public double Mz { get; set; }
         /// <summary>
-        /// Value of intensity
+        /// Value of intensity.
         /// </summary>
         public double Intensity { get; set; }
         #endregion
