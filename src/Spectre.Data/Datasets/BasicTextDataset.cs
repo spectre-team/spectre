@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using Spectre.Data.Structures;
 
@@ -109,7 +110,7 @@ namespace Spectre.Data.Datasets
                 var mzValues = sr.ReadLine()?.Split(null);
                 _mz = new double[mzValues.Length];
                 for (int i = 0; i < _mz.Length; i++)
-                    if (!double.TryParse(mzValues[i], out _mz[i]))
+                    if (!double.TryParse(mzValues[i], NumberStyles.Any, CultureInfo.InvariantCulture, out _mz[i]))
                         _mz[i] = double.NaN;
             }
             catch (Exception e)
@@ -166,11 +167,11 @@ namespace Spectre.Data.Datasets
 
                         int x, y, z;
 
-                        if (!int.TryParse(metadata[0], out x))
+                        if (!int.TryParse(metadata[0], NumberStyles.Any, CultureInfo.InvariantCulture, out x))
                             x = -1;
-                        if (!int.TryParse(metadata[1], out y))
+                        if (!int.TryParse(metadata[1], NumberStyles.Any, CultureInfo.InvariantCulture, out y))
                             y = -1;
-                        if (!int.TryParse(metadata[2], out z))
+                        if (!int.TryParse(metadata[2], NumberStyles.Any, CultureInfo.InvariantCulture, out z))
                             z = -1;
 
                         _spatialCoordinates.Add(new SpatialCoordinates(x, y, z));
@@ -178,7 +179,7 @@ namespace Spectre.Data.Datasets
 
                         int backIdx = _intensity.Count - 1;
                         for (int i = 0; i < intensities.Length; i++)
-                            if (!double.TryParse(intensities[i], out _intensity[backIdx][i]))
+                            if (!double.TryParse(intensities[i], NumberStyles.Any, CultureInfo.InvariantCulture, out _intensity[backIdx][i]))
                                 _intensity[backIdx][i] = double.NaN;
                             
                     }
