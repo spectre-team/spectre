@@ -167,11 +167,11 @@ namespace Spectre.Data.Datasets
 
                         int x, y, z;
 
-                        if (!int.TryParse(metadata[0], NumberStyles.Any, CultureInfo.InvariantCulture, out x))
+                        if (!int.TryParse((metadata.Length>0)?metadata[0]:null, NumberStyles.Any, CultureInfo.InvariantCulture, out x))
                             x = -1;
-                        if (!int.TryParse(metadata[1], NumberStyles.Any, CultureInfo.InvariantCulture, out y))
+                        if (!int.TryParse((metadata.Length>1)?metadata[1]:null, NumberStyles.Any, CultureInfo.InvariantCulture, out y))
                             y = -1;
-                        if (!int.TryParse(metadata[2], NumberStyles.Any, CultureInfo.InvariantCulture, out z))
+                        if (!int.TryParse((metadata.Length>2)?metadata[2]:null, NumberStyles.Any, CultureInfo.InvariantCulture, out z))
                             z = -1;
 
                         _spatialCoordinates.Add(new SpatialCoordinates(x, y, z));
