@@ -18,6 +18,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
@@ -57,6 +58,24 @@ namespace Spectre.Data.Tests.Datasets
             {
                 Assert.Fail("Dataset failed to initialize from file.", e);
             }
+
+            IEnumerable<SpatialCoordinates> coordinates = _dataset.SpacialCoordinates;
+            var enumerator = coordinates.GetEnumerator();
+            enumerator.MoveNext();
+            SpatialCoordinates sc = enumerator.Current;
+            Assert.AreEqual(1, sc.X, "Spatial coordinates differ");
+            Assert.AreEqual(1, sc.Y, "Spatial coordinates differ");
+            Assert.AreEqual(0, sc.Z, "Spatial coordinates differ");
+
+            enumerator.MoveNext();
+            sc = enumerator.Current;
+            Assert.AreEqual(2, sc.X, "Spatial coordinates differ in second spectrum");
+            Assert.AreEqual(1, sc.Y, "Spatial coordinates differ in second spectrum");
+            Assert.AreEqual(0, sc.Z, "Spatial coordinates differ in second spectrum");
+
+            Assert.AreEqual(_dataset.GetRawMzArray(), new[] {899.99, 902.58, 912.04}, "The m/zs differ");
+            Assert.AreEqual(_dataset.GetRawIntensityArray(0), new[] {12.0, 20.0, 0.0},
+                "The intensities of first spectrum differs");
         }
 
         [Test]
@@ -105,6 +124,29 @@ namespace Spectre.Data.Tests.Datasets
         [Test]
         public void AppendFromFileTest()
         {
+            int spectreCountBeforeAppend = _dataset.GetSpectrumCount();
+            try
+            {
+                _dataset.AppendFromFile("small-test.txt");
+            }
+            catch (Exception)
+            {
+                Assert.Fail("The file wasn't successfully appended");
+                throw;
+            }
+
+            Assert.AreEqual(spectreCountBeforeAppend + 4, _dataset.GetSpectrumCount(), "Append didn't manage to include all spectras");
+
+            Assert.AreEqual(10, _dataset.GetRawIntensityValue(5, 1), "The value of added intensity differs from expected");
+
+            IEnumerable<SpatialCoordinates> spatialCoordinates = _dataset.SpacialCoordinates;
+            var enumerator = spatialCoordinates.GetEnumerator();
+            for (int i = 0; i < spectreCountBeforeAppend + 1; i++)
+                enumerator.MoveNext(); 
+
+            Assert.AreEqual(1.0, enumerator.Current.X, "The spatial coordinate of X wasn't appended properly");
+            Assert.AreEqual(1.0, enumerator.Current.Y, "The spatial coordinate of Y wasn't appended properly");
+            Assert.AreEqual(0.0, enumerator.Current.Z, "The spatial coordinate of Z wasn't appended properly");
         }
 
         [Test]
