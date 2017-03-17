@@ -1,9 +1,9 @@
-version: 0.1.{build}
+version: 0.2.{build}
 # enable patching of AssemblyInfo.* files
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "0.1.{build}"
+  assembly_version: "0.2.{build}"
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
 platform: x64
