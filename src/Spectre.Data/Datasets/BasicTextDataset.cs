@@ -22,16 +22,13 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using Spectre.Data.Structures;
 
 namespace Spectre.Data.Datasets
 {
     public class BasicTextDataset : IDataset
     {
-
-        //TODO: Because of not-so failsafe constructors, make the Datasets 
-        //TODO: be eventually spitted out by some factory class!!!
-
         #region Fields
 
         /// <summary>
@@ -53,6 +50,12 @@ namespace Spectre.Data.Datasets
         /// Container for storing intensity values for every loaded spectrum.
         /// </summary>
         private List<double[]> _intensity;
+
+        #endregion
+
+        #region Properties
+
+     
 
         #endregion
 
@@ -94,8 +97,19 @@ namespace Spectre.Data.Datasets
         public IEnumerable<SpatialCoordinates> SpacialCoordinates
         {
             get { return _spatialCoordinates; }
-            private set { _spatialCoordinates = value as List<SpatialCoordinates>; }
+            private set { _spatialCoordinates = value.ToList(); }
         }
+
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
+        public int SpectrumLength => _mz.Length;
+
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
+        public int SpectrumCount => _intensity.Count;
+
         /// <summary>
         /// Method for creating new dataset from text file, overwriting current data.
         /// </summary>
@@ -105,17 +119,30 @@ namespace Spectre.Data.Datasets
         {
             try
             {
-                StreamReader sr = new StreamReader(filePath);
-                var metadata = sr.ReadLine(); // global metadata
-                var mzValues = sr.ReadLine()?.Split(null);
-                _mz = new double[mzValues.Length];
-                for (int i = 0; i < _mz.Length; i++)
-                    if (!double.TryParse(mzValues[i], NumberStyles.Any, CultureInfo.InvariantCulture, out _mz[i]))
-                        _mz[i] = double.NaN;
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    var metadata = sr.ReadLine(); // global metadata
+                    var mzValues = sr.ReadLine().Split(null);
+                    mzValues = mzValues.Where(str => !string.IsNullOrEmpty(str)).ToArray();
+                    if (mzValues.Length < 1)
+                        throw new InvalidDataException("No m/z values found.");
+                    _mz = new double[mzValues.Length];
+                    for (int i = 0; i < _mz.Length; i++)
+                        if (!double.TryParse(mzValues[i], NumberStyles.Any, CultureInfo.InvariantCulture, out _mz[i]))
+                            _mz[i] = double.NaN;
+                }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
-                throw new Exception("File " + filePath + " could not be read.", e);
+                throw new IOException("M/z data could not be parsed from file " + filePath + ".", e);
+            }
+            catch (InvalidDataException e)
+            {
+                throw new IOException("M/z array parsed from file " + filePath + " is empty.", e);
+            }
+            catch (Exception e) //  catch remaining Exceptions that are related to StreamReader
+            {
+                throw new IOException("Streamer failed to read " + filePath + " file.", e);
             }
 
             _intensity = new List<double[]>();
@@ -148,8 +175,6 @@ namespace Spectre.Data.Datasets
         /// <exception cref="InvalidDataException">Thrown where there is a problem with file parsing.</exception>
         public void AppendFromFile(string filePath)
         {
-            //TODO: Specifying formalized format of data in text files.
-            //TODO: Safety check, format check
             try
             {
                 using (StreamReader sr = new StreamReader(filePath))
@@ -162,6 +187,7 @@ namespace Spectre.Data.Datasets
                         var intensities = sr.ReadLine()?.Split(null);
                         if (metadata == null || intensities == null)
                             continue;
+                        intensities = intensities.Where(str => !string.IsNullOrEmpty(str)).ToArray();
                         if (intensities.Length != _mz.Length)
                             throw new InvalidDataException("Length of the data must be equal to length of m/z values.");
 
@@ -185,9 +211,13 @@ namespace Spectre.Data.Datasets
                     }
                 }
             }
-            catch (Exception e)
+            catch(InvalidDataException e)
             {
-                throw new InvalidDataException("Error while parsing " + filePath + " file.", e);
+                throw new IOException("Length mismatch in parsed data.", e);
+            }
+            catch (Exception e) //  catch remaining Exceptions that are related to StreamReader
+            {
+                throw new IOException("Streamer failed to read " + filePath + " file.", e);
             }
         }
         /// <summary>

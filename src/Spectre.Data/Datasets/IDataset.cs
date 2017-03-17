@@ -25,12 +25,6 @@ namespace Spectre.Data.Datasets
 {
     public interface IDataset
     {
-        //TODO: Somehow divide the available functionalities to the
-        //TODO: external world (DataPoint accessible from higher
-        //TODO: levels of abstraction, raw data for algorithms).
-        //TODO: ...
-        //TODO: Derive a sub-interface?
-
         #region Metadata
         /// <summary>
         /// Property containing metadata of the dataset.
@@ -47,6 +41,16 @@ namespace Spectre.Data.Datasets
         {
             get;
         }
+
+        /// <summary>
+        /// Property containing number of values in a single spectrum.
+        /// </summary>
+        int SpectrumLength { get; }
+
+        /// <summary>
+        /// Property containing amount of spectra existing in dataset.
+        /// </summary>
+        int SpectrumCount { get; }
         #endregion
 
         #region Data creation
@@ -89,16 +93,7 @@ namespace Spectre.Data.Datasets
         /// <param name="valueIdxTo">Ending value index.</param>
         /// <returns>Created <see cref="DataPoint"/> array.</returns>
         DataPoint[] GetDataPoints(int spectrumIdx, int valueIdxFrom, int valueIdxTo);
-        /// <summary>
-        /// Method returning number of values in a single spectrum.
-        /// </summary>
-        /// <returns>Number of values in a single spectrum.</returns>
-        int GetSpectrumLength();
-        /// <summary>
-        /// Method returning amount of spectra existing in dataset.
-        /// </summary>
-        /// <returns>Number of all spectras in dataset.</returns>
-        int GetSpectrumCount();
+
         #endregion
 
         #region Raw data access

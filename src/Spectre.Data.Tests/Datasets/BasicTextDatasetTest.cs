@@ -35,7 +35,7 @@ namespace Spectre.Data.Tests.Datasets
         [OneTimeSetUp]
         public void SetUpFixture()
         {
-            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory + "\\..\\..");
+            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory + "\\..\\..\\..");
         }
 
         [SetUp]
@@ -50,30 +50,33 @@ namespace Spectre.Data.Tests.Datasets
         [Test]
         public void CreateFromFileTest()
         {
-            try
-            {
-                _dataset = new BasicTextDataset("small-test.txt");
-            }
-            catch (Exception e)
-            {
-                Assert.Fail("Dataset failed to initialize from file.", e);
-            }
+            Assert.DoesNotThrow(() => { _dataset = new BasicTextDataset("small-test.txt"); },
+                "Dataset failed to initialize from file.");
+            Assert.Throws<IOException>(() => { _dataset = new BasicTextDataset("wrong-filepath.txt"); },
+                "Dataset has been initialized using wrong file path.");
 
             IEnumerable<SpatialCoordinates> coordinates = _dataset.SpacialCoordinates;
             var enumerator = coordinates.GetEnumerator();
             enumerator.MoveNext();
             SpatialCoordinates sc = enumerator.Current;
-            Assert.AreEqual(1, sc.X, "Spatial coordinates differ");
-            Assert.AreEqual(1, sc.Y, "Spatial coordinates differ");
-            Assert.AreEqual(0, sc.Z, "Spatial coordinates differ");
+            Assert.AreEqual(1, sc.X, 
+                "Spatial coordinates differ");
+            Assert.AreEqual(1, sc.Y, 
+                "Spatial coordinates differ");
+            Assert.AreEqual(0, sc.Z, 
+                "Spatial coordinates differ");
 
             enumerator.MoveNext();
             sc = enumerator.Current;
-            Assert.AreEqual(2, sc.X, "Spatial coordinates differ in second spectrum");
-            Assert.AreEqual(1, sc.Y, "Spatial coordinates differ in second spectrum");
-            Assert.AreEqual(0, sc.Z, "Spatial coordinates differ in second spectrum");
+            Assert.AreEqual(2, sc.X, 
+                "Spatial coordinates differ in second spectrum");
+            Assert.AreEqual(1, sc.Y, 
+                "Spatial coordinates differ in second spectrum");
+            Assert.AreEqual(0, sc.Z, 
+                "Spatial coordinates differ in second spectrum");
 
-            Assert.AreEqual(_dataset.GetRawMzArray(), new[] {899.99, 902.58, 912.04}, "The m/zs differ");
+            Assert.AreEqual(_dataset.GetRawMzArray(), new[] {899.99, 902.58, 912.04}, 
+                "The m/zs differ");
             Assert.AreEqual(_dataset.GetRawIntensityArray(0), new[] {12.0, 20.0, 0.0},
                 "The intensities of first spectrum differs");
         }
@@ -81,42 +84,27 @@ namespace Spectre.Data.Tests.Datasets
         [Test]
         public void CreateFromRawDataTest()
         {
-            double[] mz = null;
-            double[,] data = null;
+            double[] mz = { 1.0, 2.0, 3.0 };
+            double[,] data = { { 1, 2.1, 3.2 } };
 
-            try
-            {
-                _dataset = new BasicTextDataset(mz, data);
-                Assert.Fail("Dataset accepted null raw data.");
-            }
-            catch (Exception)
-            {
-            }
+            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(null, data); },
+                "Dataset accepted null m/z array.");
+            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(mz, null); },
+                "Dataset accepted null intensity array.");
 
-            mz = new[] {1.0, 2.0, 3.0};
-            data = new[,] {{1.0, 2.0}};
+            mz = new[] { 1.0, 2.0, 3.0 };
+            data = new[,] { { 1.0, 2.0 } };
 
-            try
-            {
-                _dataset = new BasicTextDataset(mz, data);
-                Assert.Fail("Dataset accepted raw data of different lengths.");
-            }
-            catch (Exception)
-            {
-            }
+            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(mz, data); },
+                "Dataset accepted raw data of different lengths.");
 
-            data = new[,] {{1, 1.1, 1.2}, {1, 1.1, 1.2}};
+            data = new[,] { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
 
-            try
-            {
-                _dataset = new BasicTextDataset(mz, data);
-            }
-            catch (Exception)
-            {
-                Assert.Fail("Dataset failed to initialize from correct raw data.");
-            }
+            Assert.DoesNotThrow(() => { _dataset = new BasicTextDataset(mz, data); },
+                "Dataset failed to initialize from correct raw data.");
 
-            Assert.AreEqual(_dataset.GetSpectrumCount(), 2, "Dataset failed to load spectras correctly.");
+            Assert.AreEqual(_dataset.SpectrumCount, 2, 
+                "Dataset failed to load spectras correctly.");
             Assert.AreEqual(_dataset.SpacialCoordinates.Count(), 2,
                 "Dataset do not assign spacial coordinates per spectrum.");
         }
@@ -124,75 +112,57 @@ namespace Spectre.Data.Tests.Datasets
         [Test]
         public void AppendFromFileTest()
         {
-            int spectreCountBeforeAppend = _dataset.GetSpectrumCount();
-            try
-            {
-                _dataset.AppendFromFile("small-test.txt");
-            }
-            catch (Exception)
-            {
-                Assert.Fail("The file wasn't successfully appended");
-                throw;
-            }
+            int spectreCountBeforeAppend = _dataset.SpectrumCount;
 
-            Assert.AreEqual(spectreCountBeforeAppend + 4, _dataset.GetSpectrumCount(), "Append didn't manage to include all spectras");
+            Assert.DoesNotThrow(() => { _dataset.AppendFromFile("small-test.txt"); },
+                "The file wasn't successfully appended");
 
-            Assert.AreEqual(10, _dataset.GetRawIntensityValue(5, 1), "The value of added intensity differs from expected");
+            Assert.AreEqual(spectreCountBeforeAppend + 4, _dataset.SpectrumCount, 
+                "Append didn't manage to include all spectras");
+
+            Assert.AreEqual(10, _dataset.GetRawIntensityValue(5, 1), 
+                "The value of added intensity differs from expected");
 
             IEnumerable<SpatialCoordinates> spatialCoordinates = _dataset.SpacialCoordinates;
             var enumerator = spatialCoordinates.GetEnumerator();
             for (int i = 0; i < spectreCountBeforeAppend + 1; i++)
                 enumerator.MoveNext(); 
 
-            Assert.AreEqual(1.0, enumerator.Current.X, "The spatial coordinate of X wasn't appended properly");
-            Assert.AreEqual(1.0, enumerator.Current.Y, "The spatial coordinate of Y wasn't appended properly");
-            Assert.AreEqual(0.0, enumerator.Current.Z, "The spatial coordinate of Z wasn't appended properly");
+            Assert.AreEqual(1.0, enumerator.Current.X, 
+                "The spatial coordinate of X wasn't appended properly");
+            Assert.AreEqual(1.0, enumerator.Current.Y, 
+                "The spatial coordinate of Y wasn't appended properly");
+            Assert.AreEqual(0.0, enumerator.Current.Z, 
+                "The spatial coordinate of Z wasn't appended properly");
         }
 
         [Test]
         public void AppendFromRawDataTest()
         {
-            double[,] newData = null;
+            Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(null); },
+                "Dataset accepted null raw data.");
 
-            try
-            {
-                _dataset.AppendFromRawData(newData);
-                Assert.Fail("Dataset accepted null raw data.");
-            }
-            catch (Exception)
-            {
-            }
+            Assert.AreEqual(_dataset.SpectrumCount, 3, 
+                "Dataset has been changed while appending null data.");
 
-            Assert.AreEqual(_dataset.GetSpectrumCount(), 3);
+            double[,] newData = {{0.1}};
 
-            newData = new[,] {{0.1}};
+            Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(newData); },
+                "Dataset accepted raw data of different lengths.");
 
-            try
-            {
-                _dataset.AppendFromRawData(newData);
-                Assert.Fail("Dataset accepted raw data of different lengths.");
-            }
-            catch (Exception)
-            {
-            }
-
-            Assert.AreEqual(_dataset.GetSpectrumCount(), 3);
+            Assert.AreEqual(_dataset.SpectrumCount, 3);
 
             newData = new[,] {{2, 2.1, 2.2}, {3, 3.1, 3.2}, {4, 4.1, 4.2}};
 
-            try
-            {
-                _dataset.AppendFromRawData(newData);
-            }
-            catch (Exception)
-            {
-                Assert.Fail("Dataset failed to append correct raw data.");
-            }
+            Assert.DoesNotThrow(() => { _dataset.AppendFromRawData(newData); },
+             "Dataset failed to append correct raw data.");
 
-            Assert.AreEqual(_dataset.GetSpectrumCount(), 6, "Dataset failed to load spectras correctly.");
+            Assert.AreEqual(_dataset.SpectrumCount, 6, 
+                "Dataset failed to load spectras correctly.");
             Assert.AreEqual(_dataset.SpacialCoordinates.Count(), 6,
                 "Dataset do not assign spacial coordinates per spectrum.");
-            Assert.AreEqual(_dataset.GetRawIntensityValue(4, 1), 3.1, "Dataset appended incorrect values.");
+            Assert.AreEqual(_dataset.GetRawIntensityValue(4, 1), 3.1, 
+                "Dataset appended incorrect values.");
         }
 
         [Test]
@@ -201,7 +171,8 @@ namespace Spectre.Data.Tests.Datasets
             DataPoint result = _dataset.GetDataPoint(1, 1);
             DataPoint expected = new DataPoint(2, 5.1);
 
-            Assert.AreEqual(result.Mz, expected.Mz, "Dataset returned wrong m/z values.");
+            Assert.AreEqual(result.Mz, expected.Mz, 
+                "Dataset returned wrong m/z values.");
             Assert.AreEqual(result.Intensity, expected.Intensity, "Dataset returned wrong intensity values.");
         }
 
@@ -238,13 +209,13 @@ namespace Spectre.Data.Tests.Datasets
         [Test]
         public void GetSpectrumLengthTest()
         {
-            Assert.AreEqual(_dataset.GetSpectrumLength(), 3, "Dataset returned wrong spectrum length.");
+            Assert.AreEqual(_dataset.SpectrumLength, 3, "Dataset returned wrong spectrum length.");
         }
 
         [Test]
         public void GetSpectrumCountTest()
         {
-            Assert.AreEqual(_dataset.GetSpectrumCount(), 3, "Dataset returned wrong spectrum count.");
+            Assert.AreEqual(_dataset.SpectrumCount, 3, "Dataset returned wrong spectrum count.");
         }
 
         [Test]

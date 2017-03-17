@@ -26,11 +26,11 @@ namespace Spectre.Data.Structures
         /// <summary>
         /// Value of m/z.
         /// </summary>
-        public double Mz { get; set; }
+        public double Mz { get; }
         /// <summary>
         /// Value of intensity.
         /// </summary>
-        public double Intensity { get; set; }
+        public double Intensity { get; }
         #endregion
 
         #region Constructors
