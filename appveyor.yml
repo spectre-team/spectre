@@ -23,7 +23,7 @@ build:
   verbosity: quiet
 after_build:
 - cmd: .\scripts\build_ng2_client.bat
-- ps: .\scripts\BindPageToIIS.ps1
+- ps: C:\projects\spectre\scripts\BindPageToIIS.ps1
 
 test:
   categories:
