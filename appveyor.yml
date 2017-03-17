@@ -11,16 +11,21 @@ configuration:
   - Debug
   - Release
 services: iis
+
+install:
+- ps: .\scripts\InstallNode.ps1
+
 before_build:
 - cmd: .\scripts\restore_nugets.bat
 build:
   project: ./src/Spectre.sln
   parallel: true
   verbosity: quiet
+after_build:
+- cmd: .\scripts\build_ng2_client.bat
+- ps: .\scripts\BindPageToIIS.ps1
+
 test:
   categories:
     except:
       - Algorithm
-cache:
-# preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
-  - dependencies.zip
