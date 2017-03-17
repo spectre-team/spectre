@@ -38,5 +38,14 @@ namespace Spectre.Data.Structures
             Y = y;
             Z = z;
         }
+
+        /// <summary>
+        /// Converts spatial coordinates into space-separated string of x, y and z values
+        /// </summary>
+        /// <returns>String of form "x y z"</returns>
+        public override string ToString()
+        {
+            return X.ToString() + ' ' + Y.ToString() + ' ' + Z.ToString();
+        }
     }
 }

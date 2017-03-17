@@ -55,7 +55,7 @@ namespace Spectre.Data.Tests.Datasets
             Assert.Throws<IOException>(() => { _dataset = new BasicTextDataset("wrong-filepath.txt"); },
                 "Dataset has been initialized using wrong file path.");
 
-            IEnumerable<SpatialCoordinates> coordinates = _dataset.SpacialCoordinates;
+            IEnumerable<SpatialCoordinates> coordinates = _dataset.SpatialCoordinates;
             var enumerator = coordinates.GetEnumerator();
             enumerator.MoveNext();
             SpatialCoordinates sc = enumerator.Current;
@@ -105,7 +105,7 @@ namespace Spectre.Data.Tests.Datasets
 
             Assert.AreEqual(_dataset.SpectrumCount, 2, 
                 "Dataset failed to load spectras correctly.");
-            Assert.AreEqual(_dataset.SpacialCoordinates.Count(), 2,
+            Assert.AreEqual(_dataset.SpatialCoordinates.Count(), 2,
                 "Dataset do not assign spacial coordinates per spectrum.");
         }
 
@@ -123,7 +123,7 @@ namespace Spectre.Data.Tests.Datasets
             Assert.AreEqual(10, _dataset.GetRawIntensityValue(5, 1), 
                 "The value of added intensity differs from expected");
 
-            IEnumerable<SpatialCoordinates> spatialCoordinates = _dataset.SpacialCoordinates;
+            IEnumerable<SpatialCoordinates> spatialCoordinates = _dataset.SpatialCoordinates;
             var enumerator = spatialCoordinates.GetEnumerator();
             for (int i = 0; i < spectreCountBeforeAppend + 1; i++)
                 enumerator.MoveNext(); 
@@ -159,7 +159,7 @@ namespace Spectre.Data.Tests.Datasets
 
             Assert.AreEqual(_dataset.SpectrumCount, 6, 
                 "Dataset failed to load spectras correctly.");
-            Assert.AreEqual(_dataset.SpacialCoordinates.Count(), 6,
+            Assert.AreEqual(_dataset.SpatialCoordinates.Count(), 6,
                 "Dataset do not assign spacial coordinates per spectrum.");
             Assert.AreEqual(_dataset.GetRawIntensityValue(4, 1), 3.1, 
                 "Dataset appended incorrect values.");
@@ -258,6 +258,25 @@ namespace Spectre.Data.Tests.Datasets
         {
             double[,] result = _dataset.GetRawIntensityRange(1, 3, 1, 3);
             Assert.AreEqual(result, new[,] { {5.1, 6.2}, {8.1, 9.2} }, "Dataset returned wrong intensity row.");
+        }
+
+        [Test]
+        public void SaveToFileTest()
+        {
+            string fileName = "save-test.txt";
+            _dataset.SaveToFile(fileName);
+            IDataset setFromSave = new BasicTextDataset(fileName);
+
+            Assert.AreEqual(_dataset.GetRawMzArray(), setFromSave.GetRawMzArray(), "Mz values were stored incorrectly");
+
+            for (int i = 0; i < _dataset.SpectrumCount; i++)
+            {
+                Assert.AreEqual(_dataset.GetRawIntensityRow(i), setFromSave.GetRawIntensityRow(i), "Intensities were stored incorrectly");
+            }
+
+            Assert.AreEqual(_dataset.SpatialCoordinates, setFromSave.SpatialCoordinates, "Spatial coordinates were stored incorrectly");
+
+            File.Delete(fileName);
         }
     }
 }

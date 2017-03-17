@@ -37,7 +37,7 @@ namespace Spectre.Data.Datasets
         /// <summary>
         /// Property for storing spacial coordinates for spectras in dataset.
         /// </summary>
-        IEnumerable<SpatialCoordinates> SpacialCoordinates
+        IEnumerable<SpatialCoordinates> SpatialCoordinates
         {
             get;
         }
@@ -136,6 +136,14 @@ namespace Spectre.Data.Datasets
         /// <param name="valueIdxTo">Ending value index.</param>
         /// <returns>Multidimensional array of intensities.</returns>
         double[,] GetRawIntensityRange(int spectrumIdxFrom, int spectrumIdxTo, int valueIdxFrom, int valueIdxTo);
+        #endregion
+
+        #region File storage
+        /// <summary>
+        /// Saves dataset to file using the default format.
+        /// </summary>
+        /// <param name="path">Path to the file.</param>
+        void SaveToFile(string path);
         #endregion
     }
 }
