@@ -35,15 +35,6 @@ namespace Spectre.Data.Structures
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataPoint"/> class 
-        /// with NaN values.
-        /// </summary>
-        public DataPoint()
-        {
-            Mz = double.NaN;
-            Intensity = double.NaN;
-        }
-        /// <summary>
         /// Initializes a new instance of the <see cref="DataPoint"/> class
         /// with user defined values of m/z and intensity.
         /// </summary>

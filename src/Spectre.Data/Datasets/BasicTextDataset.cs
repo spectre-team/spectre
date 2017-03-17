@@ -265,20 +265,6 @@ namespace Spectre.Data.Datasets
         /// <summary>
         /// See <see cref="IDataset"/> for description.
         /// </summary>
-        public int GetSpectrumLength()
-        {
-            return _mz.Length;
-        }
-        /// <summary>
-        /// See <see cref="IDataset"/> for description.
-        /// </summary>
-        public int GetSpectrumCount()
-        {
-            return _intensity.Count;
-        }
-        /// <summary>
-        /// See <see cref="IDataset"/> for description.
-        /// </summary>
         public double[] GetRawMzArray()
         {
             return _mz;
