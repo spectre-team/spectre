@@ -22,24 +22,18 @@ namespace Spectre.Data.Structures
     public class DataPoint
     {
         #region Fields
-       
-        public double Mz { get; set; }
+
         /// <summary>
-        /// Value of intensity
+        /// Value of m/z.
         /// </summary>
-        public double Intensity { get; set; }
+        public double Mz { get; }
+        /// <summary>
+        /// Value of intensity.
+        /// </summary>
+        public double Intensity { get; }
         #endregion
 
         #region Constructors
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DataPoint"/> class 
-        /// with NaN values.
-        /// </summary>
-        public DataPoint()
-        {
-            Mz = double.NaN;
-            Intensity = double.NaN;
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="DataPoint"/> class
         /// with user defined values of m/z and intensity.

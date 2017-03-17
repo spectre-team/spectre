@@ -25,11 +25,27 @@ namespace Spectre.Data.Structures
         public int Y;
         public int Z;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="SpatialCoordinates"/> struct with
+        /// user defined values of spatial coordinates.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
+        /// <param name="z">Z coordinate.</param>
         public SpatialCoordinates(int x, int y, int z)
         {
             X = x;
             Y = y;
             Z = z;
+        }
+
+        /// <summary>
+        /// Converts spatial coordinates into space-separated string of x, y and z values
+        /// </summary>
+        /// <returns>String of form "x y z"</returns>
+        public override string ToString()
+        {
+            return X.ToString() + ' ' + Y.ToString() + ' ' + Z.ToString();
         }
     }
 }

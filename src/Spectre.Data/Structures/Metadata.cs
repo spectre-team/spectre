@@ -20,10 +20,12 @@ namespace Spectre.Data.Structures
 {
     public struct Metadata
     {
-        //TODO: Fields of metadata for consultation.
-
         public string Description;  // dummy
 
+        /// <summary>
+        /// Default template instance for <see cref="Metadata"/> class.
+        /// </summary>
+        /// <returns>Default metadata.</returns>
         public static Metadata Default()
         {
             Metadata metadata;
