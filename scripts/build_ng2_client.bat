@@ -1,3 +1,3 @@
-cd C:\projects\spectre\src\Spectre.Angular2Client
-ng build
-cd C:\projects\spectre
+cd .\src\Spectre.Angular2Client
+ng build  >nul 2>&1
+cd ..\..
