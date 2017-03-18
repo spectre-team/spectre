@@ -1,7 +1,38 @@
 {
   "name": "spectre.angular2-client",
   "version": "0.0.0",
-  "license": "MIT",
+  "description": "Frontend for spectre.",
+  "author": "Michal Wolny <michalwoln@gmail.com>",
+  "contributors": [{
+      "name": "Dariusz Kuchta",
+      "email": "dariusz.kuchta.94@gmail.com"
+      },{
+      "name": "Grzegorz Mrukwa",
+      "email": "Grzegorz.Mrukwa@polsl.pl"
+      },{
+      "name": "Michal Gallus",
+      "email": "michal.gallus@gmail.com"
+      },{
+      "name": "Sebastian Pustelnik",
+      "email": "sebastianpustelnik95@gmail.com"
+      },{
+      "name": "Wojciech Wilgierz",
+      "email": "regis1286@gmail.com"
+      }],
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/spectre-team/spectre"
+  },
+  "keywords": [
+      "spectre",
+      "maldi",
+      "tof",
+      "mass spectrometry",
+      "analysis",
+      "clustering",
+      "divik"
+  ],
+  "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
