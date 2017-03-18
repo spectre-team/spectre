@@ -11,6 +11,4 @@ describe('spectre.angular2-client App', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('app works!');
   });
-
-  it('should fail', () => expect(false).toEqual(true));
 });
