@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableDelayedExpansion
 echo Test discovery started...
-dir *.tests.dll /b /s | findstr /v obj > __tmp.txt
+dir C:\projects\spectre\*.tests.dll /b /s | findstr /v obj > __tmp.txt
 
 set isnt=^^!=
 set conditions=
