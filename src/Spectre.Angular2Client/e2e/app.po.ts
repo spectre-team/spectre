@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class Spectre.Angular2ClientPage {
+export class SpectreAngular2ClientPage {
   navigateTo() {
     return browser.get('/');
   }

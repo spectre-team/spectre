@@ -1,10 +1,10 @@
-import { Spectre.Angular2ClientPage } from './app.po';
+import { SpectreAngular2ClientPage } from './app.po';
 
 describe('spectre.angular2-client App', () => {
-  let page: Spectre.Angular2ClientPage;
+  let page: SpectreAngular2ClientPage;
 
   beforeEach(() => {
-    page = new Spectre.Angular2ClientPage();
+    page = new SpectreAngular2ClientPage();
   });
 
   it('should display message saying app works', () => {
