@@ -6,7 +6,7 @@ dir C:\projects\spectre\*.tests.dll /b /s | findstr /v obj > __tmp.txt
 set isnt=^^!=
 set conditions=
 if "%2"=="" goto test
-set conditions=--where "cat !isnt! %2
+set conditions="cat !isnt! %2
 :parse_next
 shift
 if "%2"=="" (
