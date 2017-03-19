@@ -1,9 +1,9 @@
-version: 0.2.{build}
+version: 0.3.{build}
 # enable patching of AssemblyInfo.* files
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "0.2.{build}"
+  assembly_version: "0.3.{build}"
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
 platform: x64
@@ -11,16 +11,17 @@ configuration:
   - Debug
   - Release
 services: iis
+
+install:
+- ps: C:\projects\spectre\scripts\InstallNode.ps1
+
 before_build:
-- cmd: .\scripts\restore_nugets.bat
-build:
-  project: ./src/Spectre.sln
-  parallel: true
-  verbosity: quiet
-test:
-  categories:
-    except:
-      - Algorithm
-cache:
-# preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
-  - dependencies.zip
+- cmd: C:\projects\spectre\scripts\restore_nugets.bat
+build_script:
+- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
+
+test_script:
+- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
+- cmd: C:\projects\spectre\scripts\test_frontend.bat
+- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
