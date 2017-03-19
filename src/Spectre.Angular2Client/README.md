@@ -2,9 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.2.
 
+## Installation
+In order to install Angular CLI, please run `scripts/InstallNodeDev.ps1` using Windows Powershell. 
+If the script doesn't have permission to run, please execute `Set-ExecutionPolicy Unrestricted` command to enable running scripts from Powershell, run `InstallNodeDev.ps1`, and finish with `Set-ExecutionPolicy Restricted` (default value) if you will.
+
+Troubleshooting:
+- If nodejs.msi couldn't have been successfully downloaded and installed, please install it manually and the rest of the script should run just fine.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+If calling `ng serve` causes errors regarding uninstalled packages, please delete `src\Spectre.Angular2Client\node_modules` directory, enter `src\Spectre.Angular2Client\` and run `npm install`.
 
 ## Code scaffolding
 
