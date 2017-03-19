@@ -20,9 +20,6 @@ before_build:
 build_script:
 - cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cmd: C:\projects\spectre\scripts\build_ng2_client.bat
-after_build:
-- ps: C:\projects\spectre\scripts\BindPageToIIS.ps1
-
 
 test_script:
 - cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
