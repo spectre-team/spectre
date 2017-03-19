@@ -5,7 +5,7 @@ Start-Process msiexec.exe -ArgumentList "/i node.msi /quiet" -Wait | Wait-Proces
 Remove-Item node.msi
 $env:Path = $env:Path + ";C:\Program Files\nodejs"
 npm install -g npm
-npm install -g @angular/cli --loglevel=error
+cmd /C "npm install -g @angular/cli --loglevel=error"
 cd ..\src\Spectre.Angular2Client
 npm install --loglevel=error | Out-Null
 cd ..\..\scripts
