@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Algorithms.Tests", "Spectre.Algorithms.Tests\Spectre.Algorithms.Tests.csproj", "{BBF6329D-7BEC-494E-9FC9-B24B12D94EA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Angular2Client.Tests", "Spectre.Angular2Client.Tests\Spectre.Angular2Client.Tests.csproj", "{35B3BCF0-C51A-404D-B359-011A2ADC3A81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Data", "Spectre.Data\Spectre.Data.csproj", "{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Data.Tests", "Spectre.Data.Tests\Spectre.Data.Tests.csproj", "{01391E76-3D20-4B4B-B727-2A133B35A144}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +42,14 @@ Global
 		{35B3BCF0-C51A-404D-B359-011A2ADC3A81}.Debug|x64.Build.0 = Debug|x64
 		{35B3BCF0-C51A-404D-B359-011A2ADC3A81}.Release|x64.ActiveCfg = Release|x64
 		{35B3BCF0-C51A-404D-B359-011A2ADC3A81}.Release|x64.Build.0 = Release|x64
+		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Debug|x64.ActiveCfg = Debug|x64
+		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Debug|x64.Build.0 = Debug|x64
+		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Release|x64.ActiveCfg = Release|x64
+		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Release|x64.Build.0 = Release|x64
+		{01391E76-3D20-4B4B-B727-2A133B35A144}.Debug|x64.ActiveCfg = Debug|x64
+		{01391E76-3D20-4B4B-B727-2A133B35A144}.Debug|x64.Build.0 = Debug|x64
+		{01391E76-3D20-4B4B-B727-2A133B35A144}.Release|x64.ActiveCfg = Release|x64
+		{01391E76-3D20-4B4B-B727-2A133B35A144}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
