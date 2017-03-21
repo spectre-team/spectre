@@ -30,7 +30,10 @@
       "mass spectrometry",
       "analysis",
       "clustering",
-      "divik"
+      "divik",
+      "divisive ik-means",
+      "gmm",
+      "gaussian mixture model"
   ],
   "license": "Apache-2.0",
   "scripts": {
@@ -51,6 +54,7 @@
     "@angular/platform-browser": "^2.4.0",
     "@angular/platform-browser-dynamic": "^2.4.0",
     "@angular/router": "^3.4.0",
+    "append-transform": "^0.4.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.7.6"
