@@ -1,0 +1,23 @@
+﻿<Window x:Class="Spectre.DivikWpfClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Spectre.DivikWpfClient.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525"
+        DataContext="{StaticResource MainPageVm}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Input path:"/>
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 Text="{Binding InputPath, Mode=TwoWay}"/>
+    </Grid>
+</Window>

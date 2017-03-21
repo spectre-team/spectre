@@ -1,0 +1,10 @@
+﻿<Application x:Class="Spectre.DivikWpfClient.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Spectre.DivikWpfClient"
+             xmlns:vm="clr-namespace:Spectre.DivikWpfClient.ViewModel"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         <vm:MainPageVm x:Key="MainPageVm"/>
+    </Application.Resources>
+</Application>

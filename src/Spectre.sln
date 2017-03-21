@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Mvvm", "Spectre.Mvv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Mvvm.Tests", "Spectre.Mvvm.Tests\Spectre.Mvvm.Tests.csproj", "{23A97D0F-B6D9-4B67-84FE-4B52EA7D82EC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D3C36686-9667-48B2-A14B-FF46E6350A51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.DivikWpfClient", "Spectre.DivikWpfClient\Spectre.DivikWpfClient.csproj", "{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -59,6 +63,10 @@ Global
 		{23A97D0F-B6D9-4B67-84FE-4B52EA7D82EC}.Debug|x64.Build.0 = Debug|x64
 		{23A97D0F-B6D9-4B67-84FE-4B52EA7D82EC}.Release|x64.ActiveCfg = Release|x64
 		{23A97D0F-B6D9-4B67-84FE-4B52EA7D82EC}.Release|x64.Build.0 = Release|x64
+		{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C}.Debug|x64.ActiveCfg = Debug|x64
+		{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C}.Debug|x64.Build.0 = Debug|x64
+		{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C}.Release|x64.ActiveCfg = Release|x64
+		{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +74,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2D24F1E7-18D4-4FC0-9E4F-2F32FF27FCCE} = {7EAC5FD7-C9CD-42E8-A24B-3665E854F4CD}
 		{23A97D0F-B6D9-4B67-84FE-4B52EA7D82EC} = {7EAC5FD7-C9CD-42E8-A24B-3665E854F4CD}
+		{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C} = {D3C36686-9667-48B2-A14B-FF46E6350A51}
 	EndGlobalSection
 EndGlobal
