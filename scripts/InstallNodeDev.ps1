@@ -4,9 +4,12 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Start-Process msiexec.exe -ArgumentList "/i node.msi /quiet" -Wait | Wait-Process
 Remove-Item node.msi
 $env:Path = $env:Path + ";C:\Program Files\nodejs"
+Write-Host "Installing npm..." -ForegroundColor Yellow
 npm install -g npm
-cmd /C "npm install -g @angular/cli --loglevel=error"
+Write-Host "Installing angular-cli..." -ForegroundColor Yellow
+cmd /C "npm install -g @angular/cli@1.0.0-rc.2 --loglevel=error"
 cd ..\src\Spectre.Angular2Client
+Write-Host "Installing dependencies..." -ForegroundColor Yellow
 npm install --loglevel=error | Out-Null
 cd ..\..\scripts
 Write-Host "Press any key..."

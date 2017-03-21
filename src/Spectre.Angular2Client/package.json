@@ -30,7 +30,10 @@
       "mass spectrometry",
       "analysis",
       "clustering",
-      "divik"
+      "divik",
+      "divisive ik-means",
+      "gmm",
+      "gaussian mixture model"
   ],
   "license": "Apache-2.0",
   "scripts": {
