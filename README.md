@@ -39,8 +39,7 @@ Details will be added soon.
 
 ## References
 
-This software is part of [Data Mining Group of Silesian University of Technology](http://www.zaed.polsl.pl/)
-contribution, rest of which is published [here](https://github.com/ZAEDPolSl).
+This software is part of contribution made by [Data Mining Group of Silesian University of Technology](http://www.zaed.polsl.pl/), rest of which is published [here](https://github.com/ZAEDPolSl).
 
 + [Marczyk M, Polanska J, Polanski A: Comparison of Algorithms for Profile-Based
 Alignment of Low Resolution MALDI-ToF Spectra. In Advances in Intelligent
