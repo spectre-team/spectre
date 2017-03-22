@@ -199,7 +199,8 @@ namespace Spectre.DivikWpfClient.ViewModel
             return true;
         }
 
-        private void _ChooseFileButtonExecute() {
+        private void _ChooseFileButtonExecute()
+        {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog()
             {
                 DefaultExt = ".txt",
@@ -215,10 +216,15 @@ namespace Spectre.DivikWpfClient.ViewModel
             }
         }
 
-        public RelayCommand ChooseFileButtonExecute => new RelayCommand(
-                    execute: () => _ChooseFileButtonExecute(),
-                    canExecute: () => _ChooseFileButtonCanExecute()
-                    );
+        private RelayCommand _ChooseFileButtonHandle;
+
+        public RelayCommand ChooseFileButtonExecute
+        {
+            get
+            {
+                return _ChooseFileButtonHandle ?? (_ChooseFileButtonHandle = new RelayCommand(execute: () => _ChooseFileButtonExecute()));
+            }
+        }
 
         //start divik
         private bool _StartDivikButtonCanExecute()
@@ -233,10 +239,15 @@ namespace Spectre.DivikWpfClient.ViewModel
             StartDivikLabel = StartDivikLabel == "Start Divik" ? "Cancel" : "Start Divik";
         }
 
-        public RelayCommand StartDivikButtonExecute => new RelayCommand(
-                    execute: () => _StartDivikButtonExecute(),
-                    canExecute: () => _StartDivikButtonCanExecute()
-                    );
+        private RelayCommand _StartDivikButtonHandle;
+
+        public RelayCommand StartDivikButtonExecute
+        {
+            get
+            {
+                return _StartDivikButtonHandle ?? (_StartDivikButtonHandle = new RelayCommand(execute: () => _StartDivikButtonExecute()));
+            }
+        }
 
         #endregion
     }
