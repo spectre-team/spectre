@@ -56,7 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Validation\DoubleRangeRule.cs" />
+    <Compile Include="Validation\PercentageRangeRule.cs" />
     <Compile Include="ViewModel\MainPageVm.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

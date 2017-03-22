@@ -14,6 +14,38 @@ namespace Spectre.DivikWpfClient.ViewModel
     /// <seealso cref="Spectre.Mvvm.Base.PropertyChangedNotification" />
     public class MainPageVm: PropertyChangedNotification
     {
+        
+        #region Constructors
+
+        public MainPageVm()
+        {
+            InputPath = null;
+            MaxK = 10;
+            Level = 3;
+            UsingLevels = true;
+            UsingAmplitudeFiltration = true;
+            UsingVarianceFiltration = true;
+            PercentSizeLimit = 0.001;
+            FeaturePreservationLimit = 0.05;
+            Metric = Metric.Pearson;
+            PlottingPartitions = false;
+            PlottingRecursively = false;
+            PlottingDecomposition = false;
+            PlottingDecompositionRecursively = false;
+            MaxComponentsForDecomposition = 3;
+            OutputPath = ".";
+            CachePath = ".";
+            Caching = false;
+            Verbose = false;
+            KmeansMaxIters = 100;
+            IsProgressBarVisible = false;
+            ProgressBarLabel = "";
+        }
+
+        #endregion
+
+        #region DivikProperties
+
         public string InputPath
         {
             get { return GetValue(() => InputPath); }
@@ -127,5 +159,77 @@ namespace Spectre.DivikWpfClient.ViewModel
             get { return GetValue(() => KmeansMaxIters); }
             set { SetValue(() => KmeansMaxIters, value); }
         }
+
+        #endregion
+
+        #region DisplayProperties
+
+        public bool IsProgressBarVisible
+        {
+            get { return GetValue(() => IsProgressBarVisible); }
+            set { SetValue(() => IsProgressBarVisible, value); }
+        }
+
+        public string ProgressBarLabel
+        {
+            get { return GetValue(() => ProgressBarLabel); }
+            set { SetValue(() => ProgressBarLabel, value); }
+        }
+
+        public IEnumerable<Metric> Metrics
+        {
+            get { return Enum.GetValues(typeof(Metric)).Cast<Metric>(); }
+        }
+
+        #endregion
+
+        #region Commands
+
+
+        //choose file
+        private bool _ChooseFileButtonCanExecute()
+        {
+            return true;
+        }
+
+        private void _ChooseFileButtonExecute() {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog()
+            {
+                DefaultExt = ".txt",
+                Filter = "Txt Files (*.txt)|*.txt"
+            };
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                InputPath = filename;
+            }
+        }
+
+        public RelayCommand ChooseFileButtonExecute => new RelayCommand(
+                    execute: () => _ChooseFileButtonExecute(),
+                    canExecute: () => _ChooseFileButtonCanExecute()
+                    );
+
+        //start divik
+        private bool _StartDivikButtonCanExecute()
+        {
+            return true;
+        }
+
+        private void _StartDivikButtonExecute()
+        {
+            IsProgressBarVisible = !IsProgressBarVisible;
+            ProgressBarLabel = ProgressBarLabel == "" ? "Divik running..." : "";
+        }
+
+        public RelayCommand StartDivikButtonExecute => new RelayCommand(
+                    execute: () => _StartDivikButtonExecute(),
+                    canExecute: () => _StartDivikButtonCanExecute()
+                    );
+
+        #endregion
     }
 }

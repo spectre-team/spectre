@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace Spectre.DivikWpfClient.Validation
 {
-    public class DoubleRangeRule : ValidationRule
+    public class PercentageRangeRule : ValidationRule
     {
         public double Min { get; set; }
 
@@ -18,7 +18,7 @@ namespace Spectre.DivikWpfClient.Validation
             {
                 if (((string)value).Length > 0)
                 {
-                    parameter = Double.Parse((String)value);
+                    parameter = Double.Parse(((String)value).Replace('%', ' ').Trim());
                 }
             }
             catch (Exception e)

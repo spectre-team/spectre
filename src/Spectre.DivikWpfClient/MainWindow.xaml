@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Spectre.DivikWpfClient.ViewModel"
         xmlns:validation="clr-namespace:Spectre.DivikWpfClient.Validation"
+        xmlns:converters="clr-namespace:Spectre.Mvvm.Converters;assembly=Spectre.Mvvm"
         mc:Ignorable="d"
         Title="Spectre Divik" Height="687.612" Width="710.758"
         DataContext="{StaticResource MainPageVm}">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:PercentageConverter x:Key="PercentageConverter"/>
+    </Window.Resources>
     <Grid Background="#FF464646" Height="657" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -47,7 +52,7 @@
                    Text="Input path:" Foreground="White" VerticalAlignment="Center" Margin="0,4,0,3" Height="16"/>
         <TextBox x:Name="InputPathTextBox" Grid.Row="1"
                  Grid.Column="1"
-                 Text="{Binding InputPath, Mode=TwoWay}" TextChanged="TextBox_TextChanged" Margin="0,0,105,0"/>
+                 Text="{Binding InputPath, Mode=TwoWay}" Margin="0,0,105,0"/>
         <Button Name="ChooseFileButton"
                 Grid.Row="1"
                 Grid.Column="1"
@@ -57,7 +62,7 @@
                 VerticalAlignment="Top"
                 Width="100"
                 Height="25"
-                Click="ChooseFileButton_Click"/>
+                Command="{Binding ChooseFileButtonExecute}"/>
         <TextBlock x:Name="DivikParametersLabel" Grid.Column="1"
                    Grid.Row="2"
                    Text="Divik Parameters" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Height="22" Margin="0,9,0,7" FontSize="16"/>
@@ -66,7 +71,7 @@
                    Text="Output path:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5"/>
         <TextBox x:Name="OutputPathTextBox" Grid.Row="3"
                  Grid.Column="1"
-                 Text="{Binding OutputPath, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+                 Text="{Binding OutputPath, Mode=TwoWay}">
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -95,7 +100,7 @@
                    Text="MaxK:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,4"/>
         <TextBox Grid.Row="4"
                  Grid.Column="1"
-                 Text="{Binding MaxK, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
+                 Text="{Binding MaxK, Mode=TwoWay}"
                  Name="MaxKNumberTextBox" PreviewTextInput="NumberValidationTextBox">
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -125,7 +130,7 @@
                    Text="Level:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,5"/>
         <TextBox Grid.Row="5"
                  Grid.Column="1"
-                 Text="{Binding Level, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
+                 Text="{Binding Level, Mode=TwoWay}"
                  Name="LevelNumberTextBox" PreviewTextInput="NumberValidationTextBox">
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -183,13 +188,13 @@
         <TextBlock x:Name="PercentSizeLimitLabel" Grid.Column="0"
                    Grid.Row="9"
                    Text="Percent size limit:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
-        <TextBox x:Name="PercentSizeLimitTextBox" Grid.Row="9"
-                 Grid.Column="1"
-                 TextChanged="TextBox_TextChanged">
+        <TextBox x:Name="PercentSizeLimitTextBox"
+                 Grid.Row="9"
+                 Grid.Column="1">
             <TextBox.Text>
-                <Binding Path="PercentSizeLimit" Mode="TwoWay">
+                <Binding Path="PercentSizeLimit" Mode="TwoWay" Converter="{StaticResource PercentageConverter}">
                     <Binding.ValidationRules>
-                        <validation:DoubleRangeRule Min="0.00001" Max="1"/>
+                        <validation:PercentageRangeRule Min="0" Max="100"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -216,16 +221,21 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBlock x:Name="FeaturePreservationLimitLabel" Grid.Column="0"
+        <TextBlock x:Name="FeaturePreservationLimitLabel"
+                   Grid.Column="0"
                    Grid.Row="10"
-                   Text="Feature preservation limit:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6"/>
-        <TextBox x:Name="FeaturePreservationLimitTextBox" Grid.Row="10"
-                 Grid.Column="1"
-                 TextChanged="TextBox_TextChanged">
+                   Text="Feature preservation limit:" 
+                   Foreground="White" 
+                   VerticalAlignment="Center" 
+                   Height="16" 
+                   Margin="0,6"/>
+        <TextBox x:Name="FeaturePreservationLimitTextBox" 
+                 Grid.Row="10"
+                 Grid.Column="1">
             <TextBox.Text>
-                <Binding Path="FeaturePreservationLimit" Mode="TwoWay">
+                <Binding Path="FeaturePreservationLimit" Mode="TwoWay" Converter="{StaticResource PercentageConverter}">
                     <Binding.ValidationRules>
-                        <validation:DoubleRangeRule Min="0.00001" Max="1"/>
+                        <validation:PercentageRangeRule Min="0" Max="100"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -252,13 +262,19 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBlock x:Name="MetricLabel" Grid.Column="0"
+        <TextBlock x:Name="MetricLabel" 
+                   Grid.Column="0"
                    Grid.Row="11"
-                   Text="Metric:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,4,0,5"/>
+                   Text="Metric:" 
+                   Foreground="White" 
+                   VerticalAlignment="Center" 
+                   Height="16" 
+                   Margin="0,4,0,5"/>
         <ComboBox SelectedValue="{Binding Metric, Mode=TwoWay}"
                   Grid.Column="1"
                   Grid.Row="11" 
-                  Name="MetricComboBox"/>
+                  Name="MetricComboBox"
+                  ItemsSource="{Binding Metrics}"/>
         <TextBlock x:Name="PlottingPartitionsLabel" Grid.Column="0"
                    Grid.Row="12"
                    Text="Plotting partitions:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,7,0,6"/>
@@ -304,8 +320,9 @@
                    Text="Max decomposition components:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
         <TextBox Grid.Row="16"
                  Grid.Column="1"
-                 Text="{Binding MaxComponentsForDecomposition, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
-                 Name="MaxComponentsForDecompositionNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+                 Text="{Binding MaxComponentsForDecomposition, Mode=TwoWay}"
+                 Name="MaxComponentsForDecompositionNumberTextBox" 
+                 PreviewTextInput="NumberValidationTextBox">
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -334,7 +351,7 @@
                    Text="Cache path:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,7,0,5"/>
         <TextBox x:Name="CachePathTextBox" Grid.Row="17"
                  Grid.Column="1"
-                 Text="{Binding CachePath, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+                 Text="{Binding CachePath, Mode=TwoWay}">
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -383,7 +400,7 @@
                    Text="Max iterations for K-means:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6"/>
         <TextBox Grid.Row="20"
                  Grid.Column="1"
-                 Text="{Binding KmeansMaxIters, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
+                 Text="{Binding KmeansMaxIters, Mode=TwoWay}"
                  Name="KmeansMaxItersNumberTextBox" PreviewTextInput="NumberValidationTextBox">
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -412,8 +429,9 @@
             Grid.Row="22"
             Grid.ColumnSpan="2"
             Height="25" Foreground="#FF7EFB95"
-            IsIndeterminate="False"/>
-        <TextBlock Text="" 
+            IsIndeterminate="True"
+            Visibility="{Binding IsProgressBarVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+        <TextBlock Text="{Binding ProgressBarLabel}" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    Name="DivikProgressLabel"
@@ -429,6 +447,6 @@
                 VerticalAlignment="Top"
                 Width="100"
                 Height="30"
-                Click="StartDivikButton_Click"/>
+                Command="{Binding StartDivikButtonExecute}"/>
     </Grid>
 </Window>
