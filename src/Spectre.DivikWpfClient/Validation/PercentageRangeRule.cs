@@ -23,12 +23,12 @@ namespace Spectre.DivikWpfClient.Validation
             }
             catch (Exception e)
             {
-                return new ValidationResult(false, "Illegal characters or " + e.Message);
+                return new ValidationResult(false, "Please enter a valid percentage value.");
             }
 
             if ((parameter < this.Min) || (parameter > this.Max))
             {
-                return new ValidationResult(false, "Please enter value in the range: " + this.Min + " - " + this.Max + ".");
+                return new ValidationResult(false, "Please enter percentage value in the range: " + this.Min + " - " + this.Max + ".");
             }
             return new ValidationResult(true, null);
         }
