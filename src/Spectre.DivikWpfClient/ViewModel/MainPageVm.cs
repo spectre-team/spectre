@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spectre.Mvvm.Base;
+using Spectre.Algorithms.Parameterization;
 
 namespace Spectre.DivikWpfClient.ViewModel
 {
@@ -61,7 +62,11 @@ namespace Spectre.DivikWpfClient.ViewModel
             set { SetValue(() => FeaturePreservationLimit, value); }
         }
 
-        //metric 
+        public Metric Metric
+        {
+            get { return GetValue(() => Metric); }
+            set { SetValue(() => Metric, value); }
+        }
 
         public bool PlottingPartitions
         {

@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Validation\DoubleRangeRule.cs" />
     <Compile Include="ViewModel\MainPageVm.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +99,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Spectre.Algorithms\Spectre.Algorithms.csproj">
+      <Project>{9A886AEC-58DB-410D-91B9-C62E157501FA}</Project>
+      <Name>Spectre.Algorithms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spectre.Mvvm\Spectre.Mvvm.csproj">
       <Project>{2d24f1e7-18d4-4fc0-9e4f-2f32ff27fcce}</Project>
       <Name>Spectre.Mvvm</Name>

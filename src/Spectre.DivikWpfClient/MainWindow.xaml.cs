@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Algorithms.Parameterization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,8 @@ namespace Spectre.DivikWpfClient
             UsingVarianceFiltrationCheckbox.IsChecked = true;
             PercentSizeLimitTextBox.Text = 0.001.ToString();
             FeaturePreservationLimitTextBox.Text = 0.05.ToString();
-            //MetricComboBox
+            MetricComboBox.ItemsSource = Enum.GetValues(typeof(Metric)).Cast<Metric>();
+            MetricComboBox.SelectedValue = Metric.Pearson;
             PlottingPartitionsCheckbox.IsChecked = false;
             PlottingRecursivelyCheckbox.IsChecked = false;
             PlottingDecompositionCheckbox.IsChecked = false;
@@ -62,7 +64,8 @@ namespace Spectre.DivikWpfClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            DivikProgress.IsIndeterminate = !DivikProgress.IsIndeterminate;
+            DivikProgressLabel.Text = DivikProgressLabel.Text == "" ? "Divik running..." : "";
         }
     }
 }

@@ -4,14 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Spectre.DivikWpfClient.ViewModel"
+        xmlns:validation="clr-namespace:Spectre.DivikWpfClient.Validation"
         mc:Ignorable="d"
-        Title="Spectre Divik" Height="668.247" Width="710.758"
+        Title="Spectre Divik" Height="687.612" Width="710.758"
         DataContext="{StaticResource MainPageVm}">
-    <Grid Background="#FF464646" Height="637" VerticalAlignment="Top">
+    <Grid Background="#FF464646" Height="657" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="35*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
@@ -37,7 +40,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="SpectreLabel" Grid.Column="0"
-                   Grid.Row="0"
+                   Grid.Row="0" Grid.ColumnSpan="2"
                    Text="Spectre Divik" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Height="30" Margin="0,9,0,7" FontSize="20"/>
         <TextBlock x:Name="InputPathLabel" Grid.Column="0"
                    Grid.Row="1"
@@ -172,7 +175,14 @@
                    Text="Percent size limit:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
         <TextBox x:Name="PercentSizeLimitTextBox" Grid.Row="9"
                  Grid.Column="1"
-                 Text="{Binding PercentSizeLimit, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+                 TextChanged="TextBox_TextChanged">
+            <TextBox.Text>
+                <Binding Path="PercentSizeLimit" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <validation:DoubleRangeRule Min="0.00001" Max="1"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -201,7 +211,14 @@
                    Text="Feature preservation limit:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6"/>
         <TextBox x:Name="FeaturePreservationLimitTextBox" Grid.Row="10"
                  Grid.Column="1"
-                 Text="{Binding FeaturePreservationLimit, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+                 TextChanged="TextBox_TextChanged">
+            <TextBox.Text>
+                <Binding Path="FeaturePreservationLimit" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <validation:DoubleRangeRule Min="0.00001" Max="1"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -228,6 +245,10 @@
         <TextBlock x:Name="MetricLabel" Grid.Column="0"
                    Grid.Row="11"
                    Text="Metric:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,4,0,5"/>
+        <ComboBox SelectedValue="{Binding Metric, Mode=TwoWay}"
+                  Grid.Column="1"
+                  Grid.Row="11" 
+                  Name="MetricComboBox"/>
         <TextBlock x:Name="PlottingPartitionsLabel" Grid.Column="0"
                    Grid.Row="12"
                    Text="Plotting partitions:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,7,0,6"/>
@@ -377,7 +398,19 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Button Grid.Row="21"
+        <ProgressBar Name="DivikProgress"
+            Grid.Row="22"
+            Grid.ColumnSpan="2"
+            Height="25" Foreground="#FF7EFB95"
+            IsIndeterminate="False"/>
+        <TextBlock Text="" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Name="DivikProgressLabel"
+                   Grid.Row="22"
+                   Grid.ColumnSpan="2"
+                   Foreground="Gray"/>
+        <Button Grid.Row="23"
                 Grid.Column="1"
                 Content="Start Divik"
                 HorizontalAlignment="Right"
