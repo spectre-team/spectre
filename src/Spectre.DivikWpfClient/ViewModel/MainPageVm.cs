@@ -40,6 +40,7 @@ namespace Spectre.DivikWpfClient.ViewModel
             KmeansMaxIters = 100;
             IsProgressBarVisible = false;
             ProgressBarLabel = "";
+            StartDivikLabel = "Start Divik";
         }
 
         #endregion
@@ -181,6 +182,12 @@ namespace Spectre.DivikWpfClient.ViewModel
             get { return Enum.GetValues(typeof(Metric)).Cast<Metric>(); }
         }
 
+        public string StartDivikLabel
+        {
+            get { return GetValue(() => StartDivikLabel); }
+            set { SetValue(() => StartDivikLabel, value); }
+        }
+
         #endregion
 
         #region Commands
@@ -223,6 +230,7 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             IsProgressBarVisible = !IsProgressBarVisible;
             ProgressBarLabel = ProgressBarLabel == "" ? "Divik running..." : "";
+            StartDivikLabel = StartDivikLabel == "Start Divik" ? "Cancel" : "Start Divik";
         }
 
         public RelayCommand StartDivikButtonExecute => new RelayCommand(

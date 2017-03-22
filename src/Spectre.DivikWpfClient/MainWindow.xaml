@@ -486,7 +486,7 @@
         <Button Name="StartDivikButton"
                 Grid.Row="23"
                 Grid.Column="1"
-                Content="Start Divik"
+                Content="{Binding StartDivikLabel}"
                 HorizontalAlignment="Right"
                 Margin="0,15,50,0"
                 VerticalAlignment="Top"
