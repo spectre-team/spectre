@@ -47,7 +47,17 @@
                    Text="Input path:" Foreground="White" VerticalAlignment="Center" Margin="0,4,0,3" Height="16"/>
         <TextBox x:Name="InputPathTextBox" Grid.Row="1"
                  Grid.Column="1"
-                 Text="{Binding InputPath, Mode=TwoWay}" TextChanged="TextBox_TextChanged"/>
+                 Text="{Binding InputPath, Mode=TwoWay}" TextChanged="TextBox_TextChanged" Margin="0,0,105,0"/>
+        <Button Name="ChooseFileButton"
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="Choose file"
+                HorizontalAlignment="Right"
+                Margin="0,0,0,0"
+                VerticalAlignment="Top"
+                Width="100"
+                Height="25"
+                Click="ChooseFileButton_Click"/>
         <TextBlock x:Name="DivikParametersLabel" Grid.Column="1"
                    Grid.Row="2"
                    Text="Divik Parameters" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Height="22" Margin="0,9,0,7" FontSize="16"/>
@@ -410,7 +420,8 @@
                    Grid.Row="22"
                    Grid.ColumnSpan="2"
                    Foreground="Gray"/>
-        <Button Grid.Row="23"
+        <Button Name="StartDivikButton"
+                Grid.Row="23"
                 Grid.Column="1"
                 Content="Start Divik"
                 HorizontalAlignment="Right"
@@ -418,6 +429,6 @@
                 VerticalAlignment="Top"
                 Width="100"
                 Height="30"
-                Click="Button_Click"/>
+                Click="StartDivikButton_Click"/>
     </Grid>
 </Window>

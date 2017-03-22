@@ -62,10 +62,27 @@ namespace Spectre.DivikWpfClient
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void StartDivikButton_Click(object sender, RoutedEventArgs e)
         {
             DivikProgress.IsIndeterminate = !DivikProgress.IsIndeterminate;
             DivikProgressLabel.Text = DivikProgressLabel.Text == "" ? "Divik running..." : "";
+        }
+
+        private void ChooseFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog()
+            {
+                DefaultExt = ".txt",
+                Filter = "Txt Files (*.txt)|*.txt"
+            };
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                InputPathTextBox.Text = filename;
+            }
         }
     }
 }
