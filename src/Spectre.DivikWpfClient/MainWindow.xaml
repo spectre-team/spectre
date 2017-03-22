@@ -123,8 +123,14 @@
                    Text="MaxK:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,4"/>
         <TextBox Grid.Row="4"
                  Grid.Column="1"
-                 Text="{Binding MaxK, Mode=TwoWay}"
-                 Name="MaxKNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+                 Name="MaxKNumberTextBox">
+            <TextBox.Text>
+                <Binding Path="MaxK" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <validation:IntegerRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -153,8 +159,14 @@
                    Text="Level:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,5"/>
         <TextBox Grid.Row="5"
                  Grid.Column="1"
-                 Text="{Binding Level, Mode=TwoWay}"
-                 Name="LevelNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+                 Name="LevelNumberTextBox">
+            <TextBox.Text>
+                <Binding Path="Level" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <validation:IntegerRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -343,9 +355,14 @@
                    Text="Max decomposition components:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
         <TextBox Grid.Row="16"
                  Grid.Column="1"
-                 Text="{Binding MaxComponentsForDecomposition, Mode=TwoWay}"
-                 Name="MaxComponentsForDecompositionNumberTextBox" 
-                 PreviewTextInput="NumberValidationTextBox">
+                 Name="MaxComponentsForDecompositionNumberTextBox">
+            <TextBox.Text>
+                <Binding Path="MaxComponentsForDecomposition" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <validation:IntegerRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
@@ -423,8 +440,14 @@
                    Text="Max iterations for K-means:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6"/>
         <TextBox Grid.Row="20"
                  Grid.Column="1"
-                 Text="{Binding KmeansMaxIters, Mode=TwoWay}"
-                 Name="KmeansMaxItersNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+                 Name="KmeansMaxItersNumberTextBox">
+            <TextBox.Text>
+                <Binding Path="KmeansMaxIters" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <validation:IntegerRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
