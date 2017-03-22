@@ -5,19 +5,386 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Spectre.DivikWpfClient.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="Spectre Divik" Height="668.247" Width="710.758"
         DataContext="{StaticResource MainPageVm}">
-    <Grid>
+    <Grid Background="#FF464646" Height="637" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="75"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="190"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        <TextBlock Grid.Column="0"
+        <TextBlock x:Name="SpectreLabel" Grid.Column="0"
                    Grid.Row="0"
-                   Text="Input path:"/>
-        <TextBox Grid.Row="0"
+                   Text="Spectre Divik" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Height="30" Margin="0,9,0,7" FontSize="20"/>
+        <TextBlock x:Name="InputPathLabel" Grid.Column="0"
+                   Grid.Row="1"
+                   Text="Input path:" Foreground="White" VerticalAlignment="Center" Margin="0,4,0,3" Height="16"/>
+        <TextBox x:Name="InputPathTextBox" Grid.Row="1"
                  Grid.Column="1"
-                 Text="{Binding InputPath, Mode=TwoWay}"/>
+                 Text="{Binding InputPath, Mode=TwoWay}" TextChanged="TextBox_TextChanged"/>
+        <TextBlock x:Name="DivikParametersLabel" Grid.Column="1"
+                   Grid.Row="2"
+                   Text="Divik Parameters" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Height="22" Margin="0,9,0,7" FontSize="16"/>
+        <TextBlock x:Name="OutputPathLabel" Grid.Column="0"
+                   Grid.Row="3"
+                   Text="Output path:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5"/>
+        <TextBox x:Name="OutputPathTextBox" Grid.Row="3"
+                 Grid.Column="1"
+                 Text="{Binding OutputPath, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="The output path for images" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="MaxKLabel" Grid.Column="0"
+                   Grid.Row="4"
+                   Text="MaxK:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,4"/>
+        <TextBox Grid.Row="4"
+                 Grid.Column="1"
+                 Text="{Binding MaxK, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
+                 Name="MaxKNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Max number of clusters" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="LevelLabel" Grid.Column="0"
+                   Grid.Row="5"
+                   Text="Level:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,5"/>
+        <TextBox Grid.Row="5"
+                 Grid.Column="1"
+                 Text="{Binding Level, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
+                 Name="LevelNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Allowed level of recurrsion" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="UsingLevelsLabel" Grid.Column="0"
+                   Grid.Row="6"
+                   Text="Using Levels:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,7"/>
+        <CheckBox x:Name="UsingLevelsCheckbox"  Grid.Column="1"
+                  Grid.Row="6"
+                  IsChecked="{Binding UsingLevels, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,7">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, level of recursion is used as stop condition" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="UsingAmplitudeFiltrationLabel" Grid.Column="0"
+                   Grid.Row="7"
+                   Text="Amplitude:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
+        <CheckBox x:Name="UsingAmplitudeFiltrationCheckbox"  Grid.Column="1"
+                  Grid.Row="7"
+                  IsChecked="{Binding UsingAmplitudeFiltration, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,7,0,6">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, using amplitude filtration" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="UsingVarianceFiltrationLabel" Grid.Column="0"
+                   Grid.Row="8"
+                   Text="Variance:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,5"/>
+        <CheckBox x:Name="UsingVarianceFiltrationCheckbox"  Grid.Column="1"
+                  Grid.Row="8"
+                  IsChecked="{Binding UsingVarianceFiltration, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,6,0,7">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, using variance filtration" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="PercentSizeLimitLabel" Grid.Column="0"
+                   Grid.Row="9"
+                   Text="Percent size limit:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
+        <TextBox x:Name="PercentSizeLimitTextBox" Grid.Row="9"
+                 Grid.Column="1"
+                 Text="{Binding PercentSizeLimit, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Ratio of subregion to total size used as stop condition (if Using Levels is not checked)" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="FeaturePreservationLimitLabel" Grid.Column="0"
+                   Grid.Row="10"
+                   Text="Feature preservation limit:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6"/>
+        <TextBox x:Name="FeaturePreservationLimitTextBox" Grid.Row="10"
+                 Grid.Column="1"
+                 Text="{Binding FeaturePreservationLimit, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="The feature preservation limit as a rate of initial features number" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="MetricLabel" Grid.Column="0"
+                   Grid.Row="11"
+                   Text="Metric:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,4,0,5"/>
+        <TextBlock x:Name="PlottingPartitionsLabel" Grid.Column="0"
+                   Grid.Row="12"
+                   Text="Plotting partitions:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,7,0,6"/>
+        <CheckBox x:Name="PlottingPartitionsCheckbox"  Grid.Column="1"
+                  Grid.Row="12"
+                  IsChecked="{Binding PlottingPartitions, Mode=TwoWay}" VerticalAlignment="Center" Height="16" Margin="0,7,0,6">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, partitions are plotted" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="PlottingRecursivelyLabel" Grid.Column="0"
+                   Grid.Row="13"
+                   Text="Plotting recursively:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6,0,5"/>
+        <CheckBox x:Name="PlottingRecursivelyCheckbox"  Grid.Column="1"
+                  Grid.Row="13"
+                  IsChecked="{Binding PlottingRecursively, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,6,0,7">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, partitions are plotted recursively" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="PlottingDecompositionLabel" Grid.Column="0"
+                   Grid.Row="14"
+                   Text="Plotting decomposition:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
+        <CheckBox x:Name="PlottingDecompositionCheckbox"  Grid.Column="1"
+                  Grid.Row="14"
+                  IsChecked="{Binding PlottingDecomposition, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,7,0,6">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, decomposition plots are created" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="PlottingDecompositionRecursivelyLabel" Grid.Column="0"
+                   Grid.Row="15"
+                   Text="Plotting decomposition recursively:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,4,0,5"/>
+        <CheckBox x:Name="PlottingDecompositionRecursivelyCheckbox"  Grid.Column="1"
+                  Grid.Row="15"
+                  IsChecked="{Binding PlottingDecompositionRecursively, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,6,0,5">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, decomposition plots are created recursively" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="MaxComponentsForDecompositionLabel" Grid.Column="0"
+                   Grid.Row="16"
+                   Text="Max decomposition components:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,6"/>
+        <TextBox Grid.Row="16"
+                 Grid.Column="1"
+                 Text="{Binding MaxComponentsForDecomposition, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
+                 Name="MaxComponentsForDecompositionNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="The maximum number of components allowed for decomposition" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="CachePathLabel" Grid.Column="0"
+                   Grid.Row="17"
+                   Text="Cache path:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,7,0,5"/>
+        <TextBox x:Name="CachePathTextBox" Grid.Row="17"
+                 Grid.Column="1"
+                 Text="{Binding CachePath, Mode=TwoWay}" TextChanged="TextBox_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="The output path for partial results" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="CachingLabel" Grid.Column="0"
+                   Grid.Row="18"
+                   Text="Caching:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,3,0,7"/>
+        <CheckBox x:Name="CachingCheckbox"  Grid.Column="1"
+                  Grid.Row="18"
+                  IsChecked="{Binding Caching, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,5,0,7">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, partial results are stored on disk" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="VerboseLabel" Grid.Column="0"
+                   Grid.Row="19"
+                   Text="Verbose:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,5,0,4"/>
+        <CheckBox x:Name="VerboseCheckbox"  Grid.Column="1"
+                  Grid.Row="19"
+                  IsChecked="{Binding Caching, Mode=TwoWay}" VerticalAlignment="Center" Height="14" Margin="0,5,0,6">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, additional informations are printed to stdout" TextTrimming="CharacterEllipsis" Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+        <TextBlock x:Name="KmeansMaxItersLabel" Grid.Column="0"
+                   Grid.Row="20"
+                   Text="Max iterations for K-means:" Foreground="White" VerticalAlignment="Center" Height="16" Margin="0,6"/>
+        <TextBox Grid.Row="20"
+                 Grid.Column="1"
+                 Text="{Binding KmeansMaxIters, Mode=TwoWay}" TextChanged="TextBox_TextChanged"
+                 Name="KmeansMaxItersNumberTextBox" PreviewTextInput="NumberValidationTextBox">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Limit of iterations in K-means algorithm" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Button Grid.Row="21"
+                Grid.Column="1"
+                Content="Start Divik"
+                HorizontalAlignment="Right"
+                Margin="0,15,50,0"
+                VerticalAlignment="Top"
+                Width="100"
+                Height="30"
+                Click="Button_Click"/>
     </Grid>
 </Window>
