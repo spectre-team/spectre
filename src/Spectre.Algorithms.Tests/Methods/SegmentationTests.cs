@@ -20,6 +20,7 @@ using NUnit.Framework;
 using Spectre.Algorithms.Methods;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
+using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
@@ -43,15 +44,18 @@ namespace Spectre.Algorithms.Tests.Methods
 		[Test]
 		public void Divik()
 		{
-			double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
+            double[] mz = { 1, 2, 3, 4 };
+            double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
 			int[,] coordinates = { { 1, 1 }, { 2, 2 }, { 1, 2 }, { 2, 1 } };
-			var options = DivikOptions.ForLevels(1);
+            IDataset dataset = new BasicTextDataset(mz, data, coordinates);
+
+            var options = DivikOptions.ForLevels(1);
 			options.UsingVarianceFiltration = false;
 			options.UsingAmplitudeFiltration = false;
 			options.MaxK = 2;
 			options.Metric = Metric.Euclidean;
 
-			DivikResult result = _segmentation.Divik(data, coordinates, options);
+			DivikResult result = _segmentation.Divik(dataset, options);
 
 			// Assert
 			Assert.IsNotNull(result);

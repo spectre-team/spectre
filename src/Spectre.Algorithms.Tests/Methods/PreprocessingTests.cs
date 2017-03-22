@@ -18,6 +18,7 @@
 */
 using NUnit.Framework;
 using Spectre.Algorithms.Methods;
+using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
@@ -44,8 +45,9 @@ namespace Spectre.Algorithms.Tests.Methods
 			double[] mz = { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 };
 			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
+            IDataset dataset = new BasicTextDataset(mz, data);
 
-			double[,] result = _preprocessing.RemoveBaseline(mz, data);
+            IDataset result = _preprocessing.RemoveBaseline(dataset);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -56,8 +58,9 @@ namespace Spectre.Algorithms.Tests.Methods
 		{
 			double[] mz = { 1, 1, 1 };
 			double[,] data = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+            IDataset dataset = new BasicTextDataset(mz, data);
 
-			double[,] result = _preprocessing.AlignPeaksFft(mz, data);
+            IDataset result = _preprocessing.AlignPeaksFft(dataset);
 
 			// Assert
 			Assert.IsNotNull(result);
@@ -66,10 +69,12 @@ namespace Spectre.Algorithms.Tests.Methods
 		[Test]
 		public void TicNorm()
 		{
-			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
+            double[] mz = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
+            IDataset dataset = new BasicTextDataset(mz, data);
 
-			double[,] result = _preprocessing.NormalizeByTic(data);
+            IDataset result = _preprocessing.NormalizeByTic(dataset);
 
 			// Assert
 			Assert.IsNotNull(result);

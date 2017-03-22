@@ -17,6 +17,7 @@
    limitations under the License.
 */
 using System;
+using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Methods
 {
@@ -42,45 +43,44 @@ namespace Spectre.Algorithms.Methods
 		#endregion
 
 		#region MATLAB calls
-		/// <summary>
-		/// Perform FFT-based peak alignment.
-		/// </summary>
-		/// <param name="mz">The mz axis ticks.</param>
-		/// <param name="data">The data.</param>
-		/// <returns>Aligned data.</returns>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		public double[,] AlignPeaksFft(object mz, object data)
+
+	    /// <summary>
+	    /// Perform FFT-based peak alignment.
+	    /// </summary>
+	    /// <param name="dataset">Input dataset.</param>
+	    /// <returns>Aligned dataset.</returns>
+	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    public IDataset AlignPeaksFft(IDataset dataset)
 		{
 			ValidateDispose();
-			var pafftResult = _preprocessing.pafft(mz, data);
-			return (double[,])pafftResult;
+			var pafftResult = _preprocessing.pafft(dataset.GetRawMzArray(), dataset.GetRawIntensities());
+            return new BasicTextDataset(dataset.GetRawMzArray(), (double[,])pafftResult, dataset.GetRawSpacialCoordinates(true));
 		}
 
-		/// <summary>
-		/// Removes the baseline.
-		/// </summary>
-		/// <param name="mz">The mz axis ticks.</param>
-		/// <param name="data">The data.</param>
-		/// <returns>Data set without baseline.</returns>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		public double[,] RemoveBaseline(double[] mz, double[,] data)
+	    /// <summary>
+	    /// Removes the baseline.
+	    /// </summary>
+	    /// <param name="dataset">Input dataset.</param>
+	    /// <returns>Dataset without baseline.</returns>
+	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    public IDataset RemoveBaseline(IDataset dataset)
 		{
 			ValidateDispose();
-			var baselineRemovalResult = _preprocessing.remove_baseline(mz, data);
-			return (double[,])baselineRemovalResult;
+			var baselineRemovalResult = _preprocessing.remove_baseline(dataset.GetRawMzArray(), dataset.GetRawIntensities());
+            return new BasicTextDataset(dataset.GetRawMzArray(), (double[,])baselineRemovalResult, dataset.GetRawSpacialCoordinates(true));
 		}
 
-		/// <summary>
-		/// Normalizes dataset by TIC-based method.
-		/// </summary>
-		/// <param name="data">The data.</param>
-		/// <returns>Normalized data set.</returns>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		public double[,] NormalizeByTic(double[,] data)
+	    /// <summary>
+	    /// Normalizes dataset by TIC-based method.
+	    /// </summary>
+	    /// <param name="dataset">Input dataset.</param>
+	    /// <returns>Normalized dataset.</returns>
+	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    public IDataset NormalizeByTic(IDataset dataset)
 		{
 			ValidateDispose();
-			var normalizationResult = _preprocessing.ticnorm(data);
-			return (double[,])normalizationResult;
+			var normalizationResult = _preprocessing.ticnorm(dataset.GetRawIntensities());
+            return new BasicTextDataset(dataset.GetRawMzArray(), (double[,])normalizationResult, dataset.GetRawSpacialCoordinates(true));
 		}
 		#endregion
 

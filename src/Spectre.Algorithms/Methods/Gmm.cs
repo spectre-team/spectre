@@ -17,7 +17,9 @@
    limitations under the License.
 */
 using System;
+using MathWorks.MATLAB.NET.Arrays.native;
 using Spectre.Algorithms.Results;
+using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Methods
 {
@@ -43,36 +45,37 @@ namespace Spectre.Algorithms.Methods
 		#endregion
 
 		#region MATLAB calls
-		/// <summary>
-		/// Applies the GMM model onto data.
-		/// </summary>
-		/// <param name="model">The model.</param>
-		/// <param name="data">The data.</param>
-		/// <param name="mz">The mz axis ticks.</param>
-		/// <returns>Convolved data.</returns>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		public double[,] ApplyGmm(GmmModel model, double[,] data, double[] mz)
+
+	    /// <summary>
+	    /// Applies the GMM model onto data.
+	    /// </summary>
+	    /// <param name="model">The model.</param>
+	    /// <param name="dataset">Input dataset.</param>
+	    /// <returns>Convolved data.</returns>
+	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    public IDataset ApplyGmm(GmmModel model, IDataset dataset)
 		{
 			ValidateDispose();
 			var matlabModel = model.MatlabStruct;
-			var applyResult = _gmm.apply_gmm(matlabModel, data, mz);
-			return (double[,])applyResult;
-
+			var applyResult = _gmm.apply_gmm(matlabModel, dataset.GetRawIntensities(), dataset.GetRawMzArray());
+		    double[,] data = (double[,]) ((MWStructArray) (model.MatlabStruct)).GetField("mu");
+            double[] mz = new double[data.GetLength(0)];
+            Buffer.BlockCopy(data, 0, mz, 0, data.GetLength(0));
+            return new BasicTextDataset(mz, (double[,])applyResult, dataset.GetRawSpacialCoordinates(true));
 		}
 
-		/// <summary>
-		/// Estimates the GMM model from the data set.
-		/// </summary>
-		/// <param name="mz">The mz axis ticks.</param>
-		/// <param name="data">The data.</param>
-		/// <param name="merge">if set to <c>true</c> merges components.</param>
-		/// <param name="remove">if set to <c>true</c> removes shaping components.</param>
-		/// <returns>Estimated model</returns>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		public GmmModel EstimateGmm(object mz, double[,] data, bool merge, bool remove)
+	    /// <summary>
+	    /// Estimates the GMM model from the data set.
+	    /// </summary>
+	    /// <param name="dataset">Input dataset.</param>
+	    /// <param name="merge">if set to <c>true</c> merges components.</param>
+	    /// <param name="remove">if set to <c>true</c> removes shaping components.</param>
+	    /// <returns>Estimated model</returns>
+	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    public GmmModel EstimateGmm(IDataset dataset, bool merge, bool remove)
 		{
 			ValidateDispose();
-			var matlabModel = _gmm.estimate_gmm(mz, data, merge, remove);
+			var matlabModel = _gmm.estimate_gmm(dataset.GetRawMzArray(), dataset.GetRawIntensities(), merge, remove);
 			var model = new GmmModel(matlabModel);
 			return model;
 		}

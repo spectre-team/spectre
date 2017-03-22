@@ -38,6 +38,14 @@ namespace Spectre.Data.Structures
             Y = y;
             Z = z;
         }
+        /// <summary>
+        /// Returns raw form of spatial coordintates in order X, Y, Z.
+        /// </summary>
+        /// <returns>Array of values representing spatial coordinates.</returns>
+        public int[] GetRaw()
+        {
+            return new [] {X, Y, Z};
+        } 
 
         /// <summary>
         /// Converts spatial coordinates into space-separated string of x, y and z values

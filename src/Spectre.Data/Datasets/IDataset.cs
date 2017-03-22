@@ -59,22 +59,26 @@ namespace Spectre.Data.Datasets
         /// </summary>
         /// <param name="filePath">Path to a file.</param>
         void CreateFromFile(string filePath);
+
         /// <summary>
         /// Method for creating new dataset from raw data, overwriting current data.
         /// </summary>
         /// <param name="mz">Array of m/z values.</param>
         /// <param name="data">Multidimensional array of intensity values.</param>
-        void CreateFromRawData(double[] mz, double[,] data);
+        /// <param name="coordinates">Spatial coordinates of input spectra.</param>
+        void CreateFromRawData(double[] mz, double[,] data, int[,] coordinates = null);
         /// <summary>
         /// Method for appending new data from file.
         /// </summary>
         /// <param name="filePath">Path to a file.</param>
         void AppendFromFile(string filePath);
+
         /// <summary>
         /// Method for appending new data from raw arrays.
         /// </summary>
         /// <param name="data">Multidimensional array of intensity values.</param>
-        void AppendFromRawData(double[,] data);
+        /// <param name="coordinates">Spatial coordinates of input spectra.</param>
+        void AppendFromRawData(double[,] data, int[,] coordinates = null);
         #endregion
 
         #region Data access
@@ -93,7 +97,12 @@ namespace Spectre.Data.Datasets
         /// <param name="valueIdxTo">Ending value index.</param>
         /// <returns>Created <see cref="DataPoint"/> array.</returns>
         DataPoint[] GetDataPoints(int spectrumIdx, int valueIdxFrom, int valueIdxTo);
-
+        /// <summary>
+        /// Method returning spatial coordinates of given spectrum.
+        /// </summary>
+        /// <param name="spectrumIdx">Index of spectrum.</param>
+        /// <returns>Spatial coordinates of given spectrum.</returns>
+        SpatialCoordinates GetSpatialCoordinates(int spectrumIdx);
         #endregion
 
         #region Raw data access
@@ -136,6 +145,17 @@ namespace Spectre.Data.Datasets
         /// <param name="valueIdxTo">Ending value index.</param>
         /// <returns>Multidimensional array of intensities.</returns>
         double[,] GetRawIntensityRange(int spectrumIdxFrom, int spectrumIdxTo, int valueIdxFrom, int valueIdxTo);
+        /// <summary>
+        /// Getter for all the intensity values from all spectra from dataset.
+        /// </summary>
+        /// <returns>Multidimensional array of all the intensities present in dataset.</returns>
+        double[,] GetRawIntensities();
+        /// <summary>
+        /// Getter for spatial coordinates of all spectra present in dataset.
+        /// </summary>
+        /// <param name="is2D"></param>
+        /// <returns>Multidimensional array of spatial coordinates.</returns>
+        int[,] GetRawSpacialCoordinates(bool is2D);
         #endregion
 
         #region File storage

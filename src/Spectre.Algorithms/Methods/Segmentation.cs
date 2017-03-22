@@ -19,6 +19,7 @@
 using System;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
+using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Methods
 {
@@ -44,26 +45,27 @@ namespace Spectre.Algorithms.Methods
 		#endregion
 
 		#region MATLAB calls
-		/// <summary>
-		/// Performs DiviK clustering on the specified data.
-		/// </summary>
-		/// <param name="data">The data.</param>
-		/// <param name="coordinates">Spatial coordinates.</param>
-		/// <param name="options">Configuration.</param>
-		/// <returns>Segmentation result.</returns>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		public DivikResult Divik(double[,] data, int[,] coordinates, DivikOptions options)
+
+	    /// <summary>
+	    /// Performs DiviK clustering on the specified data.
+	    /// </summary>
+	    /// <param name="dataset">Input dataset.</param>
+	    /// <param name="options">Configuration.</param>
+	    /// <returns>Segmentation result.</returns>
+	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    public DivikResult Divik(IDataset dataset, DivikOptions options)
 		{
 			ValidateDispose();
 			//this is needed to not to make MCR go wild
 			const int numberOfOutputArgs = 2;
+		    int[,] coordinates = dataset.GetRawSpacialCoordinates(true);
 			double[,] coords = new double[coordinates.GetLength(0), coordinates.GetLength(1)];
 			for (int i = 0; i < coordinates.GetLength(0); ++i)
 				for (int j = 0; j < coordinates.GetLength(1); ++j)
 					coords[i, j] = coordinates[i, j];
 
 			var varargin = options.ToVarargin();
-			var tmp = _segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
+			var tmp = _segmentation.divik(numberOfOutputArgs, dataset.GetRawIntensities(), coordinates, varargin);
 			var result = new DivikResult(tmp);
 			return result;
 		}
