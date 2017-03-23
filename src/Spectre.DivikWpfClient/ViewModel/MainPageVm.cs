@@ -19,8 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Spectre.Mvvm.Base;
 using Spectre.Algorithms.Parameterization;
@@ -59,7 +57,6 @@ namespace Spectre.DivikWpfClient.ViewModel
             OutputPath = ".";
             CachePath = ".";
             Caching = false;
-            Verbose = false;
             KmeansMaxIters = 100;
             IsProgressBarVisible = false;
             ProgressBarLabel = "";
@@ -221,15 +218,6 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             get { return GetValue(() => Caching); }
             set { SetValue(() => Caching, value); }
-        }
-
-        /// <summary>
-		/// ViewModel property for <see cref="DivikOptions.Verbose"/>.
-		/// </summary>
-        public bool Verbose
-        {
-            get { return GetValue(() => Verbose); }
-            set { SetValue(() => Verbose, value); }
         }
 
         /// <summary>
