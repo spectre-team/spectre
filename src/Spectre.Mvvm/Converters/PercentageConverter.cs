@@ -58,7 +58,9 @@ namespace Spectre.Mvvm.Converters
         /// <exception cref="NullReferenceException">if value is null</exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Double.Parse(((string)value).Replace('%',' ').Trim())/100;
+            if (value is double)
+                return (double)value / 100;
+            return double.Parse(((string)value).Replace('%',' ').Trim())/100;
         }
     }
 }
