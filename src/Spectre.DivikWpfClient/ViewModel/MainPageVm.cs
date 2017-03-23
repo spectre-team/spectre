@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Spectre.Mvvm.Base;
 using Spectre.Algorithms.Parameterization;
 
@@ -283,23 +284,23 @@ namespace Spectre.DivikWpfClient.ViewModel
 
         #region Commands
 
+        #region ChooseFileButton
         /// <summary>
-		/// Function for picking InputPath with a file picker.
-		/// </summary>
+        /// Function for picking InputPath with a file picker.
+        /// </summary>
         private void _ChooseFileButtonExecute()
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog()
+            var dlg = new Microsoft.Win32.OpenFileDialog()
             {
                 DefaultExt = ".txt",
                 Filter = "Txt Files (*.txt)|*.txt"
             };
 
-            Nullable<bool> result = dlg.ShowDialog();
+            var result = dlg.ShowDialog();
 
             if (result == true)
             {
-                string filename = dlg.FileName;
-                InputPath = filename;
+                InputPath = dlg.FileName;
             }
         }
 
@@ -316,13 +317,47 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             get
             {
-                return _ChooseFileButtonHandle ?? (_ChooseFileButtonHandle = new RelayCommand(execute: () => _ChooseFileButtonExecute()));
+                return _ChooseFileButtonHandle ?? (_ChooseFileButtonHandle = new RelayCommand(execute: _ChooseFileButtonExecute));
             }
         }
+        #endregion
+
+        #region ChooseDirButton
 
         /// <summary>
-		/// Function for starting divik calculation.
-		/// </summary>
+        /// The handle for ChooseDirectoryCommand.
+        /// </summary>
+        private RelayCommand _chooseDirectoryCommand;
+
+        /// <summary>
+        /// Gets the command.
+        /// </summary>
+        /// <value>
+        /// The command for choosing directory.
+        /// </value>
+        public RelayCommand ChooseDirectoryCommand => _chooseDirectoryCommand ?? (_chooseDirectoryCommand = new RelayCommand(_ChooseDirectory));
+
+        /// <summary>
+        /// Chooses the directory.
+        /// </summary>
+        private void _ChooseDirectory()
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                var result = dialog.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath))
+                {
+                    OutputPath = dialog.SelectedPath;
+                }
+            }
+        }
+        #endregion
+
+        #region StartDivik
+        /// <summary>
+        /// Function for starting divik calculation.
+        /// </summary>
         private void _StartDivikButtonExecute()
         {
             IsProgressBarVisible = !IsProgressBarVisible;
@@ -346,6 +381,7 @@ namespace Spectre.DivikWpfClient.ViewModel
                 return _StartDivikButtonHandle ?? (_StartDivikButtonHandle = new RelayCommand(execute: () => _StartDivikButtonExecute()));
             }
         }
+        #endregion
 
         #endregion
     }

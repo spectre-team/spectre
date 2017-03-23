@@ -2,7 +2,7 @@
    MainWindow.xaml
    Contains XAML definition for the WPF Divik client frontend.
    
-   Copyright 2017 Grzegorz Mrukwa
+   Copyright 2017 Michal Wolny, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -25,7 +25,10 @@
         xmlns:validation="clr-namespace:Spectre.DivikWpfClient.Validation"
         xmlns:converters="clr-namespace:Spectre.Mvvm.Converters;assembly=Spectre.Mvvm"
         mc:Ignorable="d"
-        Title="Spectre Divik" Height="687.612" Width="710.758"
+        Title="Spectre Divik"
+        Height="687.612"
+        Width="710.758"
+        Background="#FF464646"
         DataContext="{StaticResource MainPageVm}">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -56,7 +59,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="#FF464646" Height="657" VerticalAlignment="Top">
+    <Grid Height="657" VerticalAlignment="Top" Margin="5,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="20*"/>
@@ -111,8 +114,7 @@
                  Grid.Column="1"
                  Text="{Binding InputPath, Mode=TwoWay}" 
                  Margin="0,0,105,0"
-                 Style="{StaticResource PromptErrorTextBox}">
-        </TextBox>
+                 Style="{StaticResource PromptErrorTextBox}" />
         <Button Name="ChooseFileButton"
                 Grid.Row="1"
                 Grid.Column="1"
@@ -144,9 +146,19 @@
         <TextBox x:Name="OutputPathTextBox" 
                  Grid.Row="3"
                  Grid.Column="1"
+                 Margin="0,0,105,0"
                  Text="{Binding OutputPath, Mode=TwoWay}"
-                 Style="{StaticResource PromptErrorTextBox}">
-        </TextBox>
+                 Style="{StaticResource PromptErrorTextBox}"/>
+        <Button Name="ChooseDirectoryButton"
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="Choose directory"
+                HorizontalAlignment="Right"
+                Margin="0,0,0,0"
+                VerticalAlignment="Top"
+                Width="100"
+                Height="25"
+                Command="{Binding ChooseDirectoryCommand}"/>
         <TextBlock x:Name="MaxKLabel" 
                    Grid.Column="0"
                    Grid.Row="4"

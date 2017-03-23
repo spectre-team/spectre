@@ -52,7 +52,7 @@ namespace Spectre.DivikWpfClient.Validation
             {
                 if (((string)value).Length > 0)
                 {
-                    parameter = Double.Parse(((String)value).Replace('%', ' ').Trim());
+                    parameter = double.Parse(((string)value).Replace('%', ' ').Trim());
                 }
             }
             catch (Exception)
