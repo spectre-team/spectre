@@ -164,7 +164,7 @@
                 VerticalAlignment="Top"
                 Width="100"
                 Height="25"
-                Command="{Binding ChooseDirectoryCommand}"/>
+                Command="{Binding ChooseOutputDirectoryCommand}"/>
         
         <!--Max K-->
         <TextBlock x:Name="MaxKLabel" 
@@ -506,9 +506,20 @@
         <TextBox x:Name="CachePathTextBox" 
                  Grid.Row="17"
                  Grid.Column="1"
+                 Margin="0,0,105,0"
                  Text="{Binding CachePath, Mode=TwoWay}"
                  Style="{StaticResource PromptErrorTextBox}">
         </TextBox>
+        <Button Name="ChooseCacheDirectoryButton"
+                Grid.Row="17"
+                Grid.Column="1"
+                Content="Choose directory"
+                HorizontalAlignment="Right"
+                Margin="0,0,0,0"
+                VerticalAlignment="Top"
+                Width="100"
+                Height="25"
+                Command="{Binding ChooseCacheDirectoryCommand}"/>
         
         <!--Enable cache-->
         <TextBlock x:Name="CachingLabel" 
@@ -516,15 +527,13 @@
                    Grid.Row="18"
                    Text="Caching:" Foreground="White" 
                    VerticalAlignment="Center" 
-                   Height="16" 
-                   Margin="0,3,0,7"/>
+                   Height="16" />
         <CheckBox x:Name="CachingCheckbox"  
                   Grid.Column="1"
                   Grid.Row="18"
                   IsChecked="{Binding Caching, Mode=TwoWay}" 
                   VerticalAlignment="Center" 
-                  Height="14" 
-                  Margin="0,5,0,7">
+                  Height="14">
             <CheckBox.Content>
                 <TextBlock Text="If checked, partial results are stored on disk" 
                            TextTrimming="CharacterEllipsis" 

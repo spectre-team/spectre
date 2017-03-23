@@ -310,12 +310,12 @@ namespace Spectre.DivikWpfClient.ViewModel
         }
         #endregion
 
-        #region ChooseDirButton
+        #region ChooseOutDirButton
 
         /// <summary>
-        /// The handle for ChooseDirectoryCommand.
+        /// The handle for ChooseOutputDirectoryCommand.
         /// </summary>
-        private RelayCommand _chooseDirectoryCommand;
+        private RelayCommand _chooseOutputDirectoryCommand;
 
         /// <summary>
         /// Gets the command.
@@ -323,12 +323,37 @@ namespace Spectre.DivikWpfClient.ViewModel
         /// <value>
         /// The command for choosing directory.
         /// </value>
-        public RelayCommand ChooseDirectoryCommand => _chooseDirectoryCommand ?? (_chooseDirectoryCommand = new RelayCommand(_ChooseDirectory));
+        public RelayCommand ChooseOutputDirectoryCommand => _chooseOutputDirectoryCommand ?? (
+                                                                _chooseOutputDirectoryCommand =
+                                                                    new RelayCommand(
+                                                                        () =>
+                                                                            OutputPath =
+                                                                                _ChooseDirectory() ?? OutputPath));
+        #endregion
 
+        #region ChooseCacheDirButton
+        /// <summary>
+        /// The command choosing cache directory 
+        /// </summary>
+        private RelayCommand _chooseCacheDirectoryCommand;
+
+        /// <summary>
+        /// Gets the command choosing cache directory.
+        /// </summary>
+        /// <value>
+        /// The command.
+        /// </value>
+        public RelayCommand ChooseCacheDirectoryCommand => _chooseCacheDirectoryCommand ?? (
+                                                               _chooseCacheDirectoryCommand =
+                                                                   new RelayCommand(
+                                                                       () => CachePath = _ChooseDirectory() ?? CachePath));
+        #endregion
+
+        #region ChooseDirectory
         /// <summary>
         /// Chooses the directory.
         /// </summary>
-        private void _ChooseDirectory()
+        private string _ChooseDirectory()
         {
             using (var dialog = new FolderBrowserDialog())
             {
@@ -336,9 +361,10 @@ namespace Spectre.DivikWpfClient.ViewModel
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath))
                 {
-                    OutputPath = dialog.SelectedPath;
+                    return dialog.SelectedPath;
                 }
             }
+            return null;
         }
         #endregion
 
