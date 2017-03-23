@@ -62,6 +62,10 @@
       <Project>{9A886AEC-58DB-410D-91B9-C62E157501FA}</Project>
       <Name>Spectre.Algorithms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
+      <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
+      <Name>Spectre.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

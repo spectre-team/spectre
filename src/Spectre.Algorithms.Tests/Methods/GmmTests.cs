@@ -19,6 +19,7 @@
 using System;
 using NUnit.Framework;
 using Spectre.Algorithms.Methods;
+using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
@@ -44,8 +45,9 @@ namespace Spectre.Algorithms.Tests.Methods
 		{
 			double[] mz = { 1, 2, 3 };
 			double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
+            IDataset dataset = new BasicTextDataset(mz, data);
 
-			object result = _gmm.EstimateGmm(mz, data, false, false);
+			object result = _gmm.EstimateGmm(dataset, false, false);
 
 			Console.WriteLine(result);
 
@@ -58,9 +60,11 @@ namespace Spectre.Algorithms.Tests.Methods
 		{
 			double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
 			double[] mz = { 1, 2, 3 };
-			var model = _gmm.EstimateGmm(mz, data, false, false);
+            IDataset dataset = new BasicTextDataset(mz, data);
 
-			double[,] result = _gmm.ApplyGmm(model, data, mz);
+            var model = _gmm.EstimateGmm(dataset, false, false);
+
+			IDataset result = _gmm.ApplyGmm(model, dataset);
 
 			Console.WriteLine(result);
 

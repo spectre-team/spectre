@@ -86,6 +86,7 @@ namespace Spectre.Data.Tests.Datasets
         {
             double[] mz = { 1.0, 2.0, 3.0 };
             double[,] data = { { 1, 2.1, 3.2 } };
+            int[,] coords = {{1, 2, 3}};
 
             Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(null, data); },
                 "Dataset accepted null m/z array.");
@@ -100,7 +101,12 @@ namespace Spectre.Data.Tests.Datasets
 
             data = new[,] { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
 
-            Assert.DoesNotThrow(() => { _dataset = new BasicTextDataset(mz, data); },
+            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(mz, data, coords); },
+                "Dataset accepted spatial coordinates array of length different than data.");
+
+            coords = new[,] {{1, 2, 3}, {4, 5, 6}};
+
+            Assert.DoesNotThrow(() => { _dataset = new BasicTextDataset(mz, data, coords); },
                 "Dataset failed to initialize from correct raw data.");
 
             Assert.AreEqual(_dataset.SpectrumCount, 2, 
@@ -153,9 +159,15 @@ namespace Spectre.Data.Tests.Datasets
             Assert.AreEqual(_dataset.SpectrumCount, 3);
 
             newData = new[,] {{2, 2.1, 2.2}, {3, 3.1, 3.2}, {4, 4.1, 4.2}};
+            int[,] coords = { { 1, 2, 3 } };
 
-            Assert.DoesNotThrow(() => { _dataset.AppendFromRawData(newData); },
-             "Dataset failed to append correct raw data.");
+            Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(newData, coords); },
+                "Dataset accepted spatial coordinates array of length different than data.");
+
+            coords = new[,] { { 1, 2, 3 }, { 4, 5, 6 }, {7, 8, 9} };
+
+            Assert.DoesNotThrow(() => { _dataset.AppendFromRawData(newData, coords); },
+                "Dataset failed to append correct raw data.");
 
             Assert.AreEqual(_dataset.SpectrumCount, 6, 
                 "Dataset failed to load spectras correctly.");
@@ -213,6 +225,20 @@ namespace Spectre.Data.Tests.Datasets
         }
 
         [Test]
+        public void GetSpatialCoordinatesTest()
+        {
+            double[,] data = { { 1, 2.1, 3.2 } };
+            int[,] coords = { { 1, 2, 3 } };
+
+            _dataset.AppendFromRawData(data, coords);
+
+            SpatialCoordinates spatialCoordinates = _dataset.GetSpatialCoordinates(_dataset.SpectrumCount - 1);
+            Assert.AreEqual(spatialCoordinates.X, 1, "Dataset returned wrong X spacial coordinate.");
+            Assert.AreEqual(spatialCoordinates.Y, 2, "Dataset returned wrong Y spacial coordinate.");
+            Assert.AreEqual(spatialCoordinates.Z, 3, "Dataset returned wrong Z spacial coordinate.");
+        }
+
+        [Test]
         public void GetSpectrumCountTest()
         {
             Assert.AreEqual(_dataset.SpectrumCount, 3, "Dataset returned wrong spectrum count.");
@@ -258,6 +284,30 @@ namespace Spectre.Data.Tests.Datasets
         {
             double[,] result = _dataset.GetRawIntensityRange(1, 3, 1, 3);
             Assert.AreEqual(result, new[,] { {5.1, 6.2}, {8.1, 9.2} }, "Dataset returned wrong intensity row.");
+        }
+
+        [Test]
+        public void GetRawIntensitiesTest()
+        {
+            double[,] result = _dataset.GetRawIntensities();
+            
+            Assert.AreEqual(result, new[,] { { 1, 2.1, 3.2 }, { 4, 5.1, 6.2 }, { 7, 8.1, 9.2 } }, "Dataset returned wrong intensity row.");
+        }
+
+        [Test]
+        public void GetRawSpacialCoordinates()
+        {
+            double[] mz = { 1.0, 2.0, 3.0 };
+            double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
+            int[,] coords = { { 1, 2, 3 }, { 4, 5, 6 } };
+
+            _dataset.CreateFromRawData(mz, data, coords);
+
+            var retCoords3D = _dataset.GetRawSpacialCoordinates(false);
+            Assert.AreEqual(retCoords3D, coords, "Dataset returned incorrect 3D spatial coordinates array.");
+
+            var retCoords2D = _dataset.GetRawSpacialCoordinates(true);
+            Assert.AreEqual(retCoords2D, new[,] { {1, 2 }, { 4, 5 } }, "Dataset returned incorrect 2D spatial coordinates array.");
         }
 
         [Test]
