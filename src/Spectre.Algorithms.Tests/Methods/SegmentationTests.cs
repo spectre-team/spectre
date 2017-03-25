@@ -70,7 +70,7 @@ namespace Spectre.Algorithms.Tests.Methods
             string path = "A:\\MALDI\\examples\\single.txt";
             BasicTextDataset dataset = new BasicTextDataset(path);
 
-            var options = DivikOptions.ForLevels(1);
+            var options = DivikOptions.ForLevels(2);
             options.UsingVarianceFiltration = false;
             options.UsingAmplitudeFiltration = false;
             options.MaxK = 2;

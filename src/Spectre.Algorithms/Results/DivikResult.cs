@@ -91,7 +91,6 @@ namespace Spectre.Algorithms.Results
                 for (var i = 0; i < tmpPartition.Length; ++i)
                 {
                     partition[i] = (int) tmpPartition[0, i];
-                    Console.WriteLine(partition[i]);
                 }
             }
 
@@ -100,7 +99,6 @@ namespace Spectre.Algorithms.Results
                 Console.WriteLine("index");
                 double[,] tmpIndex = (double[,]) array.GetField("index");
                 index = tmpIndex[0, 0];
-                Console.WriteLine(index);
             }
 
             if (array.IsField("amp_thr"))
@@ -108,7 +106,6 @@ namespace Spectre.Algorithms.Results
                 Console.WriteLine("amp_thr");
                 double[,] tmpAmpThr = (double[,]) array.GetField("amp_thr");
                 _ampThr = tmpAmpThr[0, 0];
-                Console.WriteLine(_ampThr);
             }
 
             if (array.IsField("amp_filter"))
@@ -151,18 +148,19 @@ namespace Spectre.Algorithms.Results
                 for (var i = 0; i < tmpMerged.Length; ++i)
                 {
                     merged[i] = (int) tmpMerged[0, i];
-                    Console.WriteLine(merged[i]);
                 }
             }
 
             if (array.IsField("subregions"))
             {
-                object[,] tmpSubregions = (object[,]) array.GetField("subregions");
-                subregions = new DivikResult[tmpSubregions.Length];
-                for (var i = 0; i < tmpSubregions.Length; ++i)
-                {
-                    subregions[i] = new DivikResult(tmpSubregions[0, i]);
-                }
+                Console.WriteLine("subregions");
+                MWCellArray tmpSubregions = (MWCellArray)array.GetField("subregions");
+                //subregions = new DivikResult[tmpSubregions.Length];
+                //for (var i = 0; i < tmpSubregions.Length; ++i)
+                //{
+                //    subregions[i] = new DivikResult(tmpSubregions[i]);
+                //}
+                Console.WriteLine(tmpSubregions);
             }
         }
 
