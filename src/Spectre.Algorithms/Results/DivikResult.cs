@@ -80,12 +80,38 @@ namespace Spectre.Algorithms.Results
         internal DivikResult(object matlabResult)
         {
             MWStructArray array = (MWStructArray) matlabResult;
+            setCentoids(array);
+            setIndex(array);
+            setPartition(array);
+            setAmpThr(array);
+            setAmpFilter(array);
+            setVarThr(array);
+            setVarFilter(array);
+            setMerged(array);
+            setSubregions(array);
+        }
+
+        internal void setIndex(MWStructArray array)
+        {
+            if (array.IsField("index"))
+            {
+                double[,] tmpIndex = (double[,]) array.GetField("index");
+                index = tmpIndex[0, 0];
+            }
+            else index = Double.NaN;
+        }
+
+        internal void setCentoids(MWStructArray array)
+        {
             if (array.IsField("centroids"))
                 centoid = (double[,]) array.GetField("centroids");
+            else centoid = null;
+        }
 
+        internal void setPartition(MWStructArray array)
+        {
             if (array.IsField("partition"))
             {
-                Console.WriteLine("partition");
                 double[,] tmpPartition = (double[,]) array.GetField("partition");
                 partition = new int[tmpPartition.Length];
                 for (var i = 0; i < tmpPartition.Length; ++i)
@@ -93,75 +119,129 @@ namespace Spectre.Algorithms.Results
                     partition[i] = (int) tmpPartition[0, i];
                 }
             }
+            else partition = null;
+        }
 
-            if (array.IsField("index"))
-            {
-                Console.WriteLine("index");
-                double[,] tmpIndex = (double[,]) array.GetField("index");
-                index = tmpIndex[0, 0];
-            }
-
+        internal void setAmpThr(MWStructArray array)
+        {
             if (array.IsField("amp_thr"))
             {
-                Console.WriteLine("amp_thr");
-                double[,] tmpAmpThr = (double[,]) array.GetField("amp_thr");
+                double[,] tmpAmpThr = (double[,])array.GetField("amp_thr");
                 _ampThr = tmpAmpThr[0, 0];
             }
+            _ampThr = double.NaN;
+        }
 
+        internal void setAmpFilter(MWStructArray array)
+        {
             if (array.IsField("amp_filter"))
             {
-                Console.WriteLine("amp_filter");
-                double[,] tmpAmpFilter = (double[,]) array.GetField("amp_filter");
+                double[,] tmpAmpFilter = (double[,])array.GetField("amp_filter");
                 _ampFilter = new bool[tmpAmpFilter.Length];
                 for (var i = 0; i < tmpAmpFilter.Length; ++i)
                 {
                     _ampFilter[i] = Convert.ToBoolean(tmpAmpFilter[0, i]);
-                    Console.WriteLine(_ampFilter[i]);
                 }
             }
+            _ampFilter = null;
+        }
 
+        internal void setVarThr(MWStructArray array)
+        {
             if (array.IsField("var_thr"))
             {
-                Console.WriteLine("var_thr");
-                double[,] tmpVarThr = (double[,]) array.GetField("var_thr");
+                double[,] tmpVarThr = (double[,])array.GetField("var_thr");
                 _varThr = tmpVarThr[0, 0];
-                Console.WriteLine(_varThr);
             }
+            _varThr = double.NaN;
+        }
 
+        internal void setVarFilter(MWStructArray array)
+        {
             if (array.IsField("var_filter"))
             {
-                Console.WriteLine("var_filter");
-                double[,] tmpVarFilter = (double[,]) array.GetField("var_filter");
+                double[,] tmpVarFilter = (double[,])array.GetField("var_filter");
                 _varFilter = new bool[tmpVarFilter.Length];
                 for (var i = 0; i < tmpVarFilter.Length; ++i)
                 {
                     _varFilter[i] = Convert.ToBoolean(tmpVarFilter[0, i]);
-                    Console.WriteLine(_varFilter[i]);
                 }
             }
+            _varFilter = null;
+        }
 
+        internal void setMerged(MWStructArray array)
+        {
             if (array.IsField("merged"))
             {
-                Console.WriteLine("merged");
-                double[,] tmpMerged = (double[,]) array.GetField("merged");
+                double[,] tmpMerged = (double[,])array.GetField("merged");
                 merged = new int[tmpMerged.Length];
                 for (var i = 0; i < tmpMerged.Length; ++i)
                 {
-                    merged[i] = (int) tmpMerged[0, i];
+                    merged[i] = (int)tmpMerged[0, i];
                 }
             }
+            merged = null;
+        }
 
+        internal void setSubregions(MWStructArray array)
+        {
             if (array.IsField("subregions"))
             {
-                Console.WriteLine("subregions");
                 MWCellArray tmpSubregions = (MWCellArray)array.GetField("subregions");
-                //subregions = new DivikResult[tmpSubregions.Length];
-                //for (var i = 0; i < tmpSubregions.Length; ++i)
-                //{
-                //    subregions[i] = new DivikResult(tmpSubregions[i]);
-                //}
-                Console.WriteLine(tmpSubregions);
+                subregions = new DivikResult[tmpSubregions.NumberOfElements];
+                for (var i = 0; i < tmpSubregions.NumberOfElements; ++i)
+                {
+                    if (tmpSubregions[i + 1].GetType() == typeof(MWStructArray))
+                        subregions[i] = new DivikResult(tmpSubregions[i + 1]);
+                }
             }
+            subregions = null;
+        }
+
+        public double getIndex()
+        {
+            return index;
+        }
+
+        public int[] getPartition()
+        {
+            return partition;
+        }
+
+        public double[,] getCentoids()
+        {
+            return centoid;
+        }
+
+        public double getAmpThr()
+        {
+            return _ampThr;
+        }
+
+        public bool[] getAmpFilter()
+        {
+            return _ampFilter;
+        }
+
+        public double getVarThr()
+        {
+            return _varThr;
+        }
+
+        public bool[] getVarFilter()
+        {
+            return _varFilter;
+        }
+
+        public int[] getMerged()
+        {
+            return merged;
+        }
+
+        public DivikResult[] getSubregions()
+        {
+            return subregions;
         }
 
         /// <summary>
