@@ -56,6 +56,7 @@
     <Compile Include="Methods\PreprocessingTests.cs" />
     <Compile Include="Methods\SegmentationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\DivikResultTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Spectre.Algorithms\Spectre.Algorithms.csproj">
