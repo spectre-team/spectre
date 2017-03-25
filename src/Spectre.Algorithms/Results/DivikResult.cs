@@ -23,51 +23,133 @@ using MathWorks.MATLAB.NET.Arrays.native;
 
 namespace Spectre.Algorithms.Results
 {
-	/// <summary>
-	/// Wraps DiviK algorithm results.
-	/// </summary>
-	public class DivikResult
+    /// <summary>
+    /// Wraps DiviK algorithm results.
+    /// </summary>
+    public class DivikResult
     {
-        private object _matlabResultStruct;
-
-        /// <summary>
-        /// result[0]
-        /// </summary>
-        private Double[,] _mz;
-
         /// <summary>
         /// index from matlabResult[1]
         /// </summary>
-        private Double[,] index;
+        private double index;
 
         /// <summary>
         /// centoid from matlabResult[1]
         /// </summary>
-        private Double[,] centoid;
+        private double[,] centoid;
 
         /// <summary>
         /// partition from matlabResult[1]
         /// </summary>
-        private Double[,] partition;
+        private int[] partition;
+
+        /// <summary>
+        /// amp_thr from matlabResult[1]
+        /// </summary>
+        private double _ampThr;
+
+        /// <summary>
+        /// amp_filter from matlabResult[1]
+        /// </summary>
+        private bool[] _ampFilter;
+
+        /// <summary>
+        /// var_thr from matlabResult[1]
+        /// </summary>
+        private double _varThr;
+
+        /// <summary>
+        /// var_filter from matlabResult[1]
+        /// </summary>
+        private bool[] _varFilter;
+
+        /// <summary>
+        /// merged from matlabResult[1]
+        /// </summary>
+        private int[] merged;
+
+        /// <summary>
+        /// subregions from matlabResult[1]
+        /// </summary>
+        private DivikResult[] subregions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DivikResult"/> class.
         /// </summary>
         /// <param name="matlabResult">The results coming from MCR.</param>
-        internal DivikResult(object[] matlabResult)
+        internal DivikResult(object matlabResult)
         {
-	        _matlabResultStruct = matlabResult[1];
+            MWStructArray array = (MWStructArray) matlabResult;
+            if (array.IsField("centroids"))
+                centoid = (double[,]) array.GetField("centroids");
 
-            object result = _matlabResultStruct;
+            if (array.IsField("partition"))
+            {
+                double[,] tmpPartition = (double[,]) array.GetField("partition");
+                partition = new int[tmpPartition.Length];
+                for (var i = 0; i < tmpPartition.Length; ++i)
+                {
+                    partition[i] = (int) tmpPartition[0, i];
+                }
+            }
 
-            _mz = (Double[,])matlabResult[0];
+            if (array.IsField("index"))
+            {
+                double[,] tmpIndex = (double[,]) array.GetField("index");
+                index = tmpIndex[0, 0];
+            }
 
-            MWStructArray array = (MWStructArray)_matlabResultStruct;
+            if (array.IsField("amp_thr"))
+            {
+                double[,] tmpAmpThr = (double[,]) array.GetField("amp_thr");
+                _ampThr = tmpAmpThr[0, 0];
+            }
 
-            centoid = (Double[,])array.GetField("centroids");
-            partition = (Double[,])array.GetField("partition");
-            index = (Double[,])array.GetField("index");
-            
+            if (array.IsField("amp_filter"))
+            {
+                double[,] tmpAmpFilter = (double[,]) array.GetField("amp_filter");
+                _ampFilter = new bool[tmpAmpFilter.Length];
+                for (var i = 0; i < tmpAmpFilter.Length; ++i)
+                {
+                    _ampFilter[i] = Convert.ToBoolean(tmpAmpFilter[0, i]);
+                }
+            }
+
+            if (array.IsField("var_thr"))
+            {
+                double[,] tmpVarThr = (double[,]) array.GetField("var_thr");
+                _varThr = tmpVarThr[0, 0];
+            }
+
+            if (array.IsField("var_filter"))
+            {
+                double[,] tmpVarFilter = (double[,]) array.GetField("var_filter");
+                _varFilter = new bool[tmpVarFilter.Length];
+                for (var i = 0; i < tmpVarFilter.Length; ++i)
+                {
+                    _varFilter[i] = Convert.ToBoolean(tmpVarFilter[0, i]);
+                }
+            }
+
+            if (array.IsField("merged"))
+            {
+                double[,] tmpMerged = (double[,]) array.GetField("merged");
+                merged = new int[tmpMerged.Length];
+                for (var i = 0; i < tmpMerged.Length; ++i)
+                {
+                    merged[i] = (int) tmpMerged[0, i];
+                }
+            }
+
+            if (array.IsField("subregions"))
+            {
+                object[,] tmpSubregions = (object[,]) array.GetField("subregions");
+                subregions = new DivikResult[tmpSubregions.Length];
+                for (var i = 0; i < tmpSubregions.Length; ++i)
+                {
+                    subregions[i] = new DivikResult(tmpSubregions[0, i]);
+                }
+            }
         }
     }
 }

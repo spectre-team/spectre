@@ -66,7 +66,7 @@ namespace Spectre.Algorithms.Methods
 
 			var varargin = options.ToVarargin();
 			var tmp = _segmentation.divik(numberOfOutputArgs, dataset.GetRawIntensities(), coordinates, varargin);
-			var result = new DivikResult(tmp);
+			var result = new DivikResult(tmp[1]);
 			return result;
 		}
 		#endregion
