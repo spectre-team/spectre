@@ -29,49 +29,49 @@ namespace Spectre.Algorithms.Results
 	public sealed class DivikResult
     {
         /// <summary>
-        /// index from matlabResult[1]
+        /// clustering quality index
         /// </summary>
-        private double index;
+        private readonly double _index;
 
         /// <summary>
-        /// centoid from matlabResult[1]
+        /// centroids obtained in clustering
         /// </summary>
-        private double[,] centoid;
+        private readonly double[,] _centroid;
 
         /// <summary>
-        /// partition from matlabResult[1]
+        /// partition of data
         /// </summary>
-        private int[] partition;
+        private readonly int[] _partition;
 
         /// <summary>
-        /// amp_thr from matlabResult[1]
+        /// amplitude threshold
         /// </summary>
-        private double _ampThr;
+        private readonly double _amplitudeThreshold;
 
         /// <summary>
-        /// amp_filter from matlabResult[1]
+        /// amplitude filter
         /// </summary>
-        private bool[] _ampFilter;
+        private readonly bool[] _amplitudeFilter;
 
         /// <summary>
-        /// var_thr from matlabResult[1]
+        /// variance threshold
         /// </summary>
-        private double _varThr;
+        private readonly double _varianceThreshold;
 
         /// <summary>
-        /// var_filter from matlabResult[1]
+        /// variance filter
         /// </summary>
-        private bool[] _varFilter;
+        private readonly bool[] _varianceFilter;
 
         /// <summary>
-        /// merged from matlabResult[1]
+        /// downmerged partition
         /// </summary>
-        private int[] merged;
+        private readonly int[] _merged;
 
         /// <summary>
-        /// subregions from matlabResult[1]
+        /// result of further splits
         /// </summary>
-        private DivikResult[] subregions;
+        private readonly DivikResult[] _subregions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DivikResult"/> class.
@@ -81,16 +81,16 @@ namespace Spectre.Algorithms.Results
         {
             MWStructArray array = (MWStructArray) matlabResult;
             if (array.IsField("centroids"))
-                centoid = (double[,]) array.GetField("centroids");
+                _centroid = (double[,]) array.GetField("centroids");
 
             if (array.IsField("partition"))
             {
                 Console.WriteLine("partition");
                 double[,] tmpPartition = (double[,]) array.GetField("partition");
-                partition = new int[tmpPartition.Length];
+                _partition = new int[tmpPartition.Length];
                 for (var i = 0; i < tmpPartition.Length; ++i)
                 {
-                    partition[i] = (int) tmpPartition[0, i];
+                    _partition[i] = (int) tmpPartition[0, i];
                 }
             }
 
@@ -98,25 +98,25 @@ namespace Spectre.Algorithms.Results
             {
                 Console.WriteLine("index");
                 double[,] tmpIndex = (double[,]) array.GetField("index");
-                index = tmpIndex[0, 0];
+                _index = tmpIndex[0, 0];
             }
 
             if (array.IsField("amp_thr"))
             {
                 Console.WriteLine("amp_thr");
                 double[,] tmpAmpThr = (double[,]) array.GetField("amp_thr");
-                _ampThr = tmpAmpThr[0, 0];
+                _amplitudeThreshold = tmpAmpThr[0, 0];
             }
 
             if (array.IsField("amp_filter"))
             {
                 Console.WriteLine("amp_filter");
                 double[,] tmpAmpFilter = (double[,]) array.GetField("amp_filter");
-                _ampFilter = new bool[tmpAmpFilter.Length];
+                _amplitudeFilter = new bool[tmpAmpFilter.Length];
                 for (var i = 0; i < tmpAmpFilter.Length; ++i)
                 {
-                    _ampFilter[i] = Convert.ToBoolean(tmpAmpFilter[0, i]);
-                    Console.WriteLine(_ampFilter[i]);
+                    _amplitudeFilter[i] = Convert.ToBoolean(tmpAmpFilter[0, i]);
+                    Console.WriteLine(_amplitudeFilter[i]);
                 }
             }
 
@@ -124,19 +124,19 @@ namespace Spectre.Algorithms.Results
             {
                 Console.WriteLine("var_thr");
                 double[,] tmpVarThr = (double[,]) array.GetField("var_thr");
-                _varThr = tmpVarThr[0, 0];
-                Console.WriteLine(_varThr);
+                _varianceThreshold = tmpVarThr[0, 0];
+                Console.WriteLine(_varianceThreshold);
             }
 
             if (array.IsField("var_filter"))
             {
                 Console.WriteLine("var_filter");
                 double[,] tmpVarFilter = (double[,]) array.GetField("var_filter");
-                _varFilter = new bool[tmpVarFilter.Length];
+                _varianceFilter = new bool[tmpVarFilter.Length];
                 for (var i = 0; i < tmpVarFilter.Length; ++i)
                 {
-                    _varFilter[i] = Convert.ToBoolean(tmpVarFilter[0, i]);
-                    Console.WriteLine(_varFilter[i]);
+                    _varianceFilter[i] = Convert.ToBoolean(tmpVarFilter[0, i]);
+                    Console.WriteLine(_varianceFilter[i]);
                 }
             }
 
@@ -144,10 +144,10 @@ namespace Spectre.Algorithms.Results
             {
                 Console.WriteLine("merged");
                 double[,] tmpMerged = (double[,]) array.GetField("merged");
-                merged = new int[tmpMerged.Length];
+                _merged = new int[tmpMerged.Length];
                 for (var i = 0; i < tmpMerged.Length; ++i)
                 {
-                    merged[i] = (int) tmpMerged[0, i];
+                    _merged[i] = (int) tmpMerged[0, i];
                 }
             }
 
