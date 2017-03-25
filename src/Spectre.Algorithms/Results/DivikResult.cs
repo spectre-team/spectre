@@ -23,10 +23,10 @@ using MathWorks.MATLAB.NET.Arrays.native;
 
 namespace Spectre.Algorithms.Results
 {
-    /// <summary>
-    /// Wraps DiviK algorithm results.
-    /// </summary>
-    public class DivikResult
+	/// <summary>
+	/// Wraps DiviK algorithm results.
+	/// </summary>
+	public sealed class DivikResult
     {
         /// <summary>
         /// index from matlabResult[1]
@@ -164,6 +164,16 @@ namespace Spectre.Algorithms.Results
                     subregions[i] = new DivikResult(tmpSubregions[0, i]);
                 }
             }
+        }
+
+        /// <summary>
+        /// Saves result under the specified path in JSON format.
+        /// </summary>
+        /// <param name="path">The destination path.</param>
+        /// <exception cref="System.NotImplementedException">Always, as result saving has not been implemented yet.</exception>
+        public void Save(string path)
+        {
+            throw new NotImplementedException("Result saving has not been implemented yet.");
         }
     }
 }

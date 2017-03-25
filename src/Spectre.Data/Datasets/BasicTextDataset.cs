@@ -185,9 +185,9 @@ namespace Spectre.Data.Datasets
                     {
                         var metadata = sr.ReadLine()?.Split(null);
                         var intensities = sr.ReadLine()?.Split(null);
-                        if (metadata == null || intensities == null)
-                            continue;
                         intensities = intensities.Where(str => !string.IsNullOrEmpty(str)).ToArray();
+                        if (metadata.Length == 0 || intensities.Length == 0)
+                            continue;
                         if (intensities.Length != _mz.Length)
                             throw new InvalidDataException("Length of the data must be equal to length of m/z values.");
 
