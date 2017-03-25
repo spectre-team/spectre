@@ -16,11 +16,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
+using System;
 using NUnit.Framework;
 using Spectre.Algorithms.Methods;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
 using Spectre.Data.Datasets;
+using System.IO;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
@@ -60,5 +63,23 @@ namespace Spectre.Algorithms.Tests.Methods
 			// Assert
 			Assert.IsNotNull(result);
 		}
-	}
+
+        [Test]
+        public void Divik_BigData()
+        {
+            string path = "A:\\MALDI\\examples\\single.txt";
+            BasicTextDataset dataset = new BasicTextDataset(path);
+
+            var options = DivikOptions.ForLevels(1);
+            options.UsingVarianceFiltration = false;
+            options.UsingAmplitudeFiltration = false;
+            options.MaxK = 2;
+            options.Metric = Metric.Euclidean;
+
+            DivikResult result = _segmentation.Divik(dataset, options);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+    }
 }
