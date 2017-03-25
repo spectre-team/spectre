@@ -18,12 +18,14 @@
 */
 
 
+using System;
+
 namespace Spectre.Algorithms.Results
 {
 	/// <summary>
 	/// Wraps DiviK algorithm results.
 	/// </summary>
-	public class DivikResult
+	public sealed class DivikResult
     {
 	    private object _matlabResultStruct;
 
@@ -34,6 +36,16 @@ namespace Spectre.Algorithms.Results
 		internal DivikResult(object[] matlabResult)
         {
 	        _matlabResultStruct = matlabResult[1];
+        }
+
+        /// <summary>
+        /// Saves result under the specified path in JSON format.
+        /// </summary>
+        /// <param name="path">The destination path.</param>
+        /// <exception cref="System.NotImplementedException">Always, as result saving has not been implemented yet.</exception>
+        public void Save(string path)
+        {
+            throw new NotImplementedException("Result saving has not been implemented yet.");
         }
     }
 }
