@@ -19,6 +19,7 @@
 
 
 using System;
+using System.Linq;
 using MathWorks.MATLAB.NET.Arrays.native;
 
 namespace Spectre.Algorithms.Results
@@ -227,6 +228,91 @@ namespace Spectre.Algorithms.Results
         public void Save(string path)
         {
             throw new NotImplementedException("Result saving has not been implemented yet.");
+        }
+        #endregion
+
+        #region Equals
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is DivikResult))
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            var other = (DivikResult) obj;
+
+            if (other.AmplitudeThreshold != this.AmplitudeThreshold)
+                return false;
+            if (other.VarianceThreshold != this.VarianceThreshold)
+                return false;
+            if (other.QualityIndex != this.QualityIndex)
+                return false;
+            if ((other.AmplitudeFilter != null) != (this.AmplitudeFilter != null))
+                return false;
+            if (other.AmplitudeFilter != null && this.AmplitudeFilter != null && other.AmplitudeFilter.Length != this.AmplitudeFilter.Length)
+                return false;
+            if ((other.VarianceFilter != null) != (this.VarianceFilter != null))
+                return false;
+            if (other.VarianceFilter != null && this.VarianceFilter != null && other.VarianceFilter.Length != this.VarianceFilter.Length)
+                return false;
+            if (other.Centroids.Length != this.Centroids.Length)
+                return false;
+            if (other.Partition.Length != this.Partition.Length)
+                return false;
+            if (other.AmplitudeFilter != null && this.AmplitudeFilter != null && !other.AmplitudeFilter.SequenceEqual(this.AmplitudeFilter))
+                return false;
+            if (other.VarianceFilter != null && this.VarianceFilter != null && !other.VarianceFilter.SequenceEqual(this.VarianceFilter))
+                return false;
+            if (!other.Partition.SequenceEqual(this.Partition))
+                return false;
+            if ((other.Merged != null) != (this.Merged != null))
+                return false;
+            if (other.Merged != null && this.Merged != null && !other.Merged.SequenceEqual(this.Merged))
+                return false;
+            if (!other.Centroids.Cast<double>().SequenceEqual(this.Centroids.Cast<double>()))
+                return false;
+            if ((other.Subregions != null) != (this.Subregions != null))
+                return false;
+            if (other.Subregions != null && this.Subregions != null && !other.Subregions.SequenceEqual(this.Subregions))
+                return false;
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="first">First instance to compare.</param>
+        /// <param name="second">Second instance to compare.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator ==(DivikResult first, DivikResult second)
+        {
+            return ((object)first == null && (object)second == null) || ((object)first != null && first.Equals(second)) || second.Equals(first);
+        }
+
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="first">First instance to compare.</param>
+        /// <param name="second">Second instance to compare.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator !=(DivikResult first, DivikResult second)
+        {
+            return !(first == second);
         }
         #endregion
     }
