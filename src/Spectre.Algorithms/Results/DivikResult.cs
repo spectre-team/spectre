@@ -102,7 +102,7 @@ namespace Spectre.Algorithms.Results
         /// <summary>
         /// Empty constructor for serialization purposes.
         /// </summary>
-        public DivikResult()
+        private DivikResult()
         {
 
         }
