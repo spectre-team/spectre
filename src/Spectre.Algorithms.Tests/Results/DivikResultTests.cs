@@ -38,7 +38,7 @@ namespace Spectre.Algorithms.Tests.Results
         public void SetUpFixture()
         {
             var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(1);
+            var options = DivikOptions.ForLevels(2);
             options.MaxK = 2;
             options.Caching = false;
             options.PlottingPartitions = false;
@@ -72,6 +72,17 @@ namespace Spectre.Algorithms.Tests.Results
             Assert.AreEqual(_result.VarianceFilter, deserialisedResult.VarianceFilter, "The VarianceFilter differs from original");
             Assert.AreEqual(_result.VarianceThreshold, deserialisedResult.VarianceThreshold, "The VarianceThreshold differs from original");
             Assert.AreEqual(_result.Subregions, deserialisedResult.Subregions, "The Subregions differ from original");
+            File.Delete(path);
+        }
+
+        [Test]
+        public void SavedIdented()
+        {
+            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\test-path.json";
+            _result.Save(path, false);
+
+            string contents = File.ReadAllText(path);
+            Assert.False(contents.Contains("\n"), "Non-idented formatting contains new line");
             File.Delete(path);
         }
     }

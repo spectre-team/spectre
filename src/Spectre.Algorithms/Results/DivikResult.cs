@@ -240,9 +240,11 @@ namespace Spectre.Algorithms.Results
         /// Saves result under the specified path in JSON format.
         /// </summary>
         /// <param name="path">The destination path.</param>
-        public void Save(string path)
+        /// <param name="identation">Sets idented formattings. Defaults to true.</param>
+        public void Save(string path, bool identation = true)
         {
-            string data = JsonConvert.SerializeObject(this);
+            Formatting format = identation ? Formatting.Indented : Formatting.None;
+            string data = JsonConvert.SerializeObject(this, format);
             File.WriteAllText(path, data);
         }
 
