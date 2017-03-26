@@ -32,13 +32,18 @@ namespace Spectre.Algorithms.Methods
 		/// Indicates whether this instance has been disposed.
 		/// </summary>
 		private bool _disposed = false;
-		#endregion
 
-		#region Constructor
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Algorithms"/> class.
-		/// </summary>
-		public Segmentation()
+	    /// <summary>
+	    /// Locates divik structure in matlab result array
+	    /// </summary>
+	    private const int DivikStructureLocation = 1;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Algorithms"/> class.
+        /// </summary>
+        public Segmentation()
 		{
 			_segmentation = new MatlabAlgorithmsNative.Segmentation();
 		}
@@ -65,8 +70,10 @@ namespace Spectre.Algorithms.Methods
 					coords[i, j] = coordinates[i, j];
 
 			var varargin = options.ToVarargin();
-			var tmp = _segmentation.divik(numberOfOutputArgs, dataset.GetRawIntensities(), coordinates, varargin);
-			var result = new DivikResult(tmp[1]);
+			var matlabDivikResult = _segmentation.divik(numberOfOutputArgs, dataset.GetRawIntensities(), coordinates, varargin);
+            //matlabResult[0] is equal to the "partition" field in matlabResult[1], that's why we only use matlabResult[1]
+            //Besides it helps create recursive single constructor for DivikResult
+            var result = new DivikResult(matlabDivikResult[DivikStructureLocation]);
 			return result;
 		}
 		#endregion
