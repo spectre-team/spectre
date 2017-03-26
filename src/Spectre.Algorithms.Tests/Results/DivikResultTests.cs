@@ -17,11 +17,6 @@
    limitations under the License.
 */
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Spectre.Algorithms.Methods;
 using Spectre.Algorithms.Parameterization;
@@ -48,8 +43,6 @@ namespace Spectre.Algorithms.Tests.Results
             options.PlottingDecomposition = false;
             options.PlottingDecompositionRecursively = false;
             options.PlottingRecursively = false;
-            options.UsingAmplitudeFiltration = false;
-            options.UsingVarianceFiltration = false;
             using (var segmentation = new Segmentation())
             {
                 _result = segmentation.Divik(dataset, options);

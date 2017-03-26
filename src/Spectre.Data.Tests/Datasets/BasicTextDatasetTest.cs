@@ -31,11 +31,19 @@ namespace Spectre.Data.Tests.Datasets
     public class BasicTextDatasetTest
     {
         private IDataset _dataset;
+        private string _startDirectory;
 
         [OneTimeSetUp]
         public void SetUpFixture()
         {
+            _startDirectory = Directory.GetCurrentDirectory();
             Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory + "\\..\\..\\..");
+        }
+
+        [OneTimeTearDown]
+        public void TearDownFixture()
+        {
+            Directory.SetCurrentDirectory(_startDirectory);
         }
 
         [SetUp]

@@ -45,7 +45,7 @@ namespace Spectre.Algorithms.Tests.Methods
 		}
 
 		[Test]
-		public void Divik()
+		public void DivikSimple()
 		{
             double[] mz = { 1, 2, 3, 4 };
             double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
@@ -64,17 +64,13 @@ namespace Spectre.Algorithms.Tests.Methods
 			Assert.IsNotNull(result);
 		}
 
-        [Test]
-        public void Divik_BigData()
+        [Test, Category("VeryLong")]
+        public void DivikBigData()
         {
-            string path = "A:\\MALDI\\examples\\single.txt";
-            BasicTextDataset dataset = new BasicTextDataset(path);
-
+            // path to directory with test project
+            var path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\single.txt";
+            var dataset = new BasicTextDataset(path);
             var options = DivikOptions.ForLevels(2);
-            options.UsingVarianceFiltration = false;
-            options.UsingAmplitudeFiltration = false;
-            options.MaxK = 2;
-            options.Metric = Metric.Euclidean;
 
             DivikResult result = _segmentation.Divik(dataset, options);
 
