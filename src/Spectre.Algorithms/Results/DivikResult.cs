@@ -30,47 +30,47 @@ namespace Spectre.Algorithms.Results
     {
         #region Properties
         /// <summary>
-        /// clustering quality index
+        /// Clustering quality index
         /// </summary>
         public double QualityIndex { get; }
 
         /// <summary>
-        /// centroids obtained in clustering
+        /// Centroids obtained in clustering
         /// </summary>
         public double[,] Centroids { get; }
 
         /// <summary>
-        /// partition of data
+        /// Partition of data
         /// </summary>
         public int[] Partition { get; }
 
         /// <summary>
-        /// amplitude threshold
+        /// Amplitude threshold
         /// </summary>
         public double AmplitudeThreshold { get; }
 
         /// <summary>
-        /// amplitude filter
+        /// Amplitude filter
         /// </summary>
         public bool[] AmplitudeFilter { get; }
 
         /// <summary>
-        /// variance threshold
+        /// Variance threshold
         /// </summary>
         public double VarianceThreshold { get; }
 
         /// <summary>
-        /// variance filter
+        /// Variance filter
         /// </summary>
         public bool[] VarianceFilter { get; }
 
         /// <summary>
-        /// downmerged partition
+        /// Downmerged partition
         /// </summary>
         public int[] Merged { get; }
 
         /// <summary>
-        /// result of further splits
+        /// Result of further splits
         /// </summary>
         public DivikResult[] Subregions { get; }
         #endregion
