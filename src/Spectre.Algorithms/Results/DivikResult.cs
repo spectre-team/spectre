@@ -19,6 +19,7 @@
 
 
 using System;
+using MathWorks.MATLAB.NET.Arrays.native;
 
 namespace Spectre.Algorithms.Results
 {
@@ -27,17 +28,197 @@ namespace Spectre.Algorithms.Results
 	/// </summary>
 	public sealed class DivikResult
     {
-	    private object _matlabResultStruct;
+        #region Properties
+        /// <summary>
+        /// Clustering quality index
+        /// </summary>
+        public double QualityIndex { get; }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="DivikResult"/> class.
-		/// </summary>
-		/// <param name="matlabResult">The results coming from MCR.</param>
-		internal DivikResult(object[] matlabResult)
+        /// <summary>
+        /// Centroids obtained in clustering
+        /// </summary>
+        public double[,] Centroids { get; }
+
+        /// <summary>
+        /// Partition of data
+        /// </summary>
+        public int[] Partition { get; }
+
+        /// <summary>
+        /// Amplitude threshold
+        /// </summary>
+        public double AmplitudeThreshold { get; }
+
+        /// <summary>
+        /// Amplitude filter
+        /// </summary>
+        public bool[] AmplitudeFilter { get; }
+
+        /// <summary>
+        /// Variance threshold
+        /// </summary>
+        public double VarianceThreshold { get; }
+
+        /// <summary>
+        /// Variance filter
+        /// </summary>
+        public bool[] VarianceFilter { get; }
+
+        /// <summary>
+        /// Downmerged partition
+        /// </summary>
+        public int[] Merged { get; }
+
+        /// <summary>
+        /// Result of further splits
+        /// </summary>
+        public DivikResult[] Subregions { get; }
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DivikResult"/> class.
+        /// </summary>
+        /// <param name="matlabResult">The results coming from MCR.</param>
+        internal DivikResult(object matlabResult)
         {
-	        _matlabResultStruct = matlabResult[1];
+            var array = (MWStructArray) matlabResult;
+            Centroids = ParseCentroids(array);
+            QualityIndex = ParseIndex(array);
+            Partition = ParsePartition(array);
+            AmplitudeThreshold = ParseAmplitudeThreshold(array);
+            AmplitudeFilter = ParseAmplitudeFilter(array);
+            VarianceThreshold = ParseVarianceThreshold(array);
+            VarianceFilter = ParseVarianceFilter(array);
+            Merged = ParseMerged(array);
+            Subregions = ParseSubregions(array);
+        }
+        #endregion
+
+        #region Parsing
+        private double ParseIndex(MWStructArray array)
+        {
+            if (array.IsField("index"))
+            {
+                var tmpIndex = (double[,]) array.GetField("index");
+                return tmpIndex[0, 0];
+            }
+            return double.NaN;
         }
 
+        private double[,] ParseCentroids(MWStructArray array)
+        {
+            if (array.IsField("centroids"))
+            {
+                var transposed = (double[,])array.GetField("centroids");
+                var straight = new double[transposed.GetLength(1), transposed.GetLength(0)];
+                for(var i=0; i < transposed.GetLength(1); ++i)
+                    for (var j = 0; j < transposed.GetLength(0); ++j)
+                        straight[i, j] = transposed[j, i];
+                return straight;
+            }
+            return null;
+        }
+
+        private int[] ParsePartition(MWStructArray array)
+        {
+            if (array.IsField("partition"))
+            {
+                var tmpPartition = (double[,]) array.GetField("partition");
+                var partition = new int[tmpPartition.Length];
+                for (var i = 0; i < tmpPartition.Length; ++i)
+                {
+                    // -1 for indexing purposes (label should allow to check centroid)
+                    partition[i] = (int) tmpPartition[0, i] - 1;
+                }
+                return partition;
+            }
+            return null;
+        }
+        
+        private double ParseAmplitudeThreshold(MWStructArray array)
+        {
+            if (array.IsField("amp_thr"))
+            {
+                var tmpAmpThr = (double[,]) array.GetField("amp_thr");
+                return tmpAmpThr[0, 0];
+            }
+            return double.NaN;
+        }
+
+        private bool[] ParseAmplitudeFilter(MWStructArray array)
+        {
+            if (array.IsField("amp_filter"))
+            {
+                var tmpAmpFilter = (bool[,])array.GetField("amp_filter");
+                var ampFilter = new bool[tmpAmpFilter.Length];
+                for (var i = 0; i < tmpAmpFilter.Length; ++i)
+                {
+                    ampFilter[i] = tmpAmpFilter[i, 0];
+                }
+                return ampFilter;
+            }
+            return null;
+        }
+
+        private double ParseVarianceThreshold(MWStructArray array)
+        {
+            if (array.IsField("var_thr"))
+            {
+                var tmpVarThr = (double[,])array.GetField("var_thr");
+                return tmpVarThr[0, 0];
+            }
+            return double.NaN;
+        }
+
+        private bool[] ParseVarianceFilter(MWStructArray array)
+        {
+            if (array.IsField("var_filter"))
+            {
+                var tmpVarFilter = (bool[,])array.GetField("var_filter");
+                var varFilter = new bool[tmpVarFilter.Length];
+                for (var i = 0; i < tmpVarFilter.Length; ++i)
+                {
+                    varFilter[i] = tmpVarFilter[i, 0];
+                }
+                return varFilter;
+            }
+            return null;
+        }
+
+        private int[] ParseMerged(MWStructArray array)
+        {
+            if (array.IsField("merged"))
+            {
+                var tmpMerged = (double[,])array.GetField("merged");
+                var merged = new int[tmpMerged.Length];
+                for (var i = 0; i < tmpMerged.Length; ++i)
+                {
+                    merged[i] = (int) tmpMerged[0, i];
+                }
+                return merged;
+            }
+            return null;
+        }
+
+        private DivikResult[] ParseSubregions(MWStructArray array)
+        {
+            if (array.IsField("subregions"))
+            {
+                var tmpSubregions = (MWCellArray)array.GetField("subregions");
+                var subregions = new DivikResult[tmpSubregions.NumberOfElements];
+                for (var i = 0; i < tmpSubregions.NumberOfElements; ++i)
+                {
+                    if (tmpSubregions[i + 1] is MWStructArray)
+                        subregions[i] = new DivikResult(tmpSubregions[i + 1]);
+                }
+                return subregions;
+            }
+            return null;
+        }
+        #endregion
+
+        #region Save
         /// <summary>
         /// Saves result under the specified path in JSON format.
         /// </summary>
@@ -47,5 +228,6 @@ namespace Spectre.Algorithms.Results
         {
             throw new NotImplementedException("Result saving has not been implemented yet.");
         }
+        #endregion
     }
 }
