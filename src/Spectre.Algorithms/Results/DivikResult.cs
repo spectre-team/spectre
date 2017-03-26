@@ -243,10 +243,7 @@ namespace Spectre.Algorithms.Results
         public void Save(string path)
         {
             string data = JsonConvert.SerializeObject(this);
-            using (StreamWriter sw = File.CreateText(path))
-            {
-                sw.Write(data);
-            }
+            File.WriteAllText(path, data);
         }
 
         #endregion
