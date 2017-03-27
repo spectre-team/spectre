@@ -269,9 +269,9 @@ namespace Spectre.Algorithms.Results
 
             var other = (DivikResult) obj;
 
-            if (other.AmplitudeThreshold != this.AmplitudeThreshold)
+            if ((double.IsNaN(other.AmplitudeThreshold) != double.IsNaN(this.AmplitudeThreshold)) || other.AmplitudeThreshold != this.AmplitudeThreshold)
                 return false;
-            if (other.VarianceThreshold != this.VarianceThreshold)
+            if ((double.IsNaN(other.VarianceThreshold) != double.IsNaN(this.VarianceThreshold)) || other.VarianceThreshold != this.VarianceThreshold)
                 return false;
             if (other.QualityIndex != this.QualityIndex)
                 return false;
