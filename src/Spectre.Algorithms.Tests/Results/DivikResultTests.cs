@@ -69,15 +69,7 @@ namespace Spectre.Algorithms.Tests.Results
             string jsonData = File.ReadAllText(path);
             DivikResult deserialisedResult = JsonConvert.DeserializeObject<DivikResult>(jsonData);
 
-            Assert.AreEqual(_result.AmplitudeFilter, deserialisedResult.AmplitudeFilter, "The AmplitudeFilter differs from original");
-            Assert.AreEqual(_result.AmplitudeThreshold, deserialisedResult.AmplitudeThreshold, "The AmplitudeThreshold differs from original");
-            Assert.AreEqual(_result.Centroids, deserialisedResult.Centroids, "The Centroids differ from original");
-            Assert.AreEqual(_result.Merged, deserialisedResult.Merged, "The Merged differs from original");
-            Assert.AreEqual(_result.Partition, deserialisedResult.Partition, "The Partition differs from original");
-            Assert.AreEqual(_result.QualityIndex, deserialisedResult.QualityIndex, "The QualityIndex differs from original");
-            Assert.AreEqual(_result.VarianceFilter, deserialisedResult.VarianceFilter, "The VarianceFilter differs from original");
-            Assert.AreEqual(_result.VarianceThreshold, deserialisedResult.VarianceThreshold, "The VarianceThreshold differs from original");
-            Assert.AreEqual(_result.Subregions, deserialisedResult.Subregions, "The Subregions differ from original");
+            Assert.AreEqual(_result, deserialisedResult, "Divik results differ");
             File.Delete(path);
         }
 
