@@ -3,7 +3,7 @@
  * Class representing dataset created from streaming an ordinary text 
  * file containing formatted data.
  * 
-   Copyright 2017 Dariusz Kuchta
+   Copyright 2017 Dariusz Kuchta, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

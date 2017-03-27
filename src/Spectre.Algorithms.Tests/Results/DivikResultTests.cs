@@ -2,7 +2,7 @@
  * DivikResultTests.cs
  * Tests DivikResult class.
  * 
-   Copyright 2017 Grzegorz Mrukwa
+   Copyright 2017 Grzegorz Mrukwa, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@
    limitations under the License.
 */
 using System;
+using System.IO;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using Spectre.Algorithms.Methods;
 using Spectre.Algorithms.Parameterization;
@@ -58,7 +60,28 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void Save()
         {
-            Assert.Throws<NotImplementedException>(() => _result.Save("test-path.json"));
+            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\test-path.json";
+            _result.Save(path);
+
+            Assert.True(File.Exists(path), "File doesn't exist");
+            Assert.AreNotEqual(0, new FileInfo(path).Length, "File is empty");
+
+            string jsonData = File.ReadAllText(path);
+            DivikResult deserialisedResult = JsonConvert.DeserializeObject<DivikResult>(jsonData);
+
+            Assert.AreEqual(_result, deserialisedResult, "Divik results differ");
+            File.Delete(path);
+        }
+
+        [Test]
+        public void SavedIdented()
+        {
+            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\test-path.json";
+            _result.Save(path, false);
+
+            string contents = File.ReadAllText(path);
+            Assert.False(contents.Contains("\n"), "Non-idented formatting contains new line");
+            File.Delete(path);
         }
 
         [Test]
