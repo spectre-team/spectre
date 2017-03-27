@@ -39,7 +39,7 @@ namespace Spectre.Algorithms.Tests.Results
         public void SetUpFixture()
         {
             var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(2);
+            var options = DivikOptions.ForLevels(1);
             options.MaxK = 2;
             options.Caching = false;
             options.PlottingPartitions = false;
