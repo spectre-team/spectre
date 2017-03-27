@@ -29,6 +29,7 @@ namespace Spectre.Algorithms.Tests.Results
     public class DivikResultTests
     {
         private DivikResult _result;
+        private Segmentation _segmentation;
 
         private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\small-test.txt";
 
@@ -43,16 +44,90 @@ namespace Spectre.Algorithms.Tests.Results
             options.PlottingDecomposition = false;
             options.PlottingDecompositionRecursively = false;
             options.PlottingRecursively = false;
-            using (var segmentation = new Segmentation())
-            {
-                _result = segmentation.Divik(dataset, options);
-            }
+            _segmentation = new Segmentation();
+            _result = _segmentation.Divik(dataset, options);
+        }
+
+        [OneTimeTearDown]
+        public void TearDownFixture()
+        {
+            _segmentation.Dispose();
+            _segmentation = null;
         }
 
         [Test]
         public void Save()
         {
             Assert.Throws<NotImplementedException>(() => _result.Save("test-path.json"));
+        }
+
+        [Test]
+        public void EqualsAgainstIdenticalInstance()
+        {
+            var dataset = new BasicTextDataset(_testFilePath);
+            var options = DivikOptions.ForLevels(1);
+            options.MaxK = 2;
+            options.Caching = false;
+            options.PlottingPartitions = false;
+            options.PlottingDecomposition = false;
+            options.PlottingDecompositionRecursively = false;
+            options.PlottingRecursively = false;
+            var result = _segmentation.Divik(dataset, options);
+
+            Assert.True(result.Equals(_result), "Equal objects not indicated.");
+        }
+
+        [Test]
+        public void EqualsAgainstDifferentInstance()
+        {
+            var dataset = new BasicTextDataset(_testFilePath);
+            var options = DivikOptions.ForLevels(1);
+            options.MaxK = 2;
+            options.Caching = false;
+            options.PlottingPartitions = false;
+            options.PlottingDecomposition = false;
+            options.PlottingDecompositionRecursively = false;
+            options.PlottingRecursively = false;
+            options.UsingAmplitudeFiltration = false;
+            var result = _segmentation.Divik(dataset, options);
+            
+            Assert.False(result.Equals(_result), "Unequal objects not indicated.");
+        }
+
+        [Test]
+        public void EqualsAgainstNull()
+        {
+            Assert.False(_result.Equals(null), "Instance equalized with null");
+        }
+
+        [Test]
+        public void EqualityOperatorForNulls()
+        {
+            DivikResult r1 = null;
+            DivikResult r2 = null;
+            Assert.True(r1 == r2, "Nulls not indicated as equal");
+        }
+
+        [Test]
+        public void DifferenceOperatorForNulls()
+        {
+            DivikResult r1 = null;
+            DivikResult r2 = null;
+            Assert.False(r1 != r2, "Nulls indicated as unequal");
+        }
+
+        [Test]
+        public void EqualityOperatorAgainstNull()
+        {
+            DivikResult r1 = null;
+            Assert.False(r1 == _result, "null indicated equal to instance");
+        }
+
+        [Test]
+        public void InequalityOperatorAgainstNull()
+        {
+            DivikResult r1 = null;
+            Assert.True(r1 != _result, "null not indicated unequal to instance");
         }
     }
 }
