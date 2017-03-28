@@ -3,7 +3,7 @@
  * Class representing dataset created from streaming an ordinary text 
  * file containing formatted data.
  * 
-   Copyright 2017 Dariusz Kuchta
+   Copyright 2017 Dariusz Kuchta, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -55,12 +55,6 @@ namespace Spectre.Data.Datasets
 
         #endregion
 
-        #region Properties
-
-     
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -71,14 +65,16 @@ namespace Spectre.Data.Datasets
         {
             CreateFromFile(textFilePath);
         }
+
         /// <summary>
         /// Constructor with raw value initialization.
         /// </summary>
         /// <param name="mz">Array of m/z values.</param>
         /// <param name="data">Array of intensity values.</param>
-        public BasicTextDataset(double[] mz, double[,] data)
+        /// <param name="coordinates">Array of spatial coordinates.</param>
+        public BasicTextDataset(double[] mz, double[,] data, int[,] coordinates = null)
         {
-            CreateFromRawData(mz, data);
+            CreateFromRawData(mz, data, coordinates);
         }
 
         #endregion
@@ -156,17 +152,19 @@ namespace Spectre.Data.Datasets
         /// </summary>
         /// <exception cref="InvalidDataException">Throws when the data is null or 
         /// the length of data is not matching the dataset length.</exception>
-        public void CreateFromRawData(double[] mz, double[,] data)
+        public void CreateFromRawData(double[] mz, double[,] data, int[,] coordinates = null)
         {
             if (mz == null || data == null)
                 throw new InvalidDataException("The input data is null.");
+            if (coordinates != null && coordinates.GetLength(0) != data.GetLength(0))
+                throw new InvalidDataException("Amount of input spectra does not match the amount of spatial coordinates.");
             if (mz.Length != data.GetLength(1))
                 throw new InvalidDataException("Length of the data must be equal to length of m/z values.");
 
             _intensityArray = new List<double[]>();
             _spatialCoordinates = new List<SpatialCoordinates>();
             _mz = mz;
-            AppendFromRawData(data);
+            AppendFromRawData(data, coordinates);
         }
 
         /// <summary>
@@ -187,9 +185,9 @@ namespace Spectre.Data.Datasets
                     {
                         var metadata = sr.ReadLine()?.Split(null);
                         var intensities = sr.ReadLine()?.Split(null);
-                        if (metadata == null || intensities == null)
-                            continue;
                         intensities = intensities.Where(str => !string.IsNullOrEmpty(str)).ToArray();
+                        if (metadata.Length == 0 || intensities.Length == 0)
+                            continue;
                         if (intensities.Length != _mz.Length)
                             throw new InvalidDataException("Length of the data must be equal to length of m/z values.");
 
@@ -227,16 +225,25 @@ namespace Spectre.Data.Datasets
         /// </summary>
         /// <exception cref="InvalidDataException">Throws when the data is null or 
         /// the length of data is not matching the dataset length.</exception>
-        public void AppendFromRawData(double[,] data)
+        public void AppendFromRawData(double[,] data, int[,] coordinates = null)
         {
             if(data == null)
                 throw new InvalidDataException("The input data is null.");
-            if(_mz.Length != data.GetLength(1))
+            if (coordinates != null && coordinates.GetLength(0) != data.GetLength(0))
+                throw new InvalidDataException("Amount of input spectra does not match the amount of spatial coordinates.");
+            if (_mz.Length != data.GetLength(1))
                 throw new InvalidDataException("The length of input data does not match the length of present data.");
+
+            int coordinateDimensions = coordinates?.GetLength(1) ?? 0;
+
             for (int i = 0; i < data.GetLength(0); i++)
             {
+                int[] xyz = { -1, -1, -1 };
+                for (int j = 0; j < coordinateDimensions; j++)
+                    xyz[j] = coordinates[i, j];
+                _spatialCoordinates.Add(new SpatialCoordinates(xyz[0], xyz[1], xyz[2]));
+
                 _intensityArray.Add(new double[data.GetLength(1)]);
-                _spatialCoordinates.Add(new SpatialCoordinates(-1, -1, -1));
                 int backIdx = _intensityArray.Count - 1;
                 for (int j = 0; j < data.GetLength(1); j++)
                     _intensityArray[backIdx][j] = data[i, j];
@@ -262,6 +269,13 @@ namespace Spectre.Data.Datasets
             for (int i = 0; i < valueCnt; i++)
                 result[i] = new DataPoint(_mz[valueIdxFrom + i], _intensityArray[spectrumIdx][valueIdxFrom + i]);
             return result;
+        }
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
+        public SpatialCoordinates GetSpatialCoordinates(int spectrumIdx)
+        {
+            return _spatialCoordinates[spectrumIdx];
         }
 
         /// <summary>
@@ -320,7 +334,30 @@ namespace Spectre.Data.Datasets
 
             return result;
         }
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
+        public double[,] GetRawIntensities()
+        {
+            return GetRawIntensityRange(0, SpectrumCount, 0, SpectrumLength);
+        }
+        /// <summary>
+        /// See <see cref="IDataset"/> for description.
+        /// </summary>
+        public int[,] GetRawSpacialCoordinates(bool is2D)
+        {
+            int dimensions = (is2D) ? 2 : 3;
 
+            int[,] result = new int[SpectrumCount,dimensions];
+            for(int i = 0; i < SpectrumCount; i++)
+            {
+                int[] xyz = _spatialCoordinates[i].GetRaw();
+                for (int j = 0; j < dimensions; j++)
+                    result[i, j] = xyz[j];
+            }
+
+            return result;
+        }
         /// <summary>
         /// See <see cref="IDataset"/> for description.
         /// </summary>
@@ -339,18 +376,9 @@ namespace Spectre.Data.Datasets
             }
             EndInvariantCulture();
         }
-
-        private void EndInvariantCulture()
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentCulture;
-        }
-
-        private void BeginInvariantCulture()
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        }
-
         #endregion
+
+        #region Private methods
 
         private void SaveDataToFile(string path, StringBuilder fileBuilder)
         {
@@ -395,5 +423,18 @@ namespace Spectre.Data.Datasets
         {
             fileBuilder.AppendLine(Metadata.Description);
         }
+
+        private void EndInvariantCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentCulture;
+        }
+
+        private void BeginInvariantCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+        }
+
+        #endregion
+
     }
 }

@@ -16,10 +16,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
+using System;
 using NUnit.Framework;
 using Spectre.Algorithms.Methods;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
+using Spectre.Data.Datasets;
+using System.IO;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
@@ -41,20 +45,37 @@ namespace Spectre.Algorithms.Tests.Methods
 		}
 
 		[Test]
-		public void Divik()
+		public void DivikSimple()
 		{
-			double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
+            double[] mz = { 1, 2, 3, 4 };
+            double[,] data = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 2, 2, 2, 2 }, { 1, 1, 1, 1 } };
 			int[,] coordinates = { { 1, 1 }, { 2, 2 }, { 1, 2 }, { 2, 1 } };
-			var options = DivikOptions.ForLevels(1);
+            IDataset dataset = new BasicTextDataset(mz, data, coordinates);
+
+            var options = DivikOptions.ForLevels(1);
 			options.UsingVarianceFiltration = false;
 			options.UsingAmplitudeFiltration = false;
 			options.MaxK = 2;
 			options.Metric = Metric.Euclidean;
 
-			DivikResult result = _segmentation.Divik(data, coordinates, options);
+			DivikResult result = _segmentation.Divik(dataset, options);
 
 			// Assert
 			Assert.IsNotNull(result);
 		}
-	}
+
+        [Test, Category("VeryLong")]
+        public void DivikBigData()
+        {
+            // path to directory with test project
+            var path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\single.txt";
+            var dataset = new BasicTextDataset(path);
+            var options = DivikOptions.ForLevels(2);
+
+            DivikResult result = _segmentation.Divik(dataset, options);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+    }
 }

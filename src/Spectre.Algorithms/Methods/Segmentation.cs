@@ -19,6 +19,7 @@
 using System;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
+using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Methods
 {
@@ -31,40 +32,48 @@ namespace Spectre.Algorithms.Methods
 		/// Indicates whether this instance has been disposed.
 		/// </summary>
 		private bool _disposed = false;
-		#endregion
 
-		#region Constructor
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Algorithms"/> class.
-		/// </summary>
-		public Segmentation()
+	    /// <summary>
+	    /// Locates divik structure in matlab result array
+	    /// </summary>
+	    private const int DivikStructureLocation = 1;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Algorithms"/> class.
+        /// </summary>
+        public Segmentation()
 		{
 			_segmentation = new MatlabAlgorithmsNative.Segmentation();
 		}
 		#endregion
 
 		#region MATLAB calls
-		/// <summary>
-		/// Performs DiviK clustering on the specified data.
-		/// </summary>
-		/// <param name="data">The data.</param>
-		/// <param name="coordinates">Spatial coordinates.</param>
-		/// <param name="options">Configuration.</param>
-		/// <returns>Segmentation result.</returns>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		public DivikResult Divik(double[,] data, int[,] coordinates, DivikOptions options)
+
+	    /// <summary>
+	    /// Performs DiviK clustering on the specified data.
+	    /// </summary>
+	    /// <param name="dataset">Input dataset.</param>
+	    /// <param name="options">Configuration.</param>
+	    /// <returns>Segmentation result.</returns>
+	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    public DivikResult Divik(IDataset dataset, DivikOptions options)
 		{
 			ValidateDispose();
-			//this is needed to not to make MCR go wild
+			//This is needed to not to make MCR go wild
 			const int numberOfOutputArgs = 2;
+		    int[,] coordinates = dataset.GetRawSpacialCoordinates(true);
 			double[,] coords = new double[coordinates.GetLength(0), coordinates.GetLength(1)];
 			for (int i = 0; i < coordinates.GetLength(0); ++i)
 				for (int j = 0; j < coordinates.GetLength(1); ++j)
 					coords[i, j] = coordinates[i, j];
 
 			var varargin = options.ToVarargin();
-			var tmp = _segmentation.divik(numberOfOutputArgs, data, coordinates, varargin);
-			var result = new DivikResult(tmp);
+			var matlabDivikResult = _segmentation.divik(numberOfOutputArgs, dataset.GetRawIntensities(), coordinates, varargin);
+            //matlabResult[0] is equal to the "partition" field in matlabResult[1], that's why we only use matlabResult[1]
+            //Besides it helps to create recursive single constructor for DivikResult
+            var result = new DivikResult(matlabDivikResult[DivikStructureLocation]);
 			return result;
 		}
 		#endregion
