@@ -464,6 +464,7 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             if (StartDivikLabel == "Start Divik")
             {
+
                 ThreadPool.QueueUserWorkItem(s =>
                 {
                     _ToggleDivikProgressDisplay();
@@ -494,6 +495,7 @@ namespace Spectre.DivikWpfClient.ViewModel
                 EnableStartDivik = false;
                 ProgressBarLabel = "Cancelling divik...";
                 _CancellationTokenSource.Cancel();
+                _CancellationTokenSource = new CancellationTokenSource();
             }
         }
 
