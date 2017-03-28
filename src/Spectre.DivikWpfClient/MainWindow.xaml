@@ -610,6 +610,7 @@
                 VerticalAlignment="Top"
                 Width="100"
                 Height="30"
-                Command="{Binding StartDivikButtonExecute}"/>
+                Command="{Binding StartDivikButtonExecute}"
+                IsEnabled="{Binding EnableStartDivik}"/>
     </Grid>
 </Window>

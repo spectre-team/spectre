@@ -65,6 +65,8 @@ namespace Spectre.DivikWpfClient.ViewModel
             ProgressBarLabel = "";
             StartDivikLabel = "Start Divik";
             PrettyPrint = true;
+            _CancellationTokenSource = new CancellationTokenSource();
+            EnableStartDivik = true;
         }
 
         #endregion
@@ -291,6 +293,15 @@ namespace Spectre.DivikWpfClient.ViewModel
             set { SetValue(() => PrettyPrint, value); }
         }
 
+        /// <summary>
+		/// ViewModel property for enabling <see cref="MainWindow.StartDivikButton"/>.
+		/// </summary>
+        public bool EnableStartDivik
+        {
+            get { return GetValue(() => EnableStartDivik); }
+            set { SetValue(() => EnableStartDivik, value); }
+        }
+
         #endregion
 
         #region Privates
@@ -329,6 +340,21 @@ namespace Spectre.DivikWpfClient.ViewModel
                 Verbose = false
             };
         }
+
+        /// <summary>
+		/// Toggles start button label, divik progress bar visibility and divik label.
+		/// </summary>
+        private void _ToggleDivikProgressDisplay()
+        {
+            StartDivikLabel = StartDivikLabel == "Start Divik" ? "Cancel" : "Start Divik";
+            IsProgressBarVisible = !IsProgressBarVisible;
+            ProgressBarLabel = ProgressBarLabel == "" ? "Divik running..." : "";
+        }
+
+        /// <summary>
+		/// Cancellation token source for divik calculation task.
+		/// </summary>
+        private CancellationTokenSource _CancellationTokenSource;
 
         #endregion
 
@@ -438,31 +464,36 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             if (StartDivikLabel == "Start Divik")
             {
-                StartDivikLabel = "Cancel";
-                IsProgressBarVisible = !IsProgressBarVisible;
-                ProgressBarLabel = "Divik running...";
-                ThreadPool.QueueUserWorkItem(o =>
-                {
-                    _DivikService = _DivikService ?? ServiceFactory.GetDivikService;
-                    _DivikService.CalculateDivik(_GetDatasetFromVm(), _GetDivikOptionsFromVm()).Save(OutputPath + "\\result.json", PrettyPrint);
-                    StartDivikLabel = "Start Divik";
-                    IsProgressBarVisible = !IsProgressBarVisible;
-                    ProgressBarLabel = "";
-                });
-            } else
-            {
-                CancellationTokenSource cts = new CancellationTokenSource();
                 ThreadPool.QueueUserWorkItem(s =>
                 {
+                    _ToggleDivikProgressDisplay();
                     CancellationToken token = (CancellationToken) s;
                     if (token.IsCancellationRequested)
+                    {
+                        EnableStartDivik = true;
+                        _ToggleDivikProgressDisplay();
+                        MessageBox.Show("Divik was successfully cancelled.", "Cancelled!");
                         return;
-                    token.WaitHandle.WaitOne(1000);
-                }, cts.Token);
-                cts.Cancel();
-                StartDivikLabel = "Start Divik";
-                IsProgressBarVisible = !IsProgressBarVisible;
-                ProgressBarLabel = "";
+                    }  
+                    _DivikService = _DivikService ?? ServiceFactory.GetDivikService;
+                    var fileName = "\\divik-result-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".json";
+                    if (token.IsCancellationRequested)
+                    {
+                        EnableStartDivik = true;
+                        _ToggleDivikProgressDisplay();
+                        MessageBox.Show("Divik was successfully cancelled.", "Cancelled!");
+                        return;
+                    }
+                    _DivikService.CalculateDivik(_GetDatasetFromVm(), _GetDivikOptionsFromVm()).Save(OutputPath + fileName, PrettyPrint);
+                    _ToggleDivikProgressDisplay();
+                    MessageBox.Show("Divik was successfully calculated. The result file was saved as: " + OutputPath + fileName, "Success!");
+
+                }, _CancellationTokenSource.Token);
+            } else
+            {
+                EnableStartDivik = false;
+                ProgressBarLabel = "Cancelling divik...";
+                _CancellationTokenSource.Cancel();
             }
         }
 
