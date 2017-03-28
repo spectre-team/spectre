@@ -517,6 +517,36 @@ namespace Spectre.DivikWpfClient.ViewModel
         }
         #endregion
 
+        #region StartDivik
+        /// <summary>
+        /// Function for closing window.
+        /// </summary>
+        private void _WindowCloseExecute()
+        {
+            if (_DivikService != null)
+            {
+                ((IDisposable)_DivikService).Dispose();
+            }
+        }
+
+        /// <summary>
+		/// Handle for <see cref="MainWindow.Close"/>.
+		/// </summary>
+        private RelayCommand _WindowCloseHandle;
+
+        /// <summary>
+		/// Command for <see cref="MainWindow.StartDivikButton"/>.
+        /// Executes <see cref="MainPageVm._StartDivikButtonExecute"/>.
+		/// </summary>
+        public RelayCommand WindowCloseExecute
+        {
+            get
+            {
+                return _StartDivikButtonHandle ?? (_StartDivikButtonHandle = new RelayCommand(execute: () => _StartDivikButtonExecute()));
+            }
+        }
+        #endregion
+
         #endregion
     }
 }

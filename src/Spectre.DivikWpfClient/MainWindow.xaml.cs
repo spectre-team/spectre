@@ -38,10 +38,12 @@ namespace Spectre.DivikWpfClient
             InitializeComponent();
             IKernel ninjectKernel = new StandardKernel();
             ninjectKernel.Bind<IServiceFactory>().To<ServiceFactory>();
-            DataContext = new MainPageVm()
+            var viewModel = new MainPageVm()
             {
                 ServiceFactory = ninjectKernel.Get<IServiceFactory>()
             };
+            DataContext = viewModel;
+            Closing = viewModel.WindowCloseExecute;
         }
     }
 }

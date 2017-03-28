@@ -21,13 +21,14 @@ using Spectre.Service.Abstract;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Data.Datasets;
 using Spectre.Algorithms.Methods;
+using System;
 
 namespace Spectre.Service
 {
     /// <summary>
     /// Class for calaculating divik.
     /// </summary>
-    class DivikService : IDivikService
+    class DivikService : IDivikService, IDisposable
     {
         /// <summary>
         /// Private field for holding <see cref="Segmentation"/> for the service.
@@ -52,6 +53,15 @@ namespace Spectre.Service
         public DivikResult CalculateDivik(IDataset dataset, DivikOptions options)
         {
             return _segmentation.Divik(dataset, options);
+        }
+
+        /// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+        public void Dispose()
+        {
+            _segmentation.Dispose();
+            Dispose();
         }
     }
 }

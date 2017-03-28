@@ -28,7 +28,8 @@
         Height="687.612"
         Width="710.758"
         Background="#FF464646"
-        DataContext="{StaticResource MainPageVm}">
+        DataContext="{StaticResource MainPageVm}"
+        Closing="{Binding WindowCloseExecute}">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converters:PercentageConverter x:Key="PercentageConverter"/>
