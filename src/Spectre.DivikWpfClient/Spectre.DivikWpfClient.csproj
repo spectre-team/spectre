@@ -36,6 +36,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -91,6 +94,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,9 +109,17 @@
       <Project>{9A886AEC-58DB-410D-91B9-C62E157501FA}</Project>
       <Name>Spectre.Algorithms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
+      <Project>{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}</Project>
+      <Name>Spectre.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spectre.Mvvm\Spectre.Mvvm.csproj">
       <Project>{2d24f1e7-18d4-4fc0-9e4f-2f32ff27fcce}</Project>
       <Name>Spectre.Mvvm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spectre.Service\Spectre.Service.csproj">
+      <Project>{287A1A8D-C029-4D47-96BC-755C91B7985D}</Project>
+      <Name>Spectre.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

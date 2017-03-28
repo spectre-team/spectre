@@ -36,7 +36,7 @@
             <Style.Resources>
                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                     <VisualBrush.Visual>
-                        <Label Content="Path to input txt file" Foreground="LightGray" />
+                        <Label Content="Enter your input" Foreground="LightGray" />
                     </VisualBrush.Visual>
                 </VisualBrush>
             </Style.Resources>
@@ -63,6 +63,7 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="35*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
@@ -116,7 +117,7 @@
                  Grid.Column="1"
                  Text="{Binding InputPath, Mode=TwoWay}" 
                  Margin="0,0,105,0"
-                 Style="{StaticResource PromptErrorTextBox}" />
+                 Style="{StaticResource PromptErrorTextBox}"/>
         <Button Name="ChooseFileButton"
                 Grid.Row="1"
                 Grid.Column="1"
@@ -562,10 +563,30 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        
+
+        <!--Pretty print-->
+        <TextBlock x:Name="PrettyPrintLabel" 
+                   Grid.Column="0"
+                   Grid.Row="20"
+                   Text="Pretty print:" Foreground="White" 
+                   VerticalAlignment="Center" 
+                   Height="16" />
+        <CheckBox x:Name="PrettyPrintCheckbox"  
+                  Grid.Column="1"
+                  Grid.Row="20"
+                  IsChecked="{Binding PrettyPrint, Mode=TwoWay}" 
+                  VerticalAlignment="Center" 
+                  Height="14">
+            <CheckBox.Content>
+                <TextBlock Text="If checked, json results are printed with indentation" 
+                           TextTrimming="CharacterEllipsis" 
+                           Foreground="White"></TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+
         <!--Progress bar-->
         <ProgressBar Name="DivikProgress"
-                     Grid.Row="21"
+                     Grid.Row="22"
                      Grid.ColumnSpan="2"
                      Height="25" 
                      Foreground="#FF7EFB95"
@@ -581,7 +602,7 @@
         
         <!--Start button-->
         <Button Name="StartDivikButton"
-                Grid.Row="22"
+                Grid.Row="23"
                 Grid.Column="1"
                 Content="{Binding StartDivikLabel}"
                 HorizontalAlignment="Right"

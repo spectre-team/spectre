@@ -22,6 +22,9 @@ using System.Linq;
 using System.Windows.Forms;
 using Spectre.Mvvm.Base;
 using Spectre.Algorithms.Parameterization;
+using Spectre.Service.Abstract;
+using Spectre.Data.Datasets;
+using System.Threading;
 
 namespace Spectre.DivikWpfClient.ViewModel
 {
@@ -61,6 +64,7 @@ namespace Spectre.DivikWpfClient.ViewModel
             IsProgressBarVisible = false;
             ProgressBarLabel = "";
             StartDivikLabel = "Start Divik";
+            PrettyPrint = true;
         }
 
         #endregion
@@ -229,6 +233,16 @@ namespace Spectre.DivikWpfClient.ViewModel
             set { SetValue(() => KmeansMaxIters, value); }
         }
 
+        /// <summary>
+		/// <see cref="IServiceFactory"/> for getting divik service.
+		/// </summary>
+        public IServiceFactory ServiceFactory { get; set; }
+
+        /// <summary>
+		/// Private singleton of <see cref="IDivikService"/>.
+		/// </summary>
+        private IDivikService _DivikService;
+
         #endregion
 
         #region DisplayProperties
@@ -266,6 +280,54 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             get { return GetValue(() => StartDivikLabel); }
             set { SetValue(() => StartDivikLabel, value); }
+        }
+
+        /// <summary>
+		/// ViewModel property for setting indentation of <see cref="DivikResult.Save"/> method.
+		/// </summary>
+        public bool PrettyPrint
+        {
+            get { return GetValue(() => PrettyPrint); }
+            set { SetValue(() => PrettyPrint, value); }
+        }
+
+        #endregion
+
+        #region Privates
+
+        /// <summary>
+		/// Returns <see cref="IDataset"/> created from file under the input path.
+		/// </summary>
+        private IDataset _GetDatasetFromVm()
+        {
+            return new BasicTextDataset(InputPath);
+        }
+
+        /// <summary>
+		/// Returns <see cref="DivikOptions"/> created from vm properties.
+		/// </summary>
+        private DivikOptions _GetDivikOptionsFromVm()
+        {
+            return new DivikOptions {
+                MaxK = MaxK,
+                Level = Level,
+                CachePath = CachePath,
+                Caching = Caching,
+                FeaturePreservationLimit = FeaturePreservationLimit,
+                KmeansMaxIters = KmeansMaxIters,
+                MaxComponentsForDecomposition = MaxComponentsForDecomposition,
+                Metric = Metric,
+                OutputPath = OutputPath,
+                PercentSizeLimit = PercentSizeLimit,
+                PlottingDecomposition = PlottingDecomposition,
+                PlottingDecompositionRecursively = PlottingDecompositionRecursively,
+                PlottingPartitions = PlottingPartitions,
+                PlottingRecursively = PlottingRecursively,
+                UsingAmplitudeFiltration = UsingAmplitudeFiltration,
+                UsingLevels = UsingLevels,
+                UsingVarianceFiltration = UsingVarianceFiltration,
+                Verbose = false
+            };
         }
 
         #endregion
@@ -374,9 +436,34 @@ namespace Spectre.DivikWpfClient.ViewModel
         /// </summary>
         private void _StartDivikButtonExecute()
         {
-            IsProgressBarVisible = !IsProgressBarVisible;
-            ProgressBarLabel = ProgressBarLabel == "" ? "Divik running..." : "";
-            StartDivikLabel = StartDivikLabel == "Start Divik" ? "Cancel" : "Start Divik";
+            if (StartDivikLabel == "Start Divik")
+            {
+                StartDivikLabel = "Cancel";
+                IsProgressBarVisible = !IsProgressBarVisible;
+                ProgressBarLabel = "Divik running...";
+                ThreadPool.QueueUserWorkItem(o =>
+                {
+                    _DivikService = _DivikService ?? ServiceFactory.GetDivikService;
+                    _DivikService.CalculateDivik(_GetDatasetFromVm(), _GetDivikOptionsFromVm()).Save(OutputPath, PrettyPrint);
+                    StartDivikLabel = "Start Divik";
+                    IsProgressBarVisible = !IsProgressBarVisible;
+                    ProgressBarLabel = "";
+                });
+            } else
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                ThreadPool.QueueUserWorkItem(s =>
+                {
+                    CancellationToken token = (CancellationToken) s;
+                    if (token.IsCancellationRequested)
+                        return;
+                    token.WaitHandle.WaitOne(1000);
+                }, cts.Token);
+                cts.Cancel();
+                StartDivikLabel = "Start Divik";
+                IsProgressBarVisible = !IsProgressBarVisible;
+                ProgressBarLabel = "";
+            }
         }
 
         /// <summary>

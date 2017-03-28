@@ -16,23 +16,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using Spectre.Algorithms.Parameterization;
+using Ninject;
 using Spectre.DivikWpfClient.ViewModel;
+using Spectre.Service;
+using Spectre.Service.Abstract;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Spectre.DivikWpfClient
 {
@@ -47,7 +36,12 @@ namespace Spectre.DivikWpfClient
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainPageVm();
+            IKernel ninjectKernel = new StandardKernel();
+            ninjectKernel.Bind<IServiceFactory>().To<ServiceFactory>();
+            DataContext = new MainPageVm()
+            {
+                ServiceFactory = ninjectKernel.Get<IServiceFactory>()
+            };
         }
     }
 }
