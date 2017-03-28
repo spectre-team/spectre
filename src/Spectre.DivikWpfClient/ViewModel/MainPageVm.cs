@@ -444,7 +444,7 @@ namespace Spectre.DivikWpfClient.ViewModel
                 ThreadPool.QueueUserWorkItem(o =>
                 {
                     _DivikService = _DivikService ?? ServiceFactory.GetDivikService;
-                    _DivikService.CalculateDivik(_GetDatasetFromVm(), _GetDivikOptionsFromVm()).Save(OutputPath, PrettyPrint);
+                    _DivikService.CalculateDivik(_GetDatasetFromVm(), _GetDivikOptionsFromVm()).Save(OutputPath + "\\result.json", PrettyPrint);
                     StartDivikLabel = "Start Divik";
                     IsProgressBarVisible = !IsProgressBarVisible;
                     ProgressBarLabel = "";
