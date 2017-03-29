@@ -2,7 +2,7 @@
  * MainPageVm.cs
  * Contains ViewModel for MainWindow of WPF Divik client.
  * 
-   Copyright 2017 Grzegorz Mrukwa
+   Copyright 2017 Michal Wolny, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ using Spectre.Algorithms.Parameterization;
 using Spectre.Service.Abstract;
 using Spectre.Data.Datasets;
 using System.Threading;
+using Spectre.Service;
 
 namespace Spectre.DivikWpfClient.ViewModel
 {
@@ -67,6 +68,7 @@ namespace Spectre.DivikWpfClient.ViewModel
             PrettyPrint = true;
             _CancellationTokenSource = new CancellationTokenSource();
             EnableStartDivik = true;
+            Log = string.Empty;
         }
 
         #endregion
@@ -302,6 +304,17 @@ namespace Spectre.DivikWpfClient.ViewModel
             set { SetValue(() => EnableStartDivik, value); }
         }
 
+        /// <summary>
+        /// Gets the MATLAB log.
+        /// </summary>
+        /// <value>
+        /// The output log.
+        /// </value>
+        public string Log
+        {
+            get { return GetValue(() => Log); }
+            private set { SetValue(() => Log, value); }
+        }
         #endregion
 
         #region Privates
@@ -464,7 +477,6 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             if (StartDivikLabel == "Start Divik")
             {
-
                 ThreadPool.QueueUserWorkItem(s =>
                 {
                     _ToggleDivikProgressDisplay();
@@ -476,7 +488,7 @@ namespace Spectre.DivikWpfClient.ViewModel
                         MessageBox.Show("Divik was successfully cancelled.", "Cancelled!");
                         return;
                     }  
-                    _DivikService = _DivikService ?? ServiceFactory.GetDivikService;
+                    _DivikService = _DivikService ?? ServiceFactory.GetDivikService();
                     var fileName = "\\divik-result-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".json";
                     if (token.IsCancellationRequested)
                     {
@@ -485,17 +497,25 @@ namespace Spectre.DivikWpfClient.ViewModel
                         MessageBox.Show("Divik was successfully cancelled.", "Cancelled!");
                         return;
                     }
-                    _DivikService.CalculateDivik(_GetDatasetFromVm(), _GetDivikOptionsFromVm()).Save(OutputPath + fileName, PrettyPrint);
+                    using (var consoleCapture = new ConsoleCaptureService())
+                    {
+                        Log = string.Empty;
+                        consoleCapture.Written += (sender, appended) => Log += appended;
+                        _DivikService.CalculateDivik(_GetDatasetFromVm(), _GetDivikOptionsFromVm()).Save(OutputPath + fileName, PrettyPrint);
+                    }
                     _ToggleDivikProgressDisplay();
                     MessageBox.Show("Divik was successfully calculated. The result file was saved as: " + OutputPath + fileName, "Success!");
 
                 }, _CancellationTokenSource.Token);
-            } else
+            }
+            else
             {
                 EnableStartDivik = false;
                 ProgressBarLabel = "Cancelling divik...";
                 _CancellationTokenSource.Cancel();
                 _CancellationTokenSource = new CancellationTokenSource();
+                (_DivikService as IDisposable)?.Dispose();
+                _DivikService = null;
             }
         }
 
@@ -523,10 +543,7 @@ namespace Spectre.DivikWpfClient.ViewModel
         /// </summary>
         private void _WindowCloseExecute()
         {
-            if (_DivikService != null)
-            {
-                ((IDisposable)_DivikService).Dispose();
-            }
+            (_DivikService as IDisposable)?.Dispose();
         }
 
         /// <summary>

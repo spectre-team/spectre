@@ -2,7 +2,7 @@
  * MainWindow.xaml.cs
  * Contains interaction logic for MainWindow.xml WPF Divik client.
  * 
-   Copyright 2017 Grzegorz Mrukwa
+   Copyright 2017 Michal Wolny, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ using Ninject;
 using Spectre.DivikWpfClient.ViewModel;
 using Spectre.Service;
 using Spectre.Service.Abstract;
-using System;
 using System.Windows;
 
 namespace Spectre.DivikWpfClient
@@ -38,12 +37,8 @@ namespace Spectre.DivikWpfClient
             InitializeComponent();
             IKernel ninjectKernel = new StandardKernel();
             ninjectKernel.Bind<IServiceFactory>().To<ServiceFactory>();
-            var viewModel = new MainPageVm()
-            {
-                ServiceFactory = ninjectKernel.Get<IServiceFactory>()
-            };
-            DataContext = viewModel;
-            Closing = viewModel.WindowCloseExecute;
+            var viewModel = (MainPageVm) DataContext;
+            viewModel.ServiceFactory = ninjectKernel.Get<IServiceFactory>();
         }
     }
 }

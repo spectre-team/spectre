@@ -2,7 +2,7 @@
  * IServiceFactory.cs
  * Contains definition of interface for Factory for creating services.
  * 
-   Copyright 2017 Michał Wolny
+   Copyright 2017 Michał Wolny, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,8 +24,14 @@ namespace Spectre.Service.Abstract
     public interface IServiceFactory
     {
         /// <summary>
-		/// Factory method for getting <see cref="IDivikService"/>.
-		/// </summary>
-        IDivikService GetDivikService { get; }
+        /// Factory method for getting <see cref="IDivikService"/>.
+        /// </summary>
+        IDivikService GetDivikService();
+
+        /// <summary>
+        /// Factory method for getting <see cref="IConsoleCaptureService"/>.
+        /// </summary>
+        /// <param name="updateInterval">The update interval.</param>
+        IConsoleCaptureService GetConsoleCaptureService(double updateInterval=1000.0);
     }
 }

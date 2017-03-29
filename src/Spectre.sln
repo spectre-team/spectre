@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26206.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre", "Spectre\Spectre.csproj", "{0E4F265B-8702-4D70-AB70-AA566D7A2E40}"
 EndProject
@@ -24,6 +24,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D3C36686-9667-48B2-A14B-FF46E6350A51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.DivikWpfClient", "Spectre.DivikWpfClient\Spectre.DivikWpfClient.csproj", "{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{287A1A8D-C029-4D47-96BC-755C91B7985D} = {287A1A8D-C029-4D47-96BC-755C91B7985D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Service", "Spectre.Service\Spectre.Service.csproj", "{287A1A8D-C029-4D47-96BC-755C91B7985D}"
 EndProject

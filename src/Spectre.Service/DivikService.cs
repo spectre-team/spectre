@@ -61,7 +61,6 @@ namespace Spectre.Service
         public void Dispose()
         {
             _segmentation.Dispose();
-            Dispose();
         }
     }
 }

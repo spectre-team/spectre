@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IConsoleCaptureService.cs" />
     <Compile Include="Abstract\IDivikService.cs" />
     <Compile Include="Abstract\IServiceFactory.cs" />
+    <Compile Include="ConsoleCaptureService.cs" />
     <Compile Include="DivikService.cs" />
     <Compile Include="ServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

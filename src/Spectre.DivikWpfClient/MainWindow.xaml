@@ -23,15 +23,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:validation="clr-namespace:Spectre.DivikWpfClient.Validation"
         xmlns:converters="clr-namespace:Spectre.Mvvm.Converters;assembly=Spectre.Mvvm"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="Spectre Divik"
-        Height="687.612"
+        Height="820.0"
         Width="710.758"
         Background="#FF464646"
-        DataContext="{StaticResource MainPageVm}"
-        Closing="{Binding WindowCloseExecute}">
+        DataContext="{StaticResource MainPageVm}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding WindowCloseExecute}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        <converters:CombinedConverter First="{StaticResource InverseBoolConverter}"
+                                      Second="{StaticResource BoolToVisibilityConverter}"
+                                      x:Key="InverseBoolToVisibilityConverter"/>
         <converters:PercentageConverter x:Key="PercentageConverter"/>
         <Style x:Key="PromptErrorTextBox" TargetType="{x:Type TextBox}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
             <Style.Resources>
@@ -59,7 +68,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Height="657" VerticalAlignment="Top" Margin="5,0">
+    <Grid Height="777" VerticalAlignment="Top" Margin="5,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="20*"/>
@@ -85,6 +94,7 @@
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="50*"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="190"/>
@@ -97,7 +107,7 @@
                    Grid.Row="0" 
                    Grid.ColumnSpan="2"
                    Text="Spectre Divik" 
-                   TextAlignment="Center" 
+                   TextAlignment="Center"
                    Foreground="White" 
                    VerticalAlignment="Center" 
                    Height="30" 
@@ -613,5 +623,20 @@
                 Height="30"
                 Command="{Binding StartDivikButtonExecute}"
                 IsEnabled="{Binding EnableStartDivik}"/>
+        
+        <!--<ScrollViewer Grid.Row="24"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2"
+                      Visibility="{Binding EnableStartDivik,
+                                   Converter={StaticResource InverseBoolToVisibilityConverter}}">
+            <TextBlock Text="{Binding Log}" FontFamily="Consolas"/>
+        </ScrollViewer>-->
+        <ScrollViewer Grid.Row="24"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2">
+            <TextBlock Text="{Binding Log}"
+                       FontFamily="Consolas"
+                       Foreground="White" />
+        </ScrollViewer>
     </Grid>
 </Window>
