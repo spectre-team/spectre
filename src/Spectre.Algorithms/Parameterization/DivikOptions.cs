@@ -179,7 +179,7 @@ namespace Spectre.Algorithms.Parameterization
 			addParam("PlotRecursively", PlottingRecursively);
 			addParam("DecompositionPlots", PlottingDecomposition);
 			addParam("DecompositionPlotsRecursively", PlottingDecompositionRecursively);
-			addParam("MaxComponentsForDecomposition", MaxComponentsForDecomposition);
+			addParam("MaxComponentsForDecomposition", (double)MaxComponentsForDecomposition);
 			addParam("OutPath", OutputPath);
 			addParam("CachePath", CachePath);
 			addParam("Cache", Caching);
