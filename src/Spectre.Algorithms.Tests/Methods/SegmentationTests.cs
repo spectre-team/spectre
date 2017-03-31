@@ -68,7 +68,7 @@ namespace Spectre.Algorithms.Tests.Methods
         public void DivikBigData()
         {
             // path to directory with test project
-            var path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\single.txt";
+            var path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\single.txt";
             var dataset = new BasicTextDataset(path);
             var options = DivikOptions.ForLevels(2);
 

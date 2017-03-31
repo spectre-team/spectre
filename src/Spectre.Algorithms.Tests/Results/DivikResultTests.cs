@@ -27,13 +27,13 @@ using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Tests.Results
 {
-    [TestFixture, Category("Algorithm")]
+    [TestFixture, Category("Algorithm"), Category("VeryLong")]
     public class DivikResultTests
     {
         private DivikResult _result;
         private Segmentation _segmentation;
 
-        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\small-test.txt";
+        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\single.txt";
 
         [OneTimeSetUp]
         public void SetUpFixture()
