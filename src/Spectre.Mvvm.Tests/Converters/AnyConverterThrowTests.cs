@@ -1,7 +1,7 @@
 ﻿/*
  * AnyConverterThrowTests.cs
  * Tests for any converter that it throws NullReferenceException when supplied with null.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");

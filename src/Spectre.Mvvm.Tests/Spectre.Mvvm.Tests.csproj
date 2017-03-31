@@ -57,6 +57,7 @@
     <Compile Include="Base\PropertyChangedNotificationTests.cs" />
     <Compile Include="Base\RelayCommandTests.cs" />
     <Compile Include="Converters\AnyConverterThrowTests.cs" />
+    <Compile Include="Converters\PercentageConverterTests.cs" />
     <Compile Include="Converters\BoolToVisibilityConverterTests.cs" />
     <Compile Include="Converters\CombinedConverterTests.cs" />
     <Compile Include="Converters\IntPositivenessToBoolConverterTests.cs" />

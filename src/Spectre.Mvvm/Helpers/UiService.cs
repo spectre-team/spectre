@@ -46,13 +46,17 @@ namespace Spectre.Mvvm.Helpers
             if (busy != _isBusy)
             {
                 _isBusy = busy;
-                
+
+                var dispatcher = System.Windows.Application.Current?.Dispatcher
+                                     ?? Dispatcher.CurrentDispatcher;
+
                 if (_isBusy)
                 {
-                    var dispatcher = System.Windows.Application.Current?.Dispatcher
-                                     ?? Dispatcher.CurrentDispatcher;
                     dispatcher.Invoke(() => Mouse.OverrideCursor = Cursors.Wait);
                     new DispatcherTimer(TimeSpan.FromSeconds(0), DispatcherPriority.ApplicationIdle, dispatcherTimer_Tick, dispatcher);
+                } else
+                {
+                    dispatcher.Invoke(() => Mouse.OverrideCursor = Cursors.Arrow);
                 }
             }
         }
