@@ -17,7 +17,7 @@ namespace Spectre.Service.Tests
             Assert.IsFalse(rule.Validate("blah", CultureInfo.InvariantCulture).IsValid);
             Assert.IsFalse(rule.Validate("-11,12", CultureInfo.InvariantCulture).IsValid);
             Assert.IsFalse(rule.Validate("123 %", CultureInfo.InvariantCulture).IsValid);
-            Assert.IsTrue(rule.Validate("99,99", CultureInfo.InvariantCulture).IsValid);
+            Assert.IsTrue(rule.Validate("99.99", CultureInfo.InvariantCulture).IsValid);
             Assert.IsTrue(rule.Validate("0 %", CultureInfo.InvariantCulture).IsValid);
         }
     }

@@ -32,7 +32,7 @@ namespace Spectre.Mvvm.Tests.Converters
         {
             ToGuiType(1.00, "100 %", "Conversion of 1.00 did not return \"100 %\"", "1.00 does not evalute to \"100 %\".");
 
-            ToGuiType(-10.001, "-1000,1 %", "Conversion of -10.001 did not return \"-1000,1 %\"", "-10.001 does not evalute to \"-1000,1 %\".");
+            ToGuiType(-10.001, "-1000.1 %", "Conversion of -10.001 did not return \"-1000.1 %\"", "-10.001 does not evalute to \"-1000.1 %\".");
 
             Assert.Throws<InvalidCastException>(
                 () => Converter.Convert("blah", typeof(String), null, CultureInfo.CurrentCulture),
@@ -42,7 +42,7 @@ namespace Spectre.Mvvm.Tests.Converters
         [Test]
         public void ConvertBackTest()
         {
-            ToBackendType("99,11 %", 0.9911, "Conversion of \"99,11 %\" did not return 0.9911", "\"99,11 %\" does not evalute to 0.9911.");
+            ToBackendType("99.11 %", 0.9911, "Conversion of \"99.11 %\" did not return 0.9911", "\"99.11 %\" does not evalute to 0.9911.");
 
             object conversionResult = Converter.ConvertBack(123.0, typeof(double), 1.23, CultureInfo.CurrentCulture);
             Assert.IsInstanceOf(BackendType, conversionResult, "Conversion of 123 did not return 1.23");
