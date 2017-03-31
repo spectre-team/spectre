@@ -1,9 +1,9 @@
-version: 0.4.{build}
+version: 1.0.{build}
 # enable patching of AssemblyInfo.* files
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "0.4.{build}"
+  assembly_version: "1.0.{build}"
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
 platform: x64
@@ -20,8 +20,24 @@ before_build:
 build_script:
 - cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cmd: C:\projects\spectre\scripts\build_ng2_client.bat
+after_build:
+- cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient
 
 test_script:
 - cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
 - cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
+
+artifacts:
+- path: DiviK.zip
+  name: DivikExecutables
+
+deploy:
+- provider: GitHub
+  release: Spectre-v$(appveyor_build_version)
+  auth_token:
+    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
+  artifact: DivikExecutables
+  draft: true
+  on:
+    CONFIGURATION: Release
