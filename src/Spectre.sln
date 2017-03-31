@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Service", "Spectre.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Service.Tests", "Spectre.Service.Tests\Spectre.Service.Tests.csproj", "{1D79FD14-1DF4-4AED-94DF-62E595206DEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.DivikWpfClient.Tests", "Spectre.DivikWpfClient.Tests\Spectre.DivikWpfClient.Tests.csproj", "{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,14 @@ Global
 		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Release|x64.ActiveCfg = Release|Any CPU
 		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Release|x64.Build.0 = Release|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Debug|x64.Build.0 = Debug|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Release|x64.ActiveCfg = Release|Any CPU
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,5 +128,6 @@ Global
 		{2D24F1E7-18D4-4FC0-9E4F-2F32FF27FCCE} = {7EAC5FD7-C9CD-42E8-A24B-3665E854F4CD}
 		{23A97D0F-B6D9-4B67-84FE-4B52EA7D82EC} = {7EAC5FD7-C9CD-42E8-A24B-3665E854F4CD}
 		{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C} = {D3C36686-9667-48B2-A14B-FF46E6350A51}
+		{E91589C2-123C-4C9C-B9A9-A4D4F86686B3} = {D3C36686-9667-48B2-A14B-FF46E6350A51}
 	EndGlobalSection
 EndGlobal
