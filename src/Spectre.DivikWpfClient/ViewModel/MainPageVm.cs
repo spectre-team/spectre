@@ -57,7 +57,7 @@ namespace Spectre.DivikWpfClient.ViewModel
             PlottingRecursively = false;
             PlottingDecomposition = false;
             PlottingDecompositionRecursively = false;
-            MaxComponentsForDecomposition = 3;
+            MaxComponentsForDecomposition = 10;
             OutputPath = ".";
             CachePath = ".";
             Caching = false;
