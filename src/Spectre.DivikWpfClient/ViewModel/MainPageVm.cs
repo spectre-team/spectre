@@ -564,6 +564,29 @@ namespace Spectre.DivikWpfClient.ViewModel
         }
         #endregion
 
+        #region HandleExceptionCommand
+
+        /// <summary>
+        /// The command handling exception
+        /// </summary>
+        private RelayCommand _handleExceptionCommand;
+
+        /// <summary>
+        /// Gets the command handling exception .
+        /// </summary>
+        /// <value>
+        /// The command.
+        /// </value>
+        public RelayCommand HandleExceptionCommand
+        {
+            get
+            {
+                return _handleExceptionCommand ?? (_handleExceptionCommand = new RelayCommand(s => Log += (string) s));
+            }
+        }
+
+        #endregion
+
         #endregion
     }
 }

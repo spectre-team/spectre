@@ -624,13 +624,6 @@
                 Command="{Binding StartDivikButtonExecute}"
                 IsEnabled="{Binding EnableStartDivik}"/>
         
-        <!--<ScrollViewer Grid.Row="24"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="2"
-                      Visibility="{Binding EnableStartDivik,
-                                   Converter={StaticResource InverseBoolToVisibilityConverter}}">
-            <TextBlock Text="{Binding Log}" FontFamily="Consolas"/>
-        </ScrollViewer>-->
         <ScrollViewer Grid.Row="24"
                       Grid.Column="0"
                       Grid.ColumnSpan="2">
