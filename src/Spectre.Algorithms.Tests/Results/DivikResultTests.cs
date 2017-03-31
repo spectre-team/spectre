@@ -33,7 +33,7 @@ namespace Spectre.Algorithms.Tests.Results
         private DivikResult _result;
         private Segmentation _segmentation;
 
-        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\single.txt";
+        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\hnc1_tumor.txt";
 
         [OneTimeSetUp]
         public void SetUpFixture()
@@ -46,6 +46,7 @@ namespace Spectre.Algorithms.Tests.Results
             options.PlottingDecomposition = false;
             options.PlottingDecompositionRecursively = false;
             options.PlottingRecursively = false;
+            options.UsingAmplitudeFiltration = false;
             _segmentation = new Segmentation();
             _result = _segmentation.Divik(dataset, options);
         }
@@ -95,6 +96,7 @@ namespace Spectre.Algorithms.Tests.Results
             options.PlottingDecomposition = false;
             options.PlottingDecompositionRecursively = false;
             options.PlottingRecursively = false;
+            options.UsingAmplitudeFiltration = false;
             var result = _segmentation.Divik(dataset, options);
 
             Assert.True(result.Equals(_result), "Equal objects not indicated.");
@@ -111,7 +113,7 @@ namespace Spectre.Algorithms.Tests.Results
             options.PlottingDecomposition = false;
             options.PlottingDecompositionRecursively = false;
             options.PlottingRecursively = false;
-            options.UsingAmplitudeFiltration = false;
+            options.UsingVarianceFiltration = false;
             var result = _segmentation.Divik(dataset, options);
             
             Assert.False(result.Equals(_result), "Unequal objects not indicated.");
