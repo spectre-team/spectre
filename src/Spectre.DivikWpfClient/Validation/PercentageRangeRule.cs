@@ -53,6 +53,9 @@ namespace Spectre.DivikWpfClient.Validation
                 if (((string)value).Length > 0)
                 {
                     parameter = double.Parse(((string)value).Replace('%', ' ').Trim());
+                } else
+                {
+                    return new ValidationResult(false, "Please enter a valid percentage value.");
                 }
             }
             catch (Exception)
