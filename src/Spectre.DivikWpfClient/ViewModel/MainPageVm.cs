@@ -537,7 +537,7 @@ namespace Spectre.DivikWpfClient.ViewModel
         }
         #endregion
 
-        #region StartDivik
+        #region WindowClose
         /// <summary>
         /// Function for closing window.
         /// </summary>
@@ -559,7 +559,7 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             get
             {
-                return _StartDivikButtonHandle ?? (_StartDivikButtonHandle = new RelayCommand(execute: () => _StartDivikButtonExecute()));
+                return _WindowCloseHandle ?? (_WindowCloseHandle = new RelayCommand(execute: () => _WindowCloseExecute()));
             }
         }
         #endregion
