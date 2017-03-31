@@ -33,7 +33,7 @@ namespace Spectre.Algorithms.Tests.Results
         private DivikResult _result;
         private Segmentation _segmentation;
 
-        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\small-test.txt";
+        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\small-test.txt";
 
         [OneTimeSetUp]
         public void SetUpFixture()
@@ -60,7 +60,7 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void Save()
         {
-            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\test-path.json";
+            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\test-path.json";
             _result.Save(path);
 
             Assert.True(File.Exists(path), "File doesn't exist");
@@ -76,7 +76,7 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void SavedIdented()
         {
-            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\test-path.json";
+            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\test-path.json";
             _result.Save(path, false);
 
             string contents = File.ReadAllText(path);

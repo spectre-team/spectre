@@ -37,7 +37,7 @@ namespace Spectre.Data.Tests.Datasets
         public void SetUpFixture()
         {
             _startDirectory = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory + "\\..\\..\\..");
+            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files");
         }
 
         [OneTimeTearDown]
