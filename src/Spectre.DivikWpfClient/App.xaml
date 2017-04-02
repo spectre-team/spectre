@@ -21,7 +21,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Spectre.DivikWpfClient"
              xmlns:vm="clr-namespace:Spectre.DivikWpfClient.ViewModel"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml" DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
          <vm:MainPageVm x:Key="MainPageVm"/>
     </Application.Resources>

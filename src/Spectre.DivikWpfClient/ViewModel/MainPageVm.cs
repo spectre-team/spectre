@@ -1,7 +1,7 @@
 ﻿/*
  * MainPageVm.cs
  * Contains ViewModel for MainWindow of WPF Divik client.
- * 
+ *
    Copyright 2017 Michal Wolny, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -434,7 +434,7 @@ namespace Spectre.DivikWpfClient.ViewModel
 
         #region ChooseCacheDirButton
         /// <summary>
-        /// The command choosing cache directory 
+        /// The command choosing cache directory
         /// </summary>
         private RelayCommand _chooseCacheDirectoryCommand;
 
@@ -487,7 +487,7 @@ namespace Spectre.DivikWpfClient.ViewModel
                         _ToggleDivikProgressDisplay();
                         MessageBox.Show("Divik was successfully cancelled.", "Cancelled!");
                         return;
-                    }  
+                    }
                     _DivikService = _DivikService ?? ServiceFactory.GetDivikService();
                     var fileName = "\\divik-result-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".json";
                     if (token.IsCancellationRequested)
@@ -537,7 +537,7 @@ namespace Spectre.DivikWpfClient.ViewModel
         }
         #endregion
 
-        #region StartDivik
+        #region WindowClose
         /// <summary>
         /// Function for closing window.
         /// </summary>
@@ -559,9 +559,32 @@ namespace Spectre.DivikWpfClient.ViewModel
         {
             get
             {
-                return _StartDivikButtonHandle ?? (_StartDivikButtonHandle = new RelayCommand(execute: () => _StartDivikButtonExecute()));
+                return _WindowCloseHandle ?? (_WindowCloseHandle = new RelayCommand(execute: () => _WindowCloseExecute()));
             }
         }
+        #endregion
+
+        #region HandleExceptionCommand
+
+        /// <summary>
+        /// The command handling exception
+        /// </summary>
+        private RelayCommand _handleExceptionCommand;
+
+        /// <summary>
+        /// Gets the command handling exception .
+        /// </summary>
+        /// <value>
+        /// The command.
+        /// </value>
+        public RelayCommand HandleExceptionCommand
+        {
+            get
+            {
+                return _handleExceptionCommand ?? (_handleExceptionCommand = new RelayCommand(s => Log += (string) s));
+            }
+        }
+
         #endregion
 
         #endregion
