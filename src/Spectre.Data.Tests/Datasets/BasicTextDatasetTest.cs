@@ -32,7 +32,7 @@ namespace Spectre.Data.Tests.Datasets
     {
         private IDataset _dataset;
         private string _startDirectory;
-        prrivate readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
+        private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
 
         [OneTimeSetUp]
         public void SetUpFixture()
