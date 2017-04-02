@@ -1,7 +1,7 @@
 ﻿/*
  * DivikResultTests.cs
  * Tests DivikResult class.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ namespace Spectre.Algorithms.Tests.Results
     {
         private DivikResult _result;
         private Segmentation _segmentation;
-
+        private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
         private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\hnc1_tumor.txt";
 
         [OneTimeSetUp]
@@ -61,7 +61,7 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void Save()
         {
-            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\test-path.json";
+            string path = TestDirectory + "\\test-path.json";
             _result.Save(path);
 
             Assert.True(File.Exists(path), "File doesn't exist");
@@ -77,7 +77,7 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void SavedIdented()
         {
-            string path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\test-path.json";
+            string path = TestDirectory + "\\test-path.json";
             _result.Save(path, false);
 
             string contents = File.ReadAllText(path);
@@ -115,7 +115,7 @@ namespace Spectre.Algorithms.Tests.Results
             options.PlottingRecursively = false;
             options.UsingVarianceFiltration = false;
             var result = _segmentation.Divik(dataset, options);
-            
+
             Assert.False(result.Equals(_result), "Unequal objects not indicated.");
         }
 
