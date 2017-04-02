@@ -1,7 +1,7 @@
 ﻿/*
  * SegmentationTests.cs
  * Checks, whether MCR is properly called and result may be obtained.
- * 
+ *
    Copyright 2017 Wilgierz Wojciech, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,8 @@ namespace Spectre.Algorithms.Tests.Methods
 	[TestFixture, Category("Algorithm")]
 	public class SegmentationTests
 	{
-		Segmentation _segmentation;
+		private Segmentation _segmentation;
+		private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
 
 		[OneTimeSetUp]
 		public void SetUpClass()
@@ -68,7 +69,7 @@ namespace Spectre.Algorithms.Tests.Methods
         public void DivikBigData()
         {
             // path to directory with test project
-            var path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\single.txt";
+            var path = TestDirectory + "\\hnc1_tumor.txt";
             var dataset = new BasicTextDataset(path);
             var options = DivikOptions.ForLevels(2);
 

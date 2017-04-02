@@ -1,7 +1,7 @@
 ﻿/*
  * BasicTextDatasetTest.cs
  * Checks, whether MCR is properly called and result may be obtained.
- * 
+ *
    Copyright 2017 Dariusz Kuchta, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,12 +32,13 @@ namespace Spectre.Data.Tests.Datasets
     {
         private IDataset _dataset;
         private string _startDirectory;
+        private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
 
         [OneTimeSetUp]
         public void SetUpFixture()
         {
             _startDirectory = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory + "\\..\\..\\..");
+            Directory.SetCurrentDirectory(TestDirectory);
         }
 
         [OneTimeTearDown]
@@ -67,23 +68,23 @@ namespace Spectre.Data.Tests.Datasets
             var enumerator = coordinates.GetEnumerator();
             enumerator.MoveNext();
             SpatialCoordinates sc = enumerator.Current;
-            Assert.AreEqual(1, sc.X, 
+            Assert.AreEqual(1, sc.X,
                 "Spatial coordinates differ");
-            Assert.AreEqual(1, sc.Y, 
+            Assert.AreEqual(1, sc.Y,
                 "Spatial coordinates differ");
-            Assert.AreEqual(0, sc.Z, 
+            Assert.AreEqual(0, sc.Z,
                 "Spatial coordinates differ");
 
             enumerator.MoveNext();
             sc = enumerator.Current;
-            Assert.AreEqual(2, sc.X, 
+            Assert.AreEqual(2, sc.X,
                 "Spatial coordinates differ in second spectrum");
-            Assert.AreEqual(1, sc.Y, 
+            Assert.AreEqual(1, sc.Y,
                 "Spatial coordinates differ in second spectrum");
-            Assert.AreEqual(0, sc.Z, 
+            Assert.AreEqual(0, sc.Z,
                 "Spatial coordinates differ in second spectrum");
 
-            Assert.AreEqual(_dataset.GetRawMzArray(), new[] {899.99, 902.58, 912.04}, 
+            Assert.AreEqual(_dataset.GetRawMzArray(), new[] {899.99, 902.58, 912.04},
                 "The m/zs differ");
             Assert.AreEqual(_dataset.GetRawIntensityArray(0), new[] {12.0, 20.0, 0.0},
                 "The intensities of first spectrum differs");
@@ -117,7 +118,7 @@ namespace Spectre.Data.Tests.Datasets
             Assert.DoesNotThrow(() => { _dataset = new BasicTextDataset(mz, data, coords); },
                 "Dataset failed to initialize from correct raw data.");
 
-            Assert.AreEqual(_dataset.SpectrumCount, 2, 
+            Assert.AreEqual(_dataset.SpectrumCount, 2,
                 "Dataset failed to load spectras correctly.");
             Assert.AreEqual(_dataset.SpatialCoordinates.Count(), 2,
                 "Dataset do not assign spacial coordinates per spectrum.");
@@ -131,22 +132,22 @@ namespace Spectre.Data.Tests.Datasets
             Assert.DoesNotThrow(() => { _dataset.AppendFromFile("small-test.txt"); },
                 "The file wasn't successfully appended");
 
-            Assert.AreEqual(spectreCountBeforeAppend + 4, _dataset.SpectrumCount, 
+            Assert.AreEqual(spectreCountBeforeAppend + 4, _dataset.SpectrumCount,
                 "Append didn't manage to include all spectras");
 
-            Assert.AreEqual(10, _dataset.GetRawIntensityValue(5, 1), 
+            Assert.AreEqual(10, _dataset.GetRawIntensityValue(5, 1),
                 "The value of added intensity differs from expected");
 
             IEnumerable<SpatialCoordinates> spatialCoordinates = _dataset.SpatialCoordinates;
             var enumerator = spatialCoordinates.GetEnumerator();
             for (int i = 0; i < spectreCountBeforeAppend + 1; i++)
-                enumerator.MoveNext(); 
+                enumerator.MoveNext();
 
-            Assert.AreEqual(1.0, enumerator.Current.X, 
+            Assert.AreEqual(1.0, enumerator.Current.X,
                 "The spatial coordinate of X wasn't appended properly");
-            Assert.AreEqual(1.0, enumerator.Current.Y, 
+            Assert.AreEqual(1.0, enumerator.Current.Y,
                 "The spatial coordinate of Y wasn't appended properly");
-            Assert.AreEqual(0.0, enumerator.Current.Z, 
+            Assert.AreEqual(0.0, enumerator.Current.Z,
                 "The spatial coordinate of Z wasn't appended properly");
         }
 
@@ -156,7 +157,7 @@ namespace Spectre.Data.Tests.Datasets
             Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(null); },
                 "Dataset accepted null raw data.");
 
-            Assert.AreEqual(_dataset.SpectrumCount, 3, 
+            Assert.AreEqual(_dataset.SpectrumCount, 3,
                 "Dataset has been changed while appending null data.");
 
             double[,] newData = {{0.1}};
@@ -177,11 +178,11 @@ namespace Spectre.Data.Tests.Datasets
             Assert.DoesNotThrow(() => { _dataset.AppendFromRawData(newData, coords); },
                 "Dataset failed to append correct raw data.");
 
-            Assert.AreEqual(_dataset.SpectrumCount, 6, 
+            Assert.AreEqual(_dataset.SpectrumCount, 6,
                 "Dataset failed to load spectras correctly.");
             Assert.AreEqual(_dataset.SpatialCoordinates.Count(), 6,
                 "Dataset do not assign spacial coordinates per spectrum.");
-            Assert.AreEqual(_dataset.GetRawIntensityValue(4, 1), 3.1, 
+            Assert.AreEqual(_dataset.GetRawIntensityValue(4, 1), 3.1,
                 "Dataset appended incorrect values.");
         }
 
@@ -191,7 +192,7 @@ namespace Spectre.Data.Tests.Datasets
             DataPoint result = _dataset.GetDataPoint(1, 1);
             DataPoint expected = new DataPoint(2, 5.1);
 
-            Assert.AreEqual(result.Mz, expected.Mz, 
+            Assert.AreEqual(result.Mz, expected.Mz,
                 "Dataset returned wrong m/z values.");
             Assert.AreEqual(result.Intensity, expected.Intensity, "Dataset returned wrong intensity values.");
         }
@@ -298,7 +299,7 @@ namespace Spectre.Data.Tests.Datasets
         public void GetRawIntensitiesTest()
         {
             double[,] result = _dataset.GetRawIntensities();
-            
+
             Assert.AreEqual(result, new[,] { { 1, 2.1, 3.2 }, { 4, 5.1, 6.2 }, { 7, 8.1, 9.2 } }, "Dataset returned wrong intensity row.");
         }
 

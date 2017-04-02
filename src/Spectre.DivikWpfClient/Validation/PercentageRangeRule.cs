@@ -1,7 +1,7 @@
 ﻿/*
  * IntegerRule.cs
  * Contains WPF TextBox percentage validation rule.
- * 
+ *
    Copyright 2017 Michał Wolny
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,7 +39,7 @@ namespace Spectre.DivikWpfClient.Validation
 
         /// <summary>
 		/// Percentage input validate method. Checks if passed value is a <see cref="double"/>
-        /// within given range, accepts trailing '%' sign. 
+        /// within given range, accepts trailing '%' sign.
 		/// </summary>
 		/// <param name="value">The source data being passed to the target.</param>
         /// <param name="cultureInfo">The culture of the conversion.</param>

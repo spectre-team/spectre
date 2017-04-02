@@ -1,7 +1,7 @@
 ﻿/*
  * MainPageVm.cs
  * Contains ViewModel for MainWindow of WPF Divik client.
- * 
+ *
    Copyright 2017 Michal Wolny, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,7 +57,7 @@ namespace Spectre.DivikWpfClient.ViewModel
             PlottingRecursively = false;
             PlottingDecomposition = false;
             PlottingDecompositionRecursively = false;
-            MaxComponentsForDecomposition = 3;
+            MaxComponentsForDecomposition = 10;
             OutputPath = ".";
             CachePath = ".";
             Caching = false;
@@ -434,7 +434,7 @@ namespace Spectre.DivikWpfClient.ViewModel
 
         #region ChooseCacheDirButton
         /// <summary>
-        /// The command choosing cache directory 
+        /// The command choosing cache directory
         /// </summary>
         private RelayCommand _chooseCacheDirectoryCommand;
 
@@ -487,7 +487,7 @@ namespace Spectre.DivikWpfClient.ViewModel
                         _ToggleDivikProgressDisplay();
                         MessageBox.Show("Divik was successfully cancelled.", "Cancelled!");
                         return;
-                    }  
+                    }
                     _DivikService = _DivikService ?? ServiceFactory.GetDivikService();
                     var fileName = "\\divik-result-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".json";
                     if (token.IsCancellationRequested)
