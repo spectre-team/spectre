@@ -46,12 +46,12 @@ the `.zip ` archive, it can be used without further delay.
 # Usage
 
 Interface of the application allows to provide all the options that are
-*available* to be used with DiviK. There is however an established pipeline for
-MALDI IMS data processing and these options are available just to allow anyone
-extend our investigations.
+*available* to be used with DiviK. Default settings comprise configuration
+representing pipeline used for MALDI IMS data processing that can potentially
+serve as a starting point for performing initial experiments.
 
-Default setting provided on application start is adjusted for clustering
-purposes. There is a little work to switch to compression mode: it is enough to
+Default settings provided on application start are adjusted for clustering
+purposes. User can easily switch to compression mode: it is enough to
 disable *Using Levels* checkbox (explained in section **Parameters**).
 
 After setting all the parameters (or at least required ones) it is enough to
@@ -65,8 +65,8 @@ Input file is a text file constructed as follows:
 2. Row with global *m/z* axis - data has to be resampled before usage.
 3. Data of each spectra, each consisting of two lines:
     1. Spatial coordinates of a spectrum (X, Y, and Z, separated with spaces).
-    *Please note, that Z coordinate is not used yet, so it can be e.g. set to
-    zero.*
+    *Please note, that Z coordinate is currently not used. Therefore each Z
+    value can be safely set to zero.*
     2. Intensity values for each *m/z* value specified above, separated with
     spaces. Their number **must** be equal to the number of elements in *m/z*
     axis. This is similar to *imzML* format in *processed* form.
@@ -166,9 +166,9 @@ Sample output is presented below:
 }
 ```
 
-Dots `...` represent content of an array; the array is closed with `]` sign
-and each entry is separated by a comma `,`. Instances of tree are enclosed into
-curly braces `{...}`.
+Dots '`...`' represent contents of an array; the array is closed with '`]`' sign
+and each entry is separated by a comma '`,`'. Instances of tree are enclosed
+into curly braces '`{...}`'.
 
 Full sample output file is present
 [here](https://1drv.ms/u/s!AvaKDFGHXrvClvcP9SmAuDq9TUITkA).
@@ -176,8 +176,8 @@ Full sample output file is present
 # Parameters
 
 1. **Input path** - must point to the file with properly formatted data.
-2. **Output path** - this is the directory, where result will be stored.
-3. **MaxK** - is the limit of number of clusters checked by k-means algorithm.
+2. **Output path** - directory, where result will be stored.
+3. **MaxK** - limit of number of clusters checked by k-means algorithm.
 4. **Level** - limit of recursion nesting, when using level criterion as stop
 condition.
 5. **Using Levels** - specifies whether to stop recursive splitting of data
@@ -191,7 +191,7 @@ for every division.
 to starting size of whole preparation, below which no segmentation is performed.
 Applicable only when not using levels as stop condition for recursion.
 9. **Feature preservation limit** - specifies, how much features *must* be
-preserved regardless the filtration applied (to not to leave e.g. single
+preserved regardless of filtration applied (to prevent leaving e.g. single
 feature)
 10. **Metric** - method to measure dissimilarity between spectra.
 11. **Plotting partitions** - when true, dumps plots regarding top-level and
@@ -209,13 +209,13 @@ speeds up repeated calculations if trying to chech several variants of nesting,
 etc. It can grow large. Should be specified the same for all analyses, to be
 able to resolve already computed results. Applicable only if **Caching** is
 enabled.
-17. **Caching** - if true, partial results are saved on disk to avoid
+17. **Caching** - if true, partial results are saved to disk to avoid
 unnecessary computational overhead in case of repeated calculations.
 18. **Max iterations for K-means** - maximal number of iterations, after which
 k-means algorithm stops.
 19. **Pretty print** - if true, output JSON file is printed with visually
-indented rows. Otherwise no additional white characters are introduces, to
-reduce the number of characters.
+indented rows. Otherwise no additional white characters are introduced, reducing
+the number of characters.
 
 # Final notes
 
