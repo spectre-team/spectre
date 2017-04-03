@@ -22,11 +22,11 @@ along with supporting statistics.
 
 ## Install
 
-Details will be added soon.
+Please refer to [docs](docs\Spectre.DivikWpfClient.pdf).
 
 ## Exemplary usage
 
-Details will be added soon.
+Please refer to [docs](docs\Spectre.DivikWpfClient.pdf).
 
 ## How to contribute?
 
@@ -35,7 +35,7 @@ answer you in details.
 
 ## Environment
 
-Details will be added soon.
+Please refer to [docs](docs\Spectre.DivikWpfClient.pdf).
 
 ## References
 
