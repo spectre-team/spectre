@@ -21,6 +21,9 @@ using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Methods
 {
+    /// <summary>
+    /// Contains interface for calling matlab preprocessing algorithms.
+    /// </summary>
 	public class Preprocessing: IDisposable
 	{
 		#region Fields

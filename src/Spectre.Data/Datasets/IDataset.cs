@@ -23,6 +23,9 @@ using Spectre.Data.Structures;
 
 namespace Spectre.Data.Datasets
 {
+    /// <summary>
+    /// Contains interface for basic functionalities of dataset representing measurements from single sample point.
+    /// </summary>
     public interface IDataset
     {
         #region Metadata

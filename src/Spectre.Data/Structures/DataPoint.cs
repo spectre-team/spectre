@@ -19,6 +19,9 @@
 */
 namespace Spectre.Data.Structures
 {
+    /// <summary>
+    /// Contains representation for single measurement from MALDI spectrometry for single XY coordinate.
+    /// </summary>
     public class DataPoint
     {
         #region Fields
