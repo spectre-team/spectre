@@ -23,6 +23,9 @@ using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Methods
 {
+    /// <summary>
+    /// Contains interface for calling matlab GMM algorithms.
+    /// </summary>
 	public class Gmm: IDisposable
 	{
 		#region Fields

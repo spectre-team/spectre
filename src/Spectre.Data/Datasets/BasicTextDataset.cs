@@ -29,6 +29,9 @@ using Spectre.Data.Structures;
 
 namespace Spectre.Data.Datasets
 {
+    /// <summary>
+    /// Class representing dataset created from streaming an ordinary text file containing formatted data.
+    /// </summary>
     public class BasicTextDataset : IDataset
     {
         #region Fields

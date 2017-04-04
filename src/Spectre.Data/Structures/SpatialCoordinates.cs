@@ -19,6 +19,9 @@
 
 namespace Spectre.Data.Structures
 {
+    /// <summary>
+    /// Contains struct used for storing the spacial coordinates of a spectrum.
+    /// </summary>
     public struct SpatialCoordinates
     {
         public int X;

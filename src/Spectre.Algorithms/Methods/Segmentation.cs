@@ -23,7 +23,10 @@ using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Methods
 {
-	public class Segmentation: IDisposable
+    /// <summary>
+    /// Contains interface for calling matlab Divik algorithm.
+    /// </summary>
+    public class Segmentation: IDisposable
 	{
 		#region Fields
 		private readonly MatlabAlgorithmsNative.Segmentation _segmentation;

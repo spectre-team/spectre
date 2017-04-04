@@ -18,6 +18,9 @@
 */
 namespace Spectre.Data.Structures
 {
+    /// <summary>
+    /// Contains struct for storing metadata of associated dataset.
+    /// </summary>
     public struct Metadata
     {
         public string Description;  // dummy
