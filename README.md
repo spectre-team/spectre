@@ -2,7 +2,7 @@
 
 Spectre is a versatile tool used for analysis of MALDI-MSI data sets.
 
-For the sake of simplicity, the toolset provided is available to be used 
+For the sake of simplicity, the toolset provided is available to be used
 through interfacing with web application, which is currently a work-in-progress.
 
 In order to build and run the application, please refer to the
@@ -10,10 +10,10 @@ In order to build and run the application, please refer to the
 
 ## About
 
-The project is currently in its early stage. However, it comprises the 
-implementation of our own spectra modelling based on Gaussian Mixture Models, 
-and Divisive IK-means algorithm for unsupervised segmentation, which can be 
-used for efficient dataset compression as well as for knowledge discovery. 
+The project is currently in its early stage. However, it comprises the
+implementation of our own spectra modelling based on Gaussian Mixture Models,
+and Divisive IK-means algorithm for unsupervised segmentation, which can be
+used for efficient dataset compression as well as for knowledge discovery.
 Aformentioned algorithms have already been published and links refering
 have been enclosed under [references](#references) section.
 
@@ -22,11 +22,11 @@ along with supporting statistics.
 
 ## Install
 
-Details will be added soon.
+Please refer to [docs](docs/Spectre.DivikWpfClient.pdf).
 
 ## Exemplary usage
 
-Details will be added soon.
+Please refer to [docs](docs/Spectre.DivikWpfClient.pdf).
 
 ## How to contribute?
 
@@ -35,9 +35,11 @@ answer you in details.
 
 ## Environment
 
-Details will be added soon.
+Please refer to [docs](docs/Spectre.DivikWpfClient.pdf).
 
 ## References
+
+This software is part of contribution made by [Data Mining Group of Silesian University of Technology](http://www.zaed.polsl.pl/), rest of which is published [here](https://github.com/ZAEDPolSl).
 
 + [Marczyk M, Polanska J, Polanski A: Comparison of Algorithms for Profile-Based
 Alignment of Low Resolution MALDI-ToF Spectra. In Advances in Intelligent

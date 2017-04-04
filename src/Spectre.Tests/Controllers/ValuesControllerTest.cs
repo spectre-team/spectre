@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Web.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Spectre;
 using Spectre.Controllers;
 
 namespace Spectre.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class ValuesControllerTest
     {
-        [TestMethod]
+        [Test]
         public void Get()
         {
             // Arrange
@@ -29,7 +25,7 @@ namespace Spectre.Tests.Controllers
             Assert.AreEqual("value2", result.ElementAt(1));
         }
 
-        [TestMethod]
+        [Test]
         public void GetById()
         {
             // Arrange
@@ -42,7 +38,7 @@ namespace Spectre.Tests.Controllers
             Assert.AreEqual("value", result);
         }
 
-        [TestMethod]
+        [Test]
         public void Post()
         {
             // Arrange
@@ -54,7 +50,7 @@ namespace Spectre.Tests.Controllers
             // Assert
         }
 
-        [TestMethod]
+        [Test]
         public void Put()
         {
             // Arrange
@@ -66,7 +62,7 @@ namespace Spectre.Tests.Controllers
             // Assert
         }
 
-        [TestMethod]
+        [Test]
         public void Delete()
         {
             // Arrange

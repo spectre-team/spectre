@@ -80,8 +80,10 @@ function [ thresholds ] = fetch_thresholds( params, varargin )
 			title(ax,['Gaussian Mixture Model, KS = ',num2str(best_compnum)]);
 			hold off
 			if m>1
+				mkfiledir([settings.FigurePath '_param_' num2str(i)]);
 				saveas(fig,[settings.FigurePath '_param_' num2str(i)]);
 			else
+				mkfiledir(settings.FigurePath);
 				saveas(fig,settings.FigurePath);
 			end
 			close gcf
