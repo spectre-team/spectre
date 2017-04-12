@@ -1,5 +1,5 @@
 ﻿/*
- * SegmentationTests.cs
+ * Segmentation.cs
  * Contains .NET interface for DiviK algorithm.
  * 
    Copyright 2017 Wilgierz Wojciech, Michal Gallus, Grzegorz Mrukwa
