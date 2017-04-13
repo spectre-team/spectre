@@ -42,14 +42,14 @@ namespace Spectre.Mvvm.Tests.Converters
 
         protected virtual void ToGuiType(TBackend argument, TGui expectedResult, string onTypeFailure, string onValueFailure)
         {
-            object conversionResult = Converter.Convert(argument, GuiType, null, CultureInfo.CurrentCulture);
+            object conversionResult = Converter.Convert(argument, GuiType, null, CultureInfo.InvariantCulture);
             Assert.IsInstanceOf(GuiType, conversionResult, onTypeFailure);
             Assert.AreEqual(expectedResult, (TGui)conversionResult, onValueFailure);
         }
 
         protected virtual void ToBackendType(TGui argument, TBackend expectedResult, string onTypeFailure, string onValueFailure)
         {
-            object conversionResult = Converter.ConvertBack(argument, BackendType, null, CultureInfo.CurrentCulture);
+            object conversionResult = Converter.ConvertBack(argument, BackendType, null, CultureInfo.InvariantCulture);
             Assert.IsInstanceOf(BackendType, conversionResult, onTypeFailure);
             Assert.AreEqual(expectedResult, (TBackend)conversionResult, onValueFailure);
         }
