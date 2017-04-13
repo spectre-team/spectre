@@ -55,7 +55,12 @@ namespace Spectre.Algorithms.Tests.Methods
             var options = DivikOptions.ForLevels(2);
             options.Metric = Metric.Euclidean;
 
-            var result = _segmentation.Divik(dataset, options);
+            DivikResult result;
+            using (var captureService = new Service.ConsoleCaptureService())
+            {
+                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
+                result = _segmentation.Divik(dataset, options);
+            }
 
             var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\single\\euclidean\\divik-result.json");
             var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
@@ -75,7 +80,12 @@ namespace Spectre.Algorithms.Tests.Methods
 
             var options = DivikOptions.ForLevels(2);
 
-            var result = _segmentation.Divik(dataset, options);
+            DivikResult result;
+            using (var captureService = new Service.ConsoleCaptureService())
+            {
+                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
+                result = _segmentation.Divik(dataset, options);
+            }
 
             var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\single\\pearson\\divik-result.json");
             var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
@@ -97,7 +107,12 @@ namespace Spectre.Algorithms.Tests.Methods
             options.UsingAmplitudeFiltration = false;
             options.UsingVarianceFiltration = false;
 
-            var result = _segmentation.Divik(dataset, options);
+            DivikResult result;
+            using (var captureService = new Service.ConsoleCaptureService())
+            {
+                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
+                result = _segmentation.Divik(dataset, options);
+            }
 
             var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\single\\pearson_no_filters\\divik-result.json");
             var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
@@ -119,7 +134,12 @@ namespace Spectre.Algorithms.Tests.Methods
             options.Metric = Metric.Euclidean;
             options.UsingAmplitudeFiltration = false;
 
-            var result = _segmentation.Divik(dataset, options);
+            DivikResult result;
+            using (var captureService = new Service.ConsoleCaptureService())
+            {
+                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
+                result = _segmentation.Divik(dataset, options);
+            }
 
             var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\hnc1_tumor\\euclidean\\divik-result.json");
             var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
@@ -138,7 +158,12 @@ namespace Spectre.Algorithms.Tests.Methods
             var options = DivikOptions.ForLevels(1);
             options.UsingAmplitudeFiltration = false;
 
-            var result = _segmentation.Divik(dataset, options);
+            DivikResult result;
+            using (var captureService = new Service.ConsoleCaptureService())
+            {
+                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
+                result = _segmentation.Divik(dataset, options);
+            }
 
             var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\hnc1_tumor\\pearson\\divik-result.json");
             var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
@@ -158,9 +183,14 @@ namespace Spectre.Algorithms.Tests.Methods
             options.UsingAmplitudeFiltration = false;
             options.UsingVarianceFiltration = false;
 
-            var result = _segmentation.Divik(dataset, options);
+            DivikResult result;
+            using (var captureService = new Service.ConsoleCaptureService())
+            {
+                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
+                result = _segmentation.Divik(dataset, options);
+            }
 
-            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\synthetic\\1\\euclidean\\divik-result.json");
+            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\synthetic\\1\\divik-result.json");
             var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
 
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
