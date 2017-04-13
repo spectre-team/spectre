@@ -57,7 +57,10 @@ namespace Spectre.Algorithms.Methods.Utils
             var matched = simple1.Zip(simple2, (assignment1, assignment2) => assignment1 == assignment2 ? 1 : 0);
             var matchesCount = matched.Sum();
 
-            return ((1 - tolerance) <= ((float)matchesCount / typedPartition1.Length));
+            var compatibilityRate = ((double)matchesCount) / typedPartition1.Length;
+            var requiredCompatibilityRate = 1 - tolerance;
+
+            return requiredCompatibilityRate <= compatibilityRate;
         }
 
         /// <summary>

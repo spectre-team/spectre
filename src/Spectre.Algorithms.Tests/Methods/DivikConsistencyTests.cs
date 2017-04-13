@@ -180,6 +180,7 @@ namespace Spectre.Algorithms.Tests.Methods
             var dataset = new BasicTextDataset(datasetFilename);
 
             var options = DivikOptions.ForLevels(5);
+            options.Metric = Metric.Euclidean;
             options.UsingAmplitudeFiltration = false;
             options.UsingVarianceFiltration = false;
 

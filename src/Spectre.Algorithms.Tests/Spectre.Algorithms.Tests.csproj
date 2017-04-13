@@ -74,6 +74,10 @@
       <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
       <Name>Spectre.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spectre.Service\Spectre.Service.csproj">
+      <Project>{287a1a8d-c029-4d47-96bc-755c91b7985d}</Project>
+      <Name>Spectre.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

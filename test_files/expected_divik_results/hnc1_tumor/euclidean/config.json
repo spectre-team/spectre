@@ -13,7 +13,7 @@
     "PlottingDecomposition": false,
     "PlottingDecompositionRecursively": false,
     "MaxDecompositionComponents": 10,
-    "Caching": true,
+    "Caching": false,
     "MaxIter": 100,
     "PrettyPrint": true
 }
