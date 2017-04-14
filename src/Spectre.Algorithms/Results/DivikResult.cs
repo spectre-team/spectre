@@ -85,7 +85,7 @@ namespace Spectre.Algorithms.Results
         /// Initializes a new instance of the <see cref="DivikResult"/> class.
         /// </summary>
         /// <param name="matlabResult">The results coming from MCR.</param>
-        internal DivikResult(object matlabResult)
+        public DivikResult(object matlabResult) // made public only for migration purposes!
         {
             var array = (MWStructArray) matlabResult;
             Centroids = ParseCentroids(array);

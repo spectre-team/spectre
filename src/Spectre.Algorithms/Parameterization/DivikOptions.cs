@@ -162,8 +162,8 @@ namespace Spectre.Algorithms.Parameterization
 		/// Dumps config to varargin readable by MATLAB.
 		/// </summary>
 		/// <returns>MATLAB varargin (cell).</returns>
-		internal object[] ToVarargin()
-		{
+		public object[] ToVarargin() // made public only for migration purposes!
+        {
 			var varargin = new List<object>();
 			Action<string, object> addParam = (s, o) =>
 				varargin.AddRange(new [] {s, o});

@@ -66,12 +66,8 @@ namespace Spectre.Algorithms.Methods
 			ValidateDispose();
 			//This is needed to not to make MCR go wild
 			const int numberOfOutputArgs = 2;
-		    int[,] coordinates = dataset.GetRawSpacialCoordinates(true);
-			double[,] coords = new double[coordinates.GetLength(0), coordinates.GetLength(1)];
-			for (int i = 0; i < coordinates.GetLength(0); ++i)
-				for (int j = 0; j < coordinates.GetLength(1); ++j)
-					coords[i, j] = coordinates[i, j];
-
+		    var coordinates = dataset.GetRawSpacialCoordinates(true);
+			
 			var varargin = options.ToVarargin();
 			var matlabDivikResult = _segmentation.divik(numberOfOutputArgs, dataset.GetRawIntensities(), coordinates, varargin);
             //matlabResult[0] is equal to the "partition" field in matlabResult[1], that's why we only use matlabResult[1]
