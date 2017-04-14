@@ -42,10 +42,12 @@ namespace Spectre::AlgorithmsCli::Tests::Methods
 			}
 
 			_equalOnTop = Partition::Compare<System::Int32, System::Int32>(result->Partition, referenceResult->Partition, 0);
-			_equalDownmerged = Partition::Compare<System::Int32, System::Int32>(result->Merged, referenceResult->Merged, 0);
-
+			
 			if (checkNested)
+			{
+				_equalDownmerged = Partition::Compare<System::Int32, System::Int32>(result->Merged, referenceResult->Merged, 0);
 				Assert::Multiple(gcnew TestDelegate(this, &Spectre::AlgorithmsCli::Tests::Methods::DivikConsistencyTests::AssertBothEqualities));
+			}
 			else
 				Assert::True(_equalOnTop, "Not equal on top.");
 		}

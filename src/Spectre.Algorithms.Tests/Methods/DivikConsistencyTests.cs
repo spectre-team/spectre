@@ -136,14 +136,16 @@ namespace Spectre.Algorithms.Tests.Methods
             }
 
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
-            var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
-
-            if(checkNested)
+            
+            if (checkNested)
+            {
+                var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
                 Assert.Multiple(() =>
                 {
                     Assert.True(equalOnTop, "Not equal on top.");
                     Assert.True(equalDownmerged, "Not equal in nested.");
                 });
+            }
             else
                 Assert.True(equalOnTop, "Not equal on top.");
         }
