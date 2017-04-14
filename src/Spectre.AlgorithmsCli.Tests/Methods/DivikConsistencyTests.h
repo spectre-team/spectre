@@ -17,13 +17,13 @@ namespace Spectre::AlgorithmsCli::Tests::Methods
 	{
 	private:
 		Segmentation^ _segmentation;
-		String^ _testDirectory = TestContext::CurrentContext->TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
+		String^ _testDirectory = TestContext::CurrentContext->TestDirectory + "\\..\\..\\..\\test_files";
 		bool _equalOnTop;
 		bool _equalDownmerged;
 		void TestForDataset(String^ dataPath, String^ resultPath, DivikOptions options, bool checkNested)
 		{
 			auto referenceJson = File::ReadAllText(resultPath);
-			auto referenceResult = (DivikResult^)JsonConvert::DeserializeObject(referenceJson);
+			auto referenceResult = JsonConvert::DeserializeObject<DivikResult^>(referenceJson);
 
 			auto dataset = gcnew BasicTextDataset(dataPath);
 
