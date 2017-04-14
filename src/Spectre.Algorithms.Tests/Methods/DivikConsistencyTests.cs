@@ -32,7 +32,7 @@ namespace Spectre.Algorithms.Tests.Methods
     public class DivikConsistencyTests
     {
         private Segmentation _segmentation;
-        private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
+        private readonly string _testDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
 
         [OneTimeSetUp]
         public void SetUpClass()
@@ -49,150 +49,82 @@ namespace Spectre.Algorithms.Tests.Methods
         [Test, Category("VeryLong")]
         public void BigDataSetEuclideanTest()
         {
-            var datasetFilename = TestDirectory + "\\single.txt";
-            var dataset = new BasicTextDataset(datasetFilename);
+            var datasetFilename = _testDirectory + "\\single.txt";
+            var resultPath = _testDirectory + "\\expected_divik_results\\single\\euclidean\\divik-result.json";
 
             var options = DivikOptions.ForLevels(2);
             options.Metric = Metric.Euclidean;
 
-            DivikResult result;
-            using (var captureService = new Service.ConsoleCaptureService())
-            {
-                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
-                result = _segmentation.Divik(dataset, options);
-            }
-
-            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\single\\euclidean\\divik-result.json");
-            var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
-
-            var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
-            var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
-
-            Assert.Multiple(() =>
-            {
-                Assert.True(equalOnTop, "Not equal on top.");
-                Assert.True(equalDownmerged, "Not equal in nested.");
-            });
+            TestForDataset(datasetFilename, resultPath, options, true);
         }
 
         [Test, Category("VeryLong")]
         public void BigDataSetPearsonTest()
         {
-            var datasetFilename = TestDirectory + "\\single.txt";
-            var dataset = new BasicTextDataset(datasetFilename);
+            var datasetFilename = _testDirectory + "\\single.txt";
+            var resultPath = _testDirectory + "\\expected_divik_results\\single\\pearson\\divik-result.json";
 
             var options = DivikOptions.ForLevels(2);
 
-            DivikResult result;
-            using (var captureService = new Service.ConsoleCaptureService())
-            {
-                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
-                result = _segmentation.Divik(dataset, options);
-            }
-
-            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\single\\pearson\\divik-result.json");
-            var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
-
-            var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
-            var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
-
-            Assert.Multiple(() =>
-            {
-                Assert.True(equalOnTop, "Not equal on top.");
-                Assert.True(equalDownmerged, "Not equal in nested.");
-            });
+            TestForDataset(datasetFilename, resultPath, options, true);
         }
 
         [Test, Category("VeryLong")]
         public void BigDataSetPearsonNoFiltersTest()
         {
-            var datasetFilename = TestDirectory + "\\single.txt";
-            var dataset = new BasicTextDataset(datasetFilename);
+            var datasetFilename = _testDirectory + "\\single.txt";
+            var resultPath = _testDirectory + "\\expected_divik_results\\single\\pearson_no_filters\\divik-result.json";
 
             var options = DivikOptions.ForLevels(2);
             options.UsingAmplitudeFiltration = false;
             options.UsingVarianceFiltration = false;
-
-            DivikResult result;
-            using (var captureService = new Service.ConsoleCaptureService())
-            {
-                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
-                result = _segmentation.Divik(dataset, options);
-            }
-
-            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\single\\pearson_no_filters\\divik-result.json");
-            var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
-
-            var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
-            var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
-
-            Assert.Multiple(() =>
-            {
-                Assert.True(equalOnTop, "Not equal on top.");
-                Assert.True(equalDownmerged, "Not equal in nested.");
-            });
+            
+            TestForDataset(datasetFilename, resultPath, options, true);
         }
 
         [Test]
         public void MediumDataSetEuclideanTest()
         {
-            var datasetFilename = TestDirectory + "\\hnc1_tumor.txt";
-            var dataset = new BasicTextDataset(datasetFilename);
+            var datasetFilename = _testDirectory + "\\hnc1_tumor.txt";
+            var resultPath = _testDirectory + "\\expected_divik_results\\hnc1_tumor\\euclidean\\divik-result.json";
 
             var options = DivikOptions.ForLevels(1);
             options.Metric = Metric.Euclidean;
             options.UsingAmplitudeFiltration = false;
 
-            DivikResult result;
-            using (var captureService = new Service.ConsoleCaptureService())
-            {
-                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
-                result = _segmentation.Divik(dataset, options);
-            }
-
-            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\hnc1_tumor\\euclidean\\divik-result.json");
-            var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
-
-            var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
-
-            Assert.True(equalOnTop, "Not equal on top.");
+            TestForDataset(datasetFilename, resultPath, options, false);
         }
 
         [Test]
         public void MediumDataSetPearsonTest()
         {
-            var datasetFilename = TestDirectory + "\\hnc1_tumor.txt";
-            var dataset = new BasicTextDataset(datasetFilename);
+            var datasetFilename = _testDirectory + "\\hnc1_tumor.txt";
+            var resultPath = _testDirectory + "\\expected_divik_results\\hnc1_tumor\\pearson\\divik-result.json";
 
             var options = DivikOptions.ForLevels(1);
             options.UsingAmplitudeFiltration = false;
 
-            DivikResult result;
-            using (var captureService = new Service.ConsoleCaptureService())
-            {
-                captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
-                result = _segmentation.Divik(dataset, options);
-            }
-
-            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\hnc1_tumor\\pearson\\divik-result.json");
-            var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
-
-            var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
-
-            Assert.True(equalOnTop, "Not equal on top.");
+            TestForDataset(datasetFilename, resultPath, options, false);
         }
 
         [Test]
         public void SyntheticDataSetTest()
         {
-            var datasetFilename = TestDirectory + "\\synthetic_1.txt";
-            var dataset = new BasicTextDataset(datasetFilename);
+            var datasetFilename = _testDirectory + "\\synthetic_1.txt";
+            var resultPath = _testDirectory + "\\expected_divik_results\\synthetic\\1\\divik-result.json";
 
             var options = DivikOptions.ForLevels(5);
             options.Metric = Metric.Euclidean;
             options.UsingAmplitudeFiltration = false;
             options.UsingVarianceFiltration = false;
 
+            TestForDataset(datasetFilename, resultPath, options, true);
+        }
+
+        private void TestForDataset(string dataPath, string resultPath, DivikOptions options, bool checkNested)
+        {
+            var dataset = new BasicTextDataset(dataPath);
+
             DivikResult result;
             using (var captureService = new Service.ConsoleCaptureService())
             {
@@ -200,17 +132,20 @@ namespace Spectre.Algorithms.Tests.Methods
                 result = _segmentation.Divik(dataset, options);
             }
 
-            var referenceJson = File.ReadAllText(TestDirectory + "\\expected_divik_results\\synthetic\\1\\divik-result.json");
+            var referenceJson = File.ReadAllText(resultPath);
             var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
 
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
             var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
 
-            Assert.Multiple(() =>
-            {
+            if(checkNested)
+                Assert.Multiple(() =>
+                {
+                    Assert.True(equalOnTop, "Not equal on top.");
+                    Assert.True(equalDownmerged, "Not equal in nested.");
+                });
+            else
                 Assert.True(equalOnTop, "Not equal on top.");
-                Assert.True(equalDownmerged, "Not equal in nested.");
-            });
         }
     }
 }
