@@ -68,8 +68,11 @@ namespace Spectre.Algorithms.Tests.Methods
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
             var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
 
-            Assert.True(equalOnTop, "Not equal on top.");
-            Assert.True(equalDownmerged, "Not equal in nested.");
+            Assert.Multiple(() =>
+            {
+                Assert.True(equalOnTop, "Not equal on top.");
+                Assert.True(equalDownmerged, "Not equal in nested.");
+            });
         }
 
         [Test, Category("VeryLong")]
@@ -93,8 +96,11 @@ namespace Spectre.Algorithms.Tests.Methods
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
             var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
 
-            Assert.True(equalOnTop, "Not equal on top.");
-            Assert.True(equalDownmerged, "Not equal in nested.");
+            Assert.Multiple(() =>
+            {
+                Assert.True(equalOnTop, "Not equal on top.");
+                Assert.True(equalDownmerged, "Not equal in nested.");
+            });
         }
 
         [Test, Category("VeryLong")]
@@ -120,8 +126,11 @@ namespace Spectre.Algorithms.Tests.Methods
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
             var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
 
-            Assert.True(equalOnTop, "Not equal on top.");
-            Assert.True(equalDownmerged, "Not equal in nested.");
+            Assert.Multiple(() =>
+            {
+                Assert.True(equalOnTop, "Not equal on top.");
+                Assert.True(equalDownmerged, "Not equal in nested.");
+            });
         }
 
         [Test]
@@ -197,8 +206,11 @@ namespace Spectre.Algorithms.Tests.Methods
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
             var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);
 
-            Assert.True(equalOnTop, "Not equal on top.");
-            Assert.True(equalDownmerged, "Not equal in nested.");
+            Assert.Multiple(() =>
+            {
+                Assert.True(equalOnTop, "Not equal on top.");
+                Assert.True(equalDownmerged, "Not equal in nested.");
+            });
         }
     }
 }
