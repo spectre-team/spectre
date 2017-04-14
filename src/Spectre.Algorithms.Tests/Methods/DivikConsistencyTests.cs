@@ -123,6 +123,9 @@ namespace Spectre.Algorithms.Tests.Methods
 
         private void TestForDataset(string dataPath, string resultPath, DivikOptions options, bool checkNested)
         {
+            var referenceJson = File.ReadAllText(resultPath);
+            var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
+
             var dataset = new BasicTextDataset(dataPath);
 
             DivikResult result;
@@ -131,9 +134,6 @@ namespace Spectre.Algorithms.Tests.Methods
                 captureService.Written += (caller, text) => System.Diagnostics.Debug.Write(text);
                 result = _segmentation.Divik(dataset, options);
             }
-
-            var referenceJson = File.ReadAllText(resultPath);
-            var referenceResult = JsonConvert.DeserializeObject<DivikResult>(referenceJson);
 
             var equalOnTop = Partition.Compare(result.Partition, referenceResult.Partition);
             var equalDownmerged = Partition.Compare(result.Merged, referenceResult.Merged);

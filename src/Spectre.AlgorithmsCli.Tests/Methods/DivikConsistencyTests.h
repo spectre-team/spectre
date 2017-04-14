@@ -22,6 +22,9 @@ namespace Spectre::AlgorithmsCli::Tests::Methods
 		bool _equalDownmerged;
 		void TestForDataset(String^ dataPath, String^ resultPath, DivikOptions options, bool checkNested)
 		{
+			auto referenceJson = File::ReadAllText(resultPath);
+			auto referenceResult = (DivikResult^)JsonConvert::DeserializeObject(referenceJson);
+
 			auto dataset = gcnew BasicTextDataset(dataPath);
 
 			Service::ConsoleCaptureService^ captureService;
@@ -37,9 +40,6 @@ namespace Spectre::AlgorithmsCli::Tests::Methods
 				delete captureService;
 				captureService = nullptr;
 			}
-
-			auto referenceJson = File::ReadAllText(resultPath);
-			auto referenceResult = (DivikResult^)JsonConvert::DeserializeObject(referenceJson);
 
 			_equalOnTop = Partition::Compare<System::Int32, System::Int32>(result->Partition, referenceResult->Partition, 0);
 			_equalDownmerged = Partition::Compare<System::Int32, System::Int32>(result->Merged, referenceResult->Merged, 0);
