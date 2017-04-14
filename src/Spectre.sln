@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre", "Spectre\Spectre.csproj", "{0E4F265B-8702-4D70-AB70-AA566D7A2E40}"
 EndProject
@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Algorithms", "Spectre.Algorithms\Spectre.Algorithms.csproj", "{9A886AEC-58DB-410D-91B9-C62E157501FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Algorithms.Tests", "Spectre.Algorithms.Tests\Spectre.Algorithms.Tests.csproj", "{BBF6329D-7BEC-494E-9FC9-B24B12D94EA0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{287A1A8D-C029-4D47-96BC-755C91B7985D} = {287A1A8D-C029-4D47-96BC-755C91B7985D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Data", "Spectre.Data\Spectre.Data.csproj", "{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}"
 EndProject

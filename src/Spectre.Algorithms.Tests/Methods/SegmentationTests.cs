@@ -17,13 +17,11 @@
    limitations under the License.
 */
 
-using System;
 using NUnit.Framework;
 using Spectre.Algorithms.Methods;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
 using Spectre.Data.Datasets;
-using System.IO;
 
 namespace Spectre.Algorithms.Tests.Methods
 {

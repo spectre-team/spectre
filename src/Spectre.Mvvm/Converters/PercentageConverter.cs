@@ -42,7 +42,7 @@ namespace Spectre.Mvvm.Converters
         /// <exception cref="NullReferenceException">if value is null</exception>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((double)value * 100).ToString() + " %";
+            return ((double)value * 100).ToString(culture) + " %";
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Spectre.Mvvm.Converters
         {
             if (value is double)
                 return (double)value / 100;
-            return double.Parse(((string)value).Replace('%',' ').Trim())/100;
+            return double.Parse(((string)value).Replace('%',' ').Trim(), culture)/100;
         }
     }
 }
