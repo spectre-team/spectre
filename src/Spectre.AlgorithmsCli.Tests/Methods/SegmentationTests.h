@@ -13,7 +13,7 @@ namespace Spectre::AlgorithmsCli::Tests::Methods
 	{
 	private:
 		Segmentation^ _segmentation;
-		String^ TestDirectory = TestContext::CurrentContext->TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
+		String^ TestDirectory = TestContext::CurrentContext->TestDirectory + "\\..\\..\\..\\test_files";
 	public:
 		[OneTimeSetUp]
 		void SetUpClass()
