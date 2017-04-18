@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="Methods\Gmm.cs" />
     <Compile Include="Methods\Preprocessing.cs" />
-    <Compile Include="Methods\Segmentation.cs" />
     <Compile Include="Methods\Utils\Partition.cs" />
     <Compile Include="Parameterization\DivikOptions.cs" />
     <Compile Include="Parameterization\Metric.cs" />

@@ -20,7 +20,7 @@ using Spectre.Algorithms.Results;
 using Spectre.Service.Abstract;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Data.Datasets;
-using Spectre.Algorithms.Methods;
+using Spectre.AlgorithmsCli.Methods;
 using System;
 
 namespace Spectre.Service

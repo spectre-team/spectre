@@ -7,7 +7,7 @@ using namespace Spectre::Algorithms::Parameterization;
 
 namespace Spectre::AlgorithmsCli::Methods
 {
-	DivikResult^ Segmentation::Divik(IDataset^ dataset, DivikOptions options)
+	DivikResult^ __clrcall Segmentation::Divik(IDataset^ dataset, DivikOptions options)
 	{
 		//This is needed to not to make MCR go wild
 		const int divikStructureLocation = 1;
@@ -28,18 +28,18 @@ namespace Spectre::AlgorithmsCli::Methods
 		return result;
 	}
 
-	Segmentation::Segmentation()
+	__clrcall Segmentation::Segmentation()
 	{
 		this->_segmentation = gcnew MatlabAlgorithmsNative::Segmentation();
 	}
 
-	Segmentation::!Segmentation()
+	__clrcall Segmentation::!Segmentation()
 	{
 		delete _segmentation;
 		_segmentation = nullptr;
 	}
 
-	Segmentation::~Segmentation()
+	__clrcall Segmentation::~Segmentation()
 	{
 		this->!Segmentation();
 	}
