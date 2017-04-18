@@ -1,5 +1,6 @@
 Param(
     [switch]$AppVeyor
+    [switch]$Verbose
 )
 
 if($AppVeyor -eq $True)
@@ -12,13 +13,26 @@ else
     $ProjectRoot = Get-Location | Select-String -Pattern spectre -SimpleMatch
 }
 
-Write-Host "Using $($ProjectRoot) as project root."
+function VerbosePrint($text)
+{
+    if($Verbose)
+    {
+        Write-Host $text
+    }
+}
+
+VerbosePrint -text "Using $($ProjectRoot) as project root."
 
 Try
 {
-    Write-Host "Adding $($ProjectRoot)\src\Spectre as an application."
+    VerbosePrint -text "Adding Spectre application pool."
     Import-Module "WebAdministration"
     New-Item 'IIS:\Sites\Default Web Site\spectre_api' -physicalPath "$($ProjectRoot)\src\Spectre" -type Application
+    New-Item 'IIS:\AppPools\Spectre'
+    Set-ItemProperty 'IIS:\AppPools\Spectre' -Name managedRuntimeVersion -Value 'v4.0'
+    Set-ItemProperty 'IIS:\AppPools\Spectre' -Name managedPipelineMode -Value 'Integrated'
+    VerbosePrint -text "Adding $($ProjectRoot)\src\Spectre as an application."
+    Set-ItemProperty 'IIS:\Sites\Default Web Site\spectre_api' -Name applicationPool Spectre
     #New-Item 'IIS:\Sites\Default Web Site\spectre_api' -physicalPath "$($ProjectRoot)\src\Spectre" -type VirtualDirectory
 
     Write-Host "Added API binding to IIS." -foregroundcolor green
