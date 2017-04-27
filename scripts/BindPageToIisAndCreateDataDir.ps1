@@ -38,7 +38,12 @@ Try
     VerbosePrint -text "Adding $($ProjectRoot)\src\Spectre as an application."
     Set-ItemProperty 'IIS:\Sites\Default Web Site\spectre_api' -Name applicationPool Spectre
     #New-Item 'IIS:\Sites\Default Web Site\spectre_api' -physicalPath "$($ProjectRoot)\src\Spectre" -type VirtualDirectory
-
+    
+    $Acl = Get-Acl "$($ProjectRoot)\src\Spectre"
+    $Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("IIS_IUSRS", "FullControl", "Allow")
+    $Acl.SetAccessRule($Ar)
+    Set-Acl "$($ProjectRoot)\src\Spectre" $Acl
+    
     Write-Host "Added API binding to IIS." -foregroundcolor green
 }
 Catch
