@@ -34,7 +34,7 @@ Try
     New-Item 'IIS:\Sites\Default Web Site\spectre_api' -physicalPath "$($ProjectRoot)\src\Spectre" -type Application | Out-Null
     New-Item 'IIS:\AppPools\Spectre' | Out-Null
     Set-ItemProperty 'IIS:\AppPools\Spectre' -Name managedRuntimeVersion -Value 'v4.0'
-    Set-ItemProperty 'IIS:\AppPools\Spectre' -Name managedPipelineMode -Value ([int] [Microsoft.Web.Administration.ManagedPipelineMode]::Integrated)
+    Set-ItemProperty 'IIS:\AppPools\Spectre' -Name managedPipelineMode -Value 'Integrated'
     VerbosePrint -text "Adding $($ProjectRoot)\src\Spectre as an application."
     Set-ItemProperty 'IIS:\Sites\Default Web Site\spectre_api' -Name applicationPool Spectre
     #New-Item 'IIS:\Sites\Default Web Site\spectre_api' -physicalPath "$($ProjectRoot)\src\Spectre" -type VirtualDirectory
