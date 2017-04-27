@@ -57,7 +57,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Methods\DivikConsistencyTests.cs" />
     <Compile Include="Methods\GmmTests.cs" />
     <Compile Include="Methods\PreprocessingTests.cs" />
     <Compile Include="Methods\Utils\PartitionTests.cs" />
