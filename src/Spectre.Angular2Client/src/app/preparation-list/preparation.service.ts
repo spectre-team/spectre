@@ -20,20 +20,17 @@ export class PreparationsService {
   private getHeaders() {
     const headers = new Headers();
     headers.append('Accept', 'application/json');
-    headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    headers.append('Access-Control-Allow-Methods', 'GET');
-    headers.append('Access-Control-Allow-Origin', '*'); //it is optional I think
     return headers;
   }
 }
  function mapPreparations(response: Response): Preparation[] {
-  return response.json().results.map(toPreparation);
+  return response.json().map(toPreparation);
 }
 
 function toPreparation(r: any): Preparation {
   return <Preparation>({
-    id: r.id,
-    name: r.name
+    id: r.Id,
+    name: r.Name
   });
 }
 
