@@ -5,6 +5,10 @@ export class SpectreAngular2ClientPage {
     return browser.get('/');
   }
 
+  getTitle() {
+      return browser.getTitle();
+  }
+
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
