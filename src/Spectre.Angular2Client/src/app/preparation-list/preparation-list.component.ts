@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Preparation} from './preparation';
+import { Preparation } from './preparation';
 import { PreparationsService } from './preparation.service';
 
 @Component({

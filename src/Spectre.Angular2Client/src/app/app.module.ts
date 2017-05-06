@@ -17,7 +17,6 @@ import { PreparationsService } from './preparation-list/preparation.service';
     FormsModule,
     HttpModule
   ],
-  providers: [PreparationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
