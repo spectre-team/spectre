@@ -10,6 +10,7 @@ export class SpectreAngular2ClientPreparationListPage {
     }
 
     getListText() {
-        return element(by.css('app-preparation-list ul')).getText();
+        return element(by.css('app-preparation-list div.preparation-list'))
+            .getText();
     }
 }

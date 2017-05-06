@@ -7,8 +7,8 @@ describe('spectre.angular2-client App', () => {
     page = new SpectreAngular2ClientPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display name of the project', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Spectre');
   });
 });

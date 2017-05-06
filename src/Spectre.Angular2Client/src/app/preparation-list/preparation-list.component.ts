@@ -14,6 +14,7 @@ export class PreparationListComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('onInit');
     this._preparationsService
       .getAll()
       .subscribe(p => this.preparations = p);

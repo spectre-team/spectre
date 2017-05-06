@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  margin: 0 auto;
+  max-width: 70%;
+  min-width: 800px;
+}
+
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
+body {
+  font-family: "Arimo", "Helvetica", "Arial", sans-serif;
+}
+
+body {
+  line-height: 1.5;
+  padding: 4em 1em;
+}
+
+h2 {
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+body {
+  color: #555;
+}
+
+h1,
+h2,
+strong {
+  color: #333;
+}
+
+a {
+  color: #e81c4f;
+}
+
+body {
+  color: #566b78;
+}

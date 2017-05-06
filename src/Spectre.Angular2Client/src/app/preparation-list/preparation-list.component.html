@@ -1,5 +1,9 @@
-<ul>
-  <li *ngFor="let preparation of preparations">
-    {{preparation.name}}
-  </li>
-</ul>
+<div>
+    <h2>There are {{preparations.length}} available preparations:</h2>
+
+    <div class="preparation-list">
+        <div class="preparation" *ngFor="let preparation of preparations">
+            {{preparation.name}}
+        </div>
+    </div>
+</div>
