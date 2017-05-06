@@ -5,7 +5,8 @@ import { PreparationsService } from './preparation.service';
 @Component({
   selector: 'app-preparation-list',
   templateUrl: './preparation-list.component.html',
-  styleUrls: ['./preparation-list.component.css']
+  styleUrls: ['./preparation-list.component.css'],
+  providers: [PreparationsService]
 })
 export class PreparationListComponent implements OnInit {
   preparations: Preparation[] = [];
