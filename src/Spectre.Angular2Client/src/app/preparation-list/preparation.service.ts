@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 @Injectable()
-export class PreparationsService {
+export class PreparationService {
   private baseUrl = 'http://localhost/spectre_api/api';
 
   constructor(private http: Http) {
@@ -23,6 +23,7 @@ export class PreparationsService {
     return headers;
   }
 }
+
  function mapPreparations(response: Response): Preparation[] {
   return response.json().map(toPreparation);
 }

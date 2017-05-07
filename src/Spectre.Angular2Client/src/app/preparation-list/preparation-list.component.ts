@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Preparation } from './preparation';
-import { PreparationsService } from './preparation.service';
+import { PreparationService } from './preparation.service';
 
 @Component({
   selector: 'app-preparation-list',
   templateUrl: './preparation-list.component.html',
   styleUrls: ['./preparation-list.component.css'],
-  providers: [PreparationsService]
+  providers: [PreparationService]
 })
 export class PreparationListComponent implements OnInit {
   preparations: Preparation[] = [];
-  constructor(private _preparationsService: PreparationsService) {
+  constructor(private _preparationService: PreparationService) {
   }
 
 
   ngOnInit() {
-    console.log('onInit');
-    this._preparationsService
+    this._preparationService
       .getAll()
       .subscribe(p => this.preparations = p);
   }
