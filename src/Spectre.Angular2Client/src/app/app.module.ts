@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { PreparationListComponent } from './preparation-list/preparation-list.component';
-import { PreparationsService } from './preparation-list/preparation.service';
+import { PreparationService } from './preparation-list/preparation.service';
 
 @NgModule({
   declarations: [
