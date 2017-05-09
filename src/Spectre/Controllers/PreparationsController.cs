@@ -53,7 +53,8 @@ namespace Spectre.Controllers
             var dataset = new BasicTextDataset("C:\\spectre_data\\hnc1_tumor.txt");
 
             var mz = dataset.GetRawMzArray();
-            var intensities = dataset.GetRawIntensityRow(spectrumId);
+
+            var intensities = dataset.GetRawIntensityArray(spectrumId);
             var coordinates = dataset.GetSpatialCoordinates(spectrumId);
 
             return new Spectrum() { Id = spectrumId, Intensities = intensities, Mz = mz, X = coordinates.X, Y = coordinates.Y };
