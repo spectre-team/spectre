@@ -1,6 +1,6 @@
 /*
- * app.component.spec.ts
- * Unit tests for application root element.
+ * preparation-list.component.spec.ts
+ * Unit tests for preparations list component.
  *
    Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
 
@@ -17,17 +17,18 @@
    limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
+import { PreparationListComponent } from './preparation-list.component';
 
 import { Http, BaseRequestOptions } from '@angular/http';
 
-import { PreparationListComponent } from './preparation-list/preparation-list.component';
-
 import { MockBackend } from '@angular/http/testing';
 
-describe('AppComponent', () => {
+describe('PreparationListComponent', () => {
+  let component: PreparationListComponent;
+  let fixture: ComponentFixture<PreparationListComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -41,29 +42,23 @@ describe('AppComponent', () => {
             deps: [MockBackend, BaseRequestOptions]
           }
       ],
-      declarations: [
-        AppComponent,
-        PreparationListComponent
-      ],
-    }).compileComponents();
+      declarations: [ PreparationListComponent ]
+    })
+    .compileComponents();
   }));
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'Spectre'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Spectre');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PreparationListComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Spectre');
-  }));
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should provide description', () => {
+      const compiled = fixture.debugElement.nativeElement;
+      expect(compiled.querySelector('h2').textContent).toContain('preparation');
+  });
 });

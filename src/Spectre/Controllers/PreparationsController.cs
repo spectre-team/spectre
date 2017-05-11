@@ -19,6 +19,7 @@
 
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Spectre.Data.Datasets;
 using Spectre.Models.Msi;
 
@@ -29,6 +30,7 @@ namespace Spectre.Controllers
     /// Allows to read preparation data.
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PreparationsController : ApiController
     {
         /// <summary>

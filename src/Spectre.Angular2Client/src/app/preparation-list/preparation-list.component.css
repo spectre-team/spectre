@@ -1,6 +1,6 @@
 /*
- * main.ts
- * Main application file.
+ * preparation-list.component.css
+ * Styling of preparations list.
  *
    Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
 
@@ -16,14 +16,22 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
-
-if (environment.production) {
-  enableProdMode();
+div.preparation {
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    color: #ffffff;
+    background-color: #3399FF;
+    border-radius: 20px;
+    text-align: center;
+    vertical-align: bottom;
+    display: inline-grid;
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+@media only screen and (min-width: 800px) {
+    div.preparation {
+        width: 260px;
+        height: 260px;
+    }
+}

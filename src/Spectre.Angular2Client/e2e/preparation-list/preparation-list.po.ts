@@ -1,6 +1,6 @@
 /*
- * main.ts
- * Main application file.
+ * preparation-list.po.ts
+ * Helper for e2e tests of prepataions list.
  *
    Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
 
@@ -16,14 +16,20 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { browser, element, by } from 'protractor';
 
-if (environment.production) {
-  enableProdMode();
+export class SpectreAngular2ClientPreparationListPage {
+    navigateTo() {
+        return browser.get('/');
+    }
+
+    getHeader() {
+        return element(by.css('app-preparation-list h2')).getText();
+    }
+
+    getListText() {
+        return element(by.css('app-preparation-list div.preparation-list'))
+            .getText();
+    }
 }
-
-platformBrowserDynamic().bootstrapModule(AppModule);

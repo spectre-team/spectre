@@ -1,6 +1,6 @@
 /*
- * main.ts
- * Main application file.
+ * preparation.ts
+ * Interface describing MALDI MSI preparation.
  *
    Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
 
@@ -16,14 +16,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
-
-if (environment.production) {
-  enableProdMode();
+export interface Preparation {
+  id: string;
+  name: string;
 }
-
-platformBrowserDynamic().bootstrapModule(AppModule);
