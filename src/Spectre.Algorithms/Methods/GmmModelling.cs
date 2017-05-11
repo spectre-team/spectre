@@ -1,5 +1,5 @@
 ﻿/*
- * Gmm.cs
+ * GmmModelling.cs
  * Contains .NET interface for GMM algorithms.
  * 
    Copyright 2017 Wilgierz Wojciech, Michal Gallus, Grzegorz Mrukwa
@@ -16,7 +16,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
+using System.Linq;
 using MathWorks.MATLAB.NET.Arrays.native;
 using Spectre.Algorithms.Results;
 using Spectre.Data.Datasets;
@@ -26,22 +28,25 @@ namespace Spectre.Algorithms.Methods
     /// <summary>
     /// Contains interface for calling matlab GMM algorithms.
     /// </summary>
-	public class Gmm: IDisposable
+	public class GmmModelling: IDisposable
 	{
-		#region Fields
-		private readonly MatlabAlgorithmsNative.GmmModelling _gmm;
+        #region Fields
+        /// <summary>
+        /// MATLAB GMM modelling engine.
+        /// </summary>
+        private readonly MatlabAlgorithmsNative.GmmModelling _gmm;
 
 		/// <summary>
 		/// Indicates whether this instance has been disposed.
 		/// </summary>
-		private bool _disposed = false;
+		private bool _disposed;
 		#endregion
 
 		#region Constructor
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Gmm"/> class.
+		/// Initializes a new instance of the <see cref="GmmModelling"/> class.
 		/// </summary>
-		public Gmm()
+		public GmmModelling()
 		{
 			_gmm = new MatlabAlgorithmsNative.GmmModelling();
 		}
@@ -56,9 +61,12 @@ namespace Spectre.Algorithms.Methods
 	    /// <param name="dataset">Input dataset.</param>
 	    /// <returns>Convolved data.</returns>
 	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+	    /// <exception cref="InvalidOperationException">Applying model build on different m/z axis.</exception>
 	    public IDataset ApplyGmm(GmmModel model, IDataset dataset)
 		{
 			ValidateDispose();
+            if (!dataset.GetRawMzArray().SequenceEqual(model.OriginalMz))
+                throw new InvalidOperationException("Applying model built on different m/z axis.");
 			var matlabModel = model.MatlabStruct;
 			var applyResult = _gmm.apply_gmm(matlabModel, dataset.GetRawIntensities(), dataset.GetRawMzArray());
 		    var data = (double[,]) ((MWStructArray) (model.MatlabStruct)).GetField("mu");
@@ -76,32 +84,57 @@ namespace Spectre.Algorithms.Methods
 	    public GmmModel EstimateGmm(IDataset dataset)
 		{
 			ValidateDispose();
-			var matlabModel = _gmm.estimate_gmm(dataset.GetRawMzArray(), dataset.GetRawIntensities());
-			var model = new GmmModel(matlabModel);
+		    var originalMz = dataset.GetRawMzArray();
+            var matlabModel = _gmm.estimate_gmm(originalMz, dataset.GetRawIntensities());
+			var model = new GmmModel(matlabModel, originalMz);
 			return model;
 		}
 
-	    public GmmModel ReduceModelByComponentArea(GmmModel model)
+        /// <summary>
+        /// Reduces the model filtering by component area.
+        /// </summary>
+        /// <param name="model">The reduced model.</param>
+        /// <returns>Reduced model</returns>
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        public GmmModel ReduceModelByComponentArea(GmmModel model)
 	    {
             ValidateDispose();
 	        var matlabModel = model.MatlabStruct;
-	        //var reduced = _gmm.reduce_gmm_by_component_area(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
+            var reduced = _gmm.reduce_gmm_by_component_area(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
+            return new GmmModel(reduced, model) { IsNoiseReduced = true };
+        }
 
+        /// <summary>
+        /// Reduces the model filtering by height of the component.
+        /// </summary>
+        /// <param name="model">The reduced model.</param>
+        /// <returns>Reduced model</returns>
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        public GmmModel ReduceModelByComponentHeight(GmmModel model)
+	    {
+            ValidateDispose();
+            var matlabModel = model.MatlabStruct;
+            var reduced = _gmm.reduce_gmm_by_component_height(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
+            return new GmmModel(reduced, model) { IsNoiseReduced = true };
+        }
 
-            throw new NotImplementedException();
+        /// <summary>
+        /// Merges the components supposed to correspond to the same compound.
+        /// </summary>
+        /// <param name="model">The merged model.</param>
+        /// <param name="mzThreshold">The mz threshold used for components matching.</param>
+        /// <returns>Merged model</returns>
+        /// <exception cref="System.InvalidOperationException">Applying merging on merged model.</exception>
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        public GmmModel MergeComponents(GmmModel model, double mzThreshold=0.3)
+	    {
+            ValidateDispose();
+            if (model.IsMerged)
+                throw new InvalidOperationException("Applying merging on merged model.");
+	        var matlabModel = model.MatlabStruct;
+	        var merged = _gmm.merge_gmm_model_components(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum, mzThreshold);
+	        return new GmmModel(merged, model) { IsMerged = true, MzMergingThreshold = mzThreshold };
 	    }
-
-	    public GmmModel ReduceModelByComponentHeight(GmmModel model)
-	    {
-            ValidateDispose();
-            throw new NotImplementedException();
-        }
-
-	    public GmmModel MergeComponents(GmmModel model)
-	    {
-            ValidateDispose();
-            throw new NotImplementedException();
-        }
 		#endregion
 
 		#region IDisposable
@@ -111,9 +144,9 @@ namespace Spectre.Algorithms.Methods
 		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
 		private void ValidateDispose()
 		{
-			if (this._disposed)
+			if (_disposed)
 			{
-				throw new ObjectDisposedException(nameof(Algorithms));
+				throw new ObjectDisposedException(nameof(GmmModelling));
 			}
 		}
 
@@ -132,11 +165,11 @@ namespace Spectre.Algorithms.Methods
 		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!this._disposed)
+			if (!_disposed)
 			{
 				if (disposing)
 				{
-					this._gmm.Dispose();
+					_gmm.Dispose();
 				}
 				_disposed = true;
 			}
@@ -145,7 +178,7 @@ namespace Spectre.Algorithms.Methods
 		/// <summary>
 		/// Finalizes an instance of the <see cref="Algorithms"/> class.
 		/// </summary>
-		~Gmm()
+		~GmmModelling()
 		{
 			Dispose(false);
 		}

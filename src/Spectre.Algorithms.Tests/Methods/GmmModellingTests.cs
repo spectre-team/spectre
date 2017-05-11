@@ -1,5 +1,5 @@
 ﻿/*
- * GmmTests.cs
+ * GmmModellingTests.cs
  * Checks, whether MCR is properly called and result may be obtained.
  * 
    Copyright 2017 Wilgierz Wojciech, Grzegorz Mrukwa
@@ -24,14 +24,14 @@ using Spectre.Data.Datasets;
 namespace Spectre.Algorithms.Tests.Methods
 {
 	[TestFixture, Category("Algorithm")]
-	public class GmmTests
+	public class GmmModellingTests
 	{
-		Gmm _gmm;
+		GmmModelling _gmm;
 
 		[OneTimeSetUp]
 		public void SetUpClass()
 		{
-			_gmm = new Gmm();
+			_gmm = new GmmModelling();
 		}
 
 		[OneTimeTearDown]
