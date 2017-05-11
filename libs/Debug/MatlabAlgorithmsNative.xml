@@ -9,6 +9,9 @@
             The Preprocessing class provides a CLS compliant, Object (native) interface to the
             MATLAB functions contained in the files:
             <newpara></newpara>
+            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\DiviK\libs\miscellaneous\f
+            etch_thresholds.m
+            <newpara></newpara>
             C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\pafft.m
             <newpara></newpara>
             C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\remove_baseline.m
@@ -43,6 +46,223 @@
             <summary internal= "true">
             Internal dispose function
             </summary>
+        </member>
+        <member name="M:MatlabAlgorithmsNative.Preprocessing.fetch_thresholds">
+             <summary>
+             Provides a single output, 0-input Objectinterface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.Preprocessing.fetch_thresholds(System.Object)">
+             <summary>
+             Provides a single output, 1-input Objectinterface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="params0">Input argument #1</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.Preprocessing.fetch_thresholds(System.Object,System.Object[])">
+             <summary>
+             Provides a single output, 2-input Objectinterface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="params0">Input argument #1</param>
+             <param name="varargin">Array of Objects representing the input arguments 2
+             through varargin.length+1</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.Preprocessing.fetch_thresholds(System.Int32)">
+             <summary>
+             Provides the standard 0-input Object interface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.Preprocessing.fetch_thresholds(System.Int32,System.Object)">
+             <summary>
+             Provides the standard 1-input Object interface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="params0">Input argument #1</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.Preprocessing.fetch_thresholds(System.Int32,System.Object,System.Object[])">
+             <summary>
+             Provides the standard 2-input Object interface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="params0">Input argument #1</param>
+             <param name="varargin">Array of Objects representing the input arguments 2
+             through varargin.length+1</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.Preprocessing.fetch_thresholds(System.Int32,System.Object[]@,System.Object[],System.Object[])">
+             <summary>
+             Provides an interface for the fetch_thresholds function in which the input and
+             output
+             arguments are specified as an array of Objects.
+             </summary>
+             <remarks>
+             This method will allocate and return by reference the output argument
+             array.<newpara></newpara>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return</param>
+             <param name= "argsOut">Array of Object output arguments</param>
+             <param name= "argsIn">Array of Object input arguments</param>
+             <param name= "varArgsIn">Array of Object representing variable input
+             arguments</param>
+            
         </member>
         <member name="M:MatlabAlgorithmsNative.Preprocessing.pafft">
              <summary>
@@ -383,45 +603,54 @@
              possible.</remarks>
             
         </member>
-        <member name="T:MatlabAlgorithmsNative.Gmm">
+        <member name="T:MatlabAlgorithmsNative.GmmModelling">
             <summary>
-            The Gmm class provides a CLS compliant, Object (native) interface to the MATLAB
-            functions contained in the files:
+            The GmmModelling class provides a CLS compliant, Object (native) interface to the
+            MATLAB functions contained in the files:
             <newpara></newpara>
             C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\apply_gmm.m
             <newpara></newpara>
             C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\estimate_gmm.m
+            <newpara></newpara>
+            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\merge_gmm_model_components
+            .m
+            <newpara></newpara>
+            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\reduce_gmm_by_component_ar
+            ea.m
+            <newpara></newpara>
+            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\reduce_gmm_by_component_he
+            ight.m
             </summary>
             <remarks>
             @Version 0.0
             </remarks>
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.#cctor">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.#cctor">
             <summary internal= "true">
             The static constructor instantiates and initializes the MATLAB Runtime instance.
             </summary>
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.#ctor">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.#ctor">
             <summary>
-            Constructs a new instance of the Gmm class.
+            Constructs a new instance of the GmmModelling class.
             </summary>
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.Finalize">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.Finalize">
             <summary internal= "true">
             Class destructor called by the CLR garbage collector.
             </summary>
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.Dispose">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.Dispose">
             <summary>
             Frees the native resources associated with this object
             </summary>
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.Dispose(System.Boolean)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.Dispose(System.Boolean)">
             <summary internal= "true">
             Internal dispose function
             </summary>
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm">
              <summary>
              Provides a single output, 0-input Objectinterface to the apply_gmm MATLAB
              function.
@@ -435,7 +664,7 @@
              <returns>An Object containing the first output argument.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Object)">
              <summary>
              Provides a single output, 1-input Objectinterface to the apply_gmm MATLAB
              function.
@@ -450,7 +679,7 @@
              <returns>An Object containing the first output argument.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Object,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Object,System.Object)">
              <summary>
              Provides a single output, 2-input Objectinterface to the apply_gmm MATLAB
              function.
@@ -466,7 +695,7 @@
              <returns>An Object containing the first output argument.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Object,System.Object,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Object,System.Object,System.Object)">
              <summary>
              Provides a single output, 3-input Objectinterface to the apply_gmm MATLAB
              function.
@@ -483,7 +712,7 @@
              <returns>An Object containing the first output argument.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Int32)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Int32)">
              <summary>
              Provides the standard 0-input Object interface to the apply_gmm MATLAB function.
              </summary>
@@ -498,7 +727,7 @@
              arguments.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Int32,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Int32,System.Object)">
              <summary>
              Provides the standard 1-input Object interface to the apply_gmm MATLAB function.
              </summary>
@@ -514,7 +743,7 @@
              arguments.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Int32,System.Object,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Int32,System.Object,System.Object)">
              <summary>
              Provides the standard 2-input Object interface to the apply_gmm MATLAB function.
              </summary>
@@ -531,7 +760,7 @@
              arguments.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Int32,System.Object,System.Object,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Int32,System.Object,System.Object,System.Object)">
              <summary>
              Provides the standard 3-input Object interface to the apply_gmm MATLAB function.
              </summary>
@@ -549,7 +778,7 @@
              arguments.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.apply_gmm(System.Int32,System.Object[]@,System.Object[],System.Object[])">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.apply_gmm(System.Int32,System.Object[]@,System.Object[],System.Object[])">
              <summary>
              Provides an interface for the apply_gmm function in which the input and output
              arguments are specified as an array of Objects.
@@ -569,7 +798,7 @@
              arguments</param>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.estimate_gmm">
              <summary>
              Provides a single output, 0-input Objectinterface to the estimate_gmm MATLAB
              function.
@@ -577,16 +806,12 @@
              <remarks>
              M-Documentation:
              ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
+             mdl = ESTIMATE_GMM(mz, data, mz_thr) - estimates basic GMM model for dataset
              </remarks>
              <returns>An Object containing the first output argument.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.estimate_gmm(System.Object)">
              <summary>
              Provides a single output, 1-input Objectinterface to the estimate_gmm MATLAB
              function.
@@ -594,17 +819,13 @@
              <remarks>
              M-Documentation:
              ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
+             mdl = ESTIMATE_GMM(mz, data, mz_thr) - estimates basic GMM model for dataset
              </remarks>
              <param name="mz">Input argument #1</param>
              <returns>An Object containing the first output argument.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Object,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.estimate_gmm(System.Object,System.Object)">
              <summary>
              Provides a single output, 2-input Objectinterface to the estimate_gmm MATLAB
              function.
@@ -612,59 +833,14 @@
              <remarks>
              M-Documentation:
              ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
+             mdl = ESTIMATE_GMM(mz, data, mz_thr) - estimates basic GMM model for dataset
              </remarks>
              <param name="mz">Input argument #1</param>
              <param name="data">Input argument #2</param>
              <returns>An Object containing the first output argument.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Object,System.Object,System.Object)">
-             <summary>
-             Provides a single output, 3-input Objectinterface to the estimate_gmm MATLAB
-             function.
-             </summary>
-             <remarks>
-             M-Documentation:
-             ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
-             </remarks>
-             <param name="mz">Input argument #1</param>
-             <param name="data">Input argument #2</param>
-             <param name="merge">Input argument #3</param>
-             <returns>An Object containing the first output argument.</returns>
-            
-        </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Object,System.Object,System.Object,System.Object)">
-             <summary>
-             Provides a single output, 4-input Objectinterface to the estimate_gmm MATLAB
-             function.
-             </summary>
-             <remarks>
-             M-Documentation:
-             ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
-             </remarks>
-             <param name="mz">Input argument #1</param>
-             <param name="data">Input argument #2</param>
-             <param name="merge">Input argument #3</param>
-             <param name="remove">Input argument #4</param>
-             <returns>An Object containing the first output argument.</returns>
-            
-        </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Int32)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.estimate_gmm(System.Int32)">
              <summary>
              Provides the standard 0-input Object interface to the estimate_gmm MATLAB
              function.
@@ -672,18 +848,14 @@
              <remarks>
              M-Documentation:
              ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
+             mdl = ESTIMATE_GMM(mz, data, mz_thr) - estimates basic GMM model for dataset
              </remarks>
              <param name="numArgsOut">The number of output arguments to return.</param>
              <returns>An Array of length "numArgsOut" containing the output
              arguments.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Int32,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.estimate_gmm(System.Int32,System.Object)">
              <summary>
              Provides the standard 1-input Object interface to the estimate_gmm MATLAB
              function.
@@ -691,11 +863,7 @@
              <remarks>
              M-Documentation:
              ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
+             mdl = ESTIMATE_GMM(mz, data, mz_thr) - estimates basic GMM model for dataset
              </remarks>
              <param name="numArgsOut">The number of output arguments to return.</param>
              <param name="mz">Input argument #1</param>
@@ -703,7 +871,7 @@
              arguments.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Int32,System.Object,System.Object)">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.estimate_gmm(System.Int32,System.Object,System.Object)">
              <summary>
              Provides the standard 2-input Object interface to the estimate_gmm MATLAB
              function.
@@ -711,11 +879,7 @@
              <remarks>
              M-Documentation:
              ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
+             mdl = ESTIMATE_GMM(mz, data, mz_thr) - estimates basic GMM model for dataset
              </remarks>
              <param name="numArgsOut">The number of output arguments to return.</param>
              <param name="mz">Input argument #1</param>
@@ -724,52 +888,7 @@
              arguments.</returns>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Int32,System.Object,System.Object,System.Object)">
-             <summary>
-             Provides the standard 3-input Object interface to the estimate_gmm MATLAB
-             function.
-             </summary>
-             <remarks>
-             M-Documentation:
-             ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
-             </remarks>
-             <param name="numArgsOut">The number of output arguments to return.</param>
-             <param name="mz">Input argument #1</param>
-             <param name="data">Input argument #2</param>
-             <param name="merge">Input argument #3</param>
-             <returns>An Array of length "numArgsOut" containing the output
-             arguments.</returns>
-            
-        </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Int32,System.Object,System.Object,System.Object,System.Object)">
-             <summary>
-             Provides the standard 4-input Object interface to the estimate_gmm MATLAB
-             function.
-             </summary>
-             <remarks>
-             M-Documentation:
-             ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
-             </remarks>
-             <param name="numArgsOut">The number of output arguments to return.</param>
-             <param name="mz">Input argument #1</param>
-             <param name="data">Input argument #2</param>
-             <param name="merge">Input argument #3</param>
-             <param name="remove">Input argument #4</param>
-             <returns>An Array of length "numArgsOut" containing the output
-             arguments.</returns>
-            
-        </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.estimate_gmm(System.Int32,System.Object[]@,System.Object[],System.Object[])">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.estimate_gmm(System.Int32,System.Object[]@,System.Object[],System.Object[])">
              <summary>
              Provides an interface for the estimate_gmm function in which the input and output
              arguments are specified as an array of Objects.
@@ -779,11 +898,7 @@
              array.<newpara></newpara>
              M-Documentation:
              ESTIMATE_GMM Estimates GMM model for given data
-             mdl = ESTIMATE_GMM(mz, data) - estimates basic GMM model for dataset
-             mdl = ESTIMATE_GMM(mz, data, merge) - allows to specify whether
-             components merging should be applied
-             mdl = ESTIMATE_GMM(mz, data, merge, remove) - allows to specify whether
-             additional shaping components should be removed
+             mdl = ESTIMATE_GMM(mz, data, mz_thr) - estimates basic GMM model for dataset
              </remarks>
              <param name="numArgsOut">The number of output arguments to return</param>
              <param name= "argsOut">Array of Object output arguments</param>
@@ -792,7 +907,475 @@
              arguments</param>
             
         </member>
-        <member name="M:MatlabAlgorithmsNative.Gmm.WaitForFiguresToDie">
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components">
+             <summary>
+             Provides a single output, 0-input Objectinterface to the
+             merge_gmm_model_components MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Object)">
+             <summary>
+             Provides a single output, 1-input Objectinterface to the
+             merge_gmm_model_components MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Object,System.Object)">
+             <summary>
+             Provides a single output, 2-input Objectinterface to the
+             merge_gmm_model_components MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Object,System.Object,System.Object)">
+             <summary>
+             Provides a single output, 3-input Objectinterface to the
+             merge_gmm_model_components MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Object,System.Object,System.Object,System.Object)">
+             <summary>
+             Provides a single output, 4-input Objectinterface to the
+             merge_gmm_model_components MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <param name="mz_thr">Input argument #4</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Int32)">
+             <summary>
+             Provides the standard 0-input Object interface to the merge_gmm_model_components
+             MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Int32,System.Object)">
+             <summary>
+             Provides the standard 1-input Object interface to the merge_gmm_model_components
+             MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Int32,System.Object,System.Object)">
+             <summary>
+             Provides the standard 2-input Object interface to the merge_gmm_model_components
+             MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Int32,System.Object,System.Object,System.Object)">
+             <summary>
+             Provides the standard 3-input Object interface to the merge_gmm_model_components
+             MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Int32,System.Object,System.Object,System.Object,System.Object)">
+             <summary>
+             Provides the standard 4-input Object interface to the merge_gmm_model_components
+             MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <param name="mz_thr">Input argument #4</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.merge_gmm_model_components(System.Int32,System.Object[]@,System.Object[],System.Object[])">
+             <summary>
+             Provides an interface for the merge_gmm_model_components function in which the
+             input and output
+             arguments are specified as an array of Objects.
+             </summary>
+             <remarks>
+             This method will allocate and return by reference the output argument
+             array.<newpara></newpara>
+             M-Documentation:
+             MERGE_GMM_MODEL_COMPONENTS
+             reduced = MERGE_GMM_MODEL_COMPONENTS(mdl, original_mz, mean_spectrum, mz_thr)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return</param>
+             <param name= "argsOut">Array of Object output arguments</param>
+             <param name= "argsIn">Array of Object input arguments</param>
+             <param name= "varArgsIn">Array of Object representing variable input
+             arguments</param>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area">
+             <summary>
+             Provides a single output, 0-input Objectinterface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Object)">
+             <summary>
+             Provides a single output, 1-input Objectinterface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Object,System.Object)">
+             <summary>
+             Provides a single output, 2-input Objectinterface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Object,System.Object,System.Object)">
+             <summary>
+             Provides a single output, 3-input Objectinterface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Int32)">
+             <summary>
+             Provides the standard 0-input Object interface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Int32,System.Object)">
+             <summary>
+             Provides the standard 1-input Object interface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Int32,System.Object,System.Object)">
+             <summary>
+             Provides the standard 2-input Object interface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Int32,System.Object,System.Object,System.Object)">
+             <summary>
+             Provides the standard 3-input Object interface to the
+             reduce_gmm_by_component_area MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_area(System.Int32,System.Object[]@,System.Object[],System.Object[])">
+             <summary>
+             Provides an interface for the reduce_gmm_by_component_area function in which the
+             input and output
+             arguments are specified as an array of Objects.
+             </summary>
+             <remarks>
+             This method will allocate and return by reference the output argument
+             array.<newpara></newpara>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_AREA
+             reduced = REDUCE_GMM_BY_COMPONENT_AREA(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return</param>
+             <param name= "argsOut">Array of Object output arguments</param>
+             <param name= "argsIn">Array of Object input arguments</param>
+             <param name= "varArgsIn">Array of Object representing variable input
+             arguments</param>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height">
+             <summary>
+             Provides a single output, 0-input Objectinterface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Object)">
+             <summary>
+             Provides a single output, 1-input Objectinterface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Object,System.Object)">
+             <summary>
+             Provides a single output, 2-input Objectinterface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Object,System.Object,System.Object)">
+             <summary>
+             Provides a single output, 3-input Objectinterface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Int32)">
+             <summary>
+             Provides the standard 0-input Object interface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Int32,System.Object)">
+             <summary>
+             Provides the standard 1-input Object interface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Int32,System.Object,System.Object)">
+             <summary>
+             Provides the standard 2-input Object interface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Int32,System.Object,System.Object,System.Object)">
+             <summary>
+             Provides the standard 3-input Object interface to the
+             reduce_gmm_by_component_height MATLAB function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="mdl">Input argument #1</param>
+             <param name="original_mz">Input argument #2</param>
+             <param name="mean_spectrum">Input argument #3</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.reduce_gmm_by_component_height(System.Int32,System.Object[]@,System.Object[],System.Object[])">
+             <summary>
+             Provides an interface for the reduce_gmm_by_component_height function in which
+             the input and output
+             arguments are specified as an array of Objects.
+             </summary>
+             <remarks>
+             This method will allocate and return by reference the output argument
+             array.<newpara></newpara>
+             M-Documentation:
+             REDUCE_GMM_BY_COMPONENT_HEIGHT
+             reduced = REDUCE_GMM_BY_COMPONENT_HEIGHT(mdl, original_mz, mean_spectrum)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return</param>
+             <param name= "argsOut">Array of Object output arguments</param>
+             <param name= "argsIn">Array of Object input arguments</param>
+             <param name= "varArgsIn">Array of Object representing variable input
+             arguments</param>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmModelling.WaitForFiguresToDie">
              <summary>
              This method will cause a MATLAB figure window to behave as a modal dialog box.
              The method will not return until all the figure windows associated with this
@@ -1313,6 +1896,273 @@
             
         </member>
         <member name="M:MatlabAlgorithmsNative.Segmentation.WaitForFiguresToDie">
+             <summary>
+             This method will cause a MATLAB figure window to behave as a modal dialog box.
+             The method will not return until all the figure windows associated with this
+             component have been closed.
+             </summary>
+             <remarks>
+             An application should only call this method when required to keep the
+             MATLAB figure window from disappearing.  Other techniques, such as calling
+             Console.ReadLine() from the application should be considered where
+             possible.</remarks>
+            
+        </member>
+        <member name="T:MatlabAlgorithmsNative.GmmFiltering">
+            <summary>
+            The GmmFiltering class provides a CLS compliant, Object (native) interface to the
+            MATLAB functions contained in the files:
+            <newpara></newpara>
+            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\DiviK\libs\miscellaneous\f
+            etch_thresholds.m
+            </summary>
+            <remarks>
+            @Version 0.0
+            </remarks>
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.#cctor">
+            <summary internal= "true">
+            The static constructor instantiates and initializes the MATLAB Runtime instance.
+            </summary>
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.#ctor">
+            <summary>
+            Constructs a new instance of the GmmFiltering class.
+            </summary>
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.Finalize">
+            <summary internal= "true">
+            Class destructor called by the CLR garbage collector.
+            </summary>
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.Dispose">
+            <summary>
+            Frees the native resources associated with this object
+            </summary>
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.Dispose(System.Boolean)">
+            <summary internal= "true">
+            Internal dispose function
+            </summary>
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.fetch_thresholds">
+             <summary>
+             Provides a single output, 0-input Objectinterface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.fetch_thresholds(System.Object)">
+             <summary>
+             Provides a single output, 1-input Objectinterface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="params0">Input argument #1</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.fetch_thresholds(System.Object,System.Object[])">
+             <summary>
+             Provides a single output, 2-input Objectinterface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="params0">Input argument #1</param>
+             <param name="varargin">Array of Objects representing the input arguments 2
+             through varargin.length+1</param>
+             <returns>An Object containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.fetch_thresholds(System.Int32)">
+             <summary>
+             Provides the standard 0-input Object interface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.fetch_thresholds(System.Int32,System.Object)">
+             <summary>
+             Provides the standard 1-input Object interface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="params0">Input argument #1</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.fetch_thresholds(System.Int32,System.Object,System.Object[])">
+             <summary>
+             Provides the standard 2-input Object interface to the fetch_thresholds MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <param name="params0">Input argument #1</param>
+             <param name="varargin">Array of Objects representing the input arguments 2
+             through varargin.length+1</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.fetch_thresholds(System.Int32,System.Object[]@,System.Object[],System.Object[])">
+             <summary>
+             Provides an interface for the fetch_thresholds function in which the input and
+             output
+             arguments are specified as an array of Objects.
+             </summary>
+             <remarks>
+             This method will allocate and return by reference the output argument
+             array.<newpara></newpara>
+             M-Documentation:
+             FETCH_THRESHOLDS Decomposes parameters into Gaussian peaks and finds
+             crossings
+             thresholds = FETCH_THRESHOLDS(params) - returns cell containing all
+             thresholds for every column of parameters. If no crossings are present,
+             no threshold will be returned for specific parameter. Parameter params
+             should be column vector with values of parameter investigates or matrix
+             consisting of such column vectors. For matrix m x n a cell 1 x n will
+             be returned where every field contains all available thresholds as
+             column vector.
+             Additional parameters:
+             - 'MaxComponents' - (default 10)
+             - 'CachePath' - (default '.')
+             - 'Cache' - default false - no cache is created.
+             - 'FigurePath' - decomposition plot is saved (default empty - no figure
+             is plotted)
+             - 'Threshold' - returns only thresholds associated with components of
+             higher amplitude (default 0)
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return</param>
+             <param name= "argsOut">Array of Object output arguments</param>
+             <param name= "argsIn">Array of Object input arguments</param>
+             <param name= "varArgsIn">Array of Object representing variable input
+             arguments</param>
+            
+        </member>
+        <member name="M:MatlabAlgorithmsNative.GmmFiltering.WaitForFiguresToDie">
              <summary>
              This method will cause a MATLAB figure window to behave as a modal dialog box.
              The method will not return until all the figure windows associated with this

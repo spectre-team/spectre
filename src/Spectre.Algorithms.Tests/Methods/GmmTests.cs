@@ -47,7 +47,7 @@ namespace Spectre.Algorithms.Tests.Methods
 			double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
             IDataset dataset = new BasicTextDataset(mz, data);
 
-			object result = _gmm.EstimateGmm(dataset, false, false);
+			object result = _gmm.EstimateGmm(dataset);
 
 			Console.WriteLine(result);
 
@@ -62,7 +62,7 @@ namespace Spectre.Algorithms.Tests.Methods
 			double[] mz = { 1, 2, 3 };
             IDataset dataset = new BasicTextDataset(mz, data);
 
-            var model = _gmm.EstimateGmm(dataset, false, false);
+            var model = _gmm.EstimateGmm(dataset);
 
 			IDataset result = _gmm.ApplyGmm(model, dataset);
 

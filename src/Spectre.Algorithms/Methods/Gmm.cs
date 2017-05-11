@@ -29,7 +29,7 @@ namespace Spectre.Algorithms.Methods
 	public class Gmm: IDisposable
 	{
 		#region Fields
-		private readonly MatlabAlgorithmsNative.Gmm _gmm;
+		private readonly MatlabAlgorithmsNative.GmmModelling _gmm;
 
 		/// <summary>
 		/// Indicates whether this instance has been disposed.
@@ -43,7 +43,7 @@ namespace Spectre.Algorithms.Methods
 		/// </summary>
 		public Gmm()
 		{
-			_gmm = new MatlabAlgorithmsNative.Gmm();
+			_gmm = new MatlabAlgorithmsNative.GmmModelling();
 		}
 		#endregion
 
@@ -61,8 +61,8 @@ namespace Spectre.Algorithms.Methods
 			ValidateDispose();
 			var matlabModel = model.MatlabStruct;
 			var applyResult = _gmm.apply_gmm(matlabModel, dataset.GetRawIntensities(), dataset.GetRawMzArray());
-		    double[,] data = (double[,]) ((MWStructArray) (model.MatlabStruct)).GetField("mu");
-            double[] mz = new double[data.GetLength(0)];
+		    var data = (double[,]) ((MWStructArray) (model.MatlabStruct)).GetField("mu");
+            var mz = new double[data.GetLength(0)];
             Buffer.BlockCopy(data, 0, mz, 0, data.GetLength(0));
             return new BasicTextDataset(mz, (double[,])applyResult, dataset.GetRawSpacialCoordinates(true));
 		}
@@ -71,17 +71,37 @@ namespace Spectre.Algorithms.Methods
 	    /// Estimates the GMM model from the data set.
 	    /// </summary>
 	    /// <param name="dataset">Input dataset.</param>
-	    /// <param name="merge">if set to <c>true</c> merges components.</param>
-	    /// <param name="remove">if set to <c>true</c> removes shaping components.</param>
 	    /// <returns>Estimated model</returns>
 	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-	    public GmmModel EstimateGmm(IDataset dataset, bool merge, bool remove)
+	    public GmmModel EstimateGmm(IDataset dataset)
 		{
 			ValidateDispose();
-			var matlabModel = _gmm.estimate_gmm(dataset.GetRawMzArray(), dataset.GetRawIntensities(), merge, remove);
+			var matlabModel = _gmm.estimate_gmm(dataset.GetRawMzArray(), dataset.GetRawIntensities());
 			var model = new GmmModel(matlabModel);
 			return model;
 		}
+
+	    public GmmModel ReduceModelByComponentArea(GmmModel model)
+	    {
+            ValidateDispose();
+	        var matlabModel = model.MatlabStruct;
+	        //var reduced = _gmm.reduce_gmm_by_component_area(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
+
+
+            throw new NotImplementedException();
+	    }
+
+	    public GmmModel ReduceModelByComponentHeight(GmmModel model)
+	    {
+            ValidateDispose();
+            throw new NotImplementedException();
+        }
+
+	    public GmmModel MergeComponents(GmmModel model)
+	    {
+            ValidateDispose();
+            throw new NotImplementedException();
+        }
 		#endregion
 
 		#region IDisposable

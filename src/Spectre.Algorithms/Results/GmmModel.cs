@@ -24,6 +24,13 @@ namespace Spectre.Algorithms.Results
 	/// </summary>
 	public class GmmModel
 	{
+        public bool IsMerged { get; }
+        public bool IsNoiseReduced { get; }
+	    public double MzMergingThreshold { get; }
+        public double[] OriginalMz { get; }
+        public double[] OriginalMeanSpectrum { get; }
+
+
 		/// <summary>
 		/// Gets the matlab GMM structure.
 		/// </summary>
