@@ -60,9 +60,9 @@ namespace Spectre.Algorithms.Methods
             var values2D = new double[valuesArray.Count(), 1];
             var i = 0;
             foreach (var value in valuesArray)
-                values2D[i++, 1] = value;
+                values2D[i++, 0] = value;
             var estimatedThresholdsCell = ((MWCellArray)_gmm.fetch_thresholds(values2D));
-            var thresholds = (double[,])estimatedThresholdsCell[0];
+            var thresholds = (double[,])estimatedThresholdsCell[1];
             return thresholds.Cast<double>().ToArray();
         }
         #endregion

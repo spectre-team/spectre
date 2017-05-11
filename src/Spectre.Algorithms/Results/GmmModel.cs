@@ -50,7 +50,7 @@ namespace Spectre.Algorithms.Results
         /// <value>
         /// The m/z merging threshold.
         /// </value>
-        public double MzMergingThreshold { get; internal set; }
+        public double? MzMergingThreshold { get; internal set; }
         /// <summary>
         /// Gets the original m/z axis.
         /// </summary>
