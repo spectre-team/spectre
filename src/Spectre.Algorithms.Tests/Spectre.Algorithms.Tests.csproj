@@ -57,7 +57,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Methods\GmmTests.cs" />
+    <Compile Include="Methods\GmmFilteringTests.cs" />
+    <Compile Include="Methods\GmmModellingTests.cs" />
     <Compile Include="Methods\PreprocessingTests.cs" />
     <Compile Include="Methods\Utils\PartitionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

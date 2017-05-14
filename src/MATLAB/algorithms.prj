@@ -92,24 +92,35 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
     <fileset.exports>
       <file>${PROJECT_ROOT}\apply_gmm.m</file>
       <file>${PROJECT_ROOT}\DiviK\libs\divik_library\divik.m</file>
+      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
       <file>${PROJECT_ROOT}\estimate_gmm.m</file>
+      <file>${PROJECT_ROOT}\merge_gmm_model_components.m</file>
       <file>${PROJECT_ROOT}\pafft.m</file>
+      <file>${PROJECT_ROOT}\reduce_gmm_by_component_area.m</file>
+      <file>${PROJECT_ROOT}\reduce_gmm_by_component_height.m</file>
       <file>${PROJECT_ROOT}\remove_baseline.m</file>
       <file>${PROJECT_ROOT}\ticnorm.m</file>
     </fileset.exports>
     <fileset.classes>
       <entity.package name="">
         <entity.class name="Preprocessing">
+          <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
           <file>${PROJECT_ROOT}\pafft.m</file>
           <file>${PROJECT_ROOT}\remove_baseline.m</file>
           <file>${PROJECT_ROOT}\ticnorm.m</file>
         </entity.class>
-        <entity.class name="Gmm">
+        <entity.class name="GmmModelling">
           <file>${PROJECT_ROOT}\apply_gmm.m</file>
           <file>${PROJECT_ROOT}\estimate_gmm.m</file>
+          <file>${PROJECT_ROOT}\merge_gmm_model_components.m</file>
+          <file>${PROJECT_ROOT}\reduce_gmm_by_component_area.m</file>
+          <file>${PROJECT_ROOT}\reduce_gmm_by_component_height.m</file>
         </entity.class>
         <entity.class name="Segmentation">
           <file>${PROJECT_ROOT}\DiviK\libs\divik_library\divik.m</file>
+        </entity.class>
+        <entity.class name="GmmFiltering">
+          <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
         </entity.class>
       </entity.package>
     </fileset.classes>
