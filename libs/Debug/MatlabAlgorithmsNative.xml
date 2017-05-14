@@ -9,14 +9,13 @@
             The Preprocessing class provides a CLS compliant, Object (native) interface to the
             MATLAB functions contained in the files:
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\DiviK\libs\miscellaneous\f
-            etch_thresholds.m
+            ..\..\src\MATLAB\DiviK\libs\miscellaneous\fetch_thresholds.m
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\pafft.m
+            ..\..\src\MATLAB\pafft.m
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\remove_baseline.m
+            ..\..\src\MATLAB\remove_baseline.m
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\ticnorm.m
+            ..\..\src\MATLAB\ticnorm.m
             </summary>
             <remarks>
             @Version 0.0
@@ -608,18 +607,15 @@
             The GmmModelling class provides a CLS compliant, Object (native) interface to the
             MATLAB functions contained in the files:
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\apply_gmm.m
+            ..\..\src\MATLAB\apply_gmm.m
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\estimate_gmm.m
+            ..\..\src\MATLAB\estimate_gmm.m
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\merge_gmm_model_components
-            .m
+            ..\..\src\MATLAB\merge_gmm_model_components.m
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\reduce_gmm_by_component_ar
-            ea.m
+            ..\..\src\MATLAB\reduce_gmm_by_component_area.m
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\reduce_gmm_by_component_he
-            ight.m
+            ..\..\src\MATLAB\reduce_gmm_by_component_height.m
             </summary>
             <remarks>
             @Version 0.0
@@ -1393,8 +1389,7 @@
             The Segmentation class provides a CLS compliant, Object (native) interface to the
             MATLAB functions contained in the files:
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\DiviK\libs\divik_library\d
-            ivik.m
+            ..\..\src\MATLAB\DiviK\libs\divik_library\divik.m
             </summary>
             <remarks>
             @Version 0.0
@@ -1913,8 +1908,7 @@
             The GmmFiltering class provides a CLS compliant, Object (native) interface to the
             MATLAB functions contained in the files:
             <newpara></newpara>
-            C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\DiviK\libs\miscellaneous\f
-            etch_thresholds.m
+            ..\..\src\MATLAB\DiviK\libs\miscellaneous\fetch_thresholds.m
             </summary>
             <remarks>
             @Version 0.0
