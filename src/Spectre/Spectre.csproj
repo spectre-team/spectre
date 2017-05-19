@@ -17,7 +17,7 @@
     <AssemblyName>Spectre</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44388</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -234,6 +234,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Msi\Heatmap.cs" />
     <Compile Include="Models\Msi\Preparation.cs" />
     <Compile Include="Models\Msi\Spectrum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

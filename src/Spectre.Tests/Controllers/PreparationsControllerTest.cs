@@ -17,6 +17,7 @@
    limitations under the License.
 */
 
+using System;
 using System.Linq;
 using NUnit.Framework;
 using Spectre.Controllers;
@@ -67,6 +68,24 @@ namespace Spectre.Tests.Controllers
             Assert.IsNotEmpty(spectrum.Intensities);
             Assert.IsNotEmpty(spectrum.Mz);
             Assert.AreEqual(spectrum.Mz.Count(), spectrum.Intensities.Count(), "Intensities and Mz counts do not match.");
+        }
+
+        [Test]
+        public void TestGetFirstPreparationSampleHeatmap()
+        {
+            const double validMzValue = 799.796609809649;
+            var heatmap = _controller.Get(1, validMzValue);
+
+            Assert.NotNull(heatmap);
+            Assert.IsInstanceOf<Heatmap>(heatmap);
+            Assert.IsNotEmpty(heatmap.Intensities);
+            Assert.IsNotEmpty(heatmap.X);
+            Assert.IsNotEmpty(heatmap.Y);
+            Assert.AreEqual(heatmap.X.Count(), heatmap.Y.Count(), "Number of coordinates of X and Y do not match.");
+            Assert.AreEqual(heatmap.Intensities.Count(), heatmap.Y.Count(), "Number of coordinates is different from number of intensities.");
+
+            Assert.Throws<ArgumentException>(() => { _controller.Get(1, -2.0); }, "Accepted negative mz value");
+            Assert.Throws<ArgumentException>(() => { _controller.Get(1, 0.0); }, "Accepted nonexistent mz value");
         }
     }
 }

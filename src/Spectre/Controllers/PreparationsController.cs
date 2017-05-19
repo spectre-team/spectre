@@ -2,7 +2,7 @@
  * PreparationsController.cs
  * Class serving GET requests for preparations.
  * 
-   Copyright 2017 Grzegorz Mrukwa
+   Copyright 2017 Grzegorz Mrukwa, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,10 +17,13 @@
    limitations under the License.
 */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Spectre.Data.Datasets;
+using Spectre.Data.Structures;
 using Spectre.Models.Msi;
 
 namespace Spectre.Controllers
@@ -73,6 +76,44 @@ namespace Spectre.Controllers
             var coordinates = dataset.GetSpatialCoordinates(spectrumId);
 
             return new Spectrum() { Id = spectrumId, Intensities = intensities, Mz = mz, X = coordinates.X, Y = coordinates.Y };
+        }
+
+        /// <summary>
+        /// Gets single heatmap of a specified preparation based on provided mz.
+        /// </summary>
+        /// <param name="id">Preparation identifier.</param>
+        /// <param name="mz">Mz value serving as heatmap basis.</param>
+        /// <returns>Heatmap</returns>
+        /// <exception cref="ArgumentException">Thrown when provided mz is lower 
+        /// than zero, or is invalid for a given dataset</exception>
+        public Heatmap Get(int id, double mz)
+        {
+            if (id != 1)
+                return null;
+
+            if (mz < 0.0)
+                throw new ArgumentException("Mz lower than zero provided");
+
+            IDataset dataset = new BasicTextDataset("C:\\spectre_data\\hnc1_tumor.txt");
+
+            int indexOfMz = dataset.GetRawMzArray().ToList().IndexOf(mz);
+
+            if(indexOfMz == -1)
+                throw new ArgumentException("Provided mz value wasn't found in the dataset");
+
+            var intensities = dataset.GetRawIntensityRow(indexOfMz);
+            var coordinates = dataset.GetRawSpacialCoordinates(true);
+
+            int[] xCoordinates = new int[intensities.Length];
+            int[] yCoordinates = new int[intensities.Length];
+
+            for (int i = 0; i < intensities.Length; i++)
+            {
+                xCoordinates[i] = coordinates[i, 0];
+                yCoordinates[i] = coordinates[i, 1];
+            }
+
+            return new Heatmap() {Mz = mz, Intensities = intensities, X = xCoordinates, Y = yCoordinates};
         }
     }
 }
