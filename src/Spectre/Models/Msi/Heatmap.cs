@@ -22,6 +22,9 @@ using System.Runtime.Serialization;
 
 namespace Spectre.Models.Msi
 {
+    /// <summary>
+    /// Provides details about a single heatmap in the dataset.
+    /// </summary>
     [DataContract]
     public class Heatmap
     {
