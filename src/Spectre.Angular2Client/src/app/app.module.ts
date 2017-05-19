@@ -22,19 +22,26 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { routing } from './app.routing';
+
 import { AppComponent } from './app.component';
 import { PreparationListComponent } from './preparation-list/preparation-list.component';
 import { PreparationService } from './preparation-list/preparation.service';
+import { PreparationsModule } from './preparation/preparations.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PreparationListComponent
+    PreparationListComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    PreparationsModule,
+    routing
   ],
   bootstrap: [AppComponent]
 })

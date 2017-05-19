@@ -25,12 +25,17 @@ import { Http, BaseRequestOptions } from '@angular/http';
 
 import { MockBackend } from '@angular/http/testing';
 
+import { RouterTestingModule } from '@angular/router/testing';
+
 describe('PreparationListComponent', () => {
   let component: PreparationListComponent;
   let fixture: ComponentFixture<PreparationListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+          RouterTestingModule
+      ],
       providers: [
           MockBackend,
           BaseRequestOptions,
