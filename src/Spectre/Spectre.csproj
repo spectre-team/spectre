@@ -234,6 +234,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Msi\Heatmap.cs" />
     <Compile Include="Models\Msi\Preparation.cs" />
     <Compile Include="Models\Msi\Spectrum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
