@@ -27,9 +27,14 @@ import { PreparationListComponent } from './preparation-list/preparation-list.co
 
 import { MockBackend } from '@angular/http/testing';
 
+import { RouterTestingModule } from '@angular/router/testing';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+          RouterTestingModule
+      ],
       providers: [
           MockBackend,
           BaseRequestOptions,
