@@ -29,12 +29,14 @@ import { PreparationListComponent } from './preparation-list/preparation-list.co
 import { PreparationService } from './preparation-list/preparation.service';
 import { PreparationsModule } from './preparation/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PlotlyComponent } from './plotly/plotly.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PreparationListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PlotlyComponent
   ],
   imports: [
     BrowserModule,
