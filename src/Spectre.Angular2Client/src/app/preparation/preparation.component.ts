@@ -30,6 +30,9 @@ import { PreparationRoutingModule } from './preparation-routing.module';
 export class PreparationComponent implements OnInit {
 
   id: number = null;
+  public Layout: any;
+  public Data: any;
+  public Options: any;
 
   constructor(
       private route: ActivatedRoute,
@@ -38,6 +41,17 @@ export class PreparationComponent implements OnInit {
   ngOnInit() {
       this.route.params.subscribe(params => {
           this.id = Number.parseInt(params['id']);
+      this.Data = [
+          {
+              x: [1, 2, 3, 4, 5],
+              y: [1, 2, 4, 8, 16],
+              name: 'Sample data',
+            //   type: 'bar'
+          }];
+      this.Layout = {
+          height: 500,
+          width: 1200
+      };
       });
   }
 
