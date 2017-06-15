@@ -17,16 +17,18 @@
    limitations under the License.
 */
 
-import { ChangeDetectorRef, Component, OnInit, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Input } from '@angular/core';
+import { GuidService } from './guid.service';
 
 declare var Plotly: any;
 
 @Component({
   selector: 'app-plotly',
   templateUrl: './plotly.component.html',
-  styleUrls: ['./plotly.component.css']
+  styleUrls: ['./plotly.component.css'],
+  providers: [ GuidService ]
 })
-export class PlotlyComponent implements OnInit {
+export class PlotlyComponent implements OnInit, AfterViewInit {
 
   @Input() data: any;
   @Input() layout: any;
@@ -35,10 +37,10 @@ export class PlotlyComponent implements OnInit {
   randomId: string;
 
   constructor(
-      private cdRef: ChangeDetectorRef
+      private cdRef: ChangeDetectorRef,
+      private guid: GuidService
   ) {
-    this.randomId = Guid.newGuid();
-    // this.randomId = '0';
+    this.randomId = guid.next();
   }
 
   ngOnInit() {
@@ -50,13 +52,4 @@ export class PlotlyComponent implements OnInit {
       this.cdRef.detectChanges();
   }
 
-}
-
-class Guid {
-    static newGuid() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    }
 }
