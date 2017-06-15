@@ -45,8 +45,7 @@ export class PreparationComponent implements OnInit {
           {
               x: [1, 2, 3, 4, 5],
               y: [1, 2, 4, 8, 16],
-              name: 'Sample data',
-            //   type: 'bar'
+              name: 'Sample data'
           }];
       this.Layout = {
           height: 500,

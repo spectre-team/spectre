@@ -1,6 +1,6 @@
 /*
- * plotly.module.ts
- * Module with component wrapping Plotly
+ * guid.service.ts
+ * Random GUID generator.
  *
    Copyright 2017 Grzegorz Mrukwa
 
@@ -17,24 +17,18 @@
    limitations under the License.
 */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Injectable } from '@angular/core';
 
-import { PlotlyComponent } from './plotly.component';
-import { GuidService } from './guid.service';
+@Injectable()
+export class GuidService {
 
-@NgModule({
-  providers: [
-    GuidService
-  ],
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-      PlotlyComponent
-  ],
-  exports: [
-      PlotlyComponent
-  ]
-})
-export class PlotlyModule { }
+  constructor() { }
+
+  next() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+      });
+  }
+
+}
