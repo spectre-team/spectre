@@ -1,6 +1,6 @@
 /*
- * preparations.module.ts
- * Module with preparations-related stuff (routing, imports declarations, etc.).
+ * plotly.module.ts
+ * Module with component wrapping Plotly
  *
    Copyright 2017 Grzegorz Mrukwa
 
@@ -19,22 +19,18 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
-import { PreparationComponent } from './preparation.component';
-import { PreparationRoutingModule } from './preparation-routing.module';
-import { PlotlyModule } from '../plotly/plotly.module';
+import { PlotlyComponent } from './plotly.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    PreparationRoutingModule,
-    PlotlyModule
+    CommonModule
   ],
   declarations: [
-    PreparationComponent
+      PlotlyComponent
   ],
-  providers: [  ]
+  exports: [
+      PlotlyComponent
+  ]
 })
-export class PreparationsModule {}
+export class PlotlyModule { }
