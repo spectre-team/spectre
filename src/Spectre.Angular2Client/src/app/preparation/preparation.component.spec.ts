@@ -26,6 +26,8 @@ import { MockActivatedRoute } from '../../mocks/mock-activated-router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 
+import { PlotlyModule } from '../plotly/plotly.module';
+
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
   let fixture: ComponentFixture<PreparationComponent>;
@@ -35,7 +37,7 @@ describe('PreparationComponent', () => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
       declarations: [ PreparationComponent ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, PlotlyModule],
       providers: [
           { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]
