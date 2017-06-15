@@ -1,6 +1,6 @@
 /*
- * plotly.module.ts
- * Module with component wrapping Plotly
+ * guid.service.sppec.ts
+ * Tests GUID-providing service.
  *
    Copyright 2017 Grzegorz Mrukwa
 
@@ -17,24 +17,24 @@
    limitations under the License.
 */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { TestBed, inject } from '@angular/core/testing';
 
-import { PlotlyComponent } from './plotly.component';
 import { GuidService } from './guid.service';
 
-@NgModule({
-  providers: [
-    GuidService
-  ],
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-      PlotlyComponent
-  ],
-  exports: [
-      PlotlyComponent
-  ]
-})
-export class PlotlyModule { }
+describe('GuidService', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [GuidService]
+    });
+  });
+
+  it('should inject service', inject([GuidService], (service: GuidService) => {
+    expect(service).toBeTruthy();
+  }));
+
+  it('should return different GUIDs', inject([GuidService], (service: GuidService) => {
+    const guid1 = service.next();
+    const guid2 = service.next();
+    expect(guid1).not.toEqual(guid2);
+  }));
+});
