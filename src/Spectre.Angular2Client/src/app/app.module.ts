@@ -30,8 +30,12 @@ import { PreparationService } from './preparation-list/preparation.service';
 import { PreparationsModule } from './preparation/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
+import { SpectrumService } from './preparation/spectrum.service';
 
 @NgModule({
+  providers: [
+      SpectrumService
+  ],
   declarations: [
     AppComponent,
     PreparationListComponent,
