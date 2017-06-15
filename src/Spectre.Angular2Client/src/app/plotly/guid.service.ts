@@ -1,8 +1,8 @@
-<!--
-   index.html
-   Anchor for the root component.
-
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
+/*
+ * guid.service.ts
+ * Random GUID generator.
+ *
+   Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,18 +15,20 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
--->
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Spectre Client</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script src="src/app/plotly/plotly-latest.min.js"></script>
-</head>
-<body>
-  <app-root>Loading...</app-root>
-</body>
-</html>
+*/
+
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class GuidService {
+
+  constructor() { }
+
+  next() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+      });
+  }
+
+}

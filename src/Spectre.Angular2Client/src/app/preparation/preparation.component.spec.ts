@@ -18,13 +18,18 @@
 */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PreparationComponent } from './preparation.component';
+import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../../mocks/mock-activated-router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
+
+import { PlotlyModule } from '../plotly/plotly.module';
+
+import { PreparationComponent } from './preparation.component';
+import { SpectrumService } from './spectrum.service';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -35,9 +40,19 @@ describe('PreparationComponent', () => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
       declarations: [ PreparationComponent ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, PlotlyModule],
       providers: [
-          { provide: ActivatedRoute, useValue: mockActivatedRoute }
+          MockBackend,
+          BaseRequestOptions,
+          {
+            provide: Http,
+            useFactory: (backendInstance: MockBackend, defaultOptions: BaseRequestOptions) => {
+              return new Http(backendInstance, defaultOptions);
+            },
+            deps: [MockBackend, BaseRequestOptions]
+          },
+          { provide: ActivatedRoute, useValue: mockActivatedRoute },
+          SpectrumService
       ]
     })
     .compileComponents();
