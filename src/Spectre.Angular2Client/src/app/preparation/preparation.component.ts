@@ -21,6 +21,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { PreparationRoutingModule } from './preparation-routing.module';
+import { SpectrumService } from './spectrum.service';
 
 @Component({
   selector: 'app-preparation',
@@ -36,21 +37,37 @@ export class PreparationComponent implements OnInit {
 
   constructor(
       private route: ActivatedRoute,
+      private spectrumService: SpectrumService
   ) { }
 
   ngOnInit() {
       this.route.params.subscribe(params => {
-          this.id = Number.parseInt(params['id']);
-      this.Data = [
-          {
-              x: [1, 2, 3, 4, 5],
-              y: [1, 2, 4, 8, 16],
-              name: 'Sample data'
-          }];
-      this.Layout = {
+        console.log('[PreparationComponent] ngOnInit');
+        this.id = Number.parseInt(params['id']);
+        console.log('[PreparationComponent] parsed id');
+        this.spectrumService.get(this.id, 1).subscribe(((spectrum) => {
+            console.log('[PreparationComponent] spectrum data read:');
+            console.log(spectrum);
+            this.Data = [{
+                    x: spectrum.mz,
+                    y: spectrum.intensities,
+                    name: `Spectrum ${spectrum.id}, (X=${spectrum.x},Y=${spectrum.y})`
+                }];
+            console.log('[PreparationComponent] assigned data:');
+            console.log(this.Data);
+        }));
+        console.log('[PreparationComponent] layout setup');
+        this.Layout = {
           height: 500,
           width: 1200
-      };
+        };
+        this.Data = [{
+                x: [1, 2, 3, 4],
+                y: [1, 4, 9, 16],
+                name: `Sample data`
+        }];
+        this.Options = [];
+        console.log('[PreparationComponent] plot layout set');
       });
   }
 
