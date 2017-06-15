@@ -20,13 +20,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
-import { PreparationComponent } from './preparation.component';
 import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';
 
+import { PreparationComponent } from './preparation.component';
+
 @NgModule({
   imports: [
+    HttpModule,
     CommonModule,
     FormsModule,
     PreparationRoutingModule,
@@ -34,7 +37,6 @@ import { PlotlyModule } from '../plotly/plotly.module';
   ],
   declarations: [
     PreparationComponent
-  ],
-  providers: [  ]
+]
 })
 export class PreparationsModule {}

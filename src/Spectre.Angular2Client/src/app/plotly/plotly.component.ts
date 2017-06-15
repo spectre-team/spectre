@@ -17,7 +17,7 @@
    limitations under the License.
 */
 
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, Input } from '@angular/core';
 import { GuidService } from './guid.service';
 
 declare var Plotly: any;
@@ -28,28 +28,47 @@ declare var Plotly: any;
   styleUrls: ['./plotly.component.css'],
   providers: [ GuidService ]
 })
-export class PlotlyComponent implements OnInit, AfterViewInit {
+export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() data: any;
   @Input() layout: any;
   @Input() options: any;
   @Input() displayRawData: boolean;
   randomId: string;
+  initialized: boolean;
 
   constructor(
       private cdRef: ChangeDetectorRef,
       private guid: GuidService
   ) {
     this.randomId = guid.next();
+    this.initialized = false;
   }
 
   ngOnInit() {
-    console.log('ngOnInit plotly-' + this.randomId);
+    console.log('[PlotlyComponent] ngOnInit plotly-' + this.randomId);
+  }
+
+  ngOnChanges() {
+    if (this.initialized) {
+      console.log('[PlotlyComponent] update plotly-' + this.randomId);
+      console.log('[PlotlyComponent] data: ');
+      console.log(this.data);
+      console.log('[PlotlyComponent] layout: ');
+      console.log(this.layout);
+      const div = document.getElementById('plotly-' + this.randomId);
+      Plotly.deleteTraces(div, 0);
+      Plotly.addTraces(div, this.data);
+      console.log('[PlotlyComponent] updated plotly-' + this.randomId);
+    }
   }
 
   ngAfterViewInit() {
+      console.log('[PlotlyComponent] nfAfterViewInit');
       Plotly.newPlot('plotly-' + this.randomId, this.data, this.layout, this.options);
+      this.initialized = true;
       this.cdRef.detectChanges();
+      console.log('[PlotlyComponent] created plotly-' + this.randomId);
   }
 
 }
