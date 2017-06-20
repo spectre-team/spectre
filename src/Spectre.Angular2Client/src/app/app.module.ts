@@ -31,9 +31,11 @@ import { PreparationsModule } from './preparation/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
 import { SpectrumService } from './preparation/spectrum.service';
+import { HeatmapService } from './preparation/heatmap.service';
 
 @NgModule({
   providers: [
+      HeatmapService,
       SpectrumService
   ],
   declarations: [

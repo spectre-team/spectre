@@ -3,8 +3,15 @@
 </p>
 
 <app-plotly
-    [data]="Data"
-    [layout]="Layout"
+    [data]="HeatmapData"
+    [layout]="HeatmapLayout"
+    [options]="Options"
+    [displayRawData]="false">
+</app-plotly>
+
+<app-plotly
+    [data]="SpectrumData"
+    [layout]="SpectrumLayout"
     [options]="Options"
     [displayRawData]="false">
 </app-plotly>
