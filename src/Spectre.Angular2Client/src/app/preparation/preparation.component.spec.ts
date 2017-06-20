@@ -30,6 +30,7 @@ import { PlotlyModule } from '../plotly/plotly.module';
 
 import { PreparationComponent } from './preparation.component';
 import { SpectrumService } from './spectrum.service';
+import { HeatmapService } from './heatmap.service';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -52,7 +53,8 @@ describe('PreparationComponent', () => {
             deps: [MockBackend, BaseRequestOptions]
           },
           { provide: ActivatedRoute, useValue: mockActivatedRoute },
-          SpectrumService
+          SpectrumService,
+          HeatmapService
       ]
     })
     .compileComponents();

@@ -82,26 +82,23 @@ namespace Spectre.Controllers
         /// Gets single heatmap of a specified preparation based on provided mz.
         /// </summary>
         /// <param name="id">Preparation identifier.</param>
-        /// <param name="mz">Mz value serving as heatmap basis.</param>
+        /// <param name="channelId">Identifier of channel.</param>
+        /// <param name="flag">Does nothing but allows to define this function.</param>
         /// <returns>Heatmap</returns>
         /// <exception cref="ArgumentException">Thrown when provided mz is lower 
         /// than zero, or is invalid for a given dataset</exception>
-        public Heatmap Get(int id, double mz)
+        public Heatmap Get(int id, int channelId, bool flag)
         {
+            if (channelId < 0)
+                throw new ArgumentException(nameof(channelId));
+
             if (id != 1)
                 return null;
 
-            if (mz < 0.0)
-                throw new ArgumentException("Mz lower than zero provided");
-
             IDataset dataset = new BasicTextDataset("C:\\spectre_data\\hnc1_tumor.txt");
 
-            int indexOfMz = dataset.GetRawMzArray().ToList().IndexOf(mz);
-
-            if(indexOfMz == -1)
-                throw new ArgumentException("Provided mz value wasn't found in the dataset");
-
-            var intensities = dataset.GetRawIntensityRow(indexOfMz);
+            var mz = dataset.GetRawMzValue(channelId);
+            var intensities = dataset.GetRawIntensityRow(channelId);
             var coordinates = dataset.GetRawSpacialCoordinates(true);
 
             int[] xCoordinates = new int[intensities.Length];
