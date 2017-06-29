@@ -42,3 +42,19 @@ deploy:
   draft: true
   on:
     CONFIGURATION: Release
+
+notifications:
+- provider: Webhook
+  url:
+    secure: V16hjhyXfcLNyhNUih9v1GBs2+lmplDr/5q28bfO5JtvCquVQYTtCpkFUicVp7cOd5FX4nrByFu0jSeU8bfVHUmup/CilGIjzv+kxltPTVA=
+  body: >-
+  {
+    "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png"
+    "activity": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}"
+    "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}{{/isPullRequest}}
+    Branch: {{branch}}
+    Commit: {{commitId}} {{commitMessage}}
+    Author: {{commitAuthor}}
+    [Details]({{buildUrl}})"
+    
+  }
