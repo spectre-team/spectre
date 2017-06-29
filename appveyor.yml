@@ -44,10 +44,10 @@ deploy:
     CONFIGURATION: Release
 
 notifications:
-# this publishes to gmrukwa's private channel in Glip
+# this publishes to Continuous Integration channel in Glip
 - provider: Webhook
   url:
-    secure: V16hjhyXfcLNyhNUih9v1GBs2+lmplDr/5q28bfO5JtvCquVQYTtCpkFUicVp7cOd5FX4nrByFu0jSeU8bfVHUmup/CilGIjzv+kxltPTVA=
+    secure: V16hjhyXfcLNyhNUih9v1Lb4wDly5r6CNNufciMrvllwt0m0rkguf6o4DY7pbdKia/vJGmErvQLdEW0MkzqsAhLWiPY7+Z6qvzFjweP8xNg=
   method: POST
   content_type: application/json
   body: >-
