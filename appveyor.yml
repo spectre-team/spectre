@@ -18,7 +18,7 @@ install:
 before_build:
 #- cmd: C:\projects\spectre\scripts\restore_nugets.bat
 build_script:
-#- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 #- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
 after_build:
 #- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
@@ -47,10 +47,12 @@ notifications:
 - provider: Webhook
   url:
     secure: V16hjhyXfcLNyhNUih9v1GBs2+lmplDr/5q28bfO5JtvCquVQYTtCpkFUicVp7cOd5FX4nrByFu0jSeU8bfVHUmup/CilGIjzv+kxltPTVA=
+  content_type: application/json
   body: >-
     {
       "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png"
-      "activity": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}"
+      "activity": "AppVeyor"
+      "title": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}"
       "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}{{/isPullRequest}}
       Branch: {{branch}}
       Commit: {{commitId}} {{commitMessage}}
