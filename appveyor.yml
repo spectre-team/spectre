@@ -54,8 +54,8 @@ notifications:
     {
       "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png",
       "activity": "AppVeyor",
-      "title": "Build {{buildVersion}} *{{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}* in {{duration}}",
-      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}\n{{/isPullRequest}}Branch: [{{branch}}](https://github.com/spectre-team/spectre/tree/{{branch}})\nCommit: [{{commitId}} {{commitMessage}}](https://github.com/spectre-team/spectre/commit/{{commitId}})\nAuthor: @{{commitAuthor}}\n[Build details]({{buildUrl}})"
+      "title": "Build {{buildVersion}} **{{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}** in {{duration}}",
+      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}\n{{/isPullRequest}}Branch: [{{branch}}](https://github.com/spectre-team/spectre/tree/{{branch}})\nCommit: [{{commitId}} {{commitMessage}}](https://github.com/spectre-team/spectre/commit/{{commitId}})\nAuthor: {{commitAuthor}}\n[Build details]({{buildUrl}})"
     }
   on_build_success: true
   on_build_failure: true
