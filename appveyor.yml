@@ -56,7 +56,7 @@ notifications:
       "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png",
       "activity": "AppVeyor",
       "title": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}",
-      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}{{/isPullRequest}} Branch: {{branch}} Commit: {{commitId}} {{commitMessage}} Author: {{commitAuthor}} [Details]({{buildUrl}})"
+      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}\n{{/isPullRequest}}Branch: {{branch}}\nCommit: {{commitId}} {{commitMessage}}\nAuthor: {{commitAuthor}}\n[Build details]({{buildUrl}})"
     }
   on_build_success: true
   on_build_failure: true
