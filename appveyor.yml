@@ -9,54 +9,53 @@ assembly_info:
 platform: x64
 configuration:
   - Debug
-#  - Release
+  - Release
 services: iis
 
 install:
-#- ps: C:\projects\spectre\scripts\InstallNode.ps1
+- ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 before_build:
 - cmd: C:\projects\spectre\scripts\restore_nugets.bat
 build_script:
 - cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-#- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
+- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
 after_build:
-#- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
-#- cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient
+- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
+- cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient
 
 test_script:
-#- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
-#- cmd: C:\projects\spectre\scripts\test_frontend.bat
-#- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
+- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
+- cmd: C:\projects\spectre\scripts\test_frontend.bat
+- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
 
-#artifacts:
-#- path: DiviK.zip
-#  name: DivikExecutables
+artifacts:
+- path: DiviK.zip
+  name: DivikExecutables
 
-#deploy:
-#- provider: GitHub
-#  release: Spectre-v$(appveyor_build_version)
-#  auth_token:
-#    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-#  artifact: DivikExecutables
-#  draft: true
-#  on:
-#    CONFIGURATION: Release
+deploy:
+- provider: GitHub
+  release: Spectre-v$(appveyor_build_version)
+  auth_token:
+    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
+  artifact: DivikExecutables
+  draft: true
+  on:
+    CONFIGURATION: Release
 
 notifications:
+# this publishes to gmrukwa's private channel in Glip
 - provider: Webhook
   url:
     secure: V16hjhyXfcLNyhNUih9v1GBs2+lmplDr/5q28bfO5JtvCquVQYTtCpkFUicVp7cOd5FX4nrByFu0jSeU8bfVHUmup/CilGIjzv+kxltPTVA=
   method: POST
-#  headers:
-#    Content-Type: application/json
   content_type: application/json
   body: >-
     {
       "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png",
       "activity": "AppVeyor",
-      "title": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}",
-      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}\n{{/isPullRequest}}Branch: {{branch}}\nCommit: {{commitId}} {{commitMessage}}\nAuthor: {{commitAuthor}}\n[Build details]({{buildUrl}})"
+      "title": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}} in {{duration}}",
+      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}\n{{/isPullRequest}}Branch: [{{branch}}](https://github.com/spectre-team/spectre/tree/{{branch}})\nCommit: [{{commitId}} {{commitMessage}}](https://github.com/spectre-team/spectre/commit/{{commitId}})\nAuthor: {{commitAuthor}}\n[Build details]({{buildUrl}})"
     }
   on_build_success: true
   on_build_failure: true
