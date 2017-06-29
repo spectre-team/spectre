@@ -45,9 +45,11 @@ test_script:
 
 notifications:
 - provider: Webhook
-  url: https://hooks.glip.com/webhook/529ac2aa-010d-4f5f-bf15-d49ea8091196
-#    secure: V16hjhyXfcLNyhNUih9v1GBs2+lmplDr/5q28bfO5JtvCquVQYTtCpkFUicVp7cOd5FX4nrByFu0jSeU8bfVHUmup/CilGIjzv+kxltPTVA=
+  url:
+    secure: V16hjhyXfcLNyhNUih9v1GBs2+lmplDr/5q28bfO5JtvCquVQYTtCpkFUicVp7cOd5FX4nrByFu0jSeU8bfVHUmup/CilGIjzv+kxltPTVA=
   method: POST
+  headers:
+    Content-Type: application/json
   content_type: application/json
   body: >-
     {
