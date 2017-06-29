@@ -13,35 +13,35 @@ configuration:
 services: iis
 
 install:
-- ps: C:\projects\spectre\scripts\InstallNode.ps1
+#- ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 before_build:
-- cmd: C:\projects\spectre\scripts\restore_nugets.bat
+#- cmd: C:\projects\spectre\scripts\restore_nugets.bat
 build_script:
-- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
+#- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+#- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
 after_build:
-- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
-- cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient
+#- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
+#- cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient
 
 test_script:
-- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
-- cmd: C:\projects\spectre\scripts\test_frontend.bat
-- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
+#- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
+#- cmd: C:\projects\spectre\scripts\test_frontend.bat
+#- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
 
-artifacts:
-- path: DiviK.zip
-  name: DivikExecutables
+#artifacts:
+#- path: DiviK.zip
+#  name: DivikExecutables
 
-deploy:
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: DivikExecutables
-  draft: true
-  on:
-    CONFIGURATION: Release
+#deploy:
+#- provider: GitHub
+#  release: Spectre-v$(appveyor_build_version)
+#  auth_token:
+#    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
+#  artifact: DivikExecutables
+#  draft: true
+#  on:
+#    CONFIGURATION: Release
 
 notifications:
 - provider: Webhook
@@ -57,3 +57,6 @@ notifications:
       Author: {{commitAuthor}}
       [Details]({{buildUrl}})"
     }
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
