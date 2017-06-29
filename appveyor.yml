@@ -48,19 +48,15 @@ notifications:
   url:
     secure: V16hjhyXfcLNyhNUih9v1GBs2+lmplDr/5q28bfO5JtvCquVQYTtCpkFUicVp7cOd5FX4nrByFu0jSeU8bfVHUmup/CilGIjzv+kxltPTVA=
   method: POST
-  headers:
-    Content-Type: application/json
+#  headers:
+#    Content-Type: application/json
   content_type: application/json
   body: >-
     {
       "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png",
       "activity": "AppVeyor",
       "title": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}",
-      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}{{/isPullRequest}}
-      Branch: {{branch}}
-      Commit: {{commitId}} {{commitMessage}}
-      Author: {{commitAuthor}}
-      [Details]({{buildUrl}})"
+      "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}{{/isPullRequest}} Branch: {{branch}} Commit: {{commitId}} {{commitMessage}} Author: {{commitAuthor}} [Details]({{buildUrl}})"
     }
   on_build_success: true
   on_build_failure: true
