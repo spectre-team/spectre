@@ -9,7 +9,7 @@ assembly_info:
 platform: x64
 configuration:
   - Debug
-  - Release
+#  - Release
 services: iis
 
 install:
@@ -51,9 +51,9 @@ notifications:
   content_type: application/json
   body: >-
     {
-      "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png"
-      "activity": "AppVeyor"
-      "title": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}"
+      "icon": "https://www.appveyor.com/assets/img/appveyor-logo-256.png",
+      "activity": "AppVeyor",
+      "title": "Build {{buildVersion}} {{#failed}}failed{{/failed}}{{#passed}}passed{{/passed}}",
       "body": "{{#isPullRequest}}Pull request: {{pullRequestId}}{{/isPullRequest}}
       Branch: {{branch}}
       Commit: {{commitId}} {{commitMessage}}
