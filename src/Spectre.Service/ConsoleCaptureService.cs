@@ -30,6 +30,10 @@ namespace Spectre.Service
     {
         #region Fields
         /// <summary>
+        /// Minimal interval which should suffice for updates without scheduling too much jobs.
+        /// </summary>
+        public const double MinimalReasonableUpdateInterval = 50;
+        /// <summary>
         /// The internal writer.
         /// </summary>
         private readonly StringWriter _writer;
@@ -56,8 +60,11 @@ namespace Spectre.Service
         /// Initializes a new instance of the <see cref="ConsoleCaptureService"/> class.
         /// </summary>
         /// <param name="updateInterval">The update interval.</param>
+        /// <exception cref="TooSmallUpdateIntervalException">updateInterval lower than MinimalReasonableUpdateInterval</exception>
         public ConsoleCaptureService(double updateInterval=1000.0)
         {
+            if (updateInterval < MinimalReasonableUpdateInterval)
+                throw new TooSmallUpdateIntervalException(updateInterval);
             _stdout = Console.Out;
             var builder = new StringBuilder();
             _writer = new StringWriter(builder);
