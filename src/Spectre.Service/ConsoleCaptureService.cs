@@ -19,8 +19,9 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Timers;
+using System.Threading;
 using Spectre.Service.Abstract;
+using Timer = System.Timers.Timer;
 
 namespace Spectre.Service
 {
@@ -41,6 +42,10 @@ namespace Spectre.Service
         /// </summary>
         private readonly Timer _timer;
         /// <summary>
+        /// Timer update interval.
+        /// </summary>
+        private readonly double _updateInterval;
+        /// <summary>
         /// If true, instance is useless.
         /// </summary>
         private bool _disposed;
@@ -57,7 +62,8 @@ namespace Spectre.Service
             var builder = new StringBuilder();
             _writer = new StringWriter(builder);
             Console.SetOut(_writer);
-            _timer = new Timer(updateInterval);
+            _updateInterval = updateInterval;
+            _timer = new Timer(_updateInterval);
             Content = string.Empty;
             _timer.Elapsed += (sender, args) =>
             {
@@ -90,6 +96,8 @@ namespace Spectre.Service
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
+
+            Thread.Sleep((int)_updateInterval + 1);
 
             Console.SetOut(_stdout);
             if (disposing)
