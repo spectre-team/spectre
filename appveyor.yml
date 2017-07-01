@@ -25,6 +25,7 @@ after_build:
 - cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient
 
 test_script:
+- cmd: C:\projects\spectre\scripts\test_native_code.bat
 - cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
 - cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
