@@ -18,11 +18,15 @@ limitations under the License.
 */
 
 #include "Partition.h"
+#include <exception>
 
 namespace Spectre::libClustering
 {
-	Partition::Partition(gsl::span<unsigned int> partition)
+	Partition::Partition(gsl::span<unsigned int> partition) : m_Partition(partition.size())
 	{
+		if (partition.data() == nullptr)
+			throw std::invalid_argument("The input partition is null");
+
 		std::map<unsigned int, int> labelsDictionary;
 
 		int currentIntLabel = 1;
@@ -30,9 +34,9 @@ namespace Spectre::libClustering
 			if (labelsDictionary.find(label) == labelsDictionary.end())
 				labelsDictionary.emplace(label, currentIntLabel++);
 
-		m_Partition.reserve(partition.size());
 		for (int i = 0; i < partition.size(); i++)
-			m_Partition.push_back(labelsDictionary[partition[i]]);
+			m_Partition[i] = labelsDictionary[partition[i]];
+
 	}
 
 	const std::vector<unsigned int>& Partition::Get() const
@@ -42,8 +46,8 @@ namespace Spectre::libClustering
 
 	bool Partition::Compare(const Partition & lhs, const Partition & rhs, double tolerance)
 	{
-		auto lhsPartition = lhs.Get();
-		auto rhsPartition = rhs.Get();
+		auto& lhsPartition = lhs.Get();
+		auto& rhsPartition = rhs.Get();
 
 		if (lhsPartition.size() != rhsPartition.size())
 			return false;
@@ -52,7 +56,7 @@ namespace Spectre::libClustering
 		size_t length = lhsPartition.size();
 
 		for (int i = 0; i < length; i++)
-			if (lhsPartition.at(i) == rhsPartition.at(i))
+			if (lhsPartition[i] == rhsPartition[i])
 				++matchesCount;
 
 		double compatibilityRate = matchesCount / (double)length;

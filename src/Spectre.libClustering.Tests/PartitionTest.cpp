@@ -5,6 +5,7 @@
 #include <gsl.h>
 #include <vector>
 #include <algorithm>
+#include <exception>
 #include "Partition.h"
 
 namespace Spectre::libClustering::Tests
@@ -22,15 +23,15 @@ namespace Spectre::libClustering::Tests
 
 	};
 
-	TEST_F(PartitionTest, NotFailsOnNull)
+	TEST_F(PartitionTest, fails_on_null)
 	{
-		ASSERT_NO_FATAL_FAILURE({
+		ASSERT_THROW({
 			Partition test(nullptr);
-		}) 
-			<< "Creation from null data caused fatal failure.";
+		}, std::invalid_argument) 
+			<< "Creation from null data did not throw exception.";
 	}
 
-	TEST_F(PartitionTest, SimplifyToNotEmpty)
+	TEST_F(PartitionTest, simplify_to_not_empty)
 	{
 		Partition test(testData);
 		auto result = test.Get();
@@ -38,7 +39,7 @@ namespace Spectre::libClustering::Tests
 			<< "Sequence has been simplified to empty partition.";
 	}
 
-	TEST_F(PartitionTest, SimplifySortsLabels)
+	TEST_F(PartitionTest, simplify_sorts_labels)
 	{
 		Partition test(testData);
 		auto result = test.Get();
@@ -46,7 +47,7 @@ namespace Spectre::libClustering::Tests
 			<< "Simplification does not sort the labels.";
 	}
 
-	TEST_F(PartitionTest, ComparisonDifferentLengths)
+	TEST_F(PartitionTest, comparison_different_lengths)
 	{
 		Partition test1(testData);
 		Partition test2(std::vector<unsigned int>(testData.begin(), testData.end() - 1));
@@ -54,14 +55,14 @@ namespace Spectre::libClustering::Tests
 			<< "Marked equal on partition length mismatch.";
 	}
 
-	TEST_F(PartitionTest, ComparisonEqualPartitionsNoTolerance)
+	TEST_F(PartitionTest, comparison_equal_partitions_no_tolerance)
 	{
 		Partition test(testData);
 		ASSERT_EQ(test, test)
 			<< "Marked not equal on comparison of the same instance.";
 	}
 
-	TEST_F(PartitionTest, ComparisonNotEqualPartitionsNoTolerance)
+	TEST_F(PartitionTest, comparison_not_equal_partitions_no_tolerance)
 	{
 		Partition test1(testData);
 		std::vector<unsigned int> testData2 = { 1, 2, 3, 3, 4, 5, 6, 7 };
@@ -70,7 +71,7 @@ namespace Spectre::libClustering::Tests
 			<< "Marked equal on comparison of different data.";
 	}
 
-	TEST_F(PartitionTest, ComparisonEqualPartitionsMixedLabelsNoTolerance)
+	TEST_F(PartitionTest, comparison_equal_partitions_mixed_labels_no_tolerance)
 	{
 		Partition test1(testData);
 		std::vector<unsigned int> testData2 = { 8, 7, 6, 5, 4, 3, 2, 1 };
@@ -79,7 +80,7 @@ namespace Spectre::libClustering::Tests
 			<< "Comparison is label-sensitive.";
 	}
 
-	TEST_F(PartitionTest, ComparisonEqualPartitionsWithTolerance)
+	TEST_F(PartitionTest, comparison_equal_partitions_with_tolerance)
 	{
 		Partition test1(testData);
 		std::vector<unsigned int> testData2 = testData;
@@ -89,7 +90,7 @@ namespace Spectre::libClustering::Tests
 			<< "Comparison is tolerance insensitive.";
 	}
 
-	TEST_F(PartitionTest, ComparisonNotEqualPartitionsWithTolerance)
+	TEST_F(PartitionTest, comparison_not_equal_partitions_with_tolerance)
 	{
 		Partition test1(testData);
 		std::vector<unsigned int> testData2 = { 2, 3, 3, 5, 5, 7, 7, 9 };
@@ -98,7 +99,7 @@ namespace Spectre::libClustering::Tests
 			<< "Comparison did not capture inequality.";
 	}
 
-	TEST_F(PartitionTest, ComparisonEqualPartitionsMixedLabelsWithTolerance)
+	TEST_F(PartitionTest, comparison_equal_partitions_mixed_labels_with_tolerance)
 	{
 		Partition test1(testData);
 		std::vector<unsigned int> testData2 = { 8, 7, 6, 5, 4, 3, 2, 2 };
