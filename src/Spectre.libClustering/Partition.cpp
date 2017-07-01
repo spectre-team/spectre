@@ -59,19 +59,19 @@ namespace Spectre::libClustering
 			if (lhsPartition[i] == rhsPartition[i])
 				++matchesCount;
 
-		double compatibilityRate = matchesCount / (double)length;
+		double compatibilityRate = matchesCount / static_cast<double>(length);
 		double requiredCompatibilityRate = 1 - tolerance;
 
 		return requiredCompatibilityRate <= compatibilityRate;
 	}
 
-	bool operator==(const Partition & lhs, const Partition & rhs)
+	bool Partition::operator==(const Partition & other) const
 	{
-		return Partition::Compare(lhs, rhs);
+		return Compare(*this, other);
 	}
 
-	bool operator!=(const Partition & lhs, const Partition & rhs)
+	bool Partition::operator!=(const Partition & other) const
 	{
-		return !(lhs == rhs);
+		return !(*this == other);
 	}
 }

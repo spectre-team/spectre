@@ -41,7 +41,7 @@ namespace Spectre::libClustering::Tests
 
 	TEST_F(PartitionTest, simplify_sorts_labels)
 	{
-		Partition test(testData);
+		Partition test(std::vector<unsigned int>({ 5, 6, 8, 4, 1, 2, 7, 3 }));
 		auto result = test.Get();
 		ASSERT_TRUE(std::is_sorted(result.begin(), result.end()))
 			<< "Simplification does not sort the labels.";

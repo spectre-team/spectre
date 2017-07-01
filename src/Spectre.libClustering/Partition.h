@@ -42,7 +42,7 @@ namespace Spectre::libClustering
 		/// Constructor taking partition data and computing its simplified version.
 		/// </summary>
 		/// <param name="partition">Input partition data.</param>
-		Partition(gsl::span<unsigned int> partition);
+		explicit Partition(gsl::span<unsigned int> partition);
 
 		/// <summary>
 		/// Getter for simplified partition data.
@@ -57,20 +57,18 @@ namespace Spectre::libClustering
 		/// <param name="rhs">The second partition.</param>
 		/// <param name="tolerance">The tolerance rate of mismatch.</param>
 		static bool Compare(const Partition &lhs, const Partition &rhs, double tolerance = 0);
+	
+		/// <summary>
+		/// Equality operator. Compares with tolerance = 0.
+		/// </summary>
+		/// <param name="other">The second partition.</param>
+		bool operator==(const Partition& other) const;
 
 		/// <summary>
-		/// Overloaded equality operator. Compares with tolerance = 0.
+		/// Inequality operator. Compares with tolerance = 0.
 		/// </summary>
-		/// <param name="lhs">The first partition.</param>
-		/// <param name="rhs">The second partition.</param>
-		friend bool operator== (const Partition &lhs, const Partition &rhs);
-
-		/// <summary>
-		/// Overloaded inequality operator. Compares with tolerance = 0.
-		/// </summary>
-		/// <param name="lhs">The first partition.</param>
-		/// <param name="rhs">The second partition.</param>
-		friend bool operator!= (const Partition &lhs, const Partition &rhs);
+		/// <param name="other">The second partition.</param>
+		bool operator!=(const Partition& other) const;
 
 	private:
 		std::vector<unsigned int> m_Partition;
