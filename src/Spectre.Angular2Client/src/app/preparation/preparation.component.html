@@ -2,16 +2,10 @@
   preparation {{id}} works!
 </p>
 
-<app-plotly
-    [data]="HeatmapData"
-    [layout]="HeatmapLayout"
-    [options]="Options"
-    [displayRawData]="false">
-</app-plotly>
+<app-heatmap
+  [id]=id>
+</app-heatmap>
 
-<app-plotly
-    [data]="SpectrumData"
-    [layout]="SpectrumLayout"
-    [options]="Options"
-    [displayRawData]="false">
-</app-plotly>
+<app-spectrum
+  [id]=id>
+</app-spectrum>

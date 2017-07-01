@@ -26,6 +26,8 @@ import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';
 
 import { PreparationComponent } from './preparation.component';
+import {HeatmapComponent} from '../heatmap/heatmap.component';
+import {SpectrumComponent} from '../spectrum/spectrum.component';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { PreparationComponent } from './preparation.component';
     PlotlyModule
   ],
   declarations: [
-    PreparationComponent
+    PreparationComponent,
+    HeatmapComponent,
+    SpectrumComponent
 ]
 })
 export class PreparationsModule {}
