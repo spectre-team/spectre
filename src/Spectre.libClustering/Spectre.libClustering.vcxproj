@@ -14,6 +14,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArgumentNullException.h" />
     <ClInclude Include="Partition.h" />
   </ItemGroup>
   <ItemGroup>

@@ -18,14 +18,16 @@ limitations under the License.
 */
 
 #include "Partition.h"
-#include <exception>
+#include "ArgumentNullException.h"
+
+#include <map>
 
 namespace Spectre::libClustering
 {
 	Partition::Partition(gsl::span<unsigned int> partition) : m_Partition(partition.size())
 	{
 		if (partition.data() == nullptr)
-			throw std::invalid_argument("The input partition is null");
+			throw ArgumentNullException("partition");
 
 		std::map<unsigned int, int> labelsDictionary;
 

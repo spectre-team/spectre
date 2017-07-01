@@ -1,12 +1,11 @@
 #define GTEST_LANG_CXX11 1
 
-#include <gtest\gtest.h>
-#include <gtest\gtest-spi.h>
+#include <gtest/gtest.h>
 #include <gsl.h>
 #include <vector>
 #include <algorithm>
-#include <exception>
 #include "Partition.h"
+#include "ArgumentNullException.h"
 
 namespace Spectre::libClustering::Tests
 {
@@ -16,7 +15,7 @@ namespace Spectre::libClustering::Tests
 
 		std::vector<unsigned int> testData;
 
-		virtual void SetUp()
+		virtual void SetUp() override
 		{
 			testData = { 1, 2, 3, 4, 5, 6, 7, 8 };
 		}
@@ -27,7 +26,7 @@ namespace Spectre::libClustering::Tests
 	{
 		ASSERT_THROW({
 			Partition test(nullptr);
-		}, std::invalid_argument) 
+		}, ArgumentNullException) 
 			<< "Creation from null data did not throw exception.";
 	}
 
@@ -41,7 +40,8 @@ namespace Spectre::libClustering::Tests
 
 	TEST_F(PartitionTest, simplify_sorts_labels)
 	{
-		Partition test(std::vector<unsigned int>({ 5, 6, 8, 4, 1, 2, 7, 3 }));
+		auto unsorted = std::vector<unsigned int>({ 5, 6, 8, 4, 1, 2, 7, 3 });
+		Partition test(unsorted);
 		auto result = test.Get();
 		ASSERT_TRUE(std::is_sorted(result.begin(), result.end()))
 			<< "Simplification does not sort the labels.";
@@ -50,7 +50,8 @@ namespace Spectre::libClustering::Tests
 	TEST_F(PartitionTest, comparison_different_lengths)
 	{
 		Partition test1(testData);
-		Partition test2(std::vector<unsigned int>(testData.begin(), testData.end() - 1));
+		auto shorter = std::vector<unsigned int>(testData.begin(), testData.end() - 1);
+		Partition test2(shorter);
 		ASSERT_NE(test1, test2)
 			<< "Marked equal on partition length mismatch.";
 	}
