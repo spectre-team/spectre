@@ -29,8 +29,10 @@ import { Observable } from 'rxjs/Observable';
 import { PlotlyModule } from '../plotly/plotly.module';
 
 import { PreparationComponent } from './preparation.component';
-import { SpectrumService } from './spectrum.service';
-import { HeatmapService } from './heatmap.service';
+import { SpectrumService } from '../spectrum/spectrum.service';
+import { HeatmapService } from '../heatmap/heatmap.service';
+import {SpectrumComponent} from '../spectrum/spectrum.component';
+import {HeatmapComponent} from '../heatmap/heatmap.component';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -40,7 +42,7 @@ describe('PreparationComponent', () => {
   beforeEach(async(() => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
-      declarations: [ PreparationComponent ],
+      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent],
       imports: [RouterTestingModule, PlotlyModule],
       providers: [
           MockBackend,

@@ -30,8 +30,8 @@ import { PreparationService } from './preparation-list/preparation.service';
 import { PreparationsModule } from './preparation/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
-import { SpectrumService } from './preparation/spectrum.service';
-import { HeatmapService } from './preparation/heatmap.service';
+import { SpectrumService } from './spectrum/spectrum.service';
+import { HeatmapService } from './heatmap/heatmap.service';
 
 @NgModule({
   providers: [
