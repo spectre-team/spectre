@@ -125,9 +125,6 @@
     <ClInclude Include="IDataset.h" />
     <ClInclude Include="IReadOnlyDataset.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Dataset.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
