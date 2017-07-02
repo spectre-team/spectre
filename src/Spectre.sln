@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering", "Sp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering.Tests", "Spectre.libClustering.Tests\Spectre.libClustering.Tests.vcxproj", "{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libDataset", "Spectre.libDataset\Spectre.libDataset.vcxproj", "{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGaussianMixtureModelling.Tests", "Spectre.libGaussianMixtureModelling.Tests\Spectre.libGaussianMixtureModelling.Tests.vcxproj", "{2185C120-7B01-4E2E-B200-858A2D25C715}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGaussianMixtureModelling", "Spectre.libGaussianMixtureModelling\Spectre.libGaussianMixtureModelling.vcxproj", "{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}"
@@ -159,6 +161,10 @@ Global
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}.Release|x64.ActiveCfg = Release|x64
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}.Release|x64.Build.0 = Release|x64
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}.Release|x86.ActiveCfg = Release|x64
+		{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}.Debug|x64.ActiveCfg = Debug|x64
+		{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}.Debug|x64.Build.0 = Debug|x64
+		{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}.Release|x64.ActiveCfg = Release|x64
+		{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
