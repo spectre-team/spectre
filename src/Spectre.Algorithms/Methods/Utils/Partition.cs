@@ -38,7 +38,7 @@ namespace Spectre.Algorithms.Methods.Utils
         /// <returns><value>true</value>, if partitions match; <value>false</value> otherwise.</returns>
         /// <exception cref="System.ArgumentException">Lengths of partitions differ.</exception>
         /// <exception cref="ArgumentNullException">Any of partitions is null.</exception>
-        public static bool Compare<T1,T2>(IEnumerable<T1> partition1, IEnumerable<T2> partition2, double tolerance = 0)
+        public static bool Compare<T1,T2>(IEnumerable<T1> partition1, IEnumerable<T2> partition2, double tolerance)
         {
             if(partition1 == null)
                 throw new ArgumentNullException(nameof(partition1));

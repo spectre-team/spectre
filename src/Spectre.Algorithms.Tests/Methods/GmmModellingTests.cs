@@ -46,7 +46,7 @@ namespace Spectre.Algorithms.Tests.Methods
 		[Test]
 		public void EstimateGmm()
 		{
-			IDataset dataset = new BasicTextDataset(mz, data);
+			IDataset dataset = new BasicTextDataset(mz, data, null);
 
 			var result = _gmm.EstimateGmm(dataset);
 
@@ -69,7 +69,7 @@ namespace Spectre.Algorithms.Tests.Methods
 		[Test]
 		public void ApplyGmm()
 		{
-			IDataset dataset = new BasicTextDataset(mz, data);
+			IDataset dataset = new BasicTextDataset(mz, data, null);
 
             var model = _gmm.EstimateGmm(dataset);
 
@@ -84,7 +84,7 @@ namespace Spectre.Algorithms.Tests.Methods
 	    [Test]
 	    public void ReduceByHeight()
 	    {
-            IDataset dataset = new BasicTextDataset(mz, data);
+            IDataset dataset = new BasicTextDataset(mz, data, null);
 
             var model = _gmm.EstimateGmm(dataset);
 
@@ -111,7 +111,7 @@ namespace Spectre.Algorithms.Tests.Methods
 	    [Test]
 	    public void ReduceByArea()
 	    {
-            IDataset dataset = new BasicTextDataset(mz, data);
+            IDataset dataset = new BasicTextDataset(mz, data, null);
 
             var model = _gmm.EstimateGmm(dataset);
 
@@ -138,7 +138,7 @@ namespace Spectre.Algorithms.Tests.Methods
 	    [Test]
 	    public void MergeComonents()
 	    {
-            IDataset dataset = new BasicTextDataset(mz, data);
+            IDataset dataset = new BasicTextDataset(mz, data, null);
 
             var model = _gmm.EstimateGmm(dataset);
 

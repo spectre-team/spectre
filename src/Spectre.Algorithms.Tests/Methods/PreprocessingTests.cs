@@ -45,7 +45,7 @@ namespace Spectre.Algorithms.Tests.Methods
 			double[] mz = { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 };
 			double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
-            IDataset dataset = new BasicTextDataset(mz, data);
+            IDataset dataset = new BasicTextDataset(mz, data, null);
 
             IDataset result = _preprocessing.RemoveBaseline(dataset);
 
@@ -58,7 +58,7 @@ namespace Spectre.Algorithms.Tests.Methods
 		{
 			double[] mz = { 1, 1, 1 };
 			double[,] data = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
-            IDataset dataset = new BasicTextDataset(mz, data);
+            IDataset dataset = new BasicTextDataset(mz, data, null);
 
             IDataset result = _preprocessing.AlignPeaksFft(dataset);
 
@@ -72,7 +72,7 @@ namespace Spectre.Algorithms.Tests.Methods
             double[] mz = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             double[,] data = { { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 },
 				{ 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 }, { 1.1, 1.2, 0.97, 1.07, 1.02, 5, 1.2, 1.5, 1.6, 1.2 } };
-            IDataset dataset = new BasicTextDataset(mz, data);
+            IDataset dataset = new BasicTextDataset(mz, data, null);
 
             IDataset result = _preprocessing.NormalizeByTic(dataset);
 
