@@ -70,13 +70,15 @@ namespace Spectre.Algorithms.Tests.Methods.Utils
         #endregion
 
         #region Compare
+        private const double DefaultTolerance = 0.0;
+
         [Test]
         public void IntPartitionComparisonThrowExceptionOnNull()
         {
             var notNull = new[] {1};
-            Assert.Throws<ArgumentNullException>(() => Partition.Compare<int, int>(null, null));
-            Assert.Throws<ArgumentNullException>(() => Partition.Compare<int, int>(notNull, null));
-            Assert.Throws<ArgumentNullException>(() => Partition.Compare<int, int>(null, notNull));
+            Assert.Throws<ArgumentNullException>(() => Partition.Compare<int, int>(null, null, DefaultTolerance));
+            Assert.Throws<ArgumentNullException>(() => Partition.Compare<int, int>(notNull, null, DefaultTolerance));
+            Assert.Throws<ArgumentNullException>(() => Partition.Compare<int, int>(null, notNull, DefaultTolerance));
         }
 
         [Test]
@@ -84,7 +86,7 @@ namespace Spectre.Algorithms.Tests.Methods.Utils
         {
             var partition = new[] { 1, 2 };
             var another = new[] { 1, 1, 1 };
-            Assert.Throws<ArgumentException>(() => Partition.Compare(partition, another),
+            Assert.Throws<ArgumentException>(() => Partition.Compare(partition, another, DefaultTolerance),
                 "Does not throw on partition length mismatch.");
         }
 
@@ -92,7 +94,7 @@ namespace Spectre.Algorithms.Tests.Methods.Utils
         public void IntEqualPartitionComparisonWithoutTolerance()
         {
             var partition = new[] {1, 2};
-            var result = Partition.Compare(partition, partition);
+            var result = Partition.Compare(partition, partition, 0);
             Assert.True(result, "The same instance found unequal.");
         }
 
@@ -101,7 +103,7 @@ namespace Spectre.Algorithms.Tests.Methods.Utils
         {
             var partition = new[] { 1, 2 };
             var another = new[] {1, 1};
-            var result = Partition.Compare(partition, another);
+            var result = Partition.Compare(partition, another, 0);
             Assert.False(result, "Another partition found equal.");
         }
 
@@ -110,7 +112,7 @@ namespace Spectre.Algorithms.Tests.Methods.Utils
         {
             var partition = new[] {1, 2, 2};
             var equalOne = new[] {2, 1, 1};
-            var result = Partition.Compare(partition, equalOne);
+            var result = Partition.Compare(partition, equalOne, 0);
             Assert.True(result, "Equality is label-sensitive.");
         }
 
@@ -119,7 +121,7 @@ namespace Spectre.Algorithms.Tests.Methods.Utils
         {
             var partition = new[] { 1, 2, 3, 1 };
             var equalOne = new[] { "Ala", "nie ma", "kota", "Ala" };
-            var result = Partition.Compare(partition, equalOne);
+            var result = Partition.Compare(partition, equalOne, 0);
             Assert.True(result, "Equality is type-sensitive.");
         }
 

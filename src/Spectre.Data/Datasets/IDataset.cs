@@ -69,7 +69,7 @@ namespace Spectre.Data.Datasets
         /// <param name="mz">Array of m/z values.</param>
         /// <param name="data">Multidimensional array of intensity values.</param>
         /// <param name="coordinates">Spatial coordinates of input spectra.</param>
-        void CreateFromRawData(double[] mz, double[,] data, int[,] coordinates = null);
+        void CreateFromRawData(double[] mz, double[,] data, int[,] coordinates);
         /// <summary>
         /// Method for appending new data from file.
         /// </summary>
@@ -81,7 +81,7 @@ namespace Spectre.Data.Datasets
         /// </summary>
         /// <param name="data">Multidimensional array of intensity values.</param>
         /// <param name="coordinates">Spatial coordinates of input spectra.</param>
-        void AppendFromRawData(double[,] data, int[,] coordinates = null);
+        void AppendFromRawData(double[,] data, int[,] coordinates);
         #endregion
 
         #region Data access

@@ -61,7 +61,7 @@ namespace Spectre.Service
         /// </summary>
         /// <param name="updateInterval">The update interval.</param>
         /// <exception cref="TooSmallUpdateIntervalException">updateInterval lower than MinimalReasonableUpdateInterval</exception>
-        public ConsoleCaptureService(double updateInterval=1000.0)
+        public ConsoleCaptureService(double updateInterval)
         {
             if (updateInterval < MinimalReasonableUpdateInterval)
                 throw new TooSmallUpdateIntervalException(updateInterval);
