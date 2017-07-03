@@ -1,0 +1,43 @@
+{
+  "QualityIndex": 11.157992960016614,
+  "Centroids": [
+    [
+      9.5,
+      6.0,
+      19.5
+    ],
+    [
+      10.5,
+      19.0,
+      6.5
+    ]
+  ],
+  "Partition": [
+    1,
+    1,
+    0,
+    0
+  ],
+  "AmplitudeThreshold": "-Infinity",
+  "AmplitudeFilter": [
+    true,
+    true,
+    true
+  ],
+  "VarianceThreshold": "-Infinity",
+  "VarianceFilter": [
+    true,
+    true,
+    true
+  ],
+  "Merged": [
+    2,
+    2,
+    1,
+    1
+  ],
+  "Subregions": [
+    null,
+    null
+  ]
+}
