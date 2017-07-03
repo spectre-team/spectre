@@ -2,7 +2,7 @@
  * GaussianMixtureModel.h
  * Provides implementation of Gaussian Mixture Model return type.
  *
-   Copyright 2017 Micha³ Gallus
+   Copyright 2017 Michal Gallus
    
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
