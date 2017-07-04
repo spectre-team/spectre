@@ -8,7 +8,7 @@ import { Heatmap } from './heatmap';
 @Injectable()
 export class HeatmapService {
 
-    private baseUrl = 'http://localhost/spectre_api/api';
+    private baseUrl = 'http://localhost/spectre_api';
 
     constructor(private http: Http) { }
 
@@ -20,7 +20,7 @@ export class HeatmapService {
 
     get(preparationId: number, channelId: number): Observable<Heatmap> {
       console.log('[HeatmapService] preparationId: ' + preparationId + ' channelId ' + channelId);
-      const queryUrl = `${this.baseUrl}/preparations/${preparationId}?channelId=${channelId}&flag=false`;
+      const queryUrl = `${this.baseUrl}/heatmap/${preparationId}?channelId=${channelId}&flag=false`;
       const response = this.http.get(queryUrl, {headers: this.getHeaders()});
       const spectrum = response.map(toHeatmap);
       return spectrum;
