@@ -18,8 +18,8 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { Preparation } from './preparation';
-import { PreparationService } from './preparation.service';
+import { Preparation } from '../preparation/preparation';
+import { PreparationService } from '../preparation/preparation.service';
 
 @Component({
   selector: 'app-preparation-list',
