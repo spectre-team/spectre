@@ -58,9 +58,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(SolutionDir)Spectre.libDivik;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\Spectre.libDivik.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -70,9 +71,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(SolutionDir)Spectre.libDivik;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\Spectre.libDivik.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -89,6 +91,7 @@
   <ItemGroup>
     <ClInclude Include="Methods\Segmentation.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Results\DivikResult.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +118,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
       <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Spectre.libDivik\Spectre.libDivik.vcxproj">
+      <Project>{369bdaff-9e57-40d0-830d-b9232f35e4f4}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

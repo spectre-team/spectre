@@ -3,4 +3,5 @@
 #include "stdafx.h"
 
 #include "Methods/Segmentation.h"
+#include "Results/DivikResult.h"
 
