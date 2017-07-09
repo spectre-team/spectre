@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre", "Spectre\Spectre.csproj", "{0E4F265B-8702-4D70-AB70-AA566D7A2E40}"
 EndProject
@@ -44,6 +44,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering", "Spectre.libClustering\Spectre.libClustering.vcxproj", "{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering.Tests", "Spectre.libClustering.Tests\Spectre.libClustering.Tests.vcxproj", "{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.Algorithms.Genetic", "Spectre.Algorithms.Genetic\Spectre.Algorithms.Genetic.vcxproj", "{4E43D254-CA29-490F-A41F-32150E8583DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +147,14 @@ Global
 		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Release|x64.ActiveCfg = Release|x64
 		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Release|x64.Build.0 = Release|x64
 		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Release|x86.ActiveCfg = Release|x64
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Debug|x64.ActiveCfg = Debug|x64
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Debug|x64.Build.0 = Debug|x64
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Debug|x86.ActiveCfg = Debug|Win32
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Debug|x86.Build.0 = Debug|Win32
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Release|x64.ActiveCfg = Release|x64
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Release|x64.Build.0 = Release|x64
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Release|x86.ActiveCfg = Release|Win32
+		{4E43D254-CA29-490F-A41F-32150E8583DE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
