@@ -23,16 +23,15 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 import { Spectrum } from './spectrum';
+import {Service} from '../app.service';
 
 @Injectable()
-export class SpectrumService {
+export class SpectrumService extends Service {
 
-  private baseUrl = 'http://localhost/spectre_api/api';
-
-  constructor(private http: Http) { }
+  constructor(private http: Http) { super(); }
 
   get(preparationId: number, spectrumId: number): Observable<Spectrum> {
-    const queryUrl = `${this.baseUrl}/preparations/${preparationId}?spectrumId=${spectrumId}`;
+    const queryUrl = `${this.getBaseUrl()}/preparations/${preparationId}?spectrumId=${spectrumId}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const spectrum = response.map(toSpectrum);
     return spectrum;

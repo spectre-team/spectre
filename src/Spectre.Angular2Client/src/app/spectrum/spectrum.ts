@@ -19,8 +19,6 @@
 
 export interface Spectrum {
     id: number;
-    // mz: Float64Array;
-    // intensities: Float64Array;
     mz: number[];
     intensities: number[];
     x: number;
