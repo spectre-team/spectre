@@ -61,9 +61,11 @@ namespace Spectre::libGaussianMixtureModelling
                              const std::vector<double>& intensities,
                              unsigned int numberOfComponents) :
             m_OriginalMzArray(mzArray), m_OriginalMeanSpectrum(intensities),
-            m_Components(numberOfComponents), components(m_Components),
-            originalMzArray(m_OriginalMzArray), originalMeanSpectrum(m_OriginalMeanSpectrum)
+            m_Components(numberOfComponents)
         {
+            components = gsl::span<GaussianComponent>(m_Components);
+            originalMzArray = gsl::span<double>(m_OriginalMzArray);
+            originalMeanSpectrum = gsl::span<double>(m_OriginalMeanSpectrum);
         }
 
         /// <summary>
