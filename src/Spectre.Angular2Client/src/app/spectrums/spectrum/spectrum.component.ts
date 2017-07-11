@@ -19,8 +19,8 @@
 
 import {Component, Input, OnInit} from '@angular/core';
 
-import { SpectrumService } from './spectrum.service';
-import { Spectrum } from './spectrum';
+import { SpectrumService } from '../shared/spectrum.service';
+import { Spectrum } from '../shared/spectrum';
 
 
 @Component({

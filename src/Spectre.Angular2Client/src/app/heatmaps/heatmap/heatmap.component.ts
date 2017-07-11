@@ -17,8 +17,8 @@
  limitations under the License.
  */
 import {Component, Input, OnInit} from '@angular/core';
-import {HeatmapService} from './heatmap.service';
-import {Heatmap} from './heatmap';
+import {HeatmapService} from '../shared/heatmap.service';
+import {Heatmap} from '../shared/heatmap';
 
 
 

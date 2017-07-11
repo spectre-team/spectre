@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
 
 import { Http, BaseRequestOptions } from '@angular/http';
 
-import { PreparationListComponent } from './preparation-list/preparation-list.component';
+import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
 
 import { MockBackend } from '@angular/http/testing';
 
