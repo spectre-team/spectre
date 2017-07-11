@@ -19,10 +19,6 @@
 
 import {Component, Input, OnInit} from '@angular/core';
 
-import { SpectrumService } from '../shared/spectrum.service';
-import { Spectrum } from '../shared/spectrum';
-
-
 @Component({
   selector: 'app-spectrum',
   templateUrl: './spectrum.component.html',
@@ -32,38 +28,25 @@ import { Spectrum } from '../shared/spectrum';
 export class SpectrumComponent implements OnInit {
 
   @Input() public id: number;
-  public SpectrumLayout: any;
-  public SpectrumData: any;
+  @Input() public spectrumData: any;
+  @Input() public height = 500;
+  @Input() public width = 1200;
+  public spectrumLayout: any;
+  public options: any;
 
-  public Options: any;
-
-  constructor(
-    private spectrumService: SpectrumService,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-      this.spectrumService
-        .get(this.id, 1)
-        .subscribe(spectrum => this.SpectrumData = this.toSpectrumDataset(spectrum));
-      console.log('[SpectrumComponent] layout setup');
-      this.SpectrumLayout = this.defaultSpectrumLayout();
-      this.SpectrumData = this.defaultData();
-      this.Options = [];
+      this.spectrumLayout = this.defaultSpectrumLayout();
+      this.spectrumData = this.defaultData();
+      this.options = [];
       console.log('[SpectrumComponent] plot layout set');
-  }
-
-  toSpectrumDataset(spectrum: Spectrum) {
-    return [{
-      x: spectrum.mz,
-      y: spectrum.intensities,
-      name: `Spectrum ${spectrum.id}, (X=${spectrum.x},Y=${spectrum.y})`
-    }];
   }
 
   defaultSpectrumLayout() {
     return {
-      height: 500,
-      width: 1200
+      height: this.height,
+      width: this.width
     };
   }
 

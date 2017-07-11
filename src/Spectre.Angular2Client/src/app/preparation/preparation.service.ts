@@ -22,17 +22,16 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
+import {Service} from "../app.service";
 
 @Injectable()
-export class PreparationService {
-  private baseUrl = 'http://localhost/spectre_api';
+export class PreparationService extends Service {
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http) { super(); }
 
   getAll(): Observable<Preparation[]> {
     return this.http
-      .get(`${this.baseUrl}/preparations`, {headers: this.getHeaders()})
+      .get(`${this.getBaseUrl()}/preparations`, {headers: this.getHeaders()})
       .map(mapPreparations);
   }
 

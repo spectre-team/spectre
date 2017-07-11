@@ -17,10 +17,6 @@
  limitations under the License.
  */
 import {Component, Input, OnInit} from '@angular/core';
-import {HeatmapService} from '../shared/heatmap.service';
-import {Heatmap} from '../shared/heatmap';
-
-
 
 @Component({
   selector: 'app-heatmap',
@@ -30,29 +26,25 @@ import {Heatmap} from '../shared/heatmap';
 export class HeatmapComponent implements OnInit {
 
   @Input() public id: number;
-  public HeatmapLayout: any;
-  public HeatmapData: any;
-  public Options: any;
+  @Input() public heatmapData: any;
+  @Input() public height = 600;
+  @Input() public width = 600;
+  private heatmapLayout: any;
+  private options: any;
 
-  constructor(
-    private heatmapService: HeatmapService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-      this.heatmapService
-        .get(this.id, 2)
-        .subscribe(heatmap => this.HeatmapData = this.toHeatmapDataset(heatmap));
-      console.log('[HeatmapComponent] layout setup');
-      this.HeatmapLayout = this.defaultHeatmapLayout();
-      this.HeatmapData = this.defaultData();
-      this.Options = [];
+      this.heatmapLayout = this.defaultHeatmapLayout();
+      this.heatmapData = this.defaultData();
+      this.options = [];
       console.log('[HeatmapComponent] plot layout set');
   }
 
   defaultHeatmapLayout() {
     return {
-      height: 600,
-      width: 600,
+      height: this.height,
+      width: this.width,
       xaxis: {
         autotick: false,
         dtick: 1,
@@ -70,12 +62,6 @@ export class HeatmapComponent implements OnInit {
     };
   }
 
-  toHeatmapDataset(heatmap: Heatmap) {
-    return [{
-      z: heatmap.data,
-      type: 'heatmap'
-    }];
-  }
 
   defaultData() {
     return [{}];

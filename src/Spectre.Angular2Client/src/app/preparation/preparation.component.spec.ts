@@ -22,17 +22,17 @@ import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/ht
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { ActivatedRoute } from '@angular/router';
-import { MockActivatedRoute } from '../../../mocks/mock-activated-router';
+import { MockActivatedRoute } from '../../mocks/mock-activated-router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 
-import { PlotlyModule } from '../../plotly/plotly.module';
+import { PlotlyModule } from '../plotly/plotly.module';
 
 import { PreparationComponent } from './preparation.component';
-import { SpectrumService } from '../../spectrums/shared/spectrum.service';
-import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
-import {SpectrumComponent} from '../../spectrums/spectrum/spectrum.component';
-import {HeatmapComponent} from '../../heatmaps/heatmap/heatmap.component';
+import { SpectrumService } from '../spectrum/spectrum.service';
+import { HeatmapService } from '../heatmap/heatmap.service';
+import {SpectrumComponent} from '../spectrum/spectrum.component';
+import {HeatmapComponent} from '../heatmap/heatmap.component';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;

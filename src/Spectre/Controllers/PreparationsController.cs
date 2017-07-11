@@ -55,8 +55,6 @@ namespace Spectre.Controllers
         {
             return id == 1 ? new Preparation("Head & neck cancer, patient 1, tumor region only", 1) : null;
         }
-<<<<<<< HEAD
-=======
 
 
         /// <summary>
@@ -114,6 +112,5 @@ namespace Spectre.Controllers
 
             return new Heatmap() {Mz = mz, Intensities = intensities, X = xCoordinates, Y = yCoordinates};
         }
->>>>>>> fafa8b9cfd5d710d1ea9d36bcfdf2cb4db03dc75
     }
 }

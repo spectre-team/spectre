@@ -19,6 +19,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
+import {SpectrumService} from '../spectrum/spectrum.service';
+import {HeatmapService} from '../heatmap/heatmap.service';
+import {Spectrum} from '../spectrum/spectrum';
+import {Heatmap} from '../heatmap/heatmap';
 
 
 @Component({
@@ -29,9 +33,13 @@ import { ActivatedRoute} from '@angular/router';
 export class PreparationComponent implements OnInit {
 
   public id: number;
+  public heatmapData: any;
+  public spectrumData: any;
 
   constructor(
       private route: ActivatedRoute,
+      private spectrumService: SpectrumService,
+      private heatmapService: HeatmapService
   ) { }
 
   ngOnInit() {
@@ -39,6 +47,28 @@ export class PreparationComponent implements OnInit {
         console.log('[PreparationComponent] ngOnInit');
         this.id = Number.parseInt(params['id']);
         console.log('[PreparationComponent] parsed id');
+        this.heatmapService
+          .get(this.id, 100)
+          .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
+        this.spectrumService
+          .get(this.id, 1)
+            .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+        console.log('[SpectrumComponent] layout setup');
       });
+  }
+
+  toHeatmapDataset(heatmap: Heatmap) {
+    return [{
+      z: heatmap.data,
+      type: 'heatmap'
+    }];
+  }
+
+  toSpectrumDataset(spectrum: Spectrum) {
+    return [{
+      x: spectrum.mz,
+      y: spectrum.intensities,
+      name: `Spectrum ${spectrum.id}, (X=${spectrum.x},Y=${spectrum.y})`
+    }];
   }
 }

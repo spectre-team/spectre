@@ -58,51 +58,37 @@ namespace Spectre.Tests.Controllers
             Assert.AreEqual("Head & neck cancer, patient 1, tumor region only", first.Name);
         }
 
-        //[Test]
-        //public void TestGetFirstPreparationSampleSpectrum()
-        //{
-        //    var spectrum = _controller.Get(1, 1);
+        [Test]
+        public void TestGetFirstPreparationSampleSpectrum()
+        {
+            var spectrum = _controller.Get(1, 1);
 
-        //    Assert.NotNull(spectrum);
-        //    Assert.IsInstanceOf<Spectrum>(spectrum);
-        //    Assert.IsNotEmpty(spectrum.Intensities);
-        //    Assert.IsNotEmpty(spectrum.Mz);
-        //    Assert.AreEqual(spectrum.Mz.Count(), spectrum.Intensities.Count(), "Intensities and Mz counts do not match.");
-        //}
+            Assert.NotNull(spectrum);
+            Assert.IsInstanceOf<Spectrum>(spectrum);
+            Assert.IsNotEmpty(spectrum.Intensities);
+            Assert.IsNotEmpty(spectrum.Mz);
+            Assert.AreEqual(spectrum.Mz.Count(), spectrum.Intensities.Count(), "Intensities and Mz counts do not match.");
+        }
 
-<<<<<<< HEAD
-        //[Test]
-        //public void TestGetFirstPreparationSampleHeatmap()
-        //{
-        //    const int anyChannelId = 1;
-        //    var heatmap = _controller.Get(1, anyChannelId, false);
-=======
         [Test]
         public void TestGetFirstPreparationSampleHeatmap()
         {
             const int anyChannelId = 1;
             var heatmap = _controller.Get(1, anyChannelId, false);
->>>>>>> fafa8b9cfd5d710d1ea9d36bcfdf2cb4db03dc75
 
-        //    Assert.Multiple(() =>
-        //    {
-        //        Assert.NotNull(heatmap);
-        //        Assert.IsInstanceOf<Heatmap>(heatmap);
-        //        Assert.IsNotEmpty(heatmap.Intensities);
-        //        Assert.IsNotEmpty(heatmap.X);
-        //        Assert.IsNotEmpty(heatmap.Y);
-        //        Assert.AreEqual(heatmap.X.Count(), heatmap.Y.Count(), "Number of coordinates of X and Y do not match.");
-        //        Assert.AreEqual(heatmap.Intensities.Count(), heatmap.Y.Count(),
-        //            "Number of coordinates is different from number of intensities.");
+            Assert.Multiple(() =>
+            {
+                Assert.NotNull(heatmap);
+                Assert.IsInstanceOf<Heatmap>(heatmap);
+                Assert.IsNotEmpty(heatmap.Intensities);
+                Assert.IsNotEmpty(heatmap.X);
+                Assert.IsNotEmpty(heatmap.Y);
+                Assert.AreEqual(heatmap.X.Count(), heatmap.Y.Count(), "Number of coordinates of X and Y do not match.");
+                Assert.AreEqual(heatmap.Intensities.Count(), heatmap.Y.Count(),
+                    "Number of coordinates is different from number of intensities.");
 
-<<<<<<< HEAD
-        //        Assert.Throws<ArgumentException>(() => { _controller.Get(1, -1, false); }, "Accepted negative index");
-        //    });
-        //}
-=======
                 Assert.Throws<ArgumentException>(() => { _controller.Get(1, -1, false); }, "Accepted negative index");
             });
         }
->>>>>>> fafa8b9cfd5d710d1ea9d36bcfdf2cb4db03dc75
     }
 }
