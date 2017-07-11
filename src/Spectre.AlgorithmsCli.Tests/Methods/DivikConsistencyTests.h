@@ -51,7 +51,7 @@ namespace Spectre::AlgorithmsCli::Tests::Methods
 			else
 				Assert::True(_equalOnTop, "Not equal on top.");
 		}
-		void OnWritten(System::Object ^sender, System::String ^e)
+		void OnWritten(System::Object^, System::String ^e)
 		{
 			System::Diagnostics::Debug::Write(e);
 		}

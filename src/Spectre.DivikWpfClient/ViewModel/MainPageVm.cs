@@ -497,7 +497,7 @@ namespace Spectre.DivikWpfClient.ViewModel
                         MessageBox.Show("Divik was successfully cancelled.", "Cancelled!");
                         return;
                     }
-                    using (var consoleCapture = new ConsoleCaptureService())
+                    using (var consoleCapture = new ConsoleCaptureService(1000))
                     {
                         Log = string.Empty;
                         consoleCapture.Written += (sender, appended) => Log += appended;

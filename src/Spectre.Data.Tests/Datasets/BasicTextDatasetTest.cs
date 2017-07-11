@@ -53,7 +53,7 @@ namespace Spectre.Data.Tests.Datasets
             double[] mz = {1.0, 2.0, 3.0};
             double[,] data = {{1, 2.1, 3.2}, {4, 5.1, 6.2}, {7, 8.1, 9.2}};
 
-            _dataset = new BasicTextDataset(mz, data);
+            _dataset = new BasicTextDataset(mz, data, null);
         }
 
         [Test]
@@ -97,15 +97,15 @@ namespace Spectre.Data.Tests.Datasets
             double[,] data = { { 1, 2.1, 3.2 } };
             int[,] coords = {{1, 2, 3}};
 
-            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(null, data); },
+            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(null, data, null); },
                 "Dataset accepted null m/z array.");
-            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(mz, null); },
+            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(mz, null, null); },
                 "Dataset accepted null intensity array.");
 
             mz = new[] { 1.0, 2.0, 3.0 };
             data = new[,] { { 1.0, 2.0 } };
 
-            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(mz, data); },
+            Assert.Throws<InvalidDataException>(() => { _dataset = new BasicTextDataset(mz, data, null); },
                 "Dataset accepted raw data of different lengths.");
 
             data = new[,] { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
@@ -154,7 +154,7 @@ namespace Spectre.Data.Tests.Datasets
         [Test]
         public void AppendFromRawDataTest()
         {
-            Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(null); },
+            Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(null, null); },
                 "Dataset accepted null raw data.");
 
             Assert.AreEqual(_dataset.SpectrumCount, 3,
@@ -162,7 +162,7 @@ namespace Spectre.Data.Tests.Datasets
 
             double[,] newData = {{0.1}};
 
-            Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(newData); },
+            Assert.Throws<InvalidDataException>(() => { _dataset.AppendFromRawData(newData, null); },
                 "Dataset accepted raw data of different lengths.");
 
             Assert.AreEqual(_dataset.SpectrumCount, 3);

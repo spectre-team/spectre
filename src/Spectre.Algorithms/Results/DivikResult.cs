@@ -240,10 +240,10 @@ namespace Spectre.Algorithms.Results
         /// Saves result under the specified path in JSON format.
         /// </summary>
         /// <param name="path">The destination path.</param>
-        /// <param name="identation">Sets idented formattings. Defaults to true.</param>
-        public void Save(string path, bool identation = true)
+        /// <param name="indentation">Sets indented formattings.</param>
+        public void Save(string path, bool indentation)
         {
-            Formatting format = identation ? Formatting.Indented : Formatting.None;
+            Formatting format = indentation ? Formatting.Indented : Formatting.None;
             string data = JsonConvert.SerializeObject(this, format);
             File.WriteAllText(path, data);
         }
@@ -333,6 +333,23 @@ namespace Spectre.Algorithms.Results
         {
             return !(first == second);
         }
+
+        public override int GetHashCode()
+        {
+            var hash = 17;
+            hash = 23 * hash + AmplitudeThreshold.GetHashCode();
+            hash = 23 * hash + VarianceThreshold.GetHashCode();
+            hash = 23 * hash + QualityIndex.GetHashCode();
+            hash = 23 * hash + AmplitudeFilter.GetHashCode();
+            hash = 23 * hash + VarianceFilter.GetHashCode();
+            hash = 23 * hash + Centroids.GetHashCode();
+            hash = 23 * hash + Partition.GetHashCode();
+            hash = 23 * hash + Merged.GetHashCode();
+            hash = 23 * hash + Subregions.GetHashCode();
+            
+            return hash;
+        }
+
         #endregion
     }
 }

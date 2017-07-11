@@ -55,5 +55,65 @@ namespace Spectre.Controllers
         {
             return id == 1 ? new Preparation("Head & neck cancer, patient 1, tumor region only", 1) : null;
         }
+<<<<<<< HEAD
+=======
+
+
+        /// <summary>
+        /// Gets single spectrum of a specified preparation.
+        /// </summary>
+        /// <param name="id">Preparation identifier.</param>
+        /// <param name="spectrumId">Spectrum identifier.</param>
+        /// <returns>Spectrum</returns>
+        public Spectrum Get(int id, int spectrumId)
+        {
+            if (id != 1)
+                return null;
+
+            var dataset = new BasicTextDataset("C:\\spectre_data\\hnc1_tumor.txt");
+
+            var mz = dataset.GetRawMzArray();
+
+            var intensities = dataset.GetRawIntensityArray(spectrumId);
+            var coordinates = dataset.GetSpatialCoordinates(spectrumId);
+
+            return new Spectrum() { Id = spectrumId, Intensities = intensities, Mz = mz, X = coordinates.X, Y = coordinates.Y };
+        }
+
+        /// <summary>
+        /// Gets single heatmap of a specified preparation based on provided mz.
+        /// </summary>
+        /// <param name="id">Preparation identifier.</param>
+        /// <param name="channelId">Identifier of channel.</param>
+        /// <param name="flag">Does nothing but allows to define this function.</param>
+        /// <returns>Heatmap</returns>
+        /// <exception cref="ArgumentException">Thrown when provided mz is lower 
+        /// than zero, or is invalid for a given dataset</exception>
+        public Heatmap Get(int id, int channelId, bool flag)
+        {
+            if (channelId < 0)
+                throw new ArgumentException(nameof(channelId));
+
+            if (id != 1)
+                return null;
+
+            IDataset dataset = new BasicTextDataset("C:\\spectre_data\\hnc1_tumor.txt");
+
+            var mz = dataset.GetRawMzValue(channelId);
+            var intensities = dataset.GetRawIntensityRow(channelId);
+            var coordinates = dataset.GetRawSpacialCoordinates(true);
+
+            int[] xCoordinates = new int[intensities.Length];
+            int[] yCoordinates = new int[intensities.Length];
+
+            for (int i = 0; i < intensities.Length; i++)
+            {
+                xCoordinates[i] = coordinates[i, 0];
+                yCoordinates[i] = coordinates[i, 1];
+            }
+
+            return new Heatmap() {Mz = mz, Intensities = intensities, X = xCoordinates, Y = yCoordinates};
+        }
+>>>>>>> fafa8b9cfd5d710d1ea9d36bcfdf2cb4db03dc75
     }
 }

@@ -75,7 +75,7 @@ namespace Spectre.Data.Datasets
         /// <param name="mz">Array of m/z values.</param>
         /// <param name="data">Array of intensity values.</param>
         /// <param name="coordinates">Array of spatial coordinates.</param>
-        public BasicTextDataset(double[] mz, double[,] data, int[,] coordinates = null)
+        public BasicTextDataset(double[] mz, double[,] data, int[,] coordinates)
         {
             CreateFromRawData(mz, data, coordinates);
         }
@@ -155,7 +155,7 @@ namespace Spectre.Data.Datasets
         /// </summary>
         /// <exception cref="InvalidDataException">Throws when the data is null or 
         /// the length of data is not matching the dataset length.</exception>
-        public void CreateFromRawData(double[] mz, double[,] data, int[,] coordinates = null)
+        public void CreateFromRawData(double[] mz, double[,] data, int[,] coordinates)
         {
             if (mz == null || data == null)
                 throw new InvalidDataException("The input data is null.");
@@ -228,7 +228,7 @@ namespace Spectre.Data.Datasets
         /// </summary>
         /// <exception cref="InvalidDataException">Throws when the data is null or 
         /// the length of data is not matching the dataset length.</exception>
-        public void AppendFromRawData(double[,] data, int[,] coordinates = null)
+        public void AppendFromRawData(double[,] data, int[,] coordinates)
         {
             if(data == null)
                 throw new InvalidDataException("The input data is null.");

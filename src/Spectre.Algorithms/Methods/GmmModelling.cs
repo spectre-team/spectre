@@ -102,10 +102,10 @@ namespace Spectre.Algorithms.Methods
             ValidateDispose();
             throw new NotImplementedException(nameof(ReduceModelByComponentArea) + " is not implemented.");
 
-            var matlabModel = model.MatlabStruct;
-            // @gmrukwa: this has an issue with opts.thr -> it must be defined, but no one knows how
-            var reduced = _gmm.reduce_gmm_by_component_area(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
-            return new GmmModel(reduced, model) { IsNoiseReduced = true };
+            //var matlabModel = model.MatlabStruct;
+            //// @gmrukwa: this has an issue with opts.thr -> it must be defined, but no one knows how
+            //var reduced = _gmm.reduce_gmm_by_component_area(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
+            //return new GmmModel(reduced, model) { IsNoiseReduced = true };
         }
 
         /// <summary>
@@ -120,10 +120,10 @@ namespace Spectre.Algorithms.Methods
             ValidateDispose();
 	        throw new NotImplementedException(nameof(ReduceModelByComponentHeight) + " is not implemented.");
 
-            var matlabModel = model.MatlabStruct;
-            // @gmrukwa: this has an issue with opts.thr -> it must be defined, but no one knows how
-            var reduced = _gmm.reduce_gmm_by_component_height(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
-            return new GmmModel(reduced, model) { IsNoiseReduced = true };
+            //var matlabModel = model.MatlabStruct;
+            //// @gmrukwa: this has an issue with opts.thr -> it must be defined, but no one knows how
+            //var reduced = _gmm.reduce_gmm_by_component_height(matlabModel, model.OriginalMz, model.OriginalMeanSpectrum);
+            //return new GmmModel(reduced, model) { IsNoiseReduced = true };
         }
 
         /// <summary>

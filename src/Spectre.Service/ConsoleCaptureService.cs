@@ -19,8 +19,9 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Timers;
+using System.Threading;
 using Spectre.Service.Abstract;
+using Timer = System.Timers.Timer;
 
 namespace Spectre.Service
 {
@@ -28,6 +29,10 @@ namespace Spectre.Service
     public class ConsoleCaptureService: IConsoleCaptureService
     {
         #region Fields
+        /// <summary>
+        /// Minimal interval which should suffice for updates without scheduling too much jobs.
+        /// </summary>
+        public const double MinimalReasonableUpdateInterval = 50;
         /// <summary>
         /// The internal writer.
         /// </summary>
@@ -41,6 +46,10 @@ namespace Spectre.Service
         /// </summary>
         private readonly Timer _timer;
         /// <summary>
+        /// Timer update interval.
+        /// </summary>
+        private readonly double _updateInterval;
+        /// <summary>
         /// If true, instance is useless.
         /// </summary>
         private bool _disposed;
@@ -51,13 +60,17 @@ namespace Spectre.Service
         /// Initializes a new instance of the <see cref="ConsoleCaptureService"/> class.
         /// </summary>
         /// <param name="updateInterval">The update interval.</param>
-        public ConsoleCaptureService(double updateInterval=1000.0)
+        /// <exception cref="TooSmallUpdateIntervalException">updateInterval lower than MinimalReasonableUpdateInterval</exception>
+        public ConsoleCaptureService(double updateInterval)
         {
+            if (updateInterval < MinimalReasonableUpdateInterval)
+                throw new TooSmallUpdateIntervalException(updateInterval);
             _stdout = Console.Out;
             var builder = new StringBuilder();
             _writer = new StringWriter(builder);
             Console.SetOut(_writer);
-            _timer = new Timer(updateInterval);
+            _updateInterval = updateInterval;
+            _timer = new Timer(_updateInterval);
             Content = string.Empty;
             _timer.Elapsed += (sender, args) =>
             {
@@ -90,6 +103,8 @@ namespace Spectre.Service
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
+
+            Thread.Sleep((int)_updateInterval + 1);
 
             Console.SetOut(_stdout);
             if (disposing)

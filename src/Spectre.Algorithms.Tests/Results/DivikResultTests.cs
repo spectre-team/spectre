@@ -62,7 +62,7 @@ namespace Spectre.Algorithms.Tests.Results
         public void Save()
         {
             string path = TestDirectory + "\\test-path.json";
-            _result.Save(path);
+            _result.Save(path, true);
 
             Assert.True(File.Exists(path), "File doesn't exist");
             Assert.AreNotEqual(0, new FileInfo(path).Length, "File is empty");

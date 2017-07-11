@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre", "Spectre\Spectre.csproj", "{0E4F265B-8702-4D70-AB70-AA566D7A2E40}"
 EndProject
@@ -38,6 +38,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.AlgorithmsCli", "Spectre.AlgorithmsCli\Spectre.AlgorithmsCli.vcxproj", "{7C9D29C3-E8F6-46A2-9905-B0776EB85EA3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.AlgorithmsCli.Tests", "Spectre.AlgorithmsCli.Tests\Spectre.AlgorithmsCli.Tests.vcxproj", "{8463BCA2-41C7-4992-A704-7CEE66AC6E89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native Libraries", "Native Libraries", "{7C77A75B-F387-4E4E-9C34-FA904927C7BF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering", "Spectre.libClustering\Spectre.libClustering.vcxproj", "{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering.Tests", "Spectre.libClustering.Tests\Spectre.libClustering.Tests.vcxproj", "{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +133,18 @@ Global
 		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Release|x64.Build.0 = Release|x64
 		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Release|x86.ActiveCfg = Release|Win32
 		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Release|x86.Build.0 = Release|Win32
+		{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}.Debug|x64.ActiveCfg = Debug|x64
+		{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}.Debug|x64.Build.0 = Debug|x64
+		{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}.Debug|x86.ActiveCfg = Release|x64
+		{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}.Release|x64.ActiveCfg = Release|x64
+		{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}.Release|x64.Build.0 = Release|x64
+		{450F225C-4610-4B20-84AE-2ED5B4C8D7C4}.Release|x86.ActiveCfg = Release|x64
+		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Debug|x64.ActiveCfg = Debug|x64
+		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Debug|x64.Build.0 = Debug|x64
+		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Debug|x86.ActiveCfg = Release|x64
+		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Release|x64.ActiveCfg = Release|x64
+		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Release|x64.Build.0 = Release|x64
+		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,5 +153,7 @@ Global
 		{2D24F1E7-18D4-4FC0-9E4F-2F32FF27FCCE} = {7EAC5FD7-C9CD-42E8-A24B-3665E854F4CD}
 		{23A97D0F-B6D9-4B67-84FE-4B52EA7D82EC} = {7EAC5FD7-C9CD-42E8-A24B-3665E854F4CD}
 		{F518ED4B-ADE0-4B5C-A01B-48D9FA216E0C} = {D3C36686-9667-48B2-A14B-FF46E6350A51}
+		{450F225C-4610-4B20-84AE-2ED5B4C8D7C4} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
+		{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 	EndGlobalSection
 EndGlobal
