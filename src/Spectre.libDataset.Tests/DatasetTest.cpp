@@ -1,14 +1,13 @@
-#include "stdafx.h"
-#include "CppUnitTest.h"
+#define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
 #include "Dataset.h"
 
-using namespace testing;
+using namespace Spectre::libDataset;
 
-namespace Spectre::libDataset::Tests
-{		
-    TEST(libDatasetUnitTest, ShouldInitializeCorrectly)
+namespace
+{
+    TEST(DatasetTest, should_initialize_correctly)
     {
         auto data = std::vector<int>{ 1, 2, 3 };
         auto sampleMetadata = std::vector<int>{ 4, 5, 6 };

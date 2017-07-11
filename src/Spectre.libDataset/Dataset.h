@@ -9,100 +9,80 @@ namespace Spectre::libDataset
     class Dataset : public IDataset<DataType, SampleMetadata, DatasetMetadata>
     {
     public:
-        Dataset(gsl::span<const DataTypeDT> data, gsl::span<const SampleMetadataDT> sampleMetadata, DatasetMetadata metadata) :
-            m_data(data), m_sampleMetadata(sampleMetadata), m_metadata(metadata)
+        Dataset(gsl::span<const DataType> data, gsl::span<const SampleMetadata> sampleMetadata, DatasetMetadata metadata) :
+            m_data(data.begin(), data.end()), m_sampleMetadata(sampleMetadata.begin(), sampleMetadata.end()), m_metadata(metadata)
         {
         }
 
-        virtual const DataTypeDT& operator[](int idx) const override
-        {
-            return m_data[idx];
-        }
-
-        virtual const SampleMetadataDT& getSampleMetadata(int idx) const override
-        {
-            return m_sampleMetadata[idx];
-        }
-
-        virtual const DatasetMetadata& getDatasetMetadata() const override
-        {
-            return m_metadata;
-        }
-
-        virtual DataTypeDT& operator[](int idx) override
+        const DataType& operator[](int idx) const override
         {
             return m_data[idx];
         }
 
-        virtual SampleMetadataDT& getSampleMetadata(int idx) override
+        const SampleMetadata& getSampleMetadata(int idx) const override
         {
             return m_sampleMetadata[idx];
         }
 
-        virtual DatasetMetadata& getDatasetMetadata() override
+        const DatasetMetadata& getDatasetMetadata() const override
         {
             return m_metadata;
         }
 
-        virtual gsl::span<const DataTypeDT&> getData() const override
+        DataType& operator[](int idx) override
         {
-            return gsl::span<const DataTypeDT&>(m_data);
+            return m_data[idx];
         }
 
-        virtual gsl::span<const SampleMetadataDT&> getSampleMetadata() const override
+        SampleMetadata& getSampleMetadata(int idx) override
         {
-            return gsl::span<const SampleMetadataDT&>(m_sampleMetadata);
+            return m_sampleMetadata[idx];
         }
 
-        virtual void setData(gsl::span<const DataTypeDT> data) override
+        DatasetMetadata& getDatasetMetadata() override
         {
-            m_data = data;
+            return m_metadata;
         }
 
-        virtual void setSampleMetadata(gsl::span<const SampleMetadataDT> metadata) override
+        gsl::span<const DataType> getData() const override
         {
-            m_metadata = metadata;
+            return gsl::span<const DataType>(m_data);
         }
 
-        virtual void addSample(DataTypeDT sample, SampleMetadataDT metadata) override
+        gsl::span<const SampleMetadata> getSampleMetadata() const override
+        {
+            return gsl::span<const SampleMetadata>(m_sampleMetadata);
+        }
+
+        void setData(gsl::span<const DataType> data) override
+        {
+            m_data.assign(data.begin(), data.end());
+        }
+
+        void setSampleMetadata(gsl::span<const SampleMetadata> metadata) override
+        {
+            m_sampleMetadata.assign(metadata.begin(), metadata.end());
+        }
+
+        void addSample(DataType sample, SampleMetadata metadata) override
         {
             m_data.push_back(sample);
             m_sampleMetadata.push_back(metadata);
         }
 
-        virtual const_iterator begin() const override
-        {
-            return gsl::span<const DataTypeDT>(m_data).begin();
-        }
-
-        virtual const_iterator end() const override
-        {
-            return gsl::span<const DataTypeDT>(m_data).end();
-        }
-
-        virtual iterator begin() override
-        {
-            return gsl::span<const DataTypeDT>(m_data).begin();
-        }
-
-        virtual iterator end() override
-        {
-            return gsl::span<const DataTypeDT>(m_data).end();
-        }
-
-        virtual size_t size() const override
+        size_t size() const override
         {
             return m_data.size();
         }
 
-        virtual bool empty() const override
+        bool empty() const override
         {
             return m_data.empty();
         }
 
     private:
-        std::vector<DataTypeDT> m_data;
-        std::vector<SampleMetadataDT> m_sampleMetadata;
+        std::vector<DataType> m_data;
+        std::vector<SampleMetadata> m_sampleMetadata;
         DatasetMetadata m_metadata;
     };
 }
