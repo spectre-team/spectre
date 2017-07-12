@@ -1,6 +1,6 @@
 /*
- * spectrum.component.spec.ts
- * Unit tests for single spectrum component.
+ * heatmap.component.spec.ts
+ * Unit tests for single heatmap component.
  *
  Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
 
@@ -21,20 +21,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend} from '@angular/http/testing';
 
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { PlotlyModule } from '../plotly/plotly.module';
+import { PlotlyModule } from '../../plotly/plotly.module';
 
-import { SpectrumService } from './spectrum.service';
-import {SpectrumComponent} from './spectrum.component';
+import { HeatmapService } from '../shared/heatmap.service';
+import {HeatmapComponent} from './heatmap.component';
 
-describe('SpectrumComponent', () => {
-  let component: SpectrumComponent;
-  let fixture: ComponentFixture<SpectrumComponent>;
+describe('HeatmapComponent', () => {
+  let component: HeatmapComponent;
+  let fixture: ComponentFixture<HeatmapComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SpectrumComponent],
+      declarations: [HeatmapComponent],
       imports: [RouterTestingModule, PlotlyModule],
       providers: [
         MockBackend,
@@ -46,14 +47,14 @@ describe('SpectrumComponent', () => {
           },
           deps: [MockBackend, BaseRequestOptions]
         },
-        SpectrumService
+        HeatmapService
       ]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpectrumComponent);
+    fixture = TestBed.createComponent(HeatmapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -19,10 +19,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import {SpectrumService} from '../spectrum/spectrum.service';
-import {HeatmapService} from '../heatmap/heatmap.service';
-import {Spectrum} from '../spectrum/spectrum';
-import {Heatmap} from '../heatmap/heatmap';
+import {SpectrumService} from '../../spectrums/shared/spectrum.service';
+import {HeatmapService} from '../../heatmaps/shared/heatmap.service';
+import {Spectrum} from '../../spectrums/shared/spectrum';
+import {Heatmap} from '../../heatmaps/shared/heatmap';
 
 
 @Component({

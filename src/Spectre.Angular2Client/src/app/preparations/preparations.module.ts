@@ -25,9 +25,9 @@ import { HttpModule } from '@angular/http';
 import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';
 
-import { PreparationComponent } from './preparation.component';
-import {HeatmapComponent} from '../heatmap/heatmap.component';
-import {SpectrumComponent} from '../spectrum/spectrum.component';
+import { PreparationComponent } from './preparation/preparation.component';
+import {HeatmapComponent} from '../heatmaps/heatmap/heatmap.component';
+import {SpectrumComponent} from '../spectrums/spectrum/spectrum.component';
 
 @NgModule({
   imports: [

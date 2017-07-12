@@ -23,7 +23,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 import { Heatmap } from './heatmap';
-import {Service} from '../app.service';
+import {Service} from '../../app.service';
 
 @Injectable()
 export class HeatmapService extends Service {

@@ -20,7 +20,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PreparationComponent } from './preparation.component';
+import { PreparationComponent } from './preparation/preparation.component';
 
 const preparationRoutes = [
     { path: 'preparation/:id', component: PreparationComponent }
