@@ -21,19 +21,22 @@ namespace Spectre::libGaussianMixtureModelling
     {
         constexpr unsigned int numberOfComponents = 5;
         GaussianMixtureModel model(testData, testData, numberOfComponents);
-        ASSERT_EQ(model.components.size(), numberOfComponents);
-        ASSERT_EQ(model.originalMeanSpectrum.size(), testData.size());
-        ASSERT_EQ(model.originalMzArray.size(), testData.size());
+        EXPECT_EQ(model.components.size(), numberOfComponents);
+        EXPECT_EQ(model.originalMeanSpectrum.size(), testData.size());
+        EXPECT_EQ(model.originalMzArray.size(), testData.size());
     }
 
-    TEST_F(GaussianMixtureModelTest, test_data_correctness)
+    TEST_F(GaussianMixtureModelTest, test_original_data_correctness)
     {
         constexpr unsigned int numberOfComponents = 5;
         GaussianMixtureModel model(testData, testData, numberOfComponents);
         for (int i = 0; i < testData.size(); i++)
         {
-            ASSERT_EQ(model.originalMeanSpectrum[i], testData[i]);
-            ASSERT_EQ(model.originalMzArray[i], testData[i]);
+            EXPECT_EQ(model.originalMeanSpectrum[i], testData[i]);
+            EXPECT_EQ(model.originalMzArray[i], testData[i]);
         }
+        EXPECT_EQ(model.isMerged, false);
+        EXPECT_EQ(model.isNoiseReduced, false);
+        EXPECT_EQ(model.mzMergingThreshold, 0.0);
     }
 }

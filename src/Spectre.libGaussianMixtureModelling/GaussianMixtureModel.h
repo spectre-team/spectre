@@ -62,7 +62,8 @@ namespace Spectre::libGaussianMixtureModelling
                              unsigned int numberOfComponents) :
             originalMzArray(mzArray.begin(), mzArray.end()), 
             originalMeanSpectrum(intensities.begin(), intensities.end()),
-            components(numberOfComponents)
+            components(numberOfComponents), 
+            isMerged(), isNoiseReduced(), mzMergingThreshold() // will be used in future.
         {
         }
 
@@ -84,16 +85,16 @@ namespace Spectre::libGaussianMixtureModelling
         /// <summary>
         /// M/z threshold used in components merging.
         /// </summary>
-        double mzMergingThreshold;
+        const double mzMergingThreshold;
 
         /// <summary>
         /// Value indicating whether this instance is merged.
         /// </summary>
-        bool isMerged;
+        const bool isMerged;
 
         /// <summary>
         /// Gets a value indicating whether this instance is noise components reduced.
         /// </summary>
-        bool isNoiseReduced;
+        const bool isNoiseReduced;
     };
 }
