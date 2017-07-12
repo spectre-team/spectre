@@ -119,24 +119,6 @@ namespace Spectre::libDataset
         }
 
         /// <summary>
-        /// Sets the data.
-        /// </summary>
-        /// <param name="data">The data.</param>
-        void setData(gsl::span<const DataType> data) override
-        {
-            m_data.assign(data.begin(), data.end());
-        }
-
-        /// <summary>
-        /// Sets the sample metadata.
-        /// </summary>
-        /// <param name="metadata">The metadata.</param>
-        void setSampleMetadata(gsl::span<const SampleMetadata> metadata) override
-        {
-            m_sampleMetadata.assign(metadata.begin(), metadata.end());
-        }
-
-        /// <summary>
         /// Adds the sample.
         /// </summary>
         /// <param name="sample">The sample.</param>

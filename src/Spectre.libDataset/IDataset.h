@@ -49,17 +49,6 @@ namespace Spectre::libDataset
         virtual DatasetMetadata& getDatasetMetadata() = 0;
 
         /// <summary>
-        /// Sets the data.
-        /// </summary>
-        /// <param name="data">The data.</param>
-        virtual void setData(gsl::span<const DataType> data) = 0;
-        /// <summary>
-        /// Sets the sample metadata.
-        /// </summary>
-        /// <param name="metadata">The metadata.</param>
-        virtual void setSampleMetadata(gsl::span<const SampleMetadata> metadata) = 0;
-
-        /// <summary>
         /// Adds the sample.
         /// </summary>
         /// <param name="sample">The sample.</param>
