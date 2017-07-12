@@ -57,31 +57,29 @@ namespace Spectre::libGaussianMixtureModelling
         /// <param name="mzArray">M/z data shared by all spectra.</param>
         /// <param name="intensities">Mean intensities at each point.</param>
         /// <param name="numberOfComponents">Number of Gaussian Components to be set.</param>
-        GaussianMixtureModel(const std::vector<double>& mzArray,
-                             const std::vector<double>& intensities,
+        GaussianMixtureModel(const gsl::span<double>& mzArray,
+                             const gsl::span<double>& intensities,
                              unsigned int numberOfComponents) :
-            m_OriginalMzArray(mzArray), m_OriginalMeanSpectrum(intensities),
-            m_Components(numberOfComponents)
+            originalMzArray(mzArray.begin(), mzArray.end()), 
+            originalMeanSpectrum(intensities.begin(), intensities.end()),
+            components(numberOfComponents)
         {
-            components = gsl::span<GaussianComponent>(m_Components);
-            originalMzArray = gsl::span<double>(m_OriginalMzArray);
-            originalMeanSpectrum = gsl::span<double>(m_OriginalMeanSpectrum);
         }
 
         /// <summary>
         /// Collection of Gaussian components.
         /// </summary>
-        gsl::span<GaussianComponent> components;
+        std::vector<GaussianComponent> components;
 
         /// <summary>
         /// Collection of initially supplied mz values.
         /// </summary>
-        gsl::span<double> originalMzArray;
+        const std::vector<double> originalMzArray;
 
         /// <summary>
         /// Collection of average supplied spectra.
         /// </summary>
-        gsl::span<double> originalMeanSpectrum;
+        const std::vector<double> originalMeanSpectrum;
 
         /// <summary>
         /// M/z threshold used in components merging.
@@ -97,10 +95,5 @@ namespace Spectre::libGaussianMixtureModelling
         /// Gets a value indicating whether this instance is noise components reduced.
         /// </summary>
         bool isNoiseReduced;
-
-    private:
-        std::vector<double> m_OriginalMzArray;
-        std::vector<double> m_OriginalMeanSpectrum;
-        std::vector<GaussianComponent> m_Components;
     };
 }
