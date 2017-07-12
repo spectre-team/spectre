@@ -40,6 +40,15 @@ TEST(DatasetInitializationTest, should_initialize_correctly)
     data_set dataset(data, sampleMetadata, datasetMetadata);
 }
 
+TEST(DatasetInitializationTest, throw_on_inconsistent_input_size)
+{
+    auto data = samples{ 1, 2, 3 };
+    auto sampleMetadata = samples_metadata{ 4, 5 };
+    auto datasetMetadata = dataset_metadata{ 7 };
+
+    EXPECT_THROW(data_set(data, sampleMetadata, datasetMetadata), InconsistentInputSize);
+}
+
 TEST(DatasetTest, knows_if_empty)
 {
     samples empty_samples;
@@ -139,6 +148,28 @@ TEST_F(DatasetInScopeTest, access_const_sample_metadata)
 {
     const auto& local = dataset;
     EXPECT_EQ(local.getSampleMetadata(0), dataset.getSampleMetadata(0));
+}
+
+TEST_F(DatasetInScopeTest, modify_data_throws_when_out_of_bounds)
+{
+    EXPECT_THROW(dataset[100] = 100, OutOfRange);
+}
+
+TEST_F(DatasetInScopeTest, modify_sample_metadata_throws_when_out_of_bounds)
+{
+    EXPECT_THROW(dataset.getSampleMetadata(100) = 100, OutOfRange);
+}
+
+TEST_F(DatasetInScopeTest, access_const_sample_throws_when_out_of_bounds)
+{
+    const auto& local = dataset;
+    EXPECT_THROW(local[100], OutOfRange);
+}
+
+TEST_F(DatasetInScopeTest, access_const_sample_metadata_throws_when_out_of_bounds)
+{
+    const auto& local = dataset;
+    EXPECT_THROW(local.getSampleMetadata(100), OutOfRange);
 }
 
 TEST_F(DatasetInScopeTest, access_whole_data_in_readonly)

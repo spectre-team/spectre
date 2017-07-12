@@ -21,6 +21,7 @@ limitations under the License.
 
 #include <vector>
 #include "IDataset.h"
+#include "Exception.h"
 
 namespace Spectre::libDataset
 {
@@ -40,6 +41,14 @@ namespace Spectre::libDataset
         Dataset(gsl::span<const DataType> data, gsl::span<const SampleMetadata> sampleMetadata, DatasetMetadata metadata) :
             m_data(data.begin(), data.end()), m_sampleMetadata(sampleMetadata.begin(), sampleMetadata.end()), m_metadata(metadata)
         {
+            if(data.size() == sampleMetadata.size())
+            {
+                
+            }
+            else
+            {
+                throw InconsistentInputSize(data.size(), sampleMetadata.size());
+            }
         }
 
         /// <summary>
@@ -47,9 +56,16 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample</returns>
-        const DataType& operator[](int idx) const override
+        const DataType& operator[](size_t idx) const override
         {
-            return m_data[idx];
+            if (idx < m_data.size())
+            {
+                return m_data[idx];
+            }
+            else
+            {
+                throw OutOfRange(idx, m_data.size());
+            }
         }
 
         /// <summary>
@@ -57,9 +73,16 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample metadata</returns>
-        const SampleMetadata& getSampleMetadata(int idx) const override
+        const SampleMetadata& getSampleMetadata(size_t idx) const override
         {
-            return m_sampleMetadata[idx];
+            if (idx < m_sampleMetadata.size())
+            {
+                return m_sampleMetadata[idx];
+            }
+            else
+            {
+                throw OutOfRange(idx, m_sampleMetadata.size());
+            }
         }
 
         /// <summary>
@@ -76,9 +99,16 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample</returns>
-        DataType& operator[](int idx) override
+        DataType& operator[](size_t idx) override
         {
-            return m_data[idx];
+            if (idx < m_data.size())
+            {
+                return m_data[idx];
+            }
+            else
+            {
+                throw OutOfRange(idx, m_data.size());
+            }
         }
 
         /// <summary>
@@ -86,9 +116,16 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample metadata</returns>
-        SampleMetadata& getSampleMetadata(int idx) override
+        SampleMetadata& getSampleMetadata(size_t idx) override
         {
-            return m_sampleMetadata[idx];
+            if (idx < m_sampleMetadata.size())
+            {
+                return m_sampleMetadata[idx];
+            }
+            else
+            {
+                throw OutOfRange(idx, m_sampleMetadata.size());
+            }
         }
 
         /// <summary>

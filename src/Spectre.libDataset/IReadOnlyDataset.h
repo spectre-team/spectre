@@ -35,13 +35,13 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample</returns>
-        virtual const DataType& operator[](int idx) const = 0;
+        virtual const DataType& operator[](size_t idx) const = 0;
         /// <summary>
         /// Gets the sample metadata in read-only fashion.
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample metadata</returns>
-        virtual const SampleMetadata& getSampleMetadata(int idx) const = 0;        
+        virtual const SampleMetadata& getSampleMetadata(size_t idx) const = 0;        
         /// <summary>
         /// Gets the dataset metadata in read-only fashion.
         /// </summary>

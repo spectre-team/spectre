@@ -1,6 +1,6 @@
 /*
-* dummy.cpp
-* Empty .cpp file to enforce .lib creation.
+* Exception.h
+* Exceptions related to Dataset handling.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -16,3 +16,30 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+#pragma once
+#include <string>
+
+namespace Spectre::libDataset
+{
+class ExceptionBase: public std::exception
+{
+public:
+    explicit ExceptionBase(const std::string);
+    char const* what() const override;
+private:
+    const std::string m_message;
+};
+
+class OutOfRange final: public ExceptionBase
+{
+public:
+    OutOfRange(size_t index, size_t size);
+};
+
+class InconsistentInputSize final: public ExceptionBase
+{
+public:
+    InconsistentInputSize(size_t samplesNumber, size_t metadataNumber);
+};
+}

@@ -73,11 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dataset.h" />
+    <ClInclude Include="Exception.h" />
     <ClInclude Include="IDataset.h" />
     <ClInclude Include="IReadOnlyDataset.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dummy.cpp" />
+    <ClCompile Include="Exception.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
