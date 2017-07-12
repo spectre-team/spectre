@@ -39,7 +39,7 @@ namespace Spectre::libDataset
         /// <param name="sampleMetadata">The sample metadata.</param>
         /// <param name="metadata">The metadata.</param>
         Dataset(gsl::span<const DataType> data, gsl::span<const SampleMetadata> sampleMetadata, DatasetMetadata metadata) :
-            m_data(data.begin(), data.end()), m_sampleMetadata(sampleMetadata.begin(), sampleMetadata.end()), m_metadata(metadata)
+            m_Data(data.begin(), data.end()), m_SampleMetadata(sampleMetadata.begin(), sampleMetadata.end()), m_Metadata(metadata)
         {
             if(data.size() == sampleMetadata.size())
             {
@@ -58,13 +58,13 @@ namespace Spectre::libDataset
         /// <returns>Sample</returns>
         const DataType& operator[](size_t idx) const override
         {
-            if (idx < m_data.size())
+            if (idx < m_Data.size())
             {
-                return m_data[idx];
+                return m_Data[idx];
             }
             else
             {
-                throw OutOfRange(idx, m_data.size());
+                throw OutOfRange(idx, m_Data.size());
             }
         }
 
@@ -73,15 +73,15 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample metadata</returns>
-        const SampleMetadata& getSampleMetadata(size_t idx) const override
+        const SampleMetadata& GetSampleMetadata(size_t idx) const override
         {
-            if (idx < m_sampleMetadata.size())
+            if (idx < m_SampleMetadata.size())
             {
-                return m_sampleMetadata[idx];
+                return m_SampleMetadata[idx];
             }
             else
             {
-                throw OutOfRange(idx, m_sampleMetadata.size());
+                throw OutOfRange(idx, m_SampleMetadata.size());
             }
         }
 
@@ -89,9 +89,9 @@ namespace Spectre::libDataset
         /// Gets the dataset metadata in read-only fashion.
         /// </summary>
         /// <returns>Dataset metadata</returns>
-        const DatasetMetadata& getDatasetMetadata() const override
+        const DatasetMetadata& GetDatasetMetadata() const override
         {
-            return m_metadata;
+            return m_Metadata;
         }
 
         /// <summary>
@@ -101,13 +101,13 @@ namespace Spectre::libDataset
         /// <returns>Sample</returns>
         DataType& operator[](size_t idx) override
         {
-            if (idx < m_data.size())
+            if (idx < m_Data.size())
             {
-                return m_data[idx];
+                return m_Data[idx];
             }
             else
             {
-                throw OutOfRange(idx, m_data.size());
+                throw OutOfRange(idx, m_Data.size());
             }
         }
 
@@ -116,15 +116,15 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample metadata</returns>
-        SampleMetadata& getSampleMetadata(size_t idx) override
+        SampleMetadata& GetSampleMetadata(size_t idx) override
         {
-            if (idx < m_sampleMetadata.size())
+            if (idx < m_SampleMetadata.size())
             {
-                return m_sampleMetadata[idx];
+                return m_SampleMetadata[idx];
             }
             else
             {
-                throw OutOfRange(idx, m_sampleMetadata.size());
+                throw OutOfRange(idx, m_SampleMetadata.size());
             }
         }
 
@@ -132,27 +132,27 @@ namespace Spectre::libDataset
         /// Gets the dataset metadata.
         /// </summary>
         /// <returns>Dataset metadata</returns>
-        DatasetMetadata& getDatasetMetadata() override
+        DatasetMetadata& GetDatasetMetadata() override
         {
-            return m_metadata;
+            return m_Metadata;
         }
 
         /// <summary>
         /// Gets the data in read-only fashion.
         /// </summary>
-        /// <returns></returns>
-        gsl::span<const DataType> getData() const override
+        /// <returns>Read-only data</returns>
+        gsl::span<const DataType> GetData() const override
         {
-            return gsl::span<const DataType>(m_data);
+            return gsl::span<const DataType>(m_Data);
         }
 
         /// <summary>
         /// Gets the sample metadata in read-only fashion.
         /// </summary>
-        /// <returns></returns>
-        gsl::span<const SampleMetadata> getSampleMetadata() const override
+        /// <returns>Read-only metadata</returns>
+        gsl::span<const SampleMetadata> GetSampleMetadata() const override
         {
-            return gsl::span<const SampleMetadata>(m_sampleMetadata);
+            return gsl::span<const SampleMetadata>(m_SampleMetadata);
         }
 
         /// <summary>
@@ -160,10 +160,10 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="sample">The sample.</param>
         /// <param name="metadata">The metadata.</param>
-        void addSample(DataType sample, SampleMetadata metadata) override
+        void AddSample(DataType sample, SampleMetadata metadata) override
         {
-            m_data.push_back(sample);
-            m_sampleMetadata.push_back(metadata);
+            m_Data.push_back(sample);
+            m_SampleMetadata.push_back(metadata);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Spectre::libDataset
         /// <returns>Size</returns>
         size_t size() const override
         {
-            return m_data.size();
+            return m_Data.size();
         }
 
         /// <summary>
@@ -181,12 +181,12 @@ namespace Spectre::libDataset
         /// <returns>True, if dataset is empty.</returns>
         bool empty() const override
         {
-            return m_data.empty();
+            return m_Data.empty();
         }
 
     private:
-        std::vector<DataType> m_data;
-        std::vector<SampleMetadata> m_sampleMetadata;
-        DatasetMetadata m_metadata;
+        std::vector<DataType> m_Data;
+        std::vector<SampleMetadata> m_SampleMetadata;
+        DatasetMetadata m_Metadata;
     };
 }

@@ -41,23 +41,23 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample metadata</returns>
-        virtual const SampleMetadata& getSampleMetadata(size_t idx) const = 0;        
+        virtual const SampleMetadata& GetSampleMetadata(size_t idx) const = 0;        
         /// <summary>
         /// Gets the dataset metadata in read-only fashion.
         /// </summary>
         /// <returns>Dataset metadata</returns>
-        virtual const DatasetMetadata& getDatasetMetadata() const = 0;
+        virtual const DatasetMetadata& GetDatasetMetadata() const = 0;
 
         /// <summary>
         /// Gets the data in read-only fashion.
         /// </summary>
         /// <returns></returns>
-        virtual gsl::span<const DataType> getData() const = 0;
+        virtual gsl::span<const DataType> GetData() const = 0;
         /// <summary>
         /// Gets the sample metadata in read-only fashion.
         /// </summary>
         /// <returns></returns>
-        virtual gsl::span<const SampleMetadata> getSampleMetadata() const = 0;
+        virtual gsl::span<const SampleMetadata> GetSampleMetadata() const = 0;
 
         /// <summary>
         /// Number of elements in dataset.

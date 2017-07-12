@@ -41,18 +41,18 @@ namespace Spectre::libDataset
         /// </summary>
         /// <param name="idx">The index.</param>
         /// <returns>Sample metadata</returns>
-        virtual SampleMetadata& getSampleMetadata(size_t idx) = 0;
+        virtual SampleMetadata& GetSampleMetadata(size_t idx) = 0;
         /// <summary>
         /// Gets the dataset metadata.
         /// </summary>
         /// <returns>Dataset metadata</returns>
-        virtual DatasetMetadata& getDatasetMetadata() = 0;
+        virtual DatasetMetadata& GetDatasetMetadata() = 0;
 
         /// <summary>
         /// Adds the sample.
         /// </summary>
         /// <param name="sample">The sample.</param>
         /// <param name="metadata">The metadata.</param>
-        virtual void addSample(DataType sample, SampleMetadata metadata) = 0;
+        virtual void AddSample(DataType sample, SampleMetadata metadata) = 0;
     };
 }

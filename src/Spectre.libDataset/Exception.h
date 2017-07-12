@@ -22,24 +22,53 @@ limitations under the License.
 
 namespace Spectre::libDataset
 {
-class ExceptionBase: public std::exception
+
+/// <summary>
+/// Common base for all our exceptions, which should be further migrated
+/// and enhanced.
+/// </summary>
+class ExceptionBase : public std::exception
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ExceptionBase"/> class.
+    /// </summary>
+    /// <param name="">The error message.</param>
     explicit ExceptionBase(const std::string);
+    /// <summary>
+    /// Returns error message.
+    /// </summary>
+    /// <returns>Error message</returns>
     char const* what() const override;
 private:
     const std::string m_message;
 };
 
-class OutOfRange final: public ExceptionBase
+/// <summary>
+/// Thrown when collection index out of bounds was requested
+/// </summary>
+class OutOfRange final : public ExceptionBase
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OutOfRange"/> class.
+    /// </summary>
+    /// <param name="index">The requested index.</param>
+    /// <param name="size">The size of the collection.</param>
     OutOfRange(size_t index, size_t size);
 };
 
-class InconsistentInputSize final: public ExceptionBase
+/// <summary>
+/// Thrown when two samples and metadata amount is not equal.
+/// </summary>
+class InconsistentInputSize final : public ExceptionBase
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InconsistentInputSize"/> class.
+    /// </summary>
+    /// <param name="samplesNumber">The samples number.</param>
+    /// <param name="metadataNumber">The metadata number.</param>
     InconsistentInputSize(size_t samplesNumber, size_t metadataNumber);
 };
 }

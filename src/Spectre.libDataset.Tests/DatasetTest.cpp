@@ -65,7 +65,7 @@ TEST(DatasetTest, loose_emptiness_on_add)
     dataset_metadata empty_dataset_metadata;
     data_set dataset(empty_samples, empty_samples_metadata, empty_dataset_metadata);
     ASSERT_TRUE(dataset.empty()) << "dataset was not known as empty";
-    dataset.addSample(0, 1);
+    dataset.AddSample(0, 1);
     EXPECT_FALSE(dataset.empty());
 }
 }
@@ -107,14 +107,14 @@ TEST_F(DatasetInScopeTest, provide_the_same_data)
 
 TEST_F(DatasetInScopeTest, provide_the_same_sample_metadata)
 {
-    EXPECT_EQ(dataset.getSampleMetadata(0), 4);
-    EXPECT_EQ(dataset.getSampleMetadata(1), 5);
-    EXPECT_EQ(dataset.getSampleMetadata(2), 6);
+    EXPECT_EQ(dataset.GetSampleMetadata(0), 4);
+    EXPECT_EQ(dataset.GetSampleMetadata(1), 5);
+    EXPECT_EQ(dataset.GetSampleMetadata(2), 6);
 }
 
 TEST_F(DatasetInScopeTest, provide_the_same_metadata)
 {
-    EXPECT_EQ(dataset.getDatasetMetadata()[0], 7);
+    EXPECT_EQ(dataset.GetDatasetMetadata()[0], 7);
 }
 
 TEST_F(DatasetInScopeTest, modify_data)
@@ -126,16 +126,16 @@ TEST_F(DatasetInScopeTest, modify_data)
 
 TEST_F(DatasetInScopeTest, modify_sample_metadata)
 {
-    ASSERT_NE(dataset.getSampleMetadata(0), 100) << "metadata was already set to test value";
-    dataset.getSampleMetadata(0) = 100;
-    EXPECT_EQ(dataset.getSampleMetadata(0), 100);
+    ASSERT_NE(dataset.GetSampleMetadata(0), 100) << "metadata was already set to test value";
+    dataset.GetSampleMetadata(0) = 100;
+    EXPECT_EQ(dataset.GetSampleMetadata(0), 100);
 }
 
 TEST_F(DatasetInScopeTest, modify_metadata)
 {
-    ASSERT_NE(dataset.getDatasetMetadata()[0], 100) << "metadata was already set to test value";
-    dataset.getDatasetMetadata() = { 100 };
-    EXPECT_EQ(dataset.getDatasetMetadata()[0], 100);
+    ASSERT_NE(dataset.GetDatasetMetadata()[0], 100) << "metadata was already set to test value";
+    dataset.GetDatasetMetadata() = { 100 };
+    EXPECT_EQ(dataset.GetDatasetMetadata()[0], 100);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample)
@@ -147,7 +147,7 @@ TEST_F(DatasetInScopeTest, access_const_sample)
 TEST_F(DatasetInScopeTest, access_const_sample_metadata)
 {
     const auto& local = dataset;
-    EXPECT_EQ(local.getSampleMetadata(0), dataset.getSampleMetadata(0));
+    EXPECT_EQ(local.GetSampleMetadata(0), dataset.GetSampleMetadata(0));
 }
 
 TEST_F(DatasetInScopeTest, modify_data_throws_when_out_of_bounds)
@@ -157,7 +157,7 @@ TEST_F(DatasetInScopeTest, modify_data_throws_when_out_of_bounds)
 
 TEST_F(DatasetInScopeTest, modify_sample_metadata_throws_when_out_of_bounds)
 {
-    EXPECT_THROW(dataset.getSampleMetadata(100) = 100, OutOfRange);
+    EXPECT_THROW(dataset.GetSampleMetadata(100) = 100, OutOfRange);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample_throws_when_out_of_bounds)
@@ -169,14 +169,14 @@ TEST_F(DatasetInScopeTest, access_const_sample_throws_when_out_of_bounds)
 TEST_F(DatasetInScopeTest, access_const_sample_metadata_throws_when_out_of_bounds)
 {
     const auto& local = dataset;
-    EXPECT_THROW(local.getSampleMetadata(100), OutOfRange);
+    EXPECT_THROW(local.GetSampleMetadata(100), OutOfRange);
 }
 
 TEST_F(DatasetInScopeTest, access_whole_data_in_readonly)
 {
     const auto& local = dataset;
-    auto local_data = local.getData();
-    EXPECT_EQ(local_data.size(), 3);
+    auto local_data = local.GetData();
+    ASSERT_EQ(local_data.size(), 3);
     EXPECT_EQ(local_data[0], 1);
     EXPECT_EQ(local_data[1], 2);
     EXPECT_EQ(local_data[2], 3);
@@ -185,8 +185,8 @@ TEST_F(DatasetInScopeTest, access_whole_data_in_readonly)
 TEST_F(DatasetInScopeTest, access_whole_sample_metadata_in_readonly)
 {
     const auto& local = dataset;
-    auto local_sample_metadata = local.getSampleMetadata();
-    EXPECT_EQ(local_sample_metadata.size(), 3);
+    auto local_sample_metadata = local.GetSampleMetadata();
+    ASSERT_EQ(local_sample_metadata.size(), 3);
     EXPECT_EQ(local_sample_metadata[0], 4);
     EXPECT_EQ(local_sample_metadata[1], 5);
     EXPECT_EQ(local_sample_metadata[2], 6);
@@ -199,12 +199,12 @@ TEST_F(DatasetInScopeTest, know_size)
 
 TEST_F(DatasetInScopeTest, add_new_sample)
 {
-    dataset.addSample(8, 9);
-    EXPECT_EQ(dataset.getData().size(), 4);
-    EXPECT_EQ(dataset.getSampleMetadata().size(), 4);
+    dataset.AddSample(8, 9);
+    ASSERT_EQ(dataset.GetData().size(), 4);
+    ASSERT_EQ(dataset.GetSampleMetadata().size(), 4);
     EXPECT_EQ(dataset.size(), 4);
     EXPECT_EQ(dataset[3], 8);
-    EXPECT_EQ(dataset.getSampleMetadata(3), 9);
+    EXPECT_EQ(dataset.GetSampleMetadata(3), 9);
 }
 }
 
@@ -224,7 +224,7 @@ TEST(DatasetOutOfScopeTest, owns_data)
         dataset = new data_set(data, sample_metadata, metadata);
     }
 
-    auto data = dataset->getData();
+    auto data = dataset->GetData();
     for(auto i = 0; i < 3; ++i)
     {
         EXPECT_EQ(data[i], i) << "mismatch at position: " << i;
@@ -246,7 +246,7 @@ TEST(DatasetOutOfScopeTest, owns_sample_metadata)
         dataset = new data_set(data, sample_metadata, metadata);
     }
 
-    auto metadata = dataset->getSampleMetadata();
+    auto metadata = dataset->GetSampleMetadata();
     for (auto i = 0; i < 3; ++i)
     {
         EXPECT_EQ(metadata[i], i + 4) << "mismatch at position: " << i;
@@ -268,7 +268,7 @@ TEST(DatasetOutOfScopeTest, owns_metadata)
         dataset = new data_set(data, sample_metadata, metadata);
     }
 
-    auto metadata = dataset->getDatasetMetadata();
+    auto metadata = dataset->GetDatasetMetadata();
     EXPECT_EQ(metadata[0], 7);
 
     delete dataset;
