@@ -31,7 +31,6 @@ import {Heatmap} from '../../heatmaps/shared/heatmap';
   styleUrls: ['./preparation.component.css']
 })
 export class PreparationComponent implements OnInit {
-
   public id: number;
   public heatmapData: any;
   public spectrumData: any;

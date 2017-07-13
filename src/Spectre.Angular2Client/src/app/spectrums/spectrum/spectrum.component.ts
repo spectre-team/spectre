@@ -26,8 +26,6 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 
 export class SpectrumComponent implements OnInit {
-
-  @Input() public id: number;
   @Input() public spectrumData: any;
   @Input() public height = 500;
   @Input() public width = 1200;

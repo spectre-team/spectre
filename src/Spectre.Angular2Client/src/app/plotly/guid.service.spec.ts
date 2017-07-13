@@ -1,5 +1,5 @@
 /*
- * guid.service.sppec.ts
+ * guid.service.spec.ts
  * Tests GUID-providing service.
  *
    Copyright 2017 Grzegorz Mrukwa
@@ -36,5 +36,14 @@ describe('GuidService', () => {
     const guid1 = service.next();
     const guid2 = service.next();
     expect(guid1).not.toEqual(guid2);
+  }));
+
+  it('should proper GUIDs', inject([GuidService], (service: GuidService) => {
+    const guid = service.next();
+    expect(guid[14]).toEqual('4');
+    expect(guid[8]).toEqual('-');
+    expect(guid[13]).toEqual('-');
+    expect(guid[18]).toEqual('-');
+    expect(guid[23]).toEqual('-');
   }));
 });
