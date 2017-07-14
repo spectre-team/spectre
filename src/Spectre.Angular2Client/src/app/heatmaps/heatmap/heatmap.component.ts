@@ -24,13 +24,11 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./heatmap.component.css']
 })
 export class HeatmapComponent implements OnInit {
-
-  @Input() public id: number;
   @Input() public heatmapData: any;
   @Input() public height = 600;
   @Input() public width = 600;
-  private heatmapLayout: any;
-  private options: any;
+  public heatmapLayout: any;
+  public options: any;
 
   constructor() { }
 

@@ -62,4 +62,15 @@ describe('SpectrumComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should properly define default spectrumLayout', () => {
+    component.ngOnInit();
+    expect(component.spectrumLayout).toEqual({ height: 500, width: 1200 });
+  });
+
+  it('should properly define spectrumLayout', () => {
+    component.height = 120;
+    component.width = 120;
+    component.ngOnInit();
+    expect(component.spectrumLayout).toEqual({ height: 120, width: 120 });
+  });
 });
