@@ -6,19 +6,35 @@
 #include "IClassifier.h"
 #include "Generation.h"
 #include "GeneticAlgorithm.h"
+#include "IDataset.h"
 
-GeneticAlgorithm::GeneticAlgorithm(IDataset data, IMutation mutation, ICrossover crossover, ISelection selection, IClassifier classifier, long generationSize)
+template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
+GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::GeneticAlgorithm()
 {
-	this.data = data;
+	this->data = data;
+	this->mutation = NULL;
+	this->crossover = NULL;
+	this->selection = NULL;
+	this->classifier = NULL;
+	this->generationSize = 0;
+	this->generationCurrent = NULL;
+	this->generationNew = NULL;
+}
+
+template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
+GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::GeneticAlgorithm(TDataset data, TMutation mutation, TCrossover crossover, TSelection selection, TClassifier classifier, long generationSize)
+{
+	this->data = data;
 	this->mutation = mutation;
 	this->crossover = crossover;
 	this->selection = selection;
 	this->classifier = classifier;
 	this->generationSize = generationSize;
-	this->generationCurrent = new Generation(generationSize, 100);
+	this->generationCurrent = Generation(generationSize, 100);
 	this->generationNew = NULL;
 }
 
-GeneticAlgorithm::~GeneticAlgorithm()
+template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
+GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::~GeneticAlgorithm()
 {
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "Generation.h"
 
+class IDataset;
+
 class ISelection
 {
 public:

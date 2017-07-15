@@ -11,7 +11,7 @@ Generation::Generation(long size, long indSize)
 	int i;
 	for (i = 0; i<size; i++)
 	{
-		specimen->push_back(new Individual(indSize));
+		specimen->push_back(Individual(indSize));
 	}
 }
 
@@ -22,7 +22,7 @@ Generation::Generation(long size, long indSize, long amount)
 	int i;
 	for (i = 0; i<size; i++)
 	{
-		specimen->push_back(new Individual(indSize, amount));
+		specimen->push_back(Individual(indSize, amount));
 	}
 }
 
@@ -33,7 +33,7 @@ Generation::Generation(long size, long indSize, long amountFrom, long amountTo)
 	int i;
 	for (i = 0; i<size; i++)
 	{
-		specimen->push_back(new Individual(indSize, amountFrom, amountTo));
+		specimen->push_back(Individual(indSize, amountFrom, amountTo));
 	}
 }
 
