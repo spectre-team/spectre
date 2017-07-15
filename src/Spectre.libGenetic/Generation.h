@@ -1,6 +1,8 @@
-﻿#pragma once
+#pragma once
+#include "vector"
+#include "Individual.h"
 
-public class Generation
+class Generation
 {
 public:
 	Generation(long size, long indSize);
@@ -10,5 +12,5 @@ public:
 
 private:
 	long size;
-	vector<Individual>* specimen;
+	std::vector<Individual>* specimen;
 };

@@ -1,4 +1,4 @@
-﻿#include "IMutation.h"
+#include "IMutation.h"
 #include "Individual.h"
 
 IMutation::IMutation(double mutationRate, long rngSeed = 0)

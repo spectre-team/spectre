@@ -1,4 +1,4 @@
-﻿#include "ISelection.h"
+#include "ISelection.h"
 #include "Generation.h"
 
 ISelection::ISelection()

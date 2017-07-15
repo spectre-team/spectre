@@ -1,6 +1,7 @@
-﻿#pragma once
+#pragma once
+#include "Generation.h"
 
-public class ISelection
+class ISelection
 {
 public:
 	ISelection();

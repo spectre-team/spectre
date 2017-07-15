@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Implementation">
       <UniqueIdentifier>{90eef41d-f98e-462f-b19b-8ad1ad0cb729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Implementation\mutation">
+      <UniqueIdentifier>{74084f97-96ca-4868-8ea0-ac6cc17fd449}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Spectre.Algorithms.Genetic.h">
@@ -25,12 +28,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Individual.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Generation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ISelection.h">

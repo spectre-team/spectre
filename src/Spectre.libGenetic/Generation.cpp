@@ -1,4 +1,4 @@
-﻿#include "Generation.h"
+#include "Generation.h"
 #include "Individual.h"
 #include "vector"
 
@@ -9,7 +9,7 @@ Generation::Generation(long size, long indSize)
 	this->size = size;
 	specimen = new vector<Individual>(size, 0);
 	int i;
-	for (i=0; i<size; i++)
+	for (i = 0; i<size; i++)
 	{
 		specimen->push_back(new Individual(indSize));
 	}

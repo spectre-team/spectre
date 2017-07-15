@@ -1,4 +1,4 @@
-﻿#include "Individual.h"
+#include "Individual.h"
 #include "vector"
 #include "ctime"
 #include "cstdlib"
@@ -11,7 +11,7 @@ Individual::Individual(long size)
 	spectres = new vector<bool>(size, 0);
 	int i, randomval;
 	srand(time(0));
-	for (i=0;i<size;i++)
+	for (i = 0; i<size; i++)
 	{
 		randomval = rand() % 2;
 		spectres->push_back(randomval);
@@ -24,11 +24,11 @@ Individual::Individual(long size, long amount)
 	spectres = new vector<bool>(size, 0);
 	int i, randomval;
 	srand(time(0));
-	for (i=0; i<size; i++)
+	for (i = 0; i<size; i++)
 	{
 		spectres->push_back(false);
 	}
-	for (i=0;i<amount; i++)
+	for (i = 0; i<amount; i++)
 	{
 		randomval = rand() % size;
 		spectres->at(randomval) = true;

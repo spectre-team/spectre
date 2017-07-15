@@ -1,4 +1,4 @@
-﻿#include "ICrossover.h"
+#include "ICrossover.h"
 #include "Individual.h"
 
 ICrossover::ICrossover(double mutationRate, long rngSeed)

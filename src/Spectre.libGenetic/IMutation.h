@@ -1,6 +1,7 @@
-﻿#pragma once
+#pragma once
+#include "Individual.h"
 
-public class IMutation
+class IMutation
 {
 public:
 	IMutation(double mutationRate, long rngSeed = 0);

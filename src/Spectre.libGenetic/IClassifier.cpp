@@ -1,4 +1,4 @@
-﻿#include "IClassifier.h"
+#include "IClassifier.h"
 #include "Individual.h"
 
 IClassifier::IClassifier()

@@ -1,6 +1,7 @@
-﻿#pragma once
+#pragma once
+#include "Individual.h"
 
-public class ICrossover
+class ICrossover
 {
 public:
 	ICrossover(double mutationRate, long rngSeed);

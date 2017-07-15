@@ -1,6 +1,7 @@
-﻿#pragma once
+#pragma once
+#include "vector"
 
-public class Individual
+class Individual
 {
 public:
 	Individual(long size);
@@ -10,5 +11,5 @@ public:
 
 private:
 	long size;
-	vector<bool>* spectres;
+	std::vector<bool>* spectres;
 };

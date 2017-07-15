@@ -1,6 +1,8 @@
-﻿#pragma once
+#pragma once
 
-public class IClassifier
+class Individual;
+
+class IClassifier
 {
 public:
 	IClassifier();

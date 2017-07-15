@@ -1,10 +1,12 @@
-// Spectre.Algorithms.Genetic.h
 
-#pragma once
 
-using namespace System;
+#include "Generation.h"
+class IClassifier;
+class ISelection;
+class ICrossover;
+class IMutation;
 
-public class GeneticAlgorithm
+class GeneticAlgorithm
 {
 public:
 	GeneticAlgorithm(IDataset data, IMutation mutation, ICrossover crossover, ISelection selection, IClassifier classifier, long generationSize);
