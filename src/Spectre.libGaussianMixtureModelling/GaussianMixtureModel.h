@@ -59,18 +59,18 @@ namespace Spectre::libGaussianMixtureModelling
         /// <param name="numberOfComponents">Number of Gaussian Components to be set.</param>
         GaussianMixtureModel(const gsl::span<double>& mzArray,
                              const gsl::span<double>& intensities,
-                             unsigned int numberOfComponents) :
+                             const std::vector<GaussianComponent>&& components) :
             originalMzArray(mzArray.begin(), mzArray.end()), 
             originalMeanSpectrum(intensities.begin(), intensities.end()),
-            components(numberOfComponents), 
+            components(std::move(components)),
             isMerged(), isNoiseReduced(), mzMergingThreshold() // will be used in future.
         {
         }
-
+            
         /// <summary>
         /// Collection of Gaussian components.
         /// </summary>
-        std::vector<GaussianComponent> components;
+        const std::vector<GaussianComponent> components;
 
         /// <summary>
         /// Collection of initially supplied mz values.
