@@ -1,37 +1,18 @@
-#include "ISelection.h"
+#include "Selection.h"
 #include "Generation.h"
 #include "GeneticAlgorithm.h"
 
 namespace Spectre::libGenetic
 {
-template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
-GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::GeneticAlgorithm()
-{
-	this->data = data;
-	this->mutation = NULL;
-	this->crossover = NULL;
-	this->selection = NULL;
-	this->classifier = NULL;
-	this->generationSize = 0;
-	this->generationCurrent = NULL;
-	this->generationNew = NULL;
-}
-
-template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
-GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::GeneticAlgorithm(TDataset data, TMutation mutation, TCrossover crossover, TSelection selection, TClassifier classifier, long generationSize)
-{
-	this->data = data;
-	this->mutation = mutation;
-	this->crossover = crossover;
-	this->selection = selection;
-	this->classifier = classifier;
-	this->generationSize = generationSize;
-	this->generationCurrent = Generation(generationSize, 100);
-	this->generationNew = NULL;
-}
-
-template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
-GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::~GeneticAlgorithm()
+GeneticAlgorithm::GeneticAlgorithm(const Dataset* data, MutationOperator mutation, CrossoverOperator crossover, Selection selection, Classifier classifier, long generationSize)
+    : m_Data(data),
+      m_Mutation(mutation),
+      m_Crossover(crossover),
+      m_Selection(selection),
+      m_Classifier(classifier),
+      m_GenerationSize(generationSize),
+      m_CurrentGeneration(Generation(generationSize, 100)),
+      m_NewGeneration(Generation(generationSize, 100))
 {
 }
 }

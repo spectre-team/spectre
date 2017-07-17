@@ -3,11 +3,11 @@
 
 namespace Spectre::libGenetic
 {
-class ICrossover
+class CrossoverOperator
 {
 public:
-	ICrossover(double mutationRate, long rngSeed);
-	~ICrossover();
+	CrossoverOperator(double mutationRate, long rngSeed);
+    virtual ~CrossoverOperator();
 	virtual Individual performCrossover(Individual individual);
 	virtual bool shouldCrossover();
 

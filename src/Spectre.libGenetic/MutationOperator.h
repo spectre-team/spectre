@@ -3,11 +3,11 @@
 
 namespace Spectre::libGenetic
 {
-class IMutation
+class MutationOperator
 {
 public:
-	IMutation(double mutationRate, long rngSeed = 0);
-	~IMutation();
+	MutationOperator(double mutationRate, long rngSeed = 0);
+    virtual ~MutationOperator();
 	virtual Individual performMutation(Individual individual);
 	virtual bool shouldMutate();
 private:

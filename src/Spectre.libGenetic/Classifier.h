@@ -4,11 +4,11 @@ namespace Spectre::libGenetic
 {
 class Individual;
 
-class IClassifier
+class Classifier
 {
 public:
-	IClassifier();
-	~IClassifier();
+	Classifier();
+    virtual ~Classifier();
 	virtual long getScore(Individual individual);
 
 private:

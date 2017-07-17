@@ -47,10 +47,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -68,27 +70,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DataTypes.h" />
     <ClInclude Include="Generation.h" />
     <ClInclude Include="GeneticAlgorithm.h" />
-    <ClInclude Include="ICrossover.h" />
-    <ClInclude Include="IClassifier.h" />
-    <ClInclude Include="IDataset.h" />
-    <ClInclude Include="IMutation.h" />
+    <ClInclude Include="CrossoverOperator.h" />
+    <ClInclude Include="Classifier.h" />
+    <ClInclude Include="MutationOperator.h" />
     <ClInclude Include="Individual.h" />
-    <ClInclude Include="ISelection.h" />
+    <ClInclude Include="Selection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Generation.cpp" />
     <ClCompile Include="GeneticAlgorithm.cpp" />
-    <ClCompile Include="IClassifier.cpp" />
-    <ClCompile Include="ICrossover.cpp" />
-    <ClCompile Include="IDataset.cpp" />
-    <ClCompile Include="IMutation.cpp" />
+    <ClCompile Include="Classifier.cpp" />
+    <ClCompile Include="CrossoverOperator.cpp" />
+    <ClCompile Include="MutationOperator.cpp" />
     <ClCompile Include="Individual.cpp" />
     <ClCompile Include="IsDerivatedFrom.cpp" />
-    <ClCompile Include="ISelection.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
+  </Target>
 </Project>

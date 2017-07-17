@@ -27,35 +27,23 @@
     <ClInclude Include="GeneticAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ISelection.h">
+    <ClInclude Include="DataTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IClassifier.h">
+    <ClInclude Include="Selection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IMutation.h">
+    <ClInclude Include="MutationOperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ICrossover.h">
+    <ClInclude Include="CrossoverOperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDataset.h">
+    <ClInclude Include="Classifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IMutation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ISelection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ICrossover.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IClassifier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Individual.cpp">
       <Filter>Source Files\Implementation</Filter>
     </ClCompile>
@@ -65,11 +53,20 @@
     <ClCompile Include="GeneticAlgorithm.cpp">
       <Filter>Source Files\Implementation</Filter>
     </ClCompile>
-    <ClCompile Include="IDataset.cpp">
-      <Filter>Source Files\Implementation</Filter>
-    </ClCompile>
     <ClCompile Include="IsDerivatedFrom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MutationOperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossoverOperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Classifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

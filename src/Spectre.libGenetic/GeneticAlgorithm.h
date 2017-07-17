@@ -1,29 +1,25 @@
 #pragma once
+#include "DataTypes.h"
 #include "Generation.h"
-#include "IDataset.h"
-class IDataset;
-class IClassifier;
-class ISelection;
-class ICrossover;
-class IMutation;
+#include "MutationOperator.h"
+#include "CrossoverOperator.h"
+#include "Classifier.h"
 
 namespace Spectre::libGenetic
 {
-template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
-class GeneticAlgorithm : public IsDerivedFrom<TDataset, IDataset>, public IsDerivedFrom<TMutation, IMutation>, public IsDerivedFrom<TCrossover, ICrossover>, public IsDerivedFrom<TClassifier, IClassifier>, public IsDerivedFrom<TSelection, ISelection>
+class GeneticAlgorithm
 {
 public:
-	GeneticAlgorithm();
-	GeneticAlgorithm(TDataset data, TMutation mutation, TCrossover crossover, TSelection selection, TClassifier classifier, long generationSize);
-	~GeneticAlgorithm();
+	GeneticAlgorithm(const Dataset* data, MutationOperator mutation, CrossoverOperator crossover, Selection selection, Classifier classifier, long generationSize);
+	virtual ~GeneticAlgorithm() = default;
 
 private:
-	TDataset data;
-	TMutation mutation;
-	TCrossover crossover;
-	TSelection selection;
-	TClassifier classifier;
-	Generation generationCurrent, generationNew;
-	long generationSize;
+	const Dataset* m_Data;
+	MutationOperator m_Mutation;
+	CrossoverOperator m_Crossover;
+	Selection m_Selection;
+	Classifier m_Classifier;
+	Generation m_CurrentGeneration, m_NewGeneration;
+	long m_GenerationSize;
 };
 }
