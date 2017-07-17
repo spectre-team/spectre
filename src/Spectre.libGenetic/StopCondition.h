@@ -5,6 +5,10 @@ namespace Spectre::libGenetic
 class StopCondition
 {
 public:
-    bool operator()(); //@gmrukwa: final signature yet unknown
+    explicit StopCondition(unsigned int numberOfIterations);
+    bool operator()();
+    virtual ~StopCondition() = default;
+private:
+    unsigned int m_RemainingIterations;
 };
 }

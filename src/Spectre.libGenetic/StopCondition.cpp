@@ -1,10 +1,16 @@
-#include <exception>
 #include "StopCondition.h"
 
 namespace Spectre::libGenetic
 {
+StopCondition::StopCondition(unsigned int numberOfIterations):
+    m_RemainingIterations(numberOfIterations)
+{
+    
+}
+
+
 bool StopCondition::operator()()
 {
-    throw std::exception("Not implemented");
+    return m_RemainingIterations-- > 0;
 }
 }

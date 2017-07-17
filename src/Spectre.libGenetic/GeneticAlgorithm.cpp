@@ -12,7 +12,7 @@ GeneticAlgorithm::GeneticAlgorithm(OffspringGenerator&& offspringGenerator, Scor
 
 Generation GeneticAlgorithm::evolve(Generation&& generation)
 {
-    while(!m_StopCondition()) // @gmrukwa: This dummy stop condition will be extended soon.
+    while(!m_StopCondition())
     {
         const auto scores = m_Scorer.Score(generation);
         generation = m_OffspringGenerator.next(generation, scores);
