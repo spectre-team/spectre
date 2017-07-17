@@ -5,6 +5,6 @@ namespace Spectre::libGenetic
 class StopCondition
 {
 public:
-    bool check(); //@gmrukwa: final signature yet unknown
+    bool operator()(); //@gmrukwa: final signature yet unknown
 };
 }

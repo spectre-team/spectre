@@ -3,7 +3,7 @@
 
 namespace Spectre::libGenetic
 {
-bool StopCondition::check()
+bool StopCondition::operator()()
 {
     throw std::exception("Not implemented");
 }
