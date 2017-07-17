@@ -1,8 +1,8 @@
-<!--
-   index.html
-   Anchor for the root component.
-
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
+/*
+ * plotly.module.ts
+ * Module with component wrapping Plotly
+ *
+   Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,18 +15,26 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
--->
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Spectre Client</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script src="src/app/plotly/plotly-latest.min.js"></script>
-</head>
-<body>
-  <app-root>Loading...</app-root>
-</body>
-</html>
+*/
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { PlotlyComponent } from './plotly.component';
+import { GuidService } from './guid.service';
+
+@NgModule({
+  providers: [
+    GuidService
+  ],
+  imports: [
+    CommonModule
+  ],
+  declarations: [
+      PlotlyComponent
+  ],
+  exports: [
+      PlotlyComponent
+  ]
+})
+export class PlotlyModule { }

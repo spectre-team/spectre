@@ -25,12 +25,19 @@ import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { PreparationListComponent } from './preparation-list/preparation-list.component';
-import { PreparationService } from './preparation-list/preparation.service';
-import { PreparationsModule } from './preparation/preparations.module';
+import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
+import { PreparationService } from './preparations/shared/preparation.service';
+import { PreparationsModule } from './preparations/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PlotlyModule } from './plotly/plotly.module';
+import { SpectrumService } from './spectrums/shared/spectrum.service';
+import { HeatmapService } from './heatmaps/shared/heatmap.service';
 
 @NgModule({
+  providers: [
+      HeatmapService,
+      SpectrumService
+  ],
   declarations: [
     AppComponent,
     PreparationListComponent,
@@ -40,6 +47,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserModule,
     FormsModule,
     HttpModule,
+    PlotlyModule,
     PreparationsModule,
     routing
   ],

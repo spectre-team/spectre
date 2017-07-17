@@ -1,0 +1,11 @@
+<div id="plotly-{{randomId}}" class="plotly-component"></div>
+<div *ngIf="displayRawData">
+    raw data:
+    <hr />
+    <span>{{data | json}}</span>
+    <hr />
+    layout:
+    <hr />
+    <span>{{layout | json}}</span>
+    <hr />
+</div>
