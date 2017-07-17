@@ -2,131 +2,150 @@
 
 #include "DivikResultStruct.h"
 
-#include <cliext/adapter>  
+#include <memory>
 
-using namespace cliext;
 using namespace System;
-using namespace System::Collections::Generic;
-
-public ref class DivikResult
+// TODO: Comparators, getHash, uniqueptr
+namespace Divik
 {
-public:
-
-	property double QualityIndex
+	public ref class DivikResultTest
 	{
-		double get()
+	public:
+
+		property double QualityIndex
 		{
-			return m_ResultStruct->qualityIndex;
+			double get()
+			{
+				return m_ResultStruct->qualityIndex;
+			}
 		}
-	}
 
-	property array<double, 2> ^Centroids
-	{
-		array<double, 2> ^get()
+		property array<double, 2> ^Centroids
 		{
-			auto &data = m_ResultStruct->centroids;
+			array<double, 2> ^get()
+			{
+				auto &data = m_ResultStruct->centroids;
 
-			unsigned int size1 = data.size();
-			unsigned int size2 = data.front().size();
+				int size1 = (int)data.size();
+				int size2;
+				if (size1)
+					size2 = (int)data.front().size();
+				else
+					size2 = 0;
 
-			array<double, 2> ^result = gcnew array<double, 2>(size1, size2);
+				array<double, 2> ^result = gcnew array<double, 2>(size1, size2);
 
-			for (int i = 0; i < size1; ++i)
-				for (int j = 0; j < size2; ++j)
-					result[i, j] = data[i][j];
+				for (int i = 0; i < size1; ++i)
+					for (int j = 0; j < size2; ++j)
+						result[i, j] = data[i][j];
 
-			return result;
+				return result;
+			}
 		}
-	}
 
-	property array<int> ^Partition
-	{
-		array<int> ^get()
+		property array<int> ^Partition
 		{
-			auto& data = m_ResultStruct->partition;
-			unsigned int size = data.size();
-			array<int> ^result = gcnew array<int>(size);
-			for (int i = 0; i < size; ++i)
-				result[i] = data[i];
-			return result;
+			array<int> ^get()
+			{
+				auto& data = m_ResultStruct->partition;
+				int size = (int)data.size();
+				array<int> ^result = gcnew array<int>(size);
+				for (int i = 0; i < size; ++i)
+					result[i] = data[i];
+				return result;
+			}
 		}
-	}
 
-	property double AmplitudeThreshold
-	{
-		double get()
+		property double AmplitudeThreshold
 		{
-			return m_ResultStruct->amplitudeThreshold;
+			double get()
+			{
+				return m_ResultStruct->amplitudeThreshold;
+			}
 		}
-	}
 
-	property array<bool> ^AmplitudeFilter
-	{
-		array<bool> ^get()
+		property array<bool> ^AmplitudeFilter
 		{
-			auto& data = m_ResultStruct->amplitudeFilter;
-			unsigned int size = data.size();
-			array<bool> ^result = gcnew array<bool>(size);
-			for (int i = 0; i < size; ++i)
-				result[i] = data[i];
-			return result;
+			array<bool> ^get()
+			{
+				auto& data = m_ResultStruct->amplitudeFilter;
+				int size = (int)data.size();
+				array<bool> ^result = gcnew array<bool>(size);
+				for (int i = 0; i < size; ++i)
+					result[i] = data[i];
+				return result;
+			}
 		}
-	}
 
-	property double VarianceThreshold
-	{
-		double get()
+		property double VarianceThreshold
 		{
-			return m_ResultStruct->varianceThreshold;
+			double get()
+			{
+				return m_ResultStruct->varianceThreshold;
+			}
 		}
-	}
 
-	property array<bool> ^VarianceFilter
-	{
-		array<bool> ^get()
+		property array<bool> ^VarianceFilter
 		{
-			auto& data = m_ResultStruct->varianceFilter;
-			unsigned int size = data.size();
-			array<bool> ^result = gcnew array<bool>(size);
-			for (int i = 0; i < size; ++i)
-				result[i] = data[i];
-			return result;
+			array<bool> ^get()
+			{
+				auto& data = m_ResultStruct->varianceFilter;
+				int size = (int)data.size();
+				array<bool> ^result = gcnew array<bool>(size);
+				for (int i = 0; i < size; ++i)
+					result[i] = data[i];
+				return result;
+			}
 		}
-	}
 
-	property array<int> ^Merged
-	{
-		array<int> ^get()
+		property array<int> ^Merged
 		{
-			auto& data = m_ResultStruct->merged;
-			unsigned int size = data.size();
-			array<int> ^result = gcnew array<int>(size);
-			for (int i = 0; i < size; ++i)
-				result[i] = data[i];
-			return result;
+			array<int> ^get()
+			{
+				auto& data = m_ResultStruct->merged;
+				int size = (int)data.size();
+				array<int> ^result = gcnew array<int>(size);
+				for (int i = 0; i < size; ++i)
+					result[i] = data[i];
+				return result;
+			}
 		}
-	}
 
-	property array<DivikResult^> ^Subregions
-	{
-		array<DivikResult^> ^get()
+		property array<DivikResultTest^> ^Subregions
 		{
-			auto& data = m_ResultStruct->subregions;
-			unsigned int size = data.size();
-			array<DivikResult^> ^result = gcnew array<DivikResult^>(size);
-			for (int i = 0; i < size; ++i)
-				result[i] = gcnew DivikResult(&data[i]);
-			return result;
+			array<DivikResultTest^> ^get()
+			{
+				auto& data = m_ResultStruct->subregions;
+				int size = (int)data.size();
+				array<DivikResultTest^> ^result = gcnew array<DivikResultTest^>(size);
+				for (int i = 0; i < size; ++i)
+					result[i] = gcnew DivikResultTest(&data[i]);
+				return result;
+			}
 		}
-	}
 
-	DivikResult() = delete;
-	DivikResult(DivikResultStruct *result)
-	{
-		m_ResultStruct = result;
-	}
+		DivikResultTest()
+		{
+			m_ResultStruct = new DivikResultStruct();
+		}
+		DivikResultTest(DivikResultStruct *result)	// move ownership
+		{
+			m_ResultStruct = result;
+		}
+		!DivikResultTest()
+		{
+			delete m_ResultStruct;
+		}
+		~DivikResultTest()
+		{
+			this->!DivikResultTest();
+		}
 
-private:
+		bool Equals(Object %obj) override;
 
-	DivikResultStruct *m_ResultStruct;
-};
+	private:
+
+		DivikResultStruct* m_ResultStruct;
+
+	};
+}

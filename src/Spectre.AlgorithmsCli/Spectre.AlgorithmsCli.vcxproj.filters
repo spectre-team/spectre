@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Results">
       <UniqueIdentifier>{c7412a3d-6292-4cbf-8445-e9554a6c2162}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Results">
+      <UniqueIdentifier>{78be55b1-2096-462d-971f-005a34efb2e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -49,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="Methods\Segmentation.cpp">
       <Filter>Source Files\Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Results\DivikResult.cpp">
+      <Filter>Source Files\Results</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

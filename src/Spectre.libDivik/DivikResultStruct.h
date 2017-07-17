@@ -2,10 +2,14 @@
 
 #include <vector>
 
+typedef std::vector<double> Centroid;
+
 struct DivikResultStruct
 {
+	DivikResultStruct();
+
 	double qualityIndex;
-	std::vector<std::vector<double>> centroids;
+	std::vector<Centroid> centroids;
 	std::vector<int> partition;
 
 	double amplitudeThreshold;
