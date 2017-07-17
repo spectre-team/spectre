@@ -1,3 +1,4 @@
+#pragma once
 #include "Generation.h"
 #include "IDataset.h"
 class IDataset;
@@ -6,6 +7,8 @@ class ISelection;
 class ICrossover;
 class IMutation;
 
+namespace Spectre::libGenetic
+{
 template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
 class GeneticAlgorithm : public IsDerivedFrom<TDataset, IDataset>, public IsDerivedFrom<TMutation, IMutation>, public IsDerivedFrom<TCrossover, ICrossover>, public IsDerivedFrom<TClassifier, IClassifier>, public IsDerivedFrom<TSelection, ISelection>
 {
@@ -23,3 +26,4 @@ private:
 	Generation generationCurrent, generationNew;
 	long generationSize;
 };
+}

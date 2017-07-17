@@ -1,6 +1,8 @@
 #include "ICrossover.h"
 #include "Individual.h"
 
+namespace Spectre::libGenetic
+{
 ICrossover::ICrossover(double mutationRate, long rngSeed)
 {
 	this->crossoverRate = crossoverRate;
@@ -9,4 +11,5 @@ ICrossover::ICrossover(double mutationRate, long rngSeed)
 
 ICrossover::~ICrossover()
 {
+}
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+namespace Spectre::libGenetic
+{
 class IDataset
 {
 public:
@@ -7,3 +9,4 @@ public:
 	~IDataset();
 private:
 };
+}

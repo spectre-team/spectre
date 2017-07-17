@@ -1,13 +1,9 @@
-// This is the main DLL file.
-
 #include "ISelection.h"
-#include "IMutation.h"
-#include "ICrossover.h"
-#include "IClassifier.h"
 #include "Generation.h"
 #include "GeneticAlgorithm.h"
-#include "IDataset.h"
 
+namespace Spectre::libGenetic
+{
 template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
 GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::GeneticAlgorithm()
 {
@@ -37,4 +33,5 @@ GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::Gene
 template <class TMutation, class TCrossover, class TClassifier, class TSelection, class TDataset>
 GeneticAlgorithm<TMutation, TCrossover, TClassifier, TSelection, TDataset>::~GeneticAlgorithm()
 {
+}
 }

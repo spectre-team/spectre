@@ -1,6 +1,8 @@
 #pragma once
 #include "vector"
 
+namespace Spectre::libGenetic
+{
 class Individual
 {
 public:
@@ -13,3 +15,4 @@ private:
 	long size;
 	std::vector<bool>* spectres;
 };
+}

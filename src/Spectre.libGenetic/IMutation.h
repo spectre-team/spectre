@@ -1,6 +1,8 @@
 #pragma once
 #include "Individual.h"
 
+namespace Spectre::libGenetic
+{
 class IMutation
 {
 public:
@@ -12,3 +14,4 @@ private:
 	double mutationRate;
 	long rngSeed;
 };
+}

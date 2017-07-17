@@ -1,6 +1,8 @@
 #pragma once
 #include "Generation.h"
 
+namespace Spectre::libGenetic
+{
 class IDataset;
 
 class ISelection
@@ -14,3 +16,4 @@ public:
 private:
 
 };
+}

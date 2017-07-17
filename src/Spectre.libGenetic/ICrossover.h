@@ -1,6 +1,8 @@
 #pragma once
 #include "Individual.h"
 
+namespace Spectre::libGenetic
+{
 class ICrossover
 {
 public:
@@ -13,3 +15,4 @@ private:
 	double crossoverRate;
 	long rngSeed;
 };
+}

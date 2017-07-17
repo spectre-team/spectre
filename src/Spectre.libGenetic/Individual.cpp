@@ -1,10 +1,12 @@
 #include "Individual.h"
-#include "vector"
-#include "ctime"
-#include "cstdlib"
+#include <vector>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
+namespace Spectre::libGenetic
+{
 Individual::Individual(long size)
 {
 	this->size = size;
@@ -56,4 +58,5 @@ Individual::Individual(long size, long amountFrom, long amountTo)
 Individual::~Individual()
 {
 	delete spectres;
+}
 }

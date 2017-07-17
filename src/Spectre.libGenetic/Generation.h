@@ -2,6 +2,8 @@
 #include "vector"
 #include "Individual.h"
 
+namespace Spectre::libGenetic
+{
 class Generation
 {
 public:
@@ -14,3 +16,4 @@ private:
 	long size;
 	std::vector<Individual>* specimen;
 };
+}

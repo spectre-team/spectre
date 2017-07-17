@@ -1,9 +1,11 @@
 #include "Generation.h"
 #include "Individual.h"
-#include "vector"
+#include <vector>
 
 using namespace std;
 
+namespace Spectre::libGenetic
+{
 Generation::Generation(long size, long indSize)
 {
 	this->size = size;
@@ -40,4 +42,5 @@ Generation::Generation(long size, long indSize, long amountFrom, long amountTo)
 Generation::~Generation()
 {
 	delete specimen;
+}
 }
