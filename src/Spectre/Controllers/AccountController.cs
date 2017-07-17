@@ -20,7 +20,7 @@ using Spectre.Results;
 namespace Spectre.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Account")]
+    [RoutePrefix("account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -51,7 +51,7 @@ namespace Spectre.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        // GET api/Account/UserInfo
+        // GET account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
@@ -66,7 +66,7 @@ namespace Spectre.Controllers
             };
         }
 
-        // POST api/Account/Logout
+        // POST account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
@@ -74,7 +74,7 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
+        // GET account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
@@ -114,7 +114,7 @@ namespace Spectre.Controllers
             };
         }
 
-        // POST api/Account/ChangePassword
+        // POST account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -134,7 +134,7 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/SetPassword
+        // POST account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
@@ -153,7 +153,7 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/AddExternalLogin
+        // POST account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
@@ -191,7 +191,7 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/RemoveLogin
+        // POST account/RemoveLogin
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
@@ -220,7 +220,7 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // GET api/Account/ExternalLogin
+        // GET account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
@@ -277,7 +277,7 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
+        // GET account/ExternalLogins?returnUrl=%2F&generateState=true
         [AllowAnonymous]
         [Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
@@ -318,7 +318,7 @@ namespace Spectre.Controllers
             return logins;
         }
 
-        // POST api/Account/Register
+        // POST account/Register
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
@@ -340,7 +340,7 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/RegisterExternal
+        // POST account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]

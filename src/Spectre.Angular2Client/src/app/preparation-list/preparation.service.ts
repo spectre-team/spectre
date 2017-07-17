@@ -25,7 +25,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class PreparationService {
-  private baseUrl = 'http://localhost/spectre_api/api';
+  private baseUrl = 'http://localhost/spectre_api';
 
   constructor(private http: Http) {
   }
