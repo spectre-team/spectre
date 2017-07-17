@@ -1,26 +1,22 @@
 #pragma once
 #include "DataTypes.h"
 #include "Generation.h"
-#include "MutationOperator.h"
-#include "CrossoverOperator.h"
-#include "Classifier.h"
 #include "Scorer.h"
+#include "OffspringGenerator.h"
+#include "StopCondition.h"
 
 namespace Spectre::libGenetic
 {
 class GeneticAlgorithm
 {
 public:
-	GeneticAlgorithm(const Dataset* data, MutationOperator mutation, CrossoverOperator crossover, Selection selection, Scorer classifier, long generationSize);
+	GeneticAlgorithm(OffspringGenerator&& offspringGenerator, Scorer&& classifier, StopCondition&& stopCondition);
+    Generation evolve(Generation&& generation);
 	virtual ~GeneticAlgorithm() = default;
 
 private:
-	const Dataset* m_Data;
-	MutationOperator m_Mutation;
-	CrossoverOperator m_Crossover;
-	Selection m_Selection;
+    OffspringGenerator m_OffspringGenerator;
 	Scorer m_Scorer;
-	Generation m_CurrentGeneration, m_NewGeneration;
-	long m_GenerationSize;
+    StopCondition m_StopCondition;
 };
 }

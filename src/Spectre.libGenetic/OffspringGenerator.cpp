@@ -2,8 +2,9 @@
 
 namespace Spectre::libGenetic
 {
-OffspringGenerator::OffspringGenerator(IndividualsBuilderStrategy&& builder):
-    m_Builder(builder)
+OffspringGenerator::OffspringGenerator(IndividualsBuilderStrategy&& builder, Selection&& selection):
+    m_Builder(builder),
+    m_Selection(selection)
 {
 }
 

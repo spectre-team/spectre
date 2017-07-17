@@ -1,16 +1,22 @@
-#include "Selection.h"
 #include "Generation.h"
 #include "GeneticAlgorithm.h"
 
 namespace Spectre::libGenetic
 {
-GeneticAlgorithm::GeneticAlgorithm(const Dataset* data, MutationOperator mutation, CrossoverOperator crossover, Selection selection, Scorer scorer, long generationSize)
-    : m_Data(data),
-      m_Mutation(mutation),
-      m_Crossover(crossover),
-      m_Selection(selection),
+GeneticAlgorithm::GeneticAlgorithm(OffspringGenerator&& offspringGenerator, Scorer&& scorer, StopCondition&& stopCondition)
+    : m_OffspringGenerator(offspringGenerator),
       m_Scorer(scorer),
-      m_GenerationSize(generationSize)
+      m_StopCondition(stopCondition)
 {
+}
+
+Generation GeneticAlgorithm::evolve(Generation&& generation)
+{
+    while(!m_StopCondition.check()) // @gmrukwa: This dummy stop condition will be extended soon.
+    {
+        const auto scores = m_Scorer.Score(generation);
+        generation = m_OffspringGenerator.next(generation, scores);
+    }
+    return generation;
 }
 }
