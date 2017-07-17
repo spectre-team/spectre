@@ -22,14 +22,7 @@ limitations under the License.
 #include <random>
 #include "GaussianMixtureModel.h"
 #include "DataType.h"
-#include "../Spectre.libClustering/ArgumentNullException.h"
-
-/*
- * TODO:
- * - Add documentation
- * - Add tests for Expectation, Initialization, Maximization, LogLikelihood
- * - move the ArgumentNullException to Common
- */
+#include "ArgumentNullException.h"
 
 namespace Spectre::libGaussianMixtureModelling
 {
@@ -103,7 +96,6 @@ namespace Spectre::libGaussianMixtureModelling
                 oldLikelihood = newLikelihood;
                 Maximization();
                 newLikelihood = CalculateLikelihood();
-                // printf("%f\n", newLikelihood); // TODO: Remove this shit
             } while (abs(oldLikelihood - newLikelihood) > 0.00000001);
 
             return GaussianMixtureModel(
