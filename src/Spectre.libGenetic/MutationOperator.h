@@ -7,12 +7,11 @@ namespace Spectre::libGenetic
 class MutationOperator
 {
 public:
-	MutationOperator(double mutationRate, long rngSeed = 0);
-    virtual ~MutationOperator();
-	virtual Individual performMutation(Individual individual);
-	virtual bool shouldMutate();
+	explicit MutationOperator(double mutationRate, Seed rngSeed=0);
+    Individual operator()(Individual&& individual);
+    virtual ~MutationOperator() = default;
 private:
-	double mutationRate;
-	long rngSeed;
+	const double m_MutationRate;
+    RandomNumberGenerator m_RandomNumberGenerator;
 };
 }

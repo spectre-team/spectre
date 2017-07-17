@@ -10,9 +10,7 @@ GeneticAlgorithm::GeneticAlgorithm(const Dataset* data, MutationOperator mutatio
       m_Crossover(crossover),
       m_Selection(selection),
       m_Scorer(scorer),
-      m_GenerationSize(generationSize),
-      m_CurrentGeneration(Generation(generationSize, 100)),
-      m_NewGeneration(Generation(generationSize, 100))
+      m_GenerationSize(generationSize)
 {
 }
 }
