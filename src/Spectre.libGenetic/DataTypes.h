@@ -7,4 +7,5 @@ namespace Spectre::libGenetic
 class Empty {}; // @gmrukwa: NullObject pattern - hack until we switch off properties of IDataset for void.
 
 using Dataset = Spectre::libDataset::IDataset<std::vector<double>, Empty, Empty>;
+using ScoreType = double;
 }

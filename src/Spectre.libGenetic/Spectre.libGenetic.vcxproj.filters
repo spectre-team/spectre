@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Implementation">
-      <UniqueIdentifier>{080d5432-d486-47f6-bd5e-aa72c11a1444}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Individual.h">
@@ -45,17 +42,17 @@
     <ClInclude Include="OffspringGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IndividualsBuilderStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StopCondition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scorer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Individual.cpp">
-      <Filter>Source Files\Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Generation.cpp">
-      <Filter>Source Files\Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneticAlgorithm.cpp">
-      <Filter>Source Files\Implementation</Filter>
-    </ClCompile>
     <ClCompile Include="IsDerivatedFrom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -66,6 +63,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Classifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Individual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneticAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Generation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OffspringGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IndividualsBuilderStrategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StopCondition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scorer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

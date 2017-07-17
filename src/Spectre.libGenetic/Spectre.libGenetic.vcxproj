@@ -75,19 +75,26 @@
     <ClInclude Include="GeneticAlgorithm.h" />
     <ClInclude Include="CrossoverOperator.h" />
     <ClInclude Include="Classifier.h" />
+    <ClInclude Include="IndividualsBuilderStrategy.h" />
     <ClInclude Include="MutationOperator.h" />
     <ClInclude Include="Individual.h" />
     <ClInclude Include="OffspringGenerator.h" />
+    <ClInclude Include="Scorer.h" />
     <ClInclude Include="Selection.h" />
+    <ClInclude Include="StopCondition.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Generation.cpp" />
     <ClCompile Include="GeneticAlgorithm.cpp" />
     <ClCompile Include="Classifier.cpp" />
     <ClCompile Include="CrossoverOperator.cpp" />
+    <ClCompile Include="IndividualsBuilderStrategy.cpp" />
     <ClCompile Include="MutationOperator.cpp" />
     <ClCompile Include="Individual.cpp" />
     <ClCompile Include="IsDerivatedFrom.cpp" />
+    <ClCompile Include="OffspringGenerator.cpp" />
+    <ClCompile Include="Scorer.cpp" />
+    <ClCompile Include="StopCondition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
