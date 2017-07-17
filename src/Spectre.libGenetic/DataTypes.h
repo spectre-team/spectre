@@ -8,4 +8,5 @@ class Empty {}; // @gmrukwa: NullObject pattern - hack until we switch off prope
 
 using Dataset = Spectre::libDataset::IDataset<std::vector<double>, Empty, Empty>;
 using ScoreType = double;
+using Individual = std::vector<bool>;
 }

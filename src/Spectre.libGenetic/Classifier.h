@@ -1,9 +1,8 @@
 #pragma once
+#include "DataTypes.h"
 
 namespace Spectre::libGenetic
 {
-class Individual;
-
 class Classifier
 {
 public:

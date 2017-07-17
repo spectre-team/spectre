@@ -1,6 +1,7 @@
 #pragma once
 #include "vector"
-#include "Individual.h"
+//#include "Individual.h"
+#include "DataTypes.h"
 
 namespace Spectre::libGenetic
 {

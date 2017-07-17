@@ -4,13 +4,14 @@
 #include "MutationOperator.h"
 #include "CrossoverOperator.h"
 #include "Classifier.h"
+#include "Scorer.h"
 
 namespace Spectre::libGenetic
 {
 class GeneticAlgorithm
 {
 public:
-	GeneticAlgorithm(const Dataset* data, MutationOperator mutation, CrossoverOperator crossover, Selection selection, Classifier classifier, long generationSize);
+	GeneticAlgorithm(const Dataset* data, MutationOperator mutation, CrossoverOperator crossover, Selection selection, Scorer classifier, long generationSize);
 	virtual ~GeneticAlgorithm() = default;
 
 private:
@@ -18,7 +19,7 @@ private:
 	MutationOperator m_Mutation;
 	CrossoverOperator m_Crossover;
 	Selection m_Selection;
-	Classifier m_Classifier;
+	Scorer m_Scorer;
 	Generation m_CurrentGeneration, m_NewGeneration;
 	long m_GenerationSize;
 };
