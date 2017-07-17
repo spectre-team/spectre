@@ -10,7 +10,7 @@ class IndividualsBuilderStrategy
 {
 public:
     IndividualsBuilderStrategy(CrossoverOperator&& crossover, MutationOperator&& mutation);
-    Generation build(Generation old, gsl::span<ScoreType> scores, size_t newSize);
+    Generation Build(const Generation& old, gsl::span<ScoreType> scores, size_t newSize);
     virtual ~IndividualsBuilderStrategy() = default;
 private:
     CrossoverOperator m_Crossover;

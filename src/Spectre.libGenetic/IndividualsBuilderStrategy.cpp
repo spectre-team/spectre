@@ -10,7 +10,7 @@ IndividualsBuilderStrategy::IndividualsBuilderStrategy(CrossoverOperator&& cross
     
 }
 
-Generation IndividualsBuilderStrategy::build(Generation old, gsl::span<ScoreType> scores, size_t newSize)
+Generation IndividualsBuilderStrategy::Build(const Generation& old, gsl::span<ScoreType> scores, size_t newSize)
 {
     throw std::exception("Not implemented");
 }

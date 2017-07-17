@@ -80,7 +80,8 @@
     <ClInclude Include="Individual.h" />
     <ClInclude Include="OffspringGenerator.h" />
     <ClInclude Include="Scorer.h" />
-    <ClInclude Include="Selection.h" />
+    <ClInclude Include="PreservationStrategy.h" />
+    <ClInclude Include="Sorting.h" />
     <ClInclude Include="StopCondition.h" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,7 @@
     <ClCompile Include="Individual.cpp" />
     <ClCompile Include="IsDerivatedFrom.cpp" />
     <ClCompile Include="OffspringGenerator.cpp" />
+    <ClCompile Include="PreservationStrategy.cpp" />
     <ClCompile Include="Scorer.cpp" />
     <ClCompile Include="StopCondition.cpp" />
   </ItemGroup>

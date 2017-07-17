@@ -2,14 +2,18 @@
 
 namespace Spectre::libGenetic
 {
-OffspringGenerator::OffspringGenerator(IndividualsBuilderStrategy&& builder, Selection&& selection):
+OffspringGenerator::OffspringGenerator(IndividualsBuilderStrategy&& builder, PreservationStrategy&& preservationStrategy):
     m_Builder(builder),
-    m_Selection(selection)
+    m_PreservationStrategy(preservationStrategy)
 {
 }
 
-Generation OffspringGenerator::next(Generation old, gsl::span<ScoreType> scores)
+Generation OffspringGenerator::next(Generation&& old, gsl::span<ScoreType> scores)
 {
-    throw std::exception("Not implemented");
+    auto preserved = m_PreservationStrategy.PickBest(old, scores);
+    const auto numberOfRemaining = old.size() - preserved.size();
+    const auto generated = m_Builder.Build(old, scores, numberOfRemaining);
+    preserved.insert(preserved.end(), generated.begin(), generated.end());
+    return preserved;
 }
 }
