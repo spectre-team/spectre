@@ -73,8 +73,8 @@ namespace Spectre.Tests.Controllers
         [Test]
         public void TestGetFirstPreparationSampleHeatmap()
         {
-            const double validMzValue = 799.796609809649;
-            var heatmap = _controller.Get(1, validMzValue);
+            const int anyChannelId = 1;
+            var heatmap = _controller.Get(1, anyChannelId, false);
 
             Assert.Multiple(() =>
             {
@@ -87,8 +87,7 @@ namespace Spectre.Tests.Controllers
                 Assert.AreEqual(heatmap.Intensities.Count(), heatmap.Y.Count(),
                     "Number of coordinates is different from number of intensities.");
 
-                Assert.Throws<ArgumentException>(() => { _controller.Get(1, -2.0); }, "Accepted negative mz value");
-                Assert.Throws<ArgumentException>(() => { _controller.Get(1, 0.0); }, "Accepted nonexistent mz value");
+                Assert.Throws<ArgumentException>(() => { _controller.Get(1, -1, false); }, "Accepted negative index");
             });
         }
     }

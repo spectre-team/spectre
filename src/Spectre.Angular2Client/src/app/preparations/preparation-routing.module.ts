@@ -1,6 +1,6 @@
 /*
- * preparations.module.ts
- * Module with preparations-related stuff (routing, imports declarations, etc.).
+ * preparation-routing.module.ts
+ * Module providing routing to single preparations.
  *
    Copyright 2017 Grzegorz Mrukwa
 
@@ -18,22 +18,21 @@
 */
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-import { PreparationComponent } from './preparation.component';
+import { PreparationComponent } from './preparation/preparation.component';
 
-import { PreparationRoutingModule } from './preparation-routing.module';
+const preparationRoutes = [
+    { path: 'preparation/:id', component: PreparationComponent }
+];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    PreparationRoutingModule
-  ],
-  declarations: [
-    PreparationComponent
-  ],
-  providers: [  ]
+    imports: [
+        RouterModule.forChild(preparationRoutes)
+    ],
+    exports: [
+        RouterModule
+    ]
 })
-export class PreparationsModule {}
+
+export class PreparationRoutingModule { }
