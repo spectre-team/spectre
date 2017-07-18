@@ -2,8 +2,8 @@
 #include <span.h>
 #include "DataTypes.h"
 #include "Generation.h"
-#include "PreservationStrategy.h"
 #include "IndividualsBuilderStrategy.h"
+#include "PreservationStrategy.h"
 
 namespace Spectre::libGenetic
 {

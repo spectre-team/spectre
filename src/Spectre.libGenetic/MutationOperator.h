@@ -1,5 +1,4 @@
 #pragma once
-//#include "Individual.h"
 #include "DataTypes.h"
 
 namespace Spectre::libGenetic

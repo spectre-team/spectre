@@ -46,9 +46,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering.Tests", "Spectre.libClustering.Tests\Spectre.libClustering.Tests.vcxproj", "{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGenetic", "Spectre.libGenetic\Spectre.libGenetic.vcxproj", "{9786751A-6AE1-48D3-938D-4129D0399667}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B7DB309D-3ED6-4771-993D-A1CF3A6436D9} = {B7DB309D-3ED6-4771-993D-A1CF3A6436D9}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libDataset", "Spectre.libDataset\Spectre.libDataset.vcxproj", "{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}"
 EndProject

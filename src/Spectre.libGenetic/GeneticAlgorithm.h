@@ -1,8 +1,7 @@
 #pragma once
-#include "DataTypes.h"
 #include "Generation.h"
-#include "Scorer.h"
 #include "OffspringGenerator.h"
+#include "Scorer.h"
 #include "StopCondition.h"
 
 namespace Spectre::libGenetic

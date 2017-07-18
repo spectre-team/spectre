@@ -1,5 +1,5 @@
-#include "Individual.h"
 #include <vector>
+#include "Individual.h"
 
 using namespace std;
 

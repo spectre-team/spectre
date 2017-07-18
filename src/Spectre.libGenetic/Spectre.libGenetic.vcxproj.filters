@@ -33,9 +33,6 @@
     <ClInclude Include="CrossoverOperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Classifier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OffspringGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -59,16 +56,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IsDerivatedFrom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MutationOperator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CrossoverOperator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Classifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Individual.cpp">

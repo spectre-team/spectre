@@ -1,8 +1,6 @@
 #pragma once
-#include <vector>
-#include <numeric>
-#include <algorithm>
 #include <span.h>
+#include <vector>
 
 namespace Spectre::libGenetic
 {

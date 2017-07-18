@@ -1,8 +1,8 @@
 #pragma once
-#include "Generation.h"
 #include "CrossoverOperator.h"
-#include "MutationOperator.h"
 #include "DataTypes.h"
+#include "Generation.h"
+#include "MutationOperator.h"
 #include "ParentSelectionStrategy.h"
 
 namespace Spectre::libGenetic
