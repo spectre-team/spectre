@@ -10,13 +10,15 @@ CrossoverOperator::CrossoverOperator(Seed rngSeed):
 
 Individual CrossoverOperator::operator()(const Individual& first, const Individual& second)
 {
-    std::uniform_int_distribution<size_t> distribution(0, first.size()-1);
+    std::uniform_int_distribution<size_t> distribution(0, first.size());
     const auto cuttingPoint = distribution(m_RandomNumberGenerator);
     const auto endOfFirst = first.begin() + cuttingPoint;
     const auto beginningOfSecond = second.begin() + cuttingPoint;
-    Individual individual;
-    individual.emplace_back(first.begin(), endOfFirst);
-    individual.emplace_back(beginningOfSecond, second.end());
-    return individual;
+    std::vector<bool> phenotype;
+    phenotype.reserve(first.size());
+    phenotype.emplace_back(first.begin(), endOfFirst);
+    phenotype.emplace_back(beginningOfSecond, second.end());
+    Individual individual(std::move(phenotype));
+    return std::move(individual);
 }
 }

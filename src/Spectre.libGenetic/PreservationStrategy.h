@@ -1,4 +1,5 @@
 #pragma once
+#include <span.h>
 #include "DataTypes.h"
 #include "Generation.h"
 

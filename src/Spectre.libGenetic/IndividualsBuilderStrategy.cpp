@@ -15,14 +15,15 @@ IndividualsBuilderStrategy::IndividualsBuilderStrategy(CrossoverOperator&& cross
 
 Generation IndividualsBuilderStrategy::Build(const Generation& old, gsl::span<ScoreType> scores, size_t newSize)
 {
-    Generation newGeneration;
-    newGeneration.reserve(newSize);
+    std::vector<Individual> newIndividuals;
+    newIndividuals.reserve(newSize);
     for(size_t i = 0; i < newSize; ++i)
     {
         const auto parents = m_ParentSelectionStrategy.next(old, scores);
         const auto child = m_Mutation(m_Crossover(parents.first, parents.second));
-        newGeneration.push_back(child);
+        newIndividuals.push_back(child);
     }
-    return newGeneration;
+    Generation newGeneration(std::move(newIndividuals));
+    return std::move(newGeneration);
 }
 }

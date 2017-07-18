@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "MutationOperator.h"
 
 namespace Spectre::libGenetic
