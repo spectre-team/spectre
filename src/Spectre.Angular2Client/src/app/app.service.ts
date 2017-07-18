@@ -18,7 +18,7 @@
  */
 
 export class Service {
-  private baseUrl = 'http://localhost/spectre_api/api';
+  private baseUrl = 'http://localhost/spectre_api';
 
   public getBaseUrl(): string { return this.baseUrl; }
 

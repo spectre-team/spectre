@@ -11,6 +11,8 @@ configuration:
   - Debug
   - Release
 services: iis
+hosts:
+  api.nuget.org: 93.184.221.200
 
 install:
 - ps: C:\projects\spectre\scripts\InstallNode.ps1

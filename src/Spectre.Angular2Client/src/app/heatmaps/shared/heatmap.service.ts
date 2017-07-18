@@ -38,7 +38,7 @@ export class HeatmapService extends Service {
 
     get(preparationId: number, channelId: number): Observable<Heatmap> {
       console.log('[HeatmapService] preparationId: ' + preparationId + ' channelId ' + channelId);
-      const queryUrl = `${this.getBaseUrl()}/preparations/${preparationId}?channelId=${channelId}&flag=false`;
+      const queryUrl = `${this.getBaseUrl()}/heatmap/${preparationId}?channelId=${channelId}&flag=false`;
       const response = this.http.get(queryUrl, {headers: this.getHeaders()});
       const spectrum = response.map(toHeatmap);
       return spectrum;

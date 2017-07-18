@@ -31,7 +31,7 @@ export class SpectrumService extends Service {
   constructor(private http: Http) { super(); }
 
   get(preparationId: number, spectrumId: number): Observable<Spectrum> {
-    const queryUrl = `${this.getBaseUrl()}/preparations/${preparationId}?spectrumId=${spectrumId}`;
+    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?spectrumId=${spectrumId}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const spectrum = response.map(toSpectrum);
     return spectrum;
