@@ -277,7 +277,6 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

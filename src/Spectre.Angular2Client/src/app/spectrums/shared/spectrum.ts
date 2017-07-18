@@ -1,6 +1,6 @@
 /*
- * preparation-routing.module.ts
- * Module providing routing to single preparations.
+ * spectrum.ts
+ * Interface describing single MALDI MSI spectrum.
  *
    Copyright 2017 Grzegorz Mrukwa
 
@@ -17,22 +17,10 @@
    limitations under the License.
 */
 
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
-import { PreparationComponent } from './preparation.component';
-
-const preparationRoutes = [
-    { path: 'preparation/:id', component: PreparationComponent }
-];
-
-@NgModule({
-    imports: [
-        RouterModule.forChild(preparationRoutes)
-    ],
-    exports: [
-        RouterModule
-    ]
-})
-
-export class PreparationRoutingModule { }
+export interface Spectrum {
+    id: number;
+    mz: number[];
+    intensities: number[];
+    x: number;
+    y: number;
+}

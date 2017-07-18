@@ -1,8 +1,8 @@
 /*
- * preparation.service.ts
- * Service providing preparations list.
+ * spectrum.service.ts
+ * Service providing spectrum.
  *
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
+   Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,24 +17,26 @@
    limitations under the License.
 */
 
-import { Preparation } from './preparation';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
+import { Spectrum } from './spectrum';
+import {Service} from '../../app.service';
+
 @Injectable()
-export class PreparationService {
-  private baseUrl = 'http://localhost/spectre_api';
+export class SpectrumService extends Service {
 
-  constructor(private http: Http) {
+  constructor(private http: Http) { super(); }
+
+  get(preparationId: number, spectrumId: number): Observable<Spectrum> {
+    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?spectrumId=${spectrumId}`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    const spectrum = response.map(toSpectrum);
+    return spectrum;
   }
 
-  getAll(): Observable<Preparation[]> {
-    return this.http
-      .get(`${this.baseUrl}/preparations`, {headers: this.getHeaders()})
-      .map(mapPreparations);
-  }
 
   private getHeaders() {
     const headers = new Headers();
@@ -43,13 +45,13 @@ export class PreparationService {
   }
 }
 
- function mapPreparations(response: Response): Preparation[] {
-  return response.json().map(toPreparation);
-}
-
-function toPreparation(r: any): Preparation {
-  return <Preparation>({
-    id: r.Id,
-    name: r.Name
+function toSpectrum(response: Response): Spectrum {
+  const json = response.json();
+  return <Spectrum>({
+    id: json.Id,
+    mz: json.Mz,
+    intensities: json.Intensities,
+    x: json.X,
+    y: json.Y
   });
 }
