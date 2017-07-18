@@ -10,6 +10,7 @@ namespace Spectre::libGenetic
 class OffspringGenerator
 {
 public:
+    OffspringGenerator(OffspringGenerator&&) = default;
     explicit OffspringGenerator(IndividualsBuilderStrategy&& builder, PreservationStrategy&& selection);
     Generation next(const Generation& old, gsl::span<ScoreType>&& scores);
     virtual ~OffspringGenerator() = default;

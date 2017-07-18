@@ -54,6 +54,9 @@
     <ClInclude Include="ParentSelectionStrategy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FitnessFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutationOperator.cpp">

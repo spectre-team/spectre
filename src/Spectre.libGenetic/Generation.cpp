@@ -48,4 +48,14 @@ const Individual& Generation::operator[](size_t index) const
     return m_Generation[index];
 }
 
+std::vector<Individual>::const_iterator Generation::begin() const
+{
+    return m_Generation.begin();
+}
+
+std::vector<Individual>::const_iterator Generation::end() const
+{
+    return m_Generation.end();
+}
+
 }

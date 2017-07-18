@@ -12,6 +12,8 @@ public:
     Generation& operator+=(const Generation& other);
     const Individual& operator[](size_t index) const;
     size_t size() const;
+    std::vector<Individual>::const_iterator begin() const;
+    std::vector<Individual>::const_iterator end() const;
 	virtual ~Generation() = default;
 
 private:

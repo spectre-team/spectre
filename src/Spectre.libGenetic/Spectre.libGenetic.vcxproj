@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DataTypes.h" />
+    <ClInclude Include="FitnessFunction.h" />
     <ClInclude Include="Generation.h" />
     <ClInclude Include="GeneticAlgorithm.h" />
     <ClInclude Include="CrossoverOperator.h" />
