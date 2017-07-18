@@ -15,24 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Dataset.h">
+    <ClInclude Include="ExceptionBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDataset.h">
+    <ClInclude Include="OutOfRangeException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IReadOnlyDataset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InconsistentInputSizeException.h">
+    <ClInclude Include="NullPointerException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InconsistentInputSizeException.cpp">
+    <ClCompile Include="ExceptionBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OutOfRangeException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NullPointerException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

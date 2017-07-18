@@ -1,5 +1,6 @@
-#include "Scorer.h"
 #include <algorithm>
+#include "Spectre.libException/NullPointerException.h"
+#include "Scorer.h"
 
 namespace Spectre::libGenetic
 {
@@ -12,7 +13,7 @@ Scorer::Scorer(std::unique_ptr<FitnessFunction> fitnessFunction):
     }
     else
     {
-        throw NullPointerException("fitnessFunction");
+        throw libException::NullPointerException("fitnessFunction");
     }
 }
 
@@ -24,11 +25,4 @@ std::vector<ScoreType> Scorer::Score(const Generation& generation)
         [this](const Individual& individual) { return m_FitnessFunction->operator()(individual); });
     return std::move(scores);
 }
-
-NullPointerException::NullPointerException(const std::string& variableName):
-    ExceptionBase(variableName)
-{
-    
-}
-
 }

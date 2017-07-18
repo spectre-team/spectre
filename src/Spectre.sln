@@ -46,14 +46,22 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClustering.Tests", "Spectre.libClustering.Tests\Spectre.libClustering.Tests.vcxproj", "{1C2E181F-EAB0-46AA-B096-8BC78D7D8DB3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGenetic", "Spectre.libGenetic\Spectre.libGenetic.vcxproj", "{9786751A-6AE1-48D3-938D-4129D0399667}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7417BF00-028B-4797-B58A-6058CA338493} = {7417BF00-028B-4797-B58A-6058CA338493}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libDataset", "Spectre.libDataset\Spectre.libDataset.vcxproj", "{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7417BF00-028B-4797-B58A-6058CA338493} = {7417BF00-028B-4797-B58A-6058CA338493}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libDataset.Tests", "Spectre.libDataset.Tests\Spectre.libDataset.Tests.vcxproj", "{E6B2EF6F-86BD-4E2C-B860-1B9F0D3B9556}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGaussianMixtureModelling.Tests", "Spectre.libGaussianMixtureModelling.Tests\Spectre.libGaussianMixtureModelling.Tests.vcxproj", "{2185C120-7B01-4E2E-B200-858A2D25C715}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGaussianMixtureModelling", "Spectre.libGaussianMixtureModelling\Spectre.libGaussianMixtureModelling.vcxproj", "{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libException", "Spectre.libException\Spectre.libException.vcxproj", "{7417BF00-028B-4797-B58A-6058CA338493}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +191,12 @@ Global
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}.Release|x64.ActiveCfg = Release|x64
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}.Release|x64.Build.0 = Release|x64
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}.Release|x86.ActiveCfg = Release|x64
+		{7417BF00-028B-4797-B58A-6058CA338493}.Debug|x64.ActiveCfg = Debug|x64
+		{7417BF00-028B-4797-B58A-6058CA338493}.Debug|x64.Build.0 = Debug|x64
+		{7417BF00-028B-4797-B58A-6058CA338493}.Debug|x86.ActiveCfg = Debug|x64
+		{7417BF00-028B-4797-B58A-6058CA338493}.Release|x64.ActiveCfg = Release|x64
+		{7417BF00-028B-4797-B58A-6058CA338493}.Release|x64.Build.0 = Release|x64
+		{7417BF00-028B-4797-B58A-6058CA338493}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,5 +212,6 @@ Global
 		{E6B2EF6F-86BD-4E2C-B860-1B9F0D3B9556} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 		{2185C120-7B01-4E2E-B200-858A2D25C715} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
+		{7417BF00-028B-4797-B58A-6058CA338493} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 	EndGlobalSection
 EndGlobal

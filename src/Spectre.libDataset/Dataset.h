@@ -47,7 +47,7 @@ namespace Spectre::libDataset
             }
             else
             {
-                throw InconsistentInputSize(data.size(), sampleMetadata.size());
+                throw InconsistentInputSizeException(data.size(), sampleMetadata.size());
             }
         }
 

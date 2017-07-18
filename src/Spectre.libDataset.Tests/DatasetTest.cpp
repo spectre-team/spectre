@@ -46,7 +46,7 @@ TEST(DatasetInitializationTest, throw_on_inconsistent_input_size)
     auto sampleMetadata = samples_metadata{ 4, 5 };
     auto datasetMetadata = dataset_metadata{ 7 };
 
-    EXPECT_THROW(data_set(data, sampleMetadata, datasetMetadata), InconsistentInputSize);
+    EXPECT_THROW(data_set(data, sampleMetadata, datasetMetadata), InconsistentInputSizeException);
 }
 
 TEST(DatasetTest, knows_if_empty)
