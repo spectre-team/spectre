@@ -11,7 +11,7 @@ class OffspringGenerator
 {
 public:
     explicit OffspringGenerator(IndividualsBuilderStrategy&& builder, PreservationStrategy&& selection);
-    Generation next(const Generation& old, gsl::span<ScoreType> scores);
+    Generation next(const Generation& old, gsl::span<ScoreType>&& scores);
     virtual ~OffspringGenerator() = default;
 private:
     IndividualsBuilderStrategy m_Builder;

@@ -16,8 +16,8 @@ Individual CrossoverOperator::operator()(const Individual& first, const Individu
     const auto beginningOfSecond = second.begin() + cuttingPoint;
     std::vector<bool> phenotype;
     phenotype.reserve(first.size());
-    phenotype.emplace_back(first.begin(), endOfFirst);
-    phenotype.emplace_back(beginningOfSecond, second.end());
+    phenotype.insert(phenotype.end(), first.begin(), endOfFirst);
+    phenotype.insert(phenotype.end(), beginningOfSecond, second.end());
     Individual individual(std::move(phenotype));
     return std::move(individual);
 }

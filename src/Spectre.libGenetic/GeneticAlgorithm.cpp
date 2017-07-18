@@ -14,7 +14,7 @@ Generation GeneticAlgorithm::evolve(Generation&& generation)
 {
     while(!m_StopCondition())
     {
-        const auto scores = m_Scorer.Score(generation);
+        auto scores = m_Scorer.Score(generation);
         generation = m_OffspringGenerator.next(generation, scores);
     }
     return generation;

@@ -8,7 +8,7 @@ ParentSelectionStrategy::ParentSelectionStrategy(Seed seed):
     
 }
 
-std::pair<Individual, Individual> ParentSelectionStrategy::next(const Generation& generation, gsl::span<ScoreType> scores)
+std::pair<const Individual&, const Individual&> ParentSelectionStrategy::next(const Generation& generation, gsl::span<ScoreType> scores)
 {
     std::discrete_distribution<> indexDistribution(scores.begin(), scores.end());
     const auto first = indexDistribution(m_RandomNumberGenerator);
