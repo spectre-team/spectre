@@ -70,7 +70,7 @@ Catch
 
 Try
 {
-    Invoke-WebRequest -Uri http://localhost/spectre_api/api/preparations/1?spectrumId=1 | Out-Null
+    Invoke-WebRequest -Uri http://localhost/spectre_api/spectrum/1?spectrumId=1 | Out-Null
     Write-Host "API available, test data accessible." -foregroundcolor green
 }
 Catch
