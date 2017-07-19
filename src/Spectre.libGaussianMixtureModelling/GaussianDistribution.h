@@ -18,7 +18,7 @@ limitations under the License.
 */
 
 #pragma once
-#define _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES // used for M_PI
 #include <math.h>
 
 namespace Spectre::libGaussianMixtureModelling
