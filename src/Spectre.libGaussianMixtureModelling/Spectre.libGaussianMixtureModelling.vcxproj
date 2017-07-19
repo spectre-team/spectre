@@ -11,10 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="RandomInitializationRef.h" />
+    <ClInclude Include="DataType.h" />
+    <ClInclude Include="ExpectationMaximization.h" />
+    <ClInclude Include="ExpectationRunnerRef.h" />
+    <ClInclude Include="GaussianDistribution.h" />
     <ClInclude Include="GaussianMixtureModel.h" />
+    <ClInclude Include="LogLikelihoodCalculator.h" />
+    <ClInclude Include="MaximizationRunnerRef.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ExpectationMaximization.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B}</ProjectGuid>
@@ -59,6 +70,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Common;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -75,6 +87,8 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <OpenMPSupport>false</OpenMPSupport>
+      <AdditionalIncludeDirectories>$(SolutionDir)Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

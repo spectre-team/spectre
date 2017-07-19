@@ -21,9 +21,6 @@
     <ClInclude Include="Partition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArgumentNullException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Partition.cpp">
