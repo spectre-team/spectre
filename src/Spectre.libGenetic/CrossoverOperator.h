@@ -22,11 +22,24 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Performs crossover between parent chromosomes and produces a child one.
+/// </summary>
 class CrossoverOperator
 {
 public:
-	explicit CrossoverOperator(Seed rngSeed=0);
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CrossoverOperator"/> class.
+    /// </summary>
+    /// <param name="rngSeed">The RNG seed.</param>
+    explicit CrossoverOperator(Seed rngSeed = 0);
     virtual ~CrossoverOperator() = default;
+    /// <summary>
+    /// Create new individual.
+    /// </summary>
+    /// <param name="first">The first parent.</param>
+    /// <param name="second">The second parent.</param>
+    /// <returns>A child.</returns>
     Individual operator()(const Individual& first, const Individual& second);
 	
 private:

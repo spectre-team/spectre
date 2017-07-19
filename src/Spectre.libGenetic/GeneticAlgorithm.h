@@ -25,16 +25,39 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// General-purpose genetic algorithm.
+/// </summary>
 class GeneticAlgorithm
 {
 public:
-	GeneticAlgorithm(OffspringGenerator&& offspringGenerator, Scorer&& classifier, StopCondition&& stopCondition);
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GeneticAlgorithm"/> class.
+    /// </summary>
+    /// <param name="offspringGenerator">The offspring generator.</param>
+    /// <param name="scorer">The scorer.</param>
+    /// <param name="stopCondition">The stop condition.</param>
+    GeneticAlgorithm(OffspringGenerator&& offspringGenerator, Scorer&& scorer, StopCondition&& stopCondition);
+    /// <summary>
+    /// Evolves the specified generation.
+    /// </summary>
+    /// <param name="generation">The generation.</param>
+    /// <returns>Next, evolved generation.</returns>
     Generation evolve(Generation&& generation);
 	virtual ~GeneticAlgorithm() = default;
 
 private:
+    /// <summary>
+    /// The offspring generator.
+    /// </summary>
     OffspringGenerator m_OffspringGenerator;
-	Scorer m_Scorer;
+    /// <summary>
+    /// The scorer.
+    /// </summary>
+    Scorer m_Scorer;
+    /// <summary>
+    /// The stop condition.
+    /// </summary>
     StopCondition m_StopCondition;
 };
 }

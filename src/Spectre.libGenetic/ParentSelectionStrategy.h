@@ -23,13 +23,29 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Specifies, how to choose parents to crossover
+/// </summary>
 class ParentSelectionStrategy
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ParentSelectionStrategy"/> class.
+    /// </summary>
+    /// <param name="seed">The random number generator seed.</param>
     explicit ParentSelectionStrategy(Seed seed = 0);
+    /// <summary>
+    /// Returns next pair of parents from current generation.
+    /// </summary>
+    /// <param name="generation">The generation.</param>
+    /// <param name="scores">The scores of individuals.</param>
+    /// <returns>Parents for crossover.</returns>
     std::pair<const Individual&, const Individual&>  next(const Generation& generation, gsl::span<ScoreType> scores);
     virtual ~ParentSelectionStrategy() = default;
 private:
+    /// <summary>
+    /// The random number generator.
+    /// </summary>
     RandomNumberGenerator m_RandomNumberGenerator;
 };
 }

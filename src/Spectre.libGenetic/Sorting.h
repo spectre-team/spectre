@@ -23,9 +23,17 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Utilities for sorting.
+/// </summary>
 class Sorting
 {
 public:
+    /// <summary>
+    /// Gets the indiceses sorted by the specified data.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <returns>Indices</returns>
     template <class T>
     static std::vector<size_t> indices(gsl::span<T> data)
     {

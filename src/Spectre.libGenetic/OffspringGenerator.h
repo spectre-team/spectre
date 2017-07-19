@@ -26,15 +26,39 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Specifies, how to create new generation from the old one, basing on scores of each individual.
+/// </summary>
 class OffspringGenerator
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OffspringGenerator"/> class.
+    /// </summary>
+    /// <param name="">The other instance.</param>
     OffspringGenerator(OffspringGenerator&&) = default;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OffspringGenerator"/> class.
+    /// </summary>
+    /// <param name="builder">The strategy specifying, how to build new individuals.</param>
+    /// <param name="selection">The strategy specifying, how to select preserved individuals.</param>
     explicit OffspringGenerator(IndividualsBuilderStrategy&& builder, PreservationStrategy&& selection);
+    /// <summary>
+    /// Generates offspring from current population.
+    /// </summary>
+    /// <param name="old">The current generation.</param>
+    /// <param name="scores">The scores of the individuals.</param>
+    /// <returns>New generation.</returns>
     Generation next(const Generation& old, gsl::span<ScoreType>&& scores);
     virtual ~OffspringGenerator() = default;
 private:
+    /// <summary>
+    /// The builder strategy.
+    /// </summary>
     IndividualsBuilderStrategy m_Builder;
+    /// <summary>
+    /// The preservation strategy.
+    /// </summary>
     PreservationStrategy m_PreservationStrategy;
 };
 }

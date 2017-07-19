@@ -22,19 +22,54 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Binary representation of an individual chromosome in genetic algorithm.
+/// </summary>
 class Individual
 {
 public:
-	explicit Individual(std::vector<bool>&& binaryData);
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Individual"/> class.
+    /// </summary>
+    /// <param name="binaryData">The binary data.</param>
+    explicit Individual(std::vector<bool>&& binaryData);
+    /// <summary>
+    /// Gets the data under specified index.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>Single bit of data.</returns>
     std::vector<bool>::reference operator[](size_t index);
+    /// <summary>
+    /// Return iterator for beginning of mutable sequence.
+    /// </summary>
+    /// <returns>Iterator for beginning of mutable sequence.</returns>
     std::vector<bool>::iterator begin();
+    /// <summary>
+    /// Return iterator for after the end of mutable sequence.
+    /// </summary>
+    /// <returns>Iterator after the end of mutable sequence.</returns>
     std::vector<bool>::iterator end();
+    /// <summary>
+    /// Return iterator for beginning of immutable sequence.
+    /// </summary>
+    /// <returns>Iterator for beginning of immutable sequence.</returns>
     std::vector<bool>::const_iterator begin() const;
+    /// <summary>
+    /// Return iterator after the end of immutable sequence.
+    /// </summary>
+    /// <returns>Iterator after the end of immutable sequence.</returns>
     std::vector<bool>::const_iterator end() const;
+    /// <summary>
+    /// Get the size of the data.
+    /// </summary>
+    /// <returns>Size of the data.</returns>
     size_t size() const;
 	virtual ~Individual() = default;
 
 private:
-	std::vector<bool> m_BinaryData;
+    /// <summary>
+    /// The binary representation of chromosome.
+    /// </summary>
+    std::vector<bool> m_BinaryData;
 };
 }

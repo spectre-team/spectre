@@ -26,17 +26,43 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Builds new individuals from old population, basing on specific
+/// mutation, crossover and parent selection strategies.
+/// </summary>
 class IndividualsBuilderStrategy
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IndividualsBuilderStrategy"/> class.
+    /// </summary>
+    /// <param name="crossover">The crossover.</param>
+    /// <param name="mutation">The mutation.</param>
+    /// <param name="parentSelectionStrategy">The parent selection strategy.</param>
     IndividualsBuilderStrategy(CrossoverOperator&& crossover,
                                MutationOperator&& mutation,
                                ParentSelectionStrategy&& parentSelectionStrategy);
-    Generation Build(const Generation& old, gsl::span<ScoreType> scores, size_t newSize);
+    /// <summary>
+    /// Builds new generation from the specified old one.
+    /// </summary>
+    /// <param name="old">The old population.</param>
+    /// <param name="scores">The scores of individuals.</param>
+    /// <param name="numberOfBuilt">Number of built.</param>
+    /// <returns></returns>
+    Generation Build(const Generation& old, gsl::span<ScoreType> scores, size_t numberOfBuilt);
     virtual ~IndividualsBuilderStrategy() = default;
 private:
+    /// <summary>
+    /// The crossover operator.
+    /// </summary>
     CrossoverOperator m_Crossover;
+    /// <summary>
+    /// The mutation operator.
+    /// </summary>
     MutationOperator m_Mutation;
+    /// <summary>
+    /// The parent selection strategy.
+    /// </summary>
     ParentSelectionStrategy m_ParentSelectionStrategy;
 };
 }

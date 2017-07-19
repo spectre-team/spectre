@@ -22,9 +22,17 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// General-purpose interface of a fitness function, scoring the individuals.
+/// </summary>
 class FitnessFunction
 {
 public:
+    /// <summary>
+    /// Scores the specified individual.
+    /// </summary>
+    /// <param name="individual">The individual.</param>
+    /// <returns>Non-negative score, which is greater for more optimal individuals.</returns>
     virtual ScoreType operator()(const Individual& individual) = 0;
     virtual ~FitnessFunction() = default;
 };

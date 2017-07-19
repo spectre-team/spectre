@@ -24,13 +24,32 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Scores the population with given fitness function.
+/// </summary>
 class Scorer
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Scorer"/> class.
+    /// </summary>
+    /// <param name="">Existing instance.</param>
     Scorer(Scorer&&) = default;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Scorer"/> class.
+    /// </summary>
+    /// <param name="fitnessFunction">The fitness function.</param>
     explicit Scorer(std::unique_ptr<FitnessFunction> fitnessFunction);
+    /// <summary>
+    /// Scores the specified generation.
+    /// </summary>
+    /// <param name="generation">The generation.</param>
+    /// <returns>Score vector.</returns>
     std::vector<ScoreType> Score(const Generation& generation);
 private:
+    /// <summary>
+    /// The fitness function.
+    /// </summary>
     std::unique_ptr<FitnessFunction> m_FitnessFunction;
 };
 }

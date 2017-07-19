@@ -23,19 +23,56 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Container enclosing population of individuals at time instance of single generation.
+/// </summary>
 class Generation
 {
 public:
-	explicit Generation(std::vector<Individual>&& generation);
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Generation"/> class.
+    /// </summary>
+    /// <param name="generation">The container with generation.</param>
+    explicit Generation(std::vector<Individual>&& generation);
+    /// <summary>
+    /// Concatenates populations.
+    /// </summary>
+    /// <param name="other">The other population.</param>
+    /// <returns>First population and second just after.</returns>
     Generation operator+(const Generation& other) const;
+    /// <summary>
+    /// Overwrites population with concatenated one.
+    /// </summary>
+    /// <param name="other">The other population.</param>
+    /// <returns>Self.</returns>
     Generation& operator+=(const Generation& other);
+    /// <summary>
+    /// Return individual under the specified index.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>A read-only individual.</returns>
     const Individual& operator[](size_t index) const;
+    /// <summary>
+    /// Get the size of the data.
+    /// </summary>
+    /// <returns>Size of the data.</returns>
     size_t size() const;
+    /// <summary>
+    /// Return iterator for beginning of immutable sequence.
+    /// </summary>
+    /// <returns>Iterator for beginning of immutable sequence.</returns>
     std::vector<Individual>::const_iterator begin() const;
+    /// <summary>
+    /// Return iterator after the end of immutable sequence.
+    /// </summary>
+    /// <returns>Iterator after the end of immutable sequence.</returns>
     std::vector<Individual>::const_iterator end() const;
 	virtual ~Generation() = default;
 
 private:
-	std::vector<Individual> m_Generation;
+    /// <summary>
+    /// Container for individuals.
+    /// </summary>
+    std::vector<Individual> m_Generation;
 };
 }

@@ -22,15 +22,38 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Specifies, how to apply mutation on an individual.
+/// </summary>
 class MutationOperator
 {
 public:
-	explicit MutationOperator(double mutationRate, double bitSwapRate, Seed rngSeed=0);
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MutationOperator"/> class.
+    /// </summary>
+    /// <param name="mutationRate">The mutation rate.</param>
+    /// <param name="bitSwapRate">The bit swap rate, in the case of mutation.</param>
+    /// <param name="rngSeed">The RNG seed.</param>
+    explicit MutationOperator(double mutationRate, double bitSwapRate, Seed rngSeed = 0);
+    /// <summary>
+    /// Mutates the specified individual.
+    /// </summary>
+    /// <param name="individual">The individual.</param>
+    /// <returns>Mutated individual.</returns>
     Individual operator()(Individual&& individual);
     virtual ~MutationOperator() = default;
 private:
-	const double m_MutationRate;
+    /// <summary>
+    /// The mutation rate.
+    /// </summary>
+    const double m_MutationRate;
+    /// <summary>
+    /// The bit swap rate.
+    /// </summary>
     const double m_BitSwapRate;
+    /// <summary>
+    /// The random number generator.
+    /// </summary>
     RandomNumberGenerator m_RandomNumberGenerator;
 };
 }

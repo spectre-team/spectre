@@ -24,13 +24,32 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Describes how to preserve best individuals between iterations.s
+/// </summary>
 class PreservationStrategy
 {
 public:
-	explicit PreservationStrategy(double preservationRate);
-	virtual ~PreservationStrategy() = default;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PreservationStrategy"/> class.
+    /// </summary>
+    /// <param name="preservationRate">The preservation rate.</param>
+    explicit PreservationStrategy(double preservationRate);
+    /// <summary>
+    /// Cleans up an instance of the <see cref="PreservationStrategy"/> class.
+    /// </summary>
+    virtual ~PreservationStrategy() = default;
+    /// <summary>
+    /// Picks the best individuals.
+    /// </summary>
+    /// <param name="generation">The generation.</param>
+    /// <param name="scores">The scores.</param>
+    /// <returns>Best subpopulation.</returns>
     Generation PickBest(const Generation& generation, gsl::span<ScoreType> scores);
 private:
+    /// <summary>
+    /// Rate of individuals preserved between generations..
+    /// </summary>
     const double m_PreservationRate;
 };
 }

@@ -21,15 +21,39 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// States when to stop the algorithm
+/// </summary>
 class StopCondition
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StopCondition"/> class.
+    /// </summary>
+    /// <param name="">Source instance.</param>
     StopCondition(StopCondition&&) = default;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StopCondition"/> class.
+    /// </summary>
+    /// <param name="numberOfIterations">The number of iterations.</param>
     explicit StopCondition(unsigned int numberOfIterations);
+    /// <summary>
+    /// Checks stop condition.
+    /// </summary>
+    /// <returns></returns>
     bool operator()();
+    /// <summary>
+    /// Cleans up an instance of the <see cref="StopCondition"/> class.
+    /// </summary>
     virtual ~StopCondition() = default;
 private:
+    /// <summary>
+    /// Iterations remaining in current run.
+    /// </summary>
     unsigned int m_RemainingIterations;
+    /// <summary>
+    /// The total iterations number per run.
+    /// </summary>
     const unsigned int m_IterationsNumber;
 };
 }
