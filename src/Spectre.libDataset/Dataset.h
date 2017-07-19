@@ -21,7 +21,7 @@ limitations under the License.
 
 #include <vector>
 #include "IDataset.h"
-#include "Exception.h"
+#include "InconsistentInputSizeException.h"
 
 namespace Spectre::libDataset
 {

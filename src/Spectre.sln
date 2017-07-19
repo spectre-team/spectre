@@ -56,6 +56,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libDataset", "Spect
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libDataset.Tests", "Spectre.libDataset.Tests\Spectre.libDataset.Tests.vcxproj", "{E6B2EF6F-86BD-4E2C-B860-1B9F0D3B9556}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7417BF00-028B-4797-B58A-6058CA338493} = {7417BF00-028B-4797-B58A-6058CA338493}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGaussianMixtureModelling.Tests", "Spectre.libGaussianMixtureModelling.Tests\Spectre.libGaussianMixtureModelling.Tests.vcxproj", "{2185C120-7B01-4E2E-B200-858A2D25C715}"
 EndProject

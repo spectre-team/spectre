@@ -20,9 +20,11 @@ limitations under the License.
 #define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
-#include "Dataset.h"
+#include "Spectre.libDataset/Dataset.h"
+#include "Spectre.libException/OutOfRangeException.h"
 
 using namespace Spectre::libDataset;
+using namespace Spectre::libException;
 using samples = std::vector<int>;
 using samples_metadata = std::vector<int>;
 using dataset_metadata = std::vector<int>;
