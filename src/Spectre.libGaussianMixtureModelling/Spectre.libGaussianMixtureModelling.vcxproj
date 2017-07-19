@@ -11,7 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicInitializationRef.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="RandomInitializationRef.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="ExpectationMaximization.h" />
     <ClInclude Include="ExpectationRunnerRef.h" />

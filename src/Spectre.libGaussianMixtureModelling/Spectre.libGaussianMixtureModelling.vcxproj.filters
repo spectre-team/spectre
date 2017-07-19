@@ -26,13 +26,16 @@
     <ClInclude Include="LogLikelihoodCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicInitializationRef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ExpectationRunnerRef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MaximizationRunnerRef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomInitializationRef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

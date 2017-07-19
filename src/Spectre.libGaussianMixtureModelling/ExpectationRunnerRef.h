@@ -31,9 +31,11 @@ limitations under the License.
 */
 #pragma once
 #include <vector>
+#include "ArgumentNullException.h"
 #include "DataType.h"
 #include "GaussianDistribution.h"
 #include "GaussianMixtureModel.h"
+#include "Matrix.h"
 
 namespace Spectre::libGaussianMixtureModelling
 {
@@ -53,11 +55,16 @@ namespace Spectre::libGaussianMixtureModelling
         /// <param name="affilationMatrix">Matrix symbolising the probability of affilation
         /// of each sample to a certain gaussian component.</param>
         /// <param name="components">Gaussian components.</param>
-        ExpectationRunnerRef(DataType* mzArray, unsigned size, DataType**& affilationMatrix,
+        /// <exception cref="ArgumentNullException">Thrown when mzArray pointer are null</exception>
+        ExpectationRunnerRef(DataType* mzArray, unsigned size, Matrix& affilationMatrix,
             std::vector<GaussianComponent>& components)
             : m_pMzArray(mzArray), m_DataSize(size), m_Components(components)
             , m_AffilationMatrix(affilationMatrix)
         {
+            if (mzArray == nullptr)
+            {
+                throw ArgumentNullException("mzArray");
+            }
         }
 
         /// <summary>
@@ -85,15 +92,15 @@ namespace Spectre::libGaussianMixtureModelling
                 {
                     DataType numerator = m_Components[k].weight *
                         Gaussian(m_pMzArray[i], m_Components[k].mean, m_Components[k].deviation);
-                    m_AffilationMatrix[i][k] = numerator / denominator;
+                    m_AffilationMatrix.data[i][k] = numerator / denominator;
                 }
             }
         }
 
     private:
         DataType* m_pMzArray;
-        unsigned int m_DataSize;
-        DataType**& m_AffilationMatrix;
+        unsigned m_DataSize;
+        Matrix& m_AffilationMatrix;
         std::vector<GaussianComponent>& m_Components;
     };
 }

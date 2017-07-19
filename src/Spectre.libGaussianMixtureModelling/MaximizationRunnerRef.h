@@ -15,6 +15,15 @@
  *      Algorithm for Univariate Gaussian Mixture Models 
  *           Maximization (M) Step
  *
+ * Note: throught reading of the document, you may notice that each
+ * time usage of affiliation matrix occurs it is multiplied by 
+ * corresponding intesity, to increase the probability *intensity*
+ * times that a certain mz belongs to a given component. This is 
+ * because the spectra we are given are histograms, and therefore
+ * a single mz value with intensity e.g. 500 indicates that
+ * there are de facto 500 of entities holding that certain mz value
+ * that are stored in the dataset.
+ *
 Copyright 2017 Michal Gallus
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,8 +40,10 @@ limitations under the License.
 */
 #pragma once
 #include <vector>
+#include "ArgumentNullException.h"
 #include "DataType.h"
 #include "GaussianMixtureModel.h"
+#include "Matrix.h"
 
 namespace Spectre::libGaussianMixtureModelling
 {
@@ -53,11 +64,21 @@ namespace Spectre::libGaussianMixtureModelling
         /// <param name="affilationMatrix">Matrix symbolising the probability of affilation
         /// of each sample to a certain gaussian component.</param>
         /// <param name="components">Gaussian components to be updated</param>
+        /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
         MaximizationRunnerRef(DataType* mzArray, DataType* intensities, unsigned size,
-            DataType**& affilationMatrix, std::vector<GaussianComponent>& components)
+            Matrix& affilationMatrix, std::vector<GaussianComponent>& components)
             : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size), 
               m_AffilationMatrix(affilationMatrix), m_Components(components)
         {
+            if (mzArray == nullptr)
+            {
+                throw ArgumentNullException("mzArray");
+            }
+
+            if (intensities == nullptr)
+            {
+                throw ArgumentNullException("intensities");
+            }
         }
 
         /// <summary>
@@ -81,7 +102,7 @@ namespace Spectre::libGaussianMixtureModelling
                 DataType weight = 0.0;
                 for (unsigned i = 0; i < m_DataSize; i++)
                 {
-                    weight += m_AffilationMatrix[i][k] * m_pIntensities[i];
+                    weight += m_AffilationMatrix.data[i][k] * m_pIntensities[i];
                 }
                 m_Components[k].weight = weight / totalDataSize;
             }
@@ -103,8 +124,8 @@ namespace Spectre::libGaussianMixtureModelling
                 DataType numerator = 0.0;
                 for (unsigned i = 0; i < m_DataSize; i++)
                 {
-                    denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
-                    numerator += m_AffilationMatrix[i][k] * m_pMzArray[i] * m_pIntensities[i];
+                    denominator += m_AffilationMatrix.data[i][k] * m_pIntensities[i];
+                    numerator += m_AffilationMatrix.data[i][k] * m_pMzArray[i] * m_pIntensities[i];
                 }
                 m_Components[k].mean = numerator / denominator;
             }
@@ -132,8 +153,8 @@ namespace Spectre::libGaussianMixtureModelling
                 DataType numerator = 0.0;
                 for (unsigned i = 0; i < m_DataSize; i++)
                 {
-                    denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
-                    numerator += m_AffilationMatrix[i][k] * pow(m_pMzArray[i] - m_Components[k].mean, 2) * m_pIntensities[i];
+                    denominator += m_AffilationMatrix.data[i][k] * m_pIntensities[i];
+                    numerator += m_AffilationMatrix.data[i][k] * pow(m_pMzArray[i] - m_Components[k].mean, 2) * m_pIntensities[i];
                 }
                 m_Components[k].deviation = sqrt(numerator / denominator);
             }
@@ -142,8 +163,8 @@ namespace Spectre::libGaussianMixtureModelling
     private:
         DataType* m_pMzArray;
         DataType* m_pIntensities;
-        unsigned int m_DataSize;
-        DataType**& m_AffilationMatrix;
+        unsigned m_DataSize;
+        Matrix& m_AffilationMatrix;
         std::vector<GaussianComponent>& m_Components;
     };
 }

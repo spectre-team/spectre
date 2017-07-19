@@ -20,9 +20,12 @@ limitations under the License.
 
 #pragma once
 #include <random>
-#include "GaussianMixtureModel.h"
-#include "DataType.h"
 #include "ArgumentNullException.h"
+#include "DataType.h"
+#include "GaussianMixtureModel.h"
+#include "Matrix.h"
+
+typedef std::mt19937_64 RandomNumberGenerator;
 
 namespace Spectre::libGaussianMixtureModelling
 {
@@ -37,9 +40,9 @@ namespace Spectre::libGaussianMixtureModelling
     /// <param name="MaximizationRunner">Class performing maximization step of the em algorithm.</param>
     /// <param name="LogLikelihoodCalculator">Class performing log likelihood of resulting calculation.</param>
     template<typename InitializationRunner, typename ExpectationRunner, typename MaximizationRunner, typename LogLikelihoodCalculator>
-	class ExpectationMaximization
-	{
-	public:
+    class ExpectationMaximization
+    {
+    public:
         /// <summary>
         /// Constructor initializing the class with all algorithm necessary data.
         /// </summary>
@@ -49,9 +52,10 @@ namespace Spectre::libGaussianMixtureModelling
         /// <param name="rngEngine">Mersenne-Twister engine to be used during initialization step.</param>
         /// <param name="numberOfComponents">Number of Gaussian components that build up the approximation.</param>
         /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
-		ExpectationMaximization(DataType* mzArray, DataType* intensities, const unsigned size, 
-                std::mt19937_64& rngEngine, const unsigned numberOfComponents = 2)
+        ExpectationMaximization(DataType* mzArray, DataType* intensities, const unsigned size, 
+                RandomNumberGenerator& rngEngine, const unsigned numberOfComponents = 2)
             : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size), m_Components(numberOfComponents)
+            , m_AffilationMatrix(numberOfComponents, size)
             , m_Initialization(mzArray, size, m_Components, rngEngine)
             , m_Expectation(mzArray, size, m_AffilationMatrix, m_Components)
             , m_Maximization(mzArray, intensities, size, m_AffilationMatrix, m_Components)
@@ -66,14 +70,6 @@ namespace Spectre::libGaussianMixtureModelling
             {
                 throw ArgumentNullException("intensities");
             }
-
-            m_AffilationMatrix = new DataType*[size];
-            if (size)
-            {
-                m_AffilationMatrix[0] = new DataType[numberOfComponents * size];
-                for (unsigned i = 1; i < size; ++i)
-                    m_AffilationMatrix[i] = m_AffilationMatrix[0] + i * numberOfComponents;
-            }
         }
 
         /// <summary>
@@ -86,17 +82,18 @@ namespace Spectre::libGaussianMixtureModelling
         /// </returns>
         GaussianMixtureModel ExpectationMaximization::EstimateGmm()
         {
+            constexpr DataType minLikelihoodChange = 0.00000001;
             Initialization();
 
             DataType oldLikelihood; // used as iterations terminator
-            DataType newLikelihood = CalculateLikelihood();
+            DataType newLikelihood = m_LogLikelihoodCalculator.CalculateLikelihood();
             do
             {
                 Expectation();
                 oldLikelihood = newLikelihood;
                 Maximization();
-                newLikelihood = CalculateLikelihood();
-            } while (abs(oldLikelihood - newLikelihood) > 0.00000001);
+                newLikelihood = m_LogLikelihoodCalculator.CalculateLikelihood();
+            } while (abs(oldLikelihood - newLikelihood) > minLikelihoodChange);
 
             return GaussianMixtureModel(
                 gsl::span<DataType>(m_pMzArray, m_DataSize),
@@ -105,28 +102,7 @@ namespace Spectre::libGaussianMixtureModelling
             );
         }
 
-        /// <summary>
-        /// Calculates the log likelihood using the class supplied template type.
-        /// </summary>
-        /// <returns>
-        /// Value of log likelihood.
-        /// </returns>
-        DataType ExpectationMaximization::CalculateLikelihood()
-        {
-            return m_LogLikelihoodCalculator.CalculateLikelihood();
-        }
-
-        /// <summary>
-        /// Destructor deleting the affilation matrix, also known as probability 
-        /// matrix
-        /// </summary>
-        ExpectationMaximization::~ExpectationMaximization()
-        {
-            if (m_DataSize) delete[] m_AffilationMatrix[0];
-            delete[] m_AffilationMatrix;
-        }
-
-	private:
+    private:
         void ExpectationMaximization::Initialization()
         {
             m_Initialization.AssignRandomMeans();
@@ -146,15 +122,15 @@ namespace Spectre::libGaussianMixtureModelling
             m_Maximization.UpdateStdDeviations();
         }
 
-        DataType** m_AffilationMatrix;
-		DataType* m_pMzArray;
-		DataType* m_pIntensities;
-		unsigned int m_DataSize;
+        Matrix m_AffilationMatrix;
+        DataType* m_pMzArray;
+        DataType* m_pIntensities;
+        unsigned m_DataSize;
         std::vector<GaussianComponent> m_Components;
 
         InitializationRunner m_Initialization;
         ExpectationRunner m_Expectation;
         MaximizationRunner m_Maximization;
         LogLikelihoodCalculator m_LogLikelihoodCalculator;
-	};
+    };
 }

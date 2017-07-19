@@ -1,5 +1,5 @@
 /*
- * BasicInitializationRef.h
+ * RandomInitializationRef.h
  * Provides reference implementation of basic initialization used in 
  * Expectation Maximization algorithm.
  * 
@@ -36,6 +36,8 @@ limitations under the License.
 #include "GaussianMixtureModel.h"
 #include "DataType.h"
 
+typedef std::mt19937_64 RandomNumberGenerator;
+
 namespace Spectre::libGaussianMixtureModelling
 {
     /// <summary>
@@ -43,7 +45,7 @@ namespace Spectre::libGaussianMixtureModelling
     /// used by Expectation Maximization algorithm. Serves as a reference to learn from
     /// and is purpously not optimized to avoid obfuscation of the code.
     /// </summary>
-    class BasicInitializationRef
+    class RandomInitializationRef
     {
     public:
         /// <summary>
@@ -53,17 +55,22 @@ namespace Spectre::libGaussianMixtureModelling
         /// <param name="size">Size of the mzArray and itensities arrays.</param>
         /// <param name="rngEngine">Mersenne-Twister engine to be used during initialization step.</param>
         /// <param name="components">Gaussian components to be initialized.</param>
-        BasicInitializationRef(DataType* mzArray, unsigned size,
-            std::vector<GaussianComponent>& components, std::mt19937_64& rngEngine) :
+        /// <exception cref="ArgumentNullException">Thrown when mzArray pointer is null</exception>
+        RandomInitializationRef(DataType* mzArray, unsigned size,
+            std::vector<GaussianComponent>& components, RandomNumberGenerator& rngEngine) :
             m_pMzArray(mzArray), m_DataSize(size), m_Components(components),
             m_RandomNumberGenerator(rngEngine)
         {
+            if (mzArray == nullptr)
+            {
+                throw ArgumentNullException("mzArray");
+            }
         }
 
         /// <summary>
         /// Assigns means to gaussian components, by choosing random samples from the dataset.
         /// </summary>
-        void BasicInitializationRef::AssignRandomMeans()
+        void RandomInitializationRef::AssignRandomMeans()
         {
             // This part conducts the instruction:
             // "Randomly assign samples without replacement from the dataset"
@@ -80,7 +87,7 @@ namespace Spectre::libGaussianMixtureModelling
         /// Calculates variance of the dataset, and assigns its square root
         /// (standard deviation) to variances of all components.
         /// </summary>
-        void BasicInitializationRef::AssignVariances()
+        void RandomInitializationRef::AssignVariances()
         {
             // This part conducts the instruction:
             // "Set all component variance estimates to the sample variance"
@@ -98,7 +105,7 @@ namespace Spectre::libGaussianMixtureModelling
         /// Assigns uniform weight to each component. Each weight equals to
         /// 1 / K, and therefore they all sum to 1.
         /// </summary>
-        void BasicInitializationRef::AssignWeights()
+        void RandomInitializationRef::AssignWeights()
         {
             // This part conducts the instruction:
             // "Set all component distribution prior estimates to the uniform distribution"
@@ -112,7 +119,7 @@ namespace Spectre::libGaussianMixtureModelling
         }
 
     private:
-        DataType BasicInitializationRef::CalculateMean()
+        DataType RandomInitializationRef::CalculateMean()
         {
             DataType mean = 0.0;
 
@@ -124,7 +131,7 @@ namespace Spectre::libGaussianMixtureModelling
             return mean / (DataType)m_DataSize;
         }
 
-        DataType BasicInitializationRef::CalculateVariance(DataType mean)
+        DataType RandomInitializationRef::CalculateVariance(DataType mean)
         {
             DataType variance = 0.0;
 
@@ -137,8 +144,8 @@ namespace Spectre::libGaussianMixtureModelling
         }
 
         DataType* m_pMzArray;
-        unsigned int m_DataSize;
+        unsigned m_DataSize;
         std::vector<GaussianComponent>& m_Components;
-        std::mt19937_64& m_RandomNumberGenerator;
+        RandomNumberGenerator& m_RandomNumberGenerator;
     };
 }

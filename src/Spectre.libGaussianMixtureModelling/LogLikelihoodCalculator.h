@@ -29,6 +29,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #pragma once
+#include "ArgumentNullException.h"
 #include "GaussianMixtureModel.h"
 #include "GaussianDistribution.h"
 #include "DataType.h"
@@ -51,11 +52,21 @@ namespace Spectre::libGaussianMixtureModelling
         /// <param name="intensities">Set of corresponding mean intensities values.</param>
         /// <param name="size">Size of the mzArray and itensities arrays.</param>
         /// <param name="components">Gaussian components.</param>
+        /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
         LogLikelihoodCalculator(DataType* mzArray, DataType* intensities,
             unsigned size, const std::vector<GaussianComponent>& components)
             : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size),
             m_Components(components)
         {
+            if (mzArray == nullptr)
+            {
+                throw ArgumentNullException("mzArray");
+            }
+
+            if (intensities == nullptr)
+            {
+                throw ArgumentNullException("intensities");
+            }
         }
 
         /// <summary>
@@ -86,7 +97,7 @@ namespace Spectre::libGaussianMixtureModelling
     private:
         DataType* m_pMzArray;
         DataType* m_pIntensities;
-        unsigned int m_DataSize;
+        unsigned m_DataSize;
         const std::vector<GaussianComponent>& m_Components;
     };
 };

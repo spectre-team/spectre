@@ -18,15 +18,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #define GTEST_LANG_CXX11 1
-#define _CRT_RAND_S  
 
 #include <gtest/gtest.h>
 #include "ExpectationMaximization.h"
-#include "BasicInitializationRef.h"
+#include "RandomInitializationRef.h"
 #include "ExpectationRunnerRef.h"
 #include "MaximizationRunnerRef.h"
 #include "LogLikelihoodCalculator.h"
 
+typedef std::mt19937_64 RandomNumberGenerator;
 
 namespace Spectre::libGaussianMixtureModelling
 {
@@ -41,9 +41,9 @@ namespace Spectre::libGaussianMixtureModelling
         virtual void SetUp() override
         {
             gaussianComponents = {
-                { -5.0, 3.0, 0.25 },
-                { 5.0, 3.0, 0.25 },
-                { -2.0, 9.0, 0.5 }
+                { /*mean =*/-5.0, /*deviation =*/ 3.0, /*weight =*/ 0.25 },
+                { /*mean =*/ 5.0, /*deviation =*/ 3.0, /*weight =*/ 0.25 },
+                { /*mean =*/ -2.0,/*deviation =*/ 9.0, /*weight =*/ 0.5 }
             };
 
             mzs = GenerateRange(-20.0, 20.0, 0.5);
@@ -53,8 +53,7 @@ namespace Spectre::libGaussianMixtureModelling
         std::vector<double> GenerateRange(double start, double end, double step)
         {
             const int size = int((end - start) / step);
-            std::vector<double> result(size);
-            std::fill(result.begin(), result.end(), start);
+            std::vector<double> result(size, start);
 
             for (int i = 0; i < size; i++)
             {
@@ -83,10 +82,10 @@ namespace Spectre::libGaussianMixtureModelling
     // Integration test
     TEST_F(ExpectationMaximizationTest, test_whole_em)
     {
-        std::mt19937_64 rngEngine(0);
+        RandomNumberGenerator rngEngine(0);
 
         ExpectationMaximization<
-            BasicInitializationRef,
+            RandomInitializationRef,
             ExpectationRunnerRef,
             MaximizationRunnerRef,
             LogLikelihoodCalculator
@@ -119,9 +118,9 @@ namespace Spectre::libGaussianMixtureModelling
 
     TEST_F(ExpectationMaximizationTest, test_em_ref_initialization)
     {
-        std::mt19937_64 rngEngine(0);
+        RandomNumberGenerator rngEngine(0);
         std::vector<GaussianComponent> components(gaussianComponents.size());
-        BasicInitializationRef initialization(&mzs[0], (unsigned)mzs.size(),
+        RandomInitializationRef initialization(&mzs[0], (unsigned)mzs.size(),
             components, rngEngine);
 
         // Check if values of assigned means come from available mz values
@@ -162,13 +161,10 @@ namespace Spectre::libGaussianMixtureModelling
 
     TEST_F(ExpectationMaximizationTest, test_em_ref_expectation)
     {
-        DataType** affilationMatrix = new DataType*[mzs.size()];
-        affilationMatrix[0] = new DataType[gaussianComponents.size() * mzs.size()];
-        for (unsigned i = 1; i < mzs.size(); ++i)
-            affilationMatrix[i] = affilationMatrix[0] + i * gaussianComponents.size();
+        Matrix affilationMatrix((unsigned)gaussianComponents.size(), (unsigned)mzs.size());
 
         ExpectationRunnerRef expectation(&mzs[0], (unsigned)mzs.size(), 
-            (DataType**&)affilationMatrix, gaussianComponents);
+            affilationMatrix, gaussianComponents);
         expectation.Expectation();
 
         for (unsigned i = 0; i < mzs.size(); i++)
@@ -184,31 +180,25 @@ namespace Spectre::libGaussianMixtureModelling
             {
                 DataType numerator = gaussianComponents[k].weight *
                     Gaussian(mzs[i], gaussianComponents[k].mean, gaussianComponents[k].deviation);
-                EXPECT_EQ(affilationMatrix[i][k], numerator / denominator);
+                EXPECT_EQ(affilationMatrix.data[i][k], numerator / denominator);
             }
         }
-
-        delete[] affilationMatrix[0];
-        delete[] affilationMatrix;
     }
 
     TEST_F(ExpectationMaximizationTest, test_em_ref_maximization)
     {
-        DataType** affilationMatrix = new DataType*[mzs.size()];
-        affilationMatrix[0] = new DataType[gaussianComponents.size() * mzs.size()];
-        for (unsigned i = 1; i < mzs.size(); ++i)
-            affilationMatrix[i] = affilationMatrix[0] + i * gaussianComponents.size();
+        Matrix affilationMatrix((unsigned)gaussianComponents.size(), (unsigned)mzs.size());
 
         for (unsigned i = 0; i < mzs.size(); i++)
         {
             for (unsigned k = 0; k < gaussianComponents.size(); k++)
             {
-                affilationMatrix[i][k] = 0.1;
+                affilationMatrix.data[i][k] = 0.1;
             }
         }
 
         MaximizationRunnerRef maximization(&mzs[0], &intensities[0], (unsigned)mzs.size(), 
-            (DataType**&)affilationMatrix, gaussianComponents);
+            affilationMatrix, gaussianComponents);
 
         // Check if means have ben properly updated
         maximization.UpdateMeans();
@@ -219,8 +209,8 @@ namespace Spectre::libGaussianMixtureModelling
             DataType numerator = 0.0;
             for (unsigned i = 0; i < mzs.size(); i++)
             {
-                denominator += affilationMatrix[i][k] * intensities[i];
-                numerator += affilationMatrix[i][k] * mzs[i] * intensities[i];
+                denominator += affilationMatrix.data[i][k] * intensities[i];
+                numerator += affilationMatrix.data[i][k] * mzs[i] * intensities[i];
             }
             EXPECT_EQ(gaussianComponents[k].mean, numerator / denominator);
         }
@@ -234,8 +224,8 @@ namespace Spectre::libGaussianMixtureModelling
             DataType numerator = 0.0;
             for (unsigned i = 0; i < mzs.size(); i++)
             {
-                denominator += affilationMatrix[i][k] * intensities[i];
-                numerator += affilationMatrix[i][k] * pow(mzs[i] - gaussianComponents[k].mean, 2) * intensities[i];
+                denominator += affilationMatrix.data[i][k] * intensities[i];
+                numerator += affilationMatrix.data[i][k] * pow(mzs[i] - gaussianComponents[k].mean, 2) * intensities[i];
             }
             EXPECT_EQ(gaussianComponents[k].deviation, sqrt(numerator / denominator));
         }
@@ -255,13 +245,10 @@ namespace Spectre::libGaussianMixtureModelling
             DataType weight = 0.0;
             for (unsigned i = 0; i < mzs.size(); i++)
             {
-                weight += affilationMatrix[i][k] * intensities[i];
+                weight += affilationMatrix.data[i][k] * intensities[i];
             }
             EXPECT_EQ(gaussianComponents[k].weight, weight / totalDataSize);
         }
-
-        delete[] affilationMatrix[0];
-        delete[] affilationMatrix;
     }
 
     TEST_F(ExpectationMaximizationTest, test_em_ref_loglikelihood)
