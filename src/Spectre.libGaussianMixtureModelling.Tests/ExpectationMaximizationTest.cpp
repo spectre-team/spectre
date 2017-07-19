@@ -180,7 +180,7 @@ namespace Spectre::libGaussianMixtureModelling
             {
                 DataType numerator = gaussianComponents[k].weight *
                     Gaussian(mzs[i], gaussianComponents[k].mean, gaussianComponents[k].deviation);
-                EXPECT_EQ(affilationMatrix.data[i][k], numerator / denominator);
+                EXPECT_EQ(affilationMatrix[i][k], numerator / denominator);
             }
         }
     }
@@ -193,7 +193,7 @@ namespace Spectre::libGaussianMixtureModelling
         {
             for (unsigned k = 0; k < gaussianComponents.size(); k++)
             {
-                affilationMatrix.data[i][k] = 0.1;
+                affilationMatrix[i][k] = 0.1;
             }
         }
 
@@ -209,8 +209,8 @@ namespace Spectre::libGaussianMixtureModelling
             DataType numerator = 0.0;
             for (unsigned i = 0; i < mzs.size(); i++)
             {
-                denominator += affilationMatrix.data[i][k] * intensities[i];
-                numerator += affilationMatrix.data[i][k] * mzs[i] * intensities[i];
+                denominator += affilationMatrix[i][k] * intensities[i];
+                numerator += affilationMatrix[i][k] * mzs[i] * intensities[i];
             }
             EXPECT_EQ(gaussianComponents[k].mean, numerator / denominator);
         }
@@ -224,8 +224,8 @@ namespace Spectre::libGaussianMixtureModelling
             DataType numerator = 0.0;
             for (unsigned i = 0; i < mzs.size(); i++)
             {
-                denominator += affilationMatrix.data[i][k] * intensities[i];
-                numerator += affilationMatrix.data[i][k] * pow(mzs[i] - gaussianComponents[k].mean, 2) * intensities[i];
+                denominator += affilationMatrix[i][k] * intensities[i];
+                numerator += affilationMatrix[i][k] * pow(mzs[i] - gaussianComponents[k].mean, 2) * intensities[i];
             }
             EXPECT_EQ(gaussianComponents[k].deviation, sqrt(numerator / denominator));
         }
@@ -245,7 +245,7 @@ namespace Spectre::libGaussianMixtureModelling
             DataType weight = 0.0;
             for (unsigned i = 0; i < mzs.size(); i++)
             {
-                weight += affilationMatrix.data[i][k] * intensities[i];
+                weight += affilationMatrix[i][k] * intensities[i];
             }
             EXPECT_EQ(gaussianComponents[k].weight, weight / totalDataSize);
         }

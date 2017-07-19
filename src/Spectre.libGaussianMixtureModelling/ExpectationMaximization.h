@@ -77,12 +77,12 @@ namespace Spectre::libGaussianMixtureModelling
         /// is sufficiently small (lower than  0.00000001).
         /// </summary>
         /// <returns>
-        /// Gaussian Mixture Model containing all the components with their approprite
+        /// Gaussian Mixture Model containing all the components with their appropriate
         /// parameters.
         /// </returns>
         GaussianMixtureModel ExpectationMaximization::EstimateGmm()
         {
-            constexpr DataType minLikelihoodChange = 0.00000001;
+            constexpr DataType MIN_LIKELIHOOD_CHANGE = 0.00000001;
             Initialization();
 
             DataType oldLikelihood; // used as iterations terminator
@@ -93,7 +93,7 @@ namespace Spectre::libGaussianMixtureModelling
                 oldLikelihood = newLikelihood;
                 Maximization();
                 newLikelihood = m_LogLikelihoodCalculator.CalculateLikelihood();
-            } while (abs(oldLikelihood - newLikelihood) > minLikelihoodChange);
+            } while (abs(oldLikelihood - newLikelihood) > MIN_LIKELIHOOD_CHANGE);
 
             return GaussianMixtureModel(
                 gsl::span<DataType>(m_pMzArray, m_DataSize),

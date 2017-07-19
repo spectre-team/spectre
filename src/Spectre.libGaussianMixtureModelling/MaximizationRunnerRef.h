@@ -102,7 +102,7 @@ namespace Spectre::libGaussianMixtureModelling
                 DataType weight = 0.0;
                 for (unsigned i = 0; i < m_DataSize; i++)
                 {
-                    weight += m_AffilationMatrix.data[i][k] * m_pIntensities[i];
+                    weight += m_AffilationMatrix[i][k] * m_pIntensities[i];
                 }
                 m_Components[k].weight = weight / totalDataSize;
             }
@@ -124,8 +124,8 @@ namespace Spectre::libGaussianMixtureModelling
                 DataType numerator = 0.0;
                 for (unsigned i = 0; i < m_DataSize; i++)
                 {
-                    denominator += m_AffilationMatrix.data[i][k] * m_pIntensities[i];
-                    numerator += m_AffilationMatrix.data[i][k] * m_pMzArray[i] * m_pIntensities[i];
+                    denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
+                    numerator += m_AffilationMatrix[i][k] * m_pMzArray[i] * m_pIntensities[i];
                 }
                 m_Components[k].mean = numerator / denominator;
             }
@@ -153,8 +153,8 @@ namespace Spectre::libGaussianMixtureModelling
                 DataType numerator = 0.0;
                 for (unsigned i = 0; i < m_DataSize; i++)
                 {
-                    denominator += m_AffilationMatrix.data[i][k] * m_pIntensities[i];
-                    numerator += m_AffilationMatrix.data[i][k] * pow(m_pMzArray[i] - m_Components[k].mean, 2) * m_pIntensities[i];
+                    denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
+                    numerator += m_AffilationMatrix[i][k] * pow(m_pMzArray[i] - m_Components[k].mean, 2) * m_pIntensities[i];
                 }
                 m_Components[k].deviation = sqrt(numerator / denominator);
             }

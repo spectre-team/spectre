@@ -92,7 +92,7 @@ namespace Spectre::libGaussianMixtureModelling
                 {
                     DataType numerator = m_Components[k].weight *
                         Gaussian(m_pMzArray[i], m_Components[k].mean, m_Components[k].deviation);
-                    m_AffilationMatrix.data[i][k] = numerator / denominator;
+                    m_AffilationMatrix[i][k] = numerator / denominator;
                 }
             }
         }

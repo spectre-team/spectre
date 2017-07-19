@@ -24,7 +24,7 @@ namespace Spectre::libGaussianMixtureModelling
 {
     /// <summary>
     /// Struct serves as a temporary matrix representation.
-    /// It stores its data contigiuously in the mermoy.
+    /// It stores its data contigiuously in the memory.
     /// </summary>
     struct Matrix
     {
@@ -52,6 +52,16 @@ namespace Spectre::libGaussianMixtureModelling
         {
             delete[] data[0]; // delete allocated data
             delete[] data;    // delete allocated pointers
+        }
+
+        /// <summary>
+        /// Returns a row indicated by passed index.
+        /// </summary>
+        /// <param name="index">Index of the row.</param>
+        /// <returns>Row indicated by passed index.</returns>
+        DataType* operator[](unsigned index)
+        {
+            return data[index];
         }
 
         /// <summary>
