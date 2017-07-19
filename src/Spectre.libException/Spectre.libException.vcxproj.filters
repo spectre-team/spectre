@@ -24,6 +24,9 @@
     <ClInclude Include="NullPointerException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ArgumentOutOfRangeException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExceptionBase.cpp">
