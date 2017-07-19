@@ -57,39 +57,6 @@ namespace Spectre.Tests.Controllers
             Assert.AreEqual(1, first.Id);
             Assert.AreEqual("Head & neck cancer, patient 1, tumor region only", first.Name);
         }
-
-        [Test]
-        public void TestGetFirstPreparationSampleSpectrum()
-        {
-            var spectrum = _controller.Get(1, 1);
-
-            Assert.NotNull(spectrum);
-            Assert.IsInstanceOf<Spectrum>(spectrum);
-            Assert.IsNotEmpty(spectrum.Intensities);
-            Assert.IsNotEmpty(spectrum.Mz);
-            Assert.AreEqual(spectrum.Mz.Count(), spectrum.Intensities.Count(), "Intensities and Mz counts do not match.");
-        }
-
-        [Test]
-        public void TestGetFirstPreparationSampleHeatmap()
-        {
-            const double validMzValue = 799.796609809649;
-            var heatmap = _controller.Get(1, validMzValue);
-
-            Assert.Multiple(() =>
-            {
-                Assert.NotNull(heatmap);
-                Assert.IsInstanceOf<Heatmap>(heatmap);
-                Assert.IsNotEmpty(heatmap.Intensities);
-                Assert.IsNotEmpty(heatmap.X);
-                Assert.IsNotEmpty(heatmap.Y);
-                Assert.AreEqual(heatmap.X.Count(), heatmap.Y.Count(), "Number of coordinates of X and Y do not match.");
-                Assert.AreEqual(heatmap.Intensities.Count(), heatmap.Y.Count(),
-                    "Number of coordinates is different from number of intensities.");
-
-                Assert.Throws<ArgumentException>(() => { _controller.Get(1, -2.0); }, "Accepted negative mz value");
-                Assert.Throws<ArgumentException>(() => { _controller.Get(1, 0.0); }, "Accepted nonexistent mz value");
-            });
-        }
+        
     }
 }
