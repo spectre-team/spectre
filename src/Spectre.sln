@@ -66,6 +66,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGaussianMixtureM
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libException", "Spectre.libException\Spectre.libException.vcxproj", "{7417BF00-028B-4797-B58A-6058CA338493}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libGenetic.Tests", "Spectre.libGenetic.Tests\Spectre.libGenetic.Tests.vcxproj", "{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9786751A-6AE1-48D3-938D-4129D0399667} = {9786751A-6AE1-48D3-938D-4129D0399667}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -200,6 +205,12 @@ Global
 		{7417BF00-028B-4797-B58A-6058CA338493}.Release|x64.ActiveCfg = Release|x64
 		{7417BF00-028B-4797-B58A-6058CA338493}.Release|x64.Build.0 = Release|x64
 		{7417BF00-028B-4797-B58A-6058CA338493}.Release|x86.ActiveCfg = Release|x64
+		{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318}.Debug|x64.ActiveCfg = Debug|x64
+		{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318}.Debug|x64.Build.0 = Debug|x64
+		{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318}.Debug|x86.ActiveCfg = Debug|x64
+		{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318}.Release|x64.ActiveCfg = Release|x64
+		{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318}.Release|x64.Build.0 = Release|x64
+		{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -216,5 +227,6 @@ Global
 		{2185C120-7B01-4E2E-B200-858A2D25C715} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 		{104D9A93-F6D7-4BF4-961F-7C52FEAEA77B} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 		{7417BF00-028B-4797-B58A-6058CA338493} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
+		{B0A1C3F1-D75A-4B4F-BFF0-9A5C1A843318} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 	EndGlobalSection
 EndGlobal
