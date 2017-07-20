@@ -34,7 +34,7 @@ public:
     /// Initializes a new instance of the <see cref="PreservationStrategy"/> class.
     /// </summary>
     /// <param name="preservationRate">The preservation rate.</param>
-    explicit PreservationStrategy(double preservationRate);
+    explicit PreservationStrategy(double preservationRate = 0.2);
     /// <summary>
     /// Cleans up an instance of the <see cref="PreservationStrategy"/> class.
     /// </summary>

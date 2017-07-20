@@ -20,11 +20,19 @@ limitations under the License.
 #define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
+#include "Spectre.libGenetic/IndividualsBuilderStrategy.h"
+#include "Spectre.libGenetic/PreservationStrategy.h"
 
 namespace
 {
-TEST(OffspringGeneratorTest, dummy)
-{
-    FAIL();
-}
+using namespace Spectre::libGenetic;
+
+class MockIndividualsBuilderStrategy : public IndividualsBuilderStrategy {
+
+};
+
+class MockPreservationStrategy : public PreservationStrategy {
+
+};
+
 }

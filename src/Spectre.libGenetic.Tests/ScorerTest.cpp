@@ -20,11 +20,37 @@ limitations under the License.
 #define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
+#include <memory>
+#include "Spectre.libGenetic/FitnessFunction.h"
+#include "Spectre.libGenetic/Scorer.h"
+#include "Spectre.libException/NullPointerException.h"
 
 namespace
 {
-TEST(ScorerTest, dummy)
+using namespace Spectre::libGenetic;
+
+TEST(Scorer, initializes)
 {
-    FAIL();
+	EXPECT_THROW(Scorer(nullptr), Spectre::libException::NullPointerException);
+}
+
+class ScorerTest : public ::testing::Test
+{
+public:
+	ScorerTest() {}
+protected:
+	std::unique_ptr<FitnessFunction> fitness;
+
+	void SetUp() override
+	{
+		fitness = FitnessFunction();
+	}
+};
+
+TEST_F(ScorerTest, score_generation)
+{
+	const Individual true_individual = Individual({ true, true, true, true });
+	Generation gen = Generation({ true_individual, true_individual, true_individual });
+	EXPECT_NO_THROW(fitness.Score(gen));
 }
 }

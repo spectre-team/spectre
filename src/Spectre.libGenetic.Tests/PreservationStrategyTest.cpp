@@ -20,11 +20,36 @@ limitations under the License.
 #define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
+#include "Spectre.libGenetic/PreservationStrategy.h"
 
 namespace
 {
-TEST(PreservationStrategyTest, dummy)
+using namespace Spectre::libGenetic;
+
+TEST(PreservationStrategyInitialization, initializes)
 {
-    FAIL();
+	PreservationStrategy preservation(0.5);
+}
+
+class PreservationStrategyTest : public ::testing::Test
+{
+public:
+	PreservationStrategyTest() {}
+protected:
+	const double PRESERVATION_RATE = 0.5;
+	PreservationStrategy preservation;
+
+	void SetUp() override
+	{
+		preservation = PreservationStrategy(PRESERVATION_RATE);
+	}
+};
+
+TEST_F(PreservationStrategyTest, pick_best)
+{
+	const Individual individual = Individual({ true, false, true, false });
+	Generation gen = Generation({ individual, individual, individual, individual, individual, individual, individual, individual });
+	Generation newGen = preservation.PickBest(gen);
+	EXPECT_EQ(newGen.size(), 4);
 }
 }

@@ -20,11 +20,36 @@ limitations under the License.
 #define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
+#include "Spectre.libGenetic/ParentSelectionStrategy.h"
 
 namespace
 {
-TEST(ParentSelectionStrategyTest, dummy)
+using namespace Spectre::libGenetic;
+
+TEST(ParentSelectionStrategyInitialization, initializes)
 {
-    FAIL();
+	ParentSelectionStrategy parent_selection(0);
+}
+
+class ParentSelectionStrategyTest : public ::testing::Test
+{
+public:
+	ParentSelectionStrategyTest() {}
+protected:
+	const double SEED = 0;
+	ParentSelectionStrategy parent_selection;
+
+	void SetUp() override
+	{
+		parent_selection = ParentSelectionStrategy(SEED);
+	}
+};
+
+TEST_F(ParentSelectionStrategyTest, next_parents_selection)
+{
+	const Individual individual = Individual({ true, false, true, false });
+	Generation gen = Generation({ individual, individual, individual, individual, individual, individual, individual, individual });
+	std::pair<const Individual&, const Individual&> result = parent_selection.next(gen, );
+	//TODO
 }
 }

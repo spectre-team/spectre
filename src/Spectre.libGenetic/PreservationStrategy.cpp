@@ -19,6 +19,8 @@ limitations under the License.
 
 #include "PreservationStrategy.h"
 #include "Sorting.h"
+#include <algorithm>
+#include <iterator>
 
 namespace Spectre::libGenetic
 {

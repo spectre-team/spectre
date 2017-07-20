@@ -37,8 +37,8 @@ protected:
 	std::vector<Individual> inconsistent_gen = { true_individual, smaller_individual, true_individual };
 	std::vector<Individual> gen1 = { true_individual, true_individual, true_individual };
 	std::vector<Individual> gen2 = { false_individual, false_individual, false_individual, false_individual };
-	const Generation generation1;
-	const Generation generation2;
+	Generation generation1;
+	Generation generation2;
 
 	void SetUp() override
 	{
