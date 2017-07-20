@@ -66,6 +66,7 @@ TEST_F(GenerationTest, add)
 
 TEST_F(GenerationTest, eq_add)
 {
+	Generation gen = Generation({ true_individual, true_individual, true_individual });
 	gen += generation2;
 	int size = gen.size();
 	EXPECT_EQ(size, 7);
