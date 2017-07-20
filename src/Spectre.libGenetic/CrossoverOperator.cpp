@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #include "CrossoverOperator.h"
+#include "InconsistentChromosomeLengthException.h"
 #include "Individual.h"
 
 namespace Spectre::libGenetic
@@ -29,6 +30,14 @@ CrossoverOperator::CrossoverOperator(Seed rngSeed):
 
 Individual CrossoverOperator::operator()(const Individual& first, const Individual& second)
 {
+    if(first.size() == second.size())
+    {
+        // @gmrukwa: empty
+    }
+    else
+    {
+        throw InconsistentChromosomeLengthException(first.size(), second.size());
+    }
     std::uniform_int_distribution<size_t> distribution(0, first.size());
     const auto cuttingPoint = distribution(m_RandomNumberGenerator);
     const auto endOfFirst = first.begin() + cuttingPoint;

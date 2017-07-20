@@ -35,6 +35,11 @@ std::vector<bool>::reference Individual::operator[](size_t index)
     return m_BinaryData[index];
 }
 
+std::vector<bool>::const_reference Individual::operator[](size_t index) const
+{
+    return m_BinaryData[index];
+}
+
 std::vector<bool>::iterator Individual::begin()
 {
     return m_BinaryData.begin();

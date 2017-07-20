@@ -89,6 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
+    <ClCompile Include="CrossoverOperatorTest.cpp" />
     <ClCompile Include="MutationOperatorTest.cpp" />
   </ItemGroup>
   <ItemGroup>

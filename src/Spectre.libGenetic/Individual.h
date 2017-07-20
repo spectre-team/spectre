@@ -34,11 +34,17 @@ public:
     /// <param name="binaryData">The binary data.</param>
     explicit Individual(std::vector<bool>&& binaryData);
     /// <summary>
-    /// Gets the data under specified index.
+    /// Gets the mutable data under specified index.
     /// </summary>
     /// <param name="index">The index.</param>
     /// <returns>Single bit of data.</returns>
     std::vector<bool>::reference operator[](size_t index);
+    /// <summary>
+    /// Gets the immutable data under specified index.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>Single bit of data.</returns>
+    std::vector<bool>::const_reference operator[](size_t index) const;
     /// <summary>
     /// Return iterator for beginning of mutable sequence.
     /// </summary>

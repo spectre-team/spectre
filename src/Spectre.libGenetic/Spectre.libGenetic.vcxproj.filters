@@ -57,6 +57,9 @@
     <ClInclude Include="FitnessFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InconsistentChromosomeLengthException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutationOperator.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ParentSelectionStrategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InconsistentChromosomeLengthException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
