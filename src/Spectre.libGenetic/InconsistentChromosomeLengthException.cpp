@@ -1,6 +1,6 @@
 /*
 * InconsistentChromosomeLengthException.cpp
-* Thrown when crossover chromosomes length differ.
+* Thrown when chromosomes length differ in population.
 *
 Copyright 2017 Grzegorz Mrukwa
 

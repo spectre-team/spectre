@@ -24,14 +24,21 @@ limitations under the License.
 #include "Spectre.libGenetic/FitnessFunction.h"
 #include "Spectre.libGenetic/Scorer.h"
 #include "Spectre.libException/NullPointerException.h"
+#include "MockFitnessFunction.h"
 
 namespace
 {
 using namespace Spectre::libGenetic;
+using namespace Spectre::libGenetic::Tests;
 
 TEST(Scorer, initializes)
 {
-	EXPECT_THROW(Scorer(nullptr), Spectre::libException::NullPointerException);
+    EXPECT_NO_THROW(Scorer(std::make_unique<MockFitnessFunction>()));
+}
+
+TEST(Scorer, throws_for_null_fitness_function)
+{
+    EXPECT_THROW(Scorer(nullptr), Spectre::libException::NullPointerException);
 }
 
 class ScorerTest : public ::testing::Test
@@ -43,14 +50,7 @@ protected:
 
 	void SetUp() override
 	{
-		fitness = FitnessFunction();
+		fitness = std::make_unique<MockFitnessFunction>();
 	}
 };
-
-TEST_F(ScorerTest, score_generation)
-{
-	const Individual true_individual = Individual({ true, true, true, true });
-	Generation gen = Generation({ true_individual, true_individual, true_individual });
-	EXPECT_NO_THROW(fitness.Score(gen));
-}
 }

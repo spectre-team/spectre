@@ -21,54 +21,63 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include "Spectre.libGenetic/Generation.h"
+#include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
 
 namespace
 {
 using namespace Spectre::libGenetic;
 
-class GenerationTest : public ::testing::Test
+class GenerationInitializationTest: public ::testing::Test
+{
+protected:
+    const Individual smallerIndividual = Individual({ true, false, true });
+    const Individual trueIndividual = Individual({ true, true, true, true });
+    const Individual falseIndividual = Individual({ false, false, false, false });
+    const std::vector<Individual> inconsistentGeneration = { trueIndividual, smallerIndividual, trueIndividual };
+    const std::vector<Individual> generation1Data = { trueIndividual, trueIndividual, trueIndividual };
+    const std::vector<Individual> generation2Data = { falseIndividual, falseIndividual, falseIndividual, falseIndividual };
+};
+
+TEST_F(GenerationInitializationTest, initializes)
+{
+    EXPECT_NO_THROW(Generation(std::vector<Individual>(generation1Data)));
+}
+
+TEST_F(GenerationInitializationTest, throws_on_inconsistent_chromosome_lengths)
+{
+    EXPECT_THROW(Generation(std::vector<Individual>(inconsistentGeneration)), InconsistentChromosomeLengthException);
+}
+
+class GenerationTest : public GenerationInitializationTest
 {
 public:
-	GenerationTest() {}
+	GenerationTest():
+        generation1(std::vector<Individual>(generation1Data)),
+        generation2(std::vector<Individual>(generation2Data))
+    {}
 protected:
-	const Individual smaller_individual = Individual({ true, false, true });
-	const Individual true_individual = Individual({ true, true, true, true });
-	const Individual false_individual = Individual({ false, false, false, false });
-	std::vector<Individual> inconsistent_gen = { true_individual, smaller_individual, true_individual };
-	std::vector<Individual> gen1 = { true_individual, true_individual, true_individual };
-	std::vector<Individual> gen2 = { false_individual, false_individual, false_individual, false_individual };
 	Generation generation1;
 	Generation generation2;
 
 	void SetUp() override
 	{
-		generation1 = Generation(gen1);
-		generation2 = Generation(gen2);
+		generation1 = Generation(std::vector<Individual>(generation1Data));
+		generation2 = Generation(std::vector<Individual>(generation2Data));
 	}
 };
-
-TEST_F(GenerationTest, initializes)
-{
-	EXPECT_NO_THROW(Generation(gen1));
-}
-
-TEST_F(GenerationTest, error_initialization)
-{
-	EXPECT_THROW(Generation(inconsistent_gen), std::exception);
-}
 
 TEST_F(GenerationTest, add)
 {
 	Generation gen = generation1 + generation2;
-	int size = gen.size();
+	auto size = gen.size();
 	EXPECT_EQ(size, 7);
 }
 
 TEST_F(GenerationTest, eq_add)
 {
-	Generation gen = Generation({ true_individual, true_individual, true_individual });
+	Generation gen({ trueIndividual, trueIndividual, trueIndividual });
 	gen += generation2;
-	int size = gen.size();
+	auto size = gen.size();
 	EXPECT_EQ(size, 7);
 }
 
@@ -76,8 +85,8 @@ TEST_F(GenerationTest, index)
 {
 	Individual ind1 = generation1[0];
 	Individual ind2 = generation2[0];
-	EXPECT_EQ(ind1, gen1);
-	EXPECT_EQ(ind2, gen2);
+	EXPECT_EQ(ind1, generation1Data);
+	EXPECT_EQ(ind2, generation2Data);
 }
 
 }
