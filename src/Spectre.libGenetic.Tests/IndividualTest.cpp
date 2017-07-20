@@ -20,11 +20,53 @@ limitations under the License.
 #define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
+#include "Spectre.libGenetic/Individual.h"
 
 namespace
 {
-TEST(IndividualTest, dummy)
+using namespace Spectre::libGenetic;
+
+TEST(IndividualInitialization, initializes)
 {
-    FAIL();
+	Individual true_individual({ true, true, true, true });
+	Individual false_individual({ false, false, false, false });
+	Individual diff_individual({ false, false, false, false });
 }
+
+class IndividualTest : public ::testing::Test
+{
+public:
+	IndividualTest() {}
+protected:
+	const std::vector<bool> TRUE_VECTOR = { true, true, true, true };
+	const std::vector<bool> FALSE_VECTOR = { false, false, false, false };
+	const std::vector<bool> DIFF_VECTOR = { true, false, true, false };
+	const Individual true_individual, false_individual, diff_individual;
+
+	void SetUp() override
+	{
+		true_individual = Individual(TRUE_VECTOR);
+		false_individual = Individual(FALSE_VECTOR);
+		diff_individual = Individual(DIFF_VECTOR);
+	}
+};
+
+TEST_F(IndividualTest, throws_on_inconsistent_sizes)
+{
+	int size = true_individual.size();
+	EXPECT_EQ(size, 4);
+}
+
+TEST_F(IndividualTest, index)
+{
+	bool b1 = diff_individual[0];
+	bool b2 = diff_individual[1];
+	bool b3 = diff_individual[2];
+	bool b4 = diff_individual[3];
+	EXPECT_EQ(b1, true);
+	EXPECT_EQ(b2, false);
+	EXPECT_EQ(b3, true);
+	EXPECT_EQ(b4, false);
+}
+
 }
