@@ -90,7 +90,16 @@
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
     <ClCompile Include="CrossoverOperatorTest.cpp" />
+    <ClCompile Include="GenerationTest.cpp" />
+    <ClCompile Include="GeneticAlgorithm.cpp" />
+    <ClCompile Include="IndividualsBuilderStrategyTest.cpp" />
+    <ClCompile Include="IndividualTest.cpp" />
     <ClCompile Include="MutationOperatorTest.cpp" />
+    <ClCompile Include="OffspringGeneratorTest.cpp" />
+    <ClCompile Include="ParentSelectionStrategyTest.cpp" />
+    <ClCompile Include="PreservationStrategyTest.cpp" />
+    <ClCompile Include="ScorerTest.cpp" />
+    <ClCompile Include="StopConditionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
