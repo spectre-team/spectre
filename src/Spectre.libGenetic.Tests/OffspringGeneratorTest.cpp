@@ -28,11 +28,34 @@ namespace
 using namespace Spectre::libGenetic;
 
 class MockIndividualsBuilderStrategy : public IndividualsBuilderStrategy {
-
+public:
+	Generation Build()
+	{
+		const Individual true_individual = Individual({ true, true, true, true });
+		return Generation({ true_individual, true_individual, true_individual });
+	}
 };
 
 class MockPreservationStrategy : public PreservationStrategy {
+public:
+	Generation PickBest()
+	{
+		const Individual true_individual = Individual({ true, true, true, true });
+		return Generation({ true_individual, true_individual, true_individual });
+	}
+};
 
+class OffspringGeneratorTest : public ::testing::Test
+{
+public:
+	OffspringGeneratorTest(MockIndividualsBuilderStrategy&& builder, MockPreservationStrategy&& preservationStrategy) {}
+protected:
+
+	void SetUp() override
+	{
+		MockIndividualsBuilderStrategy builder = new MockIndividualsBuilderStrategy();
+		MockPreservationStrategy preservationStrategy = new MockPreservationStrategy();
+	}
 };
 
 }

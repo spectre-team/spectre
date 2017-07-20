@@ -30,7 +30,7 @@ TEST(IndividualInitialization, initializes)
 {
 	Individual true_individual({ true, true, true, true });
 	Individual false_individual({ false, false, false, false });
-	Individual diff_individual({ false, false, false, false });
+	Individual diff_individual({ true, false, true, false });
 }
 
 class IndividualTest : public ::testing::Test
