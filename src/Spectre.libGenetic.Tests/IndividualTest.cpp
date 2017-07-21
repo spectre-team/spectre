@@ -52,7 +52,7 @@ protected:
 
 TEST_F(IndividualTest, exhibit_proper_size)
 {
-	int size = trueIndividual.size();
+	const auto size = trueIndividual.size();
 	EXPECT_EQ(size, 4);
 }
 

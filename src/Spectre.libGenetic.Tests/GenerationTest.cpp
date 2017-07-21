@@ -127,8 +127,11 @@ TEST_F(GenerationTest, index)
 {
 	const auto& ind1 = generation1[0];
 	const auto& ind2 = generation2[0];
-	EXPECT_EQ(ind1, generation1Data[0]);
-	EXPECT_EQ(ind2, generation2Data[0]);
+    for(auto i=0u; i<ind1.size(); ++i)
+    {
+        EXPECT_EQ(ind1[i], generation1Data[0][i]);
+        EXPECT_EQ(ind2[i], generation2Data[0][i]);
+    }
 }
 
 TEST_F(GenerationTest, iterators_allow_to_iterate_the_individuals)
@@ -138,7 +141,12 @@ TEST_F(GenerationTest, iterators_allow_to_iterate_the_individuals)
 
     while(generationIterator != generation1.end() && dataIterator != generation1Data.end())
     {
-        EXPECT_EQ(*generationIterator, *dataIterator);
+        const auto generationIndividual = *generationIterator;
+        const auto dataIndividual = *dataIterator;
+        for (auto i = 0u; i < generationIndividual.size(); ++i)
+        {
+            EXPECT_EQ(generationIndividual[i], dataIndividual[i]);
+        }
         ++generationIterator;
         ++dataIterator;
     }

@@ -22,7 +22,7 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include "Spectre.libGenetic/PreservationStrategy.h"
 #include "Spectre.libException/ArgumentOutOfRangeException.h"
-#include "Spectre.libGenetic/InconsistentGenerationAndScoresLength.h"
+#include "Spectre.libGenetic/InconsistentGenerationAndScoresLengthException.h"
 
 namespace
 {
@@ -79,7 +79,7 @@ TEST_F(PreservationStrategyTest, throws_for_mismatching_generation_and_scores_si
 
     const std::vector<ScoreType> tooShortScore{ 1 };
 
-    EXPECT_THROW(preservation.PickBest(generation, tooShortScore), InconsistentGenerationAndScoresLength);
+    EXPECT_THROW(preservation.PickBest(generation, tooShortScore), InconsistentGenerationAndScoresLengthException);
 }
 
 TEST_F(PreservationStrategyTest, picks_none_with_zero_preservation_rate)

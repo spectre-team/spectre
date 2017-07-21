@@ -45,7 +45,7 @@ public:
     /// <param name="generation">The generation.</param>
     /// <param name="scores">The scores.</param>
     /// <returns>Best subpopulation.</returns>
-    Generation PickBest(const Generation& generation, gsl::span<ScoreType> scores);
+    Generation PickBest(const Generation& generation, gsl::span<const ScoreType> scores);
 private:
     /// <summary>
     /// Rate of individuals preserved between generations..

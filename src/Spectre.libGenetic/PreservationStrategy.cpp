@@ -21,6 +21,7 @@ limitations under the License.
 #include "Sorting.h"
 #include <algorithm>
 #include <iterator>
+#include "Spectre.libDataset/Dataset.h"
 
 namespace Spectre::libGenetic
 {
@@ -29,7 +30,7 @@ PreservationStrategy::PreservationStrategy(double preservationRate):
 {
 }
 
-Generation PreservationStrategy::PickBest(const Generation& generation, gsl::span<ScoreType> scores)
+Generation PreservationStrategy::PickBest(const Generation& generation, gsl::span<const ScoreType> scores)
 {
     const auto indices = Sorting::indices(scores);
     const auto numberOfPreserved = static_cast<size_t>(std::min(m_PreservationRate * generation.size(), 1.0));

@@ -35,7 +35,7 @@ public:
     /// <param name="data">The data.</param>
     /// <returns>Indices</returns>
     template <class T>
-    static std::vector<size_t> indices(gsl::span<T> data)
+    static std::vector<size_t> indices(gsl::span<const T> data)
     {
         std::vector<size_t> indices(data.size());
         std::iota(indices.begin(), indices.end(), 0);

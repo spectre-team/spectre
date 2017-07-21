@@ -1,6 +1,6 @@
 /*
-* OffspringGeneratorTest.cpp
-* Tests offspring generator.
+* MockPreservationStrategy.h
+* Mocks preservation strategy.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -17,28 +17,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#define GTEST_LANG_CXX11 1
+#pragma once
+#include <gmock/gmock.h>
+#include <span.h>
+#include "Spectre.libGenetic/PreservationStrategy.h"
 
-#include <gtest/gtest.h>
-#include "Spectre.libGenetic/OffspringGenerator.h"
-
-namespace
+namespace Spectre::libGenetic::Tests
 {
-using namespace Spectre::libGenetic;
-
-class OffspringGeneratorTest : public ::testing::Test
+class MockPreservationStrategy: public PreservationStrategy
 {
 public:
-	OffspringGeneratorTest() {}
-protected:
-
-	void SetUp() override
-	{
-	}
+    MockPreservationStrategy(): PreservationStrategy(0) {}
+    MOCK_METHOD2(PickBest, Generation(const Generation&, gsl::span<ScoreType>));
 };
-
-TEST_F(OffspringGeneratorTest, dummy)
-{
-    FAIL();
-}
 }

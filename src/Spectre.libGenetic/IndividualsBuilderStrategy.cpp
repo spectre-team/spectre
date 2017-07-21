@@ -32,7 +32,7 @@ IndividualsBuilderStrategy::IndividualsBuilderStrategy(CrossoverOperator&& cross
     
 }
 
-Generation IndividualsBuilderStrategy::Build(const Generation& old, gsl::span<ScoreType> scores, size_t newSize)
+Generation IndividualsBuilderStrategy::Build(const Generation& old, gsl::span<const ScoreType> scores, size_t newSize)
 {
     std::vector<Individual> newIndividuals;
     newIndividuals.reserve(newSize);

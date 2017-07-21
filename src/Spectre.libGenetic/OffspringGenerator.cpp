@@ -27,7 +27,7 @@ OffspringGenerator::OffspringGenerator(IndividualsBuilderStrategy&& builder, Pre
 {
 }
 
-Generation OffspringGenerator::next(const Generation& old, gsl::span<ScoreType>&& scores)
+Generation OffspringGenerator::next(const Generation& old, gsl::span<const ScoreType>&& scores)
 {
     const auto preserved = m_PreservationStrategy.PickBest(old, scores);
     const auto numberOfRemaining = old.size() - preserved.size();

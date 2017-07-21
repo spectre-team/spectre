@@ -40,7 +40,7 @@ public:
     /// <param name="generation">The generation.</param>
     /// <param name="scores">The scores of individuals.</param>
     /// <returns>Parents for crossover.</returns>
-    std::pair<const Individual&, const Individual&>  next(const Generation& generation, gsl::span<ScoreType> scores);
+    std::pair<const Individual&, const Individual&>  next(const Generation& generation, gsl::span<const ScoreType> scores);
     virtual ~ParentSelectionStrategy() = default;
 private:
     /// <summary>
