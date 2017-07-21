@@ -2,7 +2,7 @@
 * ParentSelectionStrategyTest.cpp
 * Tests generation.
 *
-Copyright 2017 Grzegorz Mrukwa
+Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include "Spectre.libGenetic/ParentSelectionStrategy.h"
+#include <numeric>
 
 namespace
 {
@@ -34,10 +35,19 @@ TEST(ParentSelectionStrategyInitialization, initializes)
 class ParentSelectionStrategyTest : public ::testing::Test
 {
 public:
-	ParentSelectionStrategyTest() {}
+	ParentSelectionStrategyTest():
+        individual1(std::vector<bool>{ true, false, true, false }),
+        individual2(std::vector<bool>{ false, true, false, true }),
+        generation({ individual1, individual2 })
+    {}
 protected:
-	const double SEED = 0;
-	ParentSelectionStrategy parent_selection;
+    const unsigned NUMBER_OF_TRIALS = 1000;
+    const double ALLOWED_MISS_RATE = 0.05;
+	const Seed SEED = 0;
+    const Individual individual1;
+    const Individual individual2;
+    ParentSelectionStrategy parent_selection;
+    const Generation generation;
 
 	void SetUp() override
 	{
@@ -45,11 +55,59 @@ protected:
 	}
 };
 
-TEST_F(ParentSelectionStrategyTest, next_parents_selection)
+TEST_F(ParentSelectionStrategyTest, all_zero_scores_do_not_cause_error)
 {
-	const Individual individual = Individual({ true, false, true, false });
-	Generation gen = Generation({ individual, individual, individual, individual, individual, individual, individual, individual });
-	std::pair<const Individual&, const Individual&> result = parent_selection.next(gen, );
-	//TODO
+    const std::vector<ScoreType> score{ 0, 0 };
+
+    EXPECT_NO_THROW(parent_selection.next(generation, score));
+}
+
+TEST_F(ParentSelectionStrategyTest, zero_score_never_draws_an_individual)
+{
+    const std::vector<ScoreType> score{ 1, 0 };
+
+    for (auto i = 0u; i<NUMBER_OF_TRIALS; ++i)
+    {
+        const auto parents = parent_selection.next(generation, score);
+        EXPECT_NE(&individual2, &parents.first);
+        EXPECT_NE(&individual2, &parents.second);
+    }
+}
+
+TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportionally)
+{
+	const std::vector<ScoreType> score{ 1, 2 };
+
+    auto count1 = 0u;
+    auto count2 = 0u;
+
+    for(auto i=0u; i<NUMBER_OF_TRIALS; ++i)
+    {
+        const auto parents = parent_selection.next(generation, score);
+        if (&parents.first == &individual1)
+        {
+            ++count1;
+        }
+        else
+        {
+            ++count2;
+        }
+        if (&parents.second == &individual1)
+        {
+            ++count1;
+        }
+        else
+        {
+            ++count2;
+        }
+    }
+
+    const auto expectedCount1 = score[0] * static_cast<double>(NUMBER_OF_TRIALS) / (score[0] + score[1]);
+    const auto expectedCount2 = score[2] * static_cast<double>(NUMBER_OF_TRIALS) / (score[0] + score[1]);
+
+    EXPECT_GT(count1, expectedCount1 - NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);
+    EXPECT_LT(count1, expectedCount1 + NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);
+    EXPECT_GT(count2, expectedCount2 - NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);
+    EXPECT_LT(count2, expectedCount2 + NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);
 }
 }
