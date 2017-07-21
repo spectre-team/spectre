@@ -28,45 +28,87 @@ using namespace Spectre::libGenetic;
 
 TEST(IndividualInitialization, initializes)
 {
-	Individual true_individual({ true, true, true, true });
-	Individual false_individual({ false, false, false, false });
-	Individual diff_individual({ true, false, true, false });
+	EXPECT_NO_THROW(Individual({ true, true, true, true }));
+    EXPECT_NO_THROW(Individual({ false, false, false, false }));
+    EXPECT_NO_THROW(Individual({ true, false, true, false }));
 }
 
 class IndividualTest : public ::testing::Test
 {
 public:
-	IndividualTest() {}
+	IndividualTest():
+        trueIndividual(std::vector<bool>(TRUE_DATA)),
+        falseIndividual(std::vector<bool>(FALSE_DATA)),
+        mixedIndividual(std::vector<bool>(MIXED_DATA))
+    {}
 protected:
-	const std::vector<bool> TRUE_VECTOR = { true, true, true, true };
-	const std::vector<bool> FALSE_VECTOR = { false, false, false, false };
-	const std::vector<bool> DIFF_VECTOR = { true, false, true, false };
-	const Individual true_individual, false_individual, diff_individual;
-
-	void SetUp() override
-	{
-		true_individual = Individual(TRUE_VECTOR);
-		false_individual = Individual(FALSE_VECTOR);
-		diff_individual = Individual(DIFF_VECTOR);
-	}
+    const std::vector<bool> TRUE_DATA{ true, true, true, true };
+    const std::vector<bool> FALSE_DATA{ false, false, false, false };
+    const std::vector<bool> MIXED_DATA{ true, false, true, false };
+    const Individual trueIndividual;
+    const Individual falseIndividual;
+    const Individual mixedIndividual;
 };
 
-TEST_F(IndividualTest, throws_on_inconsistent_sizes)
+TEST_F(IndividualTest, exhibit_proper_size)
 {
-	int size = true_individual.size();
+	int size = trueIndividual.size();
 	EXPECT_EQ(size, 4);
 }
 
-TEST_F(IndividualTest, index)
+TEST_F(IndividualTest, index_returns_proper_const_bits)
 {
-	bool b1 = diff_individual[0];
-	bool b2 = diff_individual[1];
-	bool b3 = diff_individual[2];
-	bool b4 = diff_individual[3];
-	EXPECT_EQ(b1, true);
-	EXPECT_EQ(b2, false);
-	EXPECT_EQ(b3, true);
-	EXPECT_EQ(b4, false);
+	EXPECT_EQ(mixedIndividual[0], true);
+	EXPECT_EQ(mixedIndividual[1], false);
+	EXPECT_EQ(mixedIndividual[2], true);
+	EXPECT_EQ(mixedIndividual[3], false);
 }
 
+TEST_F(IndividualTest, index_allows_modification)
+{
+    Individual individual({ false, true });
+
+    individual[0] = true;
+
+    EXPECT_TRUE(individual[0]);
+}
+
+TEST_F(IndividualTest, iterators_allow_to_iterate_over_const_binary_data)
+{
+    auto individualIterator = mixedIndividual.begin();
+    auto dataIterator = MIXED_DATA.begin();
+
+    while (individualIterator != mixedIndividual.end() && dataIterator != MIXED_DATA.end())
+    {
+        EXPECT_EQ(*individualIterator, *dataIterator);
+        ++individualIterator;
+        ++dataIterator;
+    }
+
+    EXPECT_EQ(individualIterator, mixedIndividual.end());
+    EXPECT_EQ(dataIterator, MIXED_DATA.end());
+}
+
+TEST_F(IndividualTest, iterators_allow_to_read_and_modify_binary_data)
+{
+    Individual mutableIndividual{std::vector<bool>(MIXED_DATA)};
+    auto individualIterator = mutableIndividual.begin();
+    auto dataIterator = MIXED_DATA.begin();
+
+    while (individualIterator != mutableIndividual.end() && dataIterator != MIXED_DATA.end())
+    {
+        EXPECT_EQ(*individualIterator, *dataIterator);
+        *individualIterator = false;
+        ++individualIterator;
+        ++dataIterator;
+    }
+
+    EXPECT_EQ(individualIterator, mutableIndividual.end());
+    EXPECT_EQ(dataIterator, MIXED_DATA.end());
+
+    for(auto bit: mutableIndividual)
+    {
+        EXPECT_FALSE(bit);
+    }
+}
 }

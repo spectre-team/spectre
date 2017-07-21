@@ -22,6 +22,7 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include "Spectre.libGenetic/Generation.h"
 #include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
+#include <minwindef.h>
 
 namespace
 {
@@ -66,27 +67,83 @@ protected:
 	}
 };
 
-TEST_F(GenerationTest, add)
+TEST_F(GenerationTest, give_proper_size)
 {
-	Generation gen = generation1 + generation2;
-	auto size = gen.size();
+    EXPECT_EQ(generation1.size(), generation1Data.size());
+    EXPECT_EQ(generation2.size(), generation2Data.size());
+}
+
+TEST_F(GenerationTest, addition_produces_generation_of_proper_size)
+{
+	const auto generation = generation1 + generation2;
+	const auto size = generation.size();
 	EXPECT_EQ(size, 7);
 }
 
-TEST_F(GenerationTest, eq_add)
+TEST_F(GenerationTest, addition_produces_generation_of_elements_from_first_and_then_second)
 {
-	Generation gen({ trueIndividual, trueIndividual, trueIndividual });
-	gen += generation2;
-	auto size = gen.size();
+    const auto generation = Generation({ trueIndividual }) + Generation({ falseIndividual });
+    const auto first = generation[0];
+    const auto second = generation[1];
+    EXPECT_EQ(first[0], trueIndividual[0]);
+    EXPECT_EQ(second[0], falseIndividual[0]);
+}
+
+TEST_F(GenerationTest, addition_throws_on_inconsistent_chromosome_size)
+{
+    const Generation shorters({ Individual({}) });
+    const Generation longers({ Individual({true}) });
+
+    EXPECT_THROW(shorters + longers, InconsistentChromosomeLengthException);
+}
+
+TEST_F(GenerationTest, plus_equal_extends_instance_to_proper_size)
+{
+	Generation generation({ trueIndividual, trueIndividual, trueIndividual });
+	generation += generation2;
+	auto size = generation.size();
 	EXPECT_EQ(size, 7);
+}
+
+TEST_F(GenerationTest, plus_equal_extends_instance_with_elements_of_second)
+{
+    Generation falseGeneration({ Individual({false}) });
+    const Generation trueGeneration({ Individual({true}) });
+
+    falseGeneration += trueGeneration;
+
+    EXPECT_EQ(falseGeneration[1][0], trueGeneration[0][0]);
+}
+
+TEST_F(GenerationTest, plus_equal_throws_on_inconsistent_chromosome_size)
+{
+    Generation shorters({ Individual({}) });
+    const Generation longers({ Individual({ true }) });
+
+    EXPECT_THROW(shorters += longers, InconsistentChromosomeLengthException);
 }
 
 TEST_F(GenerationTest, index)
 {
-	Individual ind1 = generation1[0];
-	Individual ind2 = generation2[0];
-	EXPECT_EQ(ind1, generation1Data);
-	EXPECT_EQ(ind2, generation2Data);
+	const auto& ind1 = generation1[0];
+	const auto& ind2 = generation2[0];
+	EXPECT_EQ(ind1, generation1Data[0]);
+	EXPECT_EQ(ind2, generation2Data[0]);
 }
 
+TEST_F(GenerationTest, iterators_allow_to_iterate_the_individuals)
+{
+    auto generationIterator = generation1.begin();
+    auto dataIterator = generation1Data.begin();
+
+    while(generationIterator != generation1.end() && dataIterator != generation1Data.end())
+    {
+        EXPECT_EQ(*generationIterator, *dataIterator);
+        ++generationIterator;
+        ++dataIterator;
+    }
+
+    EXPECT_EQ(generationIterator, generation1.end());
+    EXPECT_EQ(dataIterator, generation1Data.end());
+}
 }

@@ -20,6 +20,7 @@ limitations under the License.
 #include <algorithm>
 #include <vector>
 #include "Generation.h"
+#include "InconsistentChromosomeLengthException.h"
 
 using namespace std;
 
@@ -43,18 +44,36 @@ Generation::Generation(std::vector<Individual>&& generation):
 
 Generation Generation::operator+(const Generation& other) const
 {
-    std::vector<Individual> newAllocation;
-    newAllocation.reserve(this->m_Generation.size() + other.m_Generation.size());
-    newAllocation.insert(newAllocation.end(), this->m_Generation.begin(), this->m_Generation.end());
-    newAllocation.insert(newAllocation.end(), other.m_Generation.begin(), other.m_Generation.end());
-    Generation generation(std::move(newAllocation));
-    return generation;
+    if (m_Generation.size() == 0
+        || other.m_Generation.size() == 0
+        || m_Generation[0].size() == other.m_Generation.size())
+    {
+        std::vector<Individual> newAllocation;
+        newAllocation.reserve(this->m_Generation.size() + other.m_Generation.size());
+        newAllocation.insert(newAllocation.end(), this->m_Generation.begin(), this->m_Generation.end());
+        newAllocation.insert(newAllocation.end(), other.m_Generation.begin(), other.m_Generation.end());
+        Generation generation(std::move(newAllocation));
+        return generation;
+    }
+    else
+    {
+        throw InconsistentChromosomeLengthException(m_Generation[0].size(), other.m_Generation[0].size());
+    }
 }
 
 Generation& Generation::operator+=(const Generation& other)
 {
-    this->m_Generation = (*this + other).m_Generation;
-    return *this;
+    if (m_Generation.size() == 0
+        || other.m_Generation.size() == 0
+        || m_Generation[0].size() == other.m_Generation.size())
+    {
+        m_Generation.insert(m_Generation.end(), other.m_Generation.begin(), other.m_Generation.end());
+        return *this;
+    }
+    else
+    {
+        throw InconsistentChromosomeLengthException(m_Generation[0].size(), other.m_Generation[0].size());
+    }
 }
 
 size_t Generation::size() const
