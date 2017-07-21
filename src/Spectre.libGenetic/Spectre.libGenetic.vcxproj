@@ -78,6 +78,7 @@
     <ClInclude Include="GeneticAlgorithm.h" />
     <ClInclude Include="CrossoverOperator.h" />
     <ClInclude Include="InconsistentChromosomeLengthException.h" />
+    <ClInclude Include="InconsistentGenerationAndScoresLengthException.h" />
     <ClInclude Include="IndividualsBuilderStrategy.h" />
     <ClInclude Include="MutationOperator.h" />
     <ClInclude Include="Individual.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="GeneticAlgorithm.cpp" />
     <ClCompile Include="CrossoverOperator.cpp" />
     <ClCompile Include="InconsistentChromosomeLengthException.cpp" />
+    <ClCompile Include="InconsistentGenerationAndScoresLengthException.cpp" />
     <ClCompile Include="IndividualsBuilderStrategy.cpp" />
     <ClCompile Include="MutationOperator.cpp" />
     <ClCompile Include="Individual.cpp" />

@@ -1,6 +1,6 @@
 /*
-* InconsistentChromosomeLengthException.h
-* Thrown when chromosomes length differ in population.
+* InconsistentArgumentSizesException.h
+* Thrown when coupled arguments length differ.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -18,15 +18,16 @@ limitations under the License.
 */
 
 #pragma once
+#include "ExceptionBase.h"
 
-#include "Spectre.libException/InconsistentArgumentSizesException.h"
-
-namespace Spectre::libGenetic
+namespace Spectre::libException
 {
-class InconsistentChromosomeLengthException:
-    public Spectre::libException::InconsistentArgumentSizesException
+class InconsistentArgumentSizesException: public ExceptionBase
 {
 public:
-    InconsistentChromosomeLengthException(size_t first, size_t second);
+    InconsistentArgumentSizesException(const std::string& nameOfFirst,
+                                       size_t first,
+                                       const std::string& nameOfSecond,
+                                       size_t second);
 };
 }

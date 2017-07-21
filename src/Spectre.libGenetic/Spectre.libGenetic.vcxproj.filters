@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{9a21b180-7777-4f07-a2aa-450cb8dda128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exceptions">
+      <UniqueIdentifier>{5308f0bc-e6a5-496a-be75-2ca489526cdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Individual.h">
@@ -58,7 +64,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InconsistentChromosomeLengthException.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="InconsistentGenerationAndScoresLengthException.h">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +105,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InconsistentChromosomeLengthException.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="InconsistentGenerationAndScoresLengthException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

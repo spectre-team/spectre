@@ -1,8 +1,8 @@
 /*
-* InconsistentChromosomeLengthException.h
-* Thrown when chromosomes length differ in population.
+* InconsistentGenerationAndScoresLengthException.h
+* Thrown when generation and its scores diverge in length.
 *
-Copyright 2017 Grzegorz Mrukwa
+Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,16 +17,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-
-#include "Spectre.libException/InconsistentArgumentSizesException.h"
+#include "InconsistentGenerationAndScoresLength.h"
 
 namespace Spectre::libGenetic
 {
-class InconsistentChromosomeLengthException:
-    public Spectre::libException::InconsistentArgumentSizesException
+InconsistentGenerationAndScoresLengthException::InconsistentGenerationAndScoresLengthException(size_t first, size_t second):
+    InconsistentArgumentSizesException("generation", first, "scores", second)
 {
-public:
-    InconsistentChromosomeLengthException(size_t first, size_t second);
-};
+        
+}
 }
