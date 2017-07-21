@@ -36,15 +36,6 @@ Scorer::Scorer(std::unique_ptr<FitnessFunction> fitnessFunction):
     }
 }
 
-Scorer& Scorer::operator=(Scorer&& other) noexcept
-{
-    if (this != &other)
-    {
-        m_FitnessFunction = std::move(other.m_FitnessFunction);
-    }
-    return *this;
-}
-
 std::vector<ScoreType> Scorer::Score(const Generation& generation)
 {
     std::vector<ScoreType> scores(generation.size());

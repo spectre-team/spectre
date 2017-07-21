@@ -36,12 +36,6 @@ public:
     /// <param name="">Existing instance.</param>
     Scorer(Scorer&&) = default;
     /// <summary>
-    /// Overwrites with the specified other.
-    /// </summary>
-    /// <param name="other">The other.</param>
-    /// <returns>Self.</returns>
-    Scorer& operator=(Scorer&& other) noexcept;
-    /// <summary>
     /// Initializes a new instance of the <see cref="Scorer"/> class.
     /// </summary>
     /// <param name="fitnessFunction">The fitness function.</param>
