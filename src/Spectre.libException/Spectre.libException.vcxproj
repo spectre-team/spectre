@@ -14,11 +14,13 @@
     <ClInclude Include="ArgumentOutOfRangeException.h" />
     <ClInclude Include="ExceptionBase.h" />
     <ClInclude Include="NullPointerException.h" />
+    <ClInclude Include="ObjectMovedException.h" />
     <ClInclude Include="OutOfRangeException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExceptionBase.cpp" />
     <ClCompile Include="NullPointerException.cpp" />
+    <ClCompile Include="ObjectMovedException.cpp" />
     <ClCompile Include="OutOfRangeException.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

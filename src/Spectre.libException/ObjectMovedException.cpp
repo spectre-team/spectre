@@ -1,6 +1,6 @@
 /*
-* MockFitnessFunction.h
-* Mock for a fitness function scoring the individuals.
+* ObjectMovedException.cpp
+* Thrown when using object invalidated by move operation.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -17,21 +17,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-#include <gmock/gmock.h>
-#include "Spectre.libGenetic/FitnessFunction.h"
+#include "ObjectMovedException.h"
 
-namespace Spectre::libGenetic::Tests
+namespace Spectre::libException
 {
-class MockFitnessFunction: public FitnessFunction
+ObjectMovedException::ObjectMovedException():
+    ExceptionBase("Accessing moved object")
 {
-public:
-    // @gmrukwa: call operator mocked as this
-    // https://groups.google.com/forum/#!topic/googlemock/O-5cTVVtswE
-    MOCK_CONST_METHOD1(CallOperator, ScoreType(const Individual&));
-    ScoreType operator()(const Individual& individual) override
-    {
-        return CallOperator(individual);
-    }
-};
+        
+}
 }
