@@ -77,7 +77,7 @@ TEST_F(GenerationTest, addition_produces_generation_of_proper_size)
 {
 	const auto generation = generation1 + generation2;
 	const auto size = generation.size();
-	EXPECT_EQ(size, 7);
+	EXPECT_EQ(size, generation1.size() + generation2.size());
 }
 
 TEST_F(GenerationTest, addition_produces_generation_of_elements_from_first_and_then_second)
@@ -100,9 +100,10 @@ TEST_F(GenerationTest, addition_throws_on_inconsistent_chromosome_size)
 TEST_F(GenerationTest, plus_equal_extends_instance_to_proper_size)
 {
 	Generation generation({ trueIndividual, trueIndividual, trueIndividual });
+    const auto initialSize = generation.size();
 	generation += generation2;
-	auto size = generation.size();
-	EXPECT_EQ(size, 7);
+	const auto size = generation.size();
+	EXPECT_EQ(size, initialSize + generation2.size());
 }
 
 TEST_F(GenerationTest, plus_equal_extends_instance_with_elements_of_second)

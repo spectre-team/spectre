@@ -129,7 +129,7 @@ TEST_F(PreservationStrategyTest, new_generation_is_sorted_decreasing_by_score)
     const auto newGeneration = preservation.PickBest(generation, scores);
 
     const auto first = *newGeneration.begin();
-    const auto second = *(newGeneration.begin() + 1);
+    const auto second = *++newGeneration.begin();
 
     EXPECT_EQ(first, individual2);
     EXPECT_EQ(second, individual1);

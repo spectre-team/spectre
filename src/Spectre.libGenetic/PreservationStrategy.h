@@ -48,7 +48,7 @@ public:
     Generation PickBest(const Generation& generation, gsl::span<const ScoreType> scores);
 private:
     /// <summary>
-    /// Rate of individuals preserved between generations..
+    /// Rate of individuals preserved between generations.
     /// </summary>
     const double m_PreservationRate;
 };

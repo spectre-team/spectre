@@ -30,7 +30,7 @@ class Sorting
 {
 public:
     /// <summary>
-    /// Gets the indiceses sorted by the specified data.
+    /// Gets the indices sorted by the specified data.
     /// </summary>
     /// <param name="data">The data.</param>
     /// <returns>Indices</returns>

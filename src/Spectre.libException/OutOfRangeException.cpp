@@ -21,7 +21,7 @@ limitations under the License.
 
 namespace Spectre::libException
 {
-OutOfRange::OutOfRange(size_t index, size_t size)
+OutOfRangeException::OutOfRangeException(size_t index, size_t size)
     : ExceptionBase(std::string("accessed index: ") + std::to_string(index)
                     + std::string("; size: ") + std::to_string(size))
 {

@@ -69,7 +69,13 @@ public:
     /// Get the size of the data.
     /// </summary>
     /// <returns>Size of the data.</returns>
-    size_t size() const;
+    size_t size() const;    
+    /// <summary>
+    /// Compares object with other
+    /// </summary>
+    /// <param name="other">The other.</param>
+    /// <returns>True, if binary data inside is the same.</returns>
+    bool operator==(const Individual& other) const;
 	virtual ~Individual() = default;
 
 private:

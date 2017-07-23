@@ -98,7 +98,7 @@ TEST_F(IndividualTest, iterators_allow_to_read_and_modify_binary_data)
     while (individualIterator != mutableIndividual.end() && dataIterator != MIXED_DATA.end())
     {
         EXPECT_EQ(*individualIterator, *dataIterator);
-        *individualIterator = false;
+        *individualIterator = !*individualIterator;
         ++individualIterator;
         ++dataIterator;
     }
@@ -106,9 +106,22 @@ TEST_F(IndividualTest, iterators_allow_to_read_and_modify_binary_data)
     EXPECT_EQ(individualIterator, mutableIndividual.end());
     EXPECT_EQ(dataIterator, MIXED_DATA.end());
 
-    for(auto bit: mutableIndividual)
+    individualIterator = mutableIndividual.begin();
+    dataIterator = MIXED_DATA.begin();
+    while (individualIterator != mutableIndividual.end() && dataIterator != MIXED_DATA.end())
     {
-        EXPECT_FALSE(bit);
+        EXPECT_EQ(*individualIterator, !*dataIterator);
     }
+}
+
+TEST_F(IndividualTest, different_individuals_marked_unequal)
+{
+    EXPECT_FALSE(trueIndividual == falseIndividual);
+}
+
+TEST_F(IndividualTest, same_individuals_marked_equal)
+{
+    const Individual copy{ std::vector<bool>(MIXED_DATA) };
+    EXPECT_TRUE(copy == mixedIndividual);
 }
 }

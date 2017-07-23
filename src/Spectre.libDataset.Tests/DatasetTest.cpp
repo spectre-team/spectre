@@ -154,24 +154,24 @@ TEST_F(DatasetInScopeTest, access_const_sample_metadata)
 
 TEST_F(DatasetInScopeTest, modify_data_throws_when_out_of_bounds)
 {
-    EXPECT_THROW(dataset[100] = 100, OutOfRange);
+    EXPECT_THROW(dataset[100] = 100, OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, modify_sample_metadata_throws_when_out_of_bounds)
 {
-    EXPECT_THROW(dataset.GetSampleMetadata(100) = 100, OutOfRange);
+    EXPECT_THROW(dataset.GetSampleMetadata(100) = 100, OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample_throws_when_out_of_bounds)
 {
     const auto& local = dataset;
-    EXPECT_THROW(local[100], OutOfRange);
+    EXPECT_THROW(local[100], OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample_metadata_throws_when_out_of_bounds)
 {
     const auto& local = dataset;
-    EXPECT_THROW(local.GetSampleMetadata(100), OutOfRange);
+    EXPECT_THROW(local.GetSampleMetadata(100), OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_whole_data_in_readonly)

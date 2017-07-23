@@ -26,14 +26,14 @@ namespace Spectre::libException
 /// <summary>
 /// Thrown when collection index out of bounds was requested
 /// </summary>
-class OutOfRange final : public ExceptionBase
+class OutOfRangeException final : public ExceptionBase
 {
 public:
     /// <summary>
-    /// Initializes a new instance of the <see cref="OutOfRange"/> class.
+    /// Initializes a new instance of the <see cref="OutOfRangeException"/> class.
     /// </summary>
     /// <param name="index">The requested index.</param>
     /// <param name="size">The size of the collection.</param>
-    OutOfRange(size_t index, size_t size);
+    OutOfRangeException(size_t index, size_t size);
 };
 }

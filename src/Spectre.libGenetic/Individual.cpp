@@ -65,4 +65,8 @@ size_t Individual::size() const
     return m_BinaryData.size();
 }
 
+bool Individual::operator==(const Individual& other) const
+{
+    return m_BinaryData == other.m_BinaryData;
+}
 }
