@@ -20,6 +20,7 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Spectre.libGenetic/Individual.h"
+#include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
 
 namespace
 {
@@ -48,6 +49,12 @@ protected:
     const Individual falseIndividual;
     const Individual mixedIndividual;
 };
+
+TEST_F(IndividualTest, assignment_throws_on_inconsistent_chromosome_length)
+{
+    Individual individual(std::vector<bool>{true, false, true});
+    EXPECT_THROW(individual = Individual(std::vector<bool>{true, false}), InconsistentChromosomeLengthException);
+}
 
 TEST_F(IndividualTest, exhibit_proper_size)
 {

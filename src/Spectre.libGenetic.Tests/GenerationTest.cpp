@@ -144,9 +144,17 @@ TEST_F(GenerationTest, immutable_index_allows_read_only_access_to_individuals)
 
 TEST_F(GenerationTest, mutable_index_allows_full_access_to_individuals)
 {
-    generation1[0] = generation1Data[1];
-    EXPECT_EQ(generation1[0], generation1Data[1]);
+    ASSERT_NE(generation1Data[0], generation2Data[1]);
+    generation1[0] = generation2Data[1];
+    EXPECT_EQ(generation1[0], generation2Data[1]);
     EXPECT_NE(generation1[0], generation1Data[0]);
+}
+
+TEST_F(GenerationTest, mutable_index_throws_on_inconsistent_chromosome_length)
+{
+    // @gmrukwa: This is realized by assignment operator, however this test is for double-check
+    Individual tooShortIndividual(std::vector<bool>(generation1Data.size() - 1, false));
+    EXPECT_THROW(generation1[0] = tooShortIndividual, InconsistentChromosomeLengthException);
 }
 
 TEST_F(GenerationTest, iterators_allow_to_iterate_the_individuals)

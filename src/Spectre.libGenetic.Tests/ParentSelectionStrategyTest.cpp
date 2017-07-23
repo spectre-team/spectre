@@ -108,7 +108,7 @@ TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportion
         {
             ++count2;
         }
-        if (secondParent == generation[1])
+        if (secondParent == generation[0])
         {
             ++count1;
         }

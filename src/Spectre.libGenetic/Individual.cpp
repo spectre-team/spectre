@@ -20,6 +20,7 @@ limitations under the License.
 #include <vector>
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Individual.h"
+#include "InconsistentChromosomeLengthException.h"
 
 using namespace std;
 
@@ -88,5 +89,18 @@ bool Individual::operator==(const Individual& other) const
 bool Individual::operator!=(const Individual& other) const
 {
     return !(this->operator==(other));
+}
+
+Individual& Individual::operator=(const Individual& other)
+{
+    if(size() == other.size())
+    {
+        m_BinaryData.assign(other.m_BinaryData.begin(), other.m_BinaryData.end());
+        return *this;
+    }
+    else
+    {
+        throw InconsistentChromosomeLengthException(size(), other.size());
+    }
 }
 }
