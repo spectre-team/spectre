@@ -29,7 +29,7 @@ ParentSelectionStrategy::ParentSelectionStrategy(Seed seed):
     
 }
 
-std::pair<const Individual&, const Individual&> ParentSelectionStrategy::next(const Generation& generation, gsl::span<const ScoreType> scores)
+reference_pair<Individual> ParentSelectionStrategy::next(Generation& generation, gsl::span<const ScoreType> scores)
 {
     if (generation.size() == static_cast<size_t>(scores.size()))
     {
@@ -59,9 +59,11 @@ std::pair<const Individual&, const Individual&> ParentSelectionStrategy::next(co
     {
         scores = defaultScores;
     }
-    std::discrete_distribution<> indexDistribution(scores.begin(), scores.end());
+    std::discrete_distribution<size_t> indexDistribution(scores.begin(), scores.end());
     const auto first = indexDistribution(m_RandomNumberGenerator);
     const auto second = indexDistribution(m_RandomNumberGenerator);
-    return std::make_pair(generation[first], generation[second]);
+    std::reference_wrapper<Individual> firstWrapped(generation[first]);
+    std::reference_wrapper<Individual> secondWrapped(generation[second]);
+    return std::make_pair(firstWrapped, secondWrapped);
 }
 }

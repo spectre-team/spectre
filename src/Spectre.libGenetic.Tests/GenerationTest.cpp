@@ -123,17 +123,30 @@ TEST_F(GenerationTest, plus_equal_throws_on_inconsistent_chromosome_size)
     EXPECT_THROW(shorters += longers, InconsistentChromosomeLengthException);
 }
 
-TEST_F(GenerationTest, index_throws_on_exceeded_size)
+TEST_F(GenerationTest, immutable_index_throws_on_exceeded_size)
 {
     EXPECT_THROW(generation1[generation1.size()], OutOfRangeException);
 }
 
-TEST_F(GenerationTest, index_allows_read_only_access_to_individuals)
+TEST_F(GenerationTest, mutable_index_throws_on_exceeded_size)
+{
+    Generation generation(std::vector<Individual>{generation1Data});
+    EXPECT_THROW(generation[generation.size()] = generation1Data[0], OutOfRangeException);
+}
+
+TEST_F(GenerationTest, immutable_index_allows_read_only_access_to_individuals)
 {
 	const auto& ind1 = generation1[0];
 	const auto& ind2 = generation2[0];
     EXPECT_EQ(ind1, generation1Data[0]);
     EXPECT_EQ(ind2, generation2Data[0]);
+}
+
+TEST_F(GenerationTest, mutable_index_allows_full_access_to_individuals)
+{
+    generation1[0] = generation1Data[1];
+    EXPECT_EQ(generation1[0], generation1Data[1]);
+    EXPECT_NE(generation1[0], generation1Data[0]);
 }
 
 TEST_F(GenerationTest, iterators_allow_to_iterate_the_individuals)

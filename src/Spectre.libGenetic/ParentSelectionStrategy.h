@@ -23,6 +23,9 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+template <typename T>
+using reference_pair = std::pair<std::reference_wrapper<T>, std::reference_wrapper<T>>;
+
 /// <summary>
 /// Specifies, how to choose parents to crossover
 /// </summary>
@@ -40,7 +43,7 @@ public:
     /// <param name="generation">The generation.</param>
     /// <param name="scores">The scores of individuals.</param>
     /// <returns>Parents for crossover.</returns>
-    std::pair<const Individual&, const Individual&>  next(const Generation& generation, gsl::span<const ScoreType> scores);
+    reference_pair<Individual> next(Generation& generation, gsl::span<const ScoreType> scores);
     virtual ~ParentSelectionStrategy() = default;
 private:
     /// <summary>

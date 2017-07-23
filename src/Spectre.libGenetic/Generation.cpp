@@ -101,6 +101,19 @@ const Individual& Generation::operator[](size_t index) const
     }
 }
 
+Individual& Generation::operator[](size_t index)
+{
+    if (index < m_Generation.size())
+    {
+        return m_Generation[index];
+    }
+    else
+    {
+        throw libException::OutOfRangeException(index, m_Generation.size());
+    }
+}
+
+
 std::vector<Individual>::const_iterator Generation::begin() const
 {
     return m_Generation.begin();

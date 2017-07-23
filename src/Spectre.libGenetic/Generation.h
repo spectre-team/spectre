@@ -47,11 +47,17 @@ public:
     /// <returns>Self.</returns>
     Generation& operator+=(const Generation& other);
     /// <summary>
-    /// Return individual under the specified index.
+    /// Return immutable individual under the specified index.
     /// </summary>
     /// <param name="index">The index.</param>
     /// <returns>A read-only individual.</returns>
     const Individual& operator[](size_t index) const;
+    /// <summary>
+    /// Return mutable individual under the specified index.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>A writable individual.</returns>
+    Individual& operator[](size_t index);
     /// <summary>
     /// Get the size of the data.
     /// </summary>

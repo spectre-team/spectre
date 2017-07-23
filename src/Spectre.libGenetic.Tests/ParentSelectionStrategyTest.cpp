@@ -48,7 +48,7 @@ protected:
     const Individual individual1;
     const Individual individual2;
     ParentSelectionStrategy parent_selection;
-    const Generation generation;
+    Generation generation;
 
 	void SetUp() override
 	{
@@ -98,7 +98,9 @@ TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportion
     for(auto i=0u; i<NUMBER_OF_TRIALS; ++i)
     {
         const auto parents = parent_selection.next(generation, score);
-        if (parents.first == individual1)
+        const auto& firstParent = parents.first.get();
+        const auto& secondParent = parents.second.get();
+        if (firstParent == generation[0])
         {
             ++count1;
         }
@@ -106,7 +108,7 @@ TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportion
         {
             ++count2;
         }
-        if (parents.second == individual1)
+        if (secondParent == generation[1])
         {
             ++count1;
         }
@@ -116,8 +118,8 @@ TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportion
         }
     }
 
-    const auto expectedCount1 = score[0] * static_cast<double>(NUMBER_OF_TRIALS) / (score[0] + score[1]);
-    const auto expectedCount2 = score[1] * static_cast<double>(NUMBER_OF_TRIALS) / (score[0] + score[1]);
+    const auto expectedCount1 = score[0] * NUMBER_OF_TRIALS * 2. / (score[0] + score[1]);
+    const auto expectedCount2 = score[1] * NUMBER_OF_TRIALS * 2. / (score[0] + score[1]);
 
     EXPECT_GT(count1, expectedCount1 - NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);
     EXPECT_LT(count1, expectedCount1 + NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);

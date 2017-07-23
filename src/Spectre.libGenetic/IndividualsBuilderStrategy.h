@@ -49,7 +49,7 @@ public:
     /// <param name="scores">The scores of individuals.</param>
     /// <param name="numberOfBuilt">Number of built.</param>
     /// <returns></returns>
-    Generation Build(const Generation& old, gsl::span<const ScoreType> scores, size_t numberOfBuilt);
+    Generation Build(Generation& old, gsl::span<const ScoreType> scores, size_t numberOfBuilt);
     virtual ~IndividualsBuilderStrategy() = default;
 private:
     /// <summary>
