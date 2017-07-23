@@ -19,14 +19,14 @@ limitations under the License.
 
 #pragma once
 
-#include "ExceptionBase.h"
+#include "ArgumentOutOfRangeException.h"
 
 namespace Spectre::libException
 {
 /// <summary>
 /// Thrown when collection index out of bounds was requested
 /// </summary>
-class OutOfRangeException final : public ExceptionBase
+class OutOfRangeException final : public ArgumentOutOfRangeException<size_t>
 {
 public:
     /// <summary>

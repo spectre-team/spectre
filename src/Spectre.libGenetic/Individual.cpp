@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #include <vector>
+#include "Spectre.libException/OutOfRangeException.h"
 #include "Individual.h"
 
 using namespace std;
@@ -32,12 +33,26 @@ Individual::Individual(std::vector<bool>&& binaryData):
 
 std::vector<bool>::reference Individual::operator[](size_t index)
 {
-    return m_BinaryData[index];
+    if (index < m_BinaryData.size())
+    {
+        return m_BinaryData[index];
+    }
+    else
+    {
+        throw libException::OutOfRangeException(index, m_BinaryData.size());
+    }
 }
 
 std::vector<bool>::const_reference Individual::operator[](size_t index) const
 {
-    return m_BinaryData[index];
+    if (index < m_BinaryData.size())
+    {
+        return m_BinaryData[index];
+    }
+    else
+    {
+        throw libException::OutOfRangeException(index, m_BinaryData.size());
+    }
 }
 
 std::vector<bool>::iterator Individual::begin()
@@ -68,5 +83,10 @@ size_t Individual::size() const
 bool Individual::operator==(const Individual& other) const
 {
     return m_BinaryData == other.m_BinaryData;
+}
+
+bool Individual::operator!=(const Individual& other) const
+{
+    return !(this->operator==(other));
 }
 }

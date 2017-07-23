@@ -19,6 +19,7 @@ limitations under the License.
 
 #include <algorithm>
 #include <vector>
+#include "Spectre.libException/OutOfRangeException.h"
 #include "Generation.h"
 #include "InconsistentChromosomeLengthException.h"
 
@@ -29,24 +30,31 @@ namespace Spectre::libGenetic
 Generation::Generation(std::vector<Individual>&& generation):
     m_Generation(generation)
 {
-    const auto minmax = std::minmax_element(m_Generation.begin(), m_Generation.end(), [](const auto& first, const auto& second) { return first.size() < second.size(); });
-    const auto minLength = minmax.first->size();
-    const auto maxLength = minmax.second->size();
-    if(minLength == maxLength)
+    if (m_Generation.size() > 0)
     {
-        
+        const auto minmax = std::minmax_element(m_Generation.begin(), m_Generation.end(), [](const auto& first, const auto& second) { return first.size() < second.size(); });
+        const auto minLength = minmax.first->size();
+        const auto maxLength = minmax.second->size();
+        if (minLength == maxLength)
+        {
+
+        }
+        else
+        {
+            throw InconsistentChromosomeLengthException(minLength, maxLength);
+        }
     }
     else
     {
-        throw std::exception("Inconsistent input size");
+        
     }
 }
 
 Generation Generation::operator+(const Generation& other) const
 {
-    if (m_Generation.size() == 0
-        || other.m_Generation.size() == 0
-        || m_Generation[0].size() == other.m_Generation.size())
+    if (size() == 0
+        || other.size() == 0
+        || m_Generation[0].size() == other.m_Generation[0].size())
     {
         std::vector<Individual> newAllocation;
         newAllocation.reserve(this->m_Generation.size() + other.m_Generation.size());
@@ -76,14 +84,21 @@ Generation& Generation::operator+=(const Generation& other)
     }
 }
 
-size_t Generation::size() const
+size_t Generation::size() const noexcept
 {
     return m_Generation.size();
 }
 
 const Individual& Generation::operator[](size_t index) const
 {
-    return m_Generation[index];
+    if (index < m_Generation.size())
+    {
+        return m_Generation[index];
+    }
+    else
+    {
+        throw libException::OutOfRangeException(index, m_Generation.size());
+    }
 }
 
 std::vector<Individual>::const_iterator Generation::begin() const

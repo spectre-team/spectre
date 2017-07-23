@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
+#include "Spectre.libException/OutOfRangeException.h"
 #include "Spectre.libGenetic/Individual.h"
 
 namespace
@@ -52,6 +53,17 @@ TEST_F(IndividualTest, exhibit_proper_size)
 {
 	const auto size = trueIndividual.size();
 	EXPECT_EQ(size, 4);
+}
+
+TEST_F(IndividualTest, const_index_throws_for_exceeded_size)
+{
+    EXPECT_THROW(mixedIndividual[mixedIndividual.size()], Spectre::libException::OutOfRangeException);
+}
+
+TEST_F(IndividualTest, mutable_index_throws_for_exceeded_size)
+{
+    Individual individual{ std::vector<bool>(MIXED_DATA) };
+    EXPECT_THROW(individual[individual.size()] = false, Spectre::libException::OutOfRangeException);
 }
 
 TEST_F(IndividualTest, index_returns_proper_const_bits)
@@ -114,14 +126,25 @@ TEST_F(IndividualTest, iterators_allow_to_read_and_modify_binary_data)
     }
 }
 
-TEST_F(IndividualTest, different_individuals_marked_unequal)
+TEST_F(IndividualTest, equality_different_individuals_marked_unequal)
 {
     EXPECT_FALSE(trueIndividual == falseIndividual);
 }
 
-TEST_F(IndividualTest, same_individuals_marked_equal)
+TEST_F(IndividualTest, equality_same_individuals_marked_equal)
 {
     const Individual copy{ std::vector<bool>(MIXED_DATA) };
     EXPECT_TRUE(copy == mixedIndividual);
+}
+
+TEST_F(IndividualTest, unequality_different_individuals_marked_unequal)
+{
+    EXPECT_TRUE(trueIndividual != falseIndividual);
+}
+
+TEST_F(IndividualTest, unequality_same_individuals_marked_equal)
+{
+    const Individual copy{ std::vector<bool>(MIXED_DATA) };
+    EXPECT_FALSE(copy != mixedIndividual);
 }
 }

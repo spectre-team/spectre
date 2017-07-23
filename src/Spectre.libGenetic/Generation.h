@@ -56,7 +56,7 @@ public:
     /// Get the size of the data.
     /// </summary>
     /// <returns>Size of the data.</returns>
-    size_t size() const;
+    size_t size() const noexcept;
     /// <summary>
     /// Return iterator for beginning of immutable sequence.
     /// </summary>

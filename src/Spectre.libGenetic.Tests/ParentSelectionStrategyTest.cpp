@@ -18,12 +18,15 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
-#include "Spectre.libGenetic/ParentSelectionStrategy.h"
 #include <numeric>
+#include "Spectre.libException/ArgumentOutOfRangeException.h"
+#include "Spectre.libGenetic/ParentSelectionStrategy.h"
+#include "Spectre.libGenetic/InconsistentGenerationAndScoresLengthException.h"
 
 namespace
 {
 using namespace Spectre::libGenetic;
+using namespace Spectre::libException;
 
 TEST(ParentSelectionStrategyInitialization, initializes)
 {
@@ -60,15 +63,28 @@ TEST_F(ParentSelectionStrategyTest, all_zero_scores_do_not_cause_error)
     EXPECT_NO_THROW(parent_selection.next(generation, score));
 }
 
-TEST_F(ParentSelectionStrategyTest, zero_score_never_draws_an_individual)
+TEST_F(ParentSelectionStrategyTest, throws_for_negative_weights)
+{
+    const std::vector<ScoreType> score{ -1, 0 };
+
+    EXPECT_THROW(parent_selection.next(generation, score), ArgumentOutOfRangeException<ScoreType>);
+}
+
+TEST_F(ParentSelectionStrategyTest, throws_on_inconsistent_inputs_size)
+{
+    std::vector<ScoreType> tooShortScores({ 0 });
+    EXPECT_THROW(parent_selection.next(generation, tooShortScores), InconsistentGenerationAndScoresLengthException);
+}
+
+TEST_F(ParentSelectionStrategyTest, some_zero_scores_never_draw_corresponding_individuals)
 {
     const std::vector<ScoreType> score{ 1, 0 };
 
     for (auto i = 0u; i<NUMBER_OF_TRIALS; ++i)
     {
         const auto parents = parent_selection.next(generation, score);
-        EXPECT_NE(&individual2, &parents.first);
-        EXPECT_NE(&individual2, &parents.second);
+        EXPECT_NE(individual2, parents.first);
+        EXPECT_NE(individual2, parents.second);
     }
 }
 
@@ -82,7 +98,7 @@ TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportion
     for(auto i=0u; i<NUMBER_OF_TRIALS; ++i)
     {
         const auto parents = parent_selection.next(generation, score);
-        if (&parents.first == &individual1)
+        if (parents.first == individual1)
         {
             ++count1;
         }
@@ -90,7 +106,7 @@ TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportion
         {
             ++count2;
         }
-        if (&parents.second == &individual1)
+        if (parents.second == individual1)
         {
             ++count1;
         }
@@ -101,7 +117,7 @@ TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportion
     }
 
     const auto expectedCount1 = score[0] * static_cast<double>(NUMBER_OF_TRIALS) / (score[0] + score[1]);
-    const auto expectedCount2 = score[2] * static_cast<double>(NUMBER_OF_TRIALS) / (score[0] + score[1]);
+    const auto expectedCount2 = score[1] * static_cast<double>(NUMBER_OF_TRIALS) / (score[0] + score[1]);
 
     EXPECT_GT(count1, expectedCount1 - NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);
     EXPECT_LT(count1, expectedCount1 + NUMBER_OF_TRIALS * ALLOWED_MISS_RATE);

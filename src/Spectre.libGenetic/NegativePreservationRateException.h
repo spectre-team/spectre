@@ -1,6 +1,6 @@
 /*
-* OutOfRangeException.cpp
-* Exception thrown, when referenced index is out of range.
+* NegativePreservationRateException.h
+* Thrown when preservation rate is negative.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -17,13 +17,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "OutOfRangeException.h"
+#pragma once
+#include "Spectre.libException/ArgumentOutOfRangeException.h"
 
-namespace Spectre::libException
+namespace Spectre::libGenetic
 {
-OutOfRangeException::OutOfRangeException(size_t index, size_t size)
-    : ArgumentOutOfRangeException<size_t>("index", 0, size, index)
+class NegativePreservationRateException: public libException::ArgumentOutOfRangeException<double>
 {
-    
-}
+public:
+    explicit NegativePreservationRateException(double actual);
+};
 }

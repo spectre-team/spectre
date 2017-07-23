@@ -1,6 +1,6 @@
 /*
-* OutOfRangeException.cpp
-* Exception thrown, when referenced index is out of range.
+* ExcessivePreservationRateException.cpp
+* Thrown when preservation rate is greater than one.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -17,12 +17,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "OutOfRangeException.h"
+#include "ExcessivePreservationRateException.h"
 
-namespace Spectre::libException
+namespace Spectre::libGenetic
 {
-OutOfRangeException::OutOfRangeException(size_t index, size_t size)
-    : ArgumentOutOfRangeException<size_t>("index", 0, size, index)
+ExcessivePreservationRateException::ExcessivePreservationRateException(double actual):
+    ArgumentOutOfRangeException<double>("preservationRate", 0, 1, actual)
 {
     
 }

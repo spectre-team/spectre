@@ -69,6 +69,12 @@
     <ClInclude Include="InconsistentGenerationAndScoresLengthException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="NegativePreservationRateException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcessivePreservationRateException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutationOperator.cpp">
@@ -108,6 +114,12 @@
       <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
     <ClCompile Include="InconsistentGenerationAndScoresLengthException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="NegativePreservationRateException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="ExcessivePreservationRateException.cpp">
       <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
   </ItemGroup>

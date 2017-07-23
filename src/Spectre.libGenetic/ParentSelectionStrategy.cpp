@@ -18,6 +18,8 @@ limitations under the License.
 */
 
 #include "ParentSelectionStrategy.h"
+#include "Spectre.libException/ArgumentOutOfRangeException.h"
+#include "InconsistentGenerationAndScoresLengthException.h"
 
 namespace Spectre::libGenetic
 {
@@ -29,6 +31,34 @@ ParentSelectionStrategy::ParentSelectionStrategy(Seed seed):
 
 std::pair<const Individual&, const Individual&> ParentSelectionStrategy::next(const Generation& generation, gsl::span<const ScoreType> scores)
 {
+    if (generation.size() == static_cast<size_t>(scores.size()))
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw InconsistentGenerationAndScoresLengthException(generation.size(), scores.size());
+    }
+    const auto minAndMaxWeights = std::minmax_element(scores.begin(), scores.end());
+    const auto minWeight = *minAndMaxWeights.first;
+    const auto maxWeight = *minAndMaxWeights.second;
+    if (minWeight >= 0)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::ArgumentOutOfRangeException<ScoreType>("scores", 0, std::numeric_limits<ScoreType>::max(), minWeight);
+    }
+    std::vector<ScoreType> defaultScores(scores.size(), 1);
+    if (maxWeight > 0)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        scores = defaultScores;
+    }
     std::discrete_distribution<> indexDistribution(scores.begin(), scores.end());
     const auto first = indexDistribution(m_RandomNumberGenerator);
     const auto second = indexDistribution(m_RandomNumberGenerator);

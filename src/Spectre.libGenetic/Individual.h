@@ -76,6 +76,12 @@ public:
     /// <param name="other">The other.</param>
     /// <returns>True, if binary data inside is the same.</returns>
     bool operator==(const Individual& other) const;
+    /// <summary>
+    /// Compares object with other
+    /// </summary>
+    /// <param name="other">The other.</param>
+    /// <returns>False, if binary data inside is the same.</returns>
+    bool Individual::operator!=(const Individual& other) const;
 	virtual ~Individual() = default;
 
 private:
