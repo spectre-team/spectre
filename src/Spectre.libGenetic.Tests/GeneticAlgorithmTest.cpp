@@ -17,8 +17,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#define GTEST_LANG_CXX11 1
-
 #include <gtest/gtest.h>
 
 namespace

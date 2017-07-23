@@ -64,7 +64,7 @@ namespace Spectre::libDataset
             }
             else
             {
-                throw OutOfRange(idx, m_Data.size());
+                throw OutOfRangeException(idx, m_Data.size());
             }
         }
 
@@ -81,7 +81,7 @@ namespace Spectre::libDataset
             }
             else
             {
-                throw OutOfRange(idx, m_SampleMetadata.size());
+                throw OutOfRangeException(idx, m_SampleMetadata.size());
             }
         }
 
@@ -107,7 +107,7 @@ namespace Spectre::libDataset
             }
             else
             {
-                throw OutOfRange(idx, m_Data.size());
+                throw OutOfRangeException(idx, m_Data.size());
             }
         }
 
@@ -124,7 +124,7 @@ namespace Spectre::libDataset
             }
             else
             {
-                throw OutOfRange(idx, m_SampleMetadata.size());
+                throw OutOfRangeException(idx, m_SampleMetadata.size());
             }
         }
 

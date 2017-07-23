@@ -17,8 +17,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#define GTEST_LANG_CXX11 1
-
 #include <gtest/gtest.h>
 #include "Spectre.libGenetic/Individual.h"
 
@@ -111,6 +109,8 @@ TEST_F(IndividualTest, iterators_allow_to_read_and_modify_binary_data)
     while (individualIterator != mutableIndividual.end() && dataIterator != MIXED_DATA.end())
     {
         EXPECT_EQ(*individualIterator, !*dataIterator);
+        ++individualIterator;
+        ++dataIterator;
     }
 }
 
