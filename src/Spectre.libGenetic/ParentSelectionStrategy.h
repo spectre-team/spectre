@@ -43,7 +43,7 @@ public:
     /// <param name="generation">The generation.</param>
     /// <param name="scores">The scores of individuals.</param>
     /// <returns>Parents for crossover.</returns>
-    reference_pair<Individual> next(Generation& generation, gsl::span<const ScoreType> scores);
+    virtual reference_pair<Individual> next(Generation& generation, gsl::span<const ScoreType> scores);
     virtual ~ParentSelectionStrategy() = default;
 private:
     /// <summary>

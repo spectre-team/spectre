@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #pragma once
+#include <memory>
 #include "DataTypes.h"
 
 namespace Spectre::libGenetic
@@ -40,7 +41,7 @@ public:
     /// </summary>
     /// <param name="individual">The individual.</param>
     /// <returns>Mutated individual.</returns>
-    Individual operator()(Individual&& individual);
+    virtual std::unique_ptr<Individual> operator()(std::unique_ptr<Individual> individual);
     virtual ~MutationOperator() = default;
 private:
     /// <summary>

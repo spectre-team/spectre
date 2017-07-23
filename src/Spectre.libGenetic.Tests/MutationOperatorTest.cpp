@@ -19,6 +19,7 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include "Spectre.libException/ArgumentOutOfRangeException.h"
+#include "Spectre.libException/NullPointerException.h"
 #include "Spectre.libGenetic/MutationOperator.h"
 
 namespace
@@ -54,7 +55,7 @@ TEST(MutationTestInitialization, throws_for_excessive_bit_swap_rate)
 class MutationTest: public ::testing::Test
 {
 public:
-    MutationTest(): individual(default_individual)
+    MutationTest()
     {}
 protected:
     const unsigned NUMBER_OF_TRIALS = 1000;
@@ -62,21 +63,32 @@ protected:
     const double ALWAYS = 1;
     const double NEVER = 0;
     const Seed SEED = 0;
-    const Individual default_individual = Individual({ false, false, false });
-    Individual individual;
+    const std::vector<bool> defaultData{ false, false, false };
+    std::unique_ptr<Individual> individual;
 
     void SetUp() override
     {
-        individual = default_individual;
+        individual = std::make_unique<Individual>(std::vector<bool>(defaultData));
+    }
+
+    void TearDown() override
+    {
+        individual = nullptr;
     }
 };
+
+TEST_F(MutationTest, throws_for_nullptr)
+{
+    MutationOperator mutate(ALWAYS, ALWAYS, SEED);
+    EXPECT_THROW(mutate(nullptr), NullPointerException);
+}
 
 TEST_F(MutationTest, mutated_has_the_same_size)
 {
     MutationOperator mutate(ALWAYS, ALWAYS, SEED);
-    const auto size = individual.size();
+    const auto size = individual->size();
     const auto mutant = mutate(std::move(individual));
-    EXPECT_EQ(mutant.size(), size);
+    EXPECT_EQ(mutant->size(), size);
 }
 
 TEST_F(MutationTest, seed_provides_repeatibility)
@@ -86,15 +98,15 @@ TEST_F(MutationTest, seed_provides_repeatibility)
 
     for (auto i = 0u; i < NUMBER_OF_TRIALS; ++i)
     {
-        auto firstCopy = default_individual;
-        auto secondCopy = default_individual;
+        auto firstCopy = std::make_unique<Individual>(std::vector<bool>(defaultData));
+        auto secondCopy = std::make_unique<Individual>(std::vector<bool>(defaultData));
 
         const auto firstMutant = first(std::move(firstCopy));
         const auto secondMutant = second(std::move(secondCopy));
 
-        for (size_t j = 0; j < firstMutant.size(); ++j)
+        for (size_t j = 0; j < firstMutant->size(); ++j)
         {
-            EXPECT_EQ(firstMutant[j], secondMutant[j]);
+            EXPECT_EQ((*firstMutant)[j], (*secondMutant)[j]);
         }
     }
 }
@@ -105,9 +117,9 @@ TEST_F(MutationTest, changes_nothing_when_zero_mutation_rate)
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
         individual = mutate(std::move(individual));
-        for (size_t j = 0; j < individual.size(); ++j)
+        for (size_t j = 0; j < individual->size(); ++j)
         {
-            EXPECT_FALSE(individual[j]) << "trial: " << i << "; bit: " << j;
+            EXPECT_FALSE((*individual)[j]) << "trial: " << i << "; bit: " << j;
         }
     }
 }
@@ -118,9 +130,9 @@ TEST_F(MutationTest, changes_nothing_when_zero_bit_swap_rate)
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
         individual = mutate(std::move(individual));
-        for (size_t j = 0; j < individual.size(); ++j)
+        for (size_t j = 0; j < individual->size(); ++j)
         {
-            EXPECT_FALSE(individual[j]) << "trial: " << i << "; bit: " << j;
+            EXPECT_FALSE((*individual)[j]) << "trial: " << i << "; bit: " << j;
         }
     }
 }
@@ -130,11 +142,11 @@ TEST_F(MutationTest, swaps_all_bits_on_both_rates_equal_one)
     MutationOperator mutate(ALWAYS, ALWAYS, SEED);
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
-        const auto last = individual;
+        const auto last = std::make_unique<Individual>(std::vector<bool>(individual->begin(), individual->end()));
         individual = mutate(std::move(individual));
-        for (size_t j = 0; j < individual.size(); ++j)
+        for (size_t j = 0; j < individual->size(); ++j)
         {
-            EXPECT_TRUE(individual[j] != last[j]) << "trial: " << i << "; bit: " << j;
+            EXPECT_NE((*individual)[j], (*last)[j]) << "trial: " << i << "; bit: " << j;
         }
     }
 }
@@ -143,16 +155,16 @@ TEST_F(MutationTest, toggles_in_approximate_percentage_of_cases_for_specified_mu
 {
     const auto MUTATION_RATE = 0.5;
     MutationOperator mutate(MUTATION_RATE, ALWAYS, SEED);
-    const auto expectedNumberOfToggles = NUMBER_OF_TRIALS * individual.size() * MUTATION_RATE;
+    const auto expectedNumberOfToggles = NUMBER_OF_TRIALS * individual->size() * MUTATION_RATE;
     const auto allowedMissCount = ALLOWED_MISS_RATE * expectedNumberOfToggles;
     unsigned numberOfToggles = 0;
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
-        const auto last = individual;
+        const auto last = std::make_unique<Individual>(std::vector<bool>(individual->begin(), individual->end()));
         individual = mutate(std::move(individual));
-        for (size_t j = 0; j < individual.size(); ++j)
+        for (size_t j = 0; j < individual->size(); ++j)
         {
-            numberOfToggles += last[j] != individual[j];
+            numberOfToggles += (*last)[j] != (*individual)[j];
         }
     }
     EXPECT_LT(numberOfToggles, expectedNumberOfToggles + allowedMissCount);
@@ -163,16 +175,16 @@ TEST_F(MutationTest, toggles_in_approximate_percentage_of_cases_for_specified_bi
 {
     const auto BIT_SWAP_RATE = 0.5;
     MutationOperator mutate(ALWAYS, BIT_SWAP_RATE, SEED);
-    const auto expectedNumberOfToggles = NUMBER_OF_TRIALS * individual.size() * BIT_SWAP_RATE;
+    const auto expectedNumberOfToggles = NUMBER_OF_TRIALS * individual->size() * BIT_SWAP_RATE;
     const auto allowedMissCount = ALLOWED_MISS_RATE * expectedNumberOfToggles;
     unsigned numberOfToggles = 0;
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
-        const auto last = individual;
+        const auto last = std::make_unique<Individual>(std::vector<bool>(individual->begin(), individual->end()));
         individual = mutate(std::move(individual));
-        for (size_t j = 0; j < individual.size(); ++j)
+        for (size_t j = 0; j < individual->size(); ++j)
         {
-            numberOfToggles += last[j] != individual[j];
+            numberOfToggles += (*last)[j] != (*individual)[j];
         }
     }
     EXPECT_LT(numberOfToggles, expectedNumberOfToggles + allowedMissCount);

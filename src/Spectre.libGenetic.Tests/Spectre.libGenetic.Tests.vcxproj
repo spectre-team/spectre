@@ -81,8 +81,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MockCrossoverOperator.h" />
     <ClInclude Include="MockFitnessFunction.h" />
     <ClInclude Include="MockIndividualsBuilderStrategy.h" />
+    <ClInclude Include="MockMutationOperator.h" />
+    <ClInclude Include="MockParentSelectionStrategy.h" />
     <ClInclude Include="MockPreservationStrategy.h" />
   </ItemGroup>
   <ItemGroup>

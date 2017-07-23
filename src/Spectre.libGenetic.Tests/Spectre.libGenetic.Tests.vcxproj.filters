@@ -27,6 +27,15 @@
     <ClInclude Include="MockPreservationStrategy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MockCrossoverOperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockMutationOperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockParentSelectionStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossoverOperatorTest.cpp">
@@ -62,10 +71,13 @@
     <ClCompile Include="StopConditionTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.libGenetic.Tests\..\..\lib\native\src\gtest\gtest-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\Main.cpp">
+    <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.libGenetic.Tests\..\..\lib\native\src\gmock\gmock-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

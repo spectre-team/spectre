@@ -39,8 +39,10 @@ Generation IndividualsBuilderStrategy::Build(Generation& old, gsl::span<const Sc
     for(size_t i = 0; i < newSize; ++i)
     {
         const auto parents = m_ParentSelectionStrategy.next(old, scores);
-        const auto child = m_Mutation(m_Crossover(parents.first, parents.second));
-        newIndividuals.push_back(child);
+        const auto child = m_Crossover(parents.first, parents.second);
+        auto childData = std::vector<bool>(child.begin(), child.end());
+        const auto mutant = m_Mutation(std::make_unique<Individual>(std::move(childData)));
+        newIndividuals.push_back(*mutant);
     }
     Generation newGeneration(std::move(newIndividuals));
     return std::move(newGeneration);
