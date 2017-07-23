@@ -20,7 +20,6 @@ limitations under the License.
 #include <algorithm>
 #include "Spectre.libException/ArgumentOutOfRangeException.h"
 #include "MutationOperator.h"
-#include "Spectre.libException/NullPointerException.h"
 
 namespace Spectre::libGenetic
 {
@@ -48,16 +47,8 @@ MutationOperator::MutationOperator(double mutationRate, double bitSwapRate, Seed
 
 }
 
-std::unique_ptr<Individual> MutationOperator::operator()(std::unique_ptr<Individual> individual)
+Individual MutationOperator::operator()(Individual&& individual)
 {
-    if(individual != nullptr)
-    {
-        // @gmrukwa: usual empty execution branch
-    }
-    else
-    {
-        throw libException::NullPointerException("individual");
-    }
     std::bernoulli_distribution mutationProbability(m_MutationRate);
     if(mutationProbability(m_RandomNumberGenerator))
     {
@@ -66,9 +57,9 @@ std::unique_ptr<Individual> MutationOperator::operator()(std::unique_ptr<Individ
         {
             return swapProbability(m_RandomNumberGenerator) ? !bit : bit;
         };
-        std::transform(individual->begin(), individual->end(), individual->begin(), swap_random_bits);
+        std::transform(individual.begin(), individual.end(), individual.begin(), swap_random_bits);
     }
-    return std::move(individual);
+    return individual;
 }
 
 }

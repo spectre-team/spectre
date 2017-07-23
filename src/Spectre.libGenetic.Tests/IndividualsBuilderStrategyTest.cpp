@@ -18,16 +18,24 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
+#include "Spectre.libException/NullPointerException.h"
 #include "Spectre.libGenetic/IndividualsBuilderStrategy.h"
+#include "Spectre.libGenetic/InconsistentGenerationAndScoresLengthException.h"
 #include "MockCrossoverOperator.h"
 #include "MockMutationOperator.h"
 #include "MockParentSelectionStrategy.h"
-#include "Spectre.libGenetic/InconsistentGenerationAndScoresLengthException.h"
 
 namespace
 {
 using namespace Spectre::libGenetic;
 using namespace ::testing;
+
+reference_pair<Individual> toReferencePair(std::initializer_list<bool> binaryData)
+{
+    Individual individual(std::move(binaryData));
+    std::reference_wrapper<Individual> referenceWrapper(individual);
+    return std::make_pair(referenceWrapper, referenceWrapper);
+}
 
 class IndividualsBuilderTest: public ::testing::Test
 {
@@ -39,7 +47,7 @@ protected:
     const std::vector<Individual> generationData{ Individual({ true, true }), Individual({ false, true }) };
     Generation generation;
     const std::vector<ScoreType> scores{ 1,2 };
-    Individual pickedParent{ std::vector<bool>({ true, false }) };
+    reference_pair<Individual> pickedParents{ toReferencePair({ true, false }) };
     Individual crossedIndividual{ std::vector<bool>({ false, true }) };
     Individual mutatedIndividual{ std::vector<bool>({ true, true }) };
 
@@ -48,48 +56,76 @@ protected:
         generation = Generation(std::vector<Individual>(generationData));
     }
 
-    IndividualsBuilderStrategy getBuilder() const
+    std::unique_ptr<IndividualsBuilderStrategy> getBuilder(size_t newSize) const
     {
-        ::Tests::MockCrossoverOperator crossover;
-        ::Tests::MockMutationOperator mutation;
-        ::Tests::MockParentSelectionStrategy parentSelectionStrategy;
+        auto crossover = std::make_unique<::Tests::MockCrossoverOperator>();
+        auto mutation = std::make_unique<::Tests::MockMutationOperator>();
+        auto parentSelectionStrategy = std::make_unique<::Tests::MockParentSelectionStrategy>();
 
-        EXPECT_CALL(parentSelectionStrategy, next(_, _)).WillRepeatedly(Return(Individual(pickedParent)));
-        EXPECT_CALL(crossover, CallOperator(_, _)).WillRepeatedly(Return(Individual(crossedIndividual)));
-        EXPECT_CALL(mutation, CallOperator(_)).WillRepeatedly(Return(mutatedIndividual));
+        auto size = static_cast<int>(newSize);
 
-        IndividualsBuilderStrategy strategy(std::move(crossover), std::move(mutation), std::move(parentSelectionStrategy));
-        return strategy;
+        EXPECT_CALL(*parentSelectionStrategy, next(_, _)).Times(size).WillRepeatedly(Return(pickedParents));
+        EXPECT_CALL(*crossover, CallOperator(_, _)).Times(size).WillRepeatedly(Return(Individual(crossedIndividual)));
+        EXPECT_CALL(*mutation, CallOperator(_)).Times(size).WillRepeatedly(Return(mutatedIndividual));
+
+        auto strategy = std::make_unique<IndividualsBuilderStrategy>(std::move(crossover), std::move(mutation), std::move(parentSelectionStrategy));
+        return std::move(strategy);
     }
 };
 
 TEST_F(IndividualsBuilderTest, initializes)
 {
-    ::Tests::MockCrossoverOperator crossover;
-    ::Tests::MockMutationOperator mutation;
-    ::Tests::MockParentSelectionStrategy parentSelectionStrategy;
+    auto crossover = std::make_unique<::Tests::MockCrossoverOperator>();
+    auto mutation = std::make_unique<::Tests::MockMutationOperator>();
+    auto parentSelectionStrategy = std::make_unique<::Tests::MockParentSelectionStrategy>();
     EXPECT_NO_THROW(IndividualsBuilderStrategy(std::move(crossover), std::move(mutation), std::move(parentSelectionStrategy)));
+}
+
+TEST_F(IndividualsBuilderTest, initialization_throws_for_nullptr_crossover)
+{
+    auto crossover = nullptr;
+    auto mutation = std::make_unique<::Tests::MockMutationOperator>();
+    auto parentSelectionStrategy = std::make_unique<::Tests::MockParentSelectionStrategy>();
+    EXPECT_THROW(IndividualsBuilderStrategy(std::move(crossover), std::move(mutation), std::move(parentSelectionStrategy)), Spectre::libException::NullPointerException);
+}
+
+TEST_F(IndividualsBuilderTest, initialization_throws_for_nullptr_mutation)
+{
+    auto crossover = std::make_unique<::Tests::MockCrossoverOperator>();
+    auto mutation = nullptr;
+    auto parentSelectionStrategy = std::make_unique<::Tests::MockParentSelectionStrategy>();
+    EXPECT_THROW(IndividualsBuilderStrategy(std::move(crossover), std::move(mutation), std::move(parentSelectionStrategy)), Spectre::libException::NullPointerException);
+}
+
+TEST_F(IndividualsBuilderTest, initialization_throws_for_nullptr_parent_selection)
+{
+    auto crossover = std::make_unique<::Tests::MockCrossoverOperator>();
+    auto mutation = std::make_unique<::Tests::MockMutationOperator>();
+    auto parentSelectionStrategy = nullptr;
+    EXPECT_THROW(IndividualsBuilderStrategy(std::move(crossover), std::move(mutation), std::move(parentSelectionStrategy)), Spectre::libException::NullPointerException);
 }
 
 TEST_F(IndividualsBuilderTest, throws_for_inconsistent_generation_and_scores_size)
 {
-    auto strategy = getBuilder();
-    EXPECT_THROW(strategy.Build(generation, std::vector<ScoreType>(generation.size() - 1, 1), 1), InconsistentGenerationAndScoresLengthException);
+    const auto newSize = 0;
+    auto strategy = getBuilder(newSize);
+    std::vector<ScoreType> tooShortScores(generation.size() - 1, 1);
+    EXPECT_THROW(strategy->Build(generation, tooShortScores, newSize), InconsistentGenerationAndScoresLengthException);
 }
 
 TEST_F(IndividualsBuilderTest, builds_population_of_specified_size)
 {
-    auto strategy = getBuilder();
     const auto newSize = 5;
-    auto newGeneration = strategy.Build(generation, scores, newSize);
+    auto strategy = getBuilder(newSize);
+    auto newGeneration = strategy->Build(generation, scores, newSize);
     EXPECT_EQ(newGeneration.size(), newSize);
 }
 
 TEST_F(IndividualsBuilderTest, returns_individuals_after_mutation)
 {
-    auto strategy = getBuilder();
     const auto newSize = 1;
-    auto newGeneration = strategy.Build(generation, scores, newSize);
+    auto strategy = getBuilder(newSize);
+    auto newGeneration = strategy->Build(generation, scores, newSize);
     EXPECT_EQ(newGeneration[0], mutatedIndividual);
 }
 }

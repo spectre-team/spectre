@@ -17,21 +17,38 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include "Spectre.libException/NullPointerException.h"
 #include "OffspringGenerator.h"
 
 namespace Spectre::libGenetic
 {
-OffspringGenerator::OffspringGenerator(IndividualsBuilderStrategy&& builder, PreservationStrategy&& preservationStrategy):
-    m_Builder(builder),
-    m_PreservationStrategy(preservationStrategy)
+OffspringGenerator::OffspringGenerator(std::unique_ptr<IndividualsBuilderStrategy> builder, std::unique_ptr<PreservationStrategy> preservationStrategy):
+    m_Builder(std::move(builder)),
+    m_PreservationStrategy(std::move(preservationStrategy))
 {
+    if(m_Builder != nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("builder");
+    }
+    if(m_PreservationStrategy != nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("preservationStrategy");
+    }
 }
 
-Generation OffspringGenerator::next(Generation& old, gsl::span<const ScoreType>&& scores)
+Generation OffspringGenerator::next(Generation& old, gsl::span<const ScoreType>&& scores) const
 {
-    const auto preserved = m_PreservationStrategy.PickBest(old, scores);
+    const auto preserved = m_PreservationStrategy->PickBest(old, scores);
     const auto numberOfRemaining = old.size() - preserved.size();
-    const auto generated = m_Builder.Build(old, scores, numberOfRemaining);
+    const auto generated = m_Builder->Build(old, scores, numberOfRemaining);
     return preserved + generated;
 }
 }

@@ -18,31 +18,63 @@ limitations under the License.
 */
 
 #include <span.h>
+#include "Spectre.libException/NullPointerException.h"
+#include "InconsistentGenerationAndScoresLengthException.h"
 #include "IndividualsBuilderStrategy.h"
 
 namespace Spectre::libGenetic
 {
-IndividualsBuilderStrategy::IndividualsBuilderStrategy(CrossoverOperator&& crossover,
-                                                       MutationOperator&& mutation,
-                                                       ParentSelectionStrategy&& parentSelectionStrategy):
-    m_Crossover(crossover),
-    m_Mutation(mutation),
-    m_ParentSelectionStrategy(parentSelectionStrategy)
+IndividualsBuilderStrategy::IndividualsBuilderStrategy(std::unique_ptr<CrossoverOperator> crossover,
+                                                       std::unique_ptr<MutationOperator> mutation,
+                                                       std::unique_ptr<ParentSelectionStrategy> parentSelectionStrategy):
+    m_Crossover(std::move(crossover)),
+    m_Mutation(std::move(mutation)),
+    m_ParentSelectionStrategy(std::move(parentSelectionStrategy))
 {
-    
+    if(m_Crossover!=nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("crossover");
+    }
+    if (m_Mutation != nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("mutation");
+    }
+    if (m_ParentSelectionStrategy!= nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("parentSelectionStrategy");
+    }
 }
 
-Generation IndividualsBuilderStrategy::Build(Generation& old, gsl::span<const ScoreType> scores, size_t newSize)
+Generation IndividualsBuilderStrategy::Build(Generation& old, gsl::span<const ScoreType> scores, size_t newSize) const
 {
+    if (old.size() == static_cast<size_t>(scores.size()))
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw InconsistentGenerationAndScoresLengthException(old.size(), scores.size());
+    }
     std::vector<Individual> newIndividuals;
     newIndividuals.reserve(newSize);
     for(size_t i = 0; i < newSize; ++i)
     {
-        const auto parents = m_ParentSelectionStrategy.next(old, scores);
-        const auto child = m_Crossover(parents.first, parents.second);
-        auto childData = std::vector<bool>(child.begin(), child.end());
-        const auto mutant = m_Mutation(std::make_unique<Individual>(std::move(childData)));
-        newIndividuals.push_back(*mutant);
+        const auto parents = m_ParentSelectionStrategy->next(old, scores);
+        auto child = (*m_Crossover)(parents.first, parents.second);
+        auto mutant = (*m_Mutation)(std::move(child));
+        newIndividuals.push_back(std::move(mutant));
     }
     Generation newGeneration(std::move(newIndividuals));
     return std::move(newGeneration);

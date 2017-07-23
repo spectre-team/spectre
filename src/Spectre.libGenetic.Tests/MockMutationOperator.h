@@ -27,7 +27,7 @@ class MockMutationOperator: public MutationOperator
 {
 public:
     MockMutationOperator(): MutationOperator(0,0) { }
-    MOCK_METHOD1(CallOperator, std::unique_ptr<Individual>(std::unique_ptr<Individual>));
-    std::unique_ptr<Individual> operator()(std::unique_ptr<Individual> individual) override { return CallOperator(std::move(individual)); }
+    MOCK_METHOD1(CallOperator, Individual(Individual));
+    Individual operator()(Individual&& individual) override { return CallOperator(std::move(individual)); }
 };
 }

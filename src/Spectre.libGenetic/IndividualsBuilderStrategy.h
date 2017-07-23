@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #pragma once
+#include <memory>
 #include "CrossoverOperator.h"
 #include "DataTypes.h"
 #include "Generation.h"
@@ -39,9 +40,9 @@ public:
     /// <param name="crossover">The crossover.</param>
     /// <param name="mutation">The mutation.</param>
     /// <param name="parentSelectionStrategy">The parent selection strategy.</param>
-    IndividualsBuilderStrategy(CrossoverOperator&& crossover,
-                               MutationOperator&& mutation,
-                               ParentSelectionStrategy&& parentSelectionStrategy);
+    IndividualsBuilderStrategy(std::unique_ptr<CrossoverOperator> crossover,
+                               std::unique_ptr<MutationOperator> mutation,
+                               std::unique_ptr<ParentSelectionStrategy> parentSelectionStrategy);
     /// <summary>
     /// Builds new generation from the specified old one.
     /// </summary>
@@ -49,20 +50,20 @@ public:
     /// <param name="scores">The scores of individuals.</param>
     /// <param name="numberOfBuilt">Number of built.</param>
     /// <returns></returns>
-    Generation Build(Generation& old, gsl::span<const ScoreType> scores, size_t numberOfBuilt);
+    Generation Build(Generation& old, gsl::span<const ScoreType> scores, size_t numberOfBuilt) const;
     virtual ~IndividualsBuilderStrategy() = default;
 private:
     /// <summary>
     /// The crossover operator.
     /// </summary>
-    CrossoverOperator m_Crossover;
+    std::unique_ptr<CrossoverOperator> m_Crossover;
     /// <summary>
     /// The mutation operator.
     /// </summary>
-    MutationOperator m_Mutation;
+    std::unique_ptr<MutationOperator> m_Mutation;
     /// <summary>
     /// The parent selection strategy.
     /// </summary>
-    ParentSelectionStrategy m_ParentSelectionStrategy;
+    std::unique_ptr<ParentSelectionStrategy> m_ParentSelectionStrategy;
 };
 }

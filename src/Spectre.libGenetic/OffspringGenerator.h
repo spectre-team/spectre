@@ -42,23 +42,23 @@ public:
     /// </summary>
     /// <param name="builder">The strategy specifying, how to build new individuals.</param>
     /// <param name="selection">The strategy specifying, how to select preserved individuals.</param>
-    explicit OffspringGenerator(IndividualsBuilderStrategy&& builder, PreservationStrategy&& selection);
+    explicit OffspringGenerator(std::unique_ptr<IndividualsBuilderStrategy> builder, std::unique_ptr<PreservationStrategy> preservationStrategy);
     /// <summary>
     /// Generates offspring from current population.
     /// </summary>
     /// <param name="old">The current generation.</param>
     /// <param name="scores">The scores of the individuals.</param>
     /// <returns>New generation.</returns>
-    Generation next(Generation& old, gsl::span<const ScoreType>&& scores);
+    Generation next(Generation& old, gsl::span<const ScoreType>&& scores) const;
     virtual ~OffspringGenerator() = default;
 private:
     /// <summary>
     /// The builder strategy.
     /// </summary>
-    IndividualsBuilderStrategy m_Builder;
+    std::unique_ptr<IndividualsBuilderStrategy> m_Builder;
     /// <summary>
     /// The preservation strategy.
     /// </summary>
-    PreservationStrategy m_PreservationStrategy;
+    std::unique_ptr<PreservationStrategy> m_PreservationStrategy;
 };
 }
