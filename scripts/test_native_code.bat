@@ -9,9 +9,12 @@ set failures=0
 
 FOR /F %%i IN (__tmp_gtest.txt) DO (
 	echo %%i
-	%%i
-	set /A failures=%failures%+1
+	%%i --gtest_output="xml:%%i.xml"
+	powershell C:\projects\spectre\scripts\Upload-TestResult.ps1 -fileName %%i.xml
+	if errorlevel 1 (
+		set /A failures=%failures%+1
+	)
 )
 del __tmp_gtest.txt
 
-EXIT /B 1
+EXIT /B %failures%
