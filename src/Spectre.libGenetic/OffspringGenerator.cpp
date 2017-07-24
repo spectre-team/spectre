@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #include "Spectre.libException/NullPointerException.h"
+#include "InconsistentGenerationAndScoresLengthException.h"
 #include "OffspringGenerator.h"
 
 namespace Spectre::libGenetic
@@ -44,8 +45,16 @@ OffspringGenerator::OffspringGenerator(std::unique_ptr<IndividualsBuilderStrateg
     }
 }
 
-Generation OffspringGenerator::next(Generation& old, gsl::span<const ScoreType>&& scores) const
+Generation OffspringGenerator::next(Generation& old, gsl::span<const ScoreType> scores) const
 {
+    if (old.size() == static_cast<size_t>(scores.size()))
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw InconsistentGenerationAndScoresLengthException(old.size(), scores.size());
+    }
     const auto preserved = m_PreservationStrategy->PickBest(old, scores);
     const auto numberOfRemaining = old.size() - preserved.size();
     const auto generated = m_Builder->Build(old, scores, numberOfRemaining);

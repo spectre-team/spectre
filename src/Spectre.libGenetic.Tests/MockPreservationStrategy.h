@@ -28,6 +28,6 @@ class MockPreservationStrategy: public PreservationStrategy
 {
 public:
     MockPreservationStrategy(): PreservationStrategy(0) {}
-    MOCK_METHOD2(PickBest, Generation(const Generation&, gsl::span<ScoreType>));
+    MOCK_METHOD2(PickBest, Generation(const Generation&, gsl::span<const ScoreType>));
 };
 }
