@@ -64,9 +64,18 @@ protected:
 
         auto size = static_cast<int>(newSize);
 
-        EXPECT_CALL(*parentSelectionStrategy, next(_, _)).Times(size).WillRepeatedly(Return(pickedParents));
-        EXPECT_CALL(*crossover, CallOperator(_, _)).Times(size).WillRepeatedly(Return(Individual(crossedIndividual)));
-        EXPECT_CALL(*mutation, CallOperator(_)).Times(size).WillRepeatedly(Return(mutatedIndividual));
+        if (size != 0)
+        {
+            EXPECT_CALL(*parentSelectionStrategy, next(_, _)).Times(size).WillRepeatedly(Return(pickedParents));
+            EXPECT_CALL(*crossover, CallOperator(_, _)).Times(size).WillRepeatedly(Return(Individual(crossedIndividual)));
+            EXPECT_CALL(*mutation, CallOperator(_)).Times(size).WillRepeatedly(Return(mutatedIndividual));
+        }
+        else
+        {
+            EXPECT_CALL(*parentSelectionStrategy, next(_, _)).Times(size);
+            EXPECT_CALL(*crossover, CallOperator(_, _)).Times(size);
+            EXPECT_CALL(*mutation, CallOperator(_)).Times(size);
+        }
 
         auto strategy = std::make_unique<IndividualsBuilderStrategy>(std::move(crossover), std::move(mutation), std::move(parentSelectionStrategy));
         return std::move(strategy);
