@@ -59,7 +59,7 @@ TEST_F(IndividualTest, assignment_throws_on_inconsistent_chromosome_length)
 TEST_F(IndividualTest, exhibit_proper_size)
 {
 	const auto size = trueIndividual.size();
-	EXPECT_EQ(size, 4);
+	EXPECT_EQ(size, TRUE_DATA.size());
 }
 
 TEST_F(IndividualTest, const_index_throws_for_exceeded_size)
@@ -75,10 +75,10 @@ TEST_F(IndividualTest, mutable_index_throws_for_exceeded_size)
 
 TEST_F(IndividualTest, index_returns_proper_const_bits)
 {
-	EXPECT_EQ(mixedIndividual[0], true);
-	EXPECT_EQ(mixedIndividual[1], false);
-	EXPECT_EQ(mixedIndividual[2], true);
-	EXPECT_EQ(mixedIndividual[3], false);
+    for (auto i = 0u; i < MIXED_DATA.size(); ++i)
+    {
+        EXPECT_EQ(mixedIndividual[i], MIXED_DATA[i]);
+    }
 }
 
 TEST_F(IndividualTest, index_allows_modification)
