@@ -30,18 +30,13 @@ public:
     /// <summary>
     /// Initializes a new instance of the <see cref="StopCondition"/> class.
     /// </summary>
-    /// <param name="">Source instance.</param>
-    StopCondition(StopCondition&&) = default;
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StopCondition"/> class.
-    /// </summary>
     /// <param name="numberOfIterations">The number of iterations.</param>
     explicit StopCondition(unsigned int numberOfIterations);
     /// <summary>
-    /// Checks stop condition.
+    /// Checks stop condition. When passed, resets the counter.
     /// </summary>
-    /// <returns></returns>
-    bool operator()();
+    /// <returns>True, when all iterations have passed.</returns>
+    virtual bool operator()();
     /// <summary>
     /// Cleans up an instance of the <see cref="StopCondition"/> class.
     /// </summary>

@@ -45,7 +45,8 @@ public:
     /// </summary>
     /// <param name="generation">The generation.</param>
     /// <returns>Score vector.</returns>
-    std::vector<ScoreType> Score(const Generation& generation);
+    virtual std::vector<ScoreType> Score(const Generation& generation);
+    virtual ~Scorer() = default;
 private:
     /// <summary>
     /// The fitness function.

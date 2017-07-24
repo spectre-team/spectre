@@ -36,6 +36,15 @@
     <ClInclude Include="MockParentSelectionStrategy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MockOffspringGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockScorer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockStopCondition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossoverOperatorTest.cpp">

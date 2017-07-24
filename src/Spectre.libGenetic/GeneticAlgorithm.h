@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #pragma once
+#include <memory>
 #include "Generation.h"
 #include "OffspringGenerator.h"
 #include "Scorer.h"
@@ -37,27 +38,27 @@ public:
     /// <param name="offspringGenerator">The offspring generator.</param>
     /// <param name="scorer">The scorer.</param>
     /// <param name="stopCondition">The stop condition.</param>
-    GeneticAlgorithm(OffspringGenerator&& offspringGenerator, Scorer&& scorer, StopCondition&& stopCondition);
+    GeneticAlgorithm(std::unique_ptr<OffspringGenerator> offspringGenerator, std::unique_ptr<Scorer> scorer, std::unique_ptr<StopCondition> stopCondition);
     /// <summary>
     /// Evolves the specified generation.
     /// </summary>
     /// <param name="generation">The generation.</param>
     /// <returns>Next, evolved generation.</returns>
-    Generation evolve(Generation&& generation);
+    Generation evolve(Generation&& generation) const;
 	virtual ~GeneticAlgorithm() = default;
 
 private:
     /// <summary>
     /// The offspring generator.
     /// </summary>
-    OffspringGenerator m_OffspringGenerator;
+    std::unique_ptr<OffspringGenerator> m_OffspringGenerator;
     /// <summary>
     /// The scorer.
     /// </summary>
-    Scorer m_Scorer;
+    std::unique_ptr<Scorer> m_Scorer;
     /// <summary>
     /// The stop condition.
     /// </summary>
-    StopCondition m_StopCondition;
+    std::unique_ptr<StopCondition> m_StopCondition;
 };
 }

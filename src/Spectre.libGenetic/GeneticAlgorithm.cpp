@@ -17,24 +17,49 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include "Spectre.libException/NullPointerException.h"
 #include "Generation.h"
 #include "GeneticAlgorithm.h"
 
 namespace Spectre::libGenetic
 {
-GeneticAlgorithm::GeneticAlgorithm(OffspringGenerator&& offspringGenerator, Scorer&& scorer, StopCondition&& stopCondition)
+GeneticAlgorithm::GeneticAlgorithm(std::unique_ptr<OffspringGenerator> offspringGenerator, std::unique_ptr<Scorer> scorer, std::unique_ptr<StopCondition> stopCondition)
     : m_OffspringGenerator(std::move(offspringGenerator)),
       m_Scorer(std::move(scorer)),
       m_StopCondition(std::move(stopCondition))
 {
+    if(m_OffspringGenerator!=nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("offspringGenerator");
+    }
+    if(m_Scorer != nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("scorer");
+    }
+    if(m_StopCondition != nullptr)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw libException::NullPointerException("stopCondition");
+    }
 }
 
-Generation GeneticAlgorithm::evolve(Generation&& generation)
+Generation GeneticAlgorithm::evolve(Generation&& generation) const
 {
-    while(!m_StopCondition())
+    while(!m_StopCondition->operator()())
     {
-        const auto scores = m_Scorer.Score(generation);
-        generation = m_OffspringGenerator.next(generation, scores);
+        const auto scores = m_Scorer->Score(generation);
+        generation = m_OffspringGenerator->next(generation, scores);
     }
     return generation;
 }

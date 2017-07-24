@@ -28,7 +28,7 @@ Scorer::Scorer(std::unique_ptr<FitnessFunction> fitnessFunction):
 {
     if(m_FitnessFunction != nullptr)
     {
-        
+        // @gmrukwa: usual empty execution branch
     }
     else
     {

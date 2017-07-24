@@ -35,21 +35,16 @@ public:
     /// <summary>
     /// Initializes a new instance of the <see cref="OffspringGenerator"/> class.
     /// </summary>
-    /// <param name="">The other instance.</param>
-    OffspringGenerator(OffspringGenerator&&) = default;
-    /// <summary>
-    /// Initializes a new instance of the <see cref="OffspringGenerator"/> class.
-    /// </summary>
     /// <param name="builder">The strategy specifying, how to build new individuals.</param>
     /// <param name="selection">The strategy specifying, how to select preserved individuals.</param>
-    explicit OffspringGenerator(std::unique_ptr<IndividualsBuilderStrategy> builder, std::unique_ptr<PreservationStrategy> preservationStrategy);
+    OffspringGenerator(std::unique_ptr<IndividualsBuilderStrategy> builder, std::unique_ptr<PreservationStrategy> preservationStrategy);
     /// <summary>
     /// Generates offspring from current population.
     /// </summary>
     /// <param name="old">The current generation.</param>
     /// <param name="scores">The scores of the individuals.</param>
     /// <returns>New generation.</returns>
-    Generation next(Generation& old, gsl::span<const ScoreType> scores) const;
+    virtual Generation next(Generation& old, gsl::span<const ScoreType> scores) const;
     virtual ~OffspringGenerator() = default;
 private:
     /// <summary>

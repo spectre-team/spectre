@@ -85,8 +85,11 @@
     <ClInclude Include="MockFitnessFunction.h" />
     <ClInclude Include="MockIndividualsBuilderStrategy.h" />
     <ClInclude Include="MockMutationOperator.h" />
+    <ClInclude Include="MockOffspringGenerator.h" />
     <ClInclude Include="MockParentSelectionStrategy.h" />
     <ClInclude Include="MockPreservationStrategy.h" />
+    <ClInclude Include="MockScorer.h" />
+    <ClInclude Include="MockStopCondition.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
