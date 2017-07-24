@@ -27,9 +27,6 @@
     <ClInclude Include="ArgumentOutOfRangeException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectMovedException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InconsistentArgumentSizesException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,9 +39,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NullPointerException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectMovedException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InconsistentArgumentSizesException.cpp">

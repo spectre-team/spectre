@@ -23,7 +23,7 @@ limitations under the License.
 namespace Spectre::libDataset
 {
 /// <summary>
-/// Thrown when two samples and metadata amount is not equal.
+/// Thrown when two samples and metadata amounts are not equal.
 /// </summary>
 class InconsistentInputSizeException final : public libException::ExceptionBase
 {

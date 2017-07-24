@@ -22,9 +22,19 @@ limitations under the License.
 
 namespace Spectre::libException
 {
-class InconsistentArgumentSizesException: public ExceptionBase
+/// <summary>
+/// Thrown when coupled arguments length differ.
+/// </summary>
+class InconsistentArgumentSizesException : public ExceptionBase
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InconsistentArgumentSizesException"/> class.
+    /// </summary>
+    /// <param name="nameOfFirst">The name of first argument.</param>
+    /// <param name="first">The first argument size.</param>
+    /// <param name="nameOfSecond">The name of second argument.</param>
+    /// <param name="second">The second argument size.</param>
     InconsistentArgumentSizesException(const std::string& nameOfFirst,
                                        size_t first,
                                        const std::string& nameOfSecond,
