@@ -23,37 +23,63 @@ import {SpectrumService} from '../../spectrums/shared/spectrum.service';
 import {HeatmapService} from '../../heatmaps/shared/heatmap.service';
 import {Spectrum} from '../../spectrums/shared/spectrum';
 import {Heatmap} from '../../heatmaps/shared/heatmap';
+import {PreparationService} from '../shared/preparation.service';
+import {Preparation} from '../shared/preparation';
 
 
 @Component({
   selector: 'app-preparation',
   templateUrl: './preparation.component.html',
-  styleUrls: ['./preparation.component.css']
+  styleUrls: ['./preparation.component.css'],
+  providers: [PreparationService]
 })
 export class PreparationComponent implements OnInit {
   public id: number;
+  public spectraNumber: number;
   public heatmapData: any;
   public spectrumData: any;
+  public preparation: Preparation;
 
   constructor(
       private route: ActivatedRoute,
       private spectrumService: SpectrumService,
-      private heatmapService: HeatmapService
+      private heatmapService: HeatmapService,
+      private preparationService: PreparationService
   ) { }
 
   ngOnInit() {
       this.route.params.subscribe(params => {
         console.log('[PreparationComponent] ngOnInit');
         this.id = Number.parseInt(params['id']);
+        this.spectraNumber = Number.parseInt(params['spectraNumber']);
+        this.preparationService
+          .getPreparationById(this.id)
+          .subscribe(preparation => this.preparation = preparation);
+        console.log(this.spectraNumber);
         console.log('[PreparationComponent] parsed id');
         this.heatmapService
           .get(this.id, 100)
           .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
-        this.spectrumService
-          .get(this.id, 1)
-            .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+        this.getSpectrum(1);
         console.log('[SpectrumComponent] layout setup');
       });
+  }
+
+  getSpectrum(selectNumber: number) {
+    this.spectrumService
+      .get(this.id, selectNumber)
+      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+  }
+
+  selectSpectrum(number: string) {
+    const selectNumber = Number.parseInt(number);
+    console.log(selectNumber);
+    console.log(this.preparation.spectraNumber);
+    if (isNaN(selectNumber)) {
+      console.log('blad');
+    } else if (selectNumber > this.preparation.spectraNumber || selectNumber < 0) {
+      console.log('blad');
+    } else { this.getSpectrum(selectNumber); }
   }
 
   toHeatmapDataset(heatmap: Heatmap) {

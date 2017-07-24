@@ -43,16 +43,26 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public int Id { get; private set; }
+		/// <summary>
+        /// Gets the number of spectra.
+        /// </summary>
+        /// <value>
+        /// Number of spectra.
+        /// </value>
+        [DataMember]
+        public int SpectraNumber { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Preparation"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="id">The identifier.</param>
-        public Preparation(string name, int id)
+		/// <param name="spectraNumber">Number of all spectra in preparation.</param>
+        public Preparation(string name, int id, int spectraNumber)
         {
             Name = name;
             Id = id;
+			SpectraNumber = spectraNumber;
         }
     }
 }

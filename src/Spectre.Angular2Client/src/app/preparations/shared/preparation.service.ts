@@ -35,6 +35,12 @@ export class PreparationService extends Service {
       .map(mapPreparations);
   }
 
+  getPreparationById(preparationId: number): Observable<Preparation> {
+    return this.http
+      .get(`${this.getBaseUrl()}/preparations/${preparationId}`, {headers: this.getHeaders()})
+      .map(toPreparation);
+  }
+
   private getHeaders() {
     const headers = new Headers();
     headers.append('Accept', 'application/json');
@@ -49,6 +55,7 @@ export class PreparationService extends Service {
 function toPreparation(r: any): Preparation {
   return <Preparation>({
     id: r.Id,
-    name: r.Name
+    name: r.Name,
+    spectraNumber: r.SpectraNumber
   });
 }
