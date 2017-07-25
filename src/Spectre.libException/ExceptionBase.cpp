@@ -1,6 +1,6 @@
 /*
-* Exception.cpp
-* Definition of local exceptions related to Dataseet.
+* ExceptionBase.cpp
+* Common exception base for all native libraries.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -17,9 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "Exception.h"
+#include "ExceptionBase.h"
 
-namespace Spectre::libDataset
+namespace Spectre::libException
 {
 ExceptionBase::ExceptionBase(const std::string message): m_message(message) { }
 
@@ -27,19 +27,4 @@ char const* ExceptionBase::what() const
 {
     return m_message.c_str();
 }
-
-OutOfRange::OutOfRange(size_t index, size_t size)
-    : ExceptionBase(std::string("accessed index: ") + std::to_string(index)
-                    + std::string("; size: ") + std::to_string(size))
-{
-    
-}
-
-InconsistentInputSize::InconsistentInputSize(size_t samplesNumber, size_t metadataNumber)
-    : ExceptionBase(std::string("number of samples: ") + std::to_string(samplesNumber)
-                    + std::string("; amount of metadata: ") + std::to_string(metadataNumber))
-{
-    
-}
-
 }
