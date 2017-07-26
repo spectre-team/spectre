@@ -28,6 +28,7 @@ import { PlotlyModule } from '../plotly/plotly.module';
 import { PreparationComponent } from './preparation/preparation.component';
 import {HeatmapComponent} from '../heatmaps/heatmap/heatmap.component';
 import {SpectrumComponent} from '../spectrums/spectrum/spectrum.component';
+import { MessagesComponent } from '../../../node_modules/ng2-messages/ng2-messages';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import {SpectrumComponent} from '../spectrums/spectrum/spectrum.component';
   declarations: [
     PreparationComponent,
     HeatmapComponent,
-    SpectrumComponent
+    SpectrumComponent,
+    MessagesComponent
 ]
 })
 export class PreparationsModule {}

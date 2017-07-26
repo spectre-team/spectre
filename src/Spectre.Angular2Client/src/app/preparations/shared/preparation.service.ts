@@ -38,7 +38,7 @@ export class PreparationService extends Service {
   getPreparationById(preparationId: number): Observable<Preparation> {
     return this.http
       .get(`${this.getBaseUrl()}/preparations/${preparationId}`, {headers: this.getHeaders()})
-      .map(toPreparation);
+      .map(r => toPreparation(r.json()));
   }
 
   private getHeaders() {
