@@ -44,6 +44,9 @@ deploy:
   on:
     CONFIGURATION: Release
 
+on_finish:
+- cmd: C:\projects\spectre\scripts\upload-frontend-test-results.bat
+
 notifications:
 # this publishes to Continuous Integration channel in Glip
 - provider: Webhook
