@@ -1,6 +1,6 @@
 /*
-* Main.cpp
-* Provides simplistic, common main function for all test projects.
+* LinearRegression.h
+* Functions to execute linear regression on dataset
 *
 Copyright 2017 Wojciech Wilgierz
 
@@ -17,14 +17,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
-#define GTEST_LANG_CXX11 1
-
-#include <gtest/gtest.h>
-
-int main(int argc, char **argv) 
-{
-	::testing::InitGoogleTest(&argc, argv);
-	int testsResult = RUN_ALL_TESTS();
-	return testsResult;
-}
+#include "LinearRegression.h"
