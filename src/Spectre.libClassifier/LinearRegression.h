@@ -20,6 +20,37 @@ limitations under the License.
 #pragma once
 namespace
 {
+	struct problem
+	{
+		int l, n;
+		int *y;
+		struct feature_node **x;
+		double bias;
+	};
+
+	struct parameter
+	{
+		int solver_type;
+
+		/* these are for training only */
+		double eps;             /* stopping criteria */
+		double C;
+		int nr_weight;
+		int *weight_label;
+		double* weight;
+		double p;
+	};
+
+	struct model
+	{
+		struct parameter param;
+		int nr_class;           /* number of classes */
+		int nr_feature;
+		double *w;
+		int *label;             /* label of each class */
+		double bias;
+	};
+
 	class LinearRegression
 	{
 	public:

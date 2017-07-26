@@ -24,7 +24,7 @@ limitations under the License.
 
 namespace
 {
-	struct test_struct
+	struct problem
 	{
 		int l, n;
 		std::vector<int> y;
@@ -32,9 +32,22 @@ namespace
 		double bias;
 	};
 
+	struct parameter
+	{
+		int solver_type;
+
+		/* these are for training only */
+		double eps;             /* stopping criteria */
+		double C;
+		int nr_weight;
+		int *weight_label;
+		double* weight;
+		double p;
+	};
+
 	struct model
 	{
-		struct test_struct param;
+		struct parameter param;
 		int nr_class;         
 		int nr_feature;
 		double *w;
@@ -46,17 +59,20 @@ namespace
 	{
 	protected:
 
-		test_struct test_data;
+		problem test_data;
+		parameter test_parameter;
 		model model_data;
 		virtual void SetUp() override
 		{
 			test_data = { 5, 6,{ 900, 903, 912 },{ { 1, 1, 0 },{ 12, 20, 0 },{ 2, 1, 0 },{ 9, 18, 13 } }, 0.5 };
-//			model_data = { test_data, 1, 1, }
+			//test_parameter = { L2R_LR, 0.1, 0.1, 0, nullptr, nullptr, 1};
 		}
 	};
 
-	TEST_F(LinearRegressionTest, fails_on_null)
+	TEST_F(LinearRegressionTest, check_parameter)
 	{
-		FAIL();
+		//char* result = check_parameter(test_data, test_parameter);
+		//EXPECT_EQ(result, NULL);
+		SUCCEED();
 	}
 }
