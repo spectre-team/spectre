@@ -33,6 +33,8 @@ import { SpectrumService } from '../../spectrums/shared/spectrum.service';
 import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
 import {SpectrumComponent} from '../../spectrums/spectrum/spectrum.component';
 import {HeatmapComponent} from '../../heatmaps/heatmap/heatmap.component';
+import { MessagesService } from '../../../../node_modules/ng2-messages/ng2-messages';
+import { MessagesComponent } from '../../../../node_modules/ng2-messages/ng2-messages';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -42,7 +44,7 @@ describe('PreparationComponent', () => {
   beforeEach(async(() => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
-      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent],
+      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, MessagesComponent],
       imports: [RouterTestingModule, PlotlyModule],
       providers: [
           MockBackend,
@@ -56,7 +58,8 @@ describe('PreparationComponent', () => {
           },
           { provide: ActivatedRoute, useValue: mockActivatedRoute },
           SpectrumService,
-          HeatmapService
+          HeatmapService, 
+		  MessagesService
       ]
     })
     .compileComponents();
