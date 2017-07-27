@@ -12,6 +12,9 @@ configuration:
   - Release
 services: iis
 
+nuget:
+  account_feed: true
+
 install:
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 

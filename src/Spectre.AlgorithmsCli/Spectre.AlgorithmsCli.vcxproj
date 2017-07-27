@@ -55,7 +55,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
@@ -67,7 +67,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
@@ -77,10 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="MatlabAlgorithmsNative">
-      <HintPath>..\..\libs\$(Configuration)\MatlabAlgorithmsNative.dll</HintPath>
+      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.0\lib\MatlabAlgorithmsNative.dll</HintPath>
     </Reference>
     <Reference Include="MWArray">
-      <HintPath>..\..\libs\Common\MWArray.dll</HintPath>
+      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.0\lib\MWArray.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -89,16 +89,11 @@
   <ItemGroup>
     <ClInclude Include="Methods\Segmentation.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Methods\Segmentation.cpp" />
     <ClCompile Include="Spectre.AlgorithmsCli.cpp" />
-    <ClCompile Include="Stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -116,6 +111,9 @@
     <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
       <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,3 @@
-#include "Stdafx.h"
 #include "Segmentation.h"
 
 using namespace Spectre::Algorithms::Results;
