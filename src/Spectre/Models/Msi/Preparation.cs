@@ -57,12 +57,12 @@ namespace Spectre.Models.Msi
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="id">The identifier.</param>
-		/// <param name="spectraNumber">Number of all spectra in preparation.</param>
+        /// <param name="spectraNumber">Number of all spectra in preparation.</param>
         public Preparation(string name, int id, int spectraNumber)
         {
             Name = name;
             Id = id;
-			SpectraNumber = spectraNumber;
+            SpectraNumber = spectraNumber;
         }
     }
 }

@@ -31,10 +31,9 @@ import { PlotlyModule } from '../../plotly/plotly.module';
 import { PreparationComponent } from './preparation.component';
 import { SpectrumService } from '../../spectrums/shared/spectrum.service';
 import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
-import {SpectrumComponent} from '../../spectrums/spectrum/spectrum.component';
-import {HeatmapComponent} from '../../heatmaps/heatmap/heatmap.component';
-import { MessagesService } from '../../../../node_modules/ng2-messages/ng2-messages';
-import { MessagesComponent } from '../../../../node_modules/ng2-messages/ng2-messages';
+import { SpectrumComponent } from '../../spectrums/spectrum/spectrum.component';
+import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
+import { MessagesService, MessagesComponent } from 'ng2-messages/ng2-messages';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -58,8 +57,8 @@ describe('PreparationComponent', () => {
           },
           { provide: ActivatedRoute, useValue: mockActivatedRoute },
           SpectrumService,
-          HeatmapService, 
-		  MessagesService
+          HeatmapService,
+          MessagesService
       ]
     })
     .compileComponents();
