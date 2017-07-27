@@ -2,7 +2,7 @@
 * Main.cpp
 * Provides simplistic, common main function for all test projects.
 *
-Copyright 2017 Wojciech Wilgierz
+Copyright 2017 Dariusz Kuchta
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
 
 #define GTEST_LANG_CXX11 1
 
