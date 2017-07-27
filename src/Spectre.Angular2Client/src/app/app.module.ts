@@ -32,16 +32,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PlotlyModule } from './plotly/plotly.module';
 import { SpectrumService } from './spectrums/shared/spectrum.service';
 import { HeatmapService } from './heatmaps/shared/heatmap.service';
+import { MessagesService } from 'ng2-messages/ng2-messages.service';
 
 @NgModule({
   providers: [
       HeatmapService,
-      SpectrumService
+      SpectrumService,
+      MessagesService
   ],
   declarations: [
     AppComponent,
     PreparationListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

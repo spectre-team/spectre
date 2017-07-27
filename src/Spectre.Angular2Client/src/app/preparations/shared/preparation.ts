@@ -20,4 +20,5 @@
 export interface Preparation {
   id: string;
   name: string;
+  spectraNumber: number;
 }
