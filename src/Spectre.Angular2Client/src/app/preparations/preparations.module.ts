@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {MdSliderModule} from '@angular2-material/slider';
+import {MdSliderModule} from '@angular/material';
 
 import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';

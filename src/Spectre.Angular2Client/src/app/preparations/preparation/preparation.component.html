@@ -1,9 +1,10 @@
 <p>
   preparation {{id}} works!
 </p>
-<input [(ngModel)]="currentMzIndex" type="number">
-<md-slider [(ngModel)]="currentMzIndex" showTicks="true" min="0" max={{mzLenth}} step="1" (change) = "onChange()" vertical="true"
-           thumb-label="true" tick-interval="true" style="width: 600px;" ></md-slider>
+<label>Mz:</label>
+<input [(ngModel)]="mzValue" type="number"/>
+<md-slider [(ngModel)]="currentChannelId" showTicks="true" min="0" max={{mzLenth}} step="1" (input)="onInputChannelId($event)"
+           (change)="onChangedChannelId($event)" vertical="false" thumb-label="true" tick-interval="true" style="width: 600px;" ></md-slider>
 
 <app-heatmap
   [heatmapData]=heatmapData>

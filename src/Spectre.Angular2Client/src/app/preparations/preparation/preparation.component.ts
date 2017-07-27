@@ -34,7 +34,9 @@ export class PreparationComponent implements OnInit {
   public heatmapData: any;
   public spectrumData: any;
   public mzLenth : any;
-  public currentMzIndex = 0;
+  public mz = [];
+  public currentChannelId = 0;
+  public mzValue: any;
 
   constructor(
       private route: ActivatedRoute,
@@ -57,6 +59,16 @@ export class PreparationComponent implements OnInit {
       });
   }
 
+  onInputChannelId(event: any) {
+    this.mzValue = this.mz[event.value];
+  }
+
+  onChangedChannelId(event: any) {
+    this.heatmapService
+      .get(this.id, this.currentChannelId)
+      .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
+  }
+
   toHeatmapDataset(heatmap: Heatmap) {
     return [{
       z: heatmap.data,
@@ -65,7 +77,8 @@ export class PreparationComponent implements OnInit {
   }
 
   toSpectrumDataset(spectrum: Spectrum) {
-    this.mzLenth = spectrum.mz.length;
+    this.mzLenth = spectrum.mz.length - 1;
+    this.mz = spectrum.mz;
     return [{
       x: spectrum.mz,
       y: spectrum.intensities,
@@ -73,7 +86,4 @@ export class PreparationComponent implements OnInit {
     }];
   }
 
-  onChange() {
-    alert("TEST");
-  }
 }
