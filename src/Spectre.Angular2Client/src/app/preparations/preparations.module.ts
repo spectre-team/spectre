@@ -21,6 +21,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {MdSliderModule} from '@angular2-material/slider';
 
 import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';
@@ -35,7 +36,8 @@ import {SpectrumComponent} from '../spectrums/spectrum/spectrum.component';
     CommonModule,
     FormsModule,
     PreparationRoutingModule,
-    PlotlyModule
+    PlotlyModule,
+    MdSliderModule
   ],
   declarations: [
     PreparationComponent,

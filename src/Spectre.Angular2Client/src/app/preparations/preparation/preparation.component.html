@@ -1,6 +1,9 @@
 <p>
   preparation {{id}} works!
 </p>
+<input [(ngModel)]="currentMzIndex" type="number">
+<md-slider [(ngModel)]="currentMzIndex" showTicks="true" min="0" max={{mzLenth}} step="1" (change) = "onChange()" vertical="true"
+           thumb-label="true" tick-interval="true" style="width: 600px;" ></md-slider>
 
 <app-heatmap
   [heatmapData]=heatmapData>
@@ -9,3 +12,5 @@
 <app-spectrum
   [spectrumData]=spectrumData>
 </app-spectrum>
+
+

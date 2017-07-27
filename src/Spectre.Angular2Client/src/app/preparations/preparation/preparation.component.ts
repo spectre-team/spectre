@@ -24,16 +24,17 @@ import {HeatmapService} from '../../heatmaps/shared/heatmap.service';
 import {Spectrum} from '../../spectrums/shared/spectrum';
 import {Heatmap} from '../../heatmaps/shared/heatmap';
 
-
 @Component({
   selector: 'app-preparation',
   templateUrl: './preparation.component.html',
-  styleUrls: ['./preparation.component.css']
+  styleUrls: ['./preparation.component.css'],
 })
 export class PreparationComponent implements OnInit {
   public id: number;
   public heatmapData: any;
   public spectrumData: any;
+  public mzLenth : any;
+  public currentMzIndex = 0;
 
   constructor(
       private route: ActivatedRoute,
@@ -64,10 +65,15 @@ export class PreparationComponent implements OnInit {
   }
 
   toSpectrumDataset(spectrum: Spectrum) {
+    this.mzLenth = spectrum.mz.length;
     return [{
       x: spectrum.mz,
       y: spectrum.intensities,
       name: `Spectrum ${spectrum.id}, (X=${spectrum.x},Y=${spectrum.y})`
     }];
+  }
+
+  onChange() {
+    alert("TEST");
   }
 }
