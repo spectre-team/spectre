@@ -20,6 +20,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import {MdSliderModule} from '@angular/material';
+import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 
 import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../../../mocks/mock-activated-router';
@@ -43,7 +45,7 @@ describe('PreparationComponent', () => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
       declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent],
-      imports: [RouterTestingModule, PlotlyModule],
+      imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule],
       providers: [
           MockBackend,
           BaseRequestOptions,
