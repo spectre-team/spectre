@@ -18,9 +18,6 @@
     <ClCompile Include="..\Common\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LogisticRegressionTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\regis\Documents\GitHub\spectre\src\Spectre.libClassifier.Tests\..\..\lib\native\src\gtest\gtest-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
