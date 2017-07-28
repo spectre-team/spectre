@@ -25,6 +25,8 @@ Dataset_opencv::Dataset_opencv(gsl::span<DataType> data, gsl::span<Label> labels
 	m_MatLabels(numberOfRows, 1, CV_LABEL_TYPE, m_labels.data()),
 	m_observations(numberOfRows)
 {
+	//@wwilgierz TODO sprawdx czy rozmiary sie zgadzaja
+	//@wwilgierz TODO wyeliminuj zbedne parametry (nr rows, cols)
 	auto rowBegin = m_pData.data();
 	for (auto i=0u;i<numberOfRows; i++)
 	{
@@ -40,6 +42,7 @@ Dataset_opencv::Dataset_opencv(cv::Mat data, cv::Mat labels):
 	m_MatLabels(m_labels.size(), 1, CV_LABEL_TYPE, m_labels.data()),
 	m_observations(data.rows)
 {
+	//@wwilgierz TODO sprawdx czy rozmiary sie zgadzaja
 	auto rowBegin = m_pData.data();
 	for (auto i = 0u; i<data.rows; i++)
 	{
@@ -59,11 +62,13 @@ const Observation& Dataset_opencv::operator[](size_t idx) const
 
 const Label& Dataset_opencv::GetSampleMetadata(size_t idx) const
 {
+	//@wwilgierz TODO sprawdz czy nie wykracza poza rozmiar
 	return m_labels[idx];
 }
 
 const Empty& Dataset_opencv::GetDatasetMetadata() const
 {
+	//@wwilgierz TODO wyrzuc klase Empty do innego pliku
 	return Empty::instance();
 }
 
@@ -86,5 +91,7 @@ bool Dataset_opencv::empty() const
 {
 	return size() == 0;
 }
+
+//@wwilgierz TODO 2 funkcje MAT& pierwszy i drugi parametr z svm  (m_Map, m_labels)
 
 }
