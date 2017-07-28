@@ -21,6 +21,9 @@
     <ClCompile Include="DatasetAdapter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LogisticRegression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinearRegression.h">
@@ -32,5 +35,11 @@
     <ClInclude Include="IClassifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LogisticRegression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

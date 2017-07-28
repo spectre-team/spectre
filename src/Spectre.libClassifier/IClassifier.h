@@ -37,11 +37,6 @@ class IClassifier
 {
 public:
     /// <summary>
-    /// Fits classifier to the specified labeled dataset.
-    /// </summary>
-    /// <param name="labeledDataset">The labeled dataset.</param>
-    virtual void fit(LabeledDatasetPtr labeledDataset) = 0;
-    /// <summary>
     /// Applies the specified classifier on a dataset.
     /// </summary>
     /// <param name="dataset">The dataset.</param>
