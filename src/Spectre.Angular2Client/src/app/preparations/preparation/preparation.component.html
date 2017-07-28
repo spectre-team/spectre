@@ -3,8 +3,8 @@
 </p>
 <label>Mz:</label>
 <input [(ngModel)]="mzValue" type="number"/>
-<md-slider [(ngModel)]="currentChannelId" showTicks="true" min="0" max={{mzLenth}} step="1" (input)="onInputChannelId($event)"
-           (change)="onChangedChannelId($event)" vertical="false" thumb-label="true" tick-interval="true" style="width: 600px;" ></md-slider>
+<md-slider class="slider" [(ngModel)]="currentChannelId" showTicks="true" min="0" max={{mzLenth}} step="1" (input)="onInputChannelId($event)"
+           (change)="onChangedChannelId($event)" vertical="false" thumb-label="true" tick-interval="true"></md-slider>
 
 <app-heatmap
   [heatmapData]=heatmapData>

@@ -33,10 +33,10 @@ export class PreparationComponent implements OnInit {
   public id: number;
   public heatmapData: any;
   public spectrumData: any;
-  public mzLenth : any;
-  public mz = [];
+  public mzLenth : number;
+  public mzValue: number;
   public currentChannelId = 0;
-  public mzValue: any;
+  public mz = [];
 
   constructor(
       private route: ActivatedRoute,
@@ -85,5 +85,4 @@ export class PreparationComponent implements OnInit {
       name: `Spectrum ${spectrum.id}, (X=${spectrum.x},Y=${spectrum.y})`
     }];
   }
-
 }
