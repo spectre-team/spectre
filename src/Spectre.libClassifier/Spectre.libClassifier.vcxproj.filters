@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LinearRegression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DatasetAdapter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -26,9 +23,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LinearRegression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DatasetAdapter.h">
       <Filter>Header Files</Filter>
     </ClInclude>

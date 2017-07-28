@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\opencv3.3.0.0.1\build\native\opencv3.props" Condition="Exists('..\packages\opencv3.3.0.0.1\build\native\opencv3.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -126,7 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
-    <ClCompile Include="LinearRegressionTest.cpp" />
+    <ClCompile Include="LogisticRegressionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -137,6 +138,8 @@
     <Import Project="..\packages\gmock.1.7.0\build\native\gmock.targets" Condition="Exists('..\packages\gmock.1.7.0\build\native\gmock.targets')" />
     <Import Project="..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets" Condition="Exists('..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets')" />
     <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
+    <Import Project="..\packages\opencv3.redist.3.0.0.1\build\native\opencv3.redist.targets" Condition="Exists('..\packages\opencv3.redist.3.0.0.1\build\native\opencv3.redist.targets')" />
+    <Import Project="..\packages\opencv3.3.0.0.1\build\native\opencv3.targets" Condition="Exists('..\packages\opencv3.3.0.0.1\build\native\opencv3.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -146,5 +149,8 @@
     <Error Condition="!Exists('..\packages\gmock.1.7.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gmock.1.7.0\build\native\gmock.targets'))" />
     <Error Condition="!Exists('..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
+    <Error Condition="!Exists('..\packages\opencv3.redist.3.0.0.1\build\native\opencv3.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\opencv3.redist.3.0.0.1\build\native\opencv3.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\opencv3.3.0.0.1\build\native\opencv3.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\opencv3.3.0.0.1\build\native\opencv3.props'))" />
+    <Error Condition="!Exists('..\packages\opencv3.3.0.0.1\build\native\opencv3.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\opencv3.3.0.0.1\build\native\opencv3.targets'))" />
   </Target>
 </Project>
