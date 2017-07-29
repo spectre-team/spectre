@@ -22,7 +22,7 @@ private:
 class Dataset_opencv final : public Spectre::libDataset::IReadOnlyDataset<Observation, Label, Empty>
 {
 public:
-	Dataset_opencv(gsl::span<DataType> data, gsl::span<Label> labels, size_t numberOfRows, size_t numberOfColumns);
+	Dataset_opencv(gsl::span<DataType> data, gsl::span<Label> labels);
 	Dataset_opencv(cv::Mat data, cv::Mat labels);
 
 	/// <summary>
@@ -68,7 +68,7 @@ public:
 	~Dataset_opencv() = default;
 
 private:
-	std::vector<DataType> m_pData;
+	std::vector<DataType> m_Data;
 	cv::Mat m_Mat;
 	std::vector<Label> m_labels;
 	cv::Mat m_MatLabels;
