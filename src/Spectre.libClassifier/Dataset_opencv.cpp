@@ -39,7 +39,7 @@ Dataset_opencv::Dataset_opencv(gsl::span<DataType> data, gsl::span<Label> labels
 Dataset_opencv::Dataset_opencv(cv::Mat data, cv::Mat labels):
 	m_Data(data.ptr<DataType>(), data.ptr<DataType>() + data.rows * data.cols),
 	m_Mat(data.rows, data.cols, CV_TYPE, m_Data.data()),
-	m_labels(labels.ptr<DataType>(), labels.ptr<DataType>() + labels.rows * labels.cols),
+	m_labels(labels.ptr<Label>(), labels.ptr<Label>() + labels.rows * labels.cols),
 	m_MatLabels(static_cast<int>(m_labels.size()), 1, CV_LABEL_TYPE, m_labels.data()),
 	m_observations(data.rows)
 {
