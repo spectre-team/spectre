@@ -60,12 +60,12 @@ public:
 	/// Returns data of Dataset_opencv as Mat.
 	/// </summary>
 	/// <returns></returns>
-	cv::Mat& getData();
+	const cv::Mat& getData() const;
 	/// <summary>
 	/// Returns labels of Dataset_opencv as Mat.
 	/// </summary>
 	/// <returns></returns>
-	cv::Mat& getLabels();
+	const cv::Mat& getLabels() const;
 
 	~Dataset_opencv() = default;
 

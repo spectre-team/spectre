@@ -88,12 +88,12 @@ bool Dataset_opencv::empty() const
 	return size() == 0;
 }
 
-cv::Mat& Dataset_opencv::getData()
+const cv::Mat& Dataset_opencv::getData() const
 {
 	return m_Mat;
 }
 
-cv::Mat& Dataset_opencv::getLabels()
+const cv::Mat& Dataset_opencv::getLabels() const
 {
 	return m_MatLabels;
 }
