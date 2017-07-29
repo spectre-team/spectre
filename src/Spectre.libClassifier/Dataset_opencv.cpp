@@ -1,21 +1,8 @@
 ﻿#include "Dataset_opencv.h"
 #include "Spectre.libException/OutOfRangeException.h"
+#include "Spectre.libException/InconsistentArgumentSizesException.h"
 
 namespace Spectre::libClassifier {
-
-Empty::Empty()
-{
-	
-}
-
-const Empty& Empty::instance()
-{
-	if (m_instance == nullptr)
-	{
-		m_instance = std::move(std::unique_ptr<Empty>(new Empty()));
-	}
-	return *m_instance;
-}
 
 const int ColumnMatrixWidth = 1;
 
@@ -26,7 +13,10 @@ Dataset_opencv::Dataset_opencv(gsl::span<DataType> data, gsl::span<Label> labels
 	m_MatLabels(static_cast<int>(labels.size()), ColumnMatrixWidth, CV_LABEL_TYPE, m_labels.data()),
 	m_observations(static_cast<int>(labels.size()))
 {
-	//@wwilgierz TODO sprawdx czy rozmiary sie zgadzaja
+	if (static_cast<int>(labels.size()) != static_cast<int>(labels.size()))
+	{
+		libException::InconsistentArgumentSizesException("data", static_cast<int>(labels.size()), "labels", static_cast<int>(labels.size()));
+	}
     const auto numberOfColumns = data.size() / labels.size();
     auto rowBegin = m_Data.data();
     for (auto i=0u; i < labels.size(); ++i)
@@ -43,7 +33,10 @@ Dataset_opencv::Dataset_opencv(cv::Mat data, cv::Mat labels):
 	m_MatLabels(static_cast<int>(m_labels.size()), 1, CV_LABEL_TYPE, m_labels.data()),
 	m_observations(data.rows)
 {
-	//@wwilgierz TODO sprawdx czy rozmiary sie zgadzaja
+	if (m_Mat.rows != static_cast<int>(m_labels.size()))
+	{
+		libException::InconsistentArgumentSizesException("data", m_Mat.rows,"labels", static_cast<int>(m_labels.size()));
+	}
 	auto rowBegin = m_Data.data();
 	for (auto i = 0; i < data.rows; ++i)
 	{
@@ -63,13 +56,15 @@ const Observation& Dataset_opencv::operator[](size_t idx) const
 
 const Label& Dataset_opencv::GetSampleMetadata(size_t idx) const
 {
-	//@wwilgierz TODO sprawdz czy nie wykracza poza rozmiar
+	if (idx >= m_MatLabels.rows)
+	{
+		throw libException::OutOfRangeException(idx, m_MatLabels.rows);
+	}
 	return m_labels[idx];
 }
 
 const Empty& Dataset_opencv::GetDatasetMetadata() const
 {
-	//@wwilgierz TODO wyrzuc klase Empty do innego pliku
 	return Empty::instance();
 }
 
@@ -93,6 +88,14 @@ bool Dataset_opencv::empty() const
 	return size() == 0;
 }
 
-//@wwilgierz TODO 2 funkcje MAT& pierwszy i drugi parametr z svm  (m_Map, m_labels)
+cv::Mat& Dataset_opencv::getData()
+{
+	return m_Mat;
+}
+
+cv::Mat& Dataset_opencv::getLabels()
+{
+	return m_MatLabels;
+}
 
 }

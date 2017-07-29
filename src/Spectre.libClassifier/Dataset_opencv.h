@@ -2,6 +2,7 @@
 #include <memory>
 #include <opencv2/core/mat.hpp>
 #include "Spectre.libDataset/IDataset.h"
+#include "Empty.h"
 
 namespace Spectre::libClassifier {
 	using DataType = float;
@@ -9,15 +10,6 @@ namespace Spectre::libClassifier {
 	using Label = signed;
 	const auto CV_TYPE = CV_32FC1;
 	const auto CV_LABEL_TYPE = CV_32SC1;
-
-class Empty
-{
-public:
-	static const Empty& instance();
-private:
-	static std::unique_ptr<Empty> m_instance;
-	Empty();
-};
 
 class Dataset_opencv final : public Spectre::libDataset::IReadOnlyDataset<Observation, Label, Empty>
 {
@@ -64,6 +56,16 @@ public:
 	/// </summary>
 	/// <returns>True, if dataset is empty.</returns>
 	bool empty() const override;
+	/// <summary>
+	/// Returns data of Dataset_opencv as Mat.
+	/// </summary>
+	/// <returns></returns>
+	cv::Mat& getData();
+	/// <summary>
+	/// Returns labels of Dataset_opencv as Mat.
+	/// </summary>
+	/// <returns></returns>
+	cv::Mat& getLabels();
 
 	~Dataset_opencv() = default;
 
