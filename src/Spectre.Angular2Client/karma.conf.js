@@ -6,6 +6,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
+  	  require('karma-junit-reporter'),
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
@@ -35,6 +36,16 @@ module.exports = function (config) {
     reporters: config.angularCli && config.angularCli.codeCoverage
               ? ['progress', 'coverage-istanbul']
               : ['progress', 'kjhtml'],
+    junitReporter: {
+        outputDir: 'C:\\projects\\spectre\\src\\Spectre.Angular2Client',
+        outputFile: 'karma-tests.xml',
+        suite: 'Angular2Client',
+        useBrowserName: false,
+        nameFormatter: undefined,
+        classNameFormatter: undefined,
+        properties: {},
+        xmlVersion: null
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

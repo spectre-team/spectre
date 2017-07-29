@@ -39,7 +39,7 @@ namespace Spectre.Controllers
         /// <returns>List of preparations.</returns>
         public IEnumerable<Preparation> Get()
         {
-            return new[] { new Preparation("Head & neck cancer, patient 1, tumor region only", 1) };
+            return new[] { new Preparation("Head & neck cancer, patient 1, tumor region only", 1, 997) };
         }
 
 
@@ -50,7 +50,7 @@ namespace Spectre.Controllers
         /// <returns>Data of preparation.</returns>
         public Preparation Get(int id)
         {
-            return id == 1 ? new Preparation("Head & neck cancer, patient 1, tumor region only", 1) : null;
+            return id == 1 ? new Preparation("Head & neck cancer, patient 1, tumor region only", 1, 997) : null;
         }
     }
 }
