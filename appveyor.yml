@@ -19,6 +19,9 @@ configuration:
   - Release
 services: iis
 
+# skip branch build if there is an active pull request
+skip_branch_with_pr: true
+
 #init:
 #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
