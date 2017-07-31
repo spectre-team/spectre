@@ -1,2 +1,2 @@
-cd .\src\Spectre.Angular2Client
+cd .\src\Spectre.AngularClient
 ng build  >nul 2>&1

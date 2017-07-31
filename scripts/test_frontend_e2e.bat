@@ -1,5 +1,5 @@
 @echo off
-cd C:\projects\spectre\src\Spectre.Angular2Client
+cd C:\projects\spectre\src\Spectre.AngularClient
 ng e2e --progress false
 set fail="*                    Failures                    *"
 ng e2e --progress false | findstr %fail% > __failed.txt
