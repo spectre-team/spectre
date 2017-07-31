@@ -37,9 +37,9 @@ module.exports = function (config) {
               ? ['progress', 'coverage-istanbul']
               : ['progress', 'kjhtml'],
     junitReporter: {
-        outputDir: 'C:\\projects\\spectre\\src\\Spectre.Angular2Client',
+        outputDir: 'C:\\projects\\spectre\\src\\Spectre.AngularClient',
         outputFile: 'karma-tests.xml',
-        suite: 'Angular2Client',
+        suite: 'AngularClient',
         useBrowserName: false,
         nameFormatter: undefined,
         classNameFormatter: undefined,
