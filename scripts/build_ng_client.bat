@@ -1,2 +1,2 @@
 cd .\src\Spectre.AngularClient
-ng build
+ng build >nul 2>&1
