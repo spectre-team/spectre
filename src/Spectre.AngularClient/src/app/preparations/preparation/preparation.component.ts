@@ -23,38 +23,47 @@ import {SpectrumService} from '../../spectrums/shared/spectrum.service';
 import {HeatmapService} from '../../heatmaps/shared/heatmap.service';
 import {Spectrum} from '../../spectrums/shared/spectrum';
 import {Heatmap} from '../../heatmaps/shared/heatmap';
+import {PreparationService} from '../shared/preparation.service';
+import {Preparation} from '../shared/preparation';
+import { MessagesService } from '../../../../node_modules/ng2-messages/ng2-messages';
 
 @Component({
   selector: 'app-preparation',
   templateUrl: './preparation.component.html',
   styleUrls: ['./preparation.component.css'],
+  providers: [PreparationService]
 })
 export class PreparationComponent implements OnInit {
   public id: number;
   public heatmapData: any;
   public spectrumData: any;
-  public mzLenth : number;
+  public mzLenth: number;
   public mzValue: number;
   public currentChannelId = 0;
   public mz = [];
+  public preparation: Preparation;
 
   constructor(
       private route: ActivatedRoute,
       private spectrumService: SpectrumService,
-      private heatmapService: HeatmapService
+      private heatmapService: HeatmapService,
+      private preparationService: PreparationService,
+      private messagesService: MessagesService
   ) { }
 
   ngOnInit() {
       this.route.params.subscribe(params => {
         console.log('[PreparationComponent] ngOnInit');
         this.id = Number.parseInt(params['id']);
+        console.log(this.id);
         console.log('[PreparationComponent] parsed id');
+        this.preparationService
+          .getPreparationById(this.id)
+          .subscribe(preparation => this.preparation = preparation);
         this.heatmapService
           .get(this.id, 100)
           .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
-        this.spectrumService
-          .get(this.id, 1)
-            .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+        this.getSpectrum(1);
         console.log('[SpectrumComponent] layout setup');
       });
   }
@@ -67,6 +76,24 @@ export class PreparationComponent implements OnInit {
     this.heatmapService
       .get(this.id, this.currentChannelId)
       .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
+  }
+  getSpectrum(selectNumber: number) {
+    this.spectrumService
+      .get(this.id, selectNumber)
+      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+  }
+
+  showError(msg: string) {
+    this.messagesService.error(msg);
+  }
+
+  selectSpectrum(number: string) {
+    const selectNumber = Number.parseInt(number);
+    console.log(selectNumber);
+
+    if (isNaN(selectNumber) || selectNumber > this.preparation.spectraNumber || selectNumber < 0) {
+      this.showError('Type properly number from 0 to ' + 997);
+    } else { this.getSpectrum(selectNumber); }
   }
 
   toHeatmapDataset(heatmap: Heatmap) {

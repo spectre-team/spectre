@@ -13,7 +13,7 @@ exports.config = {
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
-  framework: 'jasmine',
+  framework: 'jasmine2',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
@@ -25,6 +25,12 @@ exports.config = {
     });
   },
   onPrepare() {
+    var jasmineReporters = require('jasmine-reporters');
+    jasmine.getEnv().addReporter(
+        new jasmineReporters.JUnitXmlReporter({
+            savePath: 'C:\\projects\\spectre\\src\\Spectre.Angular2Client',
+            filePrefix: 'protractor-tests',
+            consolidateAll: true}));
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
   }
 };

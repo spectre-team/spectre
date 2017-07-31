@@ -20,9 +20,11 @@ limitations under the License.
 #define GTEST_LANG_CXX11 1
 
 #include <gtest/gtest.h>
-#include "Dataset.h"
+#include "Spectre.libDataset/Dataset.h"
+#include "Spectre.libException/OutOfRangeException.h"
 
 using namespace Spectre::libDataset;
+using namespace Spectre::libException;
 using samples = std::vector<int>;
 using samples_metadata = std::vector<int>;
 using dataset_metadata = std::vector<int>;
@@ -46,7 +48,7 @@ TEST(DatasetInitializationTest, throw_on_inconsistent_input_size)
     auto sampleMetadata = samples_metadata{ 4, 5 };
     auto datasetMetadata = dataset_metadata{ 7 };
 
-    EXPECT_THROW(data_set(data, sampleMetadata, datasetMetadata), InconsistentInputSize);
+    EXPECT_THROW(data_set(data, sampleMetadata, datasetMetadata), InconsistentInputSizeException);
 }
 
 TEST(DatasetTest, knows_if_empty)
@@ -152,24 +154,24 @@ TEST_F(DatasetInScopeTest, access_const_sample_metadata)
 
 TEST_F(DatasetInScopeTest, modify_data_throws_when_out_of_bounds)
 {
-    EXPECT_THROW(dataset[100] = 100, OutOfRange);
+    EXPECT_THROW(dataset[100] = 100, OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, modify_sample_metadata_throws_when_out_of_bounds)
 {
-    EXPECT_THROW(dataset.GetSampleMetadata(100) = 100, OutOfRange);
+    EXPECT_THROW(dataset.GetSampleMetadata(100) = 100, OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample_throws_when_out_of_bounds)
 {
     const auto& local = dataset;
-    EXPECT_THROW(local[100], OutOfRange);
+    EXPECT_THROW(local[100], OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample_metadata_throws_when_out_of_bounds)
 {
     const auto& local = dataset;
-    EXPECT_THROW(local.GetSampleMetadata(100), OutOfRange);
+    EXPECT_THROW(local.GetSampleMetadata(100), OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_whole_data_in_readonly)

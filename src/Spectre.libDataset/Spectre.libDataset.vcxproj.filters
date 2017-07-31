@@ -27,12 +27,12 @@
     <ClInclude Include="IReadOnlyDataset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exception.h">
+    <ClInclude Include="InconsistentInputSizeException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exception.cpp">
+    <ClCompile Include="InconsistentInputSizeException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
