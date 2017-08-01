@@ -27,7 +27,6 @@ import {PreparationService} from '../shared/preparation.service';
 import {Preparation} from '../shared/preparation';
 import { MessagesService } from '../../../../node_modules/ng2-messages/ng2-messages';
 
-
 @Component({
   selector: 'app-preparation',
   templateUrl: './preparation.component.html',
@@ -38,6 +37,10 @@ export class PreparationComponent implements OnInit {
   public id: number;
   public heatmapData: any;
   public spectrumData: any;
+  public mzLenth: number;
+  public mzValue: number;
+  public currentChannelId = 0;
+  public mz = [];
   public preparation: Preparation;
 
   constructor(
@@ -65,6 +68,15 @@ export class PreparationComponent implements OnInit {
       });
   }
 
+  onInputChannelId(event: any) {
+    this.mzValue = this.mz[event.value];
+  }
+
+  onChangedChannelId(event: any) {
+    this.heatmapService
+      .get(this.id, this.currentChannelId)
+      .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
+  }
   getSpectrum(selectNumber: number) {
     this.spectrumService
       .get(this.id, selectNumber)
@@ -92,6 +104,8 @@ export class PreparationComponent implements OnInit {
   }
 
   toSpectrumDataset(spectrum: Spectrum) {
+    this.mzLenth = spectrum.mz.length - 1;
+    this.mz = spectrum.mz;
     return [{
       x: spectrum.mz,
       y: spectrum.intensities,

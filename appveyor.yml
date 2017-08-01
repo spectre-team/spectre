@@ -35,7 +35,7 @@ install:
 
 build_script:
 - cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
+- cmd: C:\projects\spectre\scripts\build_ng_client.bat
 after_build:
 - ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
 - cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient

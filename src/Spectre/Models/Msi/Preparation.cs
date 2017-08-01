@@ -53,6 +53,15 @@ namespace Spectre.Models.Msi
         public int SpectraNumber { get; private set; }
 
         /// <summary>
+        /// Gets the number of chanelIds.
+        /// </summary>
+        /// <value>
+        /// Number of chanelIds.
+        /// </value>
+        [DataMember]
+        public int ChanelIdAvailableNumber { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Preparation"/> class.
         /// </summary>
         /// <param name="name">The name.</param>

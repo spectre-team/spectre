@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PlotlyModule } from './plotly/plotly.module';
 import { SpectrumService } from './spectrums/shared/spectrum.service';
 import { HeatmapService } from './heatmaps/shared/heatmap.service';
+import 'hammerjs';
 import { MessagesService } from 'ng2-messages/ng2-messages.service';
 
 @NgModule({
