@@ -1,29 +1,27 @@
+/*
+* DivikResultStruct.h
+* Contains methods for the native output struct from DiviK algorithm.
+*
+Copyright 2017 Dariusz Kuchta
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 #include "DivikResultStruct.h"
 
 DivikResultStruct::DivikResultStruct()
 {
 	qualityIndex = 0;
-	amplitudeThreshold = 0;
+	amplitudeThreshold = NAN;
 	varianceThreshold = NAN;
-
-	centroids.push_back(std::vector<double>());
-	centroids.push_back(std::vector<double>());
-	centroids.push_back(std::vector<double>());
-
-	for (int i = 0; i < centroids.size(); i++)
-		for (int j = i; j < i + 5; j++)
-			centroids[i].push_back(j);
-
-	for (int i = 0; i < 5; i++)
-		partition.push_back(i);
-
-	for (int i = 0; i < 5; i++)
-		amplitudeFilter.push_back(true);
-
-	for (int i = 0; i < 5; i++)
-		varianceFilter.push_back(false);
-
-	for (int i = 0; i < 5; i++)
-		merged.push_back(i);
-
 }
