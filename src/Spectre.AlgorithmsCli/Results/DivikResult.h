@@ -41,7 +41,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			double get()
 			{
-				return m_ResultStruct->get()->qualityIndex;
+				return m_ResultStruct->qualityIndex;
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			array<double, 2> ^get()
 			{
-				auto &data = m_ResultStruct->get()->centroids;
+				auto &data = m_ResultStruct->centroids;
 
 				int size1 = (int)data.size();
 				int size2;
@@ -78,7 +78,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			array<int> ^get()
 			{
-				auto& data = m_ResultStruct->get()->partition;
+				auto& data = m_ResultStruct->partition;
 				int size = (int)data.size();
 				array<int> ^result = gcnew array<int>(size);
 				for (int i = 0; i < size; ++i)
@@ -94,7 +94,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			double get()
 			{
-				return m_ResultStruct->get()->amplitudeThreshold;
+				return m_ResultStruct->amplitudeThreshold;
 			}
 		}
 
@@ -105,7 +105,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			array<bool> ^get()
 			{
-				auto& data = m_ResultStruct->get()->amplitudeFilter;
+				auto& data = m_ResultStruct->amplitudeFilter;
 				int size = (int)data.size();
 				array<bool> ^result = gcnew array<bool>(size);
 				for (int i = 0; i < size; ++i)
@@ -121,7 +121,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			double get()
 			{
-				return m_ResultStruct->get()->varianceThreshold;
+				return m_ResultStruct->varianceThreshold;
 			}
 		}
 
@@ -132,7 +132,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			array<bool> ^get()
 			{
-				auto& data = m_ResultStruct->get()->varianceFilter;
+				auto& data = m_ResultStruct->varianceFilter;
 				int size = (int)data.size();
 				array<bool> ^result = gcnew array<bool>(size);
 				for (int i = 0; i < size; ++i)
@@ -148,7 +148,7 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			array<int> ^get()
 			{
-				auto& data = m_ResultStruct->get()->merged;
+				auto& data = m_ResultStruct->merged;
 				int size = (int)data.size();
 				array<int> ^result = gcnew array<int>(size);
 				for (int i = 0; i < size; ++i)
@@ -164,19 +164,14 @@ namespace Spectre::AlgorithmsCli::Results
 		{
 			array<DivikResult^> ^get()
 			{
-				auto& data = m_ResultStruct->get()->subregions;
+				auto& data = m_ResultStruct->subregions;
 				int size = (int)data.size();
 				array<DivikResult^> ^result = gcnew array<DivikResult^>(size);
 				for (int i = 0; i < size; ++i)
-					result[i] = gcnew DivikResult(std::make_unique<DivikResultStruct>(data[i]));
+					result[i] = gcnew DivikResult(&data[i]);
 				return result;
 			}
 		}
-
-		/// <summary>
-		/// Deleted default constructor of the <see cref="DivikResult"/>.
-		/// </summary>
-		DivikResult() = delete;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DivikResult"/> class.

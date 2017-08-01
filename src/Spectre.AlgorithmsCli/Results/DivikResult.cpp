@@ -18,14 +18,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "stdafx.h"
 #include "DivikResult.h"
 
 #include <cliext\algorithm>
 
 using System::Object;
 
-//TODO: move to utilities
 template <typename T, int R>
 static bool UnmanagedSequenceEqual(array<T, R>^ lhs, array<T, R>^ rhs)
 {
