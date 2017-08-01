@@ -20,6 +20,7 @@ limitations under the License.
 #pragma once
 
 #include "DivikResultStruct.h"
+#pragma make_public(DivikResultStruct)
 
 #include <memory>
 

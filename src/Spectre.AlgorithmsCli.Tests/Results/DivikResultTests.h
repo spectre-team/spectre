@@ -4,6 +4,7 @@
 #include <memory>
 
 using namespace NUnit::Framework;
+using DivikResultCli = Spectre::AlgorithmsCli::Results::DivikResult;
 
 namespace Spectre::AlgorithmsCli::Tests::Results
 {
@@ -11,12 +12,14 @@ namespace Spectre::AlgorithmsCli::Tests::Results
 	public ref class DivikResultTests
 	{
 	private:
-		DivikResult^ _result;
+		DivikResultStruct* _defaultNative;
+		DivikResultCli^ _result;
 	public:
 		[OneTimeSetUp]
 		void SetUpClass()
 		{
-			_result = gcnew DivikResult();
+			_defaultNative = new DivikResultStruct();
+			_result = gcnew DivikResultCli(_defaultNative);
 		}
 
 		[OneTimeTearDown]
@@ -29,34 +32,42 @@ namespace Spectre::AlgorithmsCli::Tests::Results
 		[Test]
 		void ConstructFromNativeTest()
 		{
-			//TODO
-			Assert::True(true);
+			auto requiredQualityIndex = 0.95;
+			DivikResultStruct native;
+			native.qualityIndex = requiredQualityIndex;
+			DivikResultCli^ _newResult = gcnew DivikResultCli(&native);
+			Assert::AreEqual(_newResult->QualityIndex, requiredQualityIndex, "Data differs between native and CLI class");
 		}
 
 		[Test]
 		void EqualsTest()
 		{
 			Assert::True(_result->Equals(_result), "Same instance marked nonequal.");
-			DivikResult^ _nextResult;
+			DivikResultCli^ _nextResult;
 			
-			_nextResult = gcnew DivikResult();
+			_nextResult = gcnew DivikResultCli(_defaultNative);
 			Assert::True(_result->Equals(_nextResult), "Mirror instance marked not equal.");
 			
-			_nextResult->QualityIndex = _result->QualityIndex + 1;
+			DivikResultStruct nativeQualityChanged;
+			nativeQualityChanged.qualityIndex = _result->QualityIndex + 1;
+			_nextResult = gcnew DivikResultCli(&nativeQualityChanged);
 			Assert::False(_result->Equals(_nextResult), "Results with different quality indeces marked equal.");
 
-			_nextResult = gcnew DivikResult();
-			_nextResult->Partition = gcnew cli::array<int>(_nextResult->Partition->Length);
+			DivikResultStruct nativePartitionChanged;
+			nativePartitionChanged.partition.push_back(int());
+			_nextResult = gcnew DivikResultCli(&nativePartitionChanged);
 			Assert::False(_result->Equals(_nextResult), "Results with different partitions marked equal.");
 		}
 
 		[Test]
 		void HashCodeTest()
 		{
-			DivikResult^ _nextResult = gcnew DivikResult();
+			DivikResultCli^ _nextResult = gcnew DivikResultCli(_defaultNative);
 			Assert::AreEqual(_result->GetHashCode(), _nextResult->GetHashCode(), "Mirror instances have different hash codes.");
 
-			_nextResult->QualityIndex = _result->QualityIndex + 1;
+			DivikResultStruct nativeQualityChanged;
+			nativeQualityChanged.qualityIndex = _result->QualityIndex + 1;
+			_nextResult = gcnew DivikResultCli(&nativeQualityChanged);
 			Assert::AreNotEqual(_result->GetHashCode(), _nextResult->GetHashCode(), "Different instances have equal hash codes.");
 		}
 
