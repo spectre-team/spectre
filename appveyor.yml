@@ -7,19 +7,35 @@ assembly_info:
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
 platform: x64
+environment:
+  nuget_user:
+    secure: kWtlS49bKmP0IFXmdvDHmxGI8mS0xQGrwiJoco9nYtA=
+  nuget_password:
+    secure: Pzvx2CQjxp8eCBP+nFI2eg==
+  appveyor_rdp_password:
+    secure: Pzvx2CQjxp8eCBP+nFI2eg==
 configuration:
   - Debug
   - Release
 services: iis
 
+# skip branch build if there is an active pull request
+skip_branch_with_pr: true
+
+#init:
+#- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+nuget:
+  account_feed: false
+  project_feed: false
+
 install:
+- cmd: C:\projects\spectre\scripts\restore_nugets.bat
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 
-before_build:
-- cmd: C:\projects\spectre\scripts\restore_nugets.bat
 build_script:
 - cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-- cmd: C:\projects\spectre\scripts\build_ng2_client.bat
+- cmd: C:\projects\spectre\scripts\build_ng_client.bat
 after_build:
 - ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
 - cmd: C:\projects\spectre\scripts\package_project.bat "DiviK.zip" Spectre.DivikWpfClient
@@ -43,6 +59,10 @@ deploy:
   draft: true
   on:
     CONFIGURATION: Release
+
+on_finish:
+- cmd: C:\projects\spectre\scripts\upload-frontend-test-results.bat
+#- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 notifications:
 # this publishes to Continuous Integration channel in Glip
