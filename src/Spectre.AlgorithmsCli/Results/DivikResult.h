@@ -174,20 +174,17 @@ namespace Spectre::AlgorithmsCli::Results
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="DivikResult"/> class with empty result struct.
+		/// Deleted default constructor of the <see cref="DivikResult"/>.
 		/// </summary>
-		DivikResult()
-		{
-			m_ResultStruct = new std::unique_ptr<DivikResultStruct>(std::make_unique<DivikResultStruct>());
-		}
+		DivikResult() = delete;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DivikResult"/> class.
 		/// </summary>
 		/// <param name="result">The result coming from native Divik algorithm.</param>
-		DivikResult(std::unique_ptr<DivikResultStruct> result)
+		DivikResult(DivikResultStruct* result)
 		{
-			m_ResultStruct = new std::unique_ptr<DivikResultStruct>(std::move(result));
+			m_ResultStruct = result;
 		}
 
 		/// <summary>
@@ -196,6 +193,7 @@ namespace Spectre::AlgorithmsCli::Results
 		!DivikResult()
 		{
 			delete m_ResultStruct;
+			m_ResultStruct = nullptr;
 		}
 
 		/// <summary>
@@ -222,7 +220,6 @@ namespace Spectre::AlgorithmsCli::Results
 
 	private:
 
-		std::unique_ptr<DivikResultStruct>* m_ResultStruct;
-
+		DivikResultStruct* m_ResultStruct;
 	};
 }
