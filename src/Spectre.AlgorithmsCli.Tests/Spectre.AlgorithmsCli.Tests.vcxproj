@@ -60,9 +60,11 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -72,9 +74,11 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -92,6 +96,7 @@
     <ClInclude Include="Methods\DivikConsistencyTests.h" />
     <ClInclude Include="Methods\SegmentationTests.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Results\DivikResultTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
@@ -115,6 +120,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
       <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Spectre.libDivik\Spectre.libDivik.vcxproj">
+      <Project>{369bdaff-9e57-40d0-830d-b9232f35e4f4}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Spectre.Service\Spectre.Service.csproj">
       <Project>{287a1a8d-c029-4d47-96bc-755c91b7985d}</Project>

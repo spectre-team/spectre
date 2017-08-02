@@ -2,3 +2,4 @@
 
 #include "Methods/SegmentationTests.h"
 #include "Methods/DivikConsistencyTests.h"
+#include "Results/DivikResultTests.h"

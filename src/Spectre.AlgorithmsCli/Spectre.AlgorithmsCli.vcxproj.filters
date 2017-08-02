@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Methods">
       <UniqueIdentifier>{a0380974-2435-491f-aa4a-f480a8823806}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Results">
+      <UniqueIdentifier>{c7412a3d-6292-4cbf-8445-e9554a6c2162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Results">
+      <UniqueIdentifier>{78be55b1-2096-462d-971f-005a34efb2e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -26,6 +32,9 @@
     </ClInclude>
     <ClInclude Include="Methods\Segmentation.h">
       <Filter>Header Files\Methods</Filter>
+    </ClInclude>
+    <ClInclude Include="Results\DivikResult.h">
+      <Filter>Header Files\Results</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="Methods\Segmentation.cpp">
       <Filter>Source Files\Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Results\DivikResult.cpp">
+      <Filter>Source Files\Results</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

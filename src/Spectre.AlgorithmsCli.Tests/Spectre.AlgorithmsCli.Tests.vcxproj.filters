@@ -16,6 +16,9 @@
     <Filter Include="Header Files\Methods">
       <UniqueIdentifier>{9a94fb38-a4c5-4018-84cb-2e9aaf29abad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Results">
+      <UniqueIdentifier>{b775a53d-6a84-4714-9de0-6a3267d9fd01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -26,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="Methods\SegmentationTests.h">
       <Filter>Header Files\Methods</Filter>
+    </ClInclude>
+    <ClInclude Include="Results\DivikResultTests.h">
+      <Filter>Header Files\Results</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
