@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Spectre.libDivik/DivikResultStruct.h"	//TODO
+#include "../../Spectre.libDivik/DivikResultStruct.h"	// @dkuchta: TODO: Examine why includes ignore $(SolutionDir) 
 #include <memory>
 
 using namespace NUnit::Framework;
