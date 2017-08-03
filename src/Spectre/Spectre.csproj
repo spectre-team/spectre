@@ -195,6 +195,7 @@
     <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\ValidateConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -303,6 +304,10 @@
     <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
       <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
       <Name>Spectre.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spectre.Service\Spectre.Service.csproj">
+      <Project>{287A1A8D-C029-4D47-96BC-755C91B7985D}</Project>
+      <Name>Spectre.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
