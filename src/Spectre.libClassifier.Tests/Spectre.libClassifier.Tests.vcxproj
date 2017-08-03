@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
+    <ClCompile Include="Dataset_opencvTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

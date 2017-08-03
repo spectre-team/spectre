@@ -6,7 +6,7 @@
 
 namespace Spectre::libClassifier {
 	using DataType = float;
-	using Observation = gsl::span<DataType>;
+	using Observation = gsl::span<const DataType>;
 	using Label = signed;
 	const auto CV_TYPE = CV_32FC1;
 	const auto CV_LABEL_TYPE = CV_32SC1;
@@ -14,7 +14,7 @@ namespace Spectre::libClassifier {
 class Dataset_opencv final : public Spectre::libDataset::IReadOnlyDataset<Observation, Label, Empty>
 {
 public:
-	Dataset_opencv(gsl::span<DataType> data, gsl::span<Label> labels);
+	Dataset_opencv(gsl::span<const DataType> data, gsl::span<const Label> labels);
 	Dataset_opencv(cv::Mat data, cv::Mat labels);
 
 	/// <summary>
@@ -60,12 +60,12 @@ public:
 	/// Returns data of Dataset_opencv as Mat.
 	/// </summary>
 	/// <returns></returns>
-	const cv::Mat& getData() const;
+	const cv::Mat& getMatData() const;
 	/// <summary>
 	/// Returns labels of Dataset_opencv as Mat.
 	/// </summary>
 	/// <returns></returns>
-	const cv::Mat& getLabels() const;
+	const cv::Mat& getMatLabels() const;
 
 	~Dataset_opencv() = default;
 

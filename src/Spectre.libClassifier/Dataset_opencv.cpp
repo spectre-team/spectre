@@ -6,16 +6,16 @@ namespace Spectre::libClassifier {
 
 const int ColumnMatrixWidth = 1;
 
-Dataset_opencv::Dataset_opencv(gsl::span<DataType> data, gsl::span<Label> labels):
+Dataset_opencv::Dataset_opencv(gsl::span<const DataType> data, gsl::span<const Label> labels):
 	m_Data(data.begin(), data.end()),
 	m_Mat(static_cast<int>(labels.size()), static_cast<int>(data.size() / labels.size()), CV_TYPE, m_Data.data()),
 	m_labels(labels.begin(), labels.end()),
 	m_MatLabels(static_cast<int>(labels.size()), ColumnMatrixWidth, CV_LABEL_TYPE, m_labels.data()),
 	m_observations(static_cast<int>(labels.size()))
 {
-	if (static_cast<int>(labels.size()) != static_cast<int>(labels.size()))
+	if (m_Mat.rows != static_cast<int>(m_labels.size()))
 	{
-		libException::InconsistentArgumentSizesException("data", static_cast<int>(labels.size()), "labels", static_cast<int>(labels.size()));
+		libException::InconsistentArgumentSizesException("data", m_Mat.rows, "labels", static_cast<int>(m_labels.size()));
 	}
     const auto numberOfColumns = data.size() / labels.size();
     auto rowBegin = m_Data.data();
@@ -88,12 +88,12 @@ bool Dataset_opencv::empty() const
 	return size() == 0;
 }
 
-const cv::Mat& Dataset_opencv::getData() const
+const cv::Mat& Dataset_opencv::getMatData() const
 {
 	return m_Mat;
 }
 
-const cv::Mat& Dataset_opencv::getLabels() const
+const cv::Mat& Dataset_opencv::getMatLabels() const
 {
 	return m_MatLabels;
 }
