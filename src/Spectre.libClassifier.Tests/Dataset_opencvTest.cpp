@@ -77,7 +77,7 @@ class Dataset_opencvTest : public ::testing::Test
 public:
 	Dataset_opencvTest()
 	{
-		
+
 	}
 protected:
 	const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
@@ -99,7 +99,10 @@ TEST_F(Dataset_opencvTest, get_in_range_data)
 {
 	auto test = (*dataset)[1];
 	std::vector<DataType> check({ 1.1f, 1.6f, 0.7f });
-	EXPECT_EQ(test, check);
+	for (auto i = 0u; i < check.size(); i++)
+	{
+		EXPECT_EQ(test[i], check[i]);
+	}
 }
 
 TEST_F(Dataset_opencvTest, get_out_of_range_label)
@@ -116,20 +119,28 @@ TEST_F(Dataset_opencvTest, get_in_range_label)
 
 TEST_F(Dataset_opencvTest, get_dataset_metadata)
 {
-	Empty check = Empty::instance();
-	EXPECT_EQ((*dataset).GetDatasetMetadata(), check);
+	const Empty check = Empty::instance();
+	EXPECT_EQ(&(*dataset).GetDatasetMetadata(), &check);
 }
 
 TEST_F(Dataset_opencvTest, get_data)
 {
-	//nie potrafi porownac labels, wiec trzeba forem to robic
-	EXPECT_EQ(dataset->GetData(), data);
+	gsl::span<const Observation> result = dataset->GetData();
+	EXPECT_EQ(result.size(), data.size());
+	for (auto i = 0u; i < data.size(); i++)
+	{
+		EXPECT_EQ(result[i], data[i]);
+	}
 }
 
 TEST_F(Dataset_opencvTest, get_labels)
 {
-	//nie potrafi porownac labels, wiec trzeba forem to robic
-	EXPECT_EQ(dataset->GetSampleMetadata(), labels);
+	gsl::span<const Label> result = dataset->GetSampleMetadata();
+	EXPECT_EQ(result.size(), labels.size());
+	for (auto i = 0u; i < labels.size(); i++)
+	{
+		EXPECT_EQ(result[i], labels[i]);
+	}
 }
 
 TEST_F(Dataset_opencvTest, get_size)
@@ -150,7 +161,18 @@ TEST_F(Dataset_opencvTest, get_labels_mat)
 	std::vector<Label> mat_labels{ 3, 7, 14 };
 	cv::Mat check(3, 1, CV_LABEL_TYPE, mat_labels.data());
 	cv::Mat result = dataset->getMatLabels();
-	EXPECT_EQ(check, result);
+	EXPECT_EQ(check.size, result.size);
 }
+
+//advanced tests
+
+TEST_F(Dataset_opencvTest, check_if_creating_copy)
+{
+	std::unique_ptr<Dataset_opencv> testDataset = std::make_unique<Dataset_opencv>(data, labels);
+	gsl::span<const Observation> result = dataset->GetData();
+	delete &testDataset;
+	EXPECT_EQ(data.size(), result.size());
+}
+
 
 }
