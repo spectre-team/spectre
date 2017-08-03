@@ -1,7 +1,7 @@
 ﻿/*
  * PercentageConverter.cs
  * Converter which allows to convert percentages to double values.
- * 
+ *
    Copyright 2017 Michał Wolny
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,18 +16,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace Spectre.Mvvm.Converters
 {
     /// <summary>
-	/// This allows to convert percentage <see cref="string"/> to <see cref="double"/> and back.
-	/// </summary>
-	/// <seealso cref="System.Windows.Data.IValueConverter" />
-	public class PercentageConverter : IValueConverter
+    /// This allows to convert percentage <see cref="string"/> to <see cref="double"/> and back.
+    /// </summary>
+    /// <seealso cref="System.Windows.Data.IValueConverter" />
+    public class PercentageConverter : IValueConverter
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -40,10 +40,8 @@ namespace Spectre.Mvvm.Converters
         /// The value to be passed to the target dependency property.
         /// </returns>
         /// <exception cref="NullReferenceException">if value is null</exception>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ((double)value * 100).ToString(culture) + " %";
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+            ((double)value * 100).ToString(culture) + " %";
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.
@@ -59,8 +57,10 @@ namespace Spectre.Mvvm.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is double)
+            {
                 return (double)value / 100;
-            return double.Parse(((string)value).Replace('%',' ').Trim(), culture)/100;
+            }
+            return double.Parse(s: ((string)value).Replace(oldChar: '%', newChar: ' ').Trim(), provider: culture) / 100;
         }
     }
 }

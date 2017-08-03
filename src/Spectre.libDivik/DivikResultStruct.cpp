@@ -21,7 +21,7 @@ limitations under the License.
 
 DivikResultStruct::DivikResultStruct()
 {
-	qualityIndex = 0;
-	amplitudeThreshold = NAN;
-	varianceThreshold = NAN;
+    qualityIndex = 0;
+    amplitudeThreshold = NAN;
+    varianceThreshold = NAN;
 }

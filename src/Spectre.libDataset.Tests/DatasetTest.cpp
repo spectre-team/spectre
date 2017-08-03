@@ -35,18 +35,18 @@ namespace
 {
 TEST(DatasetInitializationTest, should_initialize_correctly)
 {
-    auto data = samples{ 1, 2, 3 };
-    auto sampleMetadata = samples_metadata{ 4, 5, 6 };
-    auto datasetMetadata = dataset_metadata{7};
+    auto data = samples { 1, 2, 3 };
+    auto sampleMetadata = samples_metadata { 4, 5, 6 };
+    auto datasetMetadata = dataset_metadata { 7 };
 
     data_set dataset(data, sampleMetadata, datasetMetadata);
 }
 
 TEST(DatasetInitializationTest, throw_on_inconsistent_input_size)
 {
-    auto data = samples{ 1, 2, 3 };
-    auto sampleMetadata = samples_metadata{ 4, 5 };
-    auto datasetMetadata = dataset_metadata{ 7 };
+    auto data = samples { 1, 2, 3 };
+    auto sampleMetadata = samples_metadata { 4, 5 };
+    auto datasetMetadata = dataset_metadata { 7 };
 
     EXPECT_THROW(data_set(data, sampleMetadata, datasetMetadata), InconsistentInputSizeException);
 }
@@ -83,11 +83,11 @@ class DatasetInScopeTest : public ::testing::Test
 {
 public:
     DatasetInScopeTest():
-        data({1,2,3}),
-        entries_metadata({4,5,6}),
-        global_metadata({7}),
-        dataset(data, entries_metadata, global_metadata)
-    { }
+        data({ 1,2,3 }),
+        entries_metadata({ 4,5,6 }),
+        global_metadata({ 7 }),
+        dataset(data, entries_metadata, global_metadata) { }
+
 protected:
     const samples data;
     const samples_metadata entries_metadata;
@@ -142,13 +142,13 @@ TEST_F(DatasetInScopeTest, modify_metadata)
 
 TEST_F(DatasetInScopeTest, access_const_sample)
 {
-    const auto& local = dataset;
+    const auto &local = dataset;
     EXPECT_EQ(local[0], dataset[0]);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample_metadata)
 {
-    const auto& local = dataset;
+    const auto &local = dataset;
     EXPECT_EQ(local.GetSampleMetadata(0), dataset.GetSampleMetadata(0));
 }
 
@@ -164,19 +164,19 @@ TEST_F(DatasetInScopeTest, modify_sample_metadata_throws_when_out_of_bounds)
 
 TEST_F(DatasetInScopeTest, access_const_sample_throws_when_out_of_bounds)
 {
-    const auto& local = dataset;
+    const auto &local = dataset;
     EXPECT_THROW(local[100], OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_const_sample_metadata_throws_when_out_of_bounds)
 {
-    const auto& local = dataset;
+    const auto &local = dataset;
     EXPECT_THROW(local.GetSampleMetadata(100), OutOfRangeException);
 }
 
 TEST_F(DatasetInScopeTest, access_whole_data_in_readonly)
 {
-    const auto& local = dataset;
+    const auto &local = dataset;
     auto local_data = local.GetData();
     ASSERT_EQ(local_data.size(), 3);
     EXPECT_EQ(local_data[0], 1);
@@ -186,7 +186,7 @@ TEST_F(DatasetInScopeTest, access_whole_data_in_readonly)
 
 TEST_F(DatasetInScopeTest, access_whole_sample_metadata_in_readonly)
 {
-    const auto& local = dataset;
+    const auto &local = dataset;
     auto local_sample_metadata = local.GetSampleMetadata();
     ASSERT_EQ(local_sample_metadata.size(), 3);
     EXPECT_EQ(local_sample_metadata[0], 4);
@@ -215,11 +215,11 @@ namespace
 {
 TEST(DatasetOutOfScopeTest, owns_data)
 {
-    data_set* dataset = nullptr;
-    
+    data_set *dataset = nullptr;
+
     // @gmrukwa: Opening new scope, so variables will get destroyed.
     {
-        samples data({0, 1, 2});
+        samples data({ 0, 1, 2 });
         samples_metadata sample_metadata({ 4, 5, 6 });
         dataset_metadata metadata({ 7 });
 
@@ -227,7 +227,7 @@ TEST(DatasetOutOfScopeTest, owns_data)
     }
 
     auto data = dataset->GetData();
-    for(auto i = 0; i < 3; ++i)
+    for (auto i = 0; i < 3; ++i)
     {
         EXPECT_EQ(data[i], i) << "mismatch at position: " << i;
     }
@@ -237,7 +237,7 @@ TEST(DatasetOutOfScopeTest, owns_data)
 
 TEST(DatasetOutOfScopeTest, owns_sample_metadata)
 {
-    data_set* dataset = nullptr;
+    data_set *dataset = nullptr;
 
     // @gmrukwa: Opening new scope, so variables will get destroyed.
     {
@@ -259,7 +259,7 @@ TEST(DatasetOutOfScopeTest, owns_sample_metadata)
 
 TEST(DatasetOutOfScopeTest, owns_metadata)
 {
-    data_set* dataset = nullptr;
+    data_set *dataset = nullptr;
 
     // @gmrukwa: Opening new scope, so variables will get destroyed.
     {

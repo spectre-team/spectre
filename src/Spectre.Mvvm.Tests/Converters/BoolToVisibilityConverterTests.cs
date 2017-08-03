@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using System.Windows;
@@ -24,31 +25,44 @@ using Spectre.Mvvm.Converters;
 
 namespace Spectre.Mvvm.Tests.Converters
 {
-    [TestFixture, Category("MvvmFramework")]
+    [TestFixture]
+    [Category(name: "MvvmFramework")]
     public class BoolToVisibilityConverterTests : SimpleConverterTestBase<BoolToVisibilityConverter, Visibility, bool>
     {
         [Test]
         public void ConvertTest()
         {
-            ToGuiType(true, Visibility.Visible, "Conversion of true did not return Visibility", "True does not evalute to Visible.");
+            ToGuiType(argument: true,
+                expectedResult: Visibility.Visible,
+                onTypeFailure: "Conversion of true did not return Visibility",
+                onValueFailure: "True does not evalute to Visible.");
 
-            ToGuiType(false, Visibility.Collapsed, "Conversion of false did not return Visibility", "False does not evalute to Collapsed.");
+            ToGuiType(argument: false,
+                expectedResult: Visibility.Collapsed,
+                onTypeFailure: "Conversion of false did not return Visibility",
+                onValueFailure: "False does not evalute to Collapsed.");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.Convert("blah", typeof(Visibility), null, CultureInfo.CurrentCulture),
-                "Converted string.");
+                code: () => Converter.Convert(value: "blah", targetType: typeof(Visibility), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted string.");
         }
 
         [Test]
         public void ConvertBackTest()
         {
-            ToBackendType(Visibility.Visible, true, "Conversion of Visibility.Visible did not return bool", "Visibility.Visible does not evalute to true.");
+            ToBackendType(Visibility.Visible,
+                expectedResult: true,
+                onTypeFailure: "Conversion of Visibility.Visible did not return bool",
+                onValueFailure: "Visibility.Visible does not evalute to true.");
 
-            ToBackendType(Visibility.Collapsed, false, "Conversion of Visibility.Collapsed did not return false", "Visibility.Collapsed does not evalute to false.");
+            ToBackendType(Visibility.Collapsed,
+                expectedResult: false,
+                onTypeFailure: "Conversion of Visibility.Collapsed did not return false",
+                onValueFailure: "Visibility.Collapsed does not evalute to false.");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.ConvertBack("blah", typeof(bool), null, CultureInfo.CurrentCulture),
-                "Converted string.");
+                code: () => Converter.ConvertBack(value: "blah", targetType: typeof(bool), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted string.");
         }
     }
 }

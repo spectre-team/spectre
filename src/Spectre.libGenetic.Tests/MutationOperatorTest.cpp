@@ -55,15 +55,15 @@ class MutationTest: public ::testing::Test
 {
 public:
     MutationTest():
-        individual(std::vector<bool>(defaultData))
-    {}
+        individual(std::vector<bool>(defaultData)) {}
+
 protected:
     const unsigned NUMBER_OF_TRIALS = 1000;
     const double ALLOWED_MISS_RATE = 0.05;
     const double ALWAYS = 1;
     const double NEVER = 0;
     const Seed SEED = 0;
-    const std::vector<bool> defaultData{ false, false, false };
+    const std::vector<bool> defaultData { false, false, false };
     Individual individual;
 
     void SetUp() override
@@ -87,8 +87,8 @@ TEST_F(MutationTest, seed_provides_repeatibility)
 
     for (auto i = 0u; i < NUMBER_OF_TRIALS; ++i)
     {
-        Individual firstCopy{ std::vector<bool>(defaultData) };
-        Individual secondCopy{ std::vector<bool>(defaultData) };
+        Individual firstCopy { std::vector<bool>(defaultData) };
+        Individual secondCopy { std::vector<bool>(defaultData) };
 
         const auto firstMutant = first(std::move(firstCopy));
         const auto secondMutant = second(std::move(secondCopy));

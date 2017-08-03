@@ -1,7 +1,7 @@
 ﻿/*
  * BoolToVisibilityConverter.cs
  * Converter which allows to steer visibility with bools.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using System.Windows;
@@ -24,10 +25,10 @@ using System.Windows.Data;
 namespace Spectre.Mvvm.Converters
 {
     /// <summary>
-	/// This allows to convert <see cref="bool"/> to <see cref="Visibility"/> and back.
-	/// </summary>
-	/// <seealso cref="System.Windows.Data.IValueConverter" />
-	public class BoolToVisibilityConverter : IValueConverter
+    /// This allows to convert <see cref="bool"/> to <see cref="Visibility"/> and back.
+    /// </summary>
+    /// <seealso cref="System.Windows.Data.IValueConverter" />
+    public class BoolToVisibilityConverter : IValueConverter
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -43,7 +44,9 @@ namespace Spectre.Mvvm.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((bool)value)
+            {
                 return Visibility.Visible;
+            }
             return Visibility.Collapsed;
         }
 
@@ -58,9 +61,10 @@ namespace Spectre.Mvvm.Converters
         /// The value to be passed to the source object.
         /// </returns>
         /// <exception cref="NullReferenceException">if value is null</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (Visibility)value == Visibility.Visible;
-        }
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture) => (Visibility)value == Visibility.Visible;
     }
 }

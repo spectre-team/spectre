@@ -22,11 +22,10 @@ limitations under the License.
 namespace Spectre::libException
 {
 InconsistentArgumentSizesException::InconsistentArgumentSizesException(
-    const std::string& nameOfFirst,
+    const std::string &nameOfFirst,
     size_t first,
-    const std::string& nameOfSecond,
+    const std::string &nameOfSecond,
     size_t second) :
     ExceptionBase(nameOfFirst + ": " + std::to_string(first) + "; "
-                  + nameOfSecond + ": " + std::to_string(second))
-{ }
+        + nameOfSecond + ": " + std::to_string(second)) { }
 }

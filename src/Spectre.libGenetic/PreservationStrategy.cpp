@@ -30,7 +30,7 @@ namespace Spectre::libGenetic
 PreservationStrategy::PreservationStrategy(double preservationRate):
     m_PreservationRate(preservationRate)
 {
-    if(preservationRate >= 0)
+    if (preservationRate >= 0)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -38,7 +38,7 @@ PreservationStrategy::PreservationStrategy(double preservationRate):
     {
         throw NegativePreservationRateException(preservationRate);
     }
-    if(preservationRate <= 1)
+    if (preservationRate <= 1)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -48,9 +48,9 @@ PreservationStrategy::PreservationStrategy(double preservationRate):
     }
 }
 
-Generation PreservationStrategy::PickBest(const Generation& generation, gsl::span<const ScoreType> scores)
+Generation PreservationStrategy::PickBest(const Generation &generation, gsl::span<const ScoreType> scores)
 {
-    if(generation.size() == static_cast<size_t>(scores.size()))
+    if (generation.size() == static_cast<size_t>(scores.size()))
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -66,5 +66,4 @@ Generation PreservationStrategy::PickBest(const Generation& generation, gsl::spa
     Generation newGeneration(std::move(bestIndividuals));
     return newGeneration;
 }
-
 }

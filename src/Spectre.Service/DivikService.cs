@@ -1,7 +1,7 @@
 ﻿/*
  * DivikService.cs
  * Contains definition of service for calculating Divik.
- * 
+ *
    Copyright 2017 Michał Wolny
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,28 +16,29 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using Spectre.Algorithms.Results;
-using Spectre.Service.Abstract;
-using Spectre.Algorithms.Parameterization;
-using Spectre.Data.Datasets;
-using Spectre.AlgorithmsCli.Methods;
+
 using System;
+using Spectre.Algorithms.Parameterization;
+using Spectre.Algorithms.Results;
+using Spectre.AlgorithmsCli.Methods;
+using Spectre.Data.Datasets;
+using Spectre.Service.Abstract;
 
 namespace Spectre.Service
 {
     /// <summary>
-    /// Class for calaculating divik.
+    ///     Class for calaculating divik.
     /// </summary>
-    class DivikService : IDivikService, IDisposable
+    internal class DivikService : IDivikService, IDisposable
     {
         /// <summary>
-        /// Private field for holding <see cref="Segmentation"/> for the service.
+        ///     Private field for holding <see cref="Segmentation" /> for the service.
         /// </summary>
-        private Segmentation _segmentation;
+        private readonly Segmentation _segmentation;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DivikService"/> class.
-        /// Creates <see cref="Segmentation"/> (MCR) instance for the service.
+        ///     Initializes a new instance of the <see cref="DivikService" /> class.
+        ///     Creates <see cref="Segmentation" /> (MCR) instance for the service.
         /// </summary>
         public DivikService()
         {
@@ -45,22 +46,21 @@ namespace Spectre.Service
         }
 
         /// <summary>
-		/// Service method for calculating divik.
-		/// </summary>
-		/// <param name="dataset">The source dataset being passed to the target.</param>
-        /// <param name="options">The options passed to the divik algorithm.</param>
-		/// <returns><see cref="DivikResult"/> of a given divik calculation.</returns>
-        public DivikResult CalculateDivik(IDataset dataset, DivikOptions options)
-        {
-            return _segmentation.Divik(dataset, options);
-        }
-
-        /// <summary>
-		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             _segmentation.Dispose();
         }
+
+        /// <summary>
+        ///     Service method for calculating divik.
+        /// </summary>
+        /// <param name="dataset">The source dataset being passed to the target.</param>
+        /// <param name="options">The options passed to the divik algorithm.</param>
+        /// <returns><see cref="DivikResult" /> of a given divik calculation.</returns>
+        public DivikResult CalculateDivik(IDataset dataset, DivikOptions options) => _segmentation.Divik(
+            dataset,
+            options);
     }
 }

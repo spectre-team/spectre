@@ -23,12 +23,12 @@ limitations under the License.
 
 namespace Spectre::libGaussianMixtureModelling
 {
-	/// <summary>
-	/// Computes value of Guassian Function, also known as Normal distribution
-	/// based on given mean, standard deviation for a single observation.
-	/// </summary>
-	inline double Gaussian(double x, double mean, double std)
-	{
-		return (1.0 / sqrt(2.0 * M_PI * std * std)) * exp(-pow(x - mean, 2) / (2.0 * std * std));
-	}
+/// <summary>
+/// Computes value of Guassian Function, also known as Normal distribution
+/// based on given mean, standard deviation for a single observation.
+/// </summary>
+inline double Gaussian(double x, double mean, double std)
+{
+    return (1.0 / sqrt(2.0 * M_PI * std * std)) * exp(-pow(x - mean, 2) / (2.0 * std * std));
+}
 }

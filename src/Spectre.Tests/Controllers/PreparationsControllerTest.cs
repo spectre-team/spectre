@@ -1,7 +1,7 @@
 ﻿/*
  * PreparationsControllerTest.cs
  * Test for proper responses after requests.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,6 @@
    limitations under the License.
 */
 
-using System;
 using System.Linq;
 using NUnit.Framework;
 using Spectre.Controllers;
@@ -25,17 +24,26 @@ using Spectre.Models.Msi;
 
 namespace Spectre.Tests.Controllers
 {
+    /// <summary>
+    /// Tests preparations controller
+    /// </summary>
     [TestFixture]
     public class PreparationsControllerTest
     {
         private PreparationsController _controller;
 
+        /// <summary>
+        /// Sets up.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
             _controller = new PreparationsController();
         }
 
+        /// <summary>
+        /// Tests the get list of preparations.
+        /// </summary>
         [Test]
         public void TestGetListOfPreparations()
         {
@@ -43,20 +51,24 @@ namespace Spectre.Tests.Controllers
 
             Assert.NotNull(list);
             Assert.IsNotEmpty(list);
-            Assert.AreEqual(1, list.Count());
-            Assert.AreEqual("Head & neck cancer, patient 1, tumor region only", list.First().Name);
+            Assert.AreEqual(expected: 1, actual: list.Count());
+            Assert.AreEqual(
+                expected: "Head & neck cancer, patient 1, tumor region only",
+                actual: list.First().Name);
         }
 
+        /// <summary>
+        /// Tests the get first preparation.
+        /// </summary>
         [Test]
         public void TestGetFirstPreparation()
         {
-            var first = _controller.Get(1);
+            var first = _controller.Get(id: 1);
 
             Assert.NotNull(first);
             Assert.IsInstanceOf<Preparation>(first);
-            Assert.AreEqual(1, first.Id);
-            Assert.AreEqual("Head & neck cancer, patient 1, tumor region only", first.Name);
+            Assert.AreEqual(expected: 1, actual: first.Id);
+            Assert.AreEqual(expected: "Head & neck cancer, patient 1, tumor region only", actual: first.Name);
         }
-        
     }
 }

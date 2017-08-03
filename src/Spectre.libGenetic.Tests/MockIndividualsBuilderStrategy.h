@@ -27,11 +27,12 @@ namespace Spectre::libGenetic::Tests
 class MockIndividualsBuilderStrategy: public IndividualsBuilderStrategy
 {
 public:
-    MockIndividualsBuilderStrategy(): 
+    MockIndividualsBuilderStrategy():
         IndividualsBuilderStrategy(std::make_unique<CrossoverOperator>(),
                                    std::make_unique<MutationOperator>(0, 0),
                                    std::make_unique<ParentSelectionStrategy>()) {}
+
     MOCK_CONST_METHOD3(BuildFunction, Generation(Generation&, std::vector<ScoreType>, size_t));
-    Generation Build(Generation& old, gsl::span<const ScoreType> scores, size_t size) const override { return BuildFunction(old, std::vector<ScoreType>(scores.begin(), scores.end()), size); }
+    Generation Build(Generation &old, gsl::span<const ScoreType> scores, size_t size) const override { return BuildFunction(old, std::vector<ScoreType>(scores.begin(), scores.end()), size); }
 };
 }

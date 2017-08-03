@@ -41,15 +41,15 @@ class IndividualsBuilderTest: public ::testing::Test
 {
 public:
     IndividualsBuilderTest():
-        generation(std::vector<Individual>(generationData))
-    {}
+        generation(std::vector<Individual>(generationData)) {}
+
 protected:
-    const std::vector<Individual> generationData{ Individual({ true, true }), Individual({ false, true }) };
+    const std::vector<Individual> generationData { Individual({ true, true }), Individual({ false, true }) };
     Generation generation;
-    const std::vector<ScoreType> scores{ 1,2 };
-    reference_pair<Individual> pickedParents{ toReferencePair({ true, false }) };
-    Individual crossedIndividual{ std::vector<bool>({ false, true }) };
-    Individual mutatedIndividual{ std::vector<bool>({ true, true }) };
+    const std::vector<ScoreType> scores { 1,2 };
+    reference_pair<Individual> pickedParents { toReferencePair({ true, false }) };
+    Individual crossedIndividual { std::vector<bool>({ false, true }) };
+    Individual mutatedIndividual { std::vector<bool>({ true, true }) };
 
     void SetUp() override
     {

@@ -22,8 +22,5 @@ limitations under the License.
 namespace Spectre::libGenetic
 {
 NegativePreservationRateException::NegativePreservationRateException(double actual):
-    ArgumentOutOfRangeException<double>("preservationRate", 0, 1, actual)
-{
-    
-}
+    ArgumentOutOfRangeException<double>("preservationRate", 0, 1, actual) { }
 }

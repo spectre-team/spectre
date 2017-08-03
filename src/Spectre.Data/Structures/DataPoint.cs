@@ -2,7 +2,7 @@
  * DataPoint.cs
  * Contains representation for single measurement from MALDI
  * spectrometry for single XY coordinate.
- * 
+ *
    Copyright 2017 Dariusz Kuchta
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 namespace Spectre.Data.Structures
 {
     /// <summary>
@@ -24,19 +25,8 @@ namespace Spectre.Data.Structures
     /// </summary>
     public class DataPoint
     {
-        #region Fields
-
-        /// <summary>
-        /// Value of m/z.
-        /// </summary>
-        public double Mz { get; }
-        /// <summary>
-        /// Value of intensity.
-        /// </summary>
-        public double Intensity { get; }
-        #endregion
-
         #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DataPoint"/> class
         /// with user defined values of m/z and intensity.
@@ -48,6 +38,21 @@ namespace Spectre.Data.Structures
             Mz = mz;
             Intensity = intensity;
         }
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// Value of m/z.
+        /// </summary>
+        public double Mz { get; }
+
+        /// <summary>
+        /// Value of intensity.
+        /// </summary>
+        public double Intensity { get; }
+
         #endregion
     }
 }

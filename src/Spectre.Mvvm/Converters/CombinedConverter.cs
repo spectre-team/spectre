@@ -1,7 +1,7 @@
 ﻿/*
  * CombinedConverter.cs
  * Converter which allows chaining of other converters.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +16,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Windows.Data;
 
 namespace Spectre.Mvvm.Converters
 {
     /// <summary>
-	/// Converter allowing nesting of the converters.
-	/// </summary>
-	public class CombinedConverter : IValueConverter
+    /// Converter allowing nesting of the converters.
+    /// </summary>
+    public class CombinedConverter : IValueConverter
     {
         /// <summary>
         /// Gets or sets the first converter used.
@@ -54,9 +55,11 @@ namespace Spectre.Mvvm.Converters
         /// </returns>
         /// <exception cref="NullReferenceException">if value is null</exception>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return Second.Convert(First.Convert(value, targetType, parameter, culture), targetType, parameter, culture);
-        }
+            => Second.Convert(
+                value: First.Convert(value, targetType, parameter, culture),
+                targetType: targetType,
+                parameter: parameter,
+                culture: culture);
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.
@@ -69,9 +72,14 @@ namespace Spectre.Mvvm.Converters
         /// The value to be passed to the source object.
         /// </returns>
         /// <exception cref="NullReferenceException">if value is null</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return First.ConvertBack(Second.ConvertBack(value, targetType, parameter, culture), targetType, parameter, culture);
-        }
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture) => First.ConvertBack(
+            value: Second.ConvertBack(value, targetType, parameter, culture),
+            targetType: targetType,
+            parameter: parameter,
+            culture: culture);
     }
 }

@@ -26,8 +26,8 @@ namespace Spectre::libGenetic::Tests
 class MockMutationOperator: public MutationOperator
 {
 public:
-    MockMutationOperator(): MutationOperator(0,0) { }
+    MockMutationOperator(): MutationOperator(0, 0) { }
     MOCK_METHOD1(CallOperator, Individual(Individual));
-    Individual operator()(Individual&& individual) override { return CallOperator(std::move(individual)); }
+    Individual operator()(Individual &&individual) override { return CallOperator(std::move(individual)); }
 };
 }

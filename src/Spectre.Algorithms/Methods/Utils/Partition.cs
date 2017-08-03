@@ -1,7 +1,7 @@
 ﻿/*
  * Partition.cs
  * Provides methods simplifying operations on partition vectors.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,26 +39,34 @@ namespace Spectre.Algorithms.Methods.Utils
         /// <returns><value>true</value>, if partitions match; <value>false</value> otherwise.</returns>
         /// <exception cref="System.ArgumentException">Lengths of partitions differ.</exception>
         /// <exception cref="ArgumentNullException">Any of partitions is null.</exception>
-        public static bool Compare<T1,T2>(IEnumerable<T1> partition1, IEnumerable<T2> partition2, double tolerance)
+        public static bool Compare<T1, T2>(IEnumerable<T1> partition1, IEnumerable<T2> partition2, double tolerance)
         {
-            if(partition1 == null)
-                throw new ArgumentNullException(nameof(partition1));
-            if(partition2 == null)
-                throw  new ArgumentNullException(nameof(partition2));
+            if (partition1 == null)
+            {
+                throw new ArgumentNullException(paramName: nameof(partition1));
+            }
+            if (partition2 == null)
+            {
+                throw new ArgumentNullException(paramName: nameof(partition2));
+            }
 
             var typedPartition1 = partition1.ToArray();
             var typedPartition2 = partition2.ToArray();
 
             if (typedPartition1.Length != typedPartition2.Length)
-                throw new ArgumentException("Lengths of partitions differ.");
+            {
+                throw new ArgumentException(message: "Lengths of partitions differ.");
+            }
 
-            var simple1 = Simplify(typedPartition1);
-            var simple2 = Simplify(typedPartition2);
+            var simple1 = Partition.Simplify(typedPartition1);
+            var simple2 = Partition.Simplify(typedPartition2);
 
-            var matched = simple1.Zip(simple2, (assignment1, assignment2) => assignment1 == assignment2 ? 1 : 0);
+            var matched = simple1.Zip(
+                simple2,
+                resultSelector: (assignment1, assignment2) => assignment1 == assignment2 ? 1 : 0);
             var matchesCount = matched.Sum();
 
-            var compatibilityRate = ((double)matchesCount) / typedPartition1.Length;
+            var compatibilityRate = (double)matchesCount / typedPartition1.Length;
             var requiredCompatibilityRate = 1 - tolerance;
 
             return requiredCompatibilityRate <= compatibilityRate;
@@ -77,12 +86,18 @@ namespace Spectre.Algorithms.Methods.Utils
             var currentIntLabel = 1;
             var typedPartition = partition.ToArray();
             foreach (var label in typedPartition)
+            {
                 if (!labelsDictionary.ContainsKey(label))
+                {
                     labelsDictionary.Add(label, currentIntLabel++);
+                }
+            }
 
             var newLabeling = new int[typedPartition.Length];
             for (var i = 0; i < typedPartition.Length; ++i)
-                newLabeling[i] = labelsDictionary[typedPartition[i]];
+            {
+                newLabeling[i] = labelsDictionary[key: typedPartition[i]];
+            }
 
             return newLabeling;
         }

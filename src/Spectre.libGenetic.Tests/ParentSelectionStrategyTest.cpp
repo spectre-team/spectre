@@ -30,42 +30,42 @@ using namespace Spectre::libException;
 
 TEST(ParentSelectionStrategyInitialization, initializes)
 {
-	ParentSelectionStrategy parent_selection(0);
+    ParentSelectionStrategy parent_selection(0);
 }
 
 class ParentSelectionStrategyTest : public ::testing::Test
 {
 public:
-	ParentSelectionStrategyTest():
-        individual1(std::vector<bool>{ true, false, true, false }),
-        individual2(std::vector<bool>{ false, true, false, true }),
-        generation({ individual1, individual2 })
-    {}
+    ParentSelectionStrategyTest():
+        individual1(std::vector<bool> { true, false, true, false }),
+        individual2(std::vector<bool> { false, true, false, true }),
+        generation({ individual1, individual2 }) {}
+
 protected:
     const unsigned NUMBER_OF_TRIALS = 1000;
     const double ALLOWED_MISS_RATE = 0.05;
-	const Seed SEED = 0;
+    const Seed SEED = 0;
     const Individual individual1;
     const Individual individual2;
     ParentSelectionStrategy parent_selection;
     Generation generation;
 
-	void SetUp() override
-	{
-		parent_selection = ParentSelectionStrategy(SEED);
-	}
+    void SetUp() override
+    {
+        parent_selection = ParentSelectionStrategy(SEED);
+    }
 };
 
 TEST_F(ParentSelectionStrategyTest, all_zero_scores_do_not_cause_error)
 {
-    const std::vector<ScoreType> score{ 0, 0 };
+    const std::vector<ScoreType> score { 0, 0 };
 
     EXPECT_NO_THROW(parent_selection.next(generation, score));
 }
 
 TEST_F(ParentSelectionStrategyTest, throws_for_negative_weights)
 {
-    const std::vector<ScoreType> score{ -1, 0 };
+    const std::vector<ScoreType> score { -1, 0 };
 
     EXPECT_THROW(parent_selection.next(generation, score), ArgumentOutOfRangeException<ScoreType>);
 }
@@ -78,9 +78,9 @@ TEST_F(ParentSelectionStrategyTest, throws_on_inconsistent_inputs_size)
 
 TEST_F(ParentSelectionStrategyTest, some_zero_scores_never_draw_corresponding_individuals)
 {
-    const std::vector<ScoreType> score{ 1, 0 };
+    const std::vector<ScoreType> score { 1, 0 };
 
-    for (auto i = 0u; i<NUMBER_OF_TRIALS; ++i)
+    for (auto i = 0u; i < NUMBER_OF_TRIALS; ++i)
     {
         const auto parents = parent_selection.next(generation, score);
         EXPECT_NE(individual2, parents.first);
@@ -90,16 +90,16 @@ TEST_F(ParentSelectionStrategyTest, some_zero_scores_never_draw_corresponding_in
 
 TEST_F(ParentSelectionStrategyTest, scores_influence_draw_probability_proportionally)
 {
-	const std::vector<ScoreType> score{ 1, 2 };
+    const std::vector<ScoreType> score { 1, 2 };
 
     auto count1 = 0u;
     auto count2 = 0u;
 
-    for(auto i=0u; i<NUMBER_OF_TRIALS; ++i)
+    for (auto i = 0u; i < NUMBER_OF_TRIALS; ++i)
     {
         const auto parents = parent_selection.next(generation, score);
-        const auto& firstParent = parents.first.get();
-        const auto& secondParent = parents.second.get();
+        const auto &firstParent = parents.first.get();
+        const auto &secondParent = parents.second.get();
         if (firstParent == generation[0])
         {
             ++count1;

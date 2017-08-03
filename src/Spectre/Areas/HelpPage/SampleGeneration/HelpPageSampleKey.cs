@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http.Headers;
@@ -11,7 +11,8 @@ namespace Spectre.Areas.HelpPage
     public class HelpPageSampleKey
     {
         /// <summary>
-        /// Creates a new <see cref="HelpPageSampleKey"/> based on media type.
+        /// Initializes a new instance of the <see cref="HelpPageSampleKey"/> class.
+        /// Bases on media type.
         /// </summary>
         /// <param name="mediaType">The media type.</param>
         public HelpPageSampleKey(MediaTypeHeaderValue mediaType)
@@ -21,14 +22,15 @@ namespace Spectre.Areas.HelpPage
                 throw new ArgumentNullException("mediaType");
             }
 
-            ActionName = String.Empty;
-            ControllerName = String.Empty;
+            ActionName = string.Empty;
+            ControllerName = string.Empty;
             MediaType = mediaType;
             ParameterNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
-        /// Creates a new <see cref="HelpPageSampleKey"/> based on media type and CLR type.
+        /// Initializes a new instance of the <see cref="HelpPageSampleKey"/> class.
+        /// Bases on media type and CLR type.
         /// </summary>
         /// <param name="mediaType">The media type.</param>
         /// <param name="type">The CLR type.</param>
@@ -44,7 +46,8 @@ namespace Spectre.Areas.HelpPage
         }
 
         /// <summary>
-        /// Creates a new <see cref="HelpPageSampleKey"/> based on <see cref="SampleDirection"/>, controller name, action name and parameter names.
+        /// Initializes a new instance of the <see cref="HelpPageSampleKey"/> class.
+        /// Bases on <see cref="SampleDirection"/>, controller name, action name and parameter names.
         /// </summary>
         /// <param name="sampleDirection">The <see cref="SampleDirection"/>.</param>
         /// <param name="controllerName">Name of the controller.</param>
@@ -76,7 +79,8 @@ namespace Spectre.Areas.HelpPage
         }
 
         /// <summary>
-        /// Creates a new <see cref="HelpPageSampleKey"/> based on media type, <see cref="SampleDirection"/>, controller name, action name and parameter names.
+        /// Initializes a new instance of the <see cref="HelpPageSampleKey"/> class.
+        /// Bases on media type, <see cref="SampleDirection"/>, controller name, action name and parameter names.
         /// </summary>
         /// <param name="mediaType">The media type.</param>
         /// <param name="sampleDirection">The <see cref="SampleDirection"/>.</param>
@@ -123,6 +127,12 @@ namespace Spectre.Areas.HelpPage
         /// </summary>
         public HashSet<string> ParameterNames { get; private set; }
 
+        /// <summary>
+        /// Gets the type of the parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the parameter.
+        /// </value>
         public Type ParameterType { get; private set; }
 
         /// <summary>
@@ -130,6 +140,7 @@ namespace Spectre.Areas.HelpPage
         /// </summary>
         public SampleDirection? SampleDirection { get; private set; }
 
+        /// <inheritdoc cref="object"/>
         public override bool Equals(object obj)
         {
             HelpPageSampleKey otherKey = obj as HelpPageSampleKey;
@@ -138,14 +149,15 @@ namespace Spectre.Areas.HelpPage
                 return false;
             }
 
-            return String.Equals(ControllerName, otherKey.ControllerName, StringComparison.OrdinalIgnoreCase) &&
-                String.Equals(ActionName, otherKey.ActionName, StringComparison.OrdinalIgnoreCase) &&
+            return string.Equals(ControllerName, otherKey.ControllerName, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(ActionName, otherKey.ActionName, StringComparison.OrdinalIgnoreCase) &&
                 (MediaType == otherKey.MediaType || (MediaType != null && MediaType.Equals(otherKey.MediaType))) &&
                 ParameterType == otherKey.ParameterType &&
                 SampleDirection == otherKey.SampleDirection &&
                 ParameterNames.SetEquals(otherKey.ParameterNames);
         }
 
+        /// <inheritdoc cref="object"/>
         public override int GetHashCode()
         {
             int hashCode = ControllerName.ToUpperInvariant().GetHashCode() ^ ActionName.ToUpperInvariant().GetHashCode();

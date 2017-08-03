@@ -23,56 +23,56 @@ limitations under the License.
 
 namespace Spectre::libDataset
 {
+/// <summary>
+/// Read-only dataset interface.
+/// </summary>
+template <typename DataType, typename SampleMetadata, typename DatasetMetadata>
+class IReadOnlyDataset
+{
+public:
     /// <summary>
-    /// Read-only dataset interface.
+    /// Gets sample under specified index in read-only fashion.
     /// </summary>
-    template<typename DataType, typename SampleMetadata, typename DatasetMetadata>
-    class IReadOnlyDataset
-    {
-    public:
-        /// <summary>
-        /// Gets sample under specified index in read-only fashion.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample</returns>
-        virtual const DataType& operator[](size_t idx) const = 0;
-        /// <summary>
-        /// Gets the sample metadata in read-only fashion.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample metadata</returns>
-        virtual const SampleMetadata& GetSampleMetadata(size_t idx) const = 0;        
-        /// <summary>
-        /// Gets the dataset metadata in read-only fashion.
-        /// </summary>
-        /// <returns>Dataset metadata</returns>
-        virtual const DatasetMetadata& GetDatasetMetadata() const = 0;
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample</returns>
+    virtual const DataType& operator[](size_t idx) const = 0;
+    /// <summary>
+    /// Gets the sample metadata in read-only fashion.
+    /// </summary>
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample metadata</returns>
+    virtual const SampleMetadata& GetSampleMetadata(size_t idx) const = 0;
+    /// <summary>
+    /// Gets the dataset metadata in read-only fashion.
+    /// </summary>
+    /// <returns>Dataset metadata</returns>
+    virtual const DatasetMetadata& GetDatasetMetadata() const = 0;
 
-        /// <summary>
-        /// Gets the data in read-only fashion.
-        /// </summary>
-        /// <returns></returns>
-        virtual gsl::span<const DataType> GetData() const = 0;
-        /// <summary>
-        /// Gets the sample metadata in read-only fashion.
-        /// </summary>
-        /// <returns></returns>
-        virtual gsl::span<const SampleMetadata> GetSampleMetadata() const = 0;
+    /// <summary>
+    /// Gets the data in read-only fashion.
+    /// </summary>
+    /// <returns></returns>
+    virtual gsl::span<const DataType> GetData() const = 0;
+    /// <summary>
+    /// Gets the sample metadata in read-only fashion.
+    /// </summary>
+    /// <returns></returns>
+    virtual gsl::span<const SampleMetadata> GetSampleMetadata() const = 0;
 
-        /// <summary>
-        /// Number of elements in dataset.
-        /// </summary>
-        /// <returns>Size</returns>
-        virtual size_t size() const = 0;        
-        /// <summary>
-        /// Checks, whether dataset is empty.
-        /// </summary>
-        /// <returns>True, if dataset is empty.</returns>
-        virtual bool empty() const = 0;
+    /// <summary>
+    /// Number of elements in dataset.
+    /// </summary>
+    /// <returns>Size</returns>
+    virtual size_t size() const = 0;
+    /// <summary>
+    /// Checks, whether dataset is empty.
+    /// </summary>
+    /// <returns>True, if dataset is empty.</returns>
+    virtual bool empty() const = 0;
 
-        /// <summary>
-        /// Cleans up an instance of the <see cref="IReadOnlyDataset"/> class.
-        /// </summary>
-        virtual ~IReadOnlyDataset() = default;
-    };
+    /// <summary>
+    /// Cleans up an instance of the <see cref="IReadOnlyDataset"/> class.
+    /// </summary>
+    virtual ~IReadOnlyDataset() = default;
+};
 }

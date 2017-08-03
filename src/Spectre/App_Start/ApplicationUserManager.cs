@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -9,22 +8,41 @@ namespace Spectre
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
+    /// <summary>
+    /// Manages application users
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNet.Identity.UserManager{T}" />
+    /// <seealso cref="Spectre.Models.ApplicationUser"/>
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationUserManager"/> class.
+        /// </summary>
+        /// <param name="store">User store</param>
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
-            : base(store)
-        {
-        }
+            : base(store) { }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        /// <summary>
+        /// Creates the user manager from specified options.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>User manager</returns>
+        public static ApplicationUserManager Create(
+            IdentityFactoryOptions<ApplicationUserManager> options,
+            IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager =
+                new ApplicationUserManager(
+                    store: new UserStore<ApplicationUser>(context: context.Get<ApplicationDbContext>()));
+
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
+
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
@@ -37,7 +55,9 @@ namespace Spectre
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider =
+                    new DataProtectorTokenProvider<ApplicationUser>(
+                        protector: dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }

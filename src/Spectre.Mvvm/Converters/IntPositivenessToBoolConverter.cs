@@ -1,7 +1,7 @@
 ﻿/*
  * IntPositivenessToBoolConverter.cs
  * Converter which gives true for positive ints, false otherwise.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +16,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Windows.Data;
 
 namespace Spectre.Mvvm.Converters
 {
     /// <summary>
-	/// This converter allows to determine if integer value is positive.
-	/// </summary>
-	/// <seealso cref="System.Windows.Data.IValueConverter" />
-	public class IntPositivenessToBoolConverter : IValueConverter
+    /// This converter allows to determine if integer value is positive.
+    /// </summary>
+    /// <seealso cref="System.Windows.Data.IValueConverter" />
+    public class IntPositivenessToBoolConverter : IValueConverter
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -38,10 +39,11 @@ namespace Spectre.Mvvm.Converters
         /// The value to be passed to the target dependency property.
         /// </returns>
         /// <exception cref="NullReferenceException">if value is null</exception>
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return (int)value > 0;
-        }
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture) => (int)value > 0;
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.
@@ -54,9 +56,11 @@ namespace Spectre.Mvvm.Converters
         /// The value to be passed to the source object.
         /// </returns>
         /// <exception cref="InvalidOperationException">Always as it cannot be used to <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new InvalidOperationException("Cannot restore int value from bool.");
-        }
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture) => throw new InvalidOperationException(
+            message: "Cannot restore int value from bool.");
     }
 }

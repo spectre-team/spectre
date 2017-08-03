@@ -1,7 +1,7 @@
 ﻿/*
  * SpatialCoordinates.cs
  * Struct used for storing the spacial coordinates of a spectrum.
- * 
+ *
    Copyright 2017 Dariusz Kuchta
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,13 +24,9 @@ namespace Spectre.Data.Structures
     /// </summary>
     public struct SpatialCoordinates
     {
-        public int X;
-        public int Y;
-        public int Z;
-
         /// <summary>
-        /// Initializes a new instance of <see cref="SpatialCoordinates"/> struct with
-        /// user defined values of spatial coordinates.
+        /// Initializes a new instance of the <see cref="SpatialCoordinates"/> struct.
+        /// Uses user defined values of spatial coordinates.
         /// </summary>
         /// <param name="x">X coordinate.</param>
         /// <param name="y">Y coordinate.</param>
@@ -41,22 +37,41 @@ namespace Spectre.Data.Structures
             Y = y;
             Z = z;
         }
+
+        /// <summary>
+        /// Gets the x.
+        /// </summary>
+        /// <value>
+        /// The x.
+        /// </value>
+        public int X { get; }
+
+        /// <summary>
+        /// Gets the y.
+        /// </summary>
+        /// <value>
+        /// The y.
+        /// </value>
+        public int Y { get; }
+
+        /// <summary>
+        /// Gets the z.
+        /// </summary>
+        /// <value>
+        /// The z.
+        /// </value>
+        public int Z { get; }
+
         /// <summary>
         /// Returns raw form of spatial coordintates in order X, Y, Z.
         /// </summary>
         /// <returns>Array of values representing spatial coordinates.</returns>
-        public int[] GetRaw()
-        {
-            return new [] {X, Y, Z};
-        } 
+        public int[] GetRaw() => new[] { X, Y, Z };
 
         /// <summary>
         /// Converts spatial coordinates into space-separated string of x, y and z values
         /// </summary>
         /// <returns>String of form "x y z"</returns>
-        public override string ToString()
-        {
-            return X.ToString() + ' ' + Y.ToString() + ' ' + Z.ToString();
-        }
+        public override string ToString() => X.ToString() + ' ' + Y + ' ' + Z;
     }
 }

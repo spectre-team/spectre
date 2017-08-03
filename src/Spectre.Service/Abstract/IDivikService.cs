@@ -1,7 +1,7 @@
 ﻿/*
  * IDivikService.cs
  * Contains definition of interface for service for calculating Divik.
- * 
+ *
    Copyright 2017 Michał Wolny
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
 using Spectre.Data.Datasets;
@@ -28,11 +29,11 @@ namespace Spectre.Service.Abstract
     public interface IDivikService
     {
         /// <summary>
-		/// Service method for calculating divik.
-		/// </summary>
-		/// <param name="dataset">The source dataset being passed to the target.</param>
+        /// Service method for calculating divik.
+        /// </summary>
+        /// <param name="dataset">The source dataset being passed to the target.</param>
         /// <param name="options">The options passed to the divik algorithm.</param>
-		/// <returns><see cref="DivikResult"/> of a given divik calculation.</returns>
+        /// <returns><see cref="DivikResult"/> of a given divik calculation.</returns>
         DivikResult CalculateDivik(IDataset dataset, DivikOptions options);
     }
 }

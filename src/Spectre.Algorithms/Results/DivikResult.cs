@@ -1,7 +1,7 @@
 ﻿/*
  * DivikResult.cs
  * Contains structure organizing all the output from DiviK algorithm.
- * 
+ *
    Copyright 2017 Wilgierz Wojciech, Grzegorz Mrukwa, Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,6 @@
    limitations under the License.
 */
 
-
 using System.IO;
 using System.Linq;
 using MathWorks.MATLAB.NET.Arrays.native;
@@ -30,6 +29,35 @@ namespace Spectre.Algorithms.Results
     /// </summary>
     public sealed class DivikResult
     {
+        #region Constructor
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DivikResult"/> class.
+        /// </summary>
+        /// <param name="matlabResult">The results coming from MCR.</param>
+        public DivikResult(object matlabResult) // made public only for migration purposes! (was internal)
+        {
+            var array = (MWStructArray)matlabResult;
+            Centroids = ParseCentroids(array);
+            QualityIndex = ParseIndex(array);
+            Partition = ParsePartition(array);
+            AmplitudeThreshold = ParseAmplitudeThreshold(array);
+            AmplitudeFilter = ParseAmplitudeFilter(array);
+            VarianceThreshold = ParseVarianceThreshold(array);
+            VarianceFilter = ParseVarianceFilter(array);
+            Merged = ParseMerged(array);
+            Subregions = ParseSubregions(array);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DivikResult"/> class.
+        /// Empty constructor for serialization purposes.
+        /// </summary>
+        public DivikResult() // made public only for migration purposes! (was private)
+        { }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -79,158 +107,30 @@ namespace Spectre.Algorithms.Results
 
         #endregion
 
-        #region Constructor
+        #region Operators
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DivikResult"/> class.
+        /// Implements the operator ==.
         /// </summary>
-        /// <param name="matlabResult">The results coming from MCR.</param>
-        public DivikResult(object matlabResult) // made public only for migration purposes! (was internal)
-        {
-            var array = (MWStructArray) matlabResult;
-            Centroids = ParseCentroids(array);
-            QualityIndex = ParseIndex(array);
-            Partition = ParsePartition(array);
-            AmplitudeThreshold = ParseAmplitudeThreshold(array);
-            AmplitudeFilter = ParseAmplitudeFilter(array);
-            VarianceThreshold = ParseVarianceThreshold(array);
-            VarianceFilter = ParseVarianceFilter(array);
-            Merged = ParseMerged(array);
-            Subregions = ParseSubregions(array);
-        }
+        /// <param name="first">First instance to compare.</param>
+        /// <param name="second">Second instance to compare.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator ==(DivikResult first, DivikResult second) =>
+            (((object)first == null) && ((object)second == null))
+            || (((object)first != null) && first.Equals(second))
+            || second.Equals(first);
 
         /// <summary>
-        /// Empty constructor for serialization purposes.
+        /// Implements the operator !=.
         /// </summary>
-        public DivikResult() // made public only for migration purposes! (was private)
-        {
-
-        }
-
-        #endregion
-
-        #region Parsing
-
-        private double ParseIndex(MWStructArray array)
-        {
-            if (array.IsField("index"))
-            {
-                var tmpIndex = (double[,]) array.GetField("index");
-                return tmpIndex[0, 0];
-            }
-            return double.NaN;
-        }
-
-        private double[,] ParseCentroids(MWStructArray array)
-        {
-            if (array.IsField("centroids"))
-            {
-                var transposed = (double[,]) array.GetField("centroids");
-                var straight = new double[transposed.GetLength(1), transposed.GetLength(0)];
-                for (var i = 0; i < transposed.GetLength(1); ++i)
-                    for (var j = 0; j < transposed.GetLength(0); ++j)
-                        straight[i, j] = transposed[j, i];
-                return straight;
-            }
-            return null;
-        }
-
-        private int[] ParsePartition(MWStructArray array)
-        {
-            if (array.IsField("partition"))
-            {
-                var tmpPartition = (double[,]) array.GetField("partition");
-                var partition = new int[tmpPartition.Length];
-                for (var i = 0; i < tmpPartition.Length; ++i)
-                {
-                    // -1 for indexing purposes (label should allow to check centroid)
-                    partition[i] = (int) tmpPartition[0, i] - 1;
-                }
-                return partition;
-            }
-            return null;
-        }
-
-        private double ParseAmplitudeThreshold(MWStructArray array)
-        {
-            if (array.IsField("amp_thr"))
-            {
-                var tmpAmpThr = (double[,]) array.GetField("amp_thr");
-                return tmpAmpThr[0, 0];
-            }
-            return double.NaN;
-        }
-
-        private bool[] ParseAmplitudeFilter(MWStructArray array)
-        {
-            if (array.IsField("amp_filter"))
-            {
-                var tmpAmpFilter = (bool[,]) array.GetField("amp_filter");
-                var ampFilter = new bool[tmpAmpFilter.Length];
-                for (var i = 0; i < tmpAmpFilter.Length; ++i)
-                {
-                    ampFilter[i] = tmpAmpFilter[i, 0];
-                }
-                return ampFilter;
-            }
-            return null;
-        }
-
-        private double ParseVarianceThreshold(MWStructArray array)
-        {
-            if (array.IsField("var_thr"))
-            {
-                var tmpVarThr = (double[,]) array.GetField("var_thr");
-                return tmpVarThr[0, 0];
-            }
-            return double.NaN;
-        }
-
-        private bool[] ParseVarianceFilter(MWStructArray array)
-        {
-            if (array.IsField("var_filter"))
-            {
-                var tmpVarFilter = (bool[,]) array.GetField("var_filter");
-                var varFilter = new bool[tmpVarFilter.Length];
-                for (var i = 0; i < tmpVarFilter.Length; ++i)
-                {
-                    varFilter[i] = tmpVarFilter[i, 0];
-                }
-                return varFilter;
-            }
-            return null;
-        }
-
-        private int[] ParseMerged(MWStructArray array)
-        {
-            if (array.IsField("merged"))
-            {
-                var tmpMerged = (double[,]) array.GetField("merged");
-                var merged = new int[tmpMerged.Length];
-                for (var i = 0; i < tmpMerged.Length; ++i)
-                {
-                    merged[i] = (int) tmpMerged[0, i];
-                }
-                return merged;
-            }
-            return null;
-        }
-
-        private DivikResult[] ParseSubregions(MWStructArray array)
-        {
-            if (array.IsField("subregions"))
-            {
-                var tmpSubregions = (MWCellArray) array.GetField("subregions");
-                var subregions = new DivikResult[tmpSubregions.NumberOfElements];
-                for (var i = 0; i < tmpSubregions.NumberOfElements; ++i)
-                {
-                    if (tmpSubregions[i + 1] is MWStructArray)
-                        subregions[i] = new DivikResult(tmpSubregions[i + 1]);
-                }
-                return subregions;
-            }
-            return null;
-        }
+        /// <param name="first">First instance to compare.</param>
+        /// <param name="second">Second instance to compare.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator !=(DivikResult first, DivikResult second) => !(first == second);
 
         #endregion
 
@@ -243,8 +143,8 @@ namespace Spectre.Algorithms.Results
         /// <param name="indentation">Sets indented formattings.</param>
         public void Save(string path, bool indentation)
         {
-            Formatting format = indentation ? Formatting.Indented : Formatting.None;
-            string data = JsonConvert.SerializeObject(this, format);
+            var format = indentation ? Formatting.Indented : Formatting.None;
+            var data = JsonConvert.SerializeObject(value: this, formatting: format);
             File.WriteAllText(path, data);
         }
 
@@ -253,87 +153,115 @@ namespace Spectre.Algorithms.Results
         #region Equals
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
             if (!(obj is DivikResult))
+            {
                 return false;
+            }
 
-            if (ReferenceEquals(this, obj))
+            if (object.ReferenceEquals(objA: this, objB: obj))
+            {
                 return true;
+            }
 
-            var other = (DivikResult) obj;
+            var other = (DivikResult)obj;
 
-            if ((double.IsNaN(other.AmplitudeThreshold) != double.IsNaN(this.AmplitudeThreshold)) || (!double.IsNaN(this.AmplitudeThreshold) && other.AmplitudeThreshold != this.AmplitudeThreshold))
+            if ((double.IsNaN(other.AmplitudeThreshold) != double.IsNaN(AmplitudeThreshold))
+                || (!double.IsNaN(AmplitudeThreshold) && (other.AmplitudeThreshold != AmplitudeThreshold)))
+            {
                 return false;
-            if ((double.IsNaN(other.VarianceThreshold) != double.IsNaN(this.VarianceThreshold)) || (!double.IsNaN(this.VarianceThreshold) && other.VarianceThreshold != this.VarianceThreshold))
+            }
+            if ((double.IsNaN(other.VarianceThreshold) != double.IsNaN(VarianceThreshold))
+                || (!double.IsNaN(VarianceThreshold) && (other.VarianceThreshold != VarianceThreshold)))
+            {
                 return false;
-            if (other.QualityIndex != this.QualityIndex)
+            }
+            if (other.QualityIndex != QualityIndex)
+            {
                 return false;
-            if ((other.AmplitudeFilter != null) != (this.AmplitudeFilter != null))
+            }
+            if ((other.AmplitudeFilter != null) != (AmplitudeFilter != null))
+            {
                 return false;
-            if (other.AmplitudeFilter != null && this.AmplitudeFilter != null && other.AmplitudeFilter.Length != this.AmplitudeFilter.Length)
+            }
+            if ((other.AmplitudeFilter != null)
+                && (AmplitudeFilter != null)
+                && (other.AmplitudeFilter.Length != AmplitudeFilter.Length))
+            {
                 return false;
-            if ((other.VarianceFilter != null) != (this.VarianceFilter != null))
+            }
+            if ((other.VarianceFilter != null) != (VarianceFilter != null))
+            {
                 return false;
-            if (other.VarianceFilter != null && this.VarianceFilter != null && other.VarianceFilter.Length != this.VarianceFilter.Length)
+            }
+            if ((other.VarianceFilter != null)
+                && (VarianceFilter != null)
+                && (other.VarianceFilter.Length != VarianceFilter.Length))
+            {
                 return false;
-            if (other.Centroids.Length != this.Centroids.Length)
+            }
+            if (other.Centroids.Length != Centroids.Length)
+            {
                 return false;
-            if (other.Partition.Length != this.Partition.Length)
+            }
+            if (other.Partition.Length != Partition.Length)
+            {
                 return false;
-            if (other.AmplitudeFilter != null && this.AmplitudeFilter != null && !other.AmplitudeFilter.SequenceEqual(this.AmplitudeFilter))
+            }
+            if ((other.AmplitudeFilter != null)
+                && (AmplitudeFilter != null)
+                && !other.AmplitudeFilter.SequenceEqual(AmplitudeFilter))
+            {
                 return false;
-            if (other.VarianceFilter != null && this.VarianceFilter != null && !other.VarianceFilter.SequenceEqual(this.VarianceFilter))
+            }
+            if ((other.VarianceFilter != null)
+                && (VarianceFilter != null)
+                && !other.VarianceFilter.SequenceEqual(VarianceFilter))
+            {
                 return false;
-            if (!other.Partition.SequenceEqual(this.Partition))
+            }
+            if (!other.Partition.SequenceEqual(Partition))
+            {
                 return false;
-            if ((other.Merged != null) != (this.Merged != null))
+            }
+            if ((other.Merged != null) != (Merged != null))
+            {
                 return false;
-            if (other.Merged != null && this.Merged != null && !other.Merged.SequenceEqual(this.Merged))
+            }
+            if ((other.Merged != null) && (Merged != null) && !other.Merged.SequenceEqual(Merged))
+            {
                 return false;
-            if (!other.Centroids.Cast<double>().SequenceEqual(this.Centroids.Cast<double>()))
+            }
+            if (!other.Centroids.Cast<double>()
+                .SequenceEqual(second: Centroids.Cast<double>()))
+            {
                 return false;
-            if ((other.Subregions != null) != (this.Subregions != null))
+            }
+            if ((other.Subregions != null) != (Subregions != null))
+            {
                 return false;
-            if (other.Subregions != null && this.Subregions != null && !other.Subregions.SequenceEqual(this.Subregions))
+            }
+            if ((other.Subregions != null) && (Subregions != null) && !other.Subregions.SequenceEqual(Subregions))
+            {
                 return false;
+            }
 
             return true;
         }
 
-
         /// <summary>
-        /// Implements the operator ==.
+        /// Returns a hash code for this instance.
         /// </summary>
-        /// <param name="first">First instance to compare.</param>
-        /// <param name="second">Second instance to compare.</param>
         /// <returns>
-        /// The result of the operator.
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public static bool operator ==(DivikResult first, DivikResult second)
-        {
-            return ((object)first == null && (object)second == null) || ((object)first != null && first.Equals(second)) || second.Equals(first);
-        }
-
-        /// <summary>
-        /// Implements the operator !=.
-        /// </summary>
-        /// <param name="first">First instance to compare.</param>
-        /// <param name="second">Second instance to compare.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
-        public static bool operator !=(DivikResult first, DivikResult second)
-        {
-            return !(first == second);
-        }
-
         public override int GetHashCode()
         {
             var hash = 17;
@@ -346,8 +274,139 @@ namespace Spectre.Algorithms.Results
             hash = 23 * hash + Partition.GetHashCode();
             hash = 23 * hash + Merged.GetHashCode();
             hash = 23 * hash + Subregions.GetHashCode();
-            
+
             return hash;
+        }
+
+        #endregion
+
+        #region Parsing
+
+        private double ParseIndex(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "index"))
+            {
+                var tmpIndex = (double[,])array.GetField(fieldName: "index");
+                return tmpIndex[0, 0];
+            }
+            return double.NaN;
+        }
+
+        private double[,] ParseCentroids(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "centroids"))
+            {
+                var transposed = (double[,])array.GetField(fieldName: "centroids");
+                var straight = new double[transposed.GetLength(dimension: 1), transposed.GetLength(dimension: 0)];
+                for (var i = 0; i < transposed.GetLength(dimension: 1); ++i)
+                {
+                    for (var j = 0; j < transposed.GetLength(dimension: 0); ++j)
+                    {
+                        straight[i, j] = transposed[j, i];
+                    }
+                }
+                return straight;
+            }
+            return null;
+        }
+
+        private int[] ParsePartition(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "partition"))
+            {
+                var tmpPartition = (double[,])array.GetField(fieldName: "partition");
+                var partition = new int[tmpPartition.Length];
+                for (var i = 0; i < tmpPartition.Length; ++i)
+                {
+                    // -1 for indexing purposes (label should allow to check centroid)
+                    partition[i] = (int)tmpPartition[0, i] - 1;
+                }
+                return partition;
+            }
+            return null;
+        }
+
+        private double ParseAmplitudeThreshold(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "amp_thr"))
+            {
+                var tmpAmpThr = (double[,])array.GetField(fieldName: "amp_thr");
+                return tmpAmpThr[0, 0];
+            }
+            return double.NaN;
+        }
+
+        private bool[] ParseAmplitudeFilter(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "amp_filter"))
+            {
+                var tmpAmpFilter = (bool[,])array.GetField(fieldName: "amp_filter");
+                var ampFilter = new bool[tmpAmpFilter.Length];
+                for (var i = 0; i < tmpAmpFilter.Length; ++i)
+                {
+                    ampFilter[i] = tmpAmpFilter[i, 0];
+                }
+                return ampFilter;
+            }
+            return null;
+        }
+
+        private double ParseVarianceThreshold(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "var_thr"))
+            {
+                var tmpVarThr = (double[,])array.GetField(fieldName: "var_thr");
+                return tmpVarThr[0, 0];
+            }
+            return double.NaN;
+        }
+
+        private bool[] ParseVarianceFilter(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "var_filter"))
+            {
+                var tmpVarFilter = (bool[,])array.GetField(fieldName: "var_filter");
+                var varFilter = new bool[tmpVarFilter.Length];
+                for (var i = 0; i < tmpVarFilter.Length; ++i)
+                {
+                    varFilter[i] = tmpVarFilter[i, 0];
+                }
+                return varFilter;
+            }
+            return null;
+        }
+
+        private int[] ParseMerged(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "merged"))
+            {
+                var tmpMerged = (double[,])array.GetField(fieldName: "merged");
+                var merged = new int[tmpMerged.Length];
+                for (var i = 0; i < tmpMerged.Length; ++i)
+                {
+                    merged[i] = (int)tmpMerged[0, i];
+                }
+                return merged;
+            }
+            return null;
+        }
+
+        private DivikResult[] ParseSubregions(MWStructArray array)
+        {
+            if (array.IsField(fieldName: "subregions"))
+            {
+                var tmpSubregions = (MWCellArray)array.GetField(fieldName: "subregions");
+                var subregions = new DivikResult[tmpSubregions.NumberOfElements];
+                for (var i = 0; i < tmpSubregions.NumberOfElements; ++i)
+                {
+                    if (tmpSubregions[i + 1] is MWStructArray)
+                    {
+                        subregions[i] = new DivikResult(matlabResult: tmpSubregions[i + 1]);
+                    }
+                }
+                return subregions;
+            }
+            return null;
         }
 
         #endregion

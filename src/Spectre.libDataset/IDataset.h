@@ -23,36 +23,36 @@ limitations under the License.
 
 namespace Spectre::libDataset
 {
+/// <summary>
+/// Modifiable interface of the dataset.
+/// </summary>
+template <typename DataType, typename SampleMetadata, typename DatasetMetadata>
+class IDataset : public IReadOnlyDataset<DataType, SampleMetadata, DatasetMetadata>
+{
+public:
     /// <summary>
-    /// Modifiable interface of the dataset.
+    /// Gets sample under specified index.
     /// </summary>
-    template <typename DataType, typename SampleMetadata, typename DatasetMetadata>
-    class IDataset : public IReadOnlyDataset<DataType, SampleMetadata, DatasetMetadata>
-    {
-    public:
-        /// <summary>
-        /// Gets sample under specified index.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample</returns>
-        virtual DataType& operator[](size_t idx) = 0;
-        /// <summary>
-        /// Gets the sample metadata.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample metadata</returns>
-        virtual SampleMetadata& GetSampleMetadata(size_t idx) = 0;
-        /// <summary>
-        /// Gets the dataset metadata.
-        /// </summary>
-        /// <returns>Dataset metadata</returns>
-        virtual DatasetMetadata& GetDatasetMetadata() = 0;
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample</returns>
+    virtual DataType& operator[](size_t idx) = 0;
+    /// <summary>
+    /// Gets the sample metadata.
+    /// </summary>
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample metadata</returns>
+    virtual SampleMetadata& GetSampleMetadata(size_t idx) = 0;
+    /// <summary>
+    /// Gets the dataset metadata.
+    /// </summary>
+    /// <returns>Dataset metadata</returns>
+    virtual DatasetMetadata& GetDatasetMetadata() = 0;
 
-        /// <summary>
-        /// Adds the sample.
-        /// </summary>
-        /// <param name="sample">The sample.</param>
-        /// <param name="metadata">The metadata.</param>
-        virtual void AddSample(DataType sample, SampleMetadata metadata) = 0;
-    };
+    /// <summary>
+    /// Adds the sample.
+    /// </summary>
+    /// <param name="sample">The sample.</param>
+    /// <param name="metadata">The metadata.</param>
+    virtual void AddSample(DataType sample, SampleMetadata metadata) = 0;
+};
 }

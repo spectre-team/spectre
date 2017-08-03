@@ -36,14 +36,11 @@ public:
     /// <param name="lowerBound">The lower bound.</param>
     /// <param name="upperBound">The upper bound.</param>
     /// <param name="actual">The actual value.</param>
-    ArgumentOutOfRangeException(const std::string& variableName,
+    ArgumentOutOfRangeException(const std::string &variableName,
                                 DataType lowerBound,
                                 DataType upperBound,
                                 DataType actual):
         ExceptionBase(variableName + " ranged (" + std::to_string(lowerBound) + ", "
-            + std::to_string(upperBound) + ") provided with " + std::to_string(actual))
-    {
-        
-    }
+            + std::to_string(upperBound) + ") provided with " + std::to_string(actual)) { }
 };
 }

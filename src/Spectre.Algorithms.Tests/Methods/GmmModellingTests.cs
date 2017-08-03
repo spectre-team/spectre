@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Linq;
 using NUnit.Framework;
@@ -24,163 +25,164 @@ using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
-	[TestFixture, Category("Algorithm")]
-	public class GmmModellingTests
-	{
-		private GmmModelling _gmm;
-        private readonly double[,] data = { { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 }, { 1, 1.1, 1.2 } };
-	    private readonly double[] mz = {1, 2, 3};
+    [TestFixture]
+    [Category(name: "Algorithm")]
+    public class GmmModellingTests
+    {
+        private GmmModelling _gmm;
+        private readonly double[,] data = {{1, 1.1, 1.2}, {1, 1.1, 1.2}, {1, 1.1, 1.2}};
+        private readonly double[] mz = {1, 2, 3};
 
         [OneTimeSetUp]
-		public void SetUpClass()
-		{
-			_gmm = new GmmModelling();
-		}
+        public void SetUpClass()
+        {
+            _gmm = new GmmModelling();
+        }
 
-		[OneTimeTearDown]
-		public void TearDownClass()
-		{
-			_gmm.Dispose();
-		}
+        [OneTimeTearDown]
+        public void TearDownClass()
+        {
+            _gmm.Dispose();
+        }
 
-		[Test]
-		public void EstimateGmm()
-		{
-			IDataset dataset = new BasicTextDataset(mz, data, null);
+        [Test]
+        public void EstimateGmm()
+        {
+            IDataset dataset = new BasicTextDataset(mz, data, coordinates: null);
 
-			var result = _gmm.EstimateGmm(dataset);
+            var result = _gmm.EstimateGmm(dataset);
 
-			Console.WriteLine(result);
+            Console.WriteLine(result);
 
             // Assert
-            Assert.Multiple(() =>
+            Assert.Multiple(testDelegate: () =>
             {
                 Assert.IsNotNull(result);
-                Assert.True(data.Cast<double>()
-                    .Take(data.GetLength(1))
+                Assert.True(condition: data.Cast<double>()
+                    .Take(count: data.GetLength(dimension: 1))
                     .SequenceEqual(result.OriginalMeanSpectrum));
-                Assert.True(mz.SequenceEqual(result.OriginalMz));
+                Assert.True(condition: mz.SequenceEqual(result.OriginalMz));
                 Assert.False(result.IsMerged);
                 Assert.False(result.IsNoiseReduced);
                 Assert.Null(result.MzMergingThreshold);
             });
         }
 
-		[Test]
-		public void ApplyGmm()
-		{
-			IDataset dataset = new BasicTextDataset(mz, data, null);
+        [Test]
+        public void ApplyGmm()
+        {
+            IDataset dataset = new BasicTextDataset(mz, data, coordinates: null);
 
             var model = _gmm.EstimateGmm(dataset);
 
-			IDataset result = _gmm.ApplyGmm(model, dataset);
+            var result = _gmm.ApplyGmm(model, dataset);
 
-			Console.WriteLine(result);
+            Console.WriteLine(result);
 
-			// Assert
+            // Assert
             Assert.IsNotNull(result);
-		}
+        }
 
-	    [Test]
-	    public void ReduceByHeight()
-	    {
-            IDataset dataset = new BasicTextDataset(mz, data, null);
-
-            var model = _gmm.EstimateGmm(dataset);
-
-	        Assert.Throws<NotImplementedException>(() =>
-	        {
-	            var reduced = _gmm.ReduceModelByComponentHeight(model);
-	        });
-
-	        //var reduced = _gmm.ReduceModelByComponentHeight(model);
-
-	        //Assert.Multiple(() =>
-	        //{
-	        //    Assert.IsNotNull(reduced);
-	        //    Assert.True(data.Cast<double>()
-	        //        .Take(data.GetLength(1))
-	        //        .SequenceEqual(reduced.OriginalMeanSpectrum));
-	        //    Assert.True(mz.SequenceEqual(reduced.OriginalMz));
-	        //    Assert.False(reduced.IsMerged);
-	        //    Assert.True(reduced.IsNoiseReduced);
-	        //    Assert.Null(reduced.MzMergingThreshold);
-	        //});
-	    }
-
-	    [Test]
-	    public void ReduceByArea()
-	    {
-            IDataset dataset = new BasicTextDataset(mz, data, null);
+        [Test]
+        public void ReduceByHeight()
+        {
+            IDataset dataset = new BasicTextDataset(mz, data, coordinates: null);
 
             var model = _gmm.EstimateGmm(dataset);
 
-	        Assert.Throws<NotImplementedException>(() =>
-	        {
-	            var reduced = _gmm.ReduceModelByComponentArea(model);
-	        });
+            Assert.Throws<NotImplementedException>(code: () =>
+            {
+                var reduced = _gmm.ReduceModelByComponentHeight(model);
+            });
 
-	        //var reduced = _gmm.ReduceModelByComponentArea(model);
+            //var reduced = _gmm.ReduceModelByComponentHeight(model);
 
-	        //Assert.Multiple(() =>
-	        //{
-	        //    Assert.IsNotNull(reduced);
-	        //    Assert.True(data.Cast<double>()
-	        //        .Take(data.GetLength(1))
-	        //        .SequenceEqual(reduced.OriginalMeanSpectrum));
-	        //    Assert.True(mz.SequenceEqual(reduced.OriginalMz));
-	        //    Assert.False(reduced.IsMerged);
-	        //    Assert.True(reduced.IsNoiseReduced);
-	        //    Assert.Null(reduced.MzMergingThreshold);
-	        //});
-	    }
+            //Assert.Multiple(() =>
+            //{
+            //    Assert.IsNotNull(reduced);
+            //    Assert.True(data.Cast<double>()
+            //        .Take(data.GetLength(1))
+            //        .SequenceEqual(reduced.OriginalMeanSpectrum));
+            //    Assert.True(mz.SequenceEqual(reduced.OriginalMz));
+            //    Assert.False(reduced.IsMerged);
+            //    Assert.True(reduced.IsNoiseReduced);
+            //    Assert.Null(reduced.MzMergingThreshold);
+            //});
+        }
 
-	    [Test]
-	    public void MergeComonents()
-	    {
-            IDataset dataset = new BasicTextDataset(mz, data, null);
+        [Test]
+        public void ReduceByArea()
+        {
+            IDataset dataset = new BasicTextDataset(mz, data, coordinates: null);
+
+            var model = _gmm.EstimateGmm(dataset);
+
+            Assert.Throws<NotImplementedException>(code: () =>
+            {
+                var reduced = _gmm.ReduceModelByComponentArea(model);
+            });
+
+            //var reduced = _gmm.ReduceModelByComponentArea(model);
+
+            //Assert.Multiple(() =>
+            //{
+            //    Assert.IsNotNull(reduced);
+            //    Assert.True(data.Cast<double>()
+            //        .Take(data.GetLength(1))
+            //        .SequenceEqual(reduced.OriginalMeanSpectrum));
+            //    Assert.True(mz.SequenceEqual(reduced.OriginalMz));
+            //    Assert.False(reduced.IsMerged);
+            //    Assert.True(reduced.IsNoiseReduced);
+            //    Assert.Null(reduced.MzMergingThreshold);
+            //});
+        }
+
+        [Test]
+        public void MergeComonents()
+        {
+            IDataset dataset = new BasicTextDataset(mz, data, coordinates: null);
 
             var model = _gmm.EstimateGmm(dataset);
 
             var merged = _gmm.MergeComponents(model, mzThreshold: 0.3);
 
-            Assert.Multiple(() =>
+            Assert.Multiple(testDelegate: () =>
             {
                 Assert.IsNotNull(merged);
-                Assert.True(data.Cast<double>()
-                    .Take(data.GetLength(1))
+                Assert.True(condition: data.Cast<double>()
+                    .Take(count: data.GetLength(dimension: 1))
                     .SequenceEqual(merged.OriginalMeanSpectrum));
-                Assert.True(mz.SequenceEqual(merged.OriginalMz));
+                Assert.True(condition: mz.SequenceEqual(merged.OriginalMz));
                 Assert.True(merged.IsMerged);
                 Assert.False(merged.IsNoiseReduced);
                 Assert.NotNull(merged.MzMergingThreshold);
-                Assert.AreEqual(0.3, merged.MzMergingThreshold.Value, 0.0001);
+                Assert.AreEqual(expected: 0.3, actual: merged.MzMergingThreshold.Value, delta: 0.0001);
             });
         }
 
-	    //[Test]
-	    //public void ReduceAndMergeComponents()
-	    //{
-     //       IDataset dataset = new BasicTextDataset(mz, data);
+        //[Test]
+        //public void ReduceAndMergeComponents()
+        //{
+        //       IDataset dataset = new BasicTextDataset(mz, data);
 
-     //       var model = _gmm.EstimateGmm(dataset);
+        //       var model = _gmm.EstimateGmm(dataset);
 
-     //       var merged = _gmm.MergeComponents(model, mzThreshold: 0.3);
+        //       var merged = _gmm.MergeComponents(model, mzThreshold: 0.3);
 
-     //       var reduced = _gmm.ReduceModelByComponentArea(merged);
+        //       var reduced = _gmm.ReduceModelByComponentArea(merged);
 
-     //       Assert.Multiple(() =>
-     //       {
-     //           Assert.IsNotNull(reduced);
-     //           Assert.True(data.Cast<double>()
-     //               .Take(data.GetLength(1))
-     //               .SequenceEqual(reduced.OriginalMeanSpectrum));
-     //           Assert.True(mz.SequenceEqual(reduced.OriginalMz));
-     //           Assert.True(reduced.IsMerged);
-     //           Assert.True(reduced.IsNoiseReduced);
-     //           Assert.NotNull(reduced.MzMergingThreshold);
-     //           Assert.AreEqual(0.3, reduced.MzMergingThreshold.Value, 0.0001);
-     //       });
-     //   }
-	}
+        //       Assert.Multiple(() =>
+        //       {
+        //           Assert.IsNotNull(reduced);
+        //           Assert.True(data.Cast<double>()
+        //               .Take(data.GetLength(1))
+        //               .SequenceEqual(reduced.OriginalMeanSpectrum));
+        //           Assert.True(mz.SequenceEqual(reduced.OriginalMz));
+        //           Assert.True(reduced.IsMerged);
+        //           Assert.True(reduced.IsNoiseReduced);
+        //           Assert.NotNull(reduced.MzMergingThreshold);
+        //           Assert.AreEqual(0.3, reduced.MzMergingThreshold.Value, 0.0001);
+        //       });
+        //   }
+    }
 }

@@ -1,7 +1,7 @@
 ﻿/*
  * Heatmap.cs
  * Class representing single heatmap in MALDI MSI sample.
- * 
+ *
    Copyright 2017 Michał Gallus
 
    Licensed under the Apache License, Version 2.0 (the "License");

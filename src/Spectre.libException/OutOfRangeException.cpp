@@ -22,8 +22,5 @@ limitations under the License.
 namespace Spectre::libException
 {
 OutOfRangeException::OutOfRangeException(size_t index, size_t size)
-    : ArgumentOutOfRangeException<size_t>("index", 0, size, index)
-{
-    
-}
+    : ArgumentOutOfRangeException<size_t>("index", 0, size, index) { }
 }

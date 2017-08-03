@@ -28,29 +28,22 @@ MutationOperator::MutationOperator(double mutationRate, double bitSwapRate, Seed
     m_BitSwapRate(bitSwapRate),
     m_RandomNumberGenerator(rngSeed)
 {
-    if(m_MutationRate>=0 && m_MutationRate <= 1)
-    {
-        
-    }
+    if (m_MutationRate >= 0 && m_MutationRate <= 1) { }
     else
     {
         throw libException::ArgumentOutOfRangeException<double>("mutationRate", 0, 1, m_MutationRate);
     }
-    if (m_BitSwapRate >= 0 && m_BitSwapRate <= 1)
-    {
-
-    }
+    if (m_BitSwapRate >= 0 && m_BitSwapRate <= 1) { }
     else
     {
         throw libException::ArgumentOutOfRangeException<double>("bitSwapRate", 0, 1, m_BitSwapRate);
     }
-
 }
 
-Individual MutationOperator::operator()(Individual&& individual)
+Individual MutationOperator::operator()(Individual &&individual)
 {
     std::bernoulli_distribution mutationProbability(m_MutationRate);
-    if(mutationProbability(m_RandomNumberGenerator))
+    if (mutationProbability(m_RandomNumberGenerator))
     {
         std::bernoulli_distribution swapProbability(m_BitSwapRate);
         const auto swap_random_bits = [&swapProbability, this](bool bit)
@@ -61,5 +54,4 @@ Individual MutationOperator::operator()(Individual&& individual)
     }
     return individual;
 }
-
 }

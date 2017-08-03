@@ -1,7 +1,7 @@
 ﻿/*
  * TooSmallUpdateIntervalException.cs
  * Exception thrown on unreasonably small update interval.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 
 namespace Spectre.Service
@@ -24,16 +25,8 @@ namespace Spectre.Service
     /// Thrown when update interval is unreasonably small, to avoid congestion.
     /// </summary>
     /// <seealso cref="System.ArgumentOutOfRangeException" />
-    public class TooSmallUpdateIntervalException: ArgumentOutOfRangeException
+    public class TooSmallUpdateIntervalException : ArgumentOutOfRangeException
     {
-        /// <summary>
-        /// Gets the update interval.
-        /// </summary>
-        /// <value>
-        /// The update interval.
-        /// </value>
-        public double UpdateInterval { get; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TooSmallUpdateIntervalException"/> class.
         /// </summary>
@@ -42,5 +35,13 @@ namespace Spectre.Service
         {
             UpdateInterval = updateInterval;
         }
+
+        /// <summary>
+        /// Gets the update interval.
+        /// </summary>
+        /// <value>
+        /// The update interval.
+        /// </value>
+        public double UpdateInterval { get; }
     }
 }

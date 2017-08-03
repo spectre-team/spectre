@@ -36,68 +36,68 @@ limitations under the License.
 
 namespace Spectre::libGaussianMixtureModelling
 {
+/// <summary>
+/// Class serves the purpose of calculation of log likelihood for the gaussian 
+/// mixture modelling. Serves as a reference to learn from and is purpously 
+/// not optimized to avoid obfuscation of the code.
+/// </summary>
+class LogLikelihoodCalculator
+{
+public:
     /// <summary>
-    /// Class serves the purpose of calculation of log likelihood for the gaussian 
-    /// mixture modelling. Serves as a reference to learn from and is purpously 
-    /// not optimized to avoid obfuscation of the code.
+    /// Constructor initializing the class with data required for calculation of 
+    /// log likelihood.
     /// </summary>
-    class LogLikelihoodCalculator
+    /// <param name="mzArray">Array of m/z values.</param>
+    /// <param name="intensities">Set of corresponding mean intensities values.</param>
+    /// <param name="size">Size of the mzArray and itensities arrays.</param>
+    /// <param name="components">Gaussian components.</param>
+    /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
+    LogLikelihoodCalculator(DataType *mzArray, DataType *intensities,
+                            unsigned size, const std::vector<GaussianComponent> &components)
+        : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size),
+          m_Components(components)
     {
-    public:
-        /// <summary>
-        /// Constructor initializing the class with data required for calculation of 
-        /// log likelihood.
-        /// </summary>
-        /// <param name="mzArray">Array of m/z values.</param>
-        /// <param name="intensities">Set of corresponding mean intensities values.</param>
-        /// <param name="size">Size of the mzArray and itensities arrays.</param>
-        /// <param name="components">Gaussian components.</param>
-        /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
-        LogLikelihoodCalculator(DataType* mzArray, DataType* intensities,
-            unsigned size, const std::vector<GaussianComponent>& components)
-            : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size),
-            m_Components(components)
+        if (mzArray == nullptr)
         {
-            if (mzArray == nullptr)
-            {
-                throw ArgumentNullException("mzArray");
-            }
-
-            if (intensities == nullptr)
-            {
-                throw ArgumentNullException("intensities");
-            }
+            throw ArgumentNullException("mzArray");
         }
 
-        /// <summary>
-        /// Calculates the log likelihood using the class supplied template type.
-        /// </summary>
-        /// <returns>
-        /// Value of log likelihood.
-        /// </returns>
-        DataType LogLikelihoodCalculator::CalculateLikelihood()
+        if (intensities == nullptr)
         {
-            // This part performs calcluation of log likelihood
-            // performed with accordance to equation (9.14)
-            // presented in the book.
-            DataType sumOfLogs = 0.0;
-            for (unsigned i = 0; i < m_DataSize; i++)
-            {
-                DataType sum = 0.0;
-                for (unsigned k = 0; k < m_Components.size(); k++)
-                {
-                    auto component = m_Components[k];
-                    sum += component.weight * m_pIntensities[i] * Gaussian(m_pMzArray[i], component.mean, component.deviation);
-                }
-                sumOfLogs += log(sum);
-            }
-            return sumOfLogs;
+            throw ArgumentNullException("intensities");
         }
+    }
 
-    private:
-        DataType* m_pMzArray;
-        DataType* m_pIntensities;
-        unsigned m_DataSize;
-        const std::vector<GaussianComponent>& m_Components;
-    };
+    /// <summary>
+    /// Calculates the log likelihood using the class supplied template type.
+    /// </summary>
+    /// <returns>
+    /// Value of log likelihood.
+    /// </returns>
+    DataType LogLikelihoodCalculator::CalculateLikelihood()
+    {
+        // This part performs calcluation of log likelihood
+        // performed with accordance to equation (9.14)
+        // presented in the book.
+        DataType sumOfLogs = 0.0;
+        for (unsigned i = 0; i < m_DataSize; i++)
+        {
+            DataType sum = 0.0;
+            for (unsigned k = 0; k < m_Components.size(); k++)
+            {
+                auto component = m_Components[k];
+                sum += component.weight * m_pIntensities[i] * Gaussian(m_pMzArray[i], component.mean, component.deviation);
+            }
+            sumOfLogs += log(sum);
+        }
+        return sumOfLogs;
+    }
+
+private:
+    DataType *m_pMzArray;
+    DataType *m_pIntensities;
+    unsigned m_DataSize;
+    const std::vector<GaussianComponent> &m_Components;
+};
 };

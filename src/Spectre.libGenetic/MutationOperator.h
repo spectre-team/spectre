@@ -40,7 +40,7 @@ public:
     /// </summary>
     /// <param name="individual">The individual.</param>
     /// <returns>Mutated individual.</returns>
-    virtual Individual operator()(Individual&& individual);
+    virtual Individual operator()(Individual &&individual);
     virtual ~MutationOperator() = default;
 private:
     /// <summary>

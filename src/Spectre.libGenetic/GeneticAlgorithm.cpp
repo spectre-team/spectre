@@ -28,7 +28,7 @@ GeneticAlgorithm::GeneticAlgorithm(std::unique_ptr<OffspringGenerator> offspring
       m_Scorer(std::move(scorer)),
       m_StopCondition(std::move(stopCondition))
 {
-    if(m_OffspringGenerator!=nullptr)
+    if (m_OffspringGenerator != nullptr)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -36,7 +36,7 @@ GeneticAlgorithm::GeneticAlgorithm(std::unique_ptr<OffspringGenerator> offspring
     {
         throw libException::NullPointerException("offspringGenerator");
     }
-    if(m_Scorer != nullptr)
+    if (m_Scorer != nullptr)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -44,7 +44,7 @@ GeneticAlgorithm::GeneticAlgorithm(std::unique_ptr<OffspringGenerator> offspring
     {
         throw libException::NullPointerException("scorer");
     }
-    if(m_StopCondition != nullptr)
+    if (m_StopCondition != nullptr)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -54,9 +54,9 @@ GeneticAlgorithm::GeneticAlgorithm(std::unique_ptr<OffspringGenerator> offspring
     }
 }
 
-Generation GeneticAlgorithm::evolve(Generation&& generation) const
+Generation GeneticAlgorithm::evolve(Generation &&generation) const
 {
-    while(!m_StopCondition->operator()())
+    while (!m_StopCondition->operator()())
     {
         const auto scores = m_Scorer->Score(generation);
         generation = m_OffspringGenerator->next(generation, scores);

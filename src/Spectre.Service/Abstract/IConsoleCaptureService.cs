@@ -1,7 +1,7 @@
 ﻿/*
  * IConsoleCaptureService.cs
  * Interface of service for capturing stdout.
- * 
+ *
    Copyright 2017 Michal Wolny, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 
 namespace Spectre.Service.Abstract
@@ -24,7 +25,7 @@ namespace Spectre.Service.Abstract
     /// Captures stdout.
     /// </summary>
     /// <seealso cref="System.IDisposable" />
-    public interface IConsoleCaptureService: IDisposable
+    public interface IConsoleCaptureService : IDisposable
     {
         /// <summary>
         /// Occurs when anything was written.
