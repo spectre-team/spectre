@@ -31,7 +31,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\CSharpCodingConvention.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\x64\Release\Spectre.Service.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
