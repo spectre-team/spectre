@@ -43,7 +43,10 @@ namespace Spectre.Mvvm.Converters
             object value,
             Type targetType,
             object parameter,
-            System.Globalization.CultureInfo culture) => (int)value > 0;
+            System.Globalization.CultureInfo culture)
+        {
+            return (int)value > 0;
+        }
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.
@@ -60,7 +63,10 @@ namespace Spectre.Mvvm.Converters
             object value,
             Type targetType,
             object parameter,
-            System.Globalization.CultureInfo culture) => throw new InvalidOperationException(
-            message: "Cannot restore int value from bool.");
+            System.Globalization.CultureInfo culture)
+        {
+            throw new InvalidOperationException(
+                message: "Cannot restore int value from bool.");
+        }
     }
 }

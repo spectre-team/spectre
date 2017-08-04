@@ -180,7 +180,10 @@ namespace Spectre.Mvvm.Base
         /// <returns>
         /// true if this command can be executed; otherwise, false.
         /// </returns>
-        public bool CanExecute(object parameter) => (_canExecute != null) && _canExecute(parameter);
+        public bool CanExecute(object parameter)
+        {
+            return (_canExecute != null) && _canExecute(parameter);
+        }
 
         #endregion
 
@@ -231,7 +234,10 @@ namespace Spectre.Mvvm.Base
         /// </summary>
         /// <param name="parameter">The necessary parameter.</param>
         /// <returns>True.</returns>
-        private static bool DefaultCanExecute(object parameter) => true;
+        private static bool DefaultCanExecute(object parameter)
+        {
+            return true;
+        }
 
         #endregion
     }

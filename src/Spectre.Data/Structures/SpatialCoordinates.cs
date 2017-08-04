@@ -66,12 +66,18 @@ namespace Spectre.Data.Structures
         /// Returns raw form of spatial coordintates in order X, Y, Z.
         /// </summary>
         /// <returns>Array of values representing spatial coordinates.</returns>
-        public int[] GetRaw() => new[] { X, Y, Z };
+        public int[] GetRaw()
+        {
+            return new[] { X, Y, Z };
+        }
 
         /// <summary>
         /// Converts spatial coordinates into space-separated string of x, y and z values
         /// </summary>
         /// <returns>String of form "x y z"</returns>
-        public override string ToString() => X.ToString() + ' ' + Y + ' ' + Z;
+        public override string ToString()
+        {
+            return X.ToString() + ' ' + Y + ' ' + Z;
+        }
     }
 }

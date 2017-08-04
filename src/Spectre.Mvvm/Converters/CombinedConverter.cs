@@ -55,11 +55,13 @@ namespace Spectre.Mvvm.Converters
         /// </returns>
         /// <exception cref="NullReferenceException">if value is null</exception>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            => Second.Convert(
+        {
+            return Second.Convert(
                 value: First.Convert(value, targetType, parameter, culture),
                 targetType: targetType,
                 parameter: parameter,
                 culture: culture);
+        }
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.
@@ -76,10 +78,13 @@ namespace Spectre.Mvvm.Converters
             object value,
             Type targetType,
             object parameter,
-            System.Globalization.CultureInfo culture) => First.ConvertBack(
-            value: Second.ConvertBack(value, targetType, parameter, culture),
-            targetType: targetType,
-            parameter: parameter,
-            culture: culture);
+            System.Globalization.CultureInfo culture)
+        {
+            return First.ConvertBack(
+                value: Second.ConvertBack(value, targetType, parameter, culture),
+                targetType: targetType,
+                parameter: parameter,
+                culture: culture);
+        }
     }
 }

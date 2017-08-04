@@ -117,10 +117,12 @@ namespace Spectre.Algorithms.Results
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator ==(DivikResult first, DivikResult second) =>
-            (((object)first == null) && ((object)second == null))
-            || (((object)first != null) && first.Equals(second))
-            || second.Equals(first);
+        public static bool operator ==(DivikResult first, DivikResult second)
+        {
+            return (((object)first == null) && ((object)second == null))
+                   || (((object)first != null) && first.Equals(second))
+                   || second.Equals(first);
+        }
 
         /// <summary>
         /// Implements the operator !=.
@@ -130,7 +132,10 @@ namespace Spectre.Algorithms.Results
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static bool operator !=(DivikResult first, DivikResult second) => !(first == second);
+        public static bool operator !=(DivikResult first, DivikResult second)
+        {
+            return !(first == second);
+        }
 
         #endregion
 

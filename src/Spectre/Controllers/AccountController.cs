@@ -74,8 +74,14 @@ namespace Spectre.Controllers
         /// </value>
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        private IAuthenticationManager Authentication => Request.GetOwinContext()
-            .Authentication;
+        private IAuthenticationManager Authentication
+        {
+            get
+            {
+                return Request.GetOwinContext()
+                    .Authentication;
+            }
+        }
 
         /// <summary>
         /// Gets the user information.

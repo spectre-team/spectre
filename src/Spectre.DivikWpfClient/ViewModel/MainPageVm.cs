@@ -314,8 +314,14 @@ namespace Spectre.DivikWpfClient.ViewModel
         /// <summary>
         ///     ViewModel property for populating <see cref="MainWindow.MetricComboBox" />.
         /// </summary>
-        public IEnumerable<Metric> Metrics => Enum.GetValues(enumType: typeof(Metric))
-            .Cast<Metric>();
+        public IEnumerable<Metric> Metrics
+        {
+            get
+            {
+                return Enum.GetValues(enumType: typeof(Metric))
+                    .Cast<Metric>();
+            }
+        }
 
         /// <summary>
         ///     ViewModel property for setting text in <see cref="MainWindow.StartDivikButton" />.
@@ -366,9 +372,15 @@ namespace Spectre.DivikWpfClient.ViewModel
         ///     Command for <see cref="MainWindow.ChooseFileButton" />.
         ///     Executes <see cref="ChooseFileButtonExecute" />.
         /// </summary>
-        public RelayCommand ChooseFile => _chooseFileButtonHandle
-                                          ?? (_chooseFileButtonHandle =
-                                              new RelayCommand(ChooseFileButtonExecute));
+        public RelayCommand ChooseFile
+        {
+            get
+            {
+                return _chooseFileButtonHandle
+                       ?? (_chooseFileButtonHandle =
+                           new RelayCommand(ChooseFileButtonExecute));
+            }
+        }
 
         #endregion
 
@@ -380,13 +392,19 @@ namespace Spectre.DivikWpfClient.ViewModel
         /// <value>
         ///     The command for choosing directory.
         /// </value>
-        public RelayCommand ChooseOutputDirectoryCommand => _chooseOutputDirectoryCommand
-                                                            ?? (
-                                                                _chooseOutputDirectoryCommand =
-                                                                    new RelayCommand(
-                                                                        execute: () =>
-                                                                            OutputPath =
-                                                                                ChooseDirectory() ?? OutputPath));
+        public RelayCommand ChooseOutputDirectoryCommand
+        {
+            get
+            {
+                return _chooseOutputDirectoryCommand
+                       ?? (
+                           _chooseOutputDirectoryCommand =
+                               new RelayCommand(
+                                   execute: () =>
+                                       OutputPath =
+                                           ChooseDirectory() ?? OutputPath));
+            }
+        }
 
         #endregion
 
@@ -398,12 +416,18 @@ namespace Spectre.DivikWpfClient.ViewModel
         /// <value>
         ///     The command.
         /// </value>
-        public RelayCommand ChooseCacheDirectoryCommand => _chooseCacheDirectoryCommand
-                                                           ?? (
-                                                               _chooseCacheDirectoryCommand =
-                                                                   new RelayCommand(
-                                                                       execute: () => CachePath =
-                                                                           ChooseDirectory() ?? CachePath));
+        public RelayCommand ChooseCacheDirectoryCommand
+        {
+            get
+            {
+                return _chooseCacheDirectoryCommand
+                       ?? (
+                           _chooseCacheDirectoryCommand =
+                               new RelayCommand(
+                                   execute: () => CachePath =
+                                       ChooseDirectory() ?? CachePath));
+            }
+        }
 
         #endregion
 
@@ -589,33 +613,39 @@ namespace Spectre.DivikWpfClient.ViewModel
         ///     Returns <see cref="IDataset" /> created from file under the input path.
         /// </summary>
         /// <returns>Dataset</returns>
-        private IDataset GetDatasetFromVm() => new BasicTextDataset(InputPath);
+        private IDataset GetDatasetFromVm()
+        {
+            return new BasicTextDataset(InputPath);
+        }
 
         /// <summary>
         ///     Returns <see cref="DivikOptions" /> created from vm properties.
         /// </summary>
         /// <returns>Options for DiviK algorithm</returns>
-        private DivikOptions GetDivikOptionsFromVm() => new DivikOptions
+        private DivikOptions GetDivikOptionsFromVm()
         {
-            MaxK = MaxK,
-            Level = Level,
-            CachePath = CachePath,
-            Caching = Caching,
-            FeaturePreservationLimit = FeaturePreservationLimit,
-            KmeansMaxIters = KmeansMaxIters,
-            MaxComponentsForDecomposition = MaxComponentsForDecomposition,
-            Metric = Metric,
-            OutputPath = OutputPath,
-            PercentSizeLimit = PercentSizeLimit,
-            PlottingDecomposition = PlottingDecomposition,
-            PlottingDecompositionRecursively = PlottingDecompositionRecursively,
-            PlottingPartitions = PlottingPartitions,
-            PlottingRecursively = PlottingRecursively,
-            UsingAmplitudeFiltration = UsingAmplitudeFiltration,
-            UsingLevels = UsingLevels,
-            UsingVarianceFiltration = UsingVarianceFiltration,
-            Verbose = false
-        };
+            return new DivikOptions
+            {
+                MaxK = MaxK,
+                Level = Level,
+                CachePath = CachePath,
+                Caching = Caching,
+                FeaturePreservationLimit = FeaturePreservationLimit,
+                KmeansMaxIters = KmeansMaxIters,
+                MaxComponentsForDecomposition = MaxComponentsForDecomposition,
+                Metric = Metric,
+                OutputPath = OutputPath,
+                PercentSizeLimit = PercentSizeLimit,
+                PlottingDecomposition = PlottingDecomposition,
+                PlottingDecompositionRecursively = PlottingDecompositionRecursively,
+                PlottingPartitions = PlottingPartitions,
+                PlottingRecursively = PlottingRecursively,
+                UsingAmplitudeFiltration = UsingAmplitudeFiltration,
+                UsingLevels = UsingLevels,
+                UsingVarianceFiltration = UsingVarianceFiltration,
+                Verbose = false
+            };
+        }
 
         #endregion
 

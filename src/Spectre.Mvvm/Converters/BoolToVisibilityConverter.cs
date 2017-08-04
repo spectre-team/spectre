@@ -65,6 +65,9 @@ namespace Spectre.Mvvm.Converters
             object value,
             Type targetType,
             object parameter,
-            CultureInfo culture) => (Visibility)value == Visibility.Visible;
+            CultureInfo culture)
+        {
+            return (Visibility)value == Visibility.Visible;
+        }
     }
 }

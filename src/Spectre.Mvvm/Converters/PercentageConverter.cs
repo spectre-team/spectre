@@ -40,8 +40,10 @@ namespace Spectre.Mvvm.Converters
         /// The value to be passed to the target dependency property.
         /// </returns>
         /// <exception cref="NullReferenceException">if value is null</exception>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-            ((double)value * 100).ToString(culture) + " %";
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((double)value * 100).ToString(culture) + " %";
+        }
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.

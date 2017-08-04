@@ -77,7 +77,10 @@ namespace Spectre.Mvvm.Base
         /// <value>
         ///     <c>true</c> if this instance has error; otherwise, <c>false</c>.
         /// </value>
-        protected bool HasError => !string.IsNullOrWhiteSpace(((IDataErrorInfo)this).Error);
+        protected bool HasError
+        {
+            get { return !string.IsNullOrWhiteSpace(((IDataErrorInfo)this).Error); }
+        }
 
         /// <summary>
         ///     Returns whether an exception is thrown, or if a Debug.Fail() is used
@@ -95,7 +98,10 @@ namespace Spectre.Mvvm.Base
         /// </value>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>Error info.</returns>
-        string IDataErrorInfo.this[string propertyName] => OnValidate(propertyName);
+        string IDataErrorInfo.this[string propertyName]
+        {
+            get { return OnValidate(propertyName); }
+        }
 
         /// <summary>
         ///     Warns the developer if this object does not have

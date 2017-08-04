@@ -19,6 +19,9 @@ namespace Spectre.Models
         /// Creates this instance.
         /// </summary>
         /// <returns>The context</returns>
-        public static ApplicationDbContext Create() => new ApplicationDbContext();
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
     }
 }

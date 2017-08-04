@@ -33,18 +33,24 @@ namespace Spectre.Controllers
         /// GET for the list of preparations.
         /// </summary>
         /// <returns>List of preparations.</returns>
-        public IEnumerable<Preparation> Get() => new[]
+        public IEnumerable<Preparation> Get()
         {
-            new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
-        };
+            return new[]
+            {
+                new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
+            };
+        }
 
         /// <summary>
         /// GET for single preparation data.
         /// </summary>
         /// <param name="id">Preparation ID.</param>
         /// <returns>Data of preparation.</returns>
-        public Preparation Get(int id) => id == 1
-            ? new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
-            : null;
+        public Preparation Get(int id)
+        {
+            return id == 1
+                ? new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
+                : null;
+        }
     }
 }

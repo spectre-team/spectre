@@ -30,14 +30,19 @@ namespace Spectre.Service
         /// Factory method for getting <see cref="IDivikService"/>.
         /// </summary>
         /// <returns>New instance of <see cref="DivikService"/></returns>
-        public IDivikService GetDivikService() => new DivikService();
+        public IDivikService GetDivikService()
+        {
+            return new DivikService();
+        }
 
         /// <summary>
         /// Gets the console capture service.
         /// </summary>
         /// <param name="updateInterval">The update interval.</param>
         /// <returns>New instance of <see cref="ConsoleCaptureService"/></returns>
-        public IConsoleCaptureService GetConsoleCaptureService(double updateInterval = 1000.0) =>
-            new ConsoleCaptureService(updateInterval);
+        public IConsoleCaptureService GetConsoleCaptureService(double updateInterval = 1000.0)
+        {
+            return new ConsoleCaptureService(updateInterval);
+        }
     }
 }

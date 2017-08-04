@@ -42,7 +42,10 @@ namespace Spectre.Mvvm.Converters
             object value,
             Type targetType,
             object parameter,
-            System.Globalization.CultureInfo culture) => !(bool)value;
+            System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay" /> bindings.
@@ -59,6 +62,9 @@ namespace Spectre.Mvvm.Converters
             object value,
             Type targetType,
             object parameter,
-            System.Globalization.CultureInfo culture) => !(bool)value;
+            System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
     }
 }

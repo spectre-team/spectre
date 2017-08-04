@@ -59,8 +59,9 @@ namespace Spectre.Service
         /// <param name="dataset">The source dataset being passed to the target.</param>
         /// <param name="options">The options passed to the divik algorithm.</param>
         /// <returns><see cref="DivikResult" /> of a given divik calculation.</returns>
-        public DivikResult CalculateDivik(IDataset dataset, DivikOptions options) => _segmentation.Divik(
-            dataset,
-            options);
+        public DivikResult CalculateDivik(IDataset dataset, DivikOptions options)
+        {
+            return _segmentation.Divik(dataset, options);
+        }
     }
 }

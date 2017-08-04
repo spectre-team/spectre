@@ -89,19 +89,25 @@ namespace Spectre.Data.Datasets
         /// </summary>
         public IEnumerable<SpatialCoordinates> SpatialCoordinates
         {
-            get => _spatialCoordinates;
-            private set => _spatialCoordinates = value.ToList();
+            get { return _spatialCoordinates; }
+            private set { _spatialCoordinates = value.ToList(); }
         }
 
         /// <summary>
         ///     See <see cref="IDataset" /> for description.
         /// </summary>
-        public int SpectrumLength => _mz.Length;
+        public int SpectrumLength
+        {
+            get { return _mz.Length; }
+        }
 
         /// <summary>
         ///     See <see cref="IDataset" /> for description.
         /// </summary>
-        public int SpectrumCount => _intensityArray.Count;
+        public int SpectrumCount
+        {
+            get { return _intensityArray.Count; }
+        }
 
         /// <summary>
         ///     Method for creating new dataset from text file, overwriting current data.
@@ -314,9 +320,12 @@ namespace Spectre.Data.Datasets
         }
 
         /// <inheritdoc cref="IDataset"/>
-        public DataPoint GetDataPoint(int spectrumIdx, int valueIdx) => new DataPoint(
-            mz: _mz[valueIdx],
-            intensity: _intensityArray[spectrumIdx][valueIdx]);
+        public DataPoint GetDataPoint(int spectrumIdx, int valueIdx)
+        {
+            return new DataPoint(
+                mz: _mz[valueIdx],
+                intensity: _intensityArray[spectrumIdx][valueIdx]);
+        }
 
         /// <inheritdoc cref="IDataset"/>
         public DataPoint[] GetDataPoints(int spectrumIdx, int valueIdxFrom, int valueIdxTo)
@@ -338,19 +347,34 @@ namespace Spectre.Data.Datasets
         }
 
         /// <inheritdoc cref="IDataset"/>
-        public SpatialCoordinates GetSpatialCoordinates(int spectrumIdx) => _spatialCoordinates[spectrumIdx];
+        public SpatialCoordinates GetSpatialCoordinates(int spectrumIdx)
+        {
+            return _spatialCoordinates[spectrumIdx];
+        }
 
         /// <inheritdoc cref="IDataset"/>
-        public double[] GetRawMzArray() => _mz;
+        public double[] GetRawMzArray()
+        {
+            return _mz;
+        }
 
         /// <inheritdoc cref="IDataset"/>
-        public double GetRawMzValue(int index) => _mz[index];
+        public double GetRawMzValue(int index)
+        {
+            return _mz[index];
+        }
 
         /// <inheritdoc cref="IDataset"/>
-        public double GetRawIntensityValue(int spectrumIdx, int valueIdx) => _intensityArray[spectrumIdx][valueIdx];
+        public double GetRawIntensityValue(int spectrumIdx, int valueIdx)
+        {
+            return _intensityArray[spectrumIdx][valueIdx];
+        }
 
         /// <inheritdoc cref="IDataset"/>
-        public double[] GetRawIntensityArray(int spectrumIdx) => _intensityArray[spectrumIdx];
+        public double[] GetRawIntensityArray(int spectrumIdx)
+        {
+            return _intensityArray[spectrumIdx];
+        }
 
         /// <inheritdoc cref="IDataset"/>
         public double[] GetRawIntensityRow(int valueIdx)
@@ -387,11 +411,14 @@ namespace Spectre.Data.Datasets
         }
 
         /// <inheritdoc cref="IDataset"/>
-        public double[,] GetRawIntensities() => GetRawIntensityRange(
-            spectrumIdxFrom: 0,
-            spectrumIdxTo: SpectrumCount,
-            valueIdxFrom: 0,
-            valueIdxTo: SpectrumLength);
+        public double[,] GetRawIntensities()
+        {
+            return GetRawIntensityRange(
+                spectrumIdxFrom: 0,
+                spectrumIdxTo: SpectrumCount,
+                valueIdxFrom: 0,
+                valueIdxTo: SpectrumLength);
+        }
 
         /// <inheritdoc cref="IDataset"/>
         public int[,] GetRawSpacialCoordinates(bool is2D)

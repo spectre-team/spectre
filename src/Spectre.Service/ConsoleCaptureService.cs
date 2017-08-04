@@ -163,7 +163,10 @@ namespace Spectre.Service
         /// Called when console was written.
         /// </summary>
         /// <param name="entry">The entry.</param>
-        protected virtual void OnWritten(string entry) => Written?.Invoke(sender: this, e: entry);
+        protected virtual void OnWritten(string entry)
+        {
+            Written?.Invoke(sender: this, e: entry);
+        }
 
         #endregion
     }
