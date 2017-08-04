@@ -17,7 +17,7 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
-      { pattern: './src/app/plotly/plotly-latest.min.js', watched: false },
+      { pattern: './src/assets/*', watched: false },
       { pattern: './src/test.ts', watched: false }
     ],
     preprocessors: {
