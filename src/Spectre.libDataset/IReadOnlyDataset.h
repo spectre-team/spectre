@@ -19,7 +19,7 @@ limitations under the License.
 
 #pragma once
 
-#include <gsl.h>
+#include <span.h>
 
 namespace Spectre::libDataset
 {
