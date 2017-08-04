@@ -3,12 +3,14 @@
 
 namespace Spectre::libClassifier {
 
-class Empty
+class Empty final
 {
 public:
 	static const Empty& instance();
+    Empty(const Empty&) = delete;
+    Empty(Empty&&) = delete;
 private:
-	static std::unique_ptr<Empty> m_instance;
+	static Empty m_instance;
 	Empty();
 };
 }

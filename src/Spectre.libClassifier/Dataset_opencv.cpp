@@ -1,4 +1,5 @@
-﻿#include "Dataset_opencv.h"
+﻿#include <opencv2/core/mat.hpp>
+#include "Dataset_opencv.h"
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 
@@ -13,9 +14,9 @@ Dataset_opencv::Dataset_opencv(gsl::span<const DataType> data, gsl::span<const L
 	m_MatLabels(static_cast<int>(labels.size()), ColumnMatrixWidth, CV_LABEL_TYPE, m_labels.data()),
 	m_observations(static_cast<int>(labels.size()))
 {
-	if (m_Mat.rows != static_cast<int>(m_labels.size()))
+	if (data.size() % labels.size() != 0 || m_Mat.rows != static_cast<int>(m_labels.size()))
 	{
-		libException::InconsistentArgumentSizesException("data", m_Mat.rows, "labels", static_cast<int>(m_labels.size()));
+		throw libException::InconsistentArgumentSizesException("data", m_Mat.rows, "labels", static_cast<int>(m_labels.size()));
 	}
     const auto numberOfColumns = data.size() / labels.size();
     auto rowBegin = m_Data.data();
@@ -35,7 +36,7 @@ Dataset_opencv::Dataset_opencv(cv::Mat data, cv::Mat labels):
 {
 	if (m_Mat.rows != static_cast<int>(m_labels.size()))
 	{
-		libException::InconsistentArgumentSizesException("data", m_Mat.rows,"labels", static_cast<int>(m_labels.size()));
+		throw libException::InconsistentArgumentSizesException("data", m_Mat.rows,"labels", static_cast<int>(m_labels.size()));
 	}
 	auto rowBegin = m_Data.data();
 	for (auto i = 0; i < data.rows; ++i)

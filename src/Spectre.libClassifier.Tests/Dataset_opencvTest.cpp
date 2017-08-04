@@ -20,6 +20,7 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include <span.h>
+#include <opencv2/core/mat.hpp>
 #include "Spectre.libClassifier/Dataset_opencv.h"
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libException/OutOfRangeException.h"
@@ -139,17 +140,18 @@ TEST_F(Dataset_opencvTest, check_getting_in_range_label)
 
 TEST_F(Dataset_opencvTest, get_dataset_metadata)
 {
-	const Empty check = Empty::instance();
+	const auto& check = Empty::instance();
 	EXPECT_EQ(&dataset->GetDatasetMetadata(), &check);
 }
 
 TEST_F(Dataset_opencvTest, get_data)
 {
 	gsl::span<const Observation> result = dataset->GetData();
-	EXPECT_EQ(result.size(), data.size());
+	ASSERT_EQ(result.size(), data.size());
 	for (auto i = 0u; i < data.size(); i++)
 	{
-		EXPECT_EQ(result[i].data(), &data[i]);
+        for (auto j = 0u; j < result[i].size(); ++j)
+		    EXPECT_EQ(result[i][j], data[i * result[i].size() + j]) << i << " " << j;
 	}
 }
 
