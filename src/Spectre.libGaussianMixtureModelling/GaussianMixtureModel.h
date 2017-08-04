@@ -23,78 +23,77 @@
 
 namespace Spectre::libGaussianMixtureModelling
 {
+/// <summary>
+/// Represents a single component of a Gaussian Mixture.
+/// </summary>
+struct GaussianComponent
+{
     /// <summary>
-    /// Represents a single component of a Gaussian Mixture.
+    /// Mean value of the component or peak's location.
     /// </summary>
-    struct GaussianComponent
-    {
-        /// <summary>
-        /// Mean value of the component or peak's location.
-        /// </summary>
-        double mean;
-
-        /// <summary>
-        /// Standard deviation of the component or peak's width.
-        /// </summary>
-        double deviation;
-
-        /// <summary>
-        /// Weight of the component or peak's height.
-        /// </summary>
-        double weight;
-    };
+    double mean;
 
     /// <summary>
-    /// Represents a composite of gaussian distribution components 
-    /// that build up a Gaussian Mixture Model.
+    /// Standard deviation of the component or peak's width.
     /// </summary>
-    struct GaussianMixtureModel
-    {
-        /// <summary>
-        /// Constructor used for initialization of m/z, intesities and gaussian components
-        /// collections.
-        /// </summary>
-        /// <param name="mzArray">M/z data shared by all spectra.</param>
-        /// <param name="intensities">Mean intensities at each point.</param>
-        /// <param name="numberOfComponents">Number of Gaussian Components to be set.</param>
-        GaussianMixtureModel(const gsl::span<double>& mzArray,
-                             const gsl::span<double>& intensities,
-                             const std::vector<GaussianComponent>&& components) :
-            originalMzArray(mzArray.begin(), mzArray.end()), 
-            originalMeanSpectrum(intensities.begin(), intensities.end()),
-            components(std::move(components)),
-            isMerged(), isNoiseReduced(), mzMergingThreshold() // will be used in future.
-        {
-        }
-            
-        /// <summary>
-        /// Collection of Gaussian components.
-        /// </summary>
-        const std::vector<GaussianComponent> components;
+    double deviation;
 
-        /// <summary>
-        /// Collection of initially supplied mz values.
-        /// </summary>
-        const std::vector<double> originalMzArray;
+    /// <summary>
+    /// Weight of the component or peak's height.
+    /// </summary>
+    double weight;
+};
 
-        /// <summary>
-        /// Collection of average supplied spectra.
-        /// </summary>
-        const std::vector<double> originalMeanSpectrum;
+/// <summary>
+/// Represents a composite of gaussian distribution components 
+/// that build up a Gaussian Mixture Model.
+/// </summary>
+struct GaussianMixtureModel
+{
+    /// <summary>
+    /// Constructor used for initialization of m/z, intesities and gaussian components
+    /// collections.
+    /// </summary>
+    /// <param name="mzArray">M/z data shared by all spectra.</param>
+    /// <param name="intensities">Mean intensities at each point.</param>
+    /// <param name="numberOfComponents">Number of Gaussian Components to be set.</param>
+    GaussianMixtureModel(const gsl::span<double> &mzArray,
+                         const gsl::span<double> &intensities,
+                         const std::vector<GaussianComponent> &&components) :
+        originalMzArray(mzArray.begin(), mzArray.end()),
+        originalMeanSpectrum(intensities.begin(), intensities.end()),
+        components(std::move(components)),
+        isMerged(), isNoiseReduced(), mzMergingThreshold() // will be used in future.
+    { }
 
-        /// <summary>
-        /// M/z threshold used in components merging.
-        /// </summary>
-        const double mzMergingThreshold;
+    /// <summary>
+    /// Collection of Gaussian components.
+    /// </summary>
+    const std::vector<GaussianComponent> components;
 
-        /// <summary>
-        /// Value indicating whether this instance is merged.
-        /// </summary>
-        const bool isMerged;
+    /// <summary>
+    /// Collection of initially supplied mz values.
+    /// </summary>
+    const std::vector<double> originalMzArray;
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is noise components reduced.
-        /// </summary>
-        const bool isNoiseReduced;
-    };
+    /// <summary>
+    /// Collection of average supplied spectra.
+    /// </summary>
+    const std::vector<double> originalMeanSpectrum;
+
+    /// <summary>
+    /// M/z threshold used in components merging.
+    /// </summary>
+    const double mzMergingThreshold;
+
+    /// <summary>
+    /// Value indicating whether this instance is merged.
+    /// </summary>
+    const bool isMerged;
+
+    /// <summary>
+    /// Gets a value indicating whether this instance is noise components reduced.
+    /// </summary>
+    const bool isNoiseReduced;
+};
 }

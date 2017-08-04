@@ -27,8 +27,8 @@ class MockStopCondition: public StopCondition
 {
 public:
     MockStopCondition():
-        StopCondition(0)
-    {}
+        StopCondition(0) {}
+
     MOCK_METHOD0(CallOperator, bool());
     bool operator()() override { return CallOperator(); }
 };

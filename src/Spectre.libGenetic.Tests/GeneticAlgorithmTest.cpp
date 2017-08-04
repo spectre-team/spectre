@@ -36,13 +36,13 @@ protected:
     std::unique_ptr<Tests::MockScorer> scorer;
     std::unique_ptr<Tests::MockOffspringGenerator> offspringGenerator;
     std::unique_ptr<Tests::MockStopCondition> stopCondition;
-    const Individual firstInitial{ std::vector<bool>{true, true} };
-    const Individual secondInitial{ std::vector<bool>{false, false} };
-    const Individual firstEvolved{ std::vector<bool>{true, false} };
-    const Individual secondEvolved{ std::vector<bool>{false, true} };
-    Generation initialGeneration{ std::vector<Individual>{firstInitial, secondInitial} };
-    Generation evolvedGeneration{ std::vector<Individual>{firstEvolved, secondEvolved} };
-    const std::vector<ScoreType> scores{1, 1};
+    const Individual firstInitial { std::vector<bool> { true, true } };
+    const Individual secondInitial { std::vector<bool> { false, false } };
+    const Individual firstEvolved { std::vector<bool> { true, false } };
+    const Individual secondEvolved { std::vector<bool> { false, true } };
+    Generation initialGeneration { std::vector<Individual> { firstInitial, secondInitial } };
+    Generation evolvedGeneration { std::vector<Individual> { firstEvolved, secondEvolved } };
+    const std::vector<ScoreType> scores { 1, 1 };
 
     void SetUp() override
     {

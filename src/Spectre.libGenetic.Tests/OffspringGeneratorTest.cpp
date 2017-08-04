@@ -33,23 +33,23 @@ using namespace ::testing;
 class OffspringGeneratorTest : public Test
 {
 public:
-	OffspringGeneratorTest() {}
+    OffspringGeneratorTest() {}
 protected:
-    const Individual preservedIndividual{ std::vector<bool>{ true, true, true, true } };
-    const Individual generatedIndividual{ std::vector<bool>{ false, false, false, false} };
-    const Individual oldIndividual{ std::vector<bool>{false, true, false, true} };
-    const Generation preserved{ std::vector<Individual>{ preservedIndividual} };
-    const Generation generated{ std::vector<Individual>{ generatedIndividual, generatedIndividual, generatedIndividual} };
-    Generation old{ std::vector<Individual> {oldIndividual, oldIndividual, oldIndividual, oldIndividual} };
-    const std::vector<ScoreType> scores{ 1, 2, 3, 4 };
+    const Individual preservedIndividual { std::vector<bool> { true, true, true, true } };
+    const Individual generatedIndividual { std::vector<bool> { false, false, false, false } };
+    const Individual oldIndividual { std::vector<bool> { false, true, false, true } };
+    const Generation preserved { std::vector<Individual> { preservedIndividual } };
+    const Generation generated { std::vector<Individual> { generatedIndividual, generatedIndividual, generatedIndividual } };
+    Generation old { std::vector<Individual> { oldIndividual, oldIndividual, oldIndividual, oldIndividual } };
+    const std::vector<ScoreType> scores { 1, 2, 3, 4 };
     std::unique_ptr<Tests::MockIndividualsBuilderStrategy> builder;
     std::unique_ptr<Tests::MockPreservationStrategy> preservationStrategy;
 
-	void SetUp() override
-	{
+    void SetUp() override
+    {
         builder = std::make_unique<Tests::MockIndividualsBuilderStrategy>();
         preservationStrategy = std::make_unique<Tests::MockPreservationStrategy>();
-	}
+    }
 };
 
 TEST_F(OffspringGeneratorTest, initializes)
@@ -85,9 +85,9 @@ TEST_F(OffspringGeneratorTest, new_generation_preserves_specified_part_of_old)
     OffspringGenerator generator(std::move(builder), std::move(preservationStrategy));
     const auto newGeneration = generator.next(old, scores);
     auto preservedCount = 0u;
-    for(auto& individual: newGeneration)
+    for (auto &individual: newGeneration)
     {
-        if(individual == preservedIndividual)
+        if (individual == preservedIndividual)
         {
             ++preservedCount;
         }
@@ -102,7 +102,7 @@ TEST_F(OffspringGeneratorTest, new_generation_creates_remaining_non_preserved)
     OffspringGenerator generator(std::move(builder), std::move(preservationStrategy));
     const auto newGeneration = generator.next(old, scores);
     auto newCount = 0u;
-    for (auto& individual : newGeneration)
+    for (auto &individual : newGeneration)
     {
         if (individual != preservedIndividual)
         {

@@ -13,9 +13,11 @@ namespace Spectre.DivikWpfClient
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.Threading.DispatcherUnhandledExceptionEventArgs"/> instance containing the event data.</param>
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(
+            object sender,
+            System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            var dataContext = (MainPageVm) Resources["MainPageVm"];
+            var dataContext = (MainPageVm)Resources[key: "MainPageVm"];
             dataContext.HandleExceptionCommand.Execute(e.Exception.Message);
         }
     }

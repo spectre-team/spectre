@@ -32,7 +32,7 @@ public:
     /// Initializes a new instance of the <see cref="Individual"/> class.
     /// </summary>
     /// <param name="binaryData">The binary data.</param>
-    explicit Individual(std::vector<bool>&& binaryData);
+    explicit Individual(std::vector<bool> &&binaryData);
     /// <summary>
     /// Gets the mutable data under specified index.
     /// </summary>
@@ -69,26 +69,26 @@ public:
     /// Get the size of the data.
     /// </summary>
     /// <returns>Size of the data.</returns>
-    size_t size() const;    
+    size_t size() const;
     /// <summary>
     /// Compares object with other
     /// </summary>
     /// <param name="other">The other.</param>
     /// <returns>True, if binary data inside is the same.</returns>
-    bool operator==(const Individual& other) const;
+    bool operator==(const Individual &other) const;
     /// <summary>
     /// Compares object with other
     /// </summary>
     /// <param name="other">The other.</param>
     /// <returns>False, if binary data inside is the same.</returns>
-    bool Individual::operator!=(const Individual& other) const;
+    bool Individual::operator!=(const Individual &other) const;
     /// <summary>
     /// Overwrites individual with another object data.
     /// </summary>
     /// <param name="other">The other.</param>
     /// <returns>This instance.</returns>
-    Individual& Individual::operator=(const Individual& other);
-	virtual ~Individual() = default;
+    Individual& Individual::operator=(const Individual &other);
+    virtual ~Individual() = default;
 
 private:
     /// <summary>

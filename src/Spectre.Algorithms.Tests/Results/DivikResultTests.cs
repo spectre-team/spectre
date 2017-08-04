@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.IO;
 using Newtonsoft.Json;
@@ -27,19 +28,25 @@ using Spectre.Data.Datasets;
 
 namespace Spectre.Algorithms.Tests.Results
 {
-    [TestFixture, Category("Algorithm"), Category("VeryLong")]
+    [TestFixture]
+    [Category(name: "Algorithm")]
+    [Category(name: "VeryLong")]
     public class DivikResultTests
     {
         private DivikResult _result;
         private Segmentation _segmentation;
-        private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
-        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\hnc1_tumor.txt";
+
+        private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory
+                                                + "\\..\\..\\..\\..\\..\\test_files";
+
+        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory
+                                                + "\\..\\..\\..\\..\\..\\test_files\\hnc1_tumor.txt";
 
         [OneTimeSetUp]
         public void SetUpFixture()
         {
             var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(1);
+            var options = DivikOptions.ForLevels(levels: 1);
             options.MaxK = 2;
             options.Caching = false;
             options.PlottingPartitions = false;
@@ -61,27 +68,28 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void Save()
         {
-            string path = TestDirectory + "\\test-path.json";
-            _result.Save(path, true);
+            var path = TestDirectory + "\\test-path.json";
+            _result.Save(path, indentation: true);
 
-            Assert.True(File.Exists(path), "File doesn't exist");
-            Assert.AreNotEqual(0, new FileInfo(path).Length, "File is empty");
+            Assert.True(condition: File.Exists(path), message: "File doesn't exist");
+            Assert.AreNotEqual(expected: 0, actual: new FileInfo(path).Length, message: "File is empty");
 
-            string jsonData = File.ReadAllText(path);
-            DivikResult deserialisedResult = JsonConvert.DeserializeObject<DivikResult>(jsonData);
+            var jsonData = File.ReadAllText(path);
+            var deserialisedResult = JsonConvert.DeserializeObject<DivikResult>(jsonData);
 
-            Assert.AreEqual(_result, deserialisedResult, "Divik results differ");
+            Assert.AreEqual(_result, deserialisedResult, message: "Divik results differ");
             File.Delete(path);
         }
 
         [Test]
         public void SavedIdented()
         {
-            string path = TestDirectory + "\\test-path.json";
-            _result.Save(path, false);
+            var path = TestDirectory + "\\test-path.json";
+            _result.Save(path, indentation: false);
 
-            string contents = File.ReadAllText(path);
-            Assert.False(contents.Contains("\n"), "Non-idented formatting contains new line");
+            var contents = File.ReadAllText(path);
+            Assert.False(condition: contents.Contains(value: "\n"),
+                message: "Non-idented formatting contains new line");
             File.Delete(path);
         }
 
@@ -89,7 +97,7 @@ namespace Spectre.Algorithms.Tests.Results
         public void EqualsAgainstIdenticalInstance()
         {
             var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(1);
+            var options = DivikOptions.ForLevels(levels: 1);
             options.MaxK = 2;
             options.Caching = false;
             options.PlottingPartitions = false;
@@ -99,14 +107,14 @@ namespace Spectre.Algorithms.Tests.Results
             options.UsingAmplitudeFiltration = false;
             var result = _segmentation.Divik(dataset, options);
 
-            Assert.True(result.Equals(_result), "Equal objects not indicated.");
+            Assert.True(condition: result.Equals(_result), message: "Equal objects not indicated.");
         }
 
         [Test]
         public void EqualsAgainstDifferentInstance()
         {
             var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(1);
+            var options = DivikOptions.ForLevels(levels: 1);
             options.MaxK = 2;
             options.Caching = false;
             options.PlottingPartitions = false;
@@ -116,13 +124,13 @@ namespace Spectre.Algorithms.Tests.Results
             options.UsingVarianceFiltration = false;
             var result = _segmentation.Divik(dataset, options);
 
-            Assert.False(result.Equals(_result), "Unequal objects not indicated.");
+            Assert.False(condition: result.Equals(_result), message: "Unequal objects not indicated.");
         }
 
         [Test]
         public void EqualsAgainstNull()
         {
-            Assert.False(_result.Equals(null), "Instance equalized with null");
+            Assert.False(condition: _result.Equals(obj: null), message: "Instance equalized with null");
         }
 
         [Test]
@@ -130,7 +138,7 @@ namespace Spectre.Algorithms.Tests.Results
         {
             DivikResult r1 = null;
             DivikResult r2 = null;
-            Assert.True(r1 == r2, "Nulls not indicated as equal");
+            Assert.True(condition: r1 == r2, message: "Nulls not indicated as equal");
         }
 
         [Test]
@@ -138,21 +146,21 @@ namespace Spectre.Algorithms.Tests.Results
         {
             DivikResult r1 = null;
             DivikResult r2 = null;
-            Assert.False(r1 != r2, "Nulls indicated as unequal");
+            Assert.False(condition: r1 != r2, message: "Nulls indicated as unequal");
         }
 
         [Test]
         public void EqualityOperatorAgainstNull()
         {
             DivikResult r1 = null;
-            Assert.False(r1 == _result, "null indicated equal to instance");
+            Assert.False(condition: r1 == _result, message: "null indicated equal to instance");
         }
 
         [Test]
         public void InequalityOperatorAgainstNull()
         {
             DivikResult r1 = null;
-            Assert.True(r1 != _result, "null not indicated unequal to instance");
+            Assert.True(condition: r1 != _result, message: "null not indicated unequal to instance");
         }
     }
 }

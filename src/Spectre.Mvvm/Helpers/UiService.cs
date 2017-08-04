@@ -1,7 +1,7 @@
 ﻿/*
  * UiServices.cs
  * Helps to maintain UI states.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +16,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Spectre.Mvvm.Helpers
 {
+    /// <summary>
+    /// Abstraction for UI related services.
+    /// </summary>
     public class UiService
     {
         /// <summary>
@@ -34,7 +38,7 @@ namespace Spectre.Mvvm.Helpers
         /// </summary>
         public virtual void SetBusyState()
         {
-            SetBusyState(true);
+            UiService.SetBusyState(busy: true);
         }
 
         /// <summary>
@@ -43,20 +47,25 @@ namespace Spectre.Mvvm.Helpers
         /// <param name="busy">if set to <c>true</c> the application is now busy.</param>
         private static void SetBusyState(bool busy)
         {
-            if (busy != _isBusy)
+            if (busy != UiService._isBusy)
             {
-                _isBusy = busy;
+                UiService._isBusy = busy;
 
                 var dispatcher = System.Windows.Application.Current?.Dispatcher
-                                     ?? Dispatcher.CurrentDispatcher;
+                                 ?? Dispatcher.CurrentDispatcher;
 
-                if (_isBusy)
+                if (UiService._isBusy)
                 {
-                    dispatcher.Invoke(() => Mouse.OverrideCursor = Cursors.Wait);
-                    new DispatcherTimer(TimeSpan.FromSeconds(0), DispatcherPriority.ApplicationIdle, dispatcherTimer_Tick, dispatcher);
-                } else
+                    dispatcher.Invoke(callback: () => Mouse.OverrideCursor = Cursors.Wait);
+                    new DispatcherTimer(
+                        interval: TimeSpan.FromSeconds(value: 0),
+                        priority: DispatcherPriority.ApplicationIdle,
+                        callback: UiService.DispatcherTimer_Tick,
+                        dispatcher: dispatcher);
+                }
+                else
                 {
-                    dispatcher.Invoke(() => Mouse.OverrideCursor = Cursors.Arrow);
+                    dispatcher.Invoke(callback: () => Mouse.OverrideCursor = Cursors.Arrow);
                 }
             }
         }
@@ -66,12 +75,12 @@ namespace Spectre.Mvvm.Helpers
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private static void dispatcherTimer_Tick(object sender, EventArgs e)
+        private static void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             var dispatcherTimer = sender as DispatcherTimer;
             if (dispatcherTimer != null)
             {
-                SetBusyState(false);
+                UiService.SetBusyState(busy: false);
                 dispatcherTimer.Stop();
             }
         }

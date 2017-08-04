@@ -17,13 +17,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#define GTEST_LANG_CXX11 1
-
 #include <gtest/gtest.h>
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-	::testing::InitGoogleTest(&argc, argv);
-	int testsResult = RUN_ALL_TESTS();
-	return testsResult;
+    ::testing::InitGoogleTest(&argc, argv);
+    int testsResult = RUN_ALL_TESTS();
+    return testsResult;
 }

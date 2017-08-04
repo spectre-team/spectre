@@ -29,108 +29,109 @@ typedef std::mt19937_64 RandomNumberGenerator;
 
 namespace Spectre::libGaussianMixtureModelling
 {
+/// <summary>
+/// Class serves as the container for all data required by
+/// A. P. Dempster's Expectation Maximization algorithm used
+/// for the purpose of Guassian Mixture Modelling of the
+/// spectral data.
+/// </summary>
+/// <param name="InitializationRunner">Class performing Initialization step of the em algorithm.</param>
+/// <param name="ExpectationRunner">Class performing expectation step of the em algorithm.</param>
+/// <param name="MaximizationRunner">Class performing maximization step of the em algorithm.</param>
+/// <param name="LogLikelihoodCalculator">Class performing log likelihood of resulting calculation.</param>
+template <typename InitializationRunner, typename ExpectationRunner, typename MaximizationRunner, typename LogLikelihoodCalculator>
+class ExpectationMaximization
+{
+public:
     /// <summary>
-    /// Class serves as the container for all data required by
-    /// A. P. Dempster's Expectation Maximization algorithm used
-    /// for the purpose of Guassian Mixture Modelling of the
-    /// spectral data.
+    /// Constructor initializing the class with all algorithm necessary data.
     /// </summary>
-    /// <param name="InitializationRunner">Class performing Initialization step of the em algorithm.</param>
-    /// <param name="ExpectationRunner">Class performing expectation step of the em algorithm.</param>
-    /// <param name="MaximizationRunner">Class performing maximization step of the em algorithm.</param>
-    /// <param name="LogLikelihoodCalculator">Class performing log likelihood of resulting calculation.</param>
-    template<typename InitializationRunner, typename ExpectationRunner, typename MaximizationRunner, typename LogLikelihoodCalculator>
-    class ExpectationMaximization
+    /// <param name="mzArray">Array of m/z values.</param>
+    /// <param name="intensities">Set of corresponding mean intensities values.</param>
+    /// <param name="size">Size of the mzArray and itensities arrays.</param>
+    /// <param name="rngEngine">Mersenne-Twister engine to be used during initialization step.</param>
+    /// <param name="numberOfComponents">Number of Gaussian components that build up the approximation.</param>
+    /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
+    ExpectationMaximization(DataType *mzArray, DataType *intensities, const unsigned size,
+                            RandomNumberGenerator &rngEngine, const unsigned numberOfComponents = 2)
+        : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size), m_Components(numberOfComponents)
+          , m_AffilationMatrix(numberOfComponents, size)
+          , m_Initialization(mzArray, size, m_Components, rngEngine)
+          , m_Expectation(mzArray, size, m_AffilationMatrix, m_Components)
+          , m_Maximization(mzArray, intensities, size, m_AffilationMatrix, m_Components)
+          , m_LogLikelihoodCalculator(mzArray, intensities, size, m_Components)
     {
-    public:
-        /// <summary>
-        /// Constructor initializing the class with all algorithm necessary data.
-        /// </summary>
-        /// <param name="mzArray">Array of m/z values.</param>
-        /// <param name="intensities">Set of corresponding mean intensities values.</param>
-        /// <param name="size">Size of the mzArray and itensities arrays.</param>
-        /// <param name="rngEngine">Mersenne-Twister engine to be used during initialization step.</param>
-        /// <param name="numberOfComponents">Number of Gaussian components that build up the approximation.</param>
-        /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
-        ExpectationMaximization(DataType* mzArray, DataType* intensities, const unsigned size, 
-                RandomNumberGenerator& rngEngine, const unsigned numberOfComponents = 2)
-            : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size), m_Components(numberOfComponents)
-            , m_AffilationMatrix(numberOfComponents, size)
-            , m_Initialization(mzArray, size, m_Components, rngEngine)
-            , m_Expectation(mzArray, size, m_AffilationMatrix, m_Components)
-            , m_Maximization(mzArray, intensities, size, m_AffilationMatrix, m_Components)
-            , m_LogLikelihoodCalculator(mzArray, intensities, size, m_Components)
+        if (mzArray == nullptr)
         {
-            if (mzArray == nullptr)
-            {
-                throw ArgumentNullException("mzArray");
-            }
-
-            if (intensities == nullptr)
-            {
-                throw ArgumentNullException("intensities");
-            }
+            throw ArgumentNullException("mzArray");
         }
 
-        /// <summary>
-        /// Performs a full algorithm run. Terminates when change in log likelihood
-        /// is sufficiently small (lower than  0.00000001).
-        /// </summary>
-        /// <returns>
-        /// Gaussian Mixture Model containing all the components with their appropriate
-        /// parameters.
-        /// </returns>
-        GaussianMixtureModel ExpectationMaximization::EstimateGmm()
+        if (intensities == nullptr)
         {
-            constexpr DataType MIN_LIKELIHOOD_CHANGE = 0.00000001;
-            Initialization();
-
-            DataType oldLikelihood; // used as iterations terminator
-            DataType newLikelihood = m_LogLikelihoodCalculator.CalculateLikelihood();
-            do
-            {
-                Expectation();
-                oldLikelihood = newLikelihood;
-                Maximization();
-                newLikelihood = m_LogLikelihoodCalculator.CalculateLikelihood();
-            } while (abs(oldLikelihood - newLikelihood) > MIN_LIKELIHOOD_CHANGE);
-
-            return GaussianMixtureModel(
-                gsl::span<DataType>(m_pMzArray, m_DataSize),
-                gsl::span<DataType>(m_pIntensities, m_DataSize),
-                std::move(m_Components)
-            );
+            throw ArgumentNullException("intensities");
         }
+    }
 
-    private:
-        void ExpectationMaximization::Initialization()
+    /// <summary>
+    /// Performs a full algorithm run. Terminates when change in log likelihood
+    /// is sufficiently small (lower than  0.00000001).
+    /// </summary>
+    /// <returns>
+    /// Gaussian Mixture Model containing all the components with their appropriate
+    /// parameters.
+    /// </returns>
+    GaussianMixtureModel ExpectationMaximization::EstimateGmm()
+    {
+        constexpr DataType MIN_LIKELIHOOD_CHANGE = 0.00000001;
+        Initialization();
+
+        DataType oldLikelihood; // used as iterations terminator
+        DataType newLikelihood = m_LogLikelihoodCalculator.CalculateLikelihood();
+        do
         {
-            m_Initialization.AssignRandomMeans();
-            m_Initialization.AssignVariances();
-            m_Initialization.AssignWeights();
+            Expectation();
+            oldLikelihood = newLikelihood;
+            Maximization();
+            newLikelihood = m_LogLikelihoodCalculator.CalculateLikelihood();
         }
+        while (abs(oldLikelihood - newLikelihood) > MIN_LIKELIHOOD_CHANGE);
 
-        void ExpectationMaximization::Expectation()
-        {
-            m_Expectation.Expectation();
-        }
+        return GaussianMixtureModel(
+            gsl::span<DataType>(m_pMzArray, m_DataSize),
+            gsl::span<DataType>(m_pIntensities, m_DataSize),
+            std::move(m_Components)
+        );
+    }
 
-        void ExpectationMaximization::Maximization()
-        {
-            m_Maximization.UpdateWeights();
-            m_Maximization.UpdateMeans();
-            m_Maximization.UpdateStdDeviations();
-        }
+private:
+    void ExpectationMaximization::Initialization()
+    {
+        m_Initialization.AssignRandomMeans();
+        m_Initialization.AssignVariances();
+        m_Initialization.AssignWeights();
+    }
 
-        Matrix m_AffilationMatrix;
-        DataType* m_pMzArray;
-        DataType* m_pIntensities;
-        unsigned m_DataSize;
-        std::vector<GaussianComponent> m_Components;
+    void ExpectationMaximization::Expectation()
+    {
+        m_Expectation.Expectation();
+    }
 
-        InitializationRunner m_Initialization;
-        ExpectationRunner m_Expectation;
-        MaximizationRunner m_Maximization;
-        LogLikelihoodCalculator m_LogLikelihoodCalculator;
-    };
+    void ExpectationMaximization::Maximization()
+    {
+        m_Maximization.UpdateWeights();
+        m_Maximization.UpdateMeans();
+        m_Maximization.UpdateStdDeviations();
+    }
+
+    Matrix m_AffilationMatrix;
+    DataType *m_pMzArray;
+    DataType *m_pIntensities;
+    unsigned m_DataSize;
+    std::vector<GaussianComponent> m_Components;
+
+    InitializationRunner m_Initialization;
+    ExpectationRunner m_Expectation;
+    MaximizationRunner m_Maximization;
+    LogLikelihoodCalculator m_LogLikelihoodCalculator;
+};
 }

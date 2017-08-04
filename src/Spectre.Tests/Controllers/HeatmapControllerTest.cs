@@ -1,7 +1,7 @@
 ﻿/*
  * HeatmapControllerTest.cs
  * Test for proper responses after requests.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa, Michał Gallus, Daniel Babiak
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,35 +25,51 @@ using Spectre.Models.Msi;
 
 namespace Spectre.Tests.Controllers
 {
+    /// <summary>
+    /// Tests for heatmap controller
+    /// </summary>
     [TestFixture]
-    class HeatmapControllerTest
+    internal class HeatmapControllerTest
     {
         private HeatmapController _controller;
 
+        /// <summary>
+        /// Sets up.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
             _controller = new HeatmapController();
         }
 
+        /// <summary>
+        /// Tests the first preparation sample heatmap getter.
+        /// </summary>
         [Test]
         public void TestGetFirstPreparationSampleHeatmap()
         {
             const int anyChannelId = 1;
-            var heatmap = _controller.Get(1, anyChannelId, false);
+            var heatmap = _controller.Get(id: 1, channelId: anyChannelId, flag: false);
 
-            Assert.Multiple(() =>
+            Assert.Multiple(testDelegate: () =>
             {
                 Assert.NotNull(heatmap);
                 Assert.IsInstanceOf<Heatmap>(heatmap);
                 Assert.IsNotEmpty(heatmap.Intensities);
                 Assert.IsNotEmpty(heatmap.X);
                 Assert.IsNotEmpty(heatmap.Y);
-                Assert.AreEqual(heatmap.X.Count(), heatmap.Y.Count(), "Number of coordinates of X and Y do not match.");
-                Assert.AreEqual(heatmap.Intensities.Count(), heatmap.Y.Count(),
-                    "Number of coordinates is different from number of intensities.");
+                Assert.AreEqual(
+                    expected: heatmap.X.Count(),
+                    actual: heatmap.Y.Count(),
+                    message: "Number of coordinates of X and Y do not match.");
+                Assert.AreEqual(
+                    expected: heatmap.Intensities.Count(),
+                    actual: heatmap.Y.Count(),
+                    message: "Number of coordinates is different from number of intensities.");
 
-                Assert.Throws<ArgumentException>(() => { _controller.Get(1, -1, false); }, "Accepted negative index");
+                Assert.Throws<ArgumentException>(
+                    code: () => { _controller.Get(id: 1, channelId: -1, flag: false); },
+                    message: "Accepted negative index");
             });
         }
     }

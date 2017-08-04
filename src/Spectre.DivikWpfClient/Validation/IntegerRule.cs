@@ -1,7 +1,7 @@
 ﻿/*
  * IntegerRule.cs
  * Contains WPF TextBox integer validation rule.
- * 
+ *
    Copyright 2017 Michał Wolny
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using System.Windows.Controls;
@@ -28,19 +29,23 @@ namespace Spectre.DivikWpfClient.Validation
     public class IntegerRule : ValidationRule
     {
         /// <summary>
-		/// Integer input validate method. Checks if passed value is a <see cref="int"/>.
-		/// </summary>
-		/// <param name="value">The source data being passed to the target.</param>
+        /// Integer input validate method. Checks if passed value is a <see cref="int"/>.
+        /// </summary>
+        /// <param name="value">The source data being passed to the target.</param>
         /// <param name="cultureInfo">The culture of the conversion.</param>
-		/// <returns><see cref="ValidationResult"/> with error messages for the rule.</returns>
+        /// <returns><see cref="ValidationResult"/> with error messages for the rule.</returns>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            int num = 0;
+            var num = 0;
 
-            if (!int.TryParse(value.ToString(), out num))
-                return new ValidationResult(false, String.Format("Please enter an integer value."));
+            if (!int.TryParse(s: value.ToString(), result: out num))
+            {
+                return new ValidationResult(
+                    isValid: false,
+                    errorContent: string.Format(format: "Please enter an integer value."));
+            }
 
-            return new ValidationResult(true, null);
+            return new ValidationResult(isValid: true, errorContent: null);
         }
     }
 }

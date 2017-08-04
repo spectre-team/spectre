@@ -26,49 +26,48 @@ limitations under the License.
 
 namespace Spectre::libGaussianMixtureModelling
 {
-    class GaussianMixtureModelTest : public ::testing::Test
+class GaussianMixtureModelTest : public ::testing::Test
+{
+protected:
+
+    std::vector<double> testData;
+    std::vector<GaussianComponent> gaussianComponents;
+
+    virtual void SetUp() override
     {
-    protected:
-
-        std::vector<double> testData;
-        std::vector<GaussianComponent> gaussianComponents;
-
-        virtual void SetUp() override
-        {
-            testData = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 };
-            gaussianComponents = {
-                { /*mean =*/-5.0, /*deviation =*/ 3.0, /*weight =*/ 0.25 },
-                { /*mean =*/ 5.0, /*deviation =*/ 3.0, /*weight =*/ 0.25 },
-                { /*mean =*/ -2.0,/*deviation =*/ 9.0, /*weight =*/ 0.5 }
-            };
-        }
-    };
-
-    TEST_F(GaussianMixtureModelTest, test_data_sizes)
-    {
-        GaussianMixtureModel model(testData, testData, std::move(gaussianComponents));
-        EXPECT_EQ(model.components.size(), gaussianComponents.size());
-        EXPECT_EQ(model.originalMeanSpectrum.size(), testData.size());
-        EXPECT_EQ(model.originalMzArray.size(), testData.size());
+        testData = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 };
+        gaussianComponents = {
+            { /*mean =*/-5.0, /*deviation =*/ 3.0, /*weight =*/ 0.25 },
+            { /*mean =*/ 5.0, /*deviation =*/ 3.0, /*weight =*/ 0.25 },
+            { /*mean =*/ -2.0,/*deviation =*/ 9.0, /*weight =*/ 0.5 }
+        };
     }
+};
 
-    TEST_F(GaussianMixtureModelTest, test_original_data_correctness)
+TEST_F(GaussianMixtureModelTest, test_data_sizes)
+{
+    GaussianMixtureModel model(testData, testData, std::move(gaussianComponents));
+    EXPECT_EQ(model.components.size(), gaussianComponents.size());
+    EXPECT_EQ(model.originalMeanSpectrum.size(), testData.size());
+    EXPECT_EQ(model.originalMzArray.size(), testData.size());
+}
+
+TEST_F(GaussianMixtureModelTest, test_original_data_correctness)
+{
+    GaussianMixtureModel model(testData, testData, std::move(gaussianComponents));
+    for (int i = 0; i < testData.size(); i++)
     {
-        GaussianMixtureModel model(testData, testData, std::move(gaussianComponents));
-        for (int i = 0; i < testData.size(); i++)
-        {
-            EXPECT_EQ(model.originalMeanSpectrum[i], testData[i]);
-            EXPECT_EQ(model.originalMzArray[i], testData[i]);
-        }
-        for (int i = 0; i < gaussianComponents.size(); i++)
-        {
-            EXPECT_EQ(model.components[i].deviation, gaussianComponents[i].deviation);
-            EXPECT_EQ(model.components[i].mean, gaussianComponents[i].mean);
-            EXPECT_EQ(model.components[i].weight, gaussianComponents[i].weight);
-
-        }
-        EXPECT_EQ(model.isMerged, false);
-        EXPECT_EQ(model.isNoiseReduced, false);
-        EXPECT_EQ(model.mzMergingThreshold, 0.0);
+        EXPECT_EQ(model.originalMeanSpectrum[i], testData[i]);
+        EXPECT_EQ(model.originalMzArray[i], testData[i]);
     }
+    for (int i = 0; i < gaussianComponents.size(); i++)
+    {
+        EXPECT_EQ(model.components[i].deviation, gaussianComponents[i].deviation);
+        EXPECT_EQ(model.components[i].mean, gaussianComponents[i].mean);
+        EXPECT_EQ(model.components[i].weight, gaussianComponents[i].weight);
+    }
+    EXPECT_EQ(model.isMerged, false);
+    EXPECT_EQ(model.isNoiseReduced, false);
+    EXPECT_EQ(model.mzMergingThreshold, 0.0);
+}
 }

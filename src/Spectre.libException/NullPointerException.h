@@ -33,6 +33,6 @@ public:
     /// Initializes a new instance of the <see cref="NullPointerException"/> class.
     /// </summary>
     /// <param name="">Name of null variable.</param>
-    explicit NullPointerException(const std::string& variableName);
+    explicit NullPointerException(const std::string &variableName);
 };
 }

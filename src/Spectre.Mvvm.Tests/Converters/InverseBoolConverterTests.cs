@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using NUnit.Framework;
@@ -30,28 +31,28 @@ namespace Spectre.Mvvm.Tests.Converters
         public void ConvertTest()
         {
             // false case
-            ToGuiType(false, true, "Returned non-boolean for false.", "false is not converted to true.");
+            ToGuiType(argument: false, expectedResult: true, onTypeFailure: "Returned non-boolean for false.", onValueFailure: "false is not converted to true.");
 
             // true case
-            ToGuiType(true, false, "Returned non-boolean for true.", "true is not converted to false.");
+            ToGuiType(argument: true, expectedResult: false, onTypeFailure: "Returned non-boolean for true.", onValueFailure: "true is not converted to false.");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.Convert("blah", typeof(bool), null, CultureInfo.CurrentCulture),
-                "Converted string.");
+                code: () => Converter.Convert(value: "blah", targetType: typeof(bool), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted string.");
         }
 
         [Test]
         public void ConvertBackTest()
         {
             // false case
-            ToBackendType(false, true, "Returned non-boolean for false.", "false is not converted to true.");
+            ToBackendType(argument: false, expectedResult: true, onTypeFailure: "Returned non-boolean for false.", onValueFailure: "false is not converted to true.");
 
             // true case
-            ToBackendType(true, false, "Returned non-boolean for true.", "true is not converted to false.");
+            ToBackendType(argument: true, expectedResult: false, onTypeFailure: "Returned non-boolean for true.", onValueFailure: "true is not converted to false.");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.ConvertBack("blah", typeof(bool), null, CultureInfo.CurrentCulture),
-                "Converted string.");
+                code: () => Converter.ConvertBack(value: "blah", targetType: typeof(bool), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted string.");
         }
     }
 }

@@ -31,10 +31,11 @@ class MockOffspringGenerator: public OffspringGenerator
 public:
     MockOffspringGenerator() :
         OffspringGenerator(std::make_unique<MockIndividualsBuilderStrategy>(),
-                           std::make_unique<MockPreservationStrategy>())
-    {}
+                           std::make_unique<MockPreservationStrategy>()) {}
+
     MOCK_CONST_METHOD2(NextFunction, Generation(Generation&, std::vector<ScoreType>));
-    Generation next(Generation& old, gsl::span<const ScoreType> scores) const override
+
+    Generation next(Generation &old, gsl::span<const ScoreType> scores) const override
     {
         return NextFunction(old, std::vector<ScoreType>(scores.begin(), scores.end()));
     }

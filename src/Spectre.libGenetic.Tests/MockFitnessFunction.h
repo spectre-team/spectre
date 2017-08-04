@@ -29,7 +29,8 @@ public:
     // @gmrukwa: call operator mocked as this
     // https://groups.google.com/forum/#!topic/googlemock/O-5cTVVtswE
     MOCK_CONST_METHOD1(CallOperator, ScoreType(const Individual&));
-    ScoreType operator()(const Individual& individual) override
+
+    ScoreType operator()(const Individual &individual) override
     {
         return CallOperator(individual);
     }

@@ -30,13 +30,13 @@ class PreservationStrategyTest: public ::testing::Test
 {
 public:
     PreservationStrategyTest():
-        individual1({true}),
-        individual2({false}),
-        generation({individual1, individual2}),
-        scores({1,2}),
+        individual1({ true }),
+        individual2({ false }),
+        generation({ individual1, individual2 }),
+        scores({ 1,2 }),
         fakeBigGeneration({}),
-        fakeBigGenerationScores({})
-    {}
+        fakeBigGenerationScores({}) {}
+
 protected:
     const Individual individual1;
     const Individual individual2;
@@ -58,7 +58,7 @@ protected:
 
 TEST_F(PreservationStrategyTest, initializes)
 {
-	EXPECT_NO_THROW(PreservationStrategy(0.5));
+    EXPECT_NO_THROW(PreservationStrategy(0.5));
 }
 
 TEST_F(PreservationStrategyTest, throws_for_negative_preservation_rate)
@@ -75,18 +75,18 @@ TEST_F(PreservationStrategyTest, throws_for_mismatching_generation_and_scores_si
 {
     PreservationStrategy preservation(0);
 
-    const std::vector<ScoreType> tooShortScore{ 1 };
+    const std::vector<ScoreType> tooShortScore { 1 };
 
     EXPECT_THROW(preservation.PickBest(generation, tooShortScore), InconsistentGenerationAndScoresLengthException);
 }
 
 TEST_F(PreservationStrategyTest, picks_none_with_zero_preservation_rate)
 {
-	PreservationStrategy preservation(0.0);
+    PreservationStrategy preservation(0.0);
 
     const auto newGeneration = preservation.PickBest(generation, scores);
 
-	EXPECT_EQ(newGeneration.size(), 0);
+    EXPECT_EQ(newGeneration.size(), 0);
 }
 
 TEST_F(PreservationStrategyTest, picks_all_with_one_preservation_rate)
@@ -129,7 +129,7 @@ TEST_F(PreservationStrategyTest, new_generation_is_sorted_decreasing_by_score)
     ASSERT_EQ(newGeneration.size(), generation.size());
 
     const auto first = *newGeneration.begin();
-    const auto second = *(newGeneration.begin()+1);
+    const auto second = *(newGeneration.begin() + 1);
 
     EXPECT_EQ(first, individual2);
     EXPECT_EQ(second, individual1);

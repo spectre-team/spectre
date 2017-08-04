@@ -44,7 +44,7 @@ TEST(Scorer, calls_fitness_function_for_each_individual_exactly_once)
     const Individual individual1({ true });
     const Individual individual2({ false });
     const Generation generation({ individual1, individual2 });
-    
+
     auto fitnessFunction = std::make_unique<MockFitnessFunction>();
 
     EXPECT_CALL(*fitnessFunction, CallOperator(individual1)).Times(1);

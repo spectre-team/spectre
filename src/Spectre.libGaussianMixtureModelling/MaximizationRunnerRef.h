@@ -47,124 +47,124 @@ limitations under the License.
 
 namespace Spectre::libGaussianMixtureModelling
 {
+/// <summary>
+/// Class serves the purpose of maximization step of Expectation Maximization algorithm. 
+/// Serves as a reference to learn from and is purpously not optimized to avoid 
+/// obfuscation of the code.
+/// </summary>
+class MaximizationRunnerRef
+{
+public:
     /// <summary>
-    /// Class serves the purpose of maximization step of Expectation Maximization algorithm. 
-    /// Serves as a reference to learn from and is purpously not optimized to avoid 
-    /// obfuscation of the code.
+    /// Constructor initializing the class with data required during maximization step.
     /// </summary>
-    class MaximizationRunnerRef
+    /// <param name="mzArray">Array of m/z values.</param>
+    /// <param name="intensities">Set of corresponding mean intensities values.</param>
+    /// <param name="size">Size of the mzArray and itensities arrays.</param>
+    /// <param name="affilationMatrix">Matrix symbolising the probability of affilation
+    /// of each sample to a certain gaussian component.</param>
+    /// <param name="components">Gaussian components to be updated</param>
+    /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
+    MaximizationRunnerRef(DataType *mzArray, DataType *intensities, unsigned size,
+                          Matrix &affilationMatrix, std::vector<GaussianComponent> &components)
+        : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size),
+          m_AffilationMatrix(affilationMatrix), m_Components(components)
     {
-    public:
-        /// <summary>
-        /// Constructor initializing the class with data required during maximization step.
-        /// </summary>
-        /// <param name="mzArray">Array of m/z values.</param>
-        /// <param name="intensities">Set of corresponding mean intensities values.</param>
-        /// <param name="size">Size of the mzArray and itensities arrays.</param>
-        /// <param name="affilationMatrix">Matrix symbolising the probability of affilation
-        /// of each sample to a certain gaussian component.</param>
-        /// <param name="components">Gaussian components to be updated</param>
-        /// <exception cref="ArgumentNullException">Thrown when either of mzArray or intensities pointers are null</exception>
-        MaximizationRunnerRef(DataType* mzArray, DataType* intensities, unsigned size,
-            Matrix& affilationMatrix, std::vector<GaussianComponent>& components)
-            : m_pMzArray(mzArray), m_pIntensities(intensities), m_DataSize(size), 
-              m_AffilationMatrix(affilationMatrix), m_Components(components)
+        if (mzArray == nullptr)
         {
-            if (mzArray == nullptr)
-            {
-                throw ArgumentNullException("mzArray");
-            }
-
-            if (intensities == nullptr)
-            {
-                throw ArgumentNullException("intensities");
-            }
+            throw ArgumentNullException("mzArray");
         }
 
-        /// <summary>
-        /// Updates weights in gaussian components, based on affilation (gamma) matrix.
-        /// </summary>
-        void MaximizationRunnerRef::UpdateWeights()
+        if (intensities == nullptr)
         {
-            // This part conducts the instruction:
-            // "Using the gamma calculated in the Expectation step, 
-            // calculate in the following order, for every k: (phi part)"
-            // from the document
-            DataType totalDataSize = 0.0;
+            throw ArgumentNullException("intensities");
+        }
+    }
+
+    /// <summary>
+    /// Updates weights in gaussian components, based on affilation (gamma) matrix.
+    /// </summary>
+    void MaximizationRunnerRef::UpdateWeights()
+    {
+        // This part conducts the instruction:
+        // "Using the gamma calculated in the Expectation step, 
+        // calculate in the following order, for every k: (phi part)"
+        // from the document
+        DataType totalDataSize = 0.0;
+        for (unsigned i = 0; i < m_DataSize; i++)
+        {
+            totalDataSize += m_pIntensities[i];
+        }
+
+        const unsigned numberOfComponents = (unsigned)m_Components.size();
+        for (unsigned k = 0; k < numberOfComponents; k++)
+        {
+            DataType weight = 0.0;
             for (unsigned i = 0; i < m_DataSize; i++)
             {
-                totalDataSize += m_pIntensities[i];
+                weight += m_AffilationMatrix[i][k] * m_pIntensities[i];
             }
-
-            const unsigned numberOfComponents = (unsigned)m_Components.size();
-            for (unsigned k = 0; k < numberOfComponents; k++)
-            {
-                DataType weight = 0.0;
-                for (unsigned i = 0; i < m_DataSize; i++)
-                {
-                    weight += m_AffilationMatrix[i][k] * m_pIntensities[i];
-                }
-                m_Components[k].weight = weight / totalDataSize;
-            }
+            m_Components[k].weight = weight / totalDataSize;
         }
+    }
 
-        /// <summary>
-        /// Updates means in gaussian components, based on affilation (gamma) matrix.
-        /// </summary>
-        void MaximizationRunnerRef::UpdateMeans()
+    /// <summary>
+    /// Updates means in gaussian components, based on affilation (gamma) matrix.
+    /// </summary>
+    void MaximizationRunnerRef::UpdateMeans()
+    {
+        // This part conducts the instruction:
+        // "Using the gamma calculated in the Expectation step, 
+        // calculate in the following order, for every k: (mu part)"
+        // from the document
+        const unsigned numberOfComponents = (unsigned)m_Components.size();
+        for (unsigned k = 0; k < numberOfComponents; k++)
         {
-            // This part conducts the instruction:
-            // "Using the gamma calculated in the Expectation step, 
-            // calculate in the following order, for every k: (mu part)"
-            // from the document
-            const unsigned numberOfComponents = (unsigned)m_Components.size();
-            for (unsigned k = 0; k < numberOfComponents; k++)
+            DataType denominator = 0.0;
+            DataType numerator = 0.0;
+            for (unsigned i = 0; i < m_DataSize; i++)
             {
-                DataType denominator = 0.0;
-                DataType numerator = 0.0;
-                for (unsigned i = 0; i < m_DataSize; i++)
-                {
-                    denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
-                    numerator += m_AffilationMatrix[i][k] * m_pMzArray[i] * m_pIntensities[i];
-                }
-                m_Components[k].mean = numerator / denominator;
+                denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
+                numerator += m_AffilationMatrix[i][k] * m_pMzArray[i] * m_pIntensities[i];
             }
+            m_Components[k].mean = numerator / denominator;
         }
+    }
 
-        /// <summary>
-        /// Updates standard deviations in gaussian components, based on affilation 
-        /// (gamma) matrix.
-        /// </summary>
-        void MaximizationRunnerRef::UpdateStdDeviations()
+    /// <summary>
+    /// Updates standard deviations in gaussian components, based on affilation 
+    /// (gamma) matrix.
+    /// </summary>
+    void MaximizationRunnerRef::UpdateStdDeviations()
+    {
+        // This part conducts the instruction:
+        // "Using the gamma calculated in the Expectation step, 
+        // calculate in the following order, for every k: (sigma part)"
+        // from the document.
+        // Please note, that equation presented in the document 
+        // is wrong in that it states that the right hand side of the
+        // equation is equal to sigma, while in a fact, it should be 
+        // equated to sigma^2. Hence the sqrt() is used during the 
+        // assignment of the standard deviation.
+        const unsigned numberOfComponents = (unsigned)m_Components.size();
+        for (unsigned k = 0; k < numberOfComponents; k++)
         {
-            // This part conducts the instruction:
-            // "Using the gamma calculated in the Expectation step, 
-            // calculate in the following order, for every k: (sigma part)"
-            // from the document.
-            // Please note, that equation presented in the document 
-            // is wrong in that it states that the right hand side of the
-            // equation is equal to sigma, while in a fact, it should be 
-            // equated to sigma^2. Hence the sqrt() is used during the 
-            // assignment of the standard deviation.
-            const unsigned numberOfComponents = (unsigned)m_Components.size();
-            for (unsigned k = 0; k < numberOfComponents; k++)
+            DataType denominator = 0.0;
+            DataType numerator = 0.0;
+            for (unsigned i = 0; i < m_DataSize; i++)
             {
-                DataType denominator = 0.0;
-                DataType numerator = 0.0;
-                for (unsigned i = 0; i < m_DataSize; i++)
-                {
-                    denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
-                    numerator += m_AffilationMatrix[i][k] * pow(m_pMzArray[i] - m_Components[k].mean, 2) * m_pIntensities[i];
-                }
-                m_Components[k].deviation = sqrt(numerator / denominator);
+                denominator += m_AffilationMatrix[i][k] * m_pIntensities[i];
+                numerator += m_AffilationMatrix[i][k] * pow(m_pMzArray[i] - m_Components[k].mean, 2) * m_pIntensities[i];
             }
+            m_Components[k].deviation = sqrt(numerator / denominator);
         }
+    }
 
-    private:
-        DataType* m_pMzArray;
-        DataType* m_pIntensities;
-        unsigned m_DataSize;
-        Matrix& m_AffilationMatrix;
-        std::vector<GaussianComponent>& m_Components;
-    };
+private:
+    DataType *m_pMzArray;
+    DataType *m_pIntensities;
+    unsigned m_DataSize;
+    Matrix &m_AffilationMatrix;
+    std::vector<GaussianComponent> &m_Components;
+};
 }

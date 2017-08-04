@@ -27,6 +27,6 @@ class MockCrossoverOperator: public CrossoverOperator
 {
 public:
     MOCK_METHOD2(CallOperator, Individual(const Individual&, const Individual&));
-    Individual operator()(const Individual& first, const Individual& second) override { return CallOperator(first, second); }
+    Individual operator()(const Individual &first, const Individual &second) override { return CallOperator(first, second); }
 };
 }

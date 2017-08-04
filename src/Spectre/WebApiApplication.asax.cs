@@ -9,8 +9,15 @@ using System.Web.Routing;
 
 namespace Spectre
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    /// <summary>
+    /// The application
+    /// </summary>
+    /// <seealso cref="System.Web.HttpApplication" />
+    public class WebApiApplication : HttpApplication
     {
+        /// <summary>
+        /// Applications the start.
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

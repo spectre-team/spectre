@@ -23,10 +23,7 @@ namespace Spectre::libGenetic
 {
 StopCondition::StopCondition(unsigned int numberOfIterations):
     m_RemainingIterations(numberOfIterations),
-    m_IterationsNumber(numberOfIterations)
-{
-    
-}
+    m_IterationsNumber(numberOfIterations) { }
 
 
 bool StopCondition::operator()()

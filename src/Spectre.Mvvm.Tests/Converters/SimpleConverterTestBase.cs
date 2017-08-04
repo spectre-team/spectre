@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -25,8 +26,10 @@ using Spectre.Mvvm.Converters;
 
 namespace Spectre.Mvvm.Tests.Converters
 {
-    [TestFixture, Category("MvvmFramework")]
-    public abstract class SimpleConverterTestBase<T, TGui, TBackend> where T : IValueConverter, new()
+    [TestFixture]
+    [Category(name: "MvvmFramework")]
+    public abstract class SimpleConverterTestBase<T, TGui, TBackend>
+        where T : IValueConverter, new()
     {
         protected T Converter;
         protected Type GuiType;
@@ -40,18 +43,32 @@ namespace Spectre.Mvvm.Tests.Converters
             BackendType = typeof(TBackend);
         }
 
-        protected virtual void ToGuiType(TBackend argument, TGui expectedResult, string onTypeFailure, string onValueFailure)
+        protected virtual void ToGuiType(
+            TBackend argument,
+            TGui expectedResult,
+            string onTypeFailure,
+            string onValueFailure)
         {
-            object conversionResult = Converter.Convert(argument, GuiType, null, CultureInfo.InvariantCulture);
+            var conversionResult = Converter.Convert(argument,
+                GuiType,
+                parameter: null,
+                culture: CultureInfo.InvariantCulture);
             Assert.IsInstanceOf(GuiType, conversionResult, onTypeFailure);
-            Assert.AreEqual(expectedResult, (TGui)conversionResult, onValueFailure);
+            Assert.AreEqual(expectedResult, actual: (TGui) conversionResult, message: onValueFailure);
         }
 
-        protected virtual void ToBackendType(TGui argument, TBackend expectedResult, string onTypeFailure, string onValueFailure)
+        protected virtual void ToBackendType(
+            TGui argument,
+            TBackend expectedResult,
+            string onTypeFailure,
+            string onValueFailure)
         {
-            object conversionResult = Converter.ConvertBack(argument, BackendType, null, CultureInfo.InvariantCulture);
+            var conversionResult = Converter.ConvertBack(argument,
+                BackendType,
+                parameter: null,
+                culture: CultureInfo.InvariantCulture);
             Assert.IsInstanceOf(BackendType, conversionResult, onTypeFailure);
-            Assert.AreEqual(expectedResult, (TBackend)conversionResult, onValueFailure);
+            Assert.AreEqual(expectedResult, actual: (TBackend) conversionResult, message: onValueFailure);
         }
     }
 }

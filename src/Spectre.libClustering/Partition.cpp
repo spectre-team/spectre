@@ -24,56 +24,55 @@ limitations under the License.
 
 namespace Spectre::libClustering
 {
-	Partition::Partition(gsl::span<unsigned int> partition) : m_Partition(partition.size())
-	{
-		if (partition.data() == nullptr)
-			throw ArgumentNullException("partition");
+Partition::Partition(gsl::span<unsigned int> partition) : m_Partition(partition.size())
+{
+    if (partition.data() == nullptr)
+        throw ArgumentNullException("partition");
 
-		std::map<unsigned int, int> labelsDictionary;
+    std::map<unsigned int, int> labelsDictionary;
 
-		int currentIntLabel = 1;
-		for (auto label : partition)
-			if (labelsDictionary.find(label) == labelsDictionary.end())
-				labelsDictionary.emplace(label, currentIntLabel++);
+    int currentIntLabel = 1;
+    for (auto label : partition)
+        if (labelsDictionary.find(label) == labelsDictionary.end())
+            labelsDictionary.emplace(label, currentIntLabel++);
 
-		for (int i = 0; i < partition.size(); i++)
-			m_Partition[i] = labelsDictionary[partition[i]];
+    for (int i = 0; i < partition.size(); i++)
+        m_Partition[i] = labelsDictionary[partition[i]];
+}
 
-	}
+const std::vector<unsigned int>& Partition::Get() const
+{
+    return m_Partition;
+}
 
-	const std::vector<unsigned int>& Partition::Get() const
-	{
-		return m_Partition;
-	}
+bool Partition::Compare(const Partition &lhs, const Partition &rhs, double tolerance)
+{
+    auto &lhsPartition = lhs.Get();
+    auto &rhsPartition = rhs.Get();
 
-	bool Partition::Compare(const Partition & lhs, const Partition & rhs, double tolerance)
-	{
-		auto& lhsPartition = lhs.Get();
-		auto& rhsPartition = rhs.Get();
+    if (lhsPartition.size() != rhsPartition.size())
+        return false;
 
-		if (lhsPartition.size() != rhsPartition.size())
-			return false;
+    unsigned int matchesCount = 0;
+    size_t length = lhsPartition.size();
 
-		unsigned int matchesCount = 0;
-		size_t length = lhsPartition.size();
+    for (int i = 0; i < length; i++)
+        if (lhsPartition[i] == rhsPartition[i])
+            ++matchesCount;
 
-		for (int i = 0; i < length; i++)
-			if (lhsPartition[i] == rhsPartition[i])
-				++matchesCount;
+    double compatibilityRate = matchesCount / static_cast<double>(length);
+    double requiredCompatibilityRate = 1 - tolerance;
 
-		double compatibilityRate = matchesCount / static_cast<double>(length);
-		double requiredCompatibilityRate = 1 - tolerance;
+    return requiredCompatibilityRate <= compatibilityRate;
+}
 
-		return requiredCompatibilityRate <= compatibilityRate;
-	}
+bool Partition::operator==(const Partition &other) const
+{
+    return Compare(*this, other);
+}
 
-	bool Partition::operator==(const Partition & other) const
-	{
-		return Compare(*this, other);
-	}
-
-	bool Partition::operator!=(const Partition & other) const
-	{
-		return !(*this == other);
-	}
+bool Partition::operator!=(const Partition &other) const
+{
+    return !(*this == other);
+}
 }

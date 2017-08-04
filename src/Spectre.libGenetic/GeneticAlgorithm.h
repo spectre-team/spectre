@@ -44,8 +44,8 @@ public:
     /// </summary>
     /// <param name="generation">The generation.</param>
     /// <returns>Next, evolved generation.</returns>
-    Generation evolve(Generation&& generation) const;
-	virtual ~GeneticAlgorithm() = default;
+    Generation evolve(Generation &&generation) const;
+    virtual ~GeneticAlgorithm() = default;
 
 private:
     /// <summary>

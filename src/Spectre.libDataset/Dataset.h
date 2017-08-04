@@ -25,168 +25,165 @@ limitations under the License.
 
 namespace Spectre::libDataset
 {
+/// <summary>
+/// Data-owning implementation of dataset interfaces.
+/// </summary>
+template <typename DataType, typename SampleMetadata, typename DatasetMetadata>
+class Dataset : public IDataset<DataType, SampleMetadata, DatasetMetadata>
+{
+public:
     /// <summary>
-    /// Data-owning implementation of dataset interfaces.
+    /// Initializes a new instance of the <see cref="Dataset"/> class.
     /// </summary>
-    template<typename DataType, typename SampleMetadata, typename DatasetMetadata>
-    class Dataset : public IDataset<DataType, SampleMetadata, DatasetMetadata>
+    /// <param name="data">The data.</param>
+    /// <param name="sampleMetadata">The sample metadata.</param>
+    /// <param name="metadata">The metadata.</param>
+    Dataset(gsl::span<const DataType> data, gsl::span<const SampleMetadata> sampleMetadata, DatasetMetadata metadata) :
+        m_Data(data.begin(), data.end()), m_SampleMetadata(sampleMetadata.begin(), sampleMetadata.end()), m_Metadata(metadata)
     {
-    public:
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Dataset"/> class.
-        /// </summary>
-        /// <param name="data">The data.</param>
-        /// <param name="sampleMetadata">The sample metadata.</param>
-        /// <param name="metadata">The metadata.</param>
-        Dataset(gsl::span<const DataType> data, gsl::span<const SampleMetadata> sampleMetadata, DatasetMetadata metadata) :
-            m_Data(data.begin(), data.end()), m_SampleMetadata(sampleMetadata.begin(), sampleMetadata.end()), m_Metadata(metadata)
+        if (data.size() == sampleMetadata.size()) { }
+        else
         {
-            if(data.size() == sampleMetadata.size())
-            {
-                
-            }
-            else
-            {
-                throw InconsistentInputSizeException(data.size(), sampleMetadata.size());
-            }
+            throw InconsistentInputSizeException(data.size(), sampleMetadata.size());
         }
+    }
 
-        /// <summary>
-        /// Gets sample under specified index in read-only fashion.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample</returns>
-        const DataType& operator[](size_t idx) const override
+    /// <summary>
+    /// Gets sample under specified index in read-only fashion.
+    /// </summary>
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample</returns>
+    const DataType& operator[](size_t idx) const override
+    {
+        if (idx < m_Data.size())
         {
-            if (idx < m_Data.size())
-            {
-                return m_Data[idx];
-            }
-            else
-            {
-                throw OutOfRangeException(idx, m_Data.size());
-            }
+            return m_Data[idx];
         }
-
-        /// <summary>
-        /// Gets the sample metadata in read-only fashion.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample metadata</returns>
-        const SampleMetadata& GetSampleMetadata(size_t idx) const override
+        else
         {
-            if (idx < m_SampleMetadata.size())
-            {
-                return m_SampleMetadata[idx];
-            }
-            else
-            {
-                throw OutOfRangeException(idx, m_SampleMetadata.size());
-            }
+            throw OutOfRangeException(idx, m_Data.size());
         }
+    }
 
-        /// <summary>
-        /// Gets the dataset metadata in read-only fashion.
-        /// </summary>
-        /// <returns>Dataset metadata</returns>
-        const DatasetMetadata& GetDatasetMetadata() const override
+    /// <summary>
+    /// Gets the sample metadata in read-only fashion.
+    /// </summary>
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample metadata</returns>
+    const SampleMetadata& GetSampleMetadata(size_t idx) const override
+    {
+        if (idx < m_SampleMetadata.size())
         {
-            return m_Metadata;
+            return m_SampleMetadata[idx];
         }
-
-        /// <summary>
-        /// Gets sample under specified index.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample</returns>
-        DataType& operator[](size_t idx) override
+        else
         {
-            if (idx < m_Data.size())
-            {
-                return m_Data[idx];
-            }
-            else
-            {
-                throw OutOfRangeException(idx, m_Data.size());
-            }
+            throw OutOfRangeException(idx, m_SampleMetadata.size());
         }
+    }
 
-        /// <summary>
-        /// Gets the sample metadata.
-        /// </summary>
-        /// <param name="idx">The index.</param>
-        /// <returns>Sample metadata</returns>
-        SampleMetadata& GetSampleMetadata(size_t idx) override
+    /// <summary>
+    /// Gets the dataset metadata in read-only fashion.
+    /// </summary>
+    /// <returns>Dataset metadata</returns>
+    const DatasetMetadata& GetDatasetMetadata() const override
+    {
+        return m_Metadata;
+    }
+
+    /// <summary>
+    /// Gets sample under specified index.
+    /// </summary>
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample</returns>
+    DataType& operator[](size_t idx) override
+    {
+        if (idx < m_Data.size())
         {
-            if (idx < m_SampleMetadata.size())
-            {
-                return m_SampleMetadata[idx];
-            }
-            else
-            {
-                throw OutOfRangeException(idx, m_SampleMetadata.size());
-            }
+            return m_Data[idx];
         }
-
-        /// <summary>
-        /// Gets the dataset metadata.
-        /// </summary>
-        /// <returns>Dataset metadata</returns>
-        DatasetMetadata& GetDatasetMetadata() override
+        else
         {
-            return m_Metadata;
+            throw OutOfRangeException(idx, m_Data.size());
         }
+    }
 
-        /// <summary>
-        /// Gets the data in read-only fashion.
-        /// </summary>
-        /// <returns>Read-only data</returns>
-        gsl::span<const DataType> GetData() const override
+    /// <summary>
+    /// Gets the sample metadata.
+    /// </summary>
+    /// <param name="idx">The index.</param>
+    /// <returns>Sample metadata</returns>
+    SampleMetadata& GetSampleMetadata(size_t idx) override
+    {
+        if (idx < m_SampleMetadata.size())
         {
-            return gsl::span<const DataType>(m_Data);
+            return m_SampleMetadata[idx];
         }
-
-        /// <summary>
-        /// Gets the sample metadata in read-only fashion.
-        /// </summary>
-        /// <returns>Read-only metadata</returns>
-        gsl::span<const SampleMetadata> GetSampleMetadata() const override
+        else
         {
-            return gsl::span<const SampleMetadata>(m_SampleMetadata);
+            throw OutOfRangeException(idx, m_SampleMetadata.size());
         }
+    }
 
-        /// <summary>
-        /// Adds the sample.
-        /// </summary>
-        /// <param name="sample">The sample.</param>
-        /// <param name="metadata">The metadata.</param>
-        void AddSample(DataType sample, SampleMetadata metadata) override
-        {
-            m_Data.push_back(sample);
-            m_SampleMetadata.push_back(metadata);
-        }
+    /// <summary>
+    /// Gets the dataset metadata.
+    /// </summary>
+    /// <returns>Dataset metadata</returns>
+    DatasetMetadata& GetDatasetMetadata() override
+    {
+        return m_Metadata;
+    }
 
-        /// <summary>
-        /// Number of elements in dataset.
-        /// </summary>
-        /// <returns>Size</returns>
-        size_t size() const override
-        {
-            return m_Data.size();
-        }
+    /// <summary>
+    /// Gets the data in read-only fashion.
+    /// </summary>
+    /// <returns>Read-only data</returns>
+    gsl::span<const DataType> GetData() const override
+    {
+        return gsl::span<const DataType>(m_Data);
+    }
 
-        /// <summary>
-        /// Checks, whether dataset is empty.
-        /// </summary>
-        /// <returns>True, if dataset is empty.</returns>
-        bool empty() const override
-        {
-            return m_Data.empty();
-        }
+    /// <summary>
+    /// Gets the sample metadata in read-only fashion.
+    /// </summary>
+    /// <returns>Read-only metadata</returns>
+    gsl::span<const SampleMetadata> GetSampleMetadata() const override
+    {
+        return gsl::span<const SampleMetadata>(m_SampleMetadata);
+    }
 
-    private:
-        std::vector<DataType> m_Data;
-        std::vector<SampleMetadata> m_SampleMetadata;
-        DatasetMetadata m_Metadata;
-    };
+    /// <summary>
+    /// Adds the sample.
+    /// </summary>
+    /// <param name="sample">The sample.</param>
+    /// <param name="metadata">The metadata.</param>
+    void AddSample(DataType sample, SampleMetadata metadata) override
+    {
+        m_Data.push_back(sample);
+        m_SampleMetadata.push_back(metadata);
+    }
+
+    /// <summary>
+    /// Number of elements in dataset.
+    /// </summary>
+    /// <returns>Size</returns>
+    size_t size() const override
+    {
+        return m_Data.size();
+    }
+
+    /// <summary>
+    /// Checks, whether dataset is empty.
+    /// </summary>
+    /// <returns>True, if dataset is empty.</returns>
+    bool empty() const override
+    {
+        return m_Data.empty();
+    }
+
+private:
+    std::vector<DataType> m_Data;
+    std::vector<SampleMetadata> m_SampleMetadata;
+    DatasetMetadata m_Metadata;
+};
 }

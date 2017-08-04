@@ -24,13 +24,11 @@ limitations under the License.
 namespace Spectre::libGenetic
 {
 CrossoverOperator::CrossoverOperator(Seed rngSeed):
-    m_RandomNumberGenerator(rngSeed)
-{
-}
+    m_RandomNumberGenerator(rngSeed) {}
 
-Individual CrossoverOperator::operator()(const Individual& first, const Individual& second)
+Individual CrossoverOperator::operator()(const Individual &first, const Individual &second)
 {
-    if(first.size() == second.size())
+    if (first.size() == second.size())
     {
         // @gmrukwa: empty
     }

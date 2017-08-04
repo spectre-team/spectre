@@ -27,30 +27,24 @@ using namespace std;
 
 namespace Spectre::libGenetic
 {
-Generation::Generation(std::vector<Individual>&& generation):
+Generation::Generation(std::vector<Individual> &&generation):
     m_Generation(generation)
 {
     if (m_Generation.size() > 0)
     {
-        const auto minmax = std::minmax_element(m_Generation.begin(), m_Generation.end(), [](const auto& first, const auto& second) { return first.size() < second.size(); });
+        const auto minmax = std::minmax_element(m_Generation.begin(), m_Generation.end(), [](const auto &first, const auto &second) { return first.size() < second.size(); });
         const auto minLength = minmax.first->size();
         const auto maxLength = minmax.second->size();
-        if (minLength == maxLength)
-        {
-
-        }
+        if (minLength == maxLength) { }
         else
         {
             throw InconsistentChromosomeLengthException(minLength, maxLength);
         }
     }
-    else
-    {
-        
-    }
+    else { }
 }
 
-Generation Generation::operator+(const Generation& other) const
+Generation Generation::operator+(const Generation &other) const
 {
     if (size() == 0
         || other.size() == 0
@@ -69,7 +63,7 @@ Generation Generation::operator+(const Generation& other) const
     }
 }
 
-Generation& Generation::operator+=(const Generation& other)
+Generation& Generation::operator+=(const Generation &other)
 {
     if (m_Generation.size() == 0
         || other.m_Generation.size() == 0
@@ -123,5 +117,4 @@ std::vector<Individual>::const_iterator Generation::end() const
 {
     return m_Generation.end();
 }
-
 }

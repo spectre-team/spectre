@@ -1,7 +1,7 @@
 ﻿/*
  * Preprocessing.cs
  * Contains .NET interface for preprocessing algorithms.
- * 
+ *
    Copyright 2017 Wilgierz Wojciech, Michal Gallus, Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using Spectre.Data.Datasets;
 
@@ -24,114 +25,131 @@ namespace Spectre.Algorithms.Methods
     /// <summary>
     /// Contains interface for calling matlab preprocessing algorithms.
     /// </summary>
-	public class Preprocessing: IDisposable
-	{
-		#region Fields
-		private readonly MatlabAlgorithmsNative.Preprocessing _preprocessing;
+    public class Preprocessing : IDisposable
+    {
+        #region Fields
 
-		/// <summary>
-		/// Indicates whether this instance has been disposed.
-		/// </summary>
-		private bool _disposed = false;
-		#endregion
+        private readonly MatlabAlgorithmsNative.Preprocessing _preprocessing;
 
-		#region Constructor
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Algorithms"/> class.
-		/// </summary>
-		public Preprocessing()
-		{
-			_preprocessing = new MatlabAlgorithmsNative.Preprocessing();
-		}
-		#endregion
+        /// <summary>
+        /// Indicates whether this instance has been disposed.
+        /// </summary>
+        private bool _disposed = false;
 
-		#region MATLAB calls
+        #endregion
 
-	    /// <summary>
-	    /// Perform FFT-based peak alignment.
-	    /// </summary>
-	    /// <param name="dataset">Input dataset.</param>
-	    /// <returns>Aligned dataset.</returns>
-	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-	    public IDataset AlignPeaksFft(IDataset dataset)
-		{
-			ValidateDispose();
-			var pafftResult = _preprocessing.pafft(dataset.GetRawMzArray(), dataset.GetRawIntensities());
-            return new BasicTextDataset(dataset.GetRawMzArray(), (double[,])pafftResult, dataset.GetRawSpacialCoordinates(true));
-		}
+        #region Constructor
 
-	    /// <summary>
-	    /// Removes the baseline.
-	    /// </summary>
-	    /// <param name="dataset">Input dataset.</param>
-	    /// <returns>Dataset without baseline.</returns>
-	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-	    public IDataset RemoveBaseline(IDataset dataset)
-		{
-			ValidateDispose();
-			var baselineRemovalResult = _preprocessing.remove_baseline(dataset.GetRawMzArray(), dataset.GetRawIntensities());
-            return new BasicTextDataset(dataset.GetRawMzArray(), (double[,])baselineRemovalResult, dataset.GetRawSpacialCoordinates(true));
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Preprocessing"/> class.
+        /// </summary>
+        public Preprocessing()
+        {
+            _preprocessing = new MatlabAlgorithmsNative.Preprocessing();
+        }
 
-	    /// <summary>
-	    /// Normalizes dataset by TIC-based method.
-	    /// </summary>
-	    /// <param name="dataset">Input dataset.</param>
-	    /// <returns>Normalized dataset.</returns>
-	    /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-	    public IDataset NormalizeByTic(IDataset dataset)
-		{
-			ValidateDispose();
-			var normalizationResult = _preprocessing.ticnorm(dataset.GetRawIntensities());
-            return new BasicTextDataset(dataset.GetRawMzArray(), (double[,])normalizationResult, dataset.GetRawSpacialCoordinates(true));
-		}
-		#endregion
+        /// <summary>
+        /// Finalizes an instance of the <see cref="Preprocessing"/> class.
+        /// </summary>
+        ~Preprocessing()
+        {
+            Dispose(disposing: false);
+        }
 
-		#region IDisposable
-		/// <summary>
-		/// Validates the dispose state. If this instance has been disposed, throws an exception.
-		/// </summary>
-		/// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-		private void ValidateDispose()
-		{
-			if (this._disposed)
-			{
-				throw new ObjectDisposedException(nameof(Algorithms));
-			}
-		}
+        #endregion
 
-		/// <summary>
-		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        #region MATLAB calls
 
-		/// <summary>
-		/// Releases unmanaged and - optionally - managed resources.
-		/// </summary>
-		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this._disposed)
-			{
-				if (disposing)
-				{
-					this._preprocessing.Dispose();
-				}
-				_disposed = true;
-			}
-		}
+        /// <summary>
+        /// Perform FFT-based peak alignment.
+        /// </summary>
+        /// <param name="dataset">Input dataset.</param>
+        /// <returns>Aligned dataset.</returns>
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        public IDataset AlignPeaksFft(IDataset dataset)
+        {
+            ValidateDispose();
+            var pafftResult = _preprocessing.pafft(mz: dataset.GetRawMzArray(), data: dataset.GetRawIntensities());
+            return new BasicTextDataset(
+                mz: dataset.GetRawMzArray(),
+                data: (double[,])pafftResult,
+                coordinates: dataset.GetRawSpacialCoordinates(is2D: true));
+        }
 
-		/// <summary>
-		/// Finalizes an instance of the <see cref="Algorithms"/> class.
-		/// </summary>
-		~Preprocessing()
-		{
-			Dispose(false);
-		}
-		#endregion
-	}
+        /// <summary>
+        /// Removes the baseline.
+        /// </summary>
+        /// <param name="dataset">Input dataset.</param>
+        /// <returns>Dataset without baseline.</returns>
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        public IDataset RemoveBaseline(IDataset dataset)
+        {
+            ValidateDispose();
+            var baselineRemovalResult =
+                _preprocessing.remove_baseline(mz: dataset.GetRawMzArray(), data: dataset.GetRawIntensities());
+            return new BasicTextDataset(
+                mz: dataset.GetRawMzArray(),
+                data: (double[,])baselineRemovalResult,
+                coordinates: dataset.GetRawSpacialCoordinates(is2D: true));
+        }
+
+        /// <summary>
+        /// Normalizes dataset by TIC-based method.
+        /// </summary>
+        /// <param name="dataset">Input dataset.</param>
+        /// <returns>Normalized dataset.</returns>
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        public IDataset NormalizeByTic(IDataset dataset)
+        {
+            ValidateDispose();
+            var normalizationResult = _preprocessing.ticnorm(data: dataset.GetRawIntensities());
+            return new BasicTextDataset(
+                mz: dataset.GetRawMzArray(),
+                data: (double[,])normalizationResult,
+                coordinates: dataset.GetRawSpacialCoordinates(is2D: true));
+        }
+
+        #endregion
+
+        #region IDisposable
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(obj: this);
+        }
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _preprocessing.Dispose();
+                }
+                _disposed = true;
+            }
+        }
+
+        /// <summary>
+        /// Validates the dispose state. If this instance has been disposed, throws an exception.
+        /// </summary>
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        private void ValidateDispose()
+        {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(objectName: nameof(Algorithms));
+            }
+        }
+
+        #endregion
+    }
 }

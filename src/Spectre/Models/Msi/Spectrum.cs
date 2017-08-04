@@ -1,7 +1,7 @@
 ﻿/*
  * Spectrum.cs
  * Class representing a single spectrum in a MALDI MSI sample.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,6 +36,7 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public int Id { get; set; }
+
         /// <summary>
         /// Gets or sets the m/z values.
         /// </summary>
@@ -44,6 +45,7 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public IEnumerable<double> Mz { get; set; }
+
         /// <summary>
         /// Gets or sets the intensities for all m/z-s.
         /// </summary>
@@ -52,6 +54,7 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public IEnumerable<double> Intensities { get; set; }
+
         /// <summary>
         /// Gets or sets the x coordinate.
         /// </summary>
@@ -60,6 +63,7 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public int X { get; set; }
+
         /// <summary>
         /// Gets or sets the y coordinate.
         /// </summary>

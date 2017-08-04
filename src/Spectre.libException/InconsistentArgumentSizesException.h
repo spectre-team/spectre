@@ -35,9 +35,9 @@ public:
     /// <param name="first">The first argument size.</param>
     /// <param name="nameOfSecond">The name of second argument.</param>
     /// <param name="second">The second argument size.</param>
-    InconsistentArgumentSizesException(const std::string& nameOfFirst,
+    InconsistentArgumentSizesException(const std::string &nameOfFirst,
                                        size_t first,
-                                       const std::string& nameOfSecond,
+                                       const std::string &nameOfSecond,
                                        size_t second);
 };
 }
