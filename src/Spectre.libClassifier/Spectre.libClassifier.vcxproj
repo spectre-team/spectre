@@ -78,11 +78,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dataset_opencv.cpp" />
+    <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dataset_opencv.h" />
+    <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />
   </ItemGroup>
   <ItemGroup>

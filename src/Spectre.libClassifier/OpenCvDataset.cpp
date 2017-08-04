@@ -1,13 +1,12 @@
-﻿#include <opencv2/core/mat.hpp>
-#include "Dataset_opencv.h"
+﻿#include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libException/OutOfRangeException.h"
-#include "Spectre.libException/InconsistentArgumentSizesException.h"
+#include "OpenCvDataset.h"
 
 namespace Spectre::libClassifier {
 
 const int ColumnMatrixWidth = 1;
 
-Dataset_opencv::Dataset_opencv(gsl::span<const DataType> data, gsl::span<const Label> labels):
+OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
 	m_Data(data.begin(), data.end()),
 	m_Mat(static_cast<int>(labels.size()), static_cast<int>(data.size() / labels.size()), CV_TYPE, m_Data.data()),
 	m_labels(labels.begin(), labels.end()),
@@ -27,7 +26,7 @@ Dataset_opencv::Dataset_opencv(gsl::span<const DataType> data, gsl::span<const L
 	}
 }
 
-Dataset_opencv::Dataset_opencv(cv::Mat data, cv::Mat labels):
+OpenCvDataset::OpenCvDataset(cv::Mat data, cv::Mat labels):
 	m_Data(data.ptr<DataType>(), data.ptr<DataType>() + data.rows * data.cols),
 	m_Mat(data.rows, data.cols, CV_TYPE, m_Data.data()),
 	m_labels(labels.ptr<Label>(), labels.ptr<Label>() + labels.rows * labels.cols),
@@ -46,7 +45,7 @@ Dataset_opencv::Dataset_opencv(cv::Mat data, cv::Mat labels):
 	}
 }
 
-const Observation& Dataset_opencv::operator[](size_t idx) const
+const Observation& OpenCvDataset::operator[](size_t idx) const
 {
 	if (idx >= m_Mat.rows)
 	{
@@ -55,7 +54,7 @@ const Observation& Dataset_opencv::operator[](size_t idx) const
 	return m_observations[idx];
 }
 
-const Label& Dataset_opencv::GetSampleMetadata(size_t idx) const
+const Label& OpenCvDataset::GetSampleMetadata(size_t idx) const
 {
 	if (idx >= m_MatLabels.rows)
 	{
@@ -64,37 +63,37 @@ const Label& Dataset_opencv::GetSampleMetadata(size_t idx) const
 	return m_labels[idx];
 }
 
-const Empty& Dataset_opencv::GetDatasetMetadata() const
+const Empty& OpenCvDataset::GetDatasetMetadata() const
 {
 	return Empty::instance();
 }
 
-gsl::span<const Observation> Dataset_opencv::GetData() const
+gsl::span<const Observation> OpenCvDataset::GetData() const
 {
 	return m_observations;
 }
 
-gsl::span<const Label> Dataset_opencv::GetSampleMetadata() const
+gsl::span<const Label> OpenCvDataset::GetSampleMetadata() const
 {
 	return m_labels;
 }
 
-size_t Dataset_opencv::size() const
+size_t OpenCvDataset::size() const
 {
 	return m_labels.size();
 }
 
-bool Dataset_opencv::empty() const
+bool OpenCvDataset::empty() const
 {
 	return size() == 0;
 }
 
-const cv::Mat& Dataset_opencv::getMatData() const
+const cv::Mat& OpenCvDataset::getMatData() const
 {
 	return m_Mat;
 }
 
-const cv::Mat& Dataset_opencv::getMatLabels() const
+const cv::Mat& OpenCvDataset::getMatLabels() const
 {
 	return m_MatLabels;
 }

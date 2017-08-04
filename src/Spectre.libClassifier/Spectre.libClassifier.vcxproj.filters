@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dataset_opencv.cpp">
+    <ClCompile Include="Empty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Empty.cpp">
+    <ClCompile Include="OpenCvDataset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dataset_opencv.h">
+    <ClInclude Include="Empty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Empty.h">
+    <ClInclude Include="OpenCvDataset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 /*
-* Dataset_opencvTest.cpp
-* Tests Dataset_opencv
+* OpenCvDatasetTest.cpp
+* Tests OpenCvDataset
 *
 Copyright 2017 Wojciech Wilgierz
 
@@ -21,7 +21,7 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include <span.h>
 #include <opencv2/core/mat.hpp>
-#include "Spectre.libClassifier/Dataset_opencv.h"
+#include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libException/OutOfRangeException.h"
 
@@ -30,9 +30,8 @@ namespace
 using namespace Spectre::libClassifier;
 using namespace Spectre::libException;
 
-class Dataset_opencvInitializationTest : public ::testing::Test
+class OpenCvDatasetInitializationTest : public ::testing::Test
 {
-public:
 protected:
 	const std::vector<DataType> data_long{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
 	const std::vector<DataType> data_short{ 0.5f, 0.4f, 0.6f };
@@ -40,57 +39,57 @@ protected:
 	const std::vector<Label> labels_too_long{ 3, 7, 14, 5 };
 };
 
-TEST_F(Dataset_opencvInitializationTest, correct_dataset_opencv_initialization_col_size_one)
+TEST_F(OpenCvDatasetInitializationTest, correct_dataset_opencv_initialization_col_size_one)
 {
-	EXPECT_NO_THROW(Dataset_opencv(data_short, labels));
+	EXPECT_NO_THROW(OpenCvDataset(data_short, labels));
 }
 
-TEST_F(Dataset_opencvInitializationTest, correct_dataset_opencv_initialization)
+TEST_F(OpenCvDatasetInitializationTest, correct_dataset_opencv_initialization)
 {
-	EXPECT_NO_THROW(Dataset_opencv(data_long, labels));
+	EXPECT_NO_THROW(OpenCvDataset(data_long, labels));
 }
 
-TEST_F(Dataset_opencvInitializationTest, throws_for_inconsistent_size)
+TEST_F(OpenCvDatasetInitializationTest, throws_for_inconsistent_size)
 {
-	EXPECT_THROW(Dataset_opencv(data_short, labels_too_long), InconsistentArgumentSizesException);
+	EXPECT_THROW(OpenCvDataset(data_short, labels_too_long), InconsistentArgumentSizesException);
 }
 
-TEST_F(Dataset_opencvInitializationTest, correct_dataset_opencv_initialization_from_mat_col_size_one)
+TEST_F(OpenCvDatasetInitializationTest, correct_dataset_opencv_initialization_from_mat_col_size_one)
 {
 	std::vector<DataType> tmp_data(data_short);
 	std::vector<Label> tmp_labels(labels);
 	cv::Mat mat_data(3, 1, CV_TYPE, tmp_data.data());
 	cv::Mat mat_labels(3, 1, CV_LABEL_TYPE, tmp_labels.data());
-	EXPECT_NO_THROW(Dataset_opencv(mat_data, mat_labels));
+	EXPECT_NO_THROW(OpenCvDataset(mat_data, mat_labels));
 }
 
-TEST_F(Dataset_opencvInitializationTest, correct_dataset_opencv_initialization_from_mat)
+TEST_F(OpenCvDatasetInitializationTest, correct_dataset_opencv_initialization_from_mat)
 {
 	std::vector<DataType> tmp_data(data_long);
 	std::vector<Label> tmp_labels(labels);
 	cv::Mat mat_data(3, 3, CV_TYPE, tmp_data.data());
 	cv::Mat mat_labels(3, 1, CV_LABEL_TYPE, tmp_labels.data());
-	EXPECT_NO_THROW(Dataset_opencv(mat_data, mat_labels));
+	EXPECT_NO_THROW(OpenCvDataset(mat_data, mat_labels));
 }
 
-TEST_F(Dataset_opencvInitializationTest, throws_for_inconsistent_size_from_mat)
+TEST_F(OpenCvDatasetInitializationTest, throws_for_inconsistent_size_from_mat)
 {
 	std::vector<DataType> tmp_data(data_long);
 	std::vector<Label> tmp_labels(labels_too_long);
 	cv::Mat mat_data(3, 3, CV_TYPE, tmp_data.data());
 	cv::Mat mat_labels(4, 1, CV_LABEL_TYPE, tmp_labels.data());
-	EXPECT_THROW(Dataset_opencv(mat_data, mat_labels), InconsistentArgumentSizesException);
+	EXPECT_THROW(OpenCvDataset(mat_data, mat_labels), InconsistentArgumentSizesException);
 }
 
-class Dataset_opencvTest : public ::testing::Test
+class OpenCvDatasetTest : public ::testing::Test
 {
 public:
-	Dataset_opencvTest()
+	OpenCvDatasetTest()
 	{
 
 	}
 
-	bool compareCVMats(cv::Mat mat1, cv::Mat mat2)
+    static bool compareCVMats(cv::Mat mat1, cv::Mat mat2)
 	{
 		if (mat1.rows != mat2.rows || mat1.cols != mat2.cols) return false;
 		for (auto i = 0; i<(mat1.rows*mat1.cols); i++)
@@ -103,20 +102,20 @@ public:
 protected:
 	const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
 	const std::vector<Label> labels{ 3, 7, 14 };
-	std::unique_ptr<Dataset_opencv> dataset;
+	std::unique_ptr<OpenCvDataset> dataset;
 
 	void SetUp() override
 	{
-		dataset = std::make_unique<Dataset_opencv>(data, labels);
+		dataset = std::make_unique<OpenCvDataset>(data, labels);
 	}
 };
 
-TEST_F(Dataset_opencvTest, throws_on_access_to_data_out_of_range)
+TEST_F(OpenCvDatasetTest, throws_on_access_to_data_out_of_range)
 {
 	EXPECT_THROW((*dataset)[4], OutOfRangeException);
 }
 
-TEST_F(Dataset_opencvTest, check_getting_in_range_data)
+TEST_F(OpenCvDatasetTest, check_getting_in_range_data)
 {
 	auto test = (*dataset)[1];
 	std::vector<DataType> check({ 1.1f, 1.6f, 0.7f });
@@ -126,25 +125,25 @@ TEST_F(Dataset_opencvTest, check_getting_in_range_data)
 	}
 }
 
-TEST_F(Dataset_opencvTest, throws_on_access_to_label_out_of_range)
+TEST_F(OpenCvDatasetTest, throws_on_access_to_label_out_of_range)
 {
 	EXPECT_THROW(dataset->GetSampleMetadata(4), OutOfRangeException);
 }
 
-TEST_F(Dataset_opencvTest, check_getting_in_range_label)
+TEST_F(OpenCvDatasetTest, check_getting_in_range_label)
 {
 	auto test = dataset->GetSampleMetadata(1);
 	Label check = 7;
 	EXPECT_EQ(test, check);
 }
 
-TEST_F(Dataset_opencvTest, get_dataset_metadata)
+TEST_F(OpenCvDatasetTest, get_dataset_metadata)
 {
 	const auto& check = Empty::instance();
 	EXPECT_EQ(&dataset->GetDatasetMetadata(), &check);
 }
 
-TEST_F(Dataset_opencvTest, get_data)
+TEST_F(OpenCvDatasetTest, get_data)
 {
     const auto& local_dataset = *dataset;
 	gsl::span<const Observation> result = dataset->GetData();
@@ -163,7 +162,7 @@ TEST_F(Dataset_opencvTest, get_data)
 	}
 }
 
-TEST_F(Dataset_opencvTest, get_labels)
+TEST_F(OpenCvDatasetTest, get_labels)
 {
 	gsl::span<const Label> result = dataset->GetSampleMetadata();
 	EXPECT_EQ(result.size(), labels.size());
@@ -173,12 +172,12 @@ TEST_F(Dataset_opencvTest, get_labels)
 	}
 }
 
-TEST_F(Dataset_opencvTest, check_correct_dataset_size)
+TEST_F(OpenCvDatasetTest, check_correct_dataset_size)
 {
 	EXPECT_EQ(dataset->size(), labels.size());
 }
 
-TEST_F(Dataset_opencvTest, check_getting_data_to_mat)
+TEST_F(OpenCvDatasetTest, check_getting_data_to_mat)
 {
 	std::vector<DataType> mat_data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
 	cv::Mat check(3, 3, CV_TYPE, mat_data.data());
@@ -186,7 +185,7 @@ TEST_F(Dataset_opencvTest, check_getting_data_to_mat)
 	EXPECT_TRUE(compareCVMats(check, result));
 }
 
-TEST_F(Dataset_opencvTest, check_getting_labels_to_mat)
+TEST_F(OpenCvDatasetTest, check_getting_labels_to_mat)
 {
 	std::vector<Label> mat_labels{ 3, 7, 14 };
 	cv::Mat check(3, 1, CV_LABEL_TYPE, mat_labels.data());
@@ -194,11 +193,9 @@ TEST_F(Dataset_opencvTest, check_getting_labels_to_mat)
 	EXPECT_TRUE(compareCVMats(check, result));
 }
 
-//advanced tests
-
-TEST_F(Dataset_opencvTest, check_if_creating_copy)
+TEST_F(OpenCvDatasetTest, check_if_creating_copy)
 {
-	std::unique_ptr<Dataset_opencv> result = nullptr;
+	std::unique_ptr<OpenCvDataset> result = nullptr;
     const std::vector<DataType> tmpData{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
     const std::vector<Label> tmpLabels{ 3, 7, 14 };
     const auto numberOfObservations = tmpLabels.size();
@@ -209,7 +206,7 @@ TEST_F(Dataset_opencvTest, check_if_creating_copy)
 		const std::vector<DataType> tmpDataDestroyed(tmpData);
 		const std::vector<Label> tmpLabelsDestroyed(tmpLabels);
 
-		result = std::make_unique<Dataset_opencv>(tmpDataDestroyed, tmpLabelsDestroyed);
+		result = std::make_unique<OpenCvDataset>(tmpDataDestroyed, tmpLabelsDestroyed);
 	}
 
 	ASSERT_EQ(result->size(), numberOfObservations);
