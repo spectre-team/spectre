@@ -146,12 +146,20 @@ TEST_F(Dataset_opencvTest, get_dataset_metadata)
 
 TEST_F(Dataset_opencvTest, get_data)
 {
+    const auto& local_dataset = *dataset;
 	gsl::span<const Observation> result = dataset->GetData();
-	ASSERT_EQ(result.size(), data.size());
-	for (auto i = 0u; i < data.size(); i++)
+    const auto numberOfObservations = local_dataset.size();
+    const auto numberofColumns = local_dataset[0].size();
+
+	ASSERT_EQ(result.size(), numberOfObservations);
+	
+    for (auto i = 0u; i < numberOfObservations; i++)
 	{
-        for (auto j = 0u; j < result[i].size(); ++j)
-		    EXPECT_EQ(result[i][j], data[i * result[i].size() + j]) << i << " " << j;
+        EXPECT_EQ(result[i].size(), numberofColumns) << i;
+        for (auto j = 0u; j < numberofColumns; ++j)
+        {
+            EXPECT_EQ(result[i][j], local_dataset[i][j]) << i << " " << j;
+        }
 	}
 }
 
@@ -191,15 +199,29 @@ TEST_F(Dataset_opencvTest, check_getting_labels_to_mat)
 TEST_F(Dataset_opencvTest, check_if_creating_copy)
 {
 	std::unique_ptr<Dataset_opencv> result = nullptr;
+    const std::vector<DataType> tmpData{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
+    const std::vector<Label> tmpLabels{ 3, 7, 14 };
+    const auto numberOfObservations = tmpLabels.size();
+    const auto numberOfColumns = tmpData.size() / numberOfObservations;
+
 	// @gmrukwa: Opening new scope, so variables will get destroyed.
 	{
-		const std::vector<DataType> tmpData{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
-		const std::vector<Label> tmpLabels{ 3, 7, 14 };
+		const std::vector<DataType> tmpDataDestroyed(tmpData);
+		const std::vector<Label> tmpLabelsDestroyed(tmpLabels);
 
-		result = std::make_unique<Dataset_opencv>(tmpData, tmpLabels);
+		result = std::make_unique<Dataset_opencv>(tmpDataDestroyed, tmpLabelsDestroyed);
 	}
 
-	EXPECT_EQ(data.size(), result->size());
+	ASSERT_EQ(result->size(), numberOfObservations);
+
+    const auto& result_dataset = *result;
+    for(auto i = 0u; i < numberOfObservations; ++i)
+    {
+        for (auto j = 0u; j < result_dataset[i].size(); ++j)
+        {
+            EXPECT_EQ(result_dataset[i][j], tmpData[i * numberOfColumns + j]) << i << " " << j;
+        }
+    }
 }
 
 
