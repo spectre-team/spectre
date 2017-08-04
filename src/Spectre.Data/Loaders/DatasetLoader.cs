@@ -37,15 +37,7 @@ namespace Spectre.Data.Loaders
         private readonly string _remoteRoot;
         #endregion
 
-        #region Constructors
-        /// <summary>
-        /// Default constructor. Marked private so there is no stateless instance.
-        /// </summary>
-        private DatasetLoader()
-        {
-            
-        }
-
+        #region Constructor
         /// <summary>
         /// Constructor specifying roots for local and remote directories.
         /// </summary>
@@ -62,14 +54,16 @@ namespace Spectre.Data.Loaders
         public IDataset GetFromName(string name)
         {
             string fullPathLocal = _localRoot + "\\" + name;
-            if (File.Exists(fullPathLocal))
-                return new BasicTextDataset(fullPathLocal);
 
-            string fullPathRemote = _remoteRoot + "\\" + name;
-            if (File.Exists(fullPathRemote))
-                return new BasicTextDataset(fullPathRemote);
+            if (!File.Exists(fullPathLocal))
+            {
+                string fullPathRemote = _remoteRoot + "\\" + name;
+                if (!File.Exists(fullPathRemote))
+                    throw new ArgumentException("Dataset \"" + name + "\" not found neither locally nor remotely.");
+                File.Copy(fullPathRemote, fullPathLocal);
+            }
 
-            throw new ArgumentException("Dataset \"" + name + "\" not found neither locally nor remotely.");
+            return new BasicTextDataset(fullPathLocal);
         }
 
         public IDataset GetFromHash(string hash)
