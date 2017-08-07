@@ -229,14 +229,6 @@
     <Compile Include="Controllers\HeatmapController.cs" />
     <Compile Include="Controllers\PreparationsController.cs" />
     <Compile Include="Controllers\SpectrumController.cs" />
-<<<<<<< HEAD
-    <Compile Include="Models\AddExternalLoginBindingModel.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\ChangePasswordBindingModel.cs" />
-    <Compile Include="Models\ExternalLoginViewModel.cs" />
-    <Compile Include="Models\ManageInfoViewModel.cs" />
-=======
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -244,7 +236,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Msi\DivikResult.cs" />
->>>>>>> df69021... Added controller and model class for divik result
     <Compile Include="Models\Msi\Heatmap.cs" />
     <Compile Include="Models\Msi\Preparation.cs" />
     <Compile Include="Models\Msi\Spectrum.cs" />
