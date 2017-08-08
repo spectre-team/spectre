@@ -1,7 +1,7 @@
 ﻿/*
  * DivikResultController.cs
  * Class serving GET requests for divik result.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -26,6 +26,10 @@ using Spectre.Models.Msi;
 
 namespace Spectre.Controllers
 {
+    /// <summary>
+    /// Allows to read divik result.
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DivikResultController : ApiController
     {
@@ -41,7 +45,7 @@ namespace Spectre.Controllers
             int[] x = new int[1];
             int[] y = new int[1];
             int[] data = new int[1];
-            return new DivikResult() { X = x, Y = y, Data =  data};
+            return new DivikResult() { X = x, Y = y, Data = data };
         }
     }
 }

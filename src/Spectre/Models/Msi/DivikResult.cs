@@ -1,8 +1,7 @@
 ﻿/*
  * DivikResult.cs
  * Class representing divik result.
- * 
-   Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
+ * Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
