@@ -16,13 +16,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Newtonsoft.Json;
 using Spectre.Data.Datasets;
-using Spectre.Models.Msi;
 
 namespace Spectre.Controllers
 {
@@ -40,12 +41,37 @@ namespace Spectre.Controllers
         /// <param name="divikId">Identifier of divik.</param>
         /// <param name="level">Divik level.</param>
         /// <returns>DivikResult</returns>
-        public DivikResult Get(int id, int divikId, int level)
+        public Models.Msi.DivikResult Get(int id, int divikId, int level)
         {
-            int[] x = new int[1];
-            int[] y = new int[1];
-            int[] data = new int[1];
-            return new DivikResult() { X = x, Y = y, Data = data };
+            if (divikId < 0 || level < 0)
+            {
+                throw new ArgumentException(message: nameof(divikId));
+            }
+
+            if (id != 1)
+            {
+                return null;
+            }
+
+            var jsonText = File.ReadAllText("C:\\spectre_data\\expected_divik_results\\hnc1_tumor\\euclidean\\divik-result.json");
+            Algorithms.Results.DivikResult divikResult = JsonConvert.DeserializeObject<Algorithms.Results.DivikResult>(jsonText);
+
+            IDataset dataset = new BasicTextDataset(textFilePath: "C:\\spectre_data\\hnc1_tumor.txt");
+            var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
+
+            int length = divikResult.Partition.Length;
+            var x_coordinates = new int[length];
+            var y_coordinates = new int[length];
+            var data = new int[length];
+
+            for (var i = 0; i < length; i++)
+            {
+                x_coordinates[i] = coordinates[i, 0];
+                y_coordinates[i] = coordinates[i, 1];
+                data[i] = divikResult.Partition[i] + 1;
+            }
+
+            return new Models.Msi.DivikResult() { X = x_coordinates, Y = y_coordinates, Data = data };
         }
     }
 }

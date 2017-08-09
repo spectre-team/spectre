@@ -36,8 +36,8 @@ export class DivikService extends Service {
       return headers;
     }
 
-    get(preparationId: number, level: number): Observable<Heatmap> {
-      const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?level=${level}`;
+    get(preparationId: number, divikId: number, level: number): Observable<Heatmap> {
+      const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
       const response = this.http.get(queryUrl, {headers: this.getHeaders()});
       return response.map(toHeatmap);
     }

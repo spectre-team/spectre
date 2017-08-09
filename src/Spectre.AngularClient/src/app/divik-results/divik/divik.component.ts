@@ -37,7 +37,7 @@ export class DivikComponent implements OnInit {
 
   ngOnInit() {
     this.divikService
-      .get(1, 1)
+      .get(1, 1, 1)
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
   }
 
