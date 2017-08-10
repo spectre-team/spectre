@@ -20,7 +20,6 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libGenetic/Individual.h"
-#include "Spectre.libGenetic/InconsistentGenerationAndScoresLengthException.h"
 #include "Spectre.libClassifier/ObservationExtractor.h"
 
 namespace
@@ -39,7 +38,7 @@ protected:
 TEST_F(ObservationExtractorInitializationTest, initialize_observation_extractor_with_no_errors)
 {
     dataset = std::make_unique<OpenCvDataset>(data, labels);
-    EXPECT_NO_THROW(ObservationExtractor(dataset));
+    EXPECT_NO_THROW(ObservationExtractor(dataset.get()));
 }
 
 class ObservationExtractorTest : public ::testing::Test
@@ -67,13 +66,13 @@ protected:
 
 TEST_F(ObservationExtractorTest, get_test_individual_data)
 {
-    DataPointer result = extractor->getOpenCVDatasetFromIndividual(individual);
+    auto result = extractor->getOpenCVDatasetFromIndividual(individual);
     const std::vector<DataType> row1Test{ 0.5f, 0.4f, 0.6f };
     const std::vector<DataType> row2Test{ 2.1f, 1.0f, 0.6f };
     std::vector<Label> labelTest{ 3, 14 };
-    Observation row1Data = (*result)[0];
-    Observation row2Data = (*result)[1];
-    gsl::span<Label> labelData = result->GetSampleMetadata();
+    const Observation row1Data = result[0];
+    const Observation row2Data = result[1];
+    gsl::span<const Label> labelData = result.GetSampleMetadata();
     for (auto i = 0u; i < row1Data.size(); i++)
     {
         EXPECT_EQ(row1Data[i], row1Test[i]);

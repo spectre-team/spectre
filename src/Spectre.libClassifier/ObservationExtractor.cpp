@@ -23,7 +23,7 @@ namespace Spectre::libClassifier {
 
 ObservationExtractor::ObservationExtractor(const DataPointer data): m_data(data) { }
 
-DataPointer ObservationExtractor::getOpenCVDatasetFromIndividual(const libGenetic::Individual &individual)
+OpenCvDataset ObservationExtractor::getOpenCVDatasetFromIndividual(const libGenetic::Individual &individual)
 {
     std::vector<DataType> data {};
     std::vector<Label> labels {};
@@ -39,8 +39,8 @@ DataPointer ObservationExtractor::getOpenCVDatasetFromIndividual(const libGeneti
             labels.push_back(m_data->GetSampleMetadata(i));
         }
     }
-    OpenCvDataset dataset = OpenCvDataset(data, labels);
-    return &dataset;
+    OpenCvDataset dataset(data, labels);
+    return dataset;
 }
 
 }

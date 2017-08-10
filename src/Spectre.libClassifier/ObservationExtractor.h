@@ -31,7 +31,7 @@ class ObservationExtractor
 {
 public:
     ObservationExtractor(const DataPointer data);
-    DataPointer getOpenCVDatasetFromIndividual(const libGenetic::Individual &individual);
+    OpenCvDataset getOpenCVDatasetFromIndividual(const libGenetic::Individual &individual);
 
 private:
     const DataPointer m_data;
