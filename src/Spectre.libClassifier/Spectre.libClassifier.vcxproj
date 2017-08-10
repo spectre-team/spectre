@@ -78,10 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ObservationExtractor.cpp" />
     <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />
   </ItemGroup>

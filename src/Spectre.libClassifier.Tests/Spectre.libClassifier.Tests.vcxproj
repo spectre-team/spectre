@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
+    <ClCompile Include="ObservationExtractorTest.cpp" />
     <ClCompile Include="OpenCvDatasetTest.cpp" />
   </ItemGroup>
   <ItemGroup>

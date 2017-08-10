@@ -21,12 +21,18 @@
     <ClCompile Include="OpenCvDataset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ObservationExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Empty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenCvDataset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObservationExtractor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
