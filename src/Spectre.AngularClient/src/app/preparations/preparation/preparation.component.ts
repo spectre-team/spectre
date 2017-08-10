@@ -19,12 +19,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import {SpectrumService} from '../../spectrums/shared/spectrum.service';
-import {HeatmapService} from '../../heatmaps/shared/heatmap.service';
-import {Spectrum} from '../../spectrums/shared/spectrum';
-import {Heatmap} from '../../heatmaps/shared/heatmap';
-import {PreparationService} from '../shared/preparation.service';
-import {Preparation} from '../shared/preparation';
+import { SpectrumService} from '../../spectrums/shared/spectrum.service';
+import { HeatmapService} from '../../heatmaps/shared/heatmap.service';
+import { Spectrum } from '../../spectrums/shared/spectrum';
+import { Heatmap } from '../../heatmaps/shared/heatmap';
+import { PreparationService } from '../shared/preparation.service';
+import { Preparation } from '../shared/preparation';
 import { MessagesService } from '../../../../node_modules/ng2-messages/ng2-messages';
 
 @Component({

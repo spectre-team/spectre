@@ -26,7 +26,7 @@ using Spectre.Models.Msi;
 namespace Spectre.Tests.Controllers
 {
     /// <summary>
-    /// Tests for heatmap controller
+    /// Tests for divik result controller
     /// </summary>
     [TestFixture]
     internal class DivikResultControllerTest
@@ -43,10 +43,10 @@ namespace Spectre.Tests.Controllers
         }
 
         /// <summary>
-        /// Tests the first preparation sample heatmap getter.
+        /// Tests the first preparation sample divik getter.
         /// </summary>
         [Test]
-        public void TestGetFirstPreparationSampleHeatmap()
+        public void TestGetFirstPreparationSampleDivikResultIfExist()
         {
             const int divikId = 1;
             const int level = 1;
@@ -59,6 +59,20 @@ namespace Spectre.Tests.Controllers
                 Assert.IsNotEmpty(heatmap.Data);
                 Assert.IsNotEmpty(heatmap.X);
                 Assert.IsNotEmpty(heatmap.Y);
+            });
+        }
+
+        /// <summary>
+        /// Tests equals in data in the first preparation sample divik result getter.
+        /// </summary>
+        public void TestGetFirstPreparationSampleDivikResultEqualsInData()
+        {
+            const int divikId = 1;
+            const int level = 1;
+            var heatmap = _controller.Get(id: 1, divikId: divikId, level: level);
+
+            Assert.Multiple(testDelegate: () =>
+            {
                 Assert.AreEqual(
                     expected: heatmap.X.Count(),
                     actual: heatmap.Y.Count(),
@@ -67,13 +81,24 @@ namespace Spectre.Tests.Controllers
                     expected: heatmap.Data.Count(),
                     actual: heatmap.Y.Count(),
                     message: "Number of coordinates is different from number of intensities.");
+            });
+        }
 
+        /// <summary>
+        /// Tests the first preparation sample heatmap getter with bad request.
+        /// </summary>
+        [Test]
+        public void TestGetResultWithBadRequest()
+        {
+            Assert.Multiple(testDelegate: () =>
+            {
                 Assert.Throws<ArgumentException>(
                     code: () => { _controller.Get(id: 1, divikId: -1, level: 1); },
                     message: "Accepted negative index");
                 Assert.Throws<ArgumentException>(
                     code: () => { _controller.Get(id: 1, divikId: 1, level: -1); },
                     message: "Accepted negative index");
+                Assert.IsNull(_controller.Get(id: 0, divikId: 1, level: 1));
             });
         }
     }

@@ -1,6 +1,6 @@
 /*
- * preparation.component.ts
- * Component of single preparation.
+ * divik.component.ts
+ * Component of single divik result.
  *
    Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
 
@@ -17,10 +17,10 @@
    limitations under the License.
 */
 
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DivikService } from '../shared/divik.service';
-import {Heatmap} from '../../heatmaps/shared/heatmap';
+import { Heatmap } from '../../heatmaps/shared/heatmap';
 
 
 @Component({

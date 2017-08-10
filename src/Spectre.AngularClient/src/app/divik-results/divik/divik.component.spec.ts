@@ -1,6 +1,6 @@
 /*
- * heatmap.component.spec.ts
- * Unit tests for single heatmap component.
+ * divik.component.spec.ts
+ * Unit tests for single divik component.
  *
  Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
 
@@ -28,7 +28,7 @@ import { PlotlyModule } from '../../plotly/plotly.module';
 
 import { DivikComponent } from './divik.component';
 import { DivikService } from '../shared/divik.service';
-import {HeatmapComponent} from '../../heatmaps/heatmap/heatmap.component';
+import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
 
 describe('DivikComponent', () => {
   let component: DivikComponent;

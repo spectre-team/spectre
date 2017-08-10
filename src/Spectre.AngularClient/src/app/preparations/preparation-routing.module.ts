@@ -20,17 +20,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DivikComponent } from '../divik-results/divik/divik.component';
 import { PreparationComponent } from './preparation/preparation.component';
 
 const preparationRoutes = [
-    { path: 'preparation/:id', component: PreparationComponent },
-     { path: 'divik', component: DivikComponent }
+    { path: 'preparation/:id', component: PreparationComponent }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(preparationRoutes),
+        RouterModule.forChild(preparationRoutes)
     ],
     exports: [
         RouterModule

@@ -1,6 +1,6 @@
 /*
- * heatmap.service.ts
- * Service providing heatmap.
+ * divik.service.ts
+ * Service providing divik result.
  *
  Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik
 
@@ -23,7 +23,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 import { Heatmap } from '../../heatmaps/shared/heatmap';
-import {Service} from '../../app.service';
+import { Service } from '../../app.service';
 
 @Injectable()
 export class DivikService extends Service {
