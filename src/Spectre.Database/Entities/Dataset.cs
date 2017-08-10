@@ -51,7 +51,7 @@ namespace Spectre.Database.Entities
         /// Gets or sets the friendly name.
         /// </summary>
         /// <value>
-        /// The friendly name.
+        /// The friendly name
         /// </value>
         [Index]
         public string FriendlyName { get; set; }
