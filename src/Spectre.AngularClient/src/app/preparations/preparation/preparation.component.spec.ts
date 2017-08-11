@@ -20,8 +20,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import {MdSliderModule} from '@angular/material';
-import {ReactiveFormsModule, FormsModule} from "@angular/forms";
+import { MdSliderModule } from '@angular/material';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../../../mocks/mock-activated-router';
@@ -36,6 +36,8 @@ import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
 import { SpectrumComponent } from '../../spectrums/spectrum/spectrum.component';
 import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
 import { MessagesService, MessagesComponent } from 'ng2-messages/ng2-messages';
+import { DivikComponent } from '../../divik-results/divik/divik.component';
+import { DivikService } from '../../divik-results/shared/divik.service';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -45,7 +47,7 @@ describe('PreparationComponent', () => {
   beforeEach(async(() => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
-      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, MessagesComponent],
+      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent],
       imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule],
       providers: [
           MockBackend,
@@ -60,7 +62,8 @@ describe('PreparationComponent', () => {
           { provide: ActivatedRoute, useValue: mockActivatedRoute },
           SpectrumService,
           HeatmapService,
-          MessagesService
+          MessagesService,
+          DivikService
       ]
     })
     .compileComponents();
