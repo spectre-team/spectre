@@ -17,30 +17,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include "Spectre.libException/NullPointerException.h"
 #include "ObservationExtractor.h"
 
 namespace Spectre::libClassifier {
 
-ObservationExtractor::ObservationExtractor(const DataPointer data): m_data(data) { }
-
-OpenCvDataset ObservationExtractor::getOpenCVDatasetFromIndividual(const libGenetic::Individual &individual)
+ObservationExtractor::ObservationExtractor(const DataPointer data): m_data(data)
 {
-    std::vector<DataType> data {};
-    std::vector<Label> labels {};
+    if(m_data!=nullptr)
+    {
+        // @gmrukwa: Purposeful empty branch
+    }
+    else
+    {
+        throw libException::NullPointerException("data");
+    }
+}
+
+OpenCvDataset ObservationExtractor::getOpenCvDatasetFromIndividual(const libGenetic::Individual &individual)
+{
+    std::vector<DataType> data;
+    std::vector<Label> labels;
     for (auto i = 0u; i < individual.size(); ++i)
     {
         if (individual[i] == true)
         {
-            Observation observation = (*m_data)[i];
-            for (auto j = 0u; j < observation.size(); j++)
-            {
-                data.push_back(observation[j]);
-            }
+            const auto& observation = m_data->operator[](i);
+            data.insert(data.end(), observation.begin(), observation.end());
             labels.push_back(m_data->GetSampleMetadata(i));
         }
     }
-    OpenCvDataset dataset(data, labels);
-    return dataset;
+    return OpenCvDataset(data, labels);
 }
 
 }

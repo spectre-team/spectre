@@ -25,13 +25,13 @@
 
 namespace Spectre::libClassifier {
 
-using DataPointer = libDataset::IReadOnlyDataset<Observation, Label, Empty>*;
+using DataPointer = const libDataset::IReadOnlyDataset<Observation, Label, Empty>*;
 
 class ObservationExtractor
 {
 public:
-    ObservationExtractor(const DataPointer data);
-    OpenCvDataset getOpenCVDatasetFromIndividual(const libGenetic::Individual &individual);
+    explicit ObservationExtractor(const DataPointer data);
+    OpenCvDataset getOpenCvDatasetFromIndividual(const libGenetic::Individual &individual);
 
 private:
     const DataPointer m_data;

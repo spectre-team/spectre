@@ -18,14 +18,16 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
-#include "Spectre.libClassifier/OpenCvDataset.h"
+#include "Spectre.libException/NullPointerException.h"
 #include "Spectre.libGenetic/Individual.h"
+#include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/ObservationExtractor.h"
 
 namespace
 {
 using namespace Spectre::libClassifier;
 using namespace Spectre::libGenetic;
+using namespace Spectre::libException;
 
 class ObservationExtractorInitializationTest : public ::testing::Test
 {
@@ -41,47 +43,70 @@ TEST_F(ObservationExtractorInitializationTest, initialize_observation_extractor_
     EXPECT_NO_THROW(ObservationExtractor(dataset.get()));
 }
 
+TEST_F(ObservationExtractorInitializationTest, throw_for_null_data)
+{
+    EXPECT_THROW(ObservationExtractor(nullptr), NullPointerException);
+}
+
 class ObservationExtractorTest : public ::testing::Test
 {
 public:
     ObservationExtractorTest() :
-        dataset(OpenCvDataset(data, labels)),
-        individual({ true, false, true }),
-        extractor(){};
+        dataset(data, labels)
+    {
+        
+    };
 
 protected:
     const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
     const std::vector<Label> labels{ 3, 7, 14 };
-    Individual individual;
-    OpenCvDataset dataset;
+    const std::vector<DataType> expectedFilteredRow0{ 0.5f, 0.4f, 0.6f };
+    const std::vector<DataType> expectedFilteredRow1{ 2.1f, 1.0f, 0.6f };
+    const unsigned trueBits = 2;
+    size_t rowSize = data.size() / labels.size();
+    const Individual individual{ std::vector<bool>{ true, false, true } };
+    const OpenCvDataset dataset;
     std::unique_ptr<ObservationExtractor> extractor;
 
     void SetUp() override
     {
-        dataset = OpenCvDataset(data, labels);
-        individual = Individual({ true, false, true });
         extractor = std::make_unique<ObservationExtractor>(&dataset);
     }
 };
 
-TEST_F(ObservationExtractorTest, get_test_individual_data)
+TEST_F(ObservationExtractorTest, returns_dataset_of_expected_size)
 {
-    auto result = extractor->getOpenCVDatasetFromIndividual(individual);
-    const std::vector<DataType> row1Test{ 0.5f, 0.4f, 0.6f };
-    const std::vector<DataType> row2Test{ 2.1f, 1.0f, 0.6f };
-    std::vector<Label> labelTest{ 3, 14 };
-    const Observation row1Data = result[0];
-    const Observation row2Data = result[1];
-    gsl::span<const Label> labelData = result.GetSampleMetadata();
-    for (auto i = 0u; i < row1Data.size(); i++)
+    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    EXPECT_EQ(trueBits, result.size());
+}
+
+TEST_F(ObservationExtractorTest, observations_have_proper_size)
+{
+    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    EXPECT_EQ(rowSize, result[0].size());
+    EXPECT_EQ(rowSize, result[1].size());
+}
+
+TEST_F(ObservationExtractorTest, observations_are_rewritten)
+{
+    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    const Observation row0Data = result[0];
+    const Observation row1Data = result[1];
+    for (auto i = 0u; i < row0Data.size(); ++i)
     {
-        EXPECT_EQ(row1Data[i], row1Test[i]);
-        EXPECT_EQ(row2Data[i], row2Test[i]);
-    }
-    for (auto i = 0u; i < labelData.size(); i++)
-    {
-        EXPECT_EQ(labelData[i], labelTest[i]);
+        EXPECT_EQ(expectedFilteredRow0[i], row0Data[i]);
+        EXPECT_EQ(expectedFilteredRow1[i], row1Data[i]);
     }
 }
 
+TEST_F(ObservationExtractorTest, labels_are_rewritten)
+{
+    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    std::vector<Label> labelTest{ 3, 14 };
+    gsl::span<const Label> labelData = result.GetSampleMetadata();
+    for (auto i = 0u; i < labelData.size(); i++)
+    {
+        EXPECT_EQ(labelTest[i], labelData[i]);
+    }
+}
 }
