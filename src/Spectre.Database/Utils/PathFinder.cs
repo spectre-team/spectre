@@ -34,12 +34,12 @@ namespace Spectre.Database.Utils
         /// <summary>
         /// The temporary...
         /// </summary>
-        private static string _hash;
+        private static string _locationfromhash;
 
         /// <summary>
         /// The friendlyname...
         /// </summary>
-        private static string _friendlyname;
+        private static string __locationfromfriendlyname;
 
         /// <summary>
         /// Returns for hash.
@@ -55,30 +55,30 @@ namespace Spectre.Database.Utils
                 var location = context.Datasets
                     .Where(b => b.Hash == hash)
                     .FirstOrDefault();
-                _hash = location.ToString();
+                _locationfromhash = location.Location.ToString();
             }
 
-            return _hash;
+            return _locationfromhash;
         }
 
         /// <summary>
         /// Returns the name of friendly name.
         /// </summary>
-        /// <param name="hash">The hash.</param>
+        /// <param name="friendlyname">The friendlyname.</param>
         /// <returns>
         /// Returns location having friendly name.
         /// </returns>
-        public string ReturnForFriendlyName(string hash)
+        public string ReturnForFriendlyName(string friendlyname)
         {
             using (var context = new Context())
             {
                 var location = context.Datasets
-                    .Where(b => b.Hash == hash)
+                    .Where(b => b.Hash == friendlyname)
                     .FirstOrDefault();
-                _friendlyname = location.ToString();
+                __locationfromfriendlyname = location.Location.ToString();
             }
 
-            return _friendlyname;
+            return __locationfromfriendlyname;
         }
     }
 }
