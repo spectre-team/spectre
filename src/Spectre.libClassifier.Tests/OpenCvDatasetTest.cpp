@@ -81,6 +81,23 @@ TEST_F(OpenCvDatasetInitializationTest, throws_for_inconsistent_size_from_mat)
 	EXPECT_THROW(OpenCvDataset(mat_data, mat_labels), InconsistentArgumentSizesException);
 }
 
+TEST_F(OpenCvDatasetInitializationTest, move_invalidates_old_instance)
+{
+    std::vector<DataType> tmp_data(data_short);
+    std::vector<Label> tmp_labels(labels);
+    cv::Mat mat_data(3, 1, CV_TYPE, tmp_data.data());
+    cv::Mat mat_labels(3, 1, CV_LABEL_TYPE, tmp_labels.data());
+    OpenCvDataset oldDataset(mat_data, mat_labels);
+    OpenCvDataset newDataset(std::move(oldDataset));
+    EXPECT_EQ(0u, oldDataset.size());
+    EXPECT_EQ(0u, oldDataset.GetData().size());
+    EXPECT_EQ(0u, oldDataset.GetSampleMetadata().size());
+    EXPECT_THROW(oldDataset[0], OutOfRangeException);
+    EXPECT_THROW(oldDataset.GetSampleMetadata(0), OutOfRangeException);
+    EXPECT_EQ(0, oldDataset.getMatData().size().area());
+    EXPECT_EQ(0, oldDataset.getMatLabels().size().area());
+}
+
 class OpenCvDatasetTest : public ::testing::Test
 {
 public:
@@ -102,6 +119,7 @@ public:
 protected:
 	const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
 	const std::vector<Label> labels{ 3, 7, 14 };
+    const size_t rowSize = data.size() / labels.size();
 	std::unique_ptr<OpenCvDataset> dataset;
 
 	void SetUp() override
@@ -162,7 +180,7 @@ TEST_F(OpenCvDatasetTest, get_data)
 	}
 }
 
-TEST_F(OpenCvDatasetTest, get_labels)
+TEST_F(OpenCvDatasetTest, get_whole_labels)
 {
 	gsl::span<const Label> result = dataset->GetSampleMetadata();
 	EXPECT_EQ(result.size(), labels.size());
@@ -170,6 +188,14 @@ TEST_F(OpenCvDatasetTest, get_labels)
 	{
 		EXPECT_EQ(result[i], labels[i]);
 	}
+}
+
+TEST_F(OpenCvDatasetTest, get_some_labels)
+{
+    for (auto i = 0u; i < labels.size(); i++)
+    {
+        EXPECT_EQ(labels[i], dataset->GetSampleMetadata(i));
+    }
 }
 
 TEST_F(OpenCvDatasetTest, check_correct_dataset_size)
@@ -195,7 +221,7 @@ TEST_F(OpenCvDatasetTest, check_getting_labels_to_mat)
 
 TEST_F(OpenCvDatasetTest, check_if_creating_copy)
 {
-	std::unique_ptr<OpenCvDataset> result = nullptr;
+	std::unique_ptr<OpenCvDataset> result;
     const std::vector<DataType> tmpData{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
     const std::vector<Label> tmpLabels{ 3, 7, 14 };
     const auto numberOfObservations = tmpLabels.size();
@@ -221,5 +247,18 @@ TEST_F(OpenCvDatasetTest, check_if_creating_copy)
     }
 }
 
+TEST_F(OpenCvDatasetTest, returns_observation_with_valid_size_through_square_braces)
+{
+    const auto& observation = dataset->operator[](0);
+    ASSERT_EQ(rowSize, observation.size());
+}
 
+TEST_F(OpenCvDatasetTest, returns_observation_with_valid_entries_through_square_braces)
+{
+    const auto& observation = dataset->operator[](0);
+    for (auto i = 0u; i < rowSize; ++i)
+    {
+        EXPECT_EQ(data[i], observation[i]);
+    }
+}
 }

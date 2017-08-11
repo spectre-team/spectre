@@ -37,6 +37,16 @@ class OpenCvDataset final : public Spectre::libDataset::IReadOnlyDataset<Observa
 {
 public:
     /// <summary>
+    /// Deleted default copy constructor.
+    /// </summary>
+    /// <param name="">The other.</param>
+    OpenCvDataset(const OpenCvDataset&) = delete;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OpenCvDataset"/> class.
+    /// </summary>
+    /// <param name="other">The other.</param>
+    OpenCvDataset(OpenCvDataset&& other) noexcept;
+    /// <summary>
     /// Initializes a new instance of the <see cref="OpenCvDataset"/> class.
     /// </summary>
     /// <param name="data">The data.</param>
