@@ -22,16 +22,32 @@ along with supporting statistics.
 
 ## Install
 
-Please refer to [docs](docs/Spectre.DivikWpfClient.pdf).
+### DiviK local client
+
+Please refer to [this manual](docs/Spectre.DivikWpfClient.pdf), as MATLAB Common Runtime has to be installed.
+
+### Spectre service & web application
+
+It is all the time available [here](http://vaei-bit01.aei.polsl.pl/). If you still would like to host it yourself, please contact us by and [e-mail](mailto:Grzegorz.Mrukwa@polsl.pl). We will provide you exhaustive explanations.
 
 ## Exemplary usage
 
+### DiviK local client
+
 Please refer to [docs](docs/Spectre.DivikWpfClient.pdf).
+
+### Spectre service & web application
+
+The application is available online [here](http://vaei-bit01.aei.polsl.pl/).
+
+Right now our web application allows only an interactive visualization of some of the data we were using in the research, along with Divisive Intelligent K-means algorithm results. More features will get documented, when they appear.
 
 ## How to contribute?
 
 Please contact us by an [e-mail](mailto:Grzegorz.Mrukwa@polsl.pl). We will
 answer you in details.
+
+Short contribution guide is actively constructed on [the project's wiki](https://github.com/spectre-team/spectre/wiki) with the development progress.
 
 ## Environment
 
