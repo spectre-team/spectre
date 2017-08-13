@@ -22,7 +22,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace Spectre.Models.Msi
+namespace Spectre.Models.Msi.DivikResult
 {
     /// <summary>
     /// Provides divik result

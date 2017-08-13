@@ -35,7 +35,7 @@ describe('DivikService', () => {
         connection.mockRespond(new Response(options));
       });
 
-      divikService.get(1, 1).subscribe((divik) => {
+      divikService.get(1, 1, 1).subscribe((divik) => {
         expect(divik.data.length).toEqual(5);
         expect(divik.data[0].length).toEqual(3);
         expect(divik.data[1].length).toEqual(3);

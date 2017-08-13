@@ -28,7 +28,7 @@ import { PlotlyModule } from '../plotly/plotly.module';
 
 import { PreparationComponent } from './preparation/preparation.component';
 import { HeatmapComponent } from '../heatmaps/heatmap/heatmap.component';
-import { SpectrumComponent } from '../spectrums/spectrum/spectrum.component';
+import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
 import { MessagesComponent } from 'ng2-messages/ng2-messages.component';
 import { DivikComponent } from '../divik-results/divik/divik.component';
 

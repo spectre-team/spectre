@@ -21,6 +21,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DivikService } from '../shared/divik.service';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
+import {DivikConfig} from "../shared/divik-config";
 
 
 @Component({
@@ -30,6 +31,7 @@ import { Heatmap } from '../../heatmaps/shared/heatmap';
 })
 export class DivikComponent implements OnInit {
   public data: any;
+  public config: string;
   constructor(
       private route: ActivatedRoute,
       private divikService: DivikService
@@ -39,6 +41,9 @@ export class DivikComponent implements OnInit {
     this.divikService
       .get(1, 1, 1)
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
+    this.divikService
+      .getConfig(1, 1)
+      .subscribe(config => this.config = this.displayConfig(config));
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
@@ -46,5 +51,21 @@ export class DivikComponent implements OnInit {
       z: heatmap.data,
       type: 'heatmap'
     }];
+  }
+
+  displayConfig(config: DivikConfig): string {
+    return 'MaxK ' + config.maxK +
+    ' Level ' + config.level +
+    ' UsingLevels ' + config.usingLevels +
+    ' Amplitude ' + config.amplitude +
+    ' Variance ' + config.variance +
+    ' PercentSizeLimit ' + config.percentSizeLimit +
+    ' FeaturePreservationLimit ' + config.featurePreservationLimit +
+    ' Metric ' + config.metric  +
+    ' PlottingPartitions ' + config.plottingPartitions +
+    ' PlottingPartitionsRecursively ' + config.plottingPartitionsRecursively +
+    ' PlottingDecomposition ' + config.plottingDecomposition +
+    ' PlottingDecompositionRecursively ' + config.plottingDecompositionRecursively +
+    ' MaxDecompositionComponents ' + config.maxDecompositionComponents;
   }
 }

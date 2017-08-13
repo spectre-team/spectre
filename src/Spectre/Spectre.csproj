@@ -235,8 +235,9 @@
     <Compile Include="Models\ChangePasswordBindingModel.cs" />
     <Compile Include="Models\ExternalLoginViewModel.cs" />
     <Compile Include="Models\ManageInfoViewModel.cs" />
+    <Compile Include="Models\Msi\DivikResult\DivikConfig.cs" />
     <Compile Include="Models\Msi\Heatmap.cs" />
-    <Compile Include="Models\Msi\DivikResult.cs" />
+    <Compile Include="Models\Msi\DivikResult\DivikResult.cs" />
     <Compile Include="Models\Msi\Preparation.cs" />
     <Compile Include="Models\Msi\Spectrum.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
