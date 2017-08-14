@@ -17,14 +17,14 @@
  limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import {Heatmap} from '../../heatmaps/shared/heatmap';
-import {Service} from '../../app.service';
-import {DivikConfig} from "./divik-config";
+import { Heatmap } from '../../heatmaps/shared/heatmap';
+import { Service } from '../../app.service';
+import { DivikConfig } from './divik-config';
 
 @Injectable()
 export class DivikService extends Service {

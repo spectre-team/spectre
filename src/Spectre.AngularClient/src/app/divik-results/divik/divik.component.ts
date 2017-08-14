@@ -21,7 +21,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DivikService } from '../shared/divik.service';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
-import {DivikConfig} from "../shared/divik-config";
+import { DivikConfig } from '../shared/divik-config';
 
 
 @Component({
