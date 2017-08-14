@@ -56,19 +56,19 @@ function toDivikConfig(response: Response): DivikConfig {
   const json = response.json();
   console.log(json);
   return <DivikConfig>({
-    maxK: json.maxK,
-    level: json.level,
-    usingLevels: json.usingLevels,
-    amplitude: json.amplitude,
-    variance: json.variance,
-    percentSizeLimit: json.percentSizeLimit,
-    featurePreservationLimit: json.featurePreservationLimit,
-    metric: json.metric,
-    plottingPartitions: json.plottingPartitions,
-    plottingPartitionsRecursively: json.plottingPartitionsRecursively,
-    plottingDecomposition: json.plottingDecomposition,
-    plottingDecompositionRecursively: json.plottingDecompositionRecursively,
-    maxDecompositionComponents: json.maxDecompositionComponents,
+    maxK: json.MaxK,
+    level: json.Level,
+    usingLevels: json.UsingLevels,
+    amplitude: json.Amplitude,
+    variance: json.Variance,
+    percentSizeLimit: json.PercentSizeLimit,
+    featurePreservationLimit: json.FeaturePreservationLimit,
+    metric: json.Metric,
+    plottingPartitions: json.PlottingPartitions,
+    plottingPartitionsRecursively: json.PlottingPartitionsRecursively,
+    plottingDecomposition: json.PlottingDecomposition,
+    plottingDecompositionRecursively: json.PlottingDecompositionRecursively,
+    maxDecompositionComponents: json.MaxDecompositionComponents,
   })
     ;
 }
