@@ -54,18 +54,19 @@ export class DivikComponent implements OnInit {
   }
 
   displayConfig(config: DivikConfig): string {
-    return 'MaxK ' + config.maxK +
-    ' Level ' + config.level +
-    ' UsingLevels ' + config.usingLevels +
-    ' Amplitude ' + config.amplitude +
-    ' Variance ' + config.variance +
-    ' PercentSizeLimit ' + config.percentSizeLimit +
-    ' FeaturePreservationLimit ' + config.featurePreservationLimit +
-    ' Metric ' + config.metric  +
-    ' PlottingPartitions ' + config.plottingPartitions +
-    ' PlottingPartitionsRecursively ' + config.plottingPartitionsRecursively +
-    ' PlottingDecomposition ' + config.plottingDecomposition +
-    ' PlottingDecompositionRecursively ' + config.plottingDecompositionRecursively +
-    ' MaxDecompositionComponents ' + config.maxDecompositionComponents;
+    return 'Divik config:' +
+    '\nMaxK ' + config.maxK +
+    '\nLevel ' + config.level +
+    '\nUsingLevels ' + config.usingLevels +
+    '\nAmplitude ' + config.amplitude +
+    '\nVariance ' + config.variance +
+    '\nPercentSizeLimit ' + config.percentSizeLimit +
+    '\nFeaturePreservationLimit ' + config.featurePreservationLimit +
+    '\nMetric ' + config.metric  +
+    '\nPlottingPartitions ' + config.plottingPartitions +
+    '\nPlottingPartitionsRecursively ' + config.plottingPartitionsRecursively +
+    '\nPlottingDecomposition ' + config.plottingDecomposition +
+    '\nPlottingDecompositionRecursively ' + config.plottingDecompositionRecursively +
+    '\nMaxDecompositionComponents ' + config.maxDecompositionComponents;
   }
 }

@@ -54,7 +54,6 @@ export class DivikService extends Service {
 
 function toDivikConfig(response: Response): DivikConfig {
   const json = response.json();
-  console.log(json);
   return <DivikConfig>({
     maxK: json.MaxK,
     level: json.Level,
