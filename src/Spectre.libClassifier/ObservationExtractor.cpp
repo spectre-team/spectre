@@ -22,9 +22,9 @@ limitations under the License.
 
 namespace Spectre::libClassifier {
 
-ObservationExtractor::ObservationExtractor(const DataPointer data): m_data(data)
+ObservationExtractor::ObservationExtractor(const DataPointer data): m_Data(data)
 {
-    if(m_data!=nullptr)
+    if(m_Data!=nullptr)
     {
         // @gmrukwa: Purposeful empty branch
     }
@@ -42,9 +42,9 @@ OpenCvDataset ObservationExtractor::getOpenCvDatasetFromIndividual(const libGene
     {
         if (individual[i] == true)
         {
-            const auto& observation = m_data->operator[](i);
+            const auto& observation = m_Data->operator[](i);
             data.insert(data.end(), observation.begin(), observation.end());
-            labels.push_back(m_data->GetSampleMetadata(i));
+            labels.push_back(m_Data->GetSampleMetadata(i));
         }
     }
     return OpenCvDataset(data, labels);
