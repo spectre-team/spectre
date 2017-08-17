@@ -117,15 +117,15 @@ public:
 	}
 
 protected:
-	const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
-	const std::vector<Label> labels{ 3, 7, 14 };
+    const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
+    const std::vector<Label> labels{ 3, 7, 14 };
     const size_t rowSize = data.size() / labels.size();
-	std::unique_ptr<OpenCvDataset> dataset;
+    std::unique_ptr<OpenCvDataset> dataset;
 
-	void SetUp() override
-	{
-		dataset = std::make_unique<OpenCvDataset>(data, labels);
-	}
+    void SetUp() override
+    {
+        dataset = std::make_unique<OpenCvDataset>(data, labels);
+    }
 };
 
 TEST_F(OpenCvDatasetTest, throws_on_access_to_data_out_of_range)

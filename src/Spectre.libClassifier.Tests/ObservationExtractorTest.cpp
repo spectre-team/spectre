@@ -1,5 +1,5 @@
 /*
-* OpenCvDatasetTest.cpp
+* ObservationExtractorTest.cpp
 * Tests ObservationExtractor
 *
 Copyright 2017 Wojciech Wilgierz

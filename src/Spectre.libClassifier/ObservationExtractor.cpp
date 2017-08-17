@@ -1,5 +1,5 @@
 ﻿/*
-* OpenCvDataset.cpp
+* ObservationExtractor.cpp
 * class for getting data from Individual object
 *
 Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
