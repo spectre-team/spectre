@@ -39,25 +39,25 @@ namespace Spectre.Service.Tests
         [Test]
         public void DataRootThrowsOnMissingLocalPath()
         {
-            Assert.Throws<ArgumentNullException>(code: () => new DataRootConfig(null, goodRemotePath));
+            Assert.Throws<ConfigValidationException>(code: () => new DataRootConfig(null, goodRemotePath));
         }
 
         [Test]
         public void DataRootThrowsOnInvalidLocalPath()
         {
-            Assert.Throws<ArgumentException>(code: () => new DataRootConfig(wrongLocalPath, goodRemotePath));
+            Assert.Throws<ConfigValidationException>(code: () => new DataRootConfig(wrongLocalPath, goodRemotePath));
         }
 
         [Test]
         public void DataRootThrowsOnMissingRemotePath()
         {
-            Assert.Throws<ArgumentNullException>(code: () => new DataRootConfig(goodLocalPath, null));
+            Assert.Throws<ConfigValidationException>(code: () => new DataRootConfig(goodLocalPath, null));
         }
 
         [Test]
         public void DataRootThrowsOnInvalidRemotePath()
         {
-            Assert.Throws<ArgumentException>(code: () => new DataRootConfig(goodLocalPath, wrongRemotePath));
+            Assert.Throws<ConfigValidationException>(code: () => new DataRootConfig(goodLocalPath, wrongRemotePath));
         }
 
         [Test]

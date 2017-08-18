@@ -51,9 +51,17 @@ namespace Spectre.Service.Configuration
         /// Validates if argument is a valid path.
         /// </summary>
         /// <param name="path">File path to validate.</param>
+        /// <exception cref="ConfigValidationException">Thrown when data directory path fails validation.</exception>
         private void ValidatePath(string path)
         {
-            var fi = new FileInfo(path);
+            try
+            {
+                var fi = new FileInfo(path);
+            }
+            catch (System.SystemException e)
+            {
+                throw new ConfigValidationException("Invalid data root path", e);
+            }
         }
     }
 }
