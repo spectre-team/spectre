@@ -35,6 +35,12 @@ public:
     /// <summary>
     /// Initializes a new instance of the <see cref="Dataset"/> class.
     /// </summary>
+    /// <param name="">The other dataset.</param>
+    Dataset(const Dataset&) = delete;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Dataset"/> class.
+    /// </summary>
     /// <param name="data">The data.</param>
     /// <param name="sampleMetadata">The sample metadata.</param>
     /// <param name="metadata">The metadata.</param>
