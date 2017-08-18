@@ -17,18 +17,5 @@
    limitations under the License.
 */
 export interface DivikConfig {
-  maxK: number;
-  level: number;
-  usingLevels: boolean;
-  amplitude: boolean;
-  variance: boolean;
-  percentSizeLimit: number;
-  featurePreservationLimit: number;
-  metric: string;
-  plottingPartitions: boolean;
-  plottingPartitionsRecursively: boolean;
-  plottingDecomposition: boolean;
-  plottingDecompositionRecursively: boolean;
-  maxDecompositionComponents: number;
-
+  properties: string[];
 }

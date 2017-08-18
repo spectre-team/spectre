@@ -31,7 +31,7 @@ import { DivikConfig } from '../shared/divik-config';
 })
 export class DivikComponent implements OnInit {
   public data: any;
-  public config: string;
+  public configDescription: string;
   constructor(
       private route: ActivatedRoute,
       private divikService: DivikService
@@ -43,7 +43,7 @@ export class DivikComponent implements OnInit {
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
     this.divikService
       .getConfig(1, 1)
-      .subscribe(config => this.config = this.displayConfig(config));
+      .subscribe(config => this.configDescription = this.displayConfig(config));
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
@@ -52,21 +52,13 @@ export class DivikComponent implements OnInit {
       type: 'heatmap'
     }];
   }
-
   displayConfig(config: DivikConfig): string {
-    return 'Divik config:' +
-    '\nMaxK ' + config.maxK +
-    '\nLevel ' + config.level +
-    '\nUsingLevels ' + config.usingLevels +
-    '\nAmplitude ' + config.amplitude +
-    '\nVariance ' + config.variance +
-    '\nPercentSizeLimit ' + config.percentSizeLimit +
-    '\nFeaturePreservationLimit ' + config.featurePreservationLimit +
-    '\nMetric ' + config.metric  +
-    '\nPlottingPartitions ' + config.plottingPartitions +
-    '\nPlottingPartitionsRecursively ' + config.plottingPartitionsRecursively +
-    '\nPlottingDecomposition ' + config.plottingDecomposition +
-    '\nPlottingDecompositionRecursively ' + config.plottingDecompositionRecursively +
-    '\nMaxDecompositionComponents ' + config.maxDecompositionComponents;
+    let description = '';
+    Object.keys(config.properties).forEach((key) => {
+      description += key + ': ' +  config.properties[key] + '\n';
+    });
+    console.log('ejjjjjjjjj' + description);
+    return description;
+
   }
 }

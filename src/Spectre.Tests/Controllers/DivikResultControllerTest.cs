@@ -20,8 +20,9 @@
 using System;
 using System.Linq;
 using NUnit.Framework;
+using Spectre.Algorithms.Parameterization;
 using Spectre.Controllers;
-using Spectre.Models.Msi.DivikResult;
+using Spectre.Models.Msi;
 
 namespace Spectre.Tests.Controllers
 {

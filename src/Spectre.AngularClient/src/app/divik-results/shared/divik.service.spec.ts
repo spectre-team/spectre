@@ -2,7 +2,8 @@ import { TestBed, inject } from '@angular/core/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import {DivikService} from './divik.service';
+import { DivikService } from './divik.service';
+import { HeatmapUtil } from '../../heatmaps/shared/heatmap.service';
 
 function divikConfig(): string {
   return JSON.stringify({
@@ -26,16 +27,16 @@ function divikResult(): string {
   return JSON.stringify({
     Id: 1,
     X: [4, 5, 6],
-    Y: [5, 8, 9 ],
+    Y: [5, 8, 9],
     Data: [1.11, 4.44, 9.99]
   });
 }
 
 function setResponse(backend: MockBackend, response: string) {
   backend.connections.subscribe((connection: MockConnection) => {
-     const options = new ResponseOptions({
-       body: response
-     });
+    const options = new ResponseOptions({
+      body: response
+    });
     connection.mockRespond(new Response(options));
   });
 }
@@ -44,16 +45,17 @@ describe('DivikService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-          MockBackend,
-          BaseRequestOptions,
-          {
-            provide: Http,
-            useFactory: (backendInstance: MockBackend, defaultOptions: BaseRequestOptions) => {
-              return new Http(backendInstance, defaultOptions);
-            },
-            deps: [MockBackend, BaseRequestOptions]
+        MockBackend,
+        BaseRequestOptions,
+        {
+          provide: Http,
+          useFactory: (backendInstance: MockBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backendInstance, defaultOptions);
           },
-          DivikService
+          deps: [MockBackend, BaseRequestOptions]
+        },
+        DivikService,
+        HeatmapUtil
       ]
     });
   });
@@ -79,107 +81,29 @@ describe('DivikService', () => {
       });
     }));
 
-    it('parses max k from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.maxK).toEqual(10);
-        });
-      }));
-
-    it('parses level from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.level).toEqual(3);
-        });
-      }));
-
-    it('parses whether level was used in analysis from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.usingLevels).toEqual(false);
-        });
-      }));
-
-    it('parses whether amplitude filtering was enabled from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.amplitude).toEqual(true);
-        });
-      }));
-
-    it('parses whether variance filtering was enabled from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.variance).toEqual(true);
-        });
-      }));
-
-    it('parses percent size limit from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.percentSizeLimit).toEqual(.01);
-        });
-      }));
-
-    it('parses feature preservation limit from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.featurePreservationLimit).toEqual(.05);
-        });
-      }));
-
-    it('parses metric from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.metric).toEqual('euclidean');
-        });
-      }));
-
-    it('parses whether partition was plotted from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.plottingPartitions).toEqual(false);
-        });
-      }));
-
-    it('parses whether partitions were plotted recursively from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.plottingPartitionsRecursively).toEqual(false);
-        });
-      }));
-
-    it('parses whether decomposition was plotted from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.plottingDecomposition).toEqual(false);
-        });
-      }));
-
-    it('parses whether decompositions were plotted recursively from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.plottingDecompositionRecursively).toEqual(false);
-        });
-      }));
-
-    it('parses maximal number of decomposition components from DiviK config', inject([DivikService, MockBackend],
-      (divikService: DivikService, mockBackend: MockBackend) => {
-        setResponse(mockBackend, divikConfig());
-        divikService.getConfig(1, 1).subscribe((config) => {
-          expect(config.maxDecompositionComponents).toEqual(7);
-        });
-      }));
+  [
+    {name: 'parses max k from DiviK config', value: 'Max K', expectedValue: 10},
+    {name: 'parses level from DiviK config', value: 'Level', expectedValue: 3},
+    {name: 'parses whether level was used in analysis from DiviK config', value: 'Using levels', expectedValue: false},
+    {name: 'parses whether amplitude filtering was enabled from DiviK config', value: 'Amplitude', expectedValue: true},
+    {name: 'parses whether variance filtering was enabled from DiviK config', value: 'Variance', expectedValue: true},
+    {name: 'parses percent size limit from DiviK config', value: 'Percent size limit', expectedValue: .01},
+    {name: 'parses feature preservation limit from DiviK config', value: 'Feature preservation limit', expectedValue: .05},
+    {name: 'parses metric from DiviK config', value: 'Metric', expectedValue: 'euclidean'},
+    {name: 'parses whether partition was plotted from DiviK config', value: 'Plotting partitions', expectedValue: false},
+    {name: 'parses whether partitions were plotted recursively from DiviK config', value: 'Plotting partitions recursively', expectedValue: false},
+    {name: 'parses whether decomposition was plotted from DiviK config', value: 'Plotting decomposition', expectedValue: false},
+    {name: 'parses whether decompositions were plotted recursively from DiviK config', value: 'Plotting decomposition recursively', expectedValue: false},
+    {name: 'parses maximal number of decomposition components from DiviK config', value: 'Max decomposition components', expectedValue: 7}
+  ]
+    .forEach(function (test) {
+      it(test.name, inject([DivikService, MockBackend],
+        (divikService: DivikService, mockBackend: MockBackend) => {
+          setResponse(mockBackend, divikConfig());
+          divikService.getConfig(1, 1).subscribe((config) => {
+            console.log(config.properties);
+            expect(config.properties[test.value]).toEqual(test.expectedValue);
+          });
+        }));
+    });
 });

@@ -25,6 +25,7 @@ import 'rxjs/Rx';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { Service } from '../../app.service';
 import { DivikConfig } from './divik-config';
+import { HeatmapUtil } from '../../heatmaps/shared/heatmap.service';
 
 @Injectable()
 export class DivikService extends Service {
@@ -42,7 +43,7 @@ export class DivikService extends Service {
   get (preparationId: number, divikId: number, level: number): Observable<Heatmap> {
     const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    return response.map(toHeatmap);
+    return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'));
   }
 
   getConfig(preparationId: number, divikId: number): Observable<DivikConfig> {
@@ -54,52 +55,21 @@ export class DivikService extends Service {
 
 function toDivikConfig(response: Response): DivikConfig {
   const json = response.json();
+  const properties = [];
+  properties['Max K'] = json.MaxK;
+  properties['Level'] = json.Level;
+  properties['Using levels'] = json.UsingLevels;
+  properties['Amplitude'] = json.Amplitude;
+  properties['Variance'] = json.Variance;
+  properties['Percent size limit'] = json.PercentSizeLimit;
+  properties['Feature preservation limit'] = json.FeaturePreservationLimit;
+  properties['Metric'] = json.Metric;
+  properties['Plotting partitions'] = json.PlottingPartitions;
+  properties['Plotting partitions recursively'] = json.PlottingPartitionsRecursively;
+  properties['Plotting decomposition'] = json.PlottingDecomposition;
+  properties['Plotting decomposition recursively'] = json.PlottingDecompositionRecursively;
+  properties['Max decomposition components'] = json.MaxDecompositionComponents;
   return <DivikConfig>({
-    maxK: json.MaxK,
-    level: json.Level,
-    usingLevels: json.UsingLevels,
-    amplitude: json.Amplitude,
-    variance: json.Variance,
-    percentSizeLimit: json.PercentSizeLimit,
-    featurePreservationLimit: json.FeaturePreservationLimit,
-    metric: json.Metric,
-    plottingPartitions: json.PlottingPartitions,
-    plottingPartitionsRecursively: json.PlottingPartitionsRecursively,
-    plottingDecomposition: json.PlottingDecomposition,
-    plottingDecompositionRecursively: json.PlottingDecompositionRecursively,
-    maxDecompositionComponents: json.MaxDecompositionComponents,
-  })
-    ;
-}
-
-function toHeatmap(response: Response): Heatmap {
-  console.log('[DivikService] parsing response:');
-  console.log(response);
-  const json = response.json();
-  console.log(json);
-  const max_column = Math.max.apply(null, json.X);
-  const min_column = Math.min.apply(null, json.X);
-  const max_row = Math.max.apply(null, json.Y);
-  const min_row = Math.min.apply(null, json.Y);
-  console.log('[DivikService] found bounds: (' + min_row + ', ' + max_row + '), (' + min_column + ', ' + max_column + ')');
-  console.log('[DivikService] initializing heatmap');
-  const data = [];
-  for (let i = min_row; i < max_row + 1; i++) {
-    data[i - min_row] = [];
-    for (let j = min_column; j < max_column + 1; j++) {
-      data[i - min_row][j - min_column] = 0;
-    }
-  }
-  console.log('[DivikService] processing heatmap');
-  for (let i = 0; i < json.X.length; i++) {
-    const column = json.X[i] - min_column;
-    const row = max_row - json.Y[i];
-    const divikData = json.Data[i];
-    console.log('[DivikService] processing (' + row + ', ' + column + ', ' + divikData + ')');
-    data[row][column] = divikData;
-  }
-  console.log('[DivikService] heatmap processed');
-  return <Heatmap>({
-    data: data
+    properties: properties
   });
 }
