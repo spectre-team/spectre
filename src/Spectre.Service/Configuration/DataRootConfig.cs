@@ -34,11 +34,7 @@ namespace Spectre.Service.Configuration
         public DataRootConfig(string localPath, string remotePath)
         {
             ValidatePath(localPath);
-
-            if (remotePath != null)
-            {
-                ValidatePath(remotePath);
-            }
+            ValidatePath(remotePath);
         }
 
         /// <summary>
