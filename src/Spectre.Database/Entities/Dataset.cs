@@ -44,7 +44,6 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The hash.
         /// </value>
-        [Index]
         public string Hash { get; set; }
 
         /// <summary>
@@ -53,7 +52,6 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The friendly name
         /// </value>
-        [Index]
         public string FriendlyName { get; set; }
 
         /// <summary>

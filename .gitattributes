@@ -1,63 +1,77 @@
-###############################################################################
-# Set default behavior to automatically normalize line endings.
-###############################################################################
-* text=auto
+using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+using NUnit.Mocks;
 
-###############################################################################
-# Set default behavior for command prompt diff.
-#
-# This is need for earlier builds of msysgit that does not have it on by
-# default for csharp files.
-# Note: This is only used by command line
-###############################################################################
-#*.cs     diff=csharp
-
-###############################################################################
-# Set the merge driver for project and solution files
-#
-# Merging from the command prompt will add diff markers to the files if there
-# are conflicts (Merging from VS is not affected by the settings below, in VS
-# the diff markers are never inserted). Diff markers may cause the following 
-# file extensions to fail to load in VS. An alternative would be to treat
-# these files as binary and thus will always conflict and require user
-# intervention with every merge. To do so, just uncomment the entries below
-###############################################################################
-#*.sln       merge=binary
-#*.csproj    merge=binary
-#*.vbproj    merge=binary
-#*.vcxproj   merge=binary
-#*.vcproj    merge=binary
-#*.dbproj    merge=binary
-#*.fsproj    merge=binary
-#*.lsproj    merge=binary
-#*.wixproj   merge=binary
-#*.modelproj merge=binary
-#*.sqlproj   merge=binary
-#*.wwaproj   merge=binary
-
-###############################################################################
-# behavior for image files
-#
-# image files are treated as binary by default.
-###############################################################################
-#*.jpg   binary
-#*.png   binary
-#*.gif   binary
-
-###############################################################################
-# diff behavior for common document formats
-# 
-# Convert binary document formats to text before diffing them. This feature
-# is only available from the command line. Turn it on by uncommenting the 
-# entries below.
-###############################################################################
-#*.doc   diff=astextplain
-#*.DOC   diff=astextplain
-#*.docx  diff=astextplain
-#*.DOCX  diff=astextplain
-#*.dot   diff=astextplain
-#*.DOT   diff=astextplain
-#*.pdf   diff=astextplain
-#*.PDF   diff=astextplain
-#*.rtf   diff=astextplain
-#*.RTF   diff=astextplain
+[TestFixture]
+public class PersonServiceTest
+{
+// The dynamic mock proxy that we will use to implement IPersonRepository
+private DynamicMock personRepositoryMock;
+// Set up some testing data
+private Person onePerson = new Person("1", "Wendy", "Whiner");
+private Person secondPerson = new Person("2", "Aaron", "Adams");
+private List peopleList;
+[SetUp]
+public void TestInit()
+{
+peopleList = new List();
+peopleList.Add(onePerson);
+peopleList.Add(secondPerson);
+// Construct a Mock Object of the IPersonRepository Interface
+personRepositoryMock = new DynamicMock(typeof (IPersonRepository));
+}
+[Test]
+public void TestGetAllPeople()
+{
+// Tell that mock object when the "GetPeople" method is
+// called to return a predefined list of people
+personRepositoryMock.ExpectAndReturn("GetPeople", peopleList);
+// Construct a Person service with the Mock IPersonRepository
+PersonService service = new PersonService(
+(IPersonRepository) personRepositoryMock.MockInstance);
+// Call methods and assert tests
+Assert.AreEqual(2, service.GetAllPeople().Count);
+}
+[Test]
+public void TestGetAllPeopleSorted()
+{
+// Tell that mock object when the "GetPeople" method is called to
+// return a predefined list of people
+personRepositoryMock.ExpectAndReturn("GetPeople", peopleList);
+PersonService service = new PersonService(
+(IPersonRepository) personRepositoryMock.MockInstance);
+// This method really has "business logic" in it - the sorting of people
+List people = service.GetAllPeopleSorted();
+Assert.IsNotNull(people);
+Assert.AreEqual(2, people.Count);
+// Make sure the first person returned is the correct one
+Person p = people[0];
+Assert.AreEqual("Adams", p.LastName);
+}
+[Test]
+public void TestGetSinglePersonWithValidId()
+{
+// Tell that mock object when the "GetPerson" method is called to
+// return a predefined Person
+personRepositoryMock.ExpectAndReturn("GetPersonById", onePerson, "1");
+PersonService service = new PersonService(
+(IPersonRepository) personRepositoryMock.MockInstance);
+Person p = service.GetPerson("1");
+Assert.IsNotNull(p);
+Assert.AreEqual(p.Id, "1");
+}
+[Test]
+public void TestGetSinglePersonWithInalidId()
+{
+// Tell that mock object when the "GetPersonById" is called with a null
+// value to throw an ArgumentException
+personRepositoryMock.ExpectAndThrow("GetPersonById",
+new ArgumentException("Invalid person id."), null);
+PersonService service = new PersonService(
+(IPersonRepository) personRepositoryMock.MockInstance);
+// The only way to get null is if the underlying IPersonRepository
+// threw an ArgumentException
+Assert.IsNull(service.GetPerson(null));
+}
+}

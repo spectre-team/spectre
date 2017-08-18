@@ -34,6 +34,6 @@ namespace Spectre.Database.Utils
         /// <value>
         /// The datasets.
         /// </value>
-        public DbSet<Dataset> Datasets { get; set; }
+        public virtual DbSet<Dataset> Datasets { get; set; }
     }
 }

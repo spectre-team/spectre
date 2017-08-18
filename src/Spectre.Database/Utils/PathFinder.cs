@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,14 +33,33 @@ namespace Spectre.Database.Utils
     public class PathFinder
     {
         /// <summary>
-        /// The temporary...
+        /// Variable for returning location from hash
         /// </summary>
         private static string _locationfromhash;
 
         /// <summary>
-        /// The friendlyname...
+        /// Variable for returning location from friendly name
         /// </summary>
-        private static string __locationfromfriendlyname;
+        private static string _locationfromfriendlyname;
+
+        /// <summary>
+        /// The location
+        /// </summary>
+        private Dataset _path = new Dataset();
+
+        /// <summary>
+        /// The context description
+        /// </summary>
+        private Context _context;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PathFinder"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        public PathFinder(Context context)
+        {
+            _context = context;
+        }
 
         /// <summary>
         /// Returns for hash.
@@ -50,15 +70,13 @@ namespace Spectre.Database.Utils
         /// </returns>
         public string ReturnForHash(string hash)
         {
-            using (var context = new Context())
-            {
-                var location = context.Datasets
+            _path = _context.Datasets
                     .Where(b => b.Hash == hash)
                     .FirstOrDefault();
-                _locationfromhash = location.Location.ToString();
-            }
 
-            return _locationfromhash;
+            PathFinder._locationfromhash = _path.Location.ToString();
+
+            return PathFinder._locationfromhash;
         }
 
         /// <summary>
@@ -70,15 +88,13 @@ namespace Spectre.Database.Utils
         /// </returns>
         public string ReturnForFriendlyName(string friendlyname)
         {
-            using (var context = new Context())
-            {
-                var location = context.Datasets
-                    .Where(b => b.Hash == friendlyname)
+            _path = _context.Datasets
+                    .Where(b => b.FriendlyName == friendlyname)
                     .FirstOrDefault();
-                __locationfromfriendlyname = location.Location.ToString();
-            }
 
-            return __locationfromfriendlyname;
+            PathFinder._locationfromfriendlyname = _path.Location.ToString();
+
+            return PathFinder._locationfromfriendlyname;
         }
     }
 }
