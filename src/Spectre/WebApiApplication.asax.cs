@@ -21,7 +21,7 @@
         /// </summary>
         protected void Application_Start()
         {
-            ValidateConfig.Validate();
+            ConfigValidator.Validate();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
