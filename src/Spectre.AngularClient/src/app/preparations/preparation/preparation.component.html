@@ -8,9 +8,16 @@
 <md-slider class="slider" [(ngModel)]="currentChannelId" showTicks="true" min="0" max={{mzLenth}} step="1" (input)="onInputChannelId($event)"
            (change)="onChangedChannelId($event)" vertical="false" thumb-label="true" tick-interval="true"></md-slider>
 
-<app-heatmap
-  [heatmapData]=heatmapData>
-</app-heatmap>
+<div>
+  <div class="inlineItemsContainer">
+    <md-slider class="sliderY" showTicks="true" min="0" max=108 step="1" vertical="true" thumb-label="true" tick-interval="true"></md-slider>
+
+    <app-heatmap
+      [heatmapData]=heatmapData>
+    </app-heatmap>
+  </div>
+  <md-slider class="sliderX" showTicks="true" min="0" max=108 step="1" vertical="false" thumb-label="true" tick-interval="true"></md-slider>
+</div>
 
 <app-spectrum
   [spectrumData]=spectrumData>
