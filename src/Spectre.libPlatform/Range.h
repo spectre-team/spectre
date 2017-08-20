@@ -20,18 +20,27 @@ limitations under the License.
 #pragma once
 #include <vector>
 #include <span.h>
+#include "ZeroStepException.h"
 
 namespace Spectre::libPlatform::Functional
 {
 template <class NumericType>
 std::vector<NumericType> range(NumericType lowerBound, NumericType upperBound, NumericType step)
 {
-    std::vector<NumericType> result(upperBound);
-    for (NumericType i = lowerBound; i < upperBound; i += step)
+    if (step != 0)
     {
-        result[i] = i;
+        const auto size = static_cast<size_t>((upperBound - lowerBound) / step);
+        std::vector<NumericType> result(size);
+        for (size_t i = 0; i < size; ++i)
+        {
+            result[i] = lowerBound + static_cast<NumericType>(i) * step;
+        }
+        return result;
     }
-    return result;
+    else
+    {
+        throw ZeroStepException();
+    }
 }
 
 template <class NumericType>
