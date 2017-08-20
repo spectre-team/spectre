@@ -127,6 +127,7 @@
     <ClCompile Include="..\Common\Main.cpp" />
     <ClCompile Include="FilterTest.cpp" />
     <ClCompile Include="FindTest.cpp" />
+    <ClCompile Include="MethTest.cpp" />
     <ClCompile Include="RangeTest.cpp" />
     <ClCompile Include="TransformTest.cpp" />
   </ItemGroup>
