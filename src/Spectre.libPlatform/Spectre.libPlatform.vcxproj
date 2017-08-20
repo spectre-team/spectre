@@ -71,6 +71,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Filter.h" />
+    <ClInclude Include="Find.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="Statistics.h" />
