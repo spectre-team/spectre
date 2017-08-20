@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <span.h>
-#include "Functional.h"
+#include "Transform.h"
 
 namespace Spectre::libPlatform::Math
 {

@@ -71,9 +71,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Functional.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Range.h" />
     <ClInclude Include="Statistics.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
