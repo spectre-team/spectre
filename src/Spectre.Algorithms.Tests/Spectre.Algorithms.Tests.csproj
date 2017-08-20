@@ -68,6 +68,7 @@
     <Compile Include="Methods\GmmModellingTests.cs" />
     <Compile Include="Methods\PreprocessingTests.cs" />
     <Compile Include="Methods\Utils\PartitionTests.cs" />
+    <Compile Include="Parameterization\MetricTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\DivikResultTests.cs" />
   </ItemGroup>

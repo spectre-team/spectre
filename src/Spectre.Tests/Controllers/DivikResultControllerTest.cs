@@ -115,7 +115,7 @@ namespace Spectre.Tests.Controllers
             Assert.Multiple(testDelegate: () =>
             {
                 Assert.NotNull(config);
-                Assert.IsInstanceOf<DivikConfig>(config);
+                Assert.IsInstanceOf<DivikOptions>(config);
             });
         }
     }

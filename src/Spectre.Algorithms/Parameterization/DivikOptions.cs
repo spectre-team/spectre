@@ -19,6 +19,8 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Spectre.Algorithms.Parameterization
 {
@@ -67,6 +69,7 @@ namespace Spectre.Algorithms.Parameterization
         /// <summary>
         /// The metric used during clustering.
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public Metric Metric;
 
         /// <summary>

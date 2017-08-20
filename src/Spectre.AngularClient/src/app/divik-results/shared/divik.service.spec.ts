@@ -10,16 +10,16 @@ function divikConfig(): string {
     MaxK: 10,
     Level: 3,
     UsingLevels: false,
-    Amplitude: true,
-    Variance: true,
+    UsingAmplitudeFiltration: true,
+    UsingVarianceFiltration: true,
     PercentSizeLimit: .01,
     FeaturePreservationLimit: .05,
     Metric: 'euclidean',
     PlottingPartitions: false,
-    PlottingPartitionsRecursively: false,
+    PlottingRecursively: false,
     PlottingDecomposition: false,
     PlottingDecompositionRecursively: false,
-    MaxDecompositionComponents: 7
+    MaxComponentsForDecomposition: 7
   });
 }
 
@@ -91,7 +91,7 @@ describe('DivikService', () => {
     {name: 'parses feature preservation limit from DiviK config', value: 'Feature preservation limit', expectedValue: .05},
     {name: 'parses metric from DiviK config', value: 'Metric', expectedValue: 'euclidean'},
     {name: 'parses whether partition was plotted from DiviK config', value: 'Plotting partitions', expectedValue: false},
-    {name: 'parses whether partitions were plotted recursively from DiviK config', value: 'Plotting partitions recursively', expectedValue: false},
+    {name: 'parses whether partitions were plotted recursively from DiviK config', value: 'Plotting recursively', expectedValue: false},
     {name: 'parses whether decomposition was plotted from DiviK config', value: 'Plotting decomposition', expectedValue: false},
     {name: 'parses whether decompositions were plotted recursively from DiviK config', value: 'Plotting decomposition recursively', expectedValue: false},
     {name: 'parses maximal number of decomposition components from DiviK config', value: 'Max decomposition components', expectedValue: 7}

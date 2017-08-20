@@ -59,16 +59,16 @@ function toDivikConfig(response: Response): DivikConfig {
   properties['Max K'] = json.MaxK;
   properties['Level'] = json.Level;
   properties['Using levels'] = json.UsingLevels;
-  properties['Amplitude'] = json.Amplitude;
-  properties['Variance'] = json.Variance;
+  properties['Amplitude'] = json.UsingAmplitudeFiltration;
+  properties['Variance'] = json.UsingVarianceFiltration;
   properties['Percent size limit'] = json.PercentSizeLimit;
   properties['Feature preservation limit'] = json.FeaturePreservationLimit;
   properties['Metric'] = json.Metric;
   properties['Plotting partitions'] = json.PlottingPartitions;
-  properties['Plotting partitions recursively'] = json.PlottingPartitionsRecursively;
+  properties['Plotting recursively'] = json.PlottingRecursively;
   properties['Plotting decomposition'] = json.PlottingDecomposition;
   properties['Plotting decomposition recursively'] = json.PlottingDecompositionRecursively;
-  properties['Max decomposition components'] = json.MaxDecompositionComponents;
+  properties['Max decomposition components'] = json.MaxComponentsForDecomposition;
   return <DivikConfig>({
     properties: properties
   });

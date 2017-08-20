@@ -85,7 +85,7 @@ namespace Spectre.Controllers
         /// <param name="id">Preparation identifier.</param>
         /// <param name="divikId">Identifier of divik.</param>
         /// <returns>DivikConfig</returns>
-        public DivikConfig GetConfig(int id, int divikId)
+        public DivikOptions GetConfig(int id, int divikId)
         {
             if (divikId < 0)
             {
@@ -94,10 +94,10 @@ namespace Spectre.Controllers
 
             if (id != 1)
             {
-                return null;
+                return DivikOptions.Default();
             }
             var jsonText = File.ReadAllText("C:\\spectre_data\\expected_divik_results\\hnc1_tumor\\euclidean\\config.json");
-            return JsonConvert.DeserializeObject<DivikConfig>(jsonText);
+            return JsonConvert.DeserializeObject<DivikOptions>(jsonText);
         }
     }
 }
