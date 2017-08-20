@@ -34,7 +34,7 @@ std::vector<DataType> filter(gsl::span<const DataType> collection, gsl::span<con
         indexes,
         [&collection](size_t index)
         {
-            if (index < collection.size())
+            if (index < static_cast<size_t>(collection.size()))
             {
                 return collection[index];
             }
@@ -49,7 +49,7 @@ std::vector<DataType> filter(gsl::span<const DataType> collection, gsl::span<con
 template <typename DataType>
 std::vector<DataType> filter(gsl::span<const DataType> collection, std::vector<bool> isIncluded)
 {
-    if(collection.size() == isIncluded.size())
+    if(static_cast<size_t>(collection.size()) == isIncluded.size())
     {
         const auto preservedIndexes = find(isIncluded);
         return filter(collection, preservedIndexes);
@@ -58,7 +58,7 @@ std::vector<DataType> filter(gsl::span<const DataType> collection, std::vector<b
     {
         throw libException::InconsistentArgumentSizesException(
             "collection",
-            collection.size(),
+            static_cast<size_t>(collection.size()),
             "isIncluded",
             isIncluded.size());
     }

@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
+    <ClCompile Include="FilterTest.cpp" />
     <ClCompile Include="FindTest.cpp" />
     <ClCompile Include="RangeTest.cpp" />
   </ItemGroup>
