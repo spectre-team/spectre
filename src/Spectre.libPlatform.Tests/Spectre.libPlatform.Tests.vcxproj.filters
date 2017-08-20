@@ -36,7 +36,10 @@
     <ClCompile Include="TransformTest.cpp">
       <Filter>Source Files\Functional</Filter>
     </ClCompile>
-    <ClCompile Include="MethTest.cpp">
+    <ClCompile Include="MathTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatisticsTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

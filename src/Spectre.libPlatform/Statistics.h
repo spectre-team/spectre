@@ -33,7 +33,7 @@ constexpr DataType Sum(gsl::span<const DataType> data)
 template <class DataType>
 constexpr DataType Mean(gsl::span<const DataType> data)
 {
-    return Sum(data) / data.size();
+    return Sum(data) / (data.size() != 0 ? data.size() : 1);
 }
 
 template <class DataType>
