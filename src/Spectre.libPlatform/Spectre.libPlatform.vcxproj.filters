@@ -50,5 +50,8 @@
     <ClCompile Include="ZeroStepException.cpp">
       <Filter>Source Files\Functional</Filter>
     </ClCompile>
+    <ClCompile Include="Find.cpp">
+      <Filter>Source Files\Functional</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

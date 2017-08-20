@@ -47,7 +47,7 @@ std::vector<DataType> filter(gsl::span<const DataType> collection, gsl::span<con
 }
 
 template <typename DataType>
-std::vector<DataType> filter(gsl::span<const DataType> collection, gsl::span<const bool> isIncluded)
+std::vector<DataType> filter(gsl::span<const DataType> collection, std::vector<bool> isIncluded)
 {
     if(collection.size() == isIncluded.size())
     {

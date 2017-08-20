@@ -1,5 +1,5 @@
 /*
-* Find.h
+* Find.cpp
 * Finds nonzero elements.
 *
 Copyright 2017 Grzegorz Mrukwa
@@ -17,17 +17,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-#include <algorithm>
-#include <iterator>
-#include <vector>
-#include <span.h>
-#include "Range.h"
+#include "Find.h"
 
 namespace Spectre::libPlatform::Functional
 {
-template <typename DataType>
-std::vector<size_t> find(gsl::span<const DataType> collection)
+std::vector<size_t> find(std::vector<bool> collection)
 {
     const auto indexRange = range(collection.size());
     std::vector<std::size_t> preservedIndexes;
@@ -35,9 +29,7 @@ std::vector<size_t> find(gsl::span<const DataType> collection)
         indexRange.begin(),
         indexRange.end(),
         std::back_inserter(preservedIndexes),
-        [&collection](size_t index) { return collection[index] != static_cast<DataType>(0); });
+        [&collection](size_t index) { return collection[index]; });
     return preservedIndexes;
 }
-
-std::vector<size_t> find(std::vector<bool> collection);
 }

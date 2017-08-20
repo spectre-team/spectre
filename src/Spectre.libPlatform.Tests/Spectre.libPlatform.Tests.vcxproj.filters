@@ -27,5 +27,8 @@
     <ClCompile Include="RangeTest.cpp">
       <Filter>Source Files\Functional</Filter>
     </ClCompile>
+    <ClCompile Include="FindTest.cpp">
+      <Filter>Source Files\Functional</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
