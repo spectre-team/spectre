@@ -38,25 +38,25 @@ constexpr std::vector<DataType> modulo(gsl::span<const DataType> first, gsl::spa
 }
 
 template< class DataType >
-constexpr std::vector<DataType> bitwise_and(gsl::span<const DataType> first, gsl::span<const DataType> second)
+constexpr std::vector<DataType> bitwiseAnd(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     return Functional::transform(first, second, [](DataType left, DataType right) { return left & right; });
 }
 
 template< class DataType >
-constexpr std::vector<DataType> logical_and(gsl::span<const DataType> first, gsl::span<const DataType> second)
+constexpr std::vector<DataType> logicalAnd(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     return Functional::transform(first, second, [](DataType left, DataType right) { return left && right; });
 }
 
 template< class DataType >
-constexpr std::vector<DataType> bitwise_or(gsl::span<const DataType> first, gsl::span<const DataType> second)
+constexpr std::vector<DataType> bitwiseOr(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     return Functional::transform(first, second, [](DataType left, DataType right) { return left | right; });
 }
 
 template< class DataType >
-constexpr std::vector<DataType> logical_or(gsl::span<const DataType> first, gsl::span<const DataType> second)
+constexpr std::vector<DataType> logicalOr(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     return Functional::transform(first, second, [](DataType left, DataType right) { return left || right; });
 }
@@ -106,25 +106,25 @@ constexpr std::vector<DataType> modulo(gsl::span<const DataType> first, DataType
 }
 
 template< class DataType >
-constexpr std::vector<DataType> bitwise_and(gsl::span<const DataType> first, DataType second)
+constexpr std::vector<DataType> bitwiseAnd(gsl::span<const DataType> first, DataType second)
 {
     return Functional::transform(first, [second](DataType left) { return left & second; });
 }
 
 template< class DataType >
-constexpr std::vector<DataType> logical_and(gsl::span<const DataType> first, DataType second)
+constexpr std::vector<DataType> logicalAnd(gsl::span<const DataType> first, DataType second)
 {
     return Functional::transform(first, [second](DataType left) { return left && second; });
 }
 
 template< class DataType >
-constexpr std::vector<DataType> bitwise_or(gsl::span<const DataType> first, DataType second)
+constexpr std::vector<DataType> bitwiseOr(gsl::span<const DataType> first, DataType second)
 {
     return Functional::transform(first, [second](DataType left) { return left | second; });
 }
 
 template< class DataType >
-constexpr std::vector<DataType> logical_or(gsl::span<const DataType> first, DataType second)
+constexpr std::vector<DataType> logicalOr(gsl::span<const DataType> first, DataType second)
 {
     return Functional::transform(first, [second](DataType left) { return left || second; });
 }
