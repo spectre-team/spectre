@@ -1,7 +1,7 @@
 ﻿/*
  * DataRootConfig.cs
  * Data directory configuration & validation class.
- * 
+ *
    Copyright 2017 Maciej Gamrat
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,17 +26,8 @@ namespace Spectre.Service.Configuration
     public class DataRootConfig
     {
         /// <summary>
-        /// Local data directory root.
-        /// </summary>
-        public string LocalPath { get; private set; }
-
-        /// <summary>
-        /// Remote data directory root.
-        /// </summary>
-        public string RemotePath { get; private set; }
-
-        /// <summary>
-        /// Constructor accepting local and remote directory paths.
+        /// Initializes a new instance of the <see cref="DataRootConfig"/> class,
+        /// accepting local and remote directory paths.
         /// </summary>
         /// <param name="localPath">Local data directory path.</param>
         /// <param name="remotePath">Remote data directory path.</param>
@@ -45,8 +36,20 @@ namespace Spectre.Service.Configuration
             ValidatePath(localPath);
 
             if (remotePath != null)
+            {
                 ValidatePath(remotePath);
+            }
         }
+
+        /// <summary>
+        /// Local data directory root.
+        /// </summary>
+        public string LocalPath { get; private set; }
+
+        /// <summary>
+        /// Remote data directory root.
+        /// </summary>
+        public string RemotePath { get; private set; }
 
         /// <summary>
         /// Validates if argument is a valid path.
