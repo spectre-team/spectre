@@ -128,6 +128,7 @@
     <ClCompile Include="FilterTest.cpp" />
     <ClCompile Include="FindTest.cpp" />
     <ClCompile Include="RangeTest.cpp" />
+    <ClCompile Include="TransformTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

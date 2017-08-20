@@ -16,7 +16,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
 #pragma once
 #include <algorithm>
 #include <vector>
@@ -25,12 +24,12 @@ limitations under the License.
 
 namespace Spectre::libPlatform::Functional
 {
-
 template< class InputType, class OutputType, class UnaryOperation >
 std::vector<OutputType> transform(gsl::span<const InputType> first, UnaryOperation unaryOperation, OutputType* = nullptr)
 {
-    std::vector<OutputType> result(first.size());
-    std::transform(first.begin(), first.end(), result.begin(), unaryOperation);
+    std::vector<OutputType> result;
+    result.reserve(first.size());
+    std::transform(first.begin(), first.end(), std::back_inserter(result), unaryOperation);
     return result;
 }
 
@@ -45,8 +44,16 @@ std::vector<OutputType> transform(gsl::span<const InputType1> first, gsl::span<c
 {
     if (first.size() == second.size())
     {
-        std::vector<OutputType> result(first.size());
-        std::transform(first.begin(), first.end(), second.begin(), result.begin(), binaryOperation);
+        std::vector<OutputType> result;
+        result.reserve(first.size());
+        // @gmrukwa: code below is equialent to the following line but causes no warning
+        // std::transform(first.begin(), first.end(), second.begin(), std::back_inserter(result), binaryOperation);
+        auto iterator1 = first.begin();
+        auto iterator2 = second.begin();
+        while (iterator1 != first.end())
+        {
+            result.push_back(binaryOperation(*iterator1++, *iterator2++));
+        }
         return result;
     }
     else
