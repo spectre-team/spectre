@@ -57,7 +57,6 @@ export class DivikComponent implements OnInit {
     Object.keys(config.properties).forEach((key) => {
       description += key + ': ' +  config.properties[key] + '\n';
     });
-    console.log('ejjjjjjjjj' + description);
     return description;
 
   }
