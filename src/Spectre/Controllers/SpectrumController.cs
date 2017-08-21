@@ -16,6 +16,8 @@
 
 namespace Spectre.Controllers
 {
+    using System.Configuration;
+    using System.IO;
     using System.Web.Http;
     using System.Web.Http.Cors;
     using Spectre.Data.Datasets;
@@ -40,7 +42,7 @@ namespace Spectre.Controllers
                 return null;
             }
 
-            var dataset = new BasicTextDataset(textFilePath: "C:\\spectre_data\\hnc1_tumor.txt");
+            var dataset = new BasicTextDataset(textFilePath: ConfigurationManager.AppSettings["LocalDataDirectory"] + Path.DirectorySeparatorChar + "hnc1_tumor.txt");
 
             var mz = dataset.GetRawMzArray();
 
