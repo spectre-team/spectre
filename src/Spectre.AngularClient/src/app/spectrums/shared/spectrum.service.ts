@@ -28,7 +28,9 @@ import {Service} from '../../app.service';
 @Injectable()
 export class SpectrumService extends Service {
 
-  constructor(private http: Http) { super(); }
+  constructor(private http: Http) {
+    super();
+  }
 
   get(preparationId: number, spectrumId: number): Observable<Spectrum> {
     const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?spectrumId=${spectrumId}`;
@@ -37,6 +39,12 @@ export class SpectrumService extends Service {
     return spectrum;
   }
 
+  getAll(preparationId: number): Observable<Array<Spectrum>> {
+    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    const spectra = response.map(toSpectra);
+    return spectra;
+  }
 
   private getHeaders() {
     const headers = new Headers();
@@ -54,4 +62,19 @@ function toSpectrum(response: Response): Spectrum {
     x: json.X,
     y: json.Y
   });
+}
+//TODO: refactorization
+function toSpectra(response: Response): Array<Spectrum> {
+  const json = response.json();
+  var spectra = [];
+  for (let spectrum of json) {
+    spectra.push(<Spectrum>({
+      id: spectrum.Id,
+      mz: spectrum.Mz,
+      intensities: spectrum.Intensities,
+      x: spectrum.X,
+      y: spectrum.Y
+    }));
+  };
+  return spectra;
 }

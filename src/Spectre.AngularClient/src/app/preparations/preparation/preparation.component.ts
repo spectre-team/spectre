@@ -42,6 +42,7 @@ export class PreparationComponent implements OnInit {
   public currentChannelId = 0;
   public mz = [];
   public preparation: Preparation;
+  public spectra: Array<Spectrum>;
 
   constructor(
       private route: ActivatedRoute,
@@ -64,6 +65,7 @@ export class PreparationComponent implements OnInit {
           .get(this.id, 100)
           .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
         this.getSpectrum(1);
+        this.getAllSpectra();
         console.log('[SpectrumComponent] layout setup');
       });
   }
@@ -77,10 +79,29 @@ export class PreparationComponent implements OnInit {
       .get(this.id, this.currentChannelId)
       .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
   }
+
+  onChangedXCoordinate(event: any) {
+    this.spectrumData = this.selectSpectrumByCoordinates();
+  }
+
+  onChangedYCoordinate(event: any) {
+    this.spectrumData = this.selectSpectrumByCoordinates();
+  }
+
+  selectSpectrumByCoordinates(){
+    alert(this.spectra.length);
+  }
+
   getSpectrum(selectNumber: number) {
     this.spectrumService
       .get(this.id, selectNumber)
       .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+  }
+
+  getAllSpectra() {
+    this.spectrumService
+      .getAll(this.id)
+      .subscribe(spectra => this.spectra = spectra);
   }
 
   showError(msg: string) {
