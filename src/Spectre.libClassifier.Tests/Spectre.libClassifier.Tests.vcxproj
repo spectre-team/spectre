@@ -87,6 +87,7 @@
     <ClCompile Include="..\Common\Main.cpp" />
     <ClCompile Include="ObservationExtractorTest.cpp" />
     <ClCompile Include="OpenCvDatasetTest.cpp" />
+    <ClCompile Include="RandomSplitterTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

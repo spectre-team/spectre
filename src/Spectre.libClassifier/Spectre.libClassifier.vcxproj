@@ -81,11 +81,13 @@
     <ClCompile Include="ObservationExtractor.cpp" />
     <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
+    <ClCompile Include="RandomSplitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />
+    <ClInclude Include="RandomSplitter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
