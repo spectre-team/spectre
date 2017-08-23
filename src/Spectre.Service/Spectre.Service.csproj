@@ -52,6 +52,7 @@
     <Compile Include="Configuration\DataRootConfig.cs" />
     <Compile Include="ConsoleCaptureService.cs" />
     <Compile Include="DivikService.cs" />
+    <Compile Include="Loaders\DatasetLoader.cs" />
     <Compile Include="ServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TooSmallUpdateIntervalException.cs" />
