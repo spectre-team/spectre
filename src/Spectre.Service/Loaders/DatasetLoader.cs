@@ -20,9 +20,13 @@ limitations under the License.
 using System;
 using System.IO;
 using Spectre.Data.Datasets;
+using Spectre.Service.Configuration;
 
 namespace Spectre.Data.Loaders
 {
+    /// <summary>
+    /// Class for loading datasets from specified directories.
+    /// </summary>
     public class DatasetLoader
     {
         #region Fields
@@ -38,19 +42,25 @@ namespace Spectre.Data.Loaders
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Constructor specifying roots for local and remote directories.
         /// </summary>
-        /// <param name="localRoot">Root for local directory.</param>
-        /// <param name="remoteRoot">Root for remote directory.</param>
-        public DatasetLoader(string localRoot, string remoteRoot)
+        /// <param name="dataRootConfig">Validated configuration of needed directories.</param>
+        public DatasetLoader(DataRootConfig dataRootConfig)
         {
-            _localRoot = localRoot;
-            _remoteRoot = remoteRoot;
+            _localRoot = dataRootConfig.LocalPath;
+            _remoteRoot = dataRootConfig.RemotePath;
         }
         #endregion
 
         #region Loaders
+        /// <summary>
+        /// Returns dataset basing directly on the name of the file.
+        /// </summary>
+        /// <param name="name">File name.</param>
+        /// <returns>Found dataset.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public IDataset GetFromName(string name)
         {
             string fullPathLocal = _localRoot + "\\" + name;
@@ -66,6 +76,11 @@ namespace Spectre.Data.Loaders
             return new BasicTextDataset(fullPathLocal);
         }
 
+        /// <summary>
+        /// Returns dataset from database, translating hash of the file into file directory.
+        /// </summary>
+        /// <param name="hash">Hash as a key to database.</param>
+        /// <returns>Found dataset.</returns>
         public IDataset GetFromHash(string hash)
         {
             string name = "";
@@ -73,6 +88,11 @@ namespace Spectre.Data.Loaders
             return GetFromName(name);
         }
 
+        /// <summary>
+        /// Returns dataset from database, translating ID of the file into file directory.
+        /// </summary>
+        /// <param name="userId">ID as a key to database.</param>
+        /// <returns>Found dataset.</returns>
         public IDataset GetFromUserId(string userId)
         {
             string name = "";
