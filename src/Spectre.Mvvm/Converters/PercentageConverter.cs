@@ -1,7 +1,7 @@
 ﻿/*
  * PercentageConverter.cs
  * Converter which allows to convert percentages to double values.
- * 
+ *
    Copyright 2017 Michał Wolny
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,18 +16,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace Spectre.Mvvm.Converters
 {
     /// <summary>
-	/// This allows to convert percentage <see cref="string"/> to <see cref="double"/> and back.
-	/// </summary>
-	/// <seealso cref="System.Windows.Data.IValueConverter" />
-	public class PercentageConverter : IValueConverter
+    /// This allows to convert percentage <see cref="string"/> to <see cref="double"/> and back.
+    /// </summary>
+    /// <seealso cref="System.Windows.Data.IValueConverter" />
+    public class PercentageConverter : IValueConverter
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -59,8 +59,10 @@ namespace Spectre.Mvvm.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is double)
+            {
                 return (double)value / 100;
-            return double.Parse(((string)value).Replace('%',' ').Trim(), culture)/100;
+            }
+            return double.Parse(s: ((string)value).Replace(oldChar: '%', newChar: ' ').Trim(), provider: culture) / 100;
         }
     }
 }

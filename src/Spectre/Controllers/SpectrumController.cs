@@ -1,8 +1,8 @@
-/*
+﻿/*
  * SpectrumController.cs
  * Class serving GET requests for spectrum.
- * 
-   Copyright 2017 Grzegorz Mrukwa, Micha� Gallus, Daniel Babiak
+ *
+   Copyright 2017 Grzegorz Mrukwa, Michał Gallus, Daniel Babiak
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
@@ -14,18 +14,18 @@
    limitations under the License.
 */
 
-using Spectre.Data.Datasets;
-using Spectre.Models.Msi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Cors;
-
 namespace Spectre.Controllers
 {
+    using System.Configuration;
+    using System.IO;
+    using System.Web.Http;
+    using System.Web.Http.Cors;
+    using Spectre.Data.Datasets;
+    using Spectre.Models.Msi;
+
+    /// <summary>
+    /// Exhibits spectrum
+    /// </summary>
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SpectrumController : ApiController
     {
@@ -38,16 +38,25 @@ namespace Spectre.Controllers
         public Spectrum Get(int id, int spectrumId)
         {
             if (id != 1)
+            {
                 return null;
+            }
 
-            var dataset = new BasicTextDataset("C:\\spectre_data\\hnc1_tumor.txt");
+            var dataset = new BasicTextDataset(textFilePath: ConfigurationManager.AppSettings["LocalDataDirectory"] + Path.DirectorySeparatorChar + "hnc1_tumor.txt");
 
             var mz = dataset.GetRawMzArray();
 
             var intensities = dataset.GetRawIntensityArray(spectrumId);
             var coordinates = dataset.GetSpatialCoordinates(spectrumId);
 
-            return new Spectrum() { Id = spectrumId, Intensities = intensities, Mz = mz, X = coordinates.X, Y = coordinates.Y };
+            return new Spectrum()
+            {
+                Id = spectrumId,
+                Intensities = intensities,
+                Mz = mz,
+                X = coordinates.X,
+                Y = coordinates.Y
+            };
         }
     }
 }

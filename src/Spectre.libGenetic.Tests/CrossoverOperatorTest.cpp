@@ -34,7 +34,7 @@ TEST(CrossoverOperatorInitialization, initializes)
 class CrossoverOperatorTest: public ::testing::Test
 {
 public:
-    CrossoverOperatorTest(){}
+    CrossoverOperatorTest() {}
 protected:
     const unsigned NUMBER_OF_TRIALS = 1000;
     const double ALLOWED_MISS_RATE = 0.05;
@@ -66,7 +66,7 @@ TEST_F(CrossoverOperatorTest, child_has_the_same_size)
 TEST_F(CrossoverOperatorTest, crossover_of_same_parents_result_in_copy)
 {
     const auto singleParent = true_individual;
-    for(unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
+    for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
         const auto child = crossover(singleParent, singleParent);
         for (size_t j = 0; j < child.size(); ++j)

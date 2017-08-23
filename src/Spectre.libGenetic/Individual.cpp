@@ -26,11 +26,8 @@ using namespace std;
 
 namespace Spectre::libGenetic
 {
-Individual::Individual(std::vector<bool>&& binaryData):
-    m_BinaryData(binaryData)
-{
-	
-}
+Individual::Individual(std::vector<bool> &&binaryData):
+    m_BinaryData(binaryData) { }
 
 std::vector<bool>::reference Individual::operator[](size_t index)
 {
@@ -81,19 +78,19 @@ size_t Individual::size() const
     return m_BinaryData.size();
 }
 
-bool Individual::operator==(const Individual& other) const
+bool Individual::operator==(const Individual &other) const
 {
     return m_BinaryData == other.m_BinaryData;
 }
 
-bool Individual::operator!=(const Individual& other) const
+bool Individual::operator!=(const Individual &other) const
 {
     return !(this->operator==(other));
 }
 
-Individual& Individual::operator=(const Individual& other)
+Individual& Individual::operator=(const Individual &other)
 {
-    if(size() == other.size())
+    if (size() == other.size())
     {
         m_BinaryData.assign(other.m_BinaryData.begin(), other.m_BinaryData.end());
         return *this;

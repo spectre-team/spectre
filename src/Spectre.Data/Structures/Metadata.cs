@@ -1,7 +1,7 @@
 ﻿/*
  * Metadata.cs
  * Contains struct for storing metadata of associated dataset.
- * 
+ *
    Copyright 2017 Dariusz Kuchta
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 namespace Spectre.Data.Structures
 {
     /// <summary>
@@ -23,7 +24,11 @@ namespace Spectre.Data.Structures
     /// </summary>
     public struct Metadata
     {
-        public string Description;  // dummy
+        /// <summary>
+        /// The description of the dataset.
+        /// Dummy property right now.
+        /// </summary>
+        public string Description;
 
         /// <summary>
         /// Default template instance for <see cref="Metadata"/> class.

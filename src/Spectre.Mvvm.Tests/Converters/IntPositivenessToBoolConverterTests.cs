@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using NUnit.Framework;
@@ -23,29 +24,31 @@ using Spectre.Mvvm.Converters;
 
 namespace Spectre.Mvvm.Tests.Converters
 {
-    [TestFixture, Category("MvvmFramework")]
-    public class IntPositivenessToBoolSimpleConverterTests : SimpleConverterTestBase<IntPositivenessToBoolConverter, bool, int>
+    [TestFixture]
+    [Category(name: "MvvmFramework")]
+    public class
+        IntPositivenessToBoolSimpleConverterTests : SimpleConverterTestBase<IntPositivenessToBoolConverter, bool, int>
     {
         [Test]
         public void ConvertTest()
         {
             // 0 case
-            ToGuiType(0, false, "Returned non-boolean for 0.", "0 is converted to true.");
+            ToGuiType(argument: 0, expectedResult: false, onTypeFailure: "Returned non-boolean for 0.", onValueFailure: "0 is converted to true.");
 
             // positive case
-            ToGuiType(1, true, "Returned non-boolean for 1.", "1 is converted to false.");
+            ToGuiType(argument: 1, expectedResult: true, onTypeFailure: "Returned non-boolean for 1.", onValueFailure: "1 is converted to false.");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.Convert("blah", typeof(bool), null, CultureInfo.CurrentCulture),
-                "Converted string.");
+                code: () => Converter.Convert(value: "blah", targetType: typeof(bool), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted string.");
         }
 
         [Test]
         public void ConvertBackTest()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Converter.ConvertBack(false, typeof(int), null, CultureInfo.CurrentCulture),
-                "Converted bool back.");
+                code: () => Converter.ConvertBack(value: false, targetType: typeof(int), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted bool back.");
         }
     }
 }

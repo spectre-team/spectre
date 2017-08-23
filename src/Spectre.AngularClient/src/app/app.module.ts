@@ -34,12 +34,14 @@ import { SpectrumService } from './spectrums/shared/spectrum.service';
 import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { MessagesService } from 'ng2-messages/ng2-messages.service';
+import { DivikService } from './divik-results/shared/divik.service';
 
 @NgModule({
   providers: [
       HeatmapService,
       SpectrumService,
-      MessagesService
+      MessagesService,
+      DivikService
   ],
   declarations: [
     AppComponent,

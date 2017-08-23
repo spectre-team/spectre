@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -33,9 +34,15 @@ namespace Spectre.Mvvm.Tests.Converters
         {
             get
             {
-                yield return new ConverterTestCase(new BoolToVisibilityConverter(), typeof(Visibility), typeof(bool));
-                yield return new ConverterTestCase(new CombinedConverter(), typeof(int), typeof(bool));
-                yield return new ConverterTestCase(new InverseBoolConverter(), typeof(bool), typeof(bool));
+                yield return new ConverterTestCase(converter: new BoolToVisibilityConverter(),
+                    gui: typeof(Visibility),
+                    backend: typeof(bool));
+                yield return new ConverterTestCase(converter: new CombinedConverter(),
+                    gui: typeof(int),
+                    backend: typeof(bool));
+                yield return new ConverterTestCase(converter: new InverseBoolConverter(),
+                    gui: typeof(bool),
+                    backend: typeof(bool));
             }
         }
 
@@ -43,7 +50,9 @@ namespace Spectre.Mvvm.Tests.Converters
         {
             get
             {
-                yield return new ConverterTestCase(new IntPositivenessToBoolConverter(), typeof(int), typeof(bool));
+                yield return new ConverterTestCase(converter: new IntPositivenessToBoolConverter(),
+                    gui: typeof(int),
+                    backend: typeof(bool));
             }
         }
 
@@ -51,27 +60,39 @@ namespace Spectre.Mvvm.Tests.Converters
         {
             get
             {
-                foreach (var tc in TwoWayConverters)
+                foreach (var tc in AnyConverterThrowTests.TwoWayConverters)
+                {
                     yield return tc;
-                foreach (var tc in ForwardOnlyConverters)
+                }
+                foreach (var tc in AnyConverterThrowTests.ForwardOnlyConverters)
+                {
                     yield return tc;
+                }
             }
         }
 
-        [Test, TestCaseSource("AllConverters")]
+        [Test]
+        [TestCaseSource(sourceName: "AllConverters")]
         public virtual void ThrowsOnNullArgumentTest(ConverterTestCase convCase)
         {
             Assert.Throws<NullReferenceException>(
-                () => convCase.Converter.Convert(null, convCase.GuiType, null, CultureInfo.CurrentCulture),
-                "Converted null without an exception.");
+                code: () => convCase.Converter.Convert(value: null,
+                    targetType: convCase.GuiType,
+                    parameter: null,
+                    culture: CultureInfo.CurrentCulture),
+                message: "Converted null without an exception.");
         }
 
-        [Test, TestCaseSource("TwoWayConverters")]
+        [Test]
+        [TestCaseSource(sourceName: "TwoWayConverters")]
         public virtual void ThrowsOnNullArgumentBackTest(ConverterTestCase convCase)
         {
             Assert.Throws<NullReferenceException>(
-                () => convCase.Converter.ConvertBack(null, convCase.BackendType, null, CultureInfo.CurrentCulture),
-                "Converted back null without an exception.");
+                code: () => convCase.Converter.ConvertBack(value: null,
+                    targetType: convCase.BackendType,
+                    parameter: null,
+                    culture: CultureInfo.CurrentCulture),
+                message: "Converted back null without an exception.");
         }
 
         public class ConverterTestCase

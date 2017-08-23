@@ -21,9 +21,6 @@ limitations under the License.
 
 namespace Spectre::libException
 {
-NullPointerException::NullPointerException(const std::string& variableName):
-    ExceptionBase(variableName)
-{
-    
-}
+NullPointerException::NullPointerException(const std::string &variableName):
+    ExceptionBase(variableName) { }
 }

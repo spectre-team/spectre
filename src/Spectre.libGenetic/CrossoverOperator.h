@@ -40,9 +40,9 @@ public:
     /// <param name="first">The first parent.</param>
     /// <param name="second">The second parent.</param>
     /// <returns>A child.</returns>
-    virtual Individual operator()(const Individual& first, const Individual& second);
-	
+    virtual Individual operator()(const Individual &first, const Individual &second);
+
 private:
-	RandomNumberGenerator m_RandomNumberGenerator;
+    RandomNumberGenerator m_RandomNumberGenerator;
 };
 }

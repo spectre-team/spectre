@@ -1,7 +1,7 @@
 ﻿/*
  * PreparationsController.cs
  * Class serving GET requests for preparations.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa, Michał Gallus
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,20 +14,16 @@
    limitations under the License.
 */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Spectre.Data.Datasets;
-using Spectre.Data.Structures;
 using Spectre.Models.Msi;
 
 namespace Spectre.Controllers
 {
-    //[Authorize] // should be enabled when authorization is ready
     /// <summary>
     /// Allows to read preparation data.
+    /// [Authorize] // should be enabled when authorization is ready
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -39,9 +35,11 @@ namespace Spectre.Controllers
         /// <returns>List of preparations.</returns>
         public IEnumerable<Preparation> Get()
         {
-            return new[] { new Preparation("Head & neck cancer, patient 1, tumor region only", 1, 997) };
+            return new[]
+            {
+                new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
+            };
         }
-
 
         /// <summary>
         /// GET for single preparation data.
@@ -50,7 +48,9 @@ namespace Spectre.Controllers
         /// <returns>Data of preparation.</returns>
         public Preparation Get(int id)
         {
-            return id == 1 ? new Preparation("Head & neck cancer, patient 1, tumor region only", 1, 997) : null;
+            return id == 1
+                ? new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
+                : null;
         }
     }
 }

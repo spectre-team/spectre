@@ -1,7 +1,7 @@
 ﻿/*
  * GmmFiltering.cs
  * Performs filtering using Gaussian Mixture Models.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,14 @@ using MathWorks.MATLAB.NET.Arrays.native;
 
 namespace Spectre.Algorithms.Methods
 {
-    public class GmmFiltering: IDisposable
+    /// <summary>
+    /// Wrapper for MATLAB GMM filtering.
+    /// </summary>
+    /// <seealso cref="System.IDisposable" />
+    public class GmmFiltering : IDisposable
     {
         #region Fields
+
         /// <summary>
         /// MATLAB GMM filtering engine.
         /// </summary>
@@ -36,9 +41,11 @@ namespace Spectre.Algorithms.Methods
         /// Indicates whether this instance has been disposed.
         /// </summary>
         private bool _disposed;
+
         #endregion
 
-        #region Constructor
+        #region Constructor & destructor
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GmmFiltering"/> class.
         /// </summary>
@@ -46,9 +53,19 @@ namespace Spectre.Algorithms.Methods
         {
             _gmm = new MatlabAlgorithmsNative.GmmFiltering();
         }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="GmmFiltering"/> class.
+        /// </summary>
+        ~GmmFiltering()
+        {
+            Dispose(disposing: false);
+        }
+
         #endregion
 
         #region MATLAB calls
+
         /// <summary>
         /// Estimates the thresholds from the decomposition of values.
         /// </summary>
@@ -60,33 +77,26 @@ namespace Spectre.Algorithms.Methods
             var values2D = new double[valuesArray.Count(), 1];
             var i = 0;
             foreach (var value in valuesArray)
+            {
                 values2D[i++, 0] = value;
-            var estimatedThresholdsCell = ((MWCellArray)_gmm.fetch_thresholds(values2D));
+            }
+            var estimatedThresholdsCell = (MWCellArray)_gmm.fetch_thresholds(values2D);
             var thresholds = (double[,])estimatedThresholdsCell[1];
-            return thresholds.Cast<double>().ToArray();
+            return thresholds.Cast<double>()
+                .ToArray();
         }
+
         #endregion
 
         #region IDisposable
-        /// <summary>
-        /// Validates the dispose state. If this instance has been disposed, throws an exception.
-        /// </summary>
-        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
-        private void ValidateDispose()
-        {
-            if (_disposed)
-            {
-                throw new ObjectDisposedException(nameof(GmmFiltering));
-            }
-        }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            Dispose(disposing: true);
+            GC.SuppressFinalize(obj: this);
         }
 
         /// <summary>
@@ -106,12 +116,17 @@ namespace Spectre.Algorithms.Methods
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="Algorithms"/> class.
+        /// Validates the dispose state. If this instance has been disposed, throws an exception.
         /// </summary>
-        ~GmmFiltering()
+        /// <exception cref="System.ObjectDisposedException">thrown if this object has been disposed.</exception>
+        private void ValidateDispose()
         {
-            Dispose(false);
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(objectName: nameof(GmmFiltering));
+            }
         }
+
         #endregion
     }
 }

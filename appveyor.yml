@@ -1,4 +1,4 @@
-version: 1.0.0.{build}
+version: 1.21.7.{build}
 # enable patching of AssemblyInfo.* files
 assembly_info:
   patch: true
@@ -43,11 +43,12 @@ install:
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 build_script:
-- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /p:Configuration=%CONFIGURATION% /m /verbosity:quiet /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /p:Configuration=%CONFIGURATION% /p:Platform=%PLATFORM% /m /verbosity:quiet /p:DeployOnBuild=true /p:PublishProfile=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cmd: C:\projects\spectre\scripts\build_ng_client.bat %CONFIGURATION%
 after_build:
 - ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
 - cmd: C:\projects\spectre\scripts\package_project.bat DiviK Spectre.DivikWpfClient
+- cmd: C:\projects\spectre\scripts\package_web_project.bat WebAPI Spectre
 - cmd: C:\projects\spectre\scripts\package_angular_client.bat
 
 test_script:
@@ -61,6 +62,8 @@ artifacts:
   name: DivikExecutables
 - path: WebClient-$(configuration).zip
   name: WebClient
+- path: WebAPI-$(configuration).zip
+  name: WebAPI
 
 deploy:
 - provider: GitHub
@@ -74,6 +77,12 @@ deploy:
   auth_token:
     secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
   artifact: WebClient
+  draft: true
+- provider: GitHub
+  release: Spectre-v$(appveyor_build_version)
+  auth_token:
+    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
+  artifact: WebAPI
   draft: true
 
 on_finish:

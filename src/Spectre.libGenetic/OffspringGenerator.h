@@ -44,7 +44,7 @@ public:
     /// <param name="old">The current generation.</param>
     /// <param name="scores">The scores of the individuals.</param>
     /// <returns>New generation.</returns>
-    virtual Generation next(Generation& old, gsl::span<const ScoreType> scores) const;
+    virtual Generation next(Generation &old, gsl::span<const ScoreType> scores) const;
     virtual ~OffspringGenerator() = default;
 private:
     /// <summary>

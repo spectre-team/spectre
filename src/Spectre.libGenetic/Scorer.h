@@ -34,7 +34,7 @@ public:
     /// Initializes a new instance of the <see cref="Scorer"/> class.
     /// </summary>
     /// <param name="">Existing instance.</param>
-    Scorer(Scorer&&) = default;
+    Scorer(Scorer &&) = default;
     /// <summary>
     /// Initializes a new instance of the <see cref="Scorer"/> class.
     /// </summary>
@@ -45,7 +45,7 @@ public:
     /// </summary>
     /// <param name="generation">The generation.</param>
     /// <returns>Score vector.</returns>
-    virtual std::vector<ScoreType> Score(const Generation& generation);
+    virtual std::vector<ScoreType> Score(const Generation &generation);
     virtual ~Scorer() = default;
 private:
     /// <summary>

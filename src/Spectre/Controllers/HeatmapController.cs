@@ -1,7 +1,7 @@
 ﻿/*
  * HeatmapController.cs
  * Class serving GET requests for heatmap.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa, Michał Gallus, Daniel Babiak
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,18 +14,20 @@
    limitations under the License.
 */
 
-using Spectre.Data.Datasets;
-using Spectre.Models.Msi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Cors;
-
 namespace Spectre.Controllers
 {
+    using System;
+    using System.Configuration;
+    using System.IO;
+    using System.Web.Http;
+    using System.Web.Http.Cors;
+    using Spectre.Data.Datasets;
+    using Spectre.Models.Msi;
+
+    /// <summary>
+    /// Controller for the needs of Heatmap providing
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class HeatmapController : ApiController
     {
@@ -36,26 +38,32 @@ namespace Spectre.Controllers
         /// <param name="channelId">Identifier of channel.</param>
         /// <param name="flag">Does nothing but allows to define this function.</param>
         /// <returns>Heatmap</returns>
-        /// <exception cref="ArgumentException">Thrown when provided mz is lower 
+        /// <exception cref="ArgumentException">Thrown when provided mz is lower
         /// than zero, or is invalid for a given dataset</exception>
         public Heatmap Get(int id, int channelId, bool flag)
         {
             if (channelId < 0)
-                throw new ArgumentException(nameof(channelId));
+            {
+                throw new ArgumentException(message: nameof(channelId));
+            }
 
             if (id != 1)
+            {
                 return null;
+            }
 
-            IDataset dataset = new BasicTextDataset("C:\\spectre_data\\hnc1_tumor.txt");
+            IDataset dataset = new BasicTextDataset(textFilePath: ConfigurationManager.AppSettings["LocalDataDirectory"] + Path.DirectorySeparatorChar + "hnc1_tumor.txt");
 
             var mz = dataset.GetRawMzValue(channelId);
             var intensities = dataset.GetRawIntensityRow(channelId);
-            var coordinates = dataset.GetRawSpacialCoordinates(true);
+            var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
 
-            int[] xCoordinates = new int[intensities.Length];
-            int[] yCoordinates = new int[intensities.Length];
+#pragma warning disable SA1305 // Field names must not use Hungarian notation
+            var xCoordinates = new int[intensities.Length];
+            var yCoordinates = new int[intensities.Length];
+#pragma warning restore SA1305 // Field names must not use Hungarian notation
 
-            for (int i = 0; i < intensities.Length; i++)
+            for (var i = 0; i < intensities.Length; i++)
             {
                 xCoordinates[i] = coordinates[i, 0];
                 yCoordinates[i] = coordinates[i, 1];

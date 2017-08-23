@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using NUnit.Framework;
@@ -23,7 +24,8 @@ using Spectre.Mvvm.Converters;
 
 namespace Spectre.Mvvm.Tests.Converters
 {
-    [TestFixture, Category("MvvmFramework")]
+    [TestFixture]
+    [Category(name: "MvvmFramework")]
     public class CombinedConverterTests : SimpleConverterTestBase<CombinedConverter, int, bool>
     {
         [SetUp]
@@ -38,30 +40,33 @@ namespace Spectre.Mvvm.Tests.Converters
         [Test]
         public void ConvertTest()
         {
-            object conversionResult = Converter.Convert(1, typeof(bool), null, CultureInfo.CurrentCulture);
+            var conversionResult = Converter.Convert(value: 1, targetType: typeof(bool), parameter: null, culture: CultureInfo.CurrentCulture);
 
-            Assert.IsInstanceOf(typeof(bool), conversionResult, "Did not convert to proper type.");
-            Assert.IsFalse((bool)conversionResult, "Did not convert 1 to false.");
+            Assert.IsInstanceOf(expected: typeof(bool),
+                actual: conversionResult,
+                message: "Did not convert to proper type.");
+            Assert.IsFalse(condition: (bool) conversionResult, message: "Did not convert 1 to false.");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.Convert("blah", typeof(bool), null, CultureInfo.CurrentCulture),
-                "Converted string.");
+                code: () => Converter.Convert(value: "blah", targetType: typeof(bool), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted string.");
         }
 
         [Test]
         public void ConvertBackTest()
         {
             Assert.Throws<InvalidOperationException>(
-                () => Converter.ConvertBack(false, typeof(int), null, CultureInfo.CurrentCulture),
-                "Did not propagate exception.");
-            
+                code: () => Converter.ConvertBack(value: false, targetType: typeof(int), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Did not propagate exception.");
+
             Converter.First = Converter.Second;
 
-            object conversionResult = Converter.ConvertBack(true, typeof(bool), null, CultureInfo.CurrentCulture);
+            var conversionResult = Converter.ConvertBack(value: true, targetType: typeof(bool), parameter: null, culture: CultureInfo.CurrentCulture);
 
-            Assert.IsInstanceOf(typeof(bool), conversionResult,
-                "Converted true to unknown type.");
-            Assert.IsTrue((bool)conversionResult);
+            Assert.IsInstanceOf(expected: typeof(bool),
+                actual: conversionResult,
+                message: "Converted true to unknown type.");
+            Assert.IsTrue(condition: (bool) conversionResult);
         }
     }
 }

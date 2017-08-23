@@ -24,12 +24,9 @@ limitations under the License.
 namespace Spectre::libGenetic
 {
 ParentSelectionStrategy::ParentSelectionStrategy(Seed seed):
-    m_RandomNumberGenerator(seed)
-{
-    
-}
+    m_RandomNumberGenerator(seed) { }
 
-reference_pair<Individual> ParentSelectionStrategy::next(Generation& generation, gsl::span<const ScoreType> scores)
+reference_pair<Individual> ParentSelectionStrategy::next(Generation &generation, gsl::span<const ScoreType> scores)
 {
     if (generation.size() == static_cast<size_t>(scores.size()))
     {

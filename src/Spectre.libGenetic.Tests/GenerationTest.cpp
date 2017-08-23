@@ -51,19 +51,19 @@ TEST_F(GenerationInitializationTest, throws_on_inconsistent_chromosome_lengths)
 class GenerationTest : public GenerationInitializationTest
 {
 public:
-	GenerationTest():
+    GenerationTest():
         generation1(std::vector<Individual>(generation1Data)),
-        generation2(std::vector<Individual>(generation2Data))
-    {}
-protected:
-	Generation generation1;
-	Generation generation2;
+        generation2(std::vector<Individual>(generation2Data)) {}
 
-	void SetUp() override
-	{
-		generation1 = Generation(std::vector<Individual>(generation1Data));
-		generation2 = Generation(std::vector<Individual>(generation2Data));
-	}
+protected:
+    Generation generation1;
+    Generation generation2;
+
+    void SetUp() override
+    {
+        generation1 = Generation(std::vector<Individual>(generation1Data));
+        generation2 = Generation(std::vector<Individual>(generation2Data));
+    }
 };
 
 TEST_F(GenerationTest, give_proper_size)
@@ -74,9 +74,9 @@ TEST_F(GenerationTest, give_proper_size)
 
 TEST_F(GenerationTest, addition_produces_generation_of_proper_size)
 {
-	const auto generation = generation1 + generation2;
-	const auto size = generation.size();
-	EXPECT_EQ(size, generation1.size() + generation2.size());
+    const auto generation = generation1 + generation2;
+    const auto size = generation.size();
+    EXPECT_EQ(size, generation1.size() + generation2.size());
 }
 
 TEST_F(GenerationTest, addition_produces_generation_of_elements_from_first_and_then_second)
@@ -91,24 +91,24 @@ TEST_F(GenerationTest, addition_produces_generation_of_elements_from_first_and_t
 TEST_F(GenerationTest, addition_throws_on_inconsistent_chromosome_size)
 {
     const Generation shorters({ Individual({}) });
-    const Generation longers({ Individual({true}) });
+    const Generation longers({ Individual({ true }) });
 
     EXPECT_THROW(shorters + longers, InconsistentChromosomeLengthException);
 }
 
 TEST_F(GenerationTest, plus_equal_extends_instance_to_proper_size)
 {
-	Generation generation({ trueIndividual, trueIndividual, trueIndividual });
+    Generation generation({ trueIndividual, trueIndividual, trueIndividual });
     const auto initialSize = generation.size();
-	generation += generation2;
-	const auto size = generation.size();
-	EXPECT_EQ(size, initialSize + generation2.size());
+    generation += generation2;
+    const auto size = generation.size();
+    EXPECT_EQ(size, initialSize + generation2.size());
 }
 
 TEST_F(GenerationTest, plus_equal_extends_instance_with_elements_of_second)
 {
-    Generation falseGeneration({ Individual({false}) });
-    const Generation trueGeneration({ Individual({true}) });
+    Generation falseGeneration({ Individual({ false }) });
+    const Generation trueGeneration({ Individual({ true }) });
 
     falseGeneration += trueGeneration;
 
@@ -130,14 +130,14 @@ TEST_F(GenerationTest, immutable_index_throws_on_exceeded_size)
 
 TEST_F(GenerationTest, mutable_index_throws_on_exceeded_size)
 {
-    Generation generation(std::vector<Individual>{generation1Data});
+    Generation generation(std::vector<Individual> { generation1Data });
     EXPECT_THROW(generation[generation.size()] = generation1Data[0], OutOfRangeException);
 }
 
 TEST_F(GenerationTest, immutable_index_allows_read_only_access_to_individuals)
 {
-	const auto& ind1 = generation1[0];
-	const auto& ind2 = generation2[0];
+    const auto &ind1 = generation1[0];
+    const auto &ind2 = generation2[0];
     EXPECT_EQ(ind1, generation1Data[0]);
     EXPECT_EQ(ind2, generation2Data[0]);
 }
@@ -162,7 +162,7 @@ TEST_F(GenerationTest, iterators_allow_to_iterate_the_individuals)
     auto generationIterator = generation1.begin();
     auto dataIterator = generation1Data.begin();
 
-    while(generationIterator != generation1.end() && dataIterator != generation1Data.end())
+    while (generationIterator != generation1.end() && dataIterator != generation1Data.end())
     {
         const auto generationIndividual = *generationIterator;
         const auto dataIndividual = *dataIterator;

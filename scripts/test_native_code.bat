@@ -11,7 +11,7 @@ FOR /F %%i IN (__tmp_gtest.txt) DO (
 	echo %%i
 	%%i --gtest_output="xml:%%i.xml"
 	powershell C:\projects\spectre\scripts\Upload-TestResult.ps1 -fileName %%i.xml
-	if errorlevel 1 (
+	IF %ERRORLEVEL% NEQ 0 (
 		set /A failures=%failures%+1
 	)
 )

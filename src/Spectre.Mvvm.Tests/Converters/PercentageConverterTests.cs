@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using System.Windows;
@@ -24,33 +25,45 @@ using Spectre.Mvvm.Converters;
 
 namespace Spectre.Mvvm.Tests.Converters
 {
-    [TestFixture, Category("MvvmFramework")]
-    public class PercentageConverterTests : SimpleConverterTestBase<PercentageConverter, String, double>
+    [TestFixture]
+    [Category(name: "MvvmFramework")]
+    public class PercentageConverterTests : SimpleConverterTestBase<PercentageConverter, string, double>
     {
         [Test]
         public void ConvertTest()
         {
-            ToGuiType(1.00, "100 %", "Conversion of 1.00 did not return \"100 %\"", "1.00 does not evalute to \"100 %\".");
+            ToGuiType(argument: 1.00,
+                expectedResult: "100 %",
+                onTypeFailure: "Conversion of 1.00 did not return \"100 %\"",
+                onValueFailure: "1.00 does not evalute to \"100 %\".");
 
-            ToGuiType(-10.001, "-1000.1 %", "Conversion of -10.001 did not return \"-1000.1 %\"", "-10.001 does not evalute to \"-1000.1 %\".");
+            ToGuiType(argument: -10.001,
+                expectedResult: "-1000.1 %",
+                onTypeFailure: "Conversion of -10.001 did not return \"-1000.1 %\"",
+                onValueFailure: "-10.001 does not evalute to \"-1000.1 %\".");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.Convert("blah", typeof(String), null, CultureInfo.CurrentCulture),
-                "Converted string.");
+                code: () => Converter.Convert(value: "blah", targetType: typeof(string), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted string.");
         }
 
         [Test]
         public void ConvertBackTest()
         {
-            ToBackendType("99.11 %", 0.9911, "Conversion of \"99.11 %\" did not return 0.9911", "\"99.11 %\" does not evalute to 0.9911.");
+            ToBackendType(argument: "99.11 %",
+                expectedResult: 0.9911,
+                onTypeFailure: "Conversion of \"99.11 %\" did not return 0.9911",
+                onValueFailure: "\"99.11 %\" does not evalute to 0.9911.");
 
-            object conversionResult = Converter.ConvertBack(123.0, typeof(double), 1.23, CultureInfo.CurrentCulture);
-            Assert.IsInstanceOf(BackendType, conversionResult, "Conversion of 123 did not return 1.23");
-            Assert.AreEqual(1.23, (double)conversionResult, "\"123 %\" does not evalute to 1.23.");
+            var conversionResult = Converter.ConvertBack(value: 123.0, targetType: typeof(double), parameter: 1.23, culture: CultureInfo.CurrentCulture);
+            Assert.IsInstanceOf(BackendType, conversionResult, message: "Conversion of 123 did not return 1.23");
+            Assert.AreEqual(expected: 1.23,
+                actual: (double) conversionResult,
+                message: "\"123 %\" does not evalute to 1.23.");
 
             Assert.Throws<InvalidCastException>(
-                () => Converter.ConvertBack(12, typeof(double), null, CultureInfo.CurrentCulture),
-                "Converted double.");
+                code: () => Converter.ConvertBack(value: 12, targetType: typeof(double), parameter: null, culture: CultureInfo.CurrentCulture),
+                message: "Converted double.");
         }
     }
 }

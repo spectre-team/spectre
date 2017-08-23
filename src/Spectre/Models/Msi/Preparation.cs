@@ -1,7 +1,7 @@
 ﻿/*
  * Preparation.cs
  * Class representing single sample in MALDI MSI.
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,6 +28,19 @@ namespace Spectre.Models.Msi
     public class Preparation
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Preparation"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="spectraNumber">Number of all spectra in preparation.</param>
+        public Preparation(string name, int id, int spectraNumber)
+        {
+            Name = name;
+            Id = id;
+            SpectraNumber = spectraNumber;
+        }
+
+        /// <summary>
         /// Gets the name.
         /// </summary>
         /// <value>
@@ -35,6 +48,7 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public string Name { get; private set; }
+
         /// <summary>
         /// Gets the identifier.
         /// </summary>
@@ -43,7 +57,8 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public int Id { get; private set; }
-		/// <summary>
+
+        /// <summary>
         /// Gets the number of spectra.
         /// </summary>
         /// <value>
@@ -60,18 +75,5 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public int ChanelIdAvailableNumber { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Preparation"/> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="spectraNumber">Number of all spectra in preparation.</param>
-        public Preparation(string name, int id, int spectraNumber)
-        {
-            Name = name;
-            Id = id;
-            SpectraNumber = spectraNumber;
-        }
     }
 }

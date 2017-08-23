@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using System.Globalization;
 using System.Windows.Controls;
@@ -38,12 +39,12 @@ namespace Spectre.DivikWpfClient.Validation
         public double Max { get; set; }
 
         /// <summary>
-		/// Percentage input validate method. Checks if passed value is a <see cref="double"/>
+        /// Percentage input validate method. Checks if passed value is a <see cref="double"/>
         /// within given range, accepts trailing '%' sign.
-		/// </summary>
-		/// <param name="value">The source data being passed to the target.</param>
+        /// </summary>
+        /// <param name="value">The source data being passed to the target.</param>
         /// <param name="cultureInfo">The culture of the conversion.</param>
-		/// <returns><see cref="ValidationResult"/> with error messages for the rule.</returns>
+        /// <returns><see cref="ValidationResult"/> with error messages for the rule.</returns>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             double parameter = 0;
@@ -52,22 +53,26 @@ namespace Spectre.DivikWpfClient.Validation
             {
                 if (((string)value).Length > 0)
                 {
-                    parameter = double.Parse(((string)value).Replace('%', ' ').Trim());
-                } else
+                    parameter = double.Parse(s: ((string)value).Replace(oldChar: '%', newChar: ' ')
+                        .Trim());
+                }
+                else
                 {
-                    return new ValidationResult(false, "Please enter a valid percentage value.");
+                    return new ValidationResult(isValid: false, errorContent: "Please enter a valid percentage value.");
                 }
             }
             catch (Exception)
             {
-                return new ValidationResult(false, "Please enter a valid percentage value.");
+                return new ValidationResult(isValid: false, errorContent: "Please enter a valid percentage value.");
             }
 
-            if ((parameter < this.Min) || (parameter > this.Max))
+            if ((parameter < Min) || (parameter > Max))
             {
-                return new ValidationResult(false, "Please enter percentage value in the range: " + this.Min + " - " + this.Max + ".");
+                return new ValidationResult(
+                    isValid: false,
+                    errorContent: "Please enter percentage value in the range: " + Min + " - " + Max + ".");
             }
-            return new ValidationResult(true, null);
+            return new ValidationResult(isValid: true, errorContent: null);
         }
     }
 }

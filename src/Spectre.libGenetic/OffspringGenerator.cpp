@@ -27,7 +27,7 @@ OffspringGenerator::OffspringGenerator(std::unique_ptr<IndividualsBuilderStrateg
     m_Builder(std::move(builder)),
     m_PreservationStrategy(std::move(preservationStrategy))
 {
-    if(m_Builder != nullptr)
+    if (m_Builder != nullptr)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -35,7 +35,7 @@ OffspringGenerator::OffspringGenerator(std::unique_ptr<IndividualsBuilderStrateg
     {
         throw libException::NullPointerException("builder");
     }
-    if(m_PreservationStrategy != nullptr)
+    if (m_PreservationStrategy != nullptr)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -45,7 +45,7 @@ OffspringGenerator::OffspringGenerator(std::unique_ptr<IndividualsBuilderStrateg
     }
 }
 
-Generation OffspringGenerator::next(Generation& old, gsl::span<const ScoreType> scores) const
+Generation OffspringGenerator::next(Generation &old, gsl::span<const ScoreType> scores) const
 {
     if (old.size() == static_cast<size_t>(scores.size()))
     {

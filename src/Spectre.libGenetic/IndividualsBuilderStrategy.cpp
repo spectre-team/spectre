@@ -31,7 +31,7 @@ IndividualsBuilderStrategy::IndividualsBuilderStrategy(std::unique_ptr<Crossover
     m_Mutation(std::move(mutation)),
     m_ParentSelectionStrategy(std::move(parentSelectionStrategy))
 {
-    if(m_Crossover!=nullptr)
+    if (m_Crossover != nullptr)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -47,7 +47,7 @@ IndividualsBuilderStrategy::IndividualsBuilderStrategy(std::unique_ptr<Crossover
     {
         throw libException::NullPointerException("mutation");
     }
-    if (m_ParentSelectionStrategy!= nullptr)
+    if (m_ParentSelectionStrategy != nullptr)
     {
         // @gmrukwa: usual empty execution branch
     }
@@ -57,7 +57,7 @@ IndividualsBuilderStrategy::IndividualsBuilderStrategy(std::unique_ptr<Crossover
     }
 }
 
-Generation IndividualsBuilderStrategy::Build(Generation& old, gsl::span<const ScoreType> scores, size_t newSize) const
+Generation IndividualsBuilderStrategy::Build(Generation &old, gsl::span<const ScoreType> scores, size_t newSize) const
 {
     if (old.size() == static_cast<size_t>(scores.size()))
     {
@@ -69,7 +69,7 @@ Generation IndividualsBuilderStrategy::Build(Generation& old, gsl::span<const Sc
     }
     std::vector<Individual> newIndividuals;
     newIndividuals.reserve(newSize);
-    for(size_t i = 0; i < newSize; ++i)
+    for (size_t i = 0; i < newSize; ++i)
     {
         const auto parents = m_ParentSelectionStrategy->next(old, scores);
         auto child = (*m_Crossover)(parents.first, parents.second);

@@ -33,19 +33,19 @@ public:
     /// Initializes a new instance of the <see cref="Generation"/> class.
     /// </summary>
     /// <param name="generation">The container with generation.</param>
-    explicit Generation(std::vector<Individual>&& generation);
+    explicit Generation(std::vector<Individual> &&generation);
     /// <summary>
     /// Concatenates populations.
     /// </summary>
     /// <param name="other">The other population.</param>
     /// <returns>First population and second just after.</returns>
-    Generation operator+(const Generation& other) const;
+    Generation operator+(const Generation &other) const;
     /// <summary>
     /// Overwrites population with concatenated one.
     /// </summary>
     /// <param name="other">The other population.</param>
     /// <returns>Self.</returns>
-    Generation& operator+=(const Generation& other);
+    Generation& operator+=(const Generation &other);
     /// <summary>
     /// Return immutable individual under the specified index.
     /// </summary>
@@ -73,7 +73,7 @@ public:
     /// </summary>
     /// <returns>Iterator after the end of immutable sequence.</returns>
     std::vector<Individual>::const_iterator end() const;
-	virtual ~Generation() = default;
+    virtual ~Generation() = default;
 
 private:
     /// <summary>

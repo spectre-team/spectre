@@ -25,7 +25,8 @@ using Spectre.Algorithms.Methods;
 
 namespace Spectre.Algorithms.Tests.Methods
 {
-    [TestFixture, Category("Algorithm")]
+    [TestFixture]
+    [Category(name: "Algorithm")]
     public class GmmFilteringTests
     {
         private GmmFiltering _gmm;
@@ -46,29 +47,44 @@ namespace Spectre.Algorithms.Tests.Methods
         [Test]
         public void GmmBasedFilter()
         {
-            var someNumbers = MakeRandomDoubles(-1, 1).Take(300).ToArray().Concat(
-                MakeRandomDoubles(10, 15).Take(500).ToArray().Concat(
-                MakeRandomDoubles(3, 4).Take(300).ToArray().Concat(
-                MakeRandomDoubles(7, 9).Take(800).ToArray().Concat(
-                MakeRandomDoubles(7.5, 8.5).Take(400).ToArray()))));
+            var someNumbers = GmmFilteringTests.MakeRandomDoubles(lowerBound: -1, upperBound: 1)
+                .Take(count: 300)
+                .ToArray()
+                .Concat(
+                    second: GmmFilteringTests.MakeRandomDoubles(lowerBound: 10, upperBound: 15)
+                        .Take(count: 500)
+                        .ToArray()
+                        .Concat(
+                            second: GmmFilteringTests.MakeRandomDoubles(lowerBound: 3, upperBound: 4)
+                                .Take(count: 300)
+                                .ToArray()
+                                .Concat(
+                                    second: GmmFilteringTests.MakeRandomDoubles(lowerBound: 7, upperBound: 9)
+                                        .Take(count: 800)
+                                        .ToArray()
+                                        .Concat(
+                                            second: GmmFilteringTests
+                                                .MakeRandomDoubles(lowerBound: 7.5, upperBound: 8.5)
+                                                .Take(count: 400)
+                                                .ToArray()))));
 
             var thresholds = _gmm.EstimateThresholds(someNumbers);
 
-            Assert.Multiple(() =>
+            Assert.Multiple(testDelegate: () =>
             {
                 Assert.NotNull(thresholds);
-                Assert.GreaterOrEqual(thresholds.Length, 1, "Found no thresholds.");
-                Assert.True(thresholds.Any(t => t < 10 && t > 1),
-                    "No threshold between 1 and 10.");
+                Assert.GreaterOrEqual(thresholds.Length, arg2: 1, message: "Found no thresholds.");
+                Assert.True(condition: thresholds.Any(predicate: t => (t < 10) && (t > 1)),
+                    message: "No threshold between 1 and 10.");
             });
         }
 
-        private static IEnumerable<double> MakeRandomDoubles(double lowerBound, double upperBound, int seed=0)
+        private static IEnumerable<double> MakeRandomDoubles(double lowerBound, double upperBound, int seed = 0)
         {
             var rng = new Random(seed);
             while (true)
             {
-                yield return rng.NextDouble()*(upperBound - lowerBound) + lowerBound;
+                yield return rng.NextDouble() * (upperBound - lowerBound) + lowerBound;
             }
         }
     }
