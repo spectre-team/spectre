@@ -67,7 +67,7 @@ std::vector<OutputType> transform(gsl::span<const InputType1> first, gsl::span<c
     {
         std::vector<OutputType> result;
         result.reserve(first.size());
-        // @gmrukwa: code below is equialent to the following line but causes no warning
+        // @gmrukwa: code below is equivalent to the following line but causes no warning
         // std::transform(first.begin(), first.end(), second.begin(), std::back_inserter(result), binaryOperation);
         auto iterator1 = first.begin();
         auto iterator2 = second.begin();
