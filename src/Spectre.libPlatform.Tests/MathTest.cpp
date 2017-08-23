@@ -51,7 +51,7 @@ TEST(VectorMinusTest, subtracts)
 
 TEST(VectorMultiplyTest, multiplies_elementwise)
 {
-    const auto multiple = times(greater, lower);
+    const auto multiple = multiplyBy(greater, lower);
     EXPECT_THAT(multiple, ContainerEq(Data{ 4, 10, 18 }));
 }
 
@@ -133,7 +133,7 @@ TEST(ScalarMinusTest, subtracts_scalar_from_each_element)
 
 TEST(ScalarMultiplyTest, multiplies_each_element_by_scalar)
 {
-    const auto multiplied = times(lower, 3.);
+    const auto multiplied = multiplyBy(lower, 3.);
     EXPECT_THAT(multiplied, ContainerEq(Data{ 3.,6.,9. }));
 }
 

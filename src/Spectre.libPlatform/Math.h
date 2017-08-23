@@ -39,7 +39,7 @@ constexpr std::vector<DataType> minus(gsl::span<const DataType> first, gsl::span
 }
 
 template< class DataType >
-constexpr std::vector<DataType> times(gsl::span<const DataType> first, gsl::span<const DataType> second)
+constexpr std::vector<DataType> multiplyBy(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     return Functional::transform(first, second, [](DataType left, DataType right) { return left * right; });
 }
@@ -107,7 +107,7 @@ constexpr std::vector<DataType> minus(gsl::span<const DataType> first, DataType 
 }
 
 template< class DataType >
-constexpr std::vector<DataType> times(gsl::span<const DataType> first, DataType second)
+constexpr std::vector<DataType> multiplyBy(gsl::span<const DataType> first, DataType second)
 {
     return Functional::transform(first, [second](DataType left) { return left * second; });
 }
