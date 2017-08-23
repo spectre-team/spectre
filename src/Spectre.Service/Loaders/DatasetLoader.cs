@@ -1,20 +1,20 @@
 ﻿/*
-* DatasetLoader.cs
-* Class loading datasets from either local root or remote root.
-*
-Copyright 2017 Dariusz Kuchta
+ * DatasetLoader.cs
+ * Class loading datasets from either local root or remote root.
+ *
+   Copyright 2017 Dariusz Kuchta
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 */
 
 using System;
@@ -22,7 +22,7 @@ using System.IO;
 using Spectre.Data.Datasets;
 using Spectre.Service.Configuration;
 
-namespace Spectre.Data.Loaders
+namespace Spectre.Service.Loaders
 {
     /// <summary>
     /// Class for loading datasets from specified directories.
@@ -30,6 +30,7 @@ namespace Spectre.Data.Loaders
     public class DatasetLoader
     {
         #region Fields
+
         /// <summary>
         /// Root for local directory.
         /// </summary>
@@ -44,7 +45,7 @@ namespace Spectre.Data.Loaders
         #region Constructor
 
         /// <summary>
-        /// Constructor specifying roots for local and remote directories.
+        /// Initializes a new instance of the <see cref="DatasetLoader"/> class.
         /// </summary>
         /// <param name="dataRootConfig">Validated configuration of needed directories.</param>
         public DatasetLoader(DataRootConfig dataRootConfig)
@@ -55,12 +56,13 @@ namespace Spectre.Data.Loaders
         #endregion
 
         #region Loaders
+
         /// <summary>
         /// Returns dataset basing directly on the name of the file.
         /// </summary>
         /// <param name="name">File name.</param>
         /// <returns>Found dataset.</returns>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentException">Throws when the file is not found both locally and remotely.</exception>
         public IDataset GetFromName(string name)
         {
             string fullPathLocal = _localRoot + "\\" + name;
@@ -69,13 +71,18 @@ namespace Spectre.Data.Loaders
             {
                 string fullPathRemote = _remoteRoot + "\\" + name;
                 if (!File.Exists(fullPathRemote))
+                {
                     throw new ArgumentException("Dataset \"" + name + "\" not found neither locally nor remotely.");
+                }
+
                 File.Copy(fullPathRemote, fullPathLocal);
             }
 
             return new BasicTextDataset(fullPathLocal);
         }
 
+        /*
+        //  TODO: @dkuchta: complete the methods below when database access is available
         /// <summary>
         /// Returns dataset from database, translating hash of the file into file directory.
         /// </summary>
@@ -99,6 +106,7 @@ namespace Spectre.Data.Loaders
             //translate userId to name from database
             return GetFromName(name);
         }
+        */
         #endregion
     }
 }
