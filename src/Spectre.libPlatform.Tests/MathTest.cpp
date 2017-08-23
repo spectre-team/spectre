@@ -117,13 +117,14 @@ TEST(VectorMinTest, picks_min_elementwise)
     EXPECT_THAT(mins, ContainerEq(Data{ 1,0,2 }));
 }
 
-//TEST(VectorEqualsTest, finds_equal_elements)
-//{
-//    std::vector<bool> first{ true, false, true };
-//    std::vector<bool> second{ false, false, true };
-//    const auto equalities = equals(first, second);
-//    EXPECT_THAT(equalities, ContainerEq(std::vector<bool>{false, true, true}));
-//}
+TEST(VectorEqualsTest, finds_equal_elements)
+{
+    // @gmrukwa: std::vector<bool> is not convertible to gsl::span<bool> due to std::vector<bool> template specialization
+    const std::vector<int> first{ true, false, true };
+    const std::vector<int> second{ false, false, true };
+    const auto equalities = equals(gsl::as_span(first), gsl::as_span(second));
+    EXPECT_THAT(equalities, ContainerEq(std::vector<bool>{false, true, true}));
+}
 
 // @gmrukwa: vector vs scalar
 
@@ -198,6 +199,15 @@ TEST(ScalarMinTest, picks_min_of_element_and_scalar)
     IntData data{ 1,0,7 };
     const auto mins = min(gsl::as_span(data), 1);
     EXPECT_THAT(mins, ContainerEq(IntData{ 1, 0, 1 }));
+}
+
+TEST(ScalarEqualsTest, finds_equal_elements)
+{
+    // @gmrukwa: std::vector<bool> is not convertible to gsl::span<bool> due to std::vector<bool> template specialization
+    const std::vector<int> first{ true, false, true };
+    const int second = false;
+    const auto equalities = equals(gsl::as_span(first), second);
+    EXPECT_THAT(equalities, ContainerEq(std::vector<bool>{false, true, false}));
 }
 
 // @gmrukwa: unary

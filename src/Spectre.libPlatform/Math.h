@@ -24,14 +24,6 @@ limitations under the License.
 
 namespace Spectre::libPlatform::Math
 {
-//template <class ContainerType, typename ContentType>
-//constexpr bool is_vector_or_span()
-//{
-//    return std::is_same_v<gsl::span<ContentType>, ContainerType>
-//        || std::is_same_v<gsl::span<const ContentType>, ContainerType>
-//        || std::is_same_v<const std::vector<ContentType>&, ContainerType>;
-//}
-
 // @gmrukwa: vector vs vector
 
 /// <summary>
@@ -177,19 +169,17 @@ constexpr std::vector<DataType> min(gsl::span<const DataType> first, gsl::span<c
     return Functional::transform(first, second, [](DataType left, DataType right) { return std::min(left, right); });
 }
 
-///// <summary>
-///// Checks equality of two vectors elementwise.
-///// </summary>
-///// <param name="first">The first.</param>
-///// <param name="second">The second.</param>
-///// <returns>Vector, elements of which are true, if corresponding elements in source vectors were equal.</returns>
-//template<class DataType, class ContainerType1, class ContainerType2 >
-//constexpr std::vector<bool> equals(ContainerType1 first, ContainerType2 second, DataType* /*dummy*/ = static_cast<DataType *>(nullptr))
-//{
-//    static_assert(is_vector_or_span<ContainerType1, DataType>(), "gsl::span and std::vector are supported");
-//    static_assert(is_vector_or_span<ContainerType2, DataType>(), "gsl::span and std::vector are supported");
-//    return Functional::transform(first, second, [](DataType left, DataType right) { return left == right; }, static_cast<bool*>(nullptr));
-//}
+/// <summary>
+/// Checks equality of two vectors elementwise.
+/// </summary>
+/// <param name="first">The first.</param>
+/// <param name="second">The second.</param>
+/// <returns>Vector, elements of which are true, if corresponding elements in source vectors were equal.</returns>
+template<class DataType>
+constexpr std::vector<bool> equals(gsl::span<const DataType> first, gsl::span<const DataType> second, DataType* /*dummy*/ = static_cast<DataType *>(nullptr))
+{
+    return Functional::transform(first, second, [](DataType left, DataType right) { return left == right; }, static_cast<bool*>(nullptr));
+}
 
 // @gmrukwa: vector vs scalar
 
@@ -336,18 +326,17 @@ constexpr std::vector<DataType> min(gsl::span<const DataType> first, DataType se
     return Functional::transform(first, [second](DataType left) { return std::min(left, second); });
 }
 
-///// <summary>
-///// Check equality of vector content with respect to a constant.
-///// </summary>
-///// <param name="first">The first.</param>
-///// <param name="second">The second.</param>
-///// <returns>Vector which elements are true where elements of first were second.</returns>
-//template<class DataType, class ContainerType>
-//constexpr std::vector<bool> equals(ContainerType first, DataType second, DataType* /*dummy*/ = static_cast<DataType *>(nullptr))
-//{
-//    static_assert(is_vector_or_span<ContainerType, DataType>(), "gsl::span and std::vector are supported");
-//    return Functional::transform(first, [second](DataType left) { return left == second; }, static_cast<bool*>(nullptr));
-//}
+/// <summary>
+/// Check equality of vector content with respect to a constant.
+/// </summary>
+/// <param name="first">The first.</param>
+/// <param name="second">The second.</param>
+/// <returns>Vector which elements are true where elements of first were second.</returns>
+template<class DataType>
+constexpr std::vector<bool> equals(gsl::span<const DataType> first, DataType second)
+{
+    return Functional::transform(first, [second](DataType left) { return left == second; }, static_cast<bool*>(nullptr));
+}
 
 // @gmrukwa: unary
 
