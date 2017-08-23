@@ -35,6 +35,9 @@ namespace Spectre.Service.Configuration
         {
             ValidatePath(localPath);
             ValidatePath(remotePath);
+
+            LocalPath = localPath;
+            RemotePath = remotePath;
         }
 
         /// <summary>
