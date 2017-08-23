@@ -22,9 +22,15 @@ limitations under the License.
 
 namespace Spectre::libPlatform::Functional
 {
-class ZeroStepException final: public libException::ExceptionBase
+/// <summary>
+/// Thrown on <see cref="range"/> function step equal to zero.
+/// </summary>
+class ZeroStepException final : public libException::ExceptionBase
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ZeroStepException"/> class.
+    /// </summary>
     ZeroStepException();
 };
 }

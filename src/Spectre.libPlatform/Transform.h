@@ -24,8 +24,15 @@ limitations under the License.
 
 namespace Spectre::libPlatform::Functional
 {
+/// <summary>
+/// Transform a vector.
+/// </summary>
+/// <param name="first">The vector to transform.</param>
+/// <param name="unaryOperation">The unary operation.</param>
+/// <param name="">The dummy argument for specification of output type.</param>
+/// <returns>Vector of transformed elements</returns>
 template< class InputType, class OutputType, class UnaryOperation >
-std::vector<OutputType> transform(gsl::span<const InputType> first, UnaryOperation unaryOperation, OutputType* = nullptr)
+std::vector<OutputType> transform(gsl::span<const InputType> first, UnaryOperation unaryOperation, OutputType* /*dummy*/ = nullptr)
 {
     std::vector<OutputType> result;
     result.reserve(first.size());
@@ -33,14 +40,28 @@ std::vector<OutputType> transform(gsl::span<const InputType> first, UnaryOperati
     return result;
 }
 
+/// <summary>
+/// Transform a vector.
+/// </summary>
+/// <param name="first">The vector to transform.</param>
+/// <param name="unaryOperation">The unary operation.</param>
+/// <returns>Vector of transformed elements</returns>
 template< class DataType, class UnaryOperation >
 std::vector<DataType> transform(gsl::span<const DataType> first, UnaryOperation unaryOperation)
 {
     return transform<DataType, DataType, UnaryOperation>(first, unaryOperation);
 }
 
+/// <summary>
+/// Transform two vectors together.
+/// </summary>
+/// <param name="first">The first.</param>
+/// <param name="second">The second.</param>
+/// <param name="binaryOperation">The binary operation.</param>
+/// <param name="">The dummy argument for specification of output type.</param>
+/// <returns>Vector of transformed elements</returns>
 template< class InputType1, class InputType2, class OutputType, class BinaryOperation >
-std::vector<OutputType> transform(gsl::span<const InputType1> first, gsl::span<const InputType2> second, BinaryOperation binaryOperation, OutputType* = nullptr)
+std::vector<OutputType> transform(gsl::span<const InputType1> first, gsl::span<const InputType2> second, BinaryOperation binaryOperation, OutputType* /*dummy*/ = nullptr)
 {
     if (first.size() == second.size())
     {
@@ -62,6 +83,13 @@ std::vector<OutputType> transform(gsl::span<const InputType1> first, gsl::span<c
     }
 }
 
+/// <summary>
+/// Transforms two vectors together.
+/// </summary>
+/// <param name="first">The first.</param>
+/// <param name="second">The second.</param>
+/// <param name="binaryOperation">The binary operation.</param>
+/// <returns>Vector of transformed elements</returns>
 template< class DataType, class BinaryOperation >
 std::vector<DataType> transform(gsl::span<const DataType> first, gsl::span<const DataType> second, BinaryOperation binaryOperation)
 {

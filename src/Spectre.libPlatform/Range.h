@@ -19,14 +19,21 @@ limitations under the License.
 
 #pragma once
 #include <vector>
-#include <span.h>
 #include "ZeroStepException.h"
 
 namespace Spectre::libPlatform::Functional
 {
+/// <summary>
+/// Create range of values from lowerBound (inclusively) to upperBound (exclusively) with specified step.
+/// </summary>
+/// <param name="lowerBound">The lower bound.</param>
+/// <param name="upperBound">The upper bound.</param>
+/// <param name="step">The step of range.</param>
+/// <returns>Vector of consecutive values</returns>
 template <class NumericType>
 std::vector<NumericType> range(NumericType lowerBound, NumericType upperBound, NumericType step)
 {
+    static_assert(std::is_arithmetic_v<NumericType>, "NumericType: expected arithmetic.");
     if (step != 0)
     {
         const auto size = static_cast<size_t>((upperBound - lowerBound) / step);
@@ -43,15 +50,28 @@ std::vector<NumericType> range(NumericType lowerBound, NumericType upperBound, N
     }
 }
 
+/// <summary>
+/// Create range of values from lowerBound (inclusively) to upperBound (exclusively) with step 1.
+/// </summary>
+/// <param name="lowerBound">The lower bound.</param>
+/// <param name="upperBound">The upper bound.</param>
+/// <returns>Vector of consecutive values</returns>
 template <class NumericType>
 std::vector<NumericType> range(NumericType lowerBound, NumericType upperBound)
 {
+    static_assert(std::is_arithmetic_v<NumericType>, "NumericType: expected arithmetic.");
     return range(lowerBound, upperBound, static_cast<NumericType>(1));
 }
 
+/// <summary>
+/// Create range of values from zero (inclusively) to upperBound (exclusively) with step 1.
+/// </summary>
+/// <param name="upperBound">The upper bound.</param>
+/// <returns>Vector of consecutive values</returns>
 template <class NumericType>
 std::vector<NumericType> range(NumericType upperBound)
 {
+    static_assert(std::is_arithmetic_v<NumericType>, "NumericType: expected arithmetic.");
     return range(static_cast<NumericType>(0), upperBound);
 }
 }

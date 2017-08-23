@@ -26,6 +26,11 @@ limitations under the License.
 
 namespace Spectre::libPlatform::Functional
 {
+/// <summary>
+/// Finds the nonzero elements in specified collection.
+/// </summary>
+/// <param name="collection">The collection.</param>
+/// <returns>Vector with indexes of nonzero elements.</returns>
 template <typename DataType>
 std::vector<size_t> find(gsl::span<const DataType> collection)
 {
@@ -39,5 +44,10 @@ std::vector<size_t> find(gsl::span<const DataType> collection)
     return preservedIndexes;
 }
 
+/// <summary>
+/// Finds the nonzero elements in specified collection.
+/// </summary>
+/// <param name="collection">The collection.</param>
+/// <returns>Vector with indexes of nonzero elements.</returns>
 std::vector<size_t> find(std::vector<bool> collection);
 }

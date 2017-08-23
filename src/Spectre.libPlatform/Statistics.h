@@ -24,21 +24,39 @@ limitations under the License.
 
 namespace Spectre::libPlatform::Statistics
 {
+/// <summary>
+/// Sum the specified data.
+/// </summary>
+/// <param name="data">The data.</param>
+/// <returns>Sum of the elements</returns>
 template <class DataType>
 constexpr DataType Sum(gsl::span<const DataType> data)
 {
+    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     return std::accumulate(data.begin(), data.end(), static_cast<DataType>(0));
 }
 
+/// <summary>
+/// Calculate mean of the specified data.
+/// </summary>
+/// <param name="data">The data.</param>
+/// <returns>Mean of the elements</returns>
 template <class DataType>
 constexpr DataType Mean(gsl::span<const DataType> data)
 {
+    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     return Sum(data) / (data.size() != 0 ? data.size() : 1);
 }
 
+/// <summary>
+/// Find mean absolute deviation of the data.
+/// </summary>
+/// <param name="data">The data.</param>
+/// <returns>Mean absolute deviation of the elements</returns>
 template <class DataType>
 DataType MeanAbsoluteDeviation(gsl::span<const DataType> data)
 {
+    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     const auto mean = Mean(data);
     const auto deviation = Math::minus(data, mean);
     const auto absoluteDeviation = Math::abs(gsl::as_span(deviation));

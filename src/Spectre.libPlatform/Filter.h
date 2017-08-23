@@ -27,6 +27,12 @@ limitations under the License.
 
 namespace Spectre::libPlatform::Functional
 {
+/// <summary>
+/// Filter the specified collection.
+/// </summary>
+/// <param name="collection">The collection.</param>
+/// <param name="indexes">The indexes.</param>
+/// <returns>Vector consisting of elements under specified indexes in the input collection</returns>
 template <typename DataType>
 std::vector<DataType> filter(gsl::span<const DataType> collection, gsl::span<const size_t> indexes)
 {
@@ -46,6 +52,12 @@ std::vector<DataType> filter(gsl::span<const DataType> collection, gsl::span<con
         static_cast<DataType*>(nullptr));
 }
 
+/// <summary>
+/// Filter the specified collection.
+/// </summary>
+/// <param name="collection">The collection.</param>
+/// <param name="isIncluded">The inclusion information.</param>
+/// <returns>Vector consisting of elements from input collection which are marked as included</returns>
 template <typename DataType>
 std::vector<DataType> filter(gsl::span<const DataType> collection, std::vector<bool> isIncluded)
 {

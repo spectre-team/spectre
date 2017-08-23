@@ -117,6 +117,14 @@ TEST(VectorMinTest, picks_min_elementwise)
     EXPECT_THAT(mins, ContainerEq(Data{ 1,0,2 }));
 }
 
+//TEST(VectorEqualsTest, finds_equal_elements)
+//{
+//    std::vector<bool> first{ true, false, true };
+//    std::vector<bool> second{ false, false, true };
+//    const auto equalities = equals(first, second);
+//    EXPECT_THAT(equalities, ContainerEq(std::vector<bool>{false, true, true}));
+//}
+
 // @gmrukwa: vector vs scalar
 
 TEST(ScalarPlusTest, adds_scalar_to_each_element)
