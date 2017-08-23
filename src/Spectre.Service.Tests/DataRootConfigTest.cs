@@ -61,9 +61,17 @@ namespace Spectre.Service.Tests
         }
 
         [Test]
-        public void DataRootWorksForCorrectPaths()
+        public void DataRootDoesNotThrowForCorrectPaths()
         {
             Assert.DoesNotThrow(code: () => new DataRootConfig(goodLocalPath, goodRemotePath));
+        }
+
+        [Test]
+        public void DataRootReturnsInputValues()
+        {
+            var dataRootConfig = new DataRootConfig(goodLocalPath, goodRemotePath);
+            Assert.AreEqual(expected: goodLocalPath, actual: dataRootConfig.LocalPath);
+            Assert.AreEqual(expected: goodRemotePath, actual: dataRootConfig.RemotePath);
         }
     }
 }
