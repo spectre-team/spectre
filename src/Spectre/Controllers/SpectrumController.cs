@@ -20,6 +20,7 @@ namespace Spectre.Controllers
     using System.Configuration;
     using System.IO;
     using System.Linq;
+    using System.Net;
     using System.Web.Http;
     using System.Web.Http.Cors;
     using Spectre.Data.Datasets;
@@ -41,24 +42,31 @@ namespace Spectre.Controllers
         {
             if (id != 1)
             {
-                return null;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
             var dataset = new BasicTextDataset(textFilePath: ConfigurationManager.AppSettings["LocalDataDirectory"] + Path.DirectorySeparatorChar + "hnc1_tumor.txt");
 
             var mz = dataset.GetRawMzArray();
 
-            var intensities = dataset.GetRawIntensityArray(spectrumId);
-            var coordinates = dataset.GetSpatialCoordinates(spectrumId);
-
-            return new Spectrum()
+            try
             {
-                Id = spectrumId,
-                Intensities = intensities,
-                Mz = mz,
-                X = coordinates.X,
-                Y = coordinates.Y
-            };
+                var intensities = dataset.GetRawIntensityArray(spectrumId);
+                var coordinates = dataset.GetSpatialCoordinates(spectrumId);
+
+                return new Spectrum()
+                {
+                    Id = spectrumId,
+                    Intensities = intensities,
+                    Mz = mz,
+                    X = coordinates.X,
+                    Y = coordinates.Y
+                };
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
         }
 
         /// <summary>
@@ -72,7 +80,7 @@ namespace Spectre.Controllers
         {
             if (id != 1)
             {
-                return null;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
             var dataset = new BasicTextDataset(textFilePath: ConfigurationManager.AppSettings["LocalDataDirectory"] + Path.DirectorySeparatorChar + "hnc1_tumor.txt");
@@ -82,7 +90,7 @@ namespace Spectre.Controllers
 
             if (spectrumId == -1)
             {
-                return null;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
             var mz = dataset.GetRawMzArray();

@@ -18,6 +18,8 @@
 */
 
 using System.Linq;
+using System.Net;
+using System.Web.Http;
 using NUnit.Framework;
 using Spectre.Controllers;
 using Spectre.Models.Msi;
@@ -30,6 +32,8 @@ namespace Spectre.Tests.Controllers
     [TestFixture]
     internal class SpectrumControllerTest
     {
+        private const double Delta = 0.001;
+
         private SpectrumController _controller;
 
         /// <summary>
@@ -42,17 +46,56 @@ namespace Spectre.Tests.Controllers
         }
 
         /// <summary>
+        /// Tests getting non-existent preparation.
+        /// </summary>
+        [Test]
+        public void TestThrows404ForInvalidPreparation()
+        {
+            try
+            {
+                var spectrum = _controller.Get(id: 0, spectrumId: 1);
+                Assert.Fail("Should throw for non-existent preparation");
+            }
+            catch (HttpResponseException e)
+            {
+                Assert.AreEqual(actual: e.Response.StatusCode, expected: HttpStatusCode.NotFound);
+            }
+        }
+
+        /// <summary>
+        /// Tests getting non-existent spectrum.
+        /// </summary>
+        [Test]
+        public void TestThrows404ForInvalidSpectrum()
+        {
+            try
+            {
+                var spectrum = _controller.Get(id: 1, spectrumId: 999);
+                Assert.Fail("Should throw for non-existent spectrum");
+            }
+            catch (HttpResponseException e)
+            {
+                Assert.AreEqual(actual: e.Response.StatusCode, expected: HttpStatusCode.NotFound);
+            }
+        }
+
+        /// <summary>
         /// Tests the get first preparation sample spectrum.
         /// </summary>
         [Test]
         public void TestGetFirstPreparationSampleSpectrum()
         {
-            var spectrum = _controller.Get(id: 1, spectrumId: 1);
+            var spectrum = _controller.Get(id: 1, spectrumId: 2);
 
             Assert.NotNull(spectrum);
             Assert.IsInstanceOf<Spectrum>(spectrum);
+
             Assert.IsNotEmpty(spectrum.Intensities);
+            Assert.AreEqual(actual: spectrum.Intensities.First(), expected: 5487.54763657640, delta: Delta);
+
             Assert.IsNotEmpty(spectrum.Mz);
+            Assert.AreEqual(actual: spectrum.Mz.First(), expected: 799.796609809649, delta: Delta);
+
             Assert.AreEqual(
                 expected: spectrum.Mz.Count(),
                 actual: spectrum.Intensities.Count(),
@@ -66,16 +109,15 @@ namespace Spectre.Tests.Controllers
         public void TestReturnsSampleSpectrumByCoords()
         {
             var spectrum = _controller.Get(id: 1, x: 94, y: 31);
-            const double delta = 0.001;
 
             Assert.NotNull(spectrum);
             Assert.IsInstanceOf<Spectrum>(spectrum);
 
             Assert.IsNotEmpty(spectrum.Intensities);
-            Assert.AreEqual(actual: spectrum.Intensities.First(), expected: 5487.54763657640, delta: delta);
+            Assert.AreEqual(actual: spectrum.Intensities.First(), expected: 5487.54763657640, delta: Delta);
 
             Assert.IsNotEmpty(spectrum.Mz);
-            Assert.AreEqual(actual: spectrum.Mz.First(), expected: 799.796609809649, delta: delta);
+            Assert.AreEqual(actual: spectrum.Mz.First(), expected: 799.796609809649, delta: Delta);
 
             Assert.AreEqual(
                 expected: spectrum.Mz.Count(),
@@ -87,11 +129,17 @@ namespace Spectre.Tests.Controllers
         /// Tests reading of sample spectrum by invalid coordinates.
         /// </summary>
         [Test]
-        public void TestDoesNotReturnSampleSpectrumForInvalidCoords()
+        public void TestThrows404ForInvalidCoords()
         {
-            var spectrum = _controller.Get(id: 1, x: 0, y: 0);
-
-            Assert.Null(spectrum);
+            try
+            {
+                var spectrum = _controller.Get(id: 1, x: 0, y: 0);
+                Assert.Fail("Should throw for invalid coords");
+            }
+            catch (HttpResponseException e)
+            {
+                Assert.AreEqual(actual: e.Response.StatusCode, expected: HttpStatusCode.NotFound);
+            }
         }
     }
 }
