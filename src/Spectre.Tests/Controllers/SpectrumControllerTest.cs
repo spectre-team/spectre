@@ -58,5 +58,40 @@ namespace Spectre.Tests.Controllers
                 actual: spectrum.Intensities.Count(),
                 message: "Intensities and Mz counts do not match.");
         }
+
+        /// <summary>
+        /// Tests reading of sample spectrum by valid coordinates.
+        /// </summary>
+        [Test]
+        public void TestReturnsSampleSpectrumByCoords()
+        {
+            var spectrum = _controller.Get(id: 1, x: 94, y: 31);
+            const double delta = 0.001;
+
+            Assert.NotNull(spectrum);
+            Assert.IsInstanceOf<Spectrum>(spectrum);
+
+            Assert.IsNotEmpty(spectrum.Intensities);
+            Assert.AreEqual(actual: spectrum.Intensities.First(), expected: 5487.54763657640, delta: delta);
+
+            Assert.IsNotEmpty(spectrum.Mz);
+            Assert.AreEqual(actual: spectrum.Mz.First(), expected: 799.796609809649, delta: delta);
+
+            Assert.AreEqual(
+                expected: spectrum.Mz.Count(),
+                actual: spectrum.Intensities.Count(),
+                message: "Intensities and Mz counts should match.");
+        }
+
+        /// <summary>
+        /// Tests reading of sample spectrum by invalid coordinates.
+        /// </summary>
+        [Test]
+        public void TestDoesNotReturnSampleSpectrumForInvalidCoords()
+        {
+            var spectrum = _controller.Get(id: 1, x: 0, y: 0);
+
+            Assert.Null(spectrum);
+        }
     }
 }

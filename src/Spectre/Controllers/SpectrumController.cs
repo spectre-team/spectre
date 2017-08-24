@@ -16,8 +16,10 @@
 
 namespace Spectre.Controllers
 {
+    using System;
     using System.Configuration;
     using System.IO;
+    using System.Linq;
     using System.Web.Http;
     using System.Web.Http.Cors;
     using Spectre.Data.Datasets;
@@ -30,7 +32,7 @@ namespace Spectre.Controllers
     public class SpectrumController : ApiController
     {
         /// <summary>
-        /// Gets single spectrum of a specified preparation.
+        /// Gets single spectrum of a specified preparation by identifier.
         /// </summary>
         /// <param name="id">Preparation identifier.</param>
         /// <param name="spectrumId">Spectrum identifier.</param>
@@ -56,6 +58,44 @@ namespace Spectre.Controllers
                 Mz = mz,
                 X = coordinates.X,
                 Y = coordinates.Y
+            };
+        }
+
+        /// <summary>
+        /// Gets single spectrum of a specified preparation by spatial coordinates.
+        /// </summary>
+        /// <param name="id">Preparation identifier.</param>
+        /// <param name="x">Spectrum's X coordinate.</param>
+        /// <param name="y">Spectrum's Y coordinate.</param>
+        /// <returns>Spectrum</returns>
+        public Spectrum Get(int id, int x, int y)
+        {
+            if (id != 1)
+            {
+                return null;
+            }
+
+            var dataset = new BasicTextDataset(textFilePath: ConfigurationManager.AppSettings["LocalDataDirectory"] + Path.DirectorySeparatorChar + "hnc1_tumor.txt");
+
+            var spectrumId = dataset.SpatialCoordinates.ToList()
+                .FindIndex(sc => sc.X == x && sc.Y == y);
+
+            if (spectrumId == -1)
+            {
+                return null;
+            }
+
+            var mz = dataset.GetRawMzArray();
+            var intensities = dataset.GetRawIntensityArray(spectrumId);
+            var coordinates = dataset.GetSpatialCoordinates(spectrumId);
+
+            return new Spectrum()
+            {
+                Id = spectrumId,
+                Intensities = intensities,
+                Mz = mz,
+                X = x,
+                Y = y
             };
         }
     }
