@@ -17,6 +17,7 @@
    limitations under the License.
 */
 
+using System;
 using NUnit.Framework;
 using Spectre.Service.Configuration;
 using Spectre.Service.Loaders;
@@ -24,7 +25,7 @@ using Spectre.Service.Loaders;
 namespace Spectre.Service.Tests.Loaders
 {
     [TestFixture]
-    class DatasetLoaderTest
+    public class DatasetLoaderTest
     {
         private DataRootConfig _rootConfig;
         private DatasetLoader _datasetLoader;
@@ -41,7 +42,13 @@ namespace Spectre.Service.Tests.Loaders
         [Test]
         public void ReturnsFromCorrectName()
         {
-            Assert.NotNull(_datasetLoader.GetFromName("small-test.txt"));
+            Assert.NotNull(_datasetLoader.GetFromName(name: "small-test.txt"));
+        }
+
+        [Test]
+        public void ThrowsOnIncorrectName()
+        {
+            Assert.Throws<ArgumentException>(code: () => _datasetLoader.GetFromName(name: "invalid_name"));
         }
     }
 }
