@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre", "Spectre\Spectre.csproj", "{0E4F265B-8702-4D70-AB70-AA566D7A2E40}"
 EndProject
@@ -81,7 +81,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClassifier", "Sp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libClassifier.Tests", "Spectre.libClassifier.Tests\Spectre.libClassifier.Tests.vcxproj", "{B6B8D608-32E7-4F09-B91D-EA5832D74C07}"
 	ProjectSection(ProjectDependencies) = postProject
-		{7417BF00-028B-4797-B58A-6058CA338493} = {7417BF00-028B-4797-B58A-6058CA338493}
 		{9786751A-6AE1-48D3-938D-4129D0399667} = {9786751A-6AE1-48D3-938D-4129D0399667}
 		{5419AEEB-98B4-4D79-9FCA-A794200073FC} = {5419AEEB-98B4-4D79-9FCA-A794200073FC}
 	EndProjectSection

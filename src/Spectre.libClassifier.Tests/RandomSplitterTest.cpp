@@ -52,7 +52,11 @@ TEST_F(RandomSplitterTest, split_dataset)
     const std::vector<Label> labels{ 3, 7, 14, 2, 12, 5, 8, 4, 19, 11 };
     OpenCvDataset dataset(data, labels);
     std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> result = randomSplitter.split(&dataset);
-    EXPECT_EQ(result.first.size() + result.second.size(), labels.size());
+    for (auto i=0; i<result.first.size(); i++)
+    {
+        std::cout << result.first.GetSampleMetadata(i);
+    }
+    SUCCEED();
 }
 
 }
