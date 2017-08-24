@@ -25,12 +25,15 @@ namespace Spectre::libClassifier {
 
 class RandomSplitter
 {
+
+using Seed = _ULonglong;
+
 public:
-    RandomSplitter::RandomSplitter(double trainingPercent, uint rngSeed = 0);
+    RandomSplitter::RandomSplitter(double trainingPercent, Seed rngSeed = 0);
     std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> RandomSplitter::split(Spectre::libClassifier::OpenCvDataset *data);
 private:
     double trainingPercent;
-    uint rngSeed;
+    Seed rngSeed;
     static void RandomSplitter::copyObservation(Observation observation, std::vector<DataType>* data);
     static void RandomSplitter::copyLabel(Label label, std::vector<Label>* data);
 };
