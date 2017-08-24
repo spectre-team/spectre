@@ -18,11 +18,11 @@ limitations under the License.
 */
 
 #include "RandomSplitter.h"
-#include <ctime>
+#include <random>
 
 namespace Spectre::libClassifier {
 
-RandomSplitter::RandomSplitter(double trainingPercent, uint rngSeed)
+RandomSplitter::RandomSplitter(double trainingPercent, Seed rngSeed)
     : trainingPercent(trainingPercent),
       rngSeed(rngSeed)
 {
@@ -33,44 +33,17 @@ std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvD
 {
     std::vector<DataType> data1{}, data2{};
     std::vector<Label> labels1{}, labels2{};
-
-    auto trainingSize = data->size() * 0.7;
-    if (rngSeed == 0)
-    {
-        srand(unsigned int(time(NULL)));
-    }
-    else {
-        srand(rngSeed);
-    }
-    int random;
+    std::vector<bool> flags;
+    std::bernoulli_distribution dist(trainingPercent);
 
     for (auto i = 0u; i < data->size(); i++)
     {
-        Observation dataObservation = (*data)[i];
-        if (data1.size() < trainingSize)
-        {
-            random = rand() % data->size();
-            if (random < trainingSize)
-            {
-                copyObservation(dataObservation, &data1);
-                copyLabel(data->GetSampleMetadata(i), &labels1);
-            }
-            else
-            {
-                copyObservation(dataObservation, &data2);
-                labels2.push_back(data->GetSampleMetadata(i));
-            }
-        }
-        else
-        {
-            copyObservation(dataObservation, &data2);
-            labels2.push_back(data->GetSampleMetadata(i));
-        }
+        flags.push_back(dist(rngSeed));
     }
 
     Spectre::libClassifier::OpenCvDataset dataset1(data1, labels1);
     Spectre::libClassifier::OpenCvDataset dataset2(data2, labels2);
-    std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> result(std::make_pair(dataset1, dataset2));
+    auto result = std::make_pair(std::move(dataset1), std::move(dataset2));
     return result;
 }
 
