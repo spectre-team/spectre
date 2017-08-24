@@ -19,6 +19,8 @@
 
 using System;
 using System.IO;
+using System.IO.Abstractions;
+using Ninject;
 using Spectre.Data.Datasets;
 using Spectre.Service.Configuration;
 
@@ -40,6 +42,7 @@ namespace Spectre.Service.Loaders
         /// Root for remote directory.
         /// </summary>
         private readonly string _remoteRoot;
+
         #endregion
 
         #region Constructor
@@ -55,6 +58,16 @@ namespace Spectre.Service.Loaders
         }
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// Handle to file system.
+        /// </summary>
+        [Inject]
+        public IFileSystem FileSystem { private get; set; }
+
+        #endregion
+
         #region Loaders
 
         /// <summary>
@@ -67,18 +80,30 @@ namespace Spectre.Service.Loaders
         {
             string fullPathLocal = _localRoot + "\\" + name;
 
-            if (!File.Exists(fullPathLocal))
+            if (!FileSystem.File.Exists(fullPathLocal))
             {
                 string fullPathRemote = _remoteRoot + "\\" + name;
-                if (!File.Exists(fullPathRemote))
+                if (!FileSystem.File.Exists(fullPathRemote))
                 {
                     throw new ArgumentException("Dataset \"" + name + "\" not found neither locally nor remotely.");
                 }
 
-                File.Copy(fullPathRemote, fullPathLocal);
+                FileSystem.File.Copy(fullPathRemote, fullPathLocal);
             }
 
-            return new BasicTextDataset(fullPathLocal);
+            IDataset result;
+
+            try
+            {
+                result = new BasicTextDataset(fullPathLocal);
+            }
+            catch (IOException)
+            {
+                FileSystem.File.Delete(fullPathLocal);
+                throw;
+            }
+
+            return result;
         }
 
         /*
