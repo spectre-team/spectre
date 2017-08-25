@@ -19,6 +19,7 @@ limitations under the License.
 
 #include "Spectre.libClassifier/RandomSplitter.h"
 #include <gtest/gtest.h>
+#include "Spectre.libGenetic/DataTypes.h"
 
 namespace
 {
@@ -36,7 +37,7 @@ public:
         :randomSplitter(training, seed) {}
 
 protected:
-    uint seed = 1;
+    Spectre::libGenetic::Seed seed = 1;
     double training = 0.7;
     RandomSplitter randomSplitter;
 
@@ -51,7 +52,7 @@ TEST_F(RandomSplitterTest, split_dataset)
     const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.9f, 0.8f };
     const std::vector<Label> labels{ 3, 7, 14, 2, 12, 5, 8, 4, 19, 11 };
     OpenCvDataset dataset(data, labels);
-    std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> result = randomSplitter.split(&dataset);
+    std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> result = randomSplitter.split(dataset);
     EXPECT_EQ(result.first.size() + result.second.size(), labels.size());
 }
 

@@ -38,7 +38,7 @@ OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
     other.m_MatLabels.release();
     other.m_observations.clear();
 }
-    
+
 OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
     m_Data(data.begin(), data.end()),
     m_Mat(static_cast<int>(labels.size()), static_cast<int>(data.size() / labels.size()), CV_TYPE, m_Data.data()),

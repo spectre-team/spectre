@@ -19,45 +19,54 @@ limitations under the License.
 
 #include "RandomSplitter.h"
 #include <random>
+#include "Spectre.libPlatform/Filter.h"
 
 namespace Spectre::libClassifier {
 
 RandomSplitter::RandomSplitter(double trainingPercent, Seed rngSeed)
-    : trainingPercent(trainingPercent),
-      rngSeed(rngSeed)
+    : m_trainingPercent(trainingPercent),
+      m_randomNumberGenerator(rngSeed)
 {
 
 }
 
-std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> RandomSplitter::split(Spectre::libClassifier::OpenCvDataset* data)
+std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
 {
-    std::vector<DataType> data1{}, data2{};
-    std::vector<Label> labels1{}, labels2{};
     std::vector<bool> flags;
-    std::bernoulli_distribution dist(trainingPercent);
+    std::bernoulli_distribution dist(m_trainingPercent);
 
-    for (auto i = 0u; i < data->size(); i++)
+    for (auto i = 0u; i < data.size(); i++)
     {
-        flags.push_back(dist(rngSeed));
+        flags.push_back(dist(m_randomNumberGenerator));
     }
+    std::vector<Observation> data1_observations = libPlatform::Functional::filter(data.GetData(), flags);
+    std::vector<Label> labels1 = libPlatform::Functional::filter(data.GetSampleMetadata(), flags);
+    for (auto i = 0u; i < flags.size(); i++)
+    {
+        flags[i] = !flags[i];
+    }
+    std::vector<Observation> data2_observations = libPlatform::Functional::filter(data.GetData(), flags);
+    std::vector<Label> labels2 = libPlatform::Functional::filter(data.GetSampleMetadata(), flags);
 
+    std::vector<DataType> data1, data2;
+    for (auto i = 0u; i < data1_observations.size(); i++)
+    {
+        for (auto j = 0u; j < data1_observations[i].size(); j++)
+        {
+            data1.push_back(data1_observations[i][j]);
+        }
+    }
+    for (auto i = 0u; i < data2_observations.size(); i++)
+    {
+        for (auto j = 0u; j < data2_observations[i].size(); j++)
+        {
+            data2.push_back(data2_observations[i][j]);
+        }
+    }
     Spectre::libClassifier::OpenCvDataset dataset1(data1, labels1);
     Spectre::libClassifier::OpenCvDataset dataset2(data2, labels2);
     auto result = std::make_pair(std::move(dataset1), std::move(dataset2));
     return result;
-}
-
-void RandomSplitter::copyObservation(Observation observation, std::vector<DataType> *data)
-{
-    for (auto i=0; i<observation.size(); i++)
-    {
-        data->push_back(observation.data()[i]);
-    }
-}
-
-void RandomSplitter::copyLabel(Label label, std::vector<Label> *data)
-{
-    data->push_back(label);
 }
 
 }
