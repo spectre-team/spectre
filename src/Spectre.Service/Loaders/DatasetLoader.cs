@@ -76,34 +76,31 @@ namespace Spectre.Service.Loaders
         /// <param name="name">File name.</param>
         /// <returns>Found dataset.</returns>
         /// <exception cref="ArgumentException">Throws when the file is not found both locally and remotely.</exception>
+        /// <exception cref="IOException">Throws when the loader fails to create dataset from the file.</exception>
         public IDataset GetFromName(string name)
         {
-            string fullPathLocal = _localRoot + "\\" + name;
+            string fullPathLocal = Path.Combine(_localRoot, name);
 
             if (!FileSystem.File.Exists(fullPathLocal))
             {
-                string fullPathRemote = _remoteRoot + "\\" + name;
+                string fullPathRemote = Path.Combine(_remoteRoot, name);
                 if (!FileSystem.File.Exists(fullPathRemote))
                 {
-                    throw new ArgumentException("Dataset \"" + name + "\" not found neither locally nor remotely.");
+                    throw new ArgumentException($"Dataset '{name}' not found neither locally nor remotely.", nameof(name));
                 }
 
                 FileSystem.File.Copy(fullPathRemote, fullPathLocal);
             }
 
-            IDataset result;
-
             try
             {
-                result = new BasicTextDataset(fullPathLocal);
+                return new BasicTextDataset(fullPathLocal);
             }
             catch (IOException)
             {
                 FileSystem.File.Delete(fullPathLocal);
                 throw;
             }
-
-            return result;
         }
 
         /*

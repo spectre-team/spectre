@@ -39,25 +39,25 @@ namespace Spectre.Service.Tests.Loaders
         private MockFileSystem _mockFileSystem;
 
         private readonly string _rootDir = @"C:\spectre_data";
-        private readonly string _localDir = @"\local";
-        private readonly string _remoteDir = @"\remote";
+        private readonly string _localDir = "local";
+        private readonly string _remoteDir = "remote";
 
-        private readonly string _fileDir = TestContext.CurrentContext.TestDirectory
-                                           + "\\..\\..\\..\\..\\..\\test_files";
+        private readonly string _fileDir = $"{TestContext.CurrentContext.TestDirectory} + "
+                                           + @"\..\..\..\..\..\test_files";
         [SetUp]
         public void SetUp()
         {
-            var localDirFull = _rootDir + _localDir;
-            var remoteDirFull = _rootDir + _remoteDir;
-            var correctDataset = File.ReadAllText(_fileDir + @"\small-test.txt");
+            var localDirFull = Path.Combine(_rootDir, _localDir);
+            var remoteDirFull = Path.Combine(_rootDir, _remoteDir);
+            var correctDataset = File.ReadAllText(Path.Combine(_fileDir, "small-test.txt"));
 
             _mockFileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
             {
                 { localDirFull, new MockDirectoryData() },
                 { remoteDirFull, new MockDirectoryData() },
-                { localDirFull + @"\local_correct.txt", new MockFileData(correctDataset) },
-                { remoteDirFull + @"\remote_correct.txt", new MockFileData(correctDataset) },
-                { localDirFull + @"\local_incorrect.txt", new MockFileData(textContents: "incorrect_data") }
+                { Path.Combine(localDirFull, "local_correct.txt"), new MockFileData(correctDataset) },
+                { Path.Combine(remoteDirFull, "remote_correct.txt"), new MockFileData(correctDataset) },
+                { Path.Combine(localDirFull, "local_incorrect.txt"), new MockFileData(textContents: "incorrect_data") }
             });
 
             var kernel = new StandardKernel();
