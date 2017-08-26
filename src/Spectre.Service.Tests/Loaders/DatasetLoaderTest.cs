@@ -73,28 +73,28 @@ namespace Spectre.Service.Tests.Loaders
         public void ReturnsFromCorrectNameLocal()
         {
             Assert.Throws<DatasetLoadException>(code: () => _datasetLoader.GetFromName(name: "local_correct.txt"), 
-                                                message: "Loader did not manage to load local file.");
+                message: "Loader did not manage to load local file.");
         }
 
         [Test]
         public void ReturnsFromCorrectNameRemote()
         {
             Assert.Throws<DatasetLoadException>(code: () => _datasetLoader.GetFromName(name: "remote_correct.txt"),
-                                                message: "Loader did not manage to load remote file.");
+                message: "Loader did not manage to load remote file.");
         }
 
         [Test]
         public void ThrowsOnIncorrectName()
         {
-            Assert.Throws<FileNotFoundException>(code: () => _datasetLoader.GetFromName(name: "invalid_name"), 
-                                                message: "Loader accepted invalid file name.");
+            Assert.Throws<FileNotFoundException>(code: () => _datasetLoader.GetFromName(name: "invalid_name"),
+                message: "Loader accepted invalid file name.");
         }
 
         [Test]
         public void ThrowsOnIncorrectFileContents()
         {
             Assert.Throws<DatasetLoadException>(code: () => _datasetLoader.GetFromName(name: "local_incorrect.txt"),
-                                                message: "Loader did not manage to load remote file.");
+                message: "Loader did not manage to load remote file.");
         }
 
         [Test]
