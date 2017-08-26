@@ -75,7 +75,7 @@ namespace Spectre.Service.Loaders
         /// </summary>
         /// <param name="name">File name.</param>
         /// <returns>Found dataset.</returns>
-        /// <exception cref="ArgumentException">Throws when the file is not found both locally and remotely.</exception>
+        /// <exception cref="FileNotFoundException">Throws when the file is not found both locally and remotely.</exception>
         /// <exception cref="DatasetLoadException">Throws when the loader fails to create dataset from the file.</exception>
         public IDataset GetFromName(string name)
         {
