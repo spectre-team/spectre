@@ -17,11 +17,14 @@
    limitations under the License.
 */
 
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
 using NUnit.Framework;
 using Spectre.Controllers;
+using Spectre.Data.Datasets;
 using Spectre.Models.Msi;
 
 namespace Spectre.Tests.Controllers
@@ -68,9 +71,16 @@ namespace Spectre.Tests.Controllers
         [Test]
         public void TestThrows404ForInvalidSpectrum()
         {
+            var dataset = new BasicTextDataset(Path.Combine(ConfigurationManager.AppSettings["LocalDataDirectory"], "hnc1_tumor.txt"));
+            var preparationId = 1;
+            var spectrumId = dataset.SpectrumCount;
+
+            Assume.That(dataset.SpectrumCount, Is.GreaterThan(0), "Should be working on a non-empty dataset");
+            Assume.That(spectrumId, Is.GreaterThanOrEqualTo(dataset.SpectrumCount), "Should be a non-existent spectrum");
+
             try
             {
-                var spectrum = _controller.Get(id: 1, spectrumId: 999);
+                var spectrum = _controller.Get(id: preparationId, spectrumId: spectrumId);
                 Assert.Fail("Should throw for non-existent spectrum");
             }
             catch (HttpResponseException e)
