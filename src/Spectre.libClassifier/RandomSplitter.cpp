@@ -17,14 +17,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "RandomSplitter.h"
 #include <random>
+#include "RandomSplitter.h"
 #include "Spectre.libPlatform/Filter.h"
+#include "Spectre.libPlatform/Math.h"
 
 namespace Spectre::libClassifier {
 
-RandomSplitter::RandomSplitter(double trainingPercent, Seed rngSeed)
-    : m_trainingPercent(trainingPercent),
+using namespace Spectre::libPlatform::Functional;
+using namespace Spectre::libPlatform::Math;
+
+RandomSplitter::RandomSplitter(double trainingProbability, Seed rngSeed)
+    : m_trainingProbability(trainingProbability),
       m_randomNumberGenerator(rngSeed)
 {
 
@@ -33,20 +37,18 @@ RandomSplitter::RandomSplitter(double trainingPercent, Seed rngSeed)
 std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
 {
     std::vector<bool> flags;
-    std::bernoulli_distribution dist(m_trainingPercent);
+    flags = fillWithRandom(flags, m_randomNumberGenerator, m_trainingProbability, data.size());
+    /*std::bernoulli_distribution dist(m_trainingPercent);
 
     for (auto i = 0u; i < data.size(); i++)
     {
         flags.push_back(dist(m_randomNumberGenerator));
-    }
-    std::vector<Observation> data1_observations = libPlatform::Functional::filter(data.GetData(), flags);
-    std::vector<Label> labels1 = libPlatform::Functional::filter(data.GetSampleMetadata(), flags);
-    for (auto i = 0u; i < flags.size(); i++)
-    {
-        flags[i] = !flags[i];
-    }
-    std::vector<Observation> data2_observations = libPlatform::Functional::filter(data.GetData(), flags);
-    std::vector<Label> labels2 = libPlatform::Functional::filter(data.GetSampleMetadata(), flags);
+    }*/
+    std::vector<Observation> data1_observations = filter(data.GetData(), flags);
+    std::vector<Label> labels1 = filter(data.GetSampleMetadata(), flags);
+    flags = negate(flags);
+    std::vector<Observation> data2_observations = filter(data.GetData(), flags);
+    std::vector<Label> labels2 = filter(data.GetSampleMetadata(), flags);
 
     std::vector<DataType> data1, data2;
     for (auto i = 0u; i < data1_observations.size(); i++)

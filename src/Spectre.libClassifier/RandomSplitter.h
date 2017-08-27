@@ -1,6 +1,6 @@
 ﻿/*
 * RandomSplitter.h
-* 
+* Splits OpenCVDataset to training set and test set
 *
 Copyright 2017 Spectre Team
 
@@ -18,9 +18,9 @@ limitations under the License.
 */
 
 #pragma once
+#include <random>
 #include <utility>
 #include "Spectre.libClassifier/OpenCvDataset.h"
-#include <random>
 
 namespace Spectre::libClassifier {
 
@@ -34,7 +34,7 @@ public:
     RandomSplitter::RandomSplitter(double trainingPercent, Seed rngSeed = 0);
     std::pair<Spectre::libClassifier::OpenCvDataset, Spectre::libClassifier::OpenCvDataset> RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data);
 private:
-    double m_trainingPercent;
+    double m_trainingProbability;
     RandomNumberGenerator m_randomNumberGenerator;
 };
 

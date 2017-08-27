@@ -21,6 +21,7 @@ limitations under the License.
 #include <vector>
 #include <span.h>
 #include "Transform.h"
+#include "Spectre.libGenetic/DataTypes.h"
 
 namespace Spectre::libPlatform::Math
 {
@@ -351,4 +352,34 @@ constexpr std::vector<DataType> abs(gsl::span<const DataType> data)
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     return Functional::transform(data, [](DataType entry) { return std::abs(entry); });
 }
+
+/// <summary>
+/// transform to opposite values
+/// </summary>
+/// <param name="data">The data.</param>
+/// <returns>Vector consisting of opposite values of elements of first</returns>
+template <class DataType>
+constexpr std::vector<DataType> negate(gsl::span<const DataType> data)
+{
+    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
+    return Functional::transform(data, [](DataType entry) { return std::negate<DataType>(entry); });
+}
+
+/// <summary>
+/// fill with random values
+/// </summary>
+/// <param name="data">The data.</param>
+/// <returns>Vector consisting of opposite values of elements of first</returns>
+template <class DataType>
+constexpr std::vector<DataType> fillWithRandom(gsl::span<const DataType> empty_data, libGenetic::Seed seed, double probability, int size)
+{
+    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
+    std::bernoulli_distribution dist(probability);
+    for (auto i = 0u; i < size; i++)
+    {
+        empty_data.push_back(dist(seed));
+    }
+    return empty_data;
+}
+
 }
