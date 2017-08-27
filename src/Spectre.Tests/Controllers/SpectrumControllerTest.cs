@@ -61,7 +61,10 @@ namespace Spectre.Tests.Controllers
             }
             catch (HttpResponseException e)
             {
-                Assert.AreEqual(actual: e.Response.StatusCode, expected: HttpStatusCode.NotFound);
+                Assert.AreEqual(
+                    actual: e.Response.StatusCode,
+                    expected: HttpStatusCode.NotFound,
+                    message: "Should respond with proper HTTP code");
             }
         }
 
@@ -85,7 +88,10 @@ namespace Spectre.Tests.Controllers
             }
             catch (HttpResponseException e)
             {
-                Assert.AreEqual(actual: e.Response.StatusCode, expected: HttpStatusCode.NotFound);
+                Assert.AreEqual(
+                    actual: e.Response.StatusCode,
+                    expected: HttpStatusCode.NotFound,
+                    message: "Should respond with proper HTTP code");
             }
         }
 
@@ -148,7 +154,10 @@ namespace Spectre.Tests.Controllers
             }
             catch (HttpResponseException e)
             {
-                Assert.AreEqual(actual: e.Response.StatusCode, expected: HttpStatusCode.NotFound);
+                Assert.AreEqual(
+                    actual: e.Response.StatusCode,
+                    expected: HttpStatusCode.NotFound,
+                    message: "Should respond with proper HTTP code");
             }
         }
     }
