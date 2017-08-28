@@ -22,6 +22,7 @@ limitations under the License.
 #include <span.h>
 #include "Transform.h"
 #include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libGaussianMixtureModelling/RandomInitializationRef.h"
 
 namespace Spectre::libPlatform::Math
 {
@@ -354,32 +355,24 @@ constexpr std::vector<DataType> abs(gsl::span<const DataType> data)
 }
 
 /// <summary>
-/// transform to opposite values
+/// transform to opposite values of vector of bool
 /// </summary>
 /// <param name="data">The data.</param>
-/// <returns>Vector consisting of opposite values of elements of first</returns>
-template <class DataType>
-constexpr std::vector<DataType> negate(gsl::span<const DataType> data)
+/// <returns>Vector of bools consisting of opposite values of elements of data</returns>
+inline std::vector<bool> negate(std::vector<bool> data)
 {
-    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(data, [](DataType entry) { return std::negate<DataType>(entry); });
+    return Functional::transform(data, [](bool entry) { return std::binary_negate<bool>(entry); });
 }
 
 /// <summary>
-/// fill with random values
+/// fill with random bool values
 /// </summary>
 /// <param name="data">The data.</param>
-/// <returns>Vector consisting of opposite values of elements of first</returns>
-template <class DataType>
-constexpr std::vector<DataType> fillWithRandom(gsl::span<const DataType> empty_data, libGenetic::Seed seed, double probability, int size)
+/// <returns>Vector consisting of random bool values</returns>
+inline std::vector<bool> build(RandomNumberGenerator generator, std::bernoulli_distribution dist, int size)
 {
-    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    std::bernoulli_distribution dist(probability);
-    for (auto i = 0u; i < size; i++)
-    {
-        empty_data.push_back(dist(seed));
-    }
-    return empty_data;
+    std::vector<bool> data(size);
+    return Functional::transform(data, [](bool entry) { return dist(generator); });
 }
 
 }

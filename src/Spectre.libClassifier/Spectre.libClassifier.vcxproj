@@ -82,12 +82,14 @@
     <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
     <ClCompile Include="RandomSplitter.cpp" />
+    <ClCompile Include="SplittedOpenCvDataset.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />
     <ClInclude Include="RandomSplitter.h" />
+    <ClInclude Include="SplittedOpevCvDataset.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
