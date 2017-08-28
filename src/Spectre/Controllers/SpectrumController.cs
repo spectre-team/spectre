@@ -14,7 +14,9 @@
    limitations under the License.
 */
 
+using System;
 using System.Collections.Generic;
+using Spectre.Exceptions;
 
 namespace Spectre.Controllers
 {
@@ -57,22 +59,6 @@ namespace Spectre.Controllers
                 X = coordinates.X,
                 Y = coordinates.Y
             };
-        }
-
-        /// <summary>
-        /// Gets all specta.
-        /// </summary>
-        /// <param name="id">Preparation identifier.</param>
-        /// <returns>Spectra</returns>
-        public Spectrum[] GetAllSpectra(int id)
-        {
-            Spectrum[] spectra = new Spectrum[10];
-            /* from where should I take number of spectra?*/
-            for (int i = 1; i <= 10; i++)
-            {
-                spectra[i - 1] = Get(id, i);
-            }
-            return spectra;
         }
     }
 }

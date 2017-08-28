@@ -42,7 +42,8 @@ export class PreparationComponent implements OnInit {
   public currentChannelId = 0;
   public mz = [];
   public preparation: Preparation;
-  public spectra: Array<Spectrum>;
+  public xCoordinate = 0;
+  public yCoordinate = 0;
 
   constructor(
       private route: ActivatedRoute,
@@ -65,7 +66,6 @@ export class PreparationComponent implements OnInit {
           .get(this.id, 100)
           .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
         this.getSpectrum(1);
-        this.getAllSpectra();
         console.log('[SpectrumComponent] layout setup');
       });
   }
@@ -81,15 +81,13 @@ export class PreparationComponent implements OnInit {
   }
 
   onChangedXCoordinate(event: any) {
-    this.spectrumData = this.selectSpectrumByCoordinates();
+    this.xCoordinate = event.value;
+    this.getSpectrumByCoordianates();
   }
 
   onChangedYCoordinate(event: any) {
-    this.spectrumData = this.selectSpectrumByCoordinates();
-  }
-
-  selectSpectrumByCoordinates(){
-    alert(this.spectra.length);
+    this.yCoordinate = event.value;
+    this.getSpectrumByCoordianates();
   }
 
   getSpectrum(selectNumber: number) {
@@ -98,10 +96,10 @@ export class PreparationComponent implements OnInit {
       .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
   }
 
-  getAllSpectra() {
+  getSpectrumByCoordianates() {
     this.spectrumService
-      .getAll(this.id)
-      .subscribe(spectra => this.spectra = spectra);
+      .getByCoordinates(this.id, this.xCoordinate, this.yCoordinate, this.preparation.spectraNumber)
+      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
   }
 
   showError(msg: string) {
@@ -127,6 +125,7 @@ export class PreparationComponent implements OnInit {
   toSpectrumDataset(spectrum: Spectrum) {
     this.mzLenth = spectrum.mz.length - 1;
     this.mz = spectrum.mz;
+    alert(spectrum.mz[1] + " " + spectrum.mz[23]);
     return [{
       x: spectrum.mz,
       y: spectrum.intensities,

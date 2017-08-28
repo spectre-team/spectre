@@ -39,11 +39,11 @@ export class SpectrumService extends Service {
     return spectrum;
   }
 
-  getAll(preparationId: number): Observable<Array<Spectrum>> {
-    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}`;
+  getByCoordinates(preparationId: number, x: number, y: number, spectraNumber: number): Observable<Spectrum> {
+    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?x=${x}?y=${y}?spectraNumber=${spectraNumber}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    const spectra = response.map(toSpectra);
-    return spectra;
+    const spectrum = response.map(toSpectrum);
+    return spectrum;
   }
 
   private getHeaders() {
@@ -61,20 +61,5 @@ function toSpectrum(response: Response): Spectrum {
     intensities: json.Intensities,
     x: json.X,
     y: json.Y
-  });
-}
-//TODO: refactorization
-function toSpectra(response: Response): Array<Spectrum> {
-  const json = response.json();
-  var spectra = [];
-  for (let spectrum of json) {
-    spectra.push(<Spectrum>({
-      id: spectrum.Id,
-      mz: spectrum.Mz,
-      intensities: spectrum.Intensities,
-      x: spectrum.X,
-      y: spectrum.Y
-    }));
-  };
-  return spectra;
+  })
 }
