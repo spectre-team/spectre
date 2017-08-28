@@ -48,6 +48,8 @@
     <Compile Include="Abstract\IConsoleCaptureService.cs" />
     <Compile Include="Abstract\IDivikService.cs" />
     <Compile Include="Abstract\IServiceFactory.cs" />
+    <Compile Include="Configuration\ConfigValidationException.cs" />
+    <Compile Include="Configuration\DataRootConfig.cs" />
     <Compile Include="ConsoleCaptureService.cs" />
     <Compile Include="DivikService.cs" />
     <Compile Include="ServiceFactory.cs" />
