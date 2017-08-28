@@ -37,13 +37,9 @@ RandomSplitter::RandomSplitter(double trainingProbability, Seed rngSeed)
 SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
 {
     std::bernoulli_distribution dist(m_trainingProbability);
-    std::vector<bool> flags = build(m_randomNumberGenerator, dist, data.size());
-    /*std::bernoulli_distribution dist(m_trainingProbability);
-
-    for (auto i = 0u; i < data.size(); i++)
-    {
-        flags.push_back(dist(m_randomNumberGenerator));
-    }*/
+    auto& randomNumberGenerator = m_randomNumberGenerator;
+    auto randomBoolGenerator = [&randomNumberGenerator, &dist]() { return dist(randomNumberGenerator); };
+    std::vector<bool> flags = build<bool, decltype(randomBoolGenerator)>(data.size(), randomBoolGenerator);
     std::vector<Observation> data1_observations = filter(data.GetData(), flags);
     std::vector<Label> labels1 = filter(data.GetSampleMetadata(), flags);
     flags = negate(flags);
@@ -65,9 +61,9 @@ SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCv
             data2.push_back(data2_observations[i][j]);
         }
     }
-    Spectre::libClassifier::OpenCvDataset dataset1(data1, labels1);
-    Spectre::libClassifier::OpenCvDataset dataset2(data2, labels2);
-    SplittedOpenCvDataset result = SplittedOpenCvDataset(dataset1, dataset2);
+    OpenCvDataset dataset1(data1, labels1);
+    OpenCvDataset dataset2(data2, labels2);
+    auto result = SplittedOpenCvDataset(std::move(dataset1), std::move(dataset2));
     return result;
 }
 

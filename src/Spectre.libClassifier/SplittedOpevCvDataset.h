@@ -21,14 +21,11 @@ limitations under the License.
 #include "Spectre.libClassifier/OpenCvDataset.h"
 
 namespace Spectre::libClassifier {
-
 class SplittedOpenCvDataset
 {
-
 public:
-    SplittedOpenCvDataset::SplittedOpenCvDataset(Spectre::libClassifier::OpenCvDataset training, Spectre::libClassifier::OpenCvDataset test);
-    Spectre::libClassifier::OpenCvDataset trainingSet, testSet;
+    SplittedOpenCvDataset::SplittedOpenCvDataset(OpenCvDataset&& training, OpenCvDataset&& test);
+    OpenCvDataset trainingSet, testSet;
 private:
 };
-
 }

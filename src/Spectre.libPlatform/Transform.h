@@ -102,16 +102,12 @@ std::vector<DataType> transform(gsl::span<const DataType> first, gsl::span<const
 /// <param name="first">The first.</param>
 /// <param name="binaryOperation">The binary operation.</param>
 /// <returns>Vector of transformed elements</returns>
-template< class BinaryOperation >
-std::vector<bool> transform(std::vector<bool> first, BinaryOperation binaryOperation)
+template< class UnaryOperation >
+std::vector<bool> transform(std::vector<bool> first, UnaryOperation unaryOperation)
 {
     std::vector<bool> result;
     result.reserve(first.size());
-    auto iterator1 = first.begin();
-    while (iterator1 != first.end())
-    {
-        result.push_back(binaryOperation(iterator1));
-    }
+    std::transform(first.begin(), first.end(), std::back_inserter(result), unaryOperation);
     return result;
 }
 }
