@@ -26,8 +26,18 @@ namespace Spectre::libClassifier {
 
 const int ColumnMatrixWidth = 1;
 
+bool throwOnEmpty(_int64 size)
+{
+    if (size == 0)
+    {
+        throw libException::EmptyOpenCvDatasetException("Empty argument");
+    }
+    return false;
+}
+
 OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
-    : m_Data(std::move(other.m_Data)),
+    : m_isEmpty(false),
+      m_Data(std::move(other.m_Data)),
       m_Mat(std::move(other.m_Mat)),
       m_labels(std::move(other.m_labels)),
       m_MatLabels(std::move(other.m_MatLabels)),
@@ -41,6 +51,8 @@ OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
 }
 
 OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
+    //temporary solution, hope to find better one
+    m_isEmpty(throwOnEmpty(data.size())),
     m_Data(data.begin(), data.end()),
     m_Mat(static_cast<int>(labels.size()), static_cast<int>(data.size() / labels.size()), CV_TYPE, m_Data.data()),
     m_labels(labels.begin(), labels.end()),
@@ -51,13 +63,9 @@ OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Lab
     {
         throw libException::InconsistentArgumentSizesException("data", m_Mat.rows, "labels", static_cast<int>(m_labels.size()));
     }
-    if (data.size() == 0)
-    {
-        throw libException::EmptyOpenCvDatasetException("Empty argument");
-    }
     const auto numberOfColumns = data.size() / labels.size();
     auto rowBegin = m_Data.data();
-    for (auto i=0u; i < labels.size(); ++i)
+    for (auto i = 0u; i < labels.size(); ++i)
     {
         m_observations[i] = Observation(rowBegin, numberOfColumns);
         rowBegin += numberOfColumns;
@@ -65,6 +73,7 @@ OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Lab
 }
 
 OpenCvDataset::OpenCvDataset(cv::Mat data, cv::Mat labels):
+    m_isEmpty(data.rows * data.cols),
     m_Data(data.ptr<DataType>(), data.ptr<DataType>() + data.rows * data.cols),
     m_Mat(data.rows, data.cols, CV_TYPE, m_Data.data()),
     m_labels(labels.ptr<Label>(), labels.ptr<Label>() + labels.rows * labels.cols),
@@ -74,10 +83,6 @@ OpenCvDataset::OpenCvDataset(cv::Mat data, cv::Mat labels):
     if (m_Mat.rows != static_cast<int>(m_labels.size()))
     {
         throw libException::InconsistentArgumentSizesException("data", m_Mat.rows,"labels", static_cast<int>(m_labels.size()));
-    }
-    if (m_Mat.rows == 0)
-    {
-        throw libException::EmptyOpenCvDatasetException("Empty argument");
     }
     auto rowBegin = m_Data.data();
     for (auto i = 0; i < data.rows; ++i)
@@ -139,5 +144,4 @@ const cv::Mat& OpenCvDataset::getMatLabels() const
 {
     return m_MatLabels;
 }
-
 }

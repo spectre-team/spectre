@@ -24,6 +24,7 @@ limitations under the License.
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libException/OutOfRangeException.h"
+#include "Spectre.libException/EmptyOpenCvDatasetException.h"
 
 namespace
 {
@@ -33,8 +34,10 @@ using namespace Spectre::libException;
 class OpenCvDatasetInitializationTest : public ::testing::Test
 {
 protected:
+    const std::vector<DataType> data_empty{};
     const std::vector<DataType> data_long{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
     const std::vector<DataType> data_short{ 0.5f, 0.4f, 0.6f };
+    const std::vector<Label> labels_empty{};
     const std::vector<Label> labels{ 3, 7, 14 };
     const std::vector<Label> labels_too_long{ 3, 7, 14, 5 };
 };
@@ -49,9 +52,9 @@ TEST_F(OpenCvDatasetInitializationTest, correct_dataset_opencv_initialization)
     EXPECT_NO_THROW(OpenCvDataset(data_long, labels));
 }
 
-TEST_F(OpenCvDatasetInitializationTest, throws_for_inconsistent_size)
+TEST_F(OpenCvDatasetInitializationTest, throws_for_empty_data)
 {
-    EXPECT_THROW(OpenCvDataset(data_short, labels_too_long), InconsistentArgumentSizesException);
+    EXPECT_THROW(OpenCvDataset(data_empty, labels_empty), EmptyOpenCvDatasetException);
 }
 
 TEST_F(OpenCvDatasetInitializationTest, correct_dataset_opencv_initialization_from_mat_col_size_one)
@@ -79,6 +82,15 @@ TEST_F(OpenCvDatasetInitializationTest, throws_for_inconsistent_size_from_mat)
     cv::Mat mat_data(3, 3, CV_TYPE, tmp_data.data());
     cv::Mat mat_labels(4, 1, CV_LABEL_TYPE, tmp_labels.data());
     EXPECT_THROW(OpenCvDataset(mat_data, mat_labels), InconsistentArgumentSizesException);
+}
+
+TEST_F(OpenCvDatasetInitializationTest, throws_for_empty_data_from_mat)
+{
+    std::vector<DataType> tmp_data(data_empty);
+    std::vector<Label> tmp_labels(labels_empty);
+    cv::Mat mat_data(3, 3, CV_TYPE, tmp_data.data());
+    cv::Mat mat_labels(3, 1, CV_LABEL_TYPE, tmp_labels.data());
+    EXPECT_THROW(OpenCvDataset(mat_data, mat_labels), EmptyOpenCvDatasetException);
 }
 
 TEST_F(OpenCvDatasetInitializationTest, move_invalidates_old_instance)
