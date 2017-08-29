@@ -46,5 +46,7 @@ describe('HeatmapService', () => {
         expect(heatmap.data[4][0]).toEqual(1.11);
         expect(heatmap.data[0][2]).toEqual(9.99);
       });
+
+      //TODO: test min column and min row
     }));
 });

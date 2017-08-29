@@ -10,14 +10,14 @@
 
 <div>
   <div class="inlineItemsContainer">
-    <md-slider class="sliderY" [(ngModel)]="yCoordinate" showTicks="true" min="0" max=108 step="1" vertical="true" thumb-label="true" tick-interval="true"
+    <md-slider class="sliderY" [(ngModel)]="yCoordinate" showTicks="true" min="0" max={{yHeatmapSize}} step="1" vertical="true" thumb-label="true" tick-interval="true"
            (change)="onChangedYCoordinate($event)"></md-slider>
 
     <app-heatmap
       [heatmapData]=heatmapData>
     </app-heatmap>
   </div>
-  <md-slider class="sliderX" [(ngModel)]="xCoordinate" showTicks="true" min="0" max=108 step="1" vertical="false" thumb-label="true" tick-interval="true"
+  <md-slider class="sliderX" [(ngModel)]="xCoordinate" showTicks="true" min="0" max={{xHeatmapSize}} step="1" vertical="false" thumb-label="true" tick-interval="true"
            (change)="onChangedXCoordinate($event)"></md-slider>
 </div>
 

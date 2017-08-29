@@ -73,6 +73,10 @@ function toHeatmap(response: Response): Heatmap {
     }
     console.log('[HeatmapService] heatmap processed');
     return <Heatmap>({
+        minRow: min_row,
+        maxRow: max_row,
+        minColumn: min_column,
+        maxColumn: max_column,
         data: data
     });
 }

@@ -39,8 +39,8 @@ export class SpectrumService extends Service {
     return spectrum;
   }
 
-  getByCoordinates(preparationId: number, x: number, y: number, spectraNumber: number): Observable<Spectrum> {
-    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?x=${x}?y=${y}?spectraNumber=${spectraNumber}`;
+  getByCoordinates(preparationId: number, x: number, y: number): Observable<Spectrum> {
+    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?x=${x}&y=${y}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const spectrum = response.map(toSpectrum);
     return spectrum;

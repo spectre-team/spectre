@@ -44,6 +44,10 @@ export class PreparationComponent implements OnInit {
   public preparation: Preparation;
   public xCoordinate = 0;
   public yCoordinate = 0;
+  public xHeatmapSize: number;
+  public yHeatmapSize: number;
+  public minHeatmapColumn: number;
+  public minHeatmapRow: number;
 
   constructor(
       private route: ActivatedRoute,
@@ -98,7 +102,7 @@ export class PreparationComponent implements OnInit {
 
   getSpectrumByCoordianates() {
     this.spectrumService
-      .getByCoordinates(this.id, this.xCoordinate, this.yCoordinate, this.preparation.spectraNumber)
+      .getByCoordinates(this.id, this.xCoordinate + this.minHeatmapColumn, this.yCoordinate + this.minHeatmapRow)
       .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
   }
 
@@ -116,6 +120,10 @@ export class PreparationComponent implements OnInit {
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
+    this.xHeatmapSize = heatmap.maxColumn - heatmap.minColumn;
+    this.yHeatmapSize = heatmap.maxRow - heatmap.minRow;
+    this.minHeatmapColumn = heatmap.minColumn;
+    this.minHeatmapRow = heatmap.minRow;
     return [{
       z: heatmap.data,
       type: 'heatmap'
@@ -123,9 +131,9 @@ export class PreparationComponent implements OnInit {
   }
 
   toSpectrumDataset(spectrum: Spectrum) {
+    alert(spectrum.x + " " + spectrum.y);
     this.mzLenth = spectrum.mz.length - 1;
     this.mz = spectrum.mz;
-    alert(spectrum.mz[1] + " " + spectrum.mz[23]);
     return [{
       x: spectrum.mz,
       y: spectrum.intensities,
