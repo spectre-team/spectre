@@ -22,6 +22,7 @@ import { ActivatedRoute} from '@angular/router';
 import { DivikService } from '../shared/divik.service';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { DivikConfig } from '../shared/divik-config';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -32,9 +33,11 @@ import { DivikConfig } from '../shared/divik-config';
 export class DivikComponent implements OnInit {
   public data: any;
   public configDescription: string;
+  public downloadJsonHref: any;
   constructor(
       private route: ActivatedRoute,
-      private divikService: DivikService
+      private divikService: DivikService,
+      private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -57,7 +60,12 @@ export class DivikComponent implements OnInit {
     Object.keys(config.properties).forEach((key) => {
       description += key + ': ' +  config.properties[key] + '\n';
     });
+    this.generateDownloadJsonUri(config);
     return description;
+  }
 
+  generateDownloadJsonUri(config: DivikConfig) {
+    const theJSON = JSON.stringify(config.properties);
+    this.downloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
   }
 }

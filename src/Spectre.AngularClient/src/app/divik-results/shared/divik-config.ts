@@ -17,5 +17,5 @@
    limitations under the License.
 */
 export interface DivikConfig {
-  properties: string[];
+  properties: {};
 }
