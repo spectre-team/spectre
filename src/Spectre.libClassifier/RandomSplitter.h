@@ -19,7 +19,6 @@ limitations under the License.
 
 #pragma once
 #include <random>
-#include <utility>
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/SplittedOpevCvDataset.h"
 
@@ -28,6 +27,7 @@ namespace Spectre::libClassifier {
 class RandomSplitter
 {
 
+using RandomDevice = std::random_device;
 using RandomNumberGenerator = std::mt19937_64;
 using Seed = _ULonglong;
 

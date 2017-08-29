@@ -36,31 +36,35 @@ RandomSplitter::RandomSplitter(double trainingProbability, Seed rngSeed)
 
 SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
 {
-    std::bernoulli_distribution dist(m_trainingProbability);
-    auto& randomNumberGenerator = m_randomNumberGenerator;
-    auto randomBoolGenerator = [&randomNumberGenerator, &dist]() { return dist(randomNumberGenerator); };
-    std::vector<bool> flags = build<bool, decltype(randomBoolGenerator)>(data.size(), randomBoolGenerator);
-    std::vector<Observation> data1_observations = filter(data.GetData(), flags);
-    std::vector<Label> labels1 = filter(data.GetSampleMetadata(), flags);
-    flags = negate(flags);
-    std::vector<Observation> data2_observations = filter(data.GetData(), flags);
-    std::vector<Label> labels2 = filter(data.GetSampleMetadata(), flags);
+    std::vector<int> indexes = range(0, int(data.size()));
+    RandomDevice rd;
+    RandomNumberGenerator g(rd());
+    std::shuffle(indexes.begin(), indexes.end(), g);
 
-    std::vector<DataType> data1, data2;
-    for (auto i = 0u; i < data1_observations.size(); i++)
+    std::vector<DataType> data1{};
+    std::vector<DataType> data2{};
+    std::vector<Label> labels1{};
+    std::vector<Label> labels2{};
+    int trainingLimit = int(data.size() * m_trainingProbability);
+    for (auto i = 0; i < trainingLimit; i++)
     {
-        for (auto j = 0u; j < data1_observations[i].size(); j++)
+        Observation observation(data[i]);
+        for (DataType dataType: observation)
         {
-            data1.push_back(data1_observations[i][j]);
+            data1.push_back(dataType);
         }
+        labels1.push_back(data.GetSampleMetadata(i));
     }
-    for (auto i = 0u; i < data2_observations.size(); i++)
+    for (auto i = trainingLimit; i < data.size(); i++)
     {
-        for (auto j = 0u; j < data2_observations[i].size(); j++)
+        Observation observation(data[i]);
+        for (DataType dataType : observation)
         {
-            data2.push_back(data2_observations[i][j]);
+            data2.push_back(dataType);
         }
+        labels2.push_back(data.GetSampleMetadata(i));
     }
+
     OpenCvDataset dataset1(data1, labels1);
     OpenCvDataset dataset2(data2, labels2);
     auto result = SplittedOpenCvDataset(std::move(dataset1), std::move(dataset2));

@@ -19,6 +19,7 @@ limitations under the License.
 
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libException/OutOfRangeException.h"
+#include "Spectre.libException/EmptyOpenCvDatasetException.h"
 #include "OpenCvDataset.h"
 
 namespace Spectre::libClassifier {
@@ -50,6 +51,10 @@ OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Lab
     {
         throw libException::InconsistentArgumentSizesException("data", m_Mat.rows, "labels", static_cast<int>(m_labels.size()));
     }
+    if (data.size() == 0)
+    {
+        throw libException::EmptyOpenCvDatasetException("Empty argument");
+    }
     const auto numberOfColumns = data.size() / labels.size();
     auto rowBegin = m_Data.data();
     for (auto i=0u; i < labels.size(); ++i)
@@ -69,6 +74,10 @@ OpenCvDataset::OpenCvDataset(cv::Mat data, cv::Mat labels):
     if (m_Mat.rows != static_cast<int>(m_labels.size()))
     {
         throw libException::InconsistentArgumentSizesException("data", m_Mat.rows,"labels", static_cast<int>(m_labels.size()));
+    }
+    if (m_Mat.rows == 0)
+    {
+        throw libException::EmptyOpenCvDatasetException("Empty argument");
     }
     auto rowBegin = m_Data.data();
     for (auto i = 0; i < data.rows; ++i)

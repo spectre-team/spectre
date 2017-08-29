@@ -65,15 +65,15 @@ TEST_F(RandomSplitterTest, check_statistical_correctness_of_split_parts_size)
     OpenCvDataset dataset(data, labels);
     size_t firstSize = 0;
     size_t secondSize = 0;
-    const float count = 10000;
+    const size_t count = 10000;
     for (auto i = 0; i < count; i++)
     {
-        auto result = randomSplitter.split(dataset);
+        const auto result = randomSplitter.split(dataset);
         firstSize += result.trainingSet.size();
         secondSize += result.testSet.size();
     }
-    EXPECT_THAT(firstSize / count, FloatEq(7));
-    EXPECT_THAT(secondSize / count, FloatEq(3));
+    EXPECT_THAT(firstSize / static_cast<float>(count), FloatEq(7));
+    EXPECT_THAT(secondSize / static_cast<float>(count), FloatEq(3));
 }
 
 }
