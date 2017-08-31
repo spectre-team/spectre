@@ -3,7 +3,7 @@ import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/ht
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { DivikService } from './divik.service';
-import { HeatmapUtil } from '../../heatmaps/shared/heatmap.service';
+import { HeatmapUtil } from '../../heatmaps/shared/heatmap-util';
 
 function divikConfig(): string {
   return JSON.stringify({

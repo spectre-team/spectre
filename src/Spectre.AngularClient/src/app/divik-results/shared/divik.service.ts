@@ -25,7 +25,7 @@ import 'rxjs/Rx';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { Service } from '../../app.service';
 import { DivikConfig } from './divik-config';
-import { HeatmapUtil } from '../../heatmaps/shared/heatmap.service';
+import { HeatmapUtil } from '../../heatmaps/shared/heatmap-util';
 
 @Injectable()
 export class DivikService extends Service {
