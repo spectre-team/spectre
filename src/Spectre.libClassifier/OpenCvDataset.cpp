@@ -19,8 +19,8 @@ limitations under the License.
 
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libException/OutOfRangeException.h"
-#include "Spectre.libException/EmptyOpenCvDatasetException.h"
 #include "OpenCvDataset.h"
+#include "Spectre.libClassifier/EmptyOpenCvDatasetException.h"
 
 namespace Spectre::libClassifier {
 
@@ -73,7 +73,7 @@ OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Lab
 }
 
 OpenCvDataset::OpenCvDataset(cv::Mat data, cv::Mat labels):
-    m_isEmpty(data.rows * data.cols),
+    m_isEmpty(throwOnEmpty(data.rows * data.cols)),
     m_Data(data.ptr<DataType>(), data.ptr<DataType>() + data.rows * data.cols),
     m_Mat(data.rows, data.cols, CV_TYPE, m_Data.data()),
     m_labels(labels.ptr<Label>(), labels.ptr<Label>() + labels.rows * labels.cols),

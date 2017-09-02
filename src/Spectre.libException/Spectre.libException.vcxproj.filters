@@ -30,9 +30,6 @@
     <ClInclude Include="InconsistentArgumentSizesException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EmptyOpenCvDatasetException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExceptionBase.cpp">
@@ -45,9 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InconsistentArgumentSizesException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EmptyOpenCvDatasetException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

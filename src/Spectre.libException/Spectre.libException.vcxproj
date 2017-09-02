@@ -12,14 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentOutOfRangeException.h" />
-    <ClInclude Include="EmptyOpenCvDatasetException.h" />
     <ClInclude Include="ExceptionBase.h" />
     <ClInclude Include="InconsistentArgumentSizesException.h" />
     <ClInclude Include="NullPointerException.h" />
     <ClInclude Include="OutOfRangeException.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EmptyOpenCvDatasetException.cpp" />
     <ClCompile Include="ExceptionBase.cpp" />
     <ClCompile Include="InconsistentArgumentSizesException.cpp" />
     <ClCompile Include="NullPointerException.cpp" />

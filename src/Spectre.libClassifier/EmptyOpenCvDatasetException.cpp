@@ -1,5 +1,5 @@
 ﻿/*
-* NullPointerException.h
+* EmptyOpenCvDatasetException.cpp
 * Exception thrown, when we would create empty OpenCvDataset.
 *
 Copyright 2017 Grzegorz Mrukwa
@@ -21,6 +21,6 @@ limitations under the License.
 
 namespace Spectre::libException
 {
-EmptyOpenCvDatasetException::EmptyOpenCvDatasetException(const std::string &variableName) :
-    ExceptionBase(variableName) { }
+    EmptyOpenCvDatasetException::EmptyOpenCvDatasetException(const std::string &variableName) :
+        ExceptionBase(variableName) { }
 }

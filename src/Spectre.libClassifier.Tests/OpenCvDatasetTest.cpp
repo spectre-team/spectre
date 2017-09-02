@@ -24,7 +24,7 @@ limitations under the License.
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libException/OutOfRangeException.h"
-#include "Spectre.libException/EmptyOpenCvDatasetException.h"
+#include "Spectre.libClassifier/EmptyOpenCvDatasetException.h"
 
 namespace
 {

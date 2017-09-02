@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EmptyOpenCvDatasetException.cpp" />
     <ClCompile Include="ObservationExtractor.cpp" />
     <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
@@ -85,6 +86,7 @@
     <ClCompile Include="SplittedOpenCvDataset.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EmptyOpenCvDatasetException.h" />
     <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />
