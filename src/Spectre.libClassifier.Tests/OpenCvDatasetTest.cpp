@@ -88,8 +88,8 @@ TEST_F(OpenCvDatasetInitializationTest, throws_for_empty_data_from_mat)
 {
     std::vector<DataType> tmp_data(data_empty);
     std::vector<Label> tmp_labels(labels_empty);
-    cv::Mat mat_data(3, 3, CV_TYPE, tmp_data.data());
-    cv::Mat mat_labels(3, 1, CV_LABEL_TYPE, tmp_labels.data());
+    cv::Mat mat_data(0, 0, CV_TYPE, tmp_data.data());
+    cv::Mat mat_labels(0, 0, CV_LABEL_TYPE, tmp_labels.data());
     EXPECT_THROW(OpenCvDataset(mat_data, mat_labels), EmptyOpenCvDatasetException);
 }
 

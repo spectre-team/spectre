@@ -26,18 +26,17 @@ namespace Spectre::libClassifier {
 
 const int ColumnMatrixWidth = 1;
 
-bool throwOnEmpty(_int64 size)
+_int64 throwOnEmpty(_int64 size)
 {
     if (size == 0)
     {
         throw libException::EmptyOpenCvDatasetException("Empty argument");
     }
-    return false;
+    return size;
 }
 
 OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
-    : m_isEmpty(false),
-      m_Data(std::move(other.m_Data)),
+    : m_Data(std::move(other.m_Data)),
       m_Mat(std::move(other.m_Mat)),
       m_labels(std::move(other.m_labels)),
       m_MatLabels(std::move(other.m_MatLabels)),
