@@ -113,10 +113,7 @@ TEST_F(OpenCvDatasetInitializationTest, move_invalidates_old_instance)
 class OpenCvDatasetTest : public ::testing::Test
 {
 public:
-    OpenCvDatasetTest()
-    {
-
-    }
+    OpenCvDatasetTest() {}
 
     static bool compareCVMats(cv::Mat mat1, cv::Mat mat2)
     {

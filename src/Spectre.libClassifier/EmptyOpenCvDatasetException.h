@@ -34,7 +34,5 @@ namespace Spectre::libException
         /// </summary>
         /// <param name="">Name of null variable.</param>
         explicit EmptyOpenCvDatasetException(const std::string &variableName);
-
     };
-
 }
