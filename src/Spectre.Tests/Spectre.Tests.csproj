@@ -110,6 +110,7 @@
     <Compile Include="Controllers\HeatmapControllerTest.cs" />
     <Compile Include="Controllers\PreparationsControllerTest.cs" />
     <Compile Include="Controllers\SpectrumControllerTest.cs" />
+    <Compile Include="Models\RangeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
