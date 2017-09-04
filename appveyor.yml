@@ -1,4 +1,4 @@
-version: 1.22.7.{build}
+version: 1.23.7.{build}
 # enable patching of AssemblyInfo.* files
 assembly_info:
   patch: true

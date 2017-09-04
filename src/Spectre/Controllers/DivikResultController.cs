@@ -3,10 +3,13 @@
  * Class serving GET requests for divik result.
  *
    Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
+
        http://www.apache.org/licenses/LICENSE-2.0
+
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +26,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Newtonsoft.Json;
+using Spectre.Algorithms.Parameterization;
 using Spectre.Data.Datasets;
+using Spectre.Models.Msi;
 
 namespace Spectre.Controllers
 {
@@ -41,7 +46,7 @@ namespace Spectre.Controllers
         /// <param name="divikId">Identifier of divik.</param>
         /// <param name="level">Divik level.</param>
         /// <returns>DivikResult</returns>
-        public Models.Msi.DivikResult Get(int id, int divikId, int level)
+        public DivikResult Get(int id, int divikId, int level)
         {
             if (divikId < 0 || level < 0)
             {
@@ -71,7 +76,28 @@ namespace Spectre.Controllers
                 data[i] = divikResult.Partition[i] + 1;
             }
 
-            return new Models.Msi.DivikResult() { X = x_coordinates, Y = y_coordinates, Data = data };
+            return new DivikResult() { X = x_coordinates, Y = y_coordinates, Data = data };
+        }
+
+        /// <summary>
+        /// Gets divik config of divik result.
+        /// </summary>
+        /// <param name="id">Preparation identifier.</param>
+        /// <param name="divikId">Identifier of divik.</param>
+        /// <returns>DivikConfig</returns>
+        public DivikOptions GetConfig(int id, int divikId)
+        {
+            if (divikId < 0)
+            {
+                throw new ArgumentException(message: nameof(divikId));
+            }
+
+            if (id != 1)
+            {
+                return DivikOptions.Default();
+            }
+            var jsonText = File.ReadAllText("C:\\spectre_data\\expected_divik_results\\hnc1_tumor\\euclidean\\config.json");
+            return JsonConvert.DeserializeObject<DivikOptions>(jsonText);
         }
     }
 }

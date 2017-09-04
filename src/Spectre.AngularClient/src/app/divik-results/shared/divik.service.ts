@@ -17,60 +17,57 @@
  limitations under the License.
  */
 
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
+import {Http, Response, Headers} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import { Heatmap } from '../../heatmaps/shared/heatmap';
-import { Service } from '../../app.service';
+import {Heatmap} from '../../heatmaps/shared/heatmap';
+import {Service} from '../../app.service';
+import {DivikConfig} from './divik-config';
+import {HeatmapUtil} from '../../heatmaps/shared/heatmap-util';
 
 @Injectable()
 export class DivikService extends Service {
 
-    constructor(private http: Http) { super(); }
+  constructor(private http: Http) {
+    super();
+  }
 
-    private getHeaders() {
-      const headers = new Headers();
-      headers.append('Accept', 'application/json');
-      return headers;
-    }
+  private getHeaders() {
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    return headers;
+  }
 
-    get(preparationId: number, divikId: number, level: number): Observable<Heatmap> {
-      const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
-      const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-      return response.map(toHeatmap);
-    }
+  get(preparationId: number, divikId: number, level: number): Observable<Heatmap> {
+    const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'));
+  }
+
+  getConfig(preparationId: number, divikId: number): Observable<DivikConfig> {
+    const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    return response.map(toDivikConfig);
+  }
 }
 
-function toHeatmap(response: Response): Heatmap {
-    console.log('[DivikService] parsing response:');
-    console.log(response);
-    const json = response.json();
-    console.log(json);
-    const max_column = Math.max.apply(null, json.X);
-    const min_column = Math.min.apply(null, json.X);
-    const max_row = Math.max.apply(null, json.Y);
-    const min_row = Math.min.apply(null, json.Y);
-    console.log('[DivikService] found bounds: (' + min_row + ', ' + max_row + '), (' + min_column + ', ' + max_column + ')');
-    console.log('[DivikService] initializing heatmap');
-    const data = [];
-    for (let i = min_row; i < max_row + 1; i++) {
-      data[i - min_row] = [];
-      for (let j = min_column; j < max_column + 1; j++) {
-        data[i - min_row][j - min_column] = 0;
-      }
-    }
-    console.log('[DivikService] processing heatmap');
-    for (let i = 0; i < json.X.length; i++) {
-        const column = json.X[i] - min_column;
-        const row = max_row - json.Y[i];
-        const divikData = json.Data[i];
-        console.log('[DivikService] processing (' + row + ', ' + column + ', ' + divikData + ')');
-        data[row][column] = divikData;
-    }
-    console.log('[DivikService] heatmap processed');
-    return <Heatmap>({
-        data: data
-    });
+function toDivikConfig(response: Response): DivikConfig {
+  const json = response.json();
+  return <DivikConfig>({
+    'Max K': json.MaxK,
+    Level: json.Level,
+    'Using levels': json.UsingLevels,
+    Amplitude: json.UsingAmplitudeFiltration,
+    Variance: json.UsingVarianceFiltration,
+    'Percent size limit': json.PercentSizeLimit,
+    'Feature preservation limit': json.FeaturePreservationLimit,
+    Metric: json.Metric,
+    'Plotting partitions': json.PlottingPartitions,
+    'Plotting recursively': json.PlottingRecursively,
+    'Plotting decomposition': json.PlottingDecomposition,
+    'Plotting decomposition recursively': json.PlottingDecompositionRecursively,
+    'Max decomposition components': json.MaxComponentsForDecomposition
+  });
 }

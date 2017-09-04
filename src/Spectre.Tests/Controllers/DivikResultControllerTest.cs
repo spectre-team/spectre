@@ -20,6 +20,7 @@
 using System;
 using System.Linq;
 using NUnit.Framework;
+using Spectre.Algorithms.Parameterization;
 using Spectre.Controllers;
 using Spectre.Models.Msi;
 
@@ -99,6 +100,22 @@ namespace Spectre.Tests.Controllers
                     code: () => { _controller.Get(id: 1, divikId: 1, level: -1); },
                     message: "Accepted negative index");
                 Assert.IsNull(_controller.Get(id: 0, divikId: 1, level: 1));
+            });
+        }
+
+        /// <summary>
+        /// Tests the divik config getter.
+        /// </summary>
+        [Test]
+        public void TestIfExistGetDivikResultConfig()
+        {
+            const int divikId = 1;
+            var config = _controller.GetConfig(id: 1, divikId: divikId);
+
+            Assert.Multiple(testDelegate: () =>
+            {
+                Assert.NotNull(config);
+                Assert.IsInstanceOf<DivikOptions>(config);
             });
         }
     }

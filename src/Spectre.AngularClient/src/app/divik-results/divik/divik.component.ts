@@ -17,10 +17,13 @@
    limitations under the License.
 */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import { DivikService } from '../shared/divik.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
 import { Heatmap } from '../../heatmaps/shared/heatmap';
+import { DivikService } from '../shared/divik.service';
+import { DivikConfig } from '../shared/divik-config';
 
 
 @Component({
@@ -30,15 +33,21 @@ import { Heatmap } from '../../heatmaps/shared/heatmap';
 })
 export class DivikComponent implements OnInit {
   public data: any;
+  public configDescription: string;
+  public downloadJsonHref: any;
   constructor(
       private route: ActivatedRoute,
-      private divikService: DivikService
+      private divikService: DivikService,
+      private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
     this.divikService
       .get(1, 1, 1)
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
+    this.divikService
+      .getConfig(1, 1)
+      .subscribe(config => this.configDescription = this.buildConfigInfo(config));
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
@@ -46,5 +55,18 @@ export class DivikComponent implements OnInit {
       z: heatmap.data,
       type: 'heatmap'
     }];
+  }
+  buildConfigInfo(config: DivikConfig): string {
+    let description = '';
+    Object.keys(config).forEach((key) => {
+      description += key + ': ' +  config[key] + '\n';
+    });
+    this.generateDownloadJsonUri(config);
+    return description;
+  }
+
+  generateDownloadJsonUri(config: DivikConfig) {
+    const theJSON = JSON.stringify(config);
+    this.downloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
   }
 }

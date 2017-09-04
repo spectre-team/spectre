@@ -1,6 +1,3 @@
-<p>
-  preparation {{id}} works!
-</p>
 <label>Mz:</label>
 
 <input [(ngModel)]="mzValue" type="number"/>
@@ -15,6 +12,11 @@
 <app-spectrum
   [spectrumData]=spectrumData>
 </app-spectrum>
+<ng2-messages></ng2-messages>
+<pre>
+  <input type="text"  #titleInput>
+  <button type="submit" (click) = 'selectSpectrum(titleInput.value)'>Select</button>
+</pre>
 
 <app-divik></app-divik>
 
