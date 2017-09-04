@@ -1,5 +1,5 @@
 ﻿/*
- * DatasetLoadException.cs
+ * DatasetFormatException.cs
  * Exception thrown when dataset loader fails to load dataset from a file.
  *
    Copyright 2017 Dariusz Kuchta
@@ -24,14 +24,14 @@ namespace Spectre.Service.Loaders
     /// Thrown when dataset loader fails to load dataset from a file.
     /// </summary>
     /// <seealso cref="System.FormatException" />
-    public class DatasetLoadException : FormatException
+    public class DatasetFormatException : FormatException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatasetLoadException"/> class.
+        /// Initializes a new instance of the <see cref="DatasetFormatException"/> class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">The original exception thrown during validation.</param>
-        public DatasetLoadException(string message, Exception innerException) : base(message, innerException)
+        public DatasetFormatException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

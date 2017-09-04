@@ -76,7 +76,7 @@ namespace Spectre.Service.Loaders
         /// <param name="name">File name.</param>
         /// <returns>Found dataset.</returns>
         /// <exception cref="FileNotFoundException">Throws when the file is not found both locally and remotely.</exception>
-        /// <exception cref="DatasetLoadException">Throws when the loader fails to create dataset from the file.</exception>
+        /// <exception cref="DatasetFormatException">Throws when the loader fails to create dataset from the file.</exception>
         public IDataset GetFromName(string name)
         {
             string fullPathLocal = Path.Combine(_localRoot, name);
@@ -99,7 +99,7 @@ namespace Spectre.Service.Loaders
             catch (IOException e)
             {
                 FileSystem.File.Delete(fullPathLocal);
-                throw new DatasetLoadException($"Failed to load dataset from file '{name}'.", e);
+                throw new DatasetFormatException($"Failed to load dataset from file '{name}'.", e);
             }
         }
 

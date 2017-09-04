@@ -22,10 +22,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using Spectre.Data.Structures;
+using Spectre.Dependencies;
 
 namespace Spectre.Data.Datasets
 {
@@ -62,6 +64,7 @@ namespace Spectre.Data.Datasets
         /// <param name="textFilePath">Path to the text file.</param>
         public BasicTextDataset(string textFilePath)
         {
+            FileSystem = FileSystemDependency.GetFileSystem();
             CreateFromFile(textFilePath);
         }
 
@@ -74,12 +77,13 @@ namespace Spectre.Data.Datasets
         /// <param name="coordinates">Array of spatial coordinates.</param>
         public BasicTextDataset(double[] mz, double[,] data, int[,] coordinates)
         {
+            FileSystem = FileSystemDependency.GetFileSystem();
             CreateFromRawData(mz, data, coordinates);
         }
 
         #endregion
 
-        #region IDataset
+        #region Properties
 
         /// <inheritdoc cref="IDataset"/>
         public Metadata Metadata { get; private set; }
@@ -110,6 +114,15 @@ namespace Spectre.Data.Datasets
         }
 
         /// <summary>
+        /// Handle to file system.
+        /// </summary>
+        public IFileSystem FileSystem { private get; set; }
+
+        #endregion
+
+        #region IDataset Methods
+
+        /// <summary>
         ///     Method for creating new dataset from text file, overwriting current data.
         /// </summary>
         /// <param name="filePath">Path to a text file.</param>
@@ -118,7 +131,7 @@ namespace Spectre.Data.Datasets
         {
             try
             {
-                using (var sr = new StreamReader(filePath))
+                using (var sr = FileSystem.File.OpenText(filePath))
                 {
                     var metadata = sr.ReadLine(); // global metadata
 #pragma warning disable SA1305 // Field names must not use Hungarian notation
@@ -201,7 +214,7 @@ namespace Spectre.Data.Datasets
         {
             try
             {
-                using (var sr = new StreamReader(filePath))
+                using (var sr = FileSystem.File.OpenText(filePath))
                 {
                     sr.ReadLine(); // omit global metadata
                     sr.ReadLine(); // omit m/z values

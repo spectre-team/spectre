@@ -97,6 +97,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libPlatform.Tests",
 		{76542909-5FC8-405B-8E6D-D2E529162A7A} = {76542909-5FC8-405B-8E6D-D2E529162A7A}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Dependencies", "Spectre.Dependencies\Spectre.Dependencies.csproj", "{2B9F4DFD-C222-477A-9107-1A3C356002A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -215,6 +217,10 @@ Global
 		{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14}.Debug|x64.Build.0 = Debug|x64
 		{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14}.Release|x64.ActiveCfg = Release|x64
 		{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14}.Release|x64.Build.0 = Release|x64
+		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Debug|x64.ActiveCfg = Debug|x64
+		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Debug|x64.Build.0 = Debug|x64
+		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Release|x64.ActiveCfg = Debug|x64
+		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Release|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

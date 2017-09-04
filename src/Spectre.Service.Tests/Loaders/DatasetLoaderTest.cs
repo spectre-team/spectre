@@ -20,12 +20,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using Ninject;
 using Ninject.Parameters;
 using NUnit.Framework;
+using Spectre.Data.Datasets;
+using Spectre.Dependencies;
 using Spectre.Service.Configuration;
 using Spectre.Service.Loaders;
 
@@ -60,26 +61,23 @@ namespace Spectre.Service.Tests.Loaders
                 { Path.Combine(localDirFull, "local_incorrect.txt"), new MockFileData(textContents: "incorrect_data") }
             });
 
-            var kernel = new StandardKernel();
-            kernel.Bind<IFileSystem>()
-                .ToConstant(_mockFileSystem);
-
+            FileSystemDependency.Initialize(_mockFileSystem);
+            var kernel = FileSystemDependency.GetKernel();
             _rootConfig = new DataRootConfig(localDirFull, remoteDirFull);
-
             _datasetLoader = kernel.Get<DatasetLoader>(new ConstructorArgument(name: "dataRootConfig", value: _rootConfig));
         }
 
         [Test]
         public void ReturnsFromCorrectNameLocal()
         {
-            Assert.Throws<DatasetLoadException>(code: () => _datasetLoader.GetFromName(name: "local_correct.txt"), 
+            Assert.IsNotNull(anObject: _datasetLoader.GetFromName(name: "local_correct.txt"),
                 message: "Loader did not manage to load local file.");
         }
 
         [Test]
         public void ReturnsFromCorrectNameRemote()
         {
-            Assert.Throws<DatasetLoadException>(code: () => _datasetLoader.GetFromName(name: "remote_correct.txt"),
+            Assert.IsNotNull(anObject: _datasetLoader.GetFromName(name: "remote_correct.txt"),
                 message: "Loader did not manage to load remote file.");
         }
 
@@ -93,7 +91,7 @@ namespace Spectre.Service.Tests.Loaders
         [Test]
         public void ThrowsOnIncorrectFileContents()
         {
-            Assert.Throws<DatasetLoadException>(code: () => _datasetLoader.GetFromName(name: "local_incorrect.txt"),
+            Assert.Throws<DatasetFormatException>(code: () => _datasetLoader.GetFromName(name: "local_incorrect.txt"),
                 message: "Loader did not manage to load remote file.");
         }
 
