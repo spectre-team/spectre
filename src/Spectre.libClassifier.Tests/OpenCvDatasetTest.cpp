@@ -178,7 +178,6 @@ TEST_F(OpenCvDatasetTest, get_data)
     const auto numberofColumns = local_dataset[0].size();
 
     ASSERT_EQ(result.size(), numberOfObservations);
-    
     for (auto i = 0u; i < numberOfObservations; i++)
     {
         EXPECT_EQ(result[i].size(), numberofColumns) << i;
