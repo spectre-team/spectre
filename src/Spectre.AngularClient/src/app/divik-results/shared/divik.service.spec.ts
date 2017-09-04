@@ -101,8 +101,7 @@ describe('DivikService', () => {
         (divikService: DivikService, mockBackend: MockBackend) => {
           setResponse(mockBackend, divikConfig());
           divikService.getConfig(1, 1).subscribe((config) => {
-            console.log(config.properties);
-            expect(config.properties[test.value]).toEqual(test.expectedValue);
+            expect(config[test.value]).toEqual(test.expectedValue);
           });
         }));
     });

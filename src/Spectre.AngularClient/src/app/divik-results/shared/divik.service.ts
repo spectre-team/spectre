@@ -17,15 +17,15 @@
  limitations under the License.
  */
 
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
+import {Http, Response, Headers} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import { Heatmap } from '../../heatmaps/shared/heatmap';
-import { Service } from '../../app.service';
-import { DivikConfig } from './divik-config';
-import { HeatmapUtil } from '../../heatmaps/shared/heatmap-util';
+import {Heatmap} from '../../heatmaps/shared/heatmap';
+import {Service} from '../../app.service';
+import {DivikConfig} from './divik-config';
+import {HeatmapUtil} from '../../heatmaps/shared/heatmap-util';
 
 @Injectable()
 export class DivikService extends Service {
@@ -40,7 +40,7 @@ export class DivikService extends Service {
     return headers;
   }
 
-  get (preparationId: number, divikId: number, level: number): Observable<Heatmap> {
+  get(preparationId: number, divikId: number, level: number): Observable<Heatmap> {
     const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'));
@@ -55,21 +55,19 @@ export class DivikService extends Service {
 
 function toDivikConfig(response: Response): DivikConfig {
   const json = response.json();
-  const properties = {};
-  properties['Max K'] = json.MaxK;
-  properties['Level'] = json.Level;
-  properties['Using levels'] = json.UsingLevels;
-  properties['Amplitude'] = json.UsingAmplitudeFiltration;
-  properties['Variance'] = json.UsingVarianceFiltration;
-  properties['Percent size limit'] = json.PercentSizeLimit;
-  properties['Feature preservation limit'] = json.FeaturePreservationLimit;
-  properties['Metric'] = json.Metric;
-  properties['Plotting partitions'] = json.PlottingPartitions;
-  properties['Plotting recursively'] = json.PlottingRecursively;
-  properties['Plotting decomposition'] = json.PlottingDecomposition;
-  properties['Plotting decomposition recursively'] = json.PlottingDecompositionRecursively;
-  properties['Max decomposition components'] = json.MaxComponentsForDecomposition;
   return <DivikConfig>({
-    properties: properties
+    'Max K': json.MaxK,
+    Level: json.Level,
+    'Using levels': json.UsingLevels,
+    Amplitude: json.UsingAmplitudeFiltration,
+    Variance: json.UsingVarianceFiltration,
+    'Percent size limit': json.PercentSizeLimit,
+    'Feature preservation limit': json.FeaturePreservationLimit,
+    Metric: json.Metric,
+    'Plotting partitions': json.PlottingPartitions,
+    'Plotting recursively': json.PlottingRecursively,
+    'Plotting decomposition': json.PlottingDecomposition,
+    'Plotting decomposition recursively': json.PlottingDecompositionRecursively,
+    'Max decomposition components': json.MaxComponentsForDecomposition
   });
 }

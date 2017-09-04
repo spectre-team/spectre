@@ -47,7 +47,7 @@ export class DivikComponent implements OnInit {
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
     this.divikService
       .getConfig(1, 1)
-      .subscribe(config => this.configDescription = this.displayConfig(config));
+      .subscribe(config => this.configDescription = this.buildConfigInfo(config));
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
@@ -56,17 +56,17 @@ export class DivikComponent implements OnInit {
       type: 'heatmap'
     }];
   }
-  displayConfig(config: DivikConfig): string {
+  buildConfigInfo(config: DivikConfig): string {
     let description = '';
-    Object.keys(config.properties).forEach((key) => {
-      description += key + ': ' +  config.properties[key] + '\n';
+    Object.keys(config).forEach((key) => {
+      description += key + ': ' +  config[key] + '\n';
     });
     this.generateDownloadJsonUri(config);
     return description;
   }
 
   generateDownloadJsonUri(config: DivikConfig) {
-    const theJSON = JSON.stringify(config.properties);
+    const theJSON = JSON.stringify(config);
     this.downloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
   }
 }

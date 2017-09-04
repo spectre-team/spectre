@@ -45,7 +45,7 @@ export class HeatmapUtil {
     for (let i = 0; i < json.X.length; i++) {
       const column = json.X[i] - min_column;
       const row = max_row - json.Y[i];
-      if (className === '[HeatmapService]') {
+      if (className === '[HeatmapService]') { // TODO normalization HeatmapService/DivikService on frontend and HeatmapController/DivikController on backend ( Data and Intensities)
         const intensity = json.Intensities[i];
         console.log(className + ' processing (' + row + ', ' + column + ', ' + intensity + ')');
         data[row][column] = intensity;
