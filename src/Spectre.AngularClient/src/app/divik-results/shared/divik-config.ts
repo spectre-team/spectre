@@ -1,8 +1,8 @@
 /*
- * main.ts
- * Main application file.
+ * divik-config.ts
+ * Interface describing Divik result config.
  *
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
+   Copyright 2017 Sebastian Pustelnik
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,16 +16,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
-
-if (environment.production) {
-  enableProdMode();
-  console.log = function(){};
-  console.debug = function(){};
+export interface DivikConfig {
+  'Max K': number;
+  Level: number;
+  'Using levels': boolean;
+  Amplitude: boolean;
+  Variance: boolean;
+  'Percent size limit': number;
+  'Feature preservation limit': number;
+  Metric: string;
+  'Plotting partitions': boolean;
+  'Plotting recursively': boolean;
+  'Plotting decomposition': boolean;
+  'Plotting decomposition recursively': boolean;
+  'Max decomposition components': number;
 }
-
-platformBrowserDynamic().bootstrapModule(AppModule);

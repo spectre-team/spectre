@@ -31,9 +31,9 @@ import { Observable } from 'rxjs/Observable';
 import { PlotlyModule } from '../../plotly/plotly.module';
 
 import { PreparationComponent } from './preparation.component';
-import { SpectrumService } from '../../spectrums/shared/spectrum.service';
+import { SpectrumService } from '../../spectra/shared/spectrum.service';
 import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
-import { SpectrumComponent } from '../../spectrums/spectrum/spectrum.component';
+import { SpectrumComponent } from '../../spectra/spectrum/spectrum.component';
 import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
 import { MessagesService, MessagesComponent } from 'ng2-messages/ng2-messages';
 import { DivikComponent } from '../../divik-results/divik/divik.component';

@@ -19,9 +19,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import { SpectrumService} from '../../spectrums/shared/spectrum.service';
+import { SpectrumService} from '../../spectra/shared/spectrum.service';
 import { HeatmapService} from '../../heatmaps/shared/heatmap.service';
-import { Spectrum } from '../../spectrums/shared/spectrum';
+import { Spectrum } from '../../spectra/shared/spectrum';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { PreparationService } from '../shared/preparation.service';
 import { Preparation } from '../shared/preparation';

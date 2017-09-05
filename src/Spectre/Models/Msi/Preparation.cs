@@ -33,11 +33,15 @@ namespace Spectre.Models.Msi
         /// <param name="name">The name.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="spectraNumber">Number of all spectra in preparation.</param>
-        public Preparation(string name, int id, int spectraNumber)
+        /// <param name="xRange">Pair of minimum &amp; maximum coordinate along X axis.</param>
+        /// <param name="yRange">Pair of minimum &amp; maximum coordinate along Y axis.</param>
+        public Preparation(string name, int id, int spectraNumber, Range xRange, Range yRange)
         {
             Name = name;
             Id = id;
             SpectraNumber = spectraNumber;
+            XRange = xRange;
+            YRange = yRange;
         }
 
         /// <summary>
@@ -66,6 +70,24 @@ namespace Spectre.Models.Msi
         /// </value>
         [DataMember]
         public int SpectraNumber { get; private set; }
+
+        /// <summary>
+        /// Specifies the inclusive range of spectrum coordinates along X axis.
+        /// </summary>
+        /// <value>
+        /// Tuple containing minimal &amp; maximal coordinate values.
+        /// </value>
+        [DataMember]
+        public Range XRange { get; private set; }
+
+        /// <summary>
+        /// Specifies the inclusive range of spectrum coordinates along Y axis.
+        /// </summary>
+        /// <value>
+        /// Tuple containing minimal &amp; maximal coordinate values.
+        /// </value>
+        [DataMember]
+        public Range YRange { get; private set; }
 
         /// <summary>
         /// Gets the number of chanelIds.

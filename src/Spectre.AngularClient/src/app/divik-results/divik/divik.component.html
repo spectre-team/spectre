@@ -1,8 +1,11 @@
-<p>
-  divik works!
-</p>
+
+<div class="multi_lines_text">
+  {{configDescription}}
+</div>
+
 
 <app-heatmap
   [heatmapData]=data>
 </app-heatmap>
 
+<div><a [href]='downloadJsonHref' download='result.json'>Download JSON result</a></div>

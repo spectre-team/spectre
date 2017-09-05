@@ -17,8 +17,10 @@
  limitations under the License.
  */
 
+import { environment } from '../environments/environment';
+
 export class Service {
-  private baseUrl = 'http://localhost/spectre_api';
+  private baseUrl = environment.apiUrl;
 
   public getBaseUrl(): string { return this.baseUrl; }
 

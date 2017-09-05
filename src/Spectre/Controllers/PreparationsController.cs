@@ -37,7 +37,12 @@ namespace Spectre.Controllers
         {
             return new[]
             {
-                new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
+                new Preparation(
+                    id: 1,
+                    name: "Head & neck cancer, patient 1, tumor region only",
+                    spectraNumber: 997,
+                    xRange: new Range(63, 106),
+                    yRange: new Range(1, 109))
             };
         }
 
@@ -49,7 +54,12 @@ namespace Spectre.Controllers
         public Preparation Get(int id)
         {
             return id == 1
-                ? new Preparation(name: "Head & neck cancer, patient 1, tumor region only", id: 1, spectraNumber: 997)
+                ? new Preparation(
+                    id: 1,
+                    name: "Head & neck cancer, patient 1, tumor region only",
+                    spectraNumber: 997,
+                    xRange: new Range(63, 106),
+                    yRange: new Range(1, 109))
                 : null;
         }
     }
