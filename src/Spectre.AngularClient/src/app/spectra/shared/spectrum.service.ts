@@ -42,7 +42,7 @@ export class SpectrumService extends Service {
   getByCoordinates(preparationId: number, x: number, y: number): Observable<Spectrum> {
     const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?x=${x}&y=${y}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    const spectrum = response.map(toSpectrum);//.catch(this.handleError);
+    const spectrum = response.map(toSpectrum);
     return spectrum;
   }
 
@@ -50,10 +50,6 @@ export class SpectrumService extends Service {
     const headers = new Headers();
     headers.append('Accept', 'application/json');
     return headers;
-  }
-
-  private handleError(error: Response) {
-    return Observable.throw(error);
   }
 }
 
