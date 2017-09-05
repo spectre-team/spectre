@@ -21,22 +21,19 @@ limitations under the License.
 #include <random>
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/SplittedOpevCvDataset.h"
+#include "Spectre.libGenetic/DataTypes.h"
 
 namespace Spectre::libClassifier {
 
 class RandomSplitter
 {
 
-using RandomDevice = std::random_device;
-using RandomNumberGenerator = std::mt19937_64;
-using Seed = _ULonglong;
-
 public:
-    RandomSplitter::RandomSplitter(double trainingPercent, Seed rngSeed = 0);
+    RandomSplitter::RandomSplitter(double trainingPercent, libGenetic::Seed rngSeed = 0);
     SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data);
 private:
     double m_trainingProbability;
-    RandomNumberGenerator m_randomNumberGenerator;
+    libGenetic::RandomNumberGenerator m_randomNumberGenerator;
 };
 
 }

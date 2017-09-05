@@ -24,6 +24,7 @@ limitations under the License.
 namespace Spectre::libGenetic
 {
 using ScoreType = double;
+using RandomDevice = std::random_device;
 using RandomNumberGenerator = std::mt19937_64;
 using Seed = _ULonglong; // @gmrukwa: from mt19937_64
 }

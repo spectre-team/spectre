@@ -21,13 +21,14 @@ limitations under the License.
 #include "RandomSplitter.h"
 #include "Spectre.libPlatform/Filter.h"
 #include "Spectre.libPlatform/Math.h"
+#include "Spectre.libGenetic/DataTypes.h"
 
 namespace Spectre::libClassifier {
 
 using namespace libPlatform::Functional;
 using namespace libPlatform::Math;
 
-RandomSplitter::RandomSplitter(double trainingProbability, Seed rngSeed)
+RandomSplitter::RandomSplitter(double trainingProbability, libGenetic::Seed rngSeed)
     : m_trainingProbability(trainingProbability),
       m_randomNumberGenerator(rngSeed)
 {
@@ -37,36 +38,36 @@ RandomSplitter::RandomSplitter(double trainingProbability, Seed rngSeed)
 SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
 {
     std::vector<int> indexes = range(0, int(data.size()));
-    RandomDevice rd;
-    RandomNumberGenerator g(rd());
+    libGenetic::RandomDevice randomDevice;
+    libGenetic::RandomNumberGenerator g(randomDevice());
     std::shuffle(indexes.begin(), indexes.end(), g);
 
-    std::vector<DataType> data1{};
-    std::vector<DataType> data2{};
-    std::vector<Label> labels1{};
-    std::vector<Label> labels2{};
+    std::vector<DataType> trainingData{};
+    std::vector<DataType> validationData{};
+    std::vector<Label> trainingLabels{};
+    std::vector<Label> validationLabels{};
     int trainingLimit = int(data.size() * m_trainingProbability);
     for (auto i = 0; i < trainingLimit; i++)
     {
         Observation observation(data[i]);
         for (DataType dataType: observation)
         {
-            data1.push_back(dataType);
+            trainingData.push_back(dataType);
         }
-        labels1.push_back(data.GetSampleMetadata(i));
+        trainingLabels.push_back(data.GetSampleMetadata(i));
     }
     for (auto i = trainingLimit; i < data.size(); i++)
     {
         Observation observation(data[i]);
         for (DataType dataType : observation)
         {
-            data2.push_back(dataType);
+            validationData.push_back(dataType);
         }
-        labels2.push_back(data.GetSampleMetadata(i));
+        validationLabels.push_back(data.GetSampleMetadata(i));
     }
 
-    OpenCvDataset dataset1(data1, labels1);
-    OpenCvDataset dataset2(data2, labels2);
+    OpenCvDataset dataset1(trainingData, trainingLabels);
+    OpenCvDataset dataset2(validationData, validationLabels);
     auto result = SplittedOpenCvDataset(std::move(dataset1), std::move(dataset2));
     return result;
 }

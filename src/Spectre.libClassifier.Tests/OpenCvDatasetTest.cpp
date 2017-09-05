@@ -52,6 +52,11 @@ TEST_F(OpenCvDatasetInitializationTest, correct_dataset_opencv_initialization)
     EXPECT_NO_THROW(OpenCvDataset(data_long, labels));
 }
 
+TEST_F(OpenCvDatasetInitializationTest, throws_for_inconsistent_size)
+{
+    EXPECT_THROW(OpenCvDataset(data_short, labels_too_long), InconsistentArgumentSizesException);
+}
+
 TEST_F(OpenCvDatasetInitializationTest, throws_for_empty_data)
 {
     EXPECT_THROW(OpenCvDataset(data_empty, labels_empty), EmptyOpenCvDatasetException);
