@@ -27,7 +27,6 @@ namespace Spectre::libClassifier {
 
 class RandomSplitter
 {
-
 public:
     RandomSplitter::RandomSplitter(double trainingPercent, libGenetic::Seed rngSeed = 0);
     SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data);
@@ -35,5 +34,4 @@ private:
     double m_trainingProbability;
     libGenetic::RandomNumberGenerator m_randomNumberGenerator;
 };
-
 }

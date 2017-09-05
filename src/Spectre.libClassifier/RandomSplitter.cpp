@@ -30,10 +30,7 @@ using namespace libPlatform::Math;
 
 RandomSplitter::RandomSplitter(double trainingProbability, libGenetic::Seed rngSeed)
     : m_trainingProbability(trainingProbability),
-      m_randomNumberGenerator(rngSeed)
-{
-
-}
+      m_randomNumberGenerator(rngSeed) {}
 
 SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
 {
