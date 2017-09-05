@@ -102,11 +102,12 @@ export class PreparationComponent implements OnInit {
 
   getSpectrumByCoordianates() {
     this.spectrumService
-      .getByCoordinates(this.id, this.xCoordinate + this.minHeatmapColumn, this.yCoordinate + this.minHeatmapRow)
-      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+      .getByCoordinates(this.id, this.xCoordinate + this.minHeatmapColumn, (this.yCoordinate - this.yHeatmapSize)*(-1) + this.minHeatmapRow)
+      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum), error => this.showError("Spectrum not found"));
   }
 
   showError(msg: string) {
+    console.log(msg);
     this.messagesService.error(msg);
   }
 
@@ -131,7 +132,6 @@ export class PreparationComponent implements OnInit {
   }
 
   toSpectrumDataset(spectrum: Spectrum) {
-    alert(spectrum.x + " " + spectrum.y);
     this.mzLenth = spectrum.mz.length - 1;
     this.mz = spectrum.mz;
     return [{
