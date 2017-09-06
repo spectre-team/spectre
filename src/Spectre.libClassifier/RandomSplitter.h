@@ -31,7 +31,7 @@ public:
     RandomSplitter::RandomSplitter(double trainingPercent, libGenetic::Seed rngSeed = 0);
     SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data);
 private:
-    double m_trainingProbability;
+    double m_trainingRate;
     libGenetic::RandomNumberGenerator m_randomNumberGenerator;
 };
 }

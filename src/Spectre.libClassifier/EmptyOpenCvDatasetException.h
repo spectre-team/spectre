@@ -26,7 +26,7 @@ namespace Spectre::libException
     /// Thrown, when we would create empty OpenCvDataset.
     /// </summary>
 
-    class EmptyOpenCvDatasetException : public ExceptionBase
+    class EmptyOpenCvDatasetException final : public ExceptionBase
     {
     public:
         /// <summary>

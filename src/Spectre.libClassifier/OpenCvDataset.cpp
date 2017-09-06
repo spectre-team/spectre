@@ -26,13 +26,11 @@ namespace Spectre::libClassifier {
 
 const int ColumnMatrixWidth = 1;
 
-_int64 throwOnEmpty(_int64 size)
+constexpr size_t throwOnEmpty(size_t size)
 {
-    if (size == 0)
-    {
-        throw libException::EmptyOpenCvDatasetException("Empty argument");
-    }
-    return size;
+    return size == 0 
+        ? throw libException::EmptyOpenCvDatasetException("Empty argument") 
+        : size;
 }
 
 OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
@@ -49,15 +47,14 @@ OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
     other.m_observations.clear();
 }
 
-OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
-    //temporary solution, hope to find better one
-    m_isEmpty(throwOnEmpty(data.size())),
+    OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
     m_Data(data.begin(), data.end()),
-    m_Mat(static_cast<int>(labels.size()), static_cast<int>(data.size() / labels.size()), CV_TYPE, m_Data.data()),
     m_labels(labels.begin(), labels.end()),
-    m_MatLabels(static_cast<int>(labels.size()), ColumnMatrixWidth, CV_LABEL_TYPE, m_labels.data()),
     m_observations(static_cast<int>(labels.size()))
 {
+    throwOnEmpty(data.size());
+    m_Mat = cv::Mat(static_cast<int>(labels.size()), static_cast<int>(data.size() / labels.size()), CV_TYPE, m_Data.data());
+    m_MatLabels = cv::Mat(static_cast<int>(labels.size()), ColumnMatrixWidth, CV_LABEL_TYPE, m_labels.data());
     if (data.size() % labels.size() != 0 || m_Mat.rows != static_cast<int>(m_labels.size()))
     {
         throw libException::InconsistentArgumentSizesException("data", m_Mat.rows, "labels", static_cast<int>(m_labels.size()));
@@ -72,13 +69,13 @@ OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Lab
 }
 
 OpenCvDataset::OpenCvDataset(cv::Mat data, cv::Mat labels):
-    m_isEmpty(throwOnEmpty(data.rows * data.cols)),
     m_Data(data.ptr<DataType>(), data.ptr<DataType>() + data.rows * data.cols),
-    m_Mat(data.rows, data.cols, CV_TYPE, m_Data.data()),
     m_labels(labels.ptr<Label>(), labels.ptr<Label>() + labels.rows * labels.cols),
-    m_MatLabels(static_cast<int>(m_labels.size()), 1, CV_LABEL_TYPE, m_labels.data()),
     m_observations(data.rows)
 {
+    throwOnEmpty(data.rows * data.cols);
+    m_Mat = cv::Mat(data.rows, data.cols, CV_TYPE, m_Data.data());
+    m_MatLabels = cv::Mat(static_cast<int>(m_labels.size()), 1, CV_LABEL_TYPE, m_labels.data());
     if (m_Mat.rows != static_cast<int>(m_labels.size()))
     {
         throw libException::InconsistentArgumentSizesException("data", m_Mat.rows,"labels", static_cast<int>(m_labels.size()));

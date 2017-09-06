@@ -28,8 +28,8 @@ namespace Spectre::libClassifier {
 using namespace libPlatform::Functional;
 using namespace libPlatform::Math;
 
-RandomSplitter::RandomSplitter(double trainingProbability, libGenetic::Seed rngSeed)
-    : m_trainingProbability(trainingProbability),
+RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
+    : m_trainingRate(trainingRate),
       m_randomNumberGenerator(rngSeed) {}
 
 SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
@@ -43,26 +43,23 @@ SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCv
     std::vector<DataType> validationData{};
     std::vector<Label> trainingLabels{};
     std::vector<Label> validationLabels{};
-    int trainingLimit = int(data.size() * m_trainingProbability);
+    trainingData.reserve(data.size() * data[0].size());
+    validationData.reserve(data.size() * data[0].size());
+    trainingLabels.reserve(data.size());
+    validationLabels.reserve(data.size());
+    int trainingLimit = int(data.size() * m_trainingRate);
     for (auto i = 0; i < trainingLimit; i++)
     {
         Observation observation(data[i]);
-        for (DataType dataType: observation)
-        {
-            trainingData.push_back(dataType);
-        }
+        trainingData.insert(trainingData.end(), observation.begin(), observation.end());
         trainingLabels.push_back(data.GetSampleMetadata(i));
     }
     for (auto i = trainingLimit; i < data.size(); i++)
     {
         Observation observation(data[i]);
-        for (DataType dataType : observation)
-        {
-            validationData.push_back(dataType);
-        }
+        validationData.insert(validationData.end(), observation.begin(), observation.end());
         validationLabels.push_back(data.GetSampleMetadata(i));
     }
-
     OpenCvDataset dataset1(trainingData, trainingLabels);
     OpenCvDataset dataset2(validationData, validationLabels);
     auto result = SplittedOpenCvDataset(std::move(dataset1), std::move(dataset2));

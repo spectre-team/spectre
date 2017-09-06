@@ -58,22 +58,14 @@ TEST_F(RandomSplitterTest, split_dataset)
     EXPECT_EQ(result.trainingSet.size() + result.testSet.size(), labels.size());
 }
 
-TEST_F(RandomSplitterTest, check_statistical_correctness_of_split_parts_size)
+TEST_F(RandomSplitterTest, check_size_of_splitted_vectors)
 {
     const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.9f, 0.8f };
     const std::vector<Label> labels{ 3, 7, 14, 2, 12, 5, 8, 4, 19, 11 };
     OpenCvDataset dataset(data, labels);
-    size_t firstSize = 0;
-    size_t secondSize = 0;
-    const size_t count = 10000;
-    for (auto i = 0; i < count; i++)
-    {
-        const auto result = randomSplitter.split(dataset);
-        firstSize += result.trainingSet.size();
-        secondSize += result.testSet.size();
-    }
-    EXPECT_THAT(firstSize / static_cast<float>(count), FloatEq(7));
-    EXPECT_THAT(secondSize / static_cast<float>(count), FloatEq(3));
+    const auto result = randomSplitter.split(dataset);
+    EXPECT_EQ(result.trainingSet.size(), data.size()*training);
+    EXPECT_EQ(result.testSet.size(), data.size()- data.size()*training);
 }
 
 }

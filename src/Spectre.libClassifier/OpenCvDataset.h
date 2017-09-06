@@ -112,7 +112,6 @@ public:
     ~OpenCvDataset() = default;
 
 private:
-    _int64 m_isEmpty;
     std::vector<DataType> m_Data;
     cv::Mat m_Mat;
     std::vector<Label> m_labels;
