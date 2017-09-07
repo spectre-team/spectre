@@ -47,7 +47,7 @@ SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCv
     validationData.reserve(data.size() * data[0].size());
     trainingLabels.reserve(data.size());
     validationLabels.reserve(data.size());
-    int trainingLimit = int(data.size() * m_trainingRate);
+    int trainingLimit = static_cast<int>(data.size() * m_trainingRate);
     for (auto i = 0; i < trainingLimit; i++)
     {
         Observation observation(data[i]);
