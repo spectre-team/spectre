@@ -28,8 +28,8 @@ const int ColumnMatrixWidth = 1;
 
 constexpr size_t throwOnEmpty(size_t size)
 {
-    return size == 0 
-        ? throw libException::EmptyOpenCvDatasetException("Empty argument") 
+    return size == 0
+        ? throw libException::EmptyOpenCvDatasetException("Empty argument")
         : size;
 }
 
