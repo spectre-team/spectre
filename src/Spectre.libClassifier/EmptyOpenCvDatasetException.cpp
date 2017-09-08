@@ -1,6 +1,6 @@
-/*
-* DataTypes.h
-* Types & aliases used in this library.
+﻿/*
+* EmptyOpenCvDatasetException.cpp
+* Exception thrown, when we would create empty OpenCvDataset.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -17,14 +17,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-#include <random>
-#include "Generation.h"
+#include "EmptyOpenCvDatasetException.h"
 
-namespace Spectre::libGenetic
+namespace Spectre::libException
 {
-using ScoreType = double;
-using RandomDevice = std::random_device;
-using RandomNumberGenerator = std::mt19937_64;
-using Seed = _ULonglong; // @gmrukwa: from mt19937_64
+    EmptyOpenCvDatasetException::EmptyOpenCvDatasetException(const std::string &variableName) :
+        ExceptionBase(variableName) { }
 }

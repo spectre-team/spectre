@@ -21,6 +21,7 @@ limitations under the License.
 #include <vector>
 #include <span.h>
 #include "Transform.h"
+#include "Spectre.libGenetic/DataTypes.h"
 
 namespace Spectre::libPlatform::Math
 {
@@ -351,4 +352,33 @@ constexpr std::vector<DataType> abs(gsl::span<const DataType> data)
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     return Functional::transform(data, [](DataType entry) { return std::abs(entry); });
 }
+
+/// <summary>
+/// transform to opposite values of vector of bool
+/// </summary>
+/// <param name="data">The data.</param>
+/// <returns>Vector of bools consisting of opposite values of elements of data</returns>
+inline std::vector<bool> negate(std::vector<bool> data)
+{
+    return Functional::transform(data, [](bool entry) { return !entry; });
+}
+
+/// <summary>
+/// Builds vector of the specified size.
+/// </summary>
+/// <param name="size">The size.</param>
+/// <param name="predicate">The generator.</param>
+/// <returns>Vector of generated elements.</returns>
+template <class DataType, class Generator>
+std::vector<DataType> build(size_t size, Generator generator)
+{
+    std::vector<DataType> result;
+    result.reserve(size);
+    for(auto i=0u; i<size; ++i)
+    {
+        result.push_back(generator());
+    }
+    return result;
+}
+
 }
