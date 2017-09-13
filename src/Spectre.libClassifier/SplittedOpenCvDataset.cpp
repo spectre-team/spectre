@@ -1,8 +1,8 @@
 /*
-* DataTypes.h
-* Types & aliases used in this library.
+* SplittedOpenCvDataset.cpp
+* Pair of OpenCvDatasets - training and test
 *
-Copyright 2017 Grzegorz Mrukwa
+Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,14 +17,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-#include <random>
-#include "Generation.h"
+#include "Spectre.libClassifier/SplittedOpevCvDataset.h"
 
-namespace Spectre::libGenetic
+namespace Spectre::libClassifier {
+SplittedOpenCvDataset::SplittedOpenCvDataset(OpenCvDataset&& training, OpenCvDataset&& test)
+    : trainingSet(std::move(training)),
+      testSet(std::move(test))
 {
-using ScoreType = double;
-using RandomDevice = std::random_device;
-using RandomNumberGenerator = std::mt19937_64;
-using Seed = _ULonglong; // @gmrukwa: from mt19937_64
+    
+}
 }
