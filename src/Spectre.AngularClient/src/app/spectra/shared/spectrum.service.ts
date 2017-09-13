@@ -63,7 +63,3 @@ function toSpectrum(response: Response): Spectrum {
     y: json.Y
   })
 }
-
-
-
-

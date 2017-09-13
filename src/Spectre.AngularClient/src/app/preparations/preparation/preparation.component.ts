@@ -69,7 +69,6 @@ export class PreparationComponent implements OnInit {
         this.heatmapService
           .get(this.id, 100)
           .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
-        this.getSpectrum(1);
         console.log('[SpectrumComponent] layout setup');
       });
   }
@@ -86,12 +85,12 @@ export class PreparationComponent implements OnInit {
 
   onChangedXCoordinate(event: any) {
     this.xCoordinate = event.value;
-    this.getSpectrumByCoordianates();
+    this.getSpectrumByCoordinates();
   }
 
   onChangedYCoordinate(event: any) {
     this.yCoordinate = event.value;
-    this.getSpectrumByCoordianates();
+    this.getSpectrumByCoordinates();
   }
 
   getSpectrum(selectNumber: number) {
@@ -100,15 +99,25 @@ export class PreparationComponent implements OnInit {
       .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
   }
 
-  getSpectrumByCoordianates() {
+  /*
+   * Parameters:
+   * id: preparation id
+   * x: x coordinate as a sum of selected value from x slider and minimum heatmap column value returned from server
+   * y: y coordinate as additive inverse of subtraction between selected value from y slider and row size plus minimum
+   * heatmap row returned from server
+   */
+  getSpectrumByCoordinates() {
+    const x = this.xCoordinate + this.minHeatmapColumn;
+    const y = (this.yCoordinate - this.yHeatmapSize)*(-1) + this.minHeatmapRow;
     this.spectrumService
-      .getByCoordinates(this.id, this.xCoordinate + this.minHeatmapColumn, (this.yCoordinate - this.yHeatmapSize)*(-1) + this.minHeatmapRow)
+      .getByCoordinates(this.id, x, y)
       .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum), error => this.showError("Spectrum not found"));
   }
 
   showError(msg: string) {
+    this.spectrumData = [{}];
     console.log(msg);
-    this.messagesService.error(msg);
+    alert(msg);
   }
 
   selectSpectrum(number: string) {

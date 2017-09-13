@@ -30,7 +30,7 @@ describe('HeatmapService', () => {
     (heatmapService: HeatmapService, mockBackend: MockBackend) => {
       mockBackend.connections.subscribe((connection: MockConnection) => {
          const options = new ResponseOptions({
-           body: JSON.stringify({ Id: 1, Mz: 853.23, X: [4, 5, 6], Y: [5, 8, 9 ], Intensities: [1.11, 4.44, 9.99] })
+           body: JSON.stringify({ Id: 1, Mz: 853.23, X: [4, 5, 6], Y: [5, 8, 9], Intensities: [1.11, 4.44, 9.99] })
          });
         connection.mockRespond(new Response(options));
       });
@@ -45,8 +45,10 @@ describe('HeatmapService', () => {
         expect(heatmap.data[1][1]).toEqual(4.44);
         expect(heatmap.data[4][0]).toEqual(1.11);
         expect(heatmap.data[0][2]).toEqual(9.99);
+        expect(heatmap.minColumn).toEqual(4);
+        expect(heatmap.maxColumn).toEqual(6);
+        expect(heatmap.minRow).toEqual(5);
+        expect(heatmap.maxRow).toEqual(9);
       });
-
-      //TODO: test min column and min row
     }));
 });
