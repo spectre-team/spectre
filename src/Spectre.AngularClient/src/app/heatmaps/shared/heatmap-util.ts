@@ -57,6 +57,10 @@ export class HeatmapUtil {
     }
     console.log(className + ' heatmap processed');
     return <Heatmap>({
+      minRow: min_row,
+      maxRow: max_row,
+      minColumn: min_column,
+      maxColumn: max_column,
       data: data
     });
   }

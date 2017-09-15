@@ -47,4 +47,3 @@ export class HeatmapService extends Service {
     return spectrum;
   }
 }
-

@@ -2,3 +2,21 @@
 {
   width: 600px;
 }
+
+.sliderX
+{
+  width: 435px;
+  margin-left: 118px;
+}
+
+.sliderY
+{
+  height: 435px;
+  margin-top: 93px;
+}
+
+.inlineItemsContainer
+{
+  display: flex;
+  justify-content: flex-start;
+}

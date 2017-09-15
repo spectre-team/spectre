@@ -1,21 +1,67 @@
-<label>Mz:</label>
+<div>
+  <md-slider
+    class="sliderX"
+    [(ngModel)]="xCoordinate"
+    showTicks="true"
+    min="0"
+    max={{xHeatmapSize}}
+    step="1"
+    vertical="false"
+    thumb-label="true"
+    tick-interval="true"
+    (change)="onChangedXCoordinate($event)">
+  </md-slider>
 
-<input [(ngModel)]="mzValue" type="number"/>
+  <div class="inlineItemsContainer">
+    <md-slider
+      class="sliderY"
+      [(ngModel)]="yCoordinate"
+      showTicks="true"
+      min="0"
+      max={{yHeatmapSize}}
+      step="1"
+      vertical="true"
+      thumb-label="true"
+      tick-interval="true"
+      (change)="onChangedYCoordinate($event)">
+    </md-slider>
 
-<md-slider class="slider" [(ngModel)]="currentChannelId" showTicks="true" min="0" max={{mzLenth}} step="1" (input)="onInputChannelId($event)"
-           (change)="onChangedChannelId($event)" vertical="false" thumb-label="true" tick-interval="true"></md-slider>
+    <app-heatmap
+      [heatmapData]=heatmapData>
+    </app-heatmap>
+  </div>
+</div>
 
-<app-heatmap
-  [heatmapData]=heatmapData>
-</app-heatmap>
+<div>
+  <label>Mz:</label>
+  <input [(ngModel)]="mzValue" type="number"/>
+
+  <md-slider
+    class="slider"
+    [(ngModel)]="currentChannelId"
+    showTicks="true"
+    min="0"
+    max={{mzLenth}}
+    step="1"
+    (input)="onInputChannelId($event)"
+    (change)="onChangedChannelId($event)"
+    vertical="false"
+    thumb-label="true"
+    tick-interval="true">
+  </md-slider>
+</div>
 
 <app-spectrum
   [spectrumData]=spectrumData>
 </app-spectrum>
-<ng2-messages></ng2-messages>
+
 <pre>
   <input type="text"  #titleInput>
-  <button type="submit" (click) = 'selectSpectrum(titleInput.value)'>Select</button>
+  <button
+    type="submit"
+    (click) = 'selectSpectrum(titleInput.value)'>
+    Select
+  </button>
 </pre>
 
 <app-divik></app-divik>

@@ -42,6 +42,12 @@ export class PreparationComponent implements OnInit {
   public currentChannelId = 0;
   public mz = [];
   public preparation: Preparation;
+  public xCoordinate = 0;
+  public yCoordinate = 0;
+  public xHeatmapSize: number;
+  public yHeatmapSize: number;
+  public minHeatmapColumn: number;
+  public minHeatmapRow: number;
 
   constructor(
       private route: ActivatedRoute,
@@ -63,7 +69,6 @@ export class PreparationComponent implements OnInit {
         this.heatmapService
           .get(this.id, 100)
           .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
-        this.getSpectrum(1);
         console.log('[SpectrumComponent] layout setup');
       });
   }
@@ -77,14 +82,42 @@ export class PreparationComponent implements OnInit {
       .get(this.id, this.currentChannelId)
       .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
   }
+
+  onChangedXCoordinate(event: any) {
+    this.xCoordinate = event.value;
+    this.getSpectrumByCoordinates();
+  }
+
+  onChangedYCoordinate(event: any) {
+    this.yCoordinate = event.value;
+    this.getSpectrumByCoordinates();
+  }
+
   getSpectrum(selectNumber: number) {
     this.spectrumService
       .get(this.id, selectNumber)
       .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
   }
 
+  /*
+   * Parameters:
+   * id: preparation id
+   * x: x coordinate as a sum of selected value from x slider and minimum heatmap column value returned from server
+   * y: y coordinate as additive inverse of subtraction between selected value from y slider and row size plus minimum
+   * heatmap row returned from server
+   */
+  getSpectrumByCoordinates() {
+    const x = this.xCoordinate + this.minHeatmapColumn;
+    const y = (this.yCoordinate - this.yHeatmapSize)*(-1) + this.minHeatmapRow;
+    this.spectrumService
+      .getByCoordinates(this.id, x, y)
+      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum), error => this.showError("Spectrum not found"));
+  }
+
   showError(msg: string) {
-    this.messagesService.error(msg);
+    this.spectrumData = [{}];
+    console.log(msg);
+    alert(msg);
   }
 
   selectSpectrum(number: string) {
@@ -97,6 +130,10 @@ export class PreparationComponent implements OnInit {
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
+    this.xHeatmapSize = heatmap.maxColumn - heatmap.minColumn;
+    this.yHeatmapSize = heatmap.maxRow - heatmap.minRow;
+    this.minHeatmapColumn = heatmap.minColumn;
+    this.minHeatmapRow = heatmap.minRow;
     return [{
       z: heatmap.data,
       type: 'heatmap'
