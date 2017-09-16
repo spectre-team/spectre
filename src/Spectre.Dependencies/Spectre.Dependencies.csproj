@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileSystemDependency.cs" />
+    <Compile Include="Modules\DefaultModule.cs" />
+    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Modules\MockModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

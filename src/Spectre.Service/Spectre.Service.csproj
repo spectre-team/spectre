@@ -80,6 +80,10 @@
       <Project>{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}</Project>
       <Name>Spectre.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spectre.Dependencies\Spectre.Dependencies.csproj">
+      <Project>{2b9f4dfd-c222-477a-9107-1a3c356002a4}</Project>
+      <Name>Spectre.Dependencies</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

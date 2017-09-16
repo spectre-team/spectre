@@ -64,7 +64,7 @@ namespace Spectre.Data.Datasets
         /// <param name="textFilePath">Path to the text file.</param>
         public BasicTextDataset(string textFilePath)
         {
-            FileSystem = FileSystemDependency.GetFileSystem();
+            FileSystem = DependencyResolver.GetService(typeof(IFileSystem)) as IFileSystem;
             CreateFromFile(textFilePath);
         }
 
@@ -77,7 +77,7 @@ namespace Spectre.Data.Datasets
         /// <param name="coordinates">Array of spatial coordinates.</param>
         public BasicTextDataset(double[] mz, double[,] data, int[,] coordinates)
         {
-            FileSystem = FileSystemDependency.GetFileSystem();
+            FileSystem = DependencyResolver.GetService(typeof(IFileSystem)) as IFileSystem;
             CreateFromRawData(mz, data, coordinates);
         }
 

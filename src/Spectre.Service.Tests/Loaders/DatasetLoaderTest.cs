@@ -18,15 +18,13 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
-using Ninject;
-using Ninject.Parameters;
 using NUnit.Framework;
-using Spectre.Data.Datasets;
 using Spectre.Dependencies;
+using Spectre.Dependencies.Modules;
 using Spectre.Service.Configuration;
 using Spectre.Service.Loaders;
 
@@ -45,26 +43,24 @@ namespace Spectre.Service.Tests.Loaders
 
         private readonly string _fileDir = $"{TestContext.CurrentContext.TestDirectory} + "
                                            + @"\..\..\..\..\..\test_files";
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
+            DependencyResolver.AddModule(new MockModule());
+
             var localDirFull = Path.Combine(_rootDir, _localDir);
             var remoteDirFull = Path.Combine(_rootDir, _remoteDir);
             var correctDataset = File.ReadAllText(Path.Combine(_fileDir, "small-test.txt"));
 
-            _mockFileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
-            {
-                { localDirFull, new MockDirectoryData() },
-                { remoteDirFull, new MockDirectoryData() },
-                { Path.Combine(localDirFull, "local_correct.txt"), new MockFileData(correctDataset) },
-                { Path.Combine(remoteDirFull, "remote_correct.txt"), new MockFileData(correctDataset) },
-                { Path.Combine(localDirFull, "local_incorrect.txt"), new MockFileData(textContents: "incorrect_data") }
-            });
+            _mockFileSystem = DependencyResolver.GetService(typeof(IFileSystem)) as MockFileSystem;
 
-            FileSystemDependency.Initialize(_mockFileSystem);
-            var kernel = FileSystemDependency.GetKernel();
+            _mockFileSystem.AddFile(Path.Combine(localDirFull, "local_correct.txt"), new MockFileData(correctDataset));
+            _mockFileSystem.AddFile(Path.Combine(remoteDirFull, "remote_correct.txt"), new MockFileData(correctDataset));
+            _mockFileSystem.AddFile(Path.Combine(localDirFull, "local_incorrect.txt"), new MockFileData(textContents: "incorrect_data"));
+            _mockFileSystem.AddFile(Path.Combine(remoteDirFull, "remote_incorrect.txt"), new MockFileData(textContents: "incorrect_data"));
+
             _rootConfig = new DataRootConfig(localDirFull, remoteDirFull);
-            _datasetLoader = kernel.Get<DatasetLoader>(new ConstructorArgument(name: "dataRootConfig", value: _rootConfig));
+            _datasetLoader = new DatasetLoader(_rootConfig);
         }
 
         [Test]
@@ -96,17 +92,17 @@ namespace Spectre.Service.Tests.Loaders
         }
 
         [Test]
-        public void DeletesIncorrectFilesFrom()
+        public void DeletesIncorrectFilesFromLocal()
         {
             try
             {
-                _datasetLoader.GetFromName(name: "local_incorrect.txt");
+                _datasetLoader.GetFromName(name: "remote_incorrect.txt");
             }
             catch (Exception)
             {
                 // ignored
             }
-            var result = _mockFileSystem.AllFiles.FirstOrDefault(predicate: file => file.Contains(value: "local_incorrect.txt"));
+            var result = _mockFileSystem.AllFiles.FirstOrDefault(predicate: file => file.Contains(value: Path.Combine(_localDir, "remote_incorrect.txt")));
             Assert.IsNull(result, message: "Loader leaves copies of incorrect files in local directory.");
         }
     }

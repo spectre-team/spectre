@@ -22,6 +22,7 @@ using System.IO;
 using System.IO.Abstractions;
 using Ninject;
 using Spectre.Data.Datasets;
+using Spectre.Dependencies;
 using Spectre.Service.Configuration;
 
 namespace Spectre.Service.Loaders
@@ -55,6 +56,8 @@ namespace Spectre.Service.Loaders
         {
             _localRoot = dataRootConfig.LocalPath;
             _remoteRoot = dataRootConfig.RemotePath;
+
+            FileSystem = DependencyResolver.GetService(typeof(IFileSystem)) as IFileSystem;
         }
         #endregion
 
@@ -63,7 +66,6 @@ namespace Spectre.Service.Loaders
         /// <summary>
         /// Handle to file system.
         /// </summary>
-        [Inject]
         public IFileSystem FileSystem { private get; set; }
 
         #endregion
