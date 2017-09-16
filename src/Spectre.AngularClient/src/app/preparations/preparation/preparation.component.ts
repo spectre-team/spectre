@@ -25,13 +25,14 @@ import { Spectrum } from '../../spectra/shared/spectrum';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { PreparationService } from '../shared/preparation.service';
 import { Preparation } from '../shared/preparation';
-import { MessagesService } from '../../../../node_modules/ng2-messages/ng2-messages';
+import {MessageService} from 'primeng/components/common/messageservice';
+
 
 @Component({
   selector: 'app-preparation',
   templateUrl: './preparation.component.html',
   styleUrls: ['./preparation.component.css'],
-  providers: [PreparationService]
+  providers: [PreparationService, MessageService]
 })
 export class PreparationComponent implements OnInit {
   public id: number;
@@ -54,7 +55,7 @@ export class PreparationComponent implements OnInit {
       private spectrumService: SpectrumService,
       private heatmapService: HeatmapService,
       private preparationService: PreparationService,
-      private messagesService: MessagesService
+      private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -111,13 +112,22 @@ export class PreparationComponent implements OnInit {
     const y = (this.yCoordinate - this.yHeatmapSize)*(-1) + this.minHeatmapRow;
     this.spectrumService
       .getByCoordinates(this.id, x, y)
-      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum), error => this.showError("Spectrum not found"));
+      .subscribe(spectrum => {
+        this.spectrumData = this.toSpectrumDataset(spectrum);
+        this.showSuccess("Spectrum found");
+      }, error => {
+        this.spectrumData = [{}];
+        this.showError("Spectrum not found");
+      });
   }
 
   showError(msg: string) {
-    this.spectrumData = [{}];
     console.log(msg);
-    alert(msg);
+    this.messageService.add({severity:'error', summary:'Error Message', detail:msg});
+  }
+
+  showSuccess(msg: string){
+    this.messageService.add({severity:'success', summary:'Success Message', detail:msg});
   }
 
   selectSpectrum(number: string) {
