@@ -29,8 +29,8 @@ import { PlotlyModule } from '../plotly/plotly.module';
 import { PreparationComponent } from './preparation/preparation.component';
 import { HeatmapComponent } from '../heatmaps/heatmap/heatmap.component';
 import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
-import { MessagesComponent } from 'ng2-messages/ng2-messages.component';
 import { DivikComponent } from '../divik-results/divik/divik.component';
+import {GrowlModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -39,13 +39,13 @@ import { DivikComponent } from '../divik-results/divik/divik.component';
     FormsModule,
     PreparationRoutingModule,
     PlotlyModule,
-    MdSliderModule
+    MdSliderModule,
+    GrowlModule
   ],
   declarations: [
     PreparationComponent,
     HeatmapComponent,
     SpectrumComponent,
-    MessagesComponent,
     DivikComponent
 ]
 })
