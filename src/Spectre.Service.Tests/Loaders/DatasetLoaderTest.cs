@@ -80,7 +80,7 @@ namespace Spectre.Service.Tests.Loaders
         [Test]
         public void ThrowsOnIncorrectName()
         {
-            Assert.Throws<FileNotFoundException>(code: () => _datasetLoader.GetFromName(name: "invalid_name"),
+            Assert.Throws<DatasetNotFoundException>(code: () => _datasetLoader.GetFromName(name: "invalid_name"),
                 message: "Loader accepted invalid file name.");
         }
 

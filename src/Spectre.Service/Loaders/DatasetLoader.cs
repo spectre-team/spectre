@@ -88,7 +88,7 @@ namespace Spectre.Service.Loaders
                 string fullPathRemote = Path.Combine(_remoteRoot, name);
                 if (!FileSystem.File.Exists(fullPathRemote))
                 {
-                    throw new FileNotFoundException("File not found neither locally nor remotely.", name);
+                    throw new DatasetNotFoundException("Dataset file not found neither locally nor remotely.", name);
                 }
 
                 FileSystem.File.Copy(fullPathRemote, fullPathLocal);
