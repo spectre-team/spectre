@@ -21,12 +21,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
-import { PreparationService } from './preparations/shared/preparation.service';
 import { PreparationsModule } from './preparations/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
@@ -54,6 +54,7 @@ import { DivikService } from './divik-results/shared/divik.service';
     HttpModule,
     PlotlyModule,
     PreparationsModule,
+    BrowserAnimationsModule,
     routing
   ],
   bootstrap: [AppComponent]

@@ -3,9 +3,19 @@
   {{configDescription}}
 </div>
 
+<md-form-field *ngIf="divikConfig">
+  <input mdInput
+         type='number'
+         min="0"
+         max={{divikConfig.Level}}
+         (change)="changeLevel($event.target.value)"/>
+  <md-hint align="center">Max value: divikConfig.Level</md-hint>
+</md-form-field>
+
 
 <app-heatmap
   [heatmapData]=data>
 </app-heatmap>
 
-<div><a [href]='downloadJsonHref' download='result.json'>Download JSON result</a></div>
+<div><a [href]='downloadJsonHref'
+        download='result.json'>Download JSON result</a></div>

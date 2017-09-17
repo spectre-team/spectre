@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MdSliderModule } from '@angular/material';
+import { MdFormFieldModule, MdInputModule, MdSliderModule} from '@angular/material';
 
 import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';
@@ -39,7 +39,9 @@ import { DivikComponent } from '../divik-results/divik/divik.component';
     FormsModule,
     PreparationRoutingModule,
     PlotlyModule,
-    MdSliderModule
+    MdSliderModule,
+    MdInputModule,
+    MdFormFieldModule
   ],
   declarations: [
     PreparationComponent,

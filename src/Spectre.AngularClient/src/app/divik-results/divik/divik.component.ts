@@ -34,6 +34,7 @@ import { DivikConfig } from '../shared/divik-config';
 export class DivikComponent implements OnInit {
   public data: any;
   public configDescription: string;
+  public divikConfig: DivikConfig;
   public downloadJsonHref: any;
   constructor(
       private route: ActivatedRoute,
@@ -57,12 +58,22 @@ export class DivikComponent implements OnInit {
     }];
   }
   buildConfigInfo(config: DivikConfig): string {
+    this.divikConfig = config;
     let description = '';
     Object.keys(config).forEach((key) => {
       description += key + ': ' +  config[key] + '\n';
     });
     this.generateDownloadJsonUri(config);
     return description;
+  }
+
+  changeLevel(value) {
+    console.log('change ' + value);
+    if (value > 0 && value <= this.divikConfig.Level) {
+      this.divikService
+        .get(1, 1, value)
+        .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
+    }
   }
 
   generateDownloadJsonUri(config: DivikConfig) {
