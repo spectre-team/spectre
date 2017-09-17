@@ -1,70 +1,93 @@
-<p-growl [(value)]="msgs"></p-growl>
-<div>
-  <md-slider
-    class="sliderX"
-    [(ngModel)]="xCoordinate"
-    showTicks="true"
-    min="0"
-    max={{xHeatmapSize}}
-    step="1"
-    vertical="false"
-    thumb-label="true"
-    tick-interval="true"
-    (change)="onChangedXCoordinate($event)">
-  </md-slider>
+<div id="mainContainer">
+  <div id="slideNav">
 
-  <div class="inlineItemsContainer">
-    <md-slider
-      class="sliderY"
-      [(ngModel)]="yCoordinate"
-      showTicks="true"
-      min="0"
-      max={{yHeatmapSize}}
-      step="1"
-      vertical="true"
-      thumb-label="true"
-      tick-interval="true"
-      (change)="onChangedYCoordinate($event)">
-    </md-slider>
+  </div>
+  <div id="tabsManu">
+    <md-tab-group>
+      <md-tab label="Heatmap & Spectrum" content="asdf">
 
-    <app-heatmap
-      [heatmapData]=heatmapData>
-    </app-heatmap>
+      </md-tab>
+      <md-tab label="Heatmap">
+
+      </md-tab>
+      <md-tab label="Spectrum">
+
+      </md-tab>
+      <md-tab label="Divik">
+
+      </md-tab>
+    </md-tab-group>
   </div>
 </div>
 
-<div>
-  <label>Mz:</label>
-  <input [(ngModel)]="mzValue" type="number"/>
+<p-growl [(value)]="msgs"></p-growl>
 
-  <md-slider
-    class="slider"
-    [(ngModel)]="currentChannelId"
-    showTicks="true"
-    min="0"
-    max={{mzLenth}}
-    step="1"
-    (input)="onInputChannelId($event)"
-    (change)="onChangedChannelId($event)"
-    vertical="false"
-    thumb-label="true"
-    tick-interval="true">
-  </md-slider>
-</div>
+<!--<div>-->
+  <!--<md-slider-->
+    <!--class="sliderX"-->
+    <!--[(ngModel)]="xCoordinate"-->
+    <!--showTicks="true"-->
+    <!--min="0"-->
+    <!--max={{xHeatmapSize}}-->
+    <!--step="1"-->
+    <!--vertical="false"-->
+    <!--thumb-label="true"-->
+    <!--tick-interval="true"-->
+    <!--(change)="onChangedXCoordinate($event)">-->
+  <!--</md-slider>-->
 
-<app-spectrum
-  [spectrumData]=spectrumData>
-</app-spectrum>
+  <!--<div class="inlineItemsContainer">-->
+    <!--<md-slider-->
+      <!--class="sliderY"-->
+      <!--[(ngModel)]="yCoordinate"-->
+      <!--showTicks="true"-->
+      <!--min="0"-->
+      <!--max={{yHeatmapSize}}-->
+      <!--step="1"-->
+      <!--vertical="true"-->
+      <!--thumb-label="true"-->
+      <!--tick-interval="true"-->
+      <!--(change)="onChangedYCoordinate($event)">-->
+    <!--</md-slider>-->
 
-<pre>
-  <input type="text"  #titleInput>
-  <button
-    type="submit"
-    (click) = 'selectSpectrum(titleInput.value)'>
-    Select
-  </button>
-</pre>
+    <!--<app-heatmap-->
+      <!--[heatmapData]=heatmapData>-->
+    <!--</app-heatmap>-->
+  <!--</div>-->
+<!--</div>-->
 
-<app-divik></app-divik>
+<!--<div>-->
+  <!--<label>Mz:</label>-->
+  <!--<input [(ngModel)]="mzValue" type="number"/>-->
+
+  <!--<md-slider-->
+    <!--class="slider"-->
+    <!--[(ngModel)]="currentChannelId"-->
+    <!--showTicks="true"-->
+    <!--min="0"-->
+    <!--max={{mzLenth}}-->
+    <!--step="1"-->
+    <!--(input)="onInputChannelId($event)"-->
+    <!--(change)="onChangedChannelId($event)"-->
+    <!--vertical="false"-->
+    <!--thumb-label="true"-->
+    <!--tick-interval="true">-->
+  <!--</md-slider>-->
+<!--</div>-->
+
+<!--<app-spectrum-->
+  <!--[spectrumData]=spectrumData>-->
+<!--</app-spectrum>-->
+
+<!--<pre>-->
+  <!--<input type="text"  #titleInput>-->
+  <!--<button-->
+    <!--type="submit"-->
+    <!--(click) = 'selectSpectrum(titleInput.value)'>-->
+    <!--Select-->
+  <!--</button>-->
+<!--</pre>-->
+
+<!--<app-divik></app-divik>-->
 
 
