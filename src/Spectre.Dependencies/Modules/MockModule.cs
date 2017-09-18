@@ -1,5 +1,5 @@
 ﻿/*
- * DefaultModule.cs
+ * MockModule.cs
  * Module containing bindings for mocks of certain parts of the application
  * for testing purposes.
  *

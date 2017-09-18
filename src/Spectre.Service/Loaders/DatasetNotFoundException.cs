@@ -44,8 +44,9 @@ namespace Spectre.Service.Loaders
         /// Initializes a new instance of the <see cref="DatasetNotFoundException"/> class.
         /// </summary>
         /// <param name="message">The exception message.</param>
+        /// <param name="fileName">Name of file.</param>
         /// <param name="innerException">The original exception thrown during validation.</param>
-        public DatasetNotFoundException(string message, Exception innerException) : base(message, innerException)
+        public DatasetNotFoundException(string message, string fileName, Exception innerException) : base(message, fileName, innerException)
         {
         }
     }

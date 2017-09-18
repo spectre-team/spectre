@@ -57,7 +57,7 @@ namespace Spectre.Service.Loaders
             _localRoot = dataRootConfig.LocalPath;
             _remoteRoot = dataRootConfig.RemotePath;
 
-            FileSystem = DependencyResolver.GetService(typeof(IFileSystem)) as IFileSystem;
+            FileSystem = DependencyResolver.GetService<IFileSystem>();
         }
         #endregion
 
@@ -66,7 +66,7 @@ namespace Spectre.Service.Loaders
         /// <summary>
         /// Handle to file system.
         /// </summary>
-        public IFileSystem FileSystem { private get; set; }
+        private IFileSystem FileSystem { get; }
 
         #endregion
 

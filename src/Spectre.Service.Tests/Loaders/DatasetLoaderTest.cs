@@ -52,7 +52,7 @@ namespace Spectre.Service.Tests.Loaders
             var remoteDirFull = Path.Combine(_rootDir, _remoteDir);
             var correctDataset = File.ReadAllText(Path.Combine(_fileDir, "small-test.txt"));
 
-            _mockFileSystem = DependencyResolver.GetService(typeof(IFileSystem)) as MockFileSystem;
+            _mockFileSystem = DependencyResolver.GetService<IFileSystem>() as MockFileSystem;
 
             _mockFileSystem.AddFile(Path.Combine(localDirFull, "local_correct.txt"), new MockFileData(correctDataset));
             _mockFileSystem.AddFile(Path.Combine(remoteDirFull, "remote_correct.txt"), new MockFileData(correctDataset));
@@ -98,7 +98,7 @@ namespace Spectre.Service.Tests.Loaders
             {
                 _datasetLoader.GetFromName(name: "remote_incorrect.txt");
             }
-            catch (Exception)
+            catch (DatasetFormatException)
             {
                 // ignored
             }

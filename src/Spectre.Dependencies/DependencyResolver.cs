@@ -41,8 +41,7 @@ namespace Spectre.Dependencies
         /// <summary>
         /// Method for getting a certain service according to its type.
         /// </summary>
-        /// <param name="serviceType">Type of desired service.</param>
-        /// <returns></returns>
-        public static object GetService(Type serviceType) => Kernel.TryGet(serviceType);
+        /// <returns>Found service.</returns>
+        public static T GetService<T>() where T : class => Kernel.TryGet(typeof(T)) as T;
     }
 }
