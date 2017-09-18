@@ -31,8 +31,7 @@ import { HeatmapComponent } from '../heatmaps/heatmap/heatmap.component';
 import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
 import { DivikComponent } from '../divik-results/divik/divik.component';
 import {GrowlModule} from 'primeng/primeng';
-import {MdTabsModule} from '@angular/material';
-import {MdSidenavModule} from '@angular/material';
+
 
 @NgModule({
   imports: [
@@ -43,8 +42,7 @@ import {MdSidenavModule} from '@angular/material';
     PlotlyModule,
     MdSliderModule,
     GrowlModule,
-    MdTabsModule,
-    MdSidenavModule
+
   ],
   declarations: [
     PreparationComponent,

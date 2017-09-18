@@ -1,2 +1,18 @@
-<div id="header">Spectre</div>
-<router-outlet></router-outlet>
+<md-sidenav-container >
+  <div id="header"><h1>Spectre</h1></div>
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    <md-list>
+      <a md-list-item routerLink="mainPage">Main Page</a>
+      <a md-list-item routerLink="preparations">Preparations</a>
+    </md-list>
+  </md-sidenav>
+  <md-toolbar color="primary">
+    <button md-icon-button (click)="sidenav.toggle()">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+  </md-toolbar>
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
+
