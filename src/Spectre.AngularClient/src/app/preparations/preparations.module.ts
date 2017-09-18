@@ -33,6 +33,7 @@ import { DivikComponent } from '../divik-results/divik/divik.component';
 import {GrowlModule} from 'primeng/primeng';
 import {MdTabsModule} from '@angular/material';
 import {MdSidenavModule} from '@angular/material';
+import {TabViewModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import {MdSidenavModule} from '@angular/material';
     MdSliderModule,
     GrowlModule,
     MdTabsModule,
-    MdSidenavModule
+    MdSidenavModule,
+    TabViewModule
   ],
   declarations: [
     PreparationComponent,

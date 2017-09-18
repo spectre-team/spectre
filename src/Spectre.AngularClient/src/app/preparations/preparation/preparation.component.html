@@ -1,26 +1,121 @@
+<p-growl [(value)]="msgs"></p-growl>
+
 <div id="mainContainer">
   <div id="slideNav">
-
+    asfddsafasdfasd
   </div>
   <div id="tabsManu">
-    <md-tab-group>
-      <md-tab label="Heatmap & Spectrum" content="asdf">
+    <p-tabView>
+      <p-tabPanel header="Heatmap & Spectrum">
+        <div>
+          <md-slider
+            class="sliderX"
+            [(ngModel)]="xCoordinate"
+            showTicks="true"
+            min="0"
+            max={{xHeatmapSize}}
+            step="1"
+            vertical="false"
+            thumb-label="true"
+            tick-interval="true"
+            (change)="onChangedXCoordinate($event)">
+          </md-slider>
 
-      </md-tab>
-      <md-tab label="Heatmap">
+          <div class="inlineItemsContainer">
+            <md-slider
+              class="sliderY"
+              [(ngModel)]="yCoordinate"
+              showTicks="true"
+              min="0"
+              max={{yHeatmapSize}}
+              step="1"
+              vertical="true"
+              thumb-label="true"
+              tick-interval="true"
+              (change)="onChangedYCoordinate($event)">
+            </md-slider>
 
-      </md-tab>
-      <md-tab label="Spectrum">
+            <app-heatmap
+              [heatmapData]=heatmapData>
+            </app-heatmap>
+          </div>
+        </div>
 
-      </md-tab>
-      <md-tab label="Divik">
+        <div>
+          <label>Mz:</label>
+          <input [(ngModel)]="mzValue" type="number"/>
 
-      </md-tab>
-    </md-tab-group>
+          <md-slider
+            class="slider"
+            [(ngModel)]="currentChannelId"
+            showTicks="true"
+            min="0"
+            max={{mzLenth}}
+            step="1"
+            (input)="onInputChannelId($event)"
+            (change)="onChangedChannelId($event)"
+            vertical="false"
+            thumb-label="true"
+            tick-interval="true">
+          </md-slider>
+        </div>
+
+        <app-spectrum
+          [spectrumData]=spectrumData>
+        </app-spectrum>
+
+        <pre>
+          <input type="text"  #titleInput>
+          <button
+            type="submit"
+            (click) = 'selectSpectrum(titleInput.value)'>
+            Select
+          </button>
+        </pre>
+        </p-tabPanel>
+      <p-tabPanel header="Heatmap">
+        <app-heatmap
+          [heatmapData]=heatmapData>
+        </app-heatmap>
+          <div>
+            <label>Mz:</label>
+            <input [(ngModel)]="mzValue" type="number"/>
+
+            <md-slider
+              class="slider"
+              [(ngModel)]="currentChannelId"
+              showTicks="true"
+              min="0"
+              max={{mzLenth}}
+              step="1"
+              (input)="onInputChannelId($event)"
+              (change)="onChangedChannelId($event)"
+              vertical="false"
+              thumb-label="true"
+              tick-interval="true">
+            </md-slider>
+          </div>
+        </p-tabPanel>
+      <p-tabPanel header="Spectrum">
+        <app-spectrum
+          [spectrumData]=spectrumData>
+        </app-spectrum>
+
+        <pre>
+          <input type="text"  #titleInput>
+          <button
+            type="submit"
+            (click) = 'selectSpectrum(titleInput.value)'>
+            Select
+          </button>
+        </pre>
+        </p-tabPanel>
+      <p-tabPanel header="Divik">
+        <app-divik></app-divik>
+      </p-tabPanel>
+    </p-tabView>
   </div>
 </div>
-
-<p-growl [(value)]="msgs"></p-growl>
 
 <!--<div>-->
   <!--<md-slider-->

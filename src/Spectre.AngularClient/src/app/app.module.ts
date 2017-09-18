@@ -35,6 +35,7 @@ import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { MessagesService } from 'ng2-messages/ng2-messages.service';
 import { DivikService } from './divik-results/shared/divik.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   providers: [
@@ -54,6 +55,7 @@ import { DivikService } from './divik-results/shared/divik.service';
     HttpModule,
     PlotlyModule,
     PreparationsModule,
+    BrowserAnimationsModule,
     routing
   ],
   bootstrap: [AppComponent]
