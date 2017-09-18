@@ -28,12 +28,14 @@ import { PreparationListComponent } from './preparations/preparation-list/prepar
 import { MockBackend } from '@angular/http/testing';
 
 import { RouterTestingModule } from '@angular/router/testing';
+import { MdListModule, MdSidenavModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-          RouterTestingModule
+          [RouterTestingModule, MdListModule, MdSidenavModule, BrowserAnimationsModule]
       ],
       providers: [
           MockBackend,

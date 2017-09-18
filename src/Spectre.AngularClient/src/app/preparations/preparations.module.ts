@@ -31,9 +31,6 @@ import { HeatmapComponent } from '../heatmaps/heatmap/heatmap.component';
 import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
 import { DivikComponent } from '../divik-results/divik/divik.component';
 import {GrowlModule} from 'primeng/primeng';
-import {MdTabsModule} from '@angular/material';
-import {MdSidenavModule} from '@angular/material';
-import {TabViewModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -43,10 +40,7 @@ import {TabViewModule} from 'primeng/primeng';
     PreparationRoutingModule,
     PlotlyModule,
     MdSliderModule,
-    GrowlModule,
-    MdTabsModule,
-    MdSidenavModule,
-    TabViewModule
+    GrowlModule
   ],
   declarations: [
     PreparationComponent,

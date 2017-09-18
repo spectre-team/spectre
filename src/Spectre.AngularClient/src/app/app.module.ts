@@ -36,6 +36,7 @@ import 'hammerjs';
 import { MessagesService } from 'ng2-messages/ng2-messages.service';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdListModule, MdSidenavModule} from '@angular/material';
 
 @NgModule({
   providers: [
@@ -54,8 +55,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpModule,
     PlotlyModule,
+    BrowserAnimationsModule,
     PreparationsModule,
     BrowserAnimationsModule,
+    MdSidenavModule,
+    MdListModule,
     routing
   ],
   bootstrap: [AppComponent]
