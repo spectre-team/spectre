@@ -23,7 +23,8 @@
 @import "../node_modules/primeng/resources/primeng.min.css";
 @import "../node_modules/primeng/resources/themes/omega/theme.css";
 
-body {
-  font-family: "Arimo", "Helvetica", "Arial", sans-serif;
+html, body {
   margin: 0px;
+  min-height: 100%;
+  height: 100%;
 }

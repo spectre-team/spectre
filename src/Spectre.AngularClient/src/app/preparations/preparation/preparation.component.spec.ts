@@ -22,7 +22,7 @@ import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/ht
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { MdSliderModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {GrowlModule} from 'primeng/primeng';
+import {GrowlModule, TabViewModule} from 'primeng/primeng';
 import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../../../mocks/mock-activated-router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -48,7 +48,7 @@ describe('PreparationComponent', () => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
       declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent],
-      imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule, GrowlModule],
+      imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule, GrowlModule, TabViewModule],
       providers: [
           MockBackend,
           BaseRequestOptions,
