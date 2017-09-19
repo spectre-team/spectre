@@ -1,5 +1,31 @@
 #header
 {
-  background-color: #3399FF;
-  height: 70px;
+  background-color: #292b2c;
+  height: 60px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#headerName
+{
+  margin-left: 30px;
+  font-fimily: 'Roboto', sans-serif;
+  color: #e9e9e9;
+  margin-top: 10px;
+}
+
+#listButton
+{
+  height: 40px;
+  width: 40px;
+  background-color: #292b2c;
+  border-color: #e9e9e9;
+  margin-left: 20px;
+}
+
+#listBootstrapIcon
+{
+  color: #e9e9e9;
 }

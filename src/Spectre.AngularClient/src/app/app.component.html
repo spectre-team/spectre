@@ -1,16 +1,20 @@
+<div id="header">
+  <md-toolbar color="primary">
+    <button id="listButton" (click) ="sidenav.toggle()" class="btn btn-info btn-sm">
+      <span id="listBootstrapIcon" class="glyphicon glyphicon-th-list"></span>
+    </button>
+  </md-toolbar>
+  <h2 id="headerName">
+    Spectre
+  </h2>
+</div>
 <md-sidenav-container >
-  <div id="header"><h1>Spectre</h1></div>
   <md-sidenav #sidenav mode="side" class="app-sidenav">
     <md-list>
       <a md-list-item routerLink="mainPage">Main Page</a>
       <a md-list-item routerLink="preparations">Preparations</a>
     </md-list>
   </md-sidenav>
-  <md-toolbar color="primary">
-    <button md-icon-button (click)="sidenav.toggle()">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-  </md-toolbar>
   <div class="app-content">
     <router-outlet></router-outlet>
   </div>
