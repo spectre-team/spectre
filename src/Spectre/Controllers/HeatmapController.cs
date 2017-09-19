@@ -14,6 +14,9 @@
    limitations under the License.
 */
 
+using Spectre.Service.Configuration;
+using Spectre.Service.Loaders;
+
 namespace Spectre.Controllers
 {
     using System;
@@ -52,7 +55,11 @@ namespace Spectre.Controllers
                 return null;
             }
 
-            IDataset dataset = new BasicTextDataset(textFilePath: ConfigurationManager.AppSettings["LocalDataDirectory"] + Path.DirectorySeparatorChar + "hnc1_tumor.txt");
+            DatasetLoader datasetLoader = new DatasetLoader(
+                new DataRootConfig(
+                    ConfigurationManager.AppSettings["LocalDataDirectory"],
+                    ConfigurationManager.AppSettings["RemoteDataDirectory"]));
+            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor.txt");
 
             var mz = dataset.GetRawMzValue(channelId);
             var intensities = dataset.GetRawIntensityRow(channelId);

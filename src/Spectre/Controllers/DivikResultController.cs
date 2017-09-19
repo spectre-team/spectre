@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -29,6 +30,8 @@ using Newtonsoft.Json;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Data.Datasets;
 using Spectre.Models.Msi;
+using Spectre.Service.Configuration;
+using Spectre.Service.Loaders;
 
 namespace Spectre.Controllers
 {
@@ -61,7 +64,12 @@ namespace Spectre.Controllers
             var jsonText = File.ReadAllText("C:\\spectre_data\\expected_divik_results\\hnc1_tumor\\euclidean\\divik-result.json");
             Algorithms.Results.DivikResult divikResult = JsonConvert.DeserializeObject<Algorithms.Results.DivikResult>(jsonText);
 
-            IDataset dataset = new BasicTextDataset(textFilePath: "C:\\spectre_data\\hnc1_tumor.txt");
+            DatasetLoader datasetLoader = new DatasetLoader(
+                new DataRootConfig(
+                    ConfigurationManager.AppSettings["LocalDataDirectory"],
+                    ConfigurationManager.AppSettings["RemoteDataDirectory"]));
+            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor.txt");
+
             var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
 
             int length = divikResult.Partition.Length;
