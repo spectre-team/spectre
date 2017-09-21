@@ -53,7 +53,8 @@
     <Compile Include="Entities\Dataset.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\Context.cs" />
+    <Compile Include="Contexts\Context.cs" />
+    <Compile Include="Utils\IPathFinder.cs" />
     <Compile Include="Utils\PathFinder.cs" />
   </ItemGroup>
   <ItemGroup>

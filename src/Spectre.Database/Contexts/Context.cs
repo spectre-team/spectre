@@ -20,7 +20,7 @@
 using System.Data.Entity;
 using Spectre.Database.Entities;
 
-namespace Spectre.Database.Utils
+namespace Spectre.Database.Contexts
 {
     /// <summary>
     /// Context for database access.

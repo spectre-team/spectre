@@ -23,19 +23,18 @@ using System.IO;
 using System.Linq;
 using Spectre.Database.Entities;
 using Spectre.Database.Utils;
+using Spectre.Database.Contexts;
 using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using NUnit.Mocks;
 using Moq;
 
-
 namespace Spectre.Database.Tests
 {
     [TestFixture]
     public class QueryTests
     {
-
         [Test]
         public void QueryTest()
         {
@@ -55,13 +54,14 @@ namespace Spectre.Database.Tests
             var mockContext = new Mock<Context>();
             mockContext.Setup(c => c.Datasets).Returns(mockSet.Object);
 
-
             var service = new PathFinder(mockContext.Object);
             var dataset1 = service.ReturnForHash("1");
             var dataset2 = service.ReturnForFriendlyName("Bajer2");
+            var dataset3 = service.ReturnForHash("4");
 
             NUnit.Framework.Assert.AreEqual("path1", dataset1);
             NUnit.Framework.Assert.AreEqual("path2", dataset2);
+            NUnit.Framework.Assert.AreEqual(null, dataset3);
         }
     }
 }

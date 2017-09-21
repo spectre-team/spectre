@@ -17,40 +17,31 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectre.Database.Entities;
-
 namespace Spectre.Database.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Spectre.Database.Contexts;
+    using Spectre.Database.Entities;
+
     /// <summary>
     /// Class for finding the path of chosen property.
     /// </summary>
-    public class PathFinder
+    public class PathFinder : IPathFinder
     {
-        /// <summary>
-        /// Variable for returning location from hash
-        /// </summary>
-        private static string _locationfromhash;
-
-        /// <summary>
-        /// Variable for returning location from friendly name
-        /// </summary>
-        private static string _locationfromfriendlyname;
-
-        /// <summary>
-        /// The location
-        /// </summary>
-        private Dataset _path = new Dataset();
-
         /// <summary>
         /// The context description
         /// </summary>
         private Context _context;
+
+        /// <summary>
+        /// The dataset
+        /// </summary>
+        private Dataset _dataset = new Dataset();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PathFinder"/> class.
@@ -68,15 +59,20 @@ namespace Spectre.Database.Utils
         /// <returns>
         /// Returns location having hash.
         /// </returns>
-        public string ReturnForHash(string hash)
+        public virtual string ReturnForHash(string hash)
         {
-            _path = _context.Datasets
+            if (_context.Datasets.Any(o => o.Hash == hash))
+            {
+                _dataset = _context.Datasets
                     .Where(b => b.Hash == hash)
                     .FirstOrDefault();
 
-            PathFinder._locationfromhash = _path.Location.ToString();
-
-            return PathFinder._locationfromhash;
+                return _dataset.Location.ToString();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -86,15 +82,20 @@ namespace Spectre.Database.Utils
         /// <returns>
         /// Returns location having friendly name.
         /// </returns>
-        public string ReturnForFriendlyName(string friendlyname)
+        public virtual string ReturnForFriendlyName(string friendlyname)
         {
-            _path = _context.Datasets
+            if (_context.Datasets.Any(o => o.FriendlyName == friendlyname))
+            {
+                _dataset = _context.Datasets
                     .Where(b => b.FriendlyName == friendlyname)
                     .FirstOrDefault();
 
-            PathFinder._locationfromfriendlyname = _path.Location.ToString();
-
-            return PathFinder._locationfromfriendlyname;
+                return _dataset.Location.ToString();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
