@@ -24,7 +24,7 @@ namespace Spectre.Database.Migrations
     /// <summary>
     /// Configuration of dataset migrations.
     /// </summary>
-    /// <seealso cref="Utils.Context" />
+    /// <seealso cref="Contexts.Context" />
     internal sealed class Configuration : DbMigrationsConfiguration<Contexts.Context>
     {
         /// <summary>

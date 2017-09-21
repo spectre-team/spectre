@@ -65,5 +65,3 @@ namespace Spectre.Database.Tests
         }
     }
 }
-
-
