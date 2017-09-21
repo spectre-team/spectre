@@ -17,7 +17,7 @@
    limitations under the License.
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -36,6 +36,7 @@ export class DivikComponent implements OnInit {
   public configDescription: string;
   public divikConfig: DivikConfig;
   public downloadJsonHref: any;
+  @Input() public preparationId;
   constructor(
       private route: ActivatedRoute,
       private divikService: DivikService,
@@ -44,10 +45,10 @@ export class DivikComponent implements OnInit {
 
   ngOnInit() {
     this.divikService
-      .get(1, 1, 1)
+      .get(this.preparationId, 1, 1)
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
     this.divikService
-      .getConfig(1, 1)
+      .getConfig(this.preparationId, 1)
       .subscribe(config => this.configDescription = this.buildConfigInfo(config));
   }
 
@@ -68,10 +69,9 @@ export class DivikComponent implements OnInit {
   }
 
   changeLevel(value) {
-    console.log('change ' + value);
     if (value > 0 && value <= this.divikConfig.Level) {
       this.divikService
-        .get(1, 1, value)
+        .get(this.preparationId, 1, value)
         .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
     }
   }
