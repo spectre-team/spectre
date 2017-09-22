@@ -21,15 +21,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {MdSliderModule} from '@angular/material';
+import { MdSliderModule } from '@angular/material';
 
 import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';
 
 import { PreparationComponent } from './preparation/preparation.component';
-import {HeatmapComponent} from '../heatmaps/heatmap/heatmap.component';
-import {SpectrumComponent} from '../spectrums/spectrum/spectrum.component';
-import { MessagesComponent } from '../../../node_modules/ng2-messages/ng2-messages';
+import { HeatmapComponent } from '../heatmaps/heatmap/heatmap.component';
+import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
+import { MessagesComponent } from 'ng2-messages/ng2-messages.component';
+import { DivikComponent } from '../divik-results/divik/divik.component';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { MessagesComponent } from '../../../node_modules/ng2-messages/ng2-messag
     PreparationComponent,
     HeatmapComponent,
     SpectrumComponent,
-    MessagesComponent
+    MessagesComponent,
+    DivikComponent
 ]
 })
 export class PreparationsModule {}

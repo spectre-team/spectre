@@ -40,14 +40,25 @@
     <CodeAnalysisRuleSet>..\CSharpCodingConvention.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Abstractions, Version=2.0.0.143, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.2.0.0.143\lib\net40\System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions.TestingHelpers, Version=2.0.0.143, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.TestingHelpers.2.0.0.143\lib\net40\System.IO.Abstractions.TestingHelpers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleCaptureServiceTest.cs" />
+    <Compile Include="DataRootConfigTest.cs" />
+    <Compile Include="Loaders\DatasetLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTest.cs" />
   </ItemGroup>
@@ -55,6 +66,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
+      <Project>{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}</Project>
+      <Name>Spectre.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spectre.Dependencies\Spectre.Dependencies.csproj">
+      <Project>{2b9f4dfd-c222-477a-9107-1a3c356002a4}</Project>
+      <Name>Spectre.Dependencies</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spectre.Service\Spectre.Service.csproj">
       <Project>{287a1a8d-c029-4d47-96bc-755c91b7985d}</Project>
       <Name>Spectre.Service</Name>

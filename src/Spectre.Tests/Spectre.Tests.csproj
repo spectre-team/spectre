@@ -106,9 +106,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DivikResultControllerTest.cs" />
     <Compile Include="Controllers\HeatmapControllerTest.cs" />
     <Compile Include="Controllers\PreparationsControllerTest.cs" />
     <Compile Include="Controllers\SpectrumControllerTest.cs" />
+    <Compile Include="Models\RangeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +123,10 @@
     <ProjectReference Include="..\Spectre.Algorithms\Spectre.Algorithms.csproj">
       <Project>{9A886AEC-58DB-410D-91B9-C62E157501FA}</Project>
       <Name>Spectre.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
+      <Project>{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}</Project>
+      <Name>Spectre.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Spectre\Spectre.csproj">
       <Project>{0E4F265B-8702-4D70-AB70-AA566D7A2E40}</Project>

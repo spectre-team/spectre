@@ -30,16 +30,18 @@ import { PreparationService } from './preparations/shared/preparation.service';
 import { PreparationsModule } from './preparations/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
-import { SpectrumService } from './spectrums/shared/spectrum.service';
+import { SpectrumService } from './spectra/shared/spectrum.service';
 import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { MessagesService } from 'ng2-messages/ng2-messages.service';
+import { DivikService } from './divik-results/shared/divik.service';
 
 @NgModule({
   providers: [
       HeatmapService,
       SpectrumService,
-      MessagesService
+      MessagesService,
+      DivikService
   ],
   declarations: [
     AppComponent,

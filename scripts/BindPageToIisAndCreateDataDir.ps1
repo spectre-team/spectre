@@ -59,7 +59,7 @@ Try
     $Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("IIS_IUSRS", "FullControl", "Allow")
     $Acl.SetAccessRule($Ar)
     Set-Acl c:\spectre_data $Acl
-    Copy-Item "$($ProjectRoot)\test_files\*" c:\spectre_data | Out-Null
+    Copy-Item "$($ProjectRoot)\test_files\*" c:\spectre_data  –Recurse | Out-Null
 
     Write-Host "Test data copied to default data directory." -foregroundcolor green
 }
