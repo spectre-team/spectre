@@ -37,6 +37,7 @@
 {
   display: flex;
   justify-content: flex-start;
+  height: 100vh;
 }
 
 a:hover, a:visited, a:link, a:active

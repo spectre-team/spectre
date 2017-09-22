@@ -1,11 +1,11 @@
 <div id="main-container">
-    <h2>There are {{preparations.length}} available preparations:</h2>
+    <h2>There is {{preparations.length}} available preparations:</h2>
 
     <div class="preparation-list">
         <div class="preparation" *ngFor="let preparation of preparations">
             <a routerLink="/preparation/{{preparation.id}}"
                 routerLinkActive="active">
-                {{preparation.name}}
+                <div class="preparation-text">{{preparation.name}}</div>
             </a>
         </div>
     </div>
