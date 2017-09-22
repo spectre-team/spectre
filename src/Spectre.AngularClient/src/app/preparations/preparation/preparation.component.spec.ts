@@ -20,7 +20,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule } from '@angular/material';
+import {
+  MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule,
+  MdSelectModule
+} from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {GrowlModule, TabViewModule} from 'primeng/primeng';
 import { ActivatedRoute } from '@angular/router';
@@ -50,7 +53,7 @@ describe('PreparationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent],
       imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule, GrowlModule, TabViewModule, MdExpansionModule,
-        MdInputModule, MdButtonModule, MdTabsModule, BlockUIModule, BrowserAnimationsModule
+        MdInputModule, MdButtonModule, MdTabsModule, BlockUIModule, BrowserAnimationsModule, MdSelectModule
       ],
       providers: [
           MockBackend,

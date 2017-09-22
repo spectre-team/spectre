@@ -38,6 +38,13 @@
         </div>
 
         <div class="column-item-position">
+          <form>
+            <md-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
+              <md-option *ngFor="let color of colors" [value]="color.value" selected="$first">
+                {{color.value}}
+              </md-option>
+            </md-select>
+          </form>
           <md-form-field class="example-full-width">
             <input mdInput placeholder="Mz" disabled [(ngModel)]="mzValue">
           </md-form-field>
@@ -67,6 +74,13 @@
           [heatmapData]=heatmapData>
         </app-heatmap>
           <div class="column-item-position">
+            <form>
+              <md-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
+                <md-option *ngFor="let color of colors" [value]="color.value" selected="$first">
+                  {{color.value}}
+                </md-option>
+              </md-select>
+            </form>
             <md-form-field class="example-full-width">
               <input mdInput placeholder="Mz" disabled [(ngModel)]="mzValue">
             </md-form-field>

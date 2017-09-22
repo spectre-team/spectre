@@ -51,6 +51,11 @@ export class PreparationComponent implements OnInit {
   public minHeatmapRow: number;
   public disabledChanelIdSlider = true;
   @BlockUI() blockUI: NgBlockUI;
+  public colors = [ {value:  'RdBu'}, {value: 'Greys'}, {value:  'YlGnBu'} , {value: 'Greens'}, {value:  'YlOrRd'},
+    {value:  'Bluered'}, {value:  'Reds'}, {value: 'Blues'}, {value:  'Picnic'}, {value:  'Rainbow'}, {value: 'Portland'},
+    {value:  'Jet'}, {value:  'Hot'}, {value:  'Blackbody'}, {value:  'Earth'}, {value: 'Electric'}, {value:  'Viridis'}];
+  public selectedValue = 'RdBu';
+  public heatmap: Heatmap;
 
   constructor(
       private route: ActivatedRoute,
@@ -81,10 +86,10 @@ export class PreparationComponent implements OnInit {
   }
 
   onChangedChannelId(event: any) {
-    if(this.disabledChanelIdSlider == true){
-      this.showError("Please select spectrum by coordinates")
-    } else{
-      this.blockUI.start("Getting heatmap...");
+    if (this.disabledChanelIdSlider === true) {
+      this.showError('Please select spectrum by coordinates');
+    } else {
+      this.blockUI.start('Getting heatmap...');
       this.heatmapService
         .get(this.id, this.currentChannelId)
         .subscribe(heatmap => {
@@ -92,6 +97,10 @@ export class PreparationComponent implements OnInit {
           this.blockUI.stop();
         });
     }
+  }
+
+  changeColor() {
+    this.heatmapData = this.toHeatmapDataset(this.heatmap);
   }
 
   onChangedXCoordinate(event: any) {
@@ -105,7 +114,7 @@ export class PreparationComponent implements OnInit {
   }
 
   getSpectrum(selectNumber: number) {
-    this.blockUI.start("Getting spectrum...");
+    this.blockUI.start('Getting spectrum...');
     this.spectrumService
       .get(this.id, selectNumber)
       .subscribe(spectrum => {
@@ -113,7 +122,7 @@ export class PreparationComponent implements OnInit {
         this.blockUI.stop();
       }, error => {
         this.spectrumData = [{}];
-        this.showError("Spectrum not found");
+        this.showError('Spectrum not found');
       });
   }
 
@@ -126,23 +135,23 @@ export class PreparationComponent implements OnInit {
    */
   getSpectrumByCoordinates() {
     const x = this.xCoordinate + this.minHeatmapColumn;
-    const y = (this.yCoordinate - this.yHeatmapSize)*(-1) + this.minHeatmapRow;
-    this.blockUI.start("Getting spectrum...");
+    const y = (this.yCoordinate - this.yHeatmapSize) * (-1) + this.minHeatmapRow;
+    this.blockUI.start('Getting spectrum...');
     this.spectrumService
       .getByCoordinates(this.id, x, y)
       .subscribe(spectrum => {
         this.spectrumData = this.toSpectrumDataset(spectrum);
         this.disableChanelIdSlider(false);
-        this.showSuccess("Spectrum found");
+        this.showSuccess('Spectrum found');
       }, error => {
         this.spectrumData = [{}];
         this.disableChanelIdSlider(true);
-        this.showError("Spectrum not found");
+        this.showError('Spectrum not found');
       });
   }
 
-  disableChanelIdSlider(disableFlag: boolean){
-    if(disableFlag){
+  disableChanelIdSlider(disableFlag: boolean) {
+    if (disableFlag) {
       this.mzValue = 0;
       this.currentChannelId = 0;
       this.disabledChanelIdSlider = true;
@@ -154,12 +163,12 @@ export class PreparationComponent implements OnInit {
   showError(msg: string) {
     this.blockUI.stop();
     console.log(msg);
-    this.messageService.add({severity:'error', summary:'Error Message', detail:msg});
+    this.messageService.add({severity: 'error', summary: 'Error Message', detail: msg});
   }
 
-  showSuccess(msg: string){
+  showSuccess(msg: string) {
     this.blockUI.stop();
-    this.messageService.add({severity:'success', summary:'Success Message', detail:msg});
+    this.messageService.add({severity: 'success', summary: 'Success Message', detail: msg});
   }
 
   selectSpectrum(number: string) {
@@ -172,13 +181,15 @@ export class PreparationComponent implements OnInit {
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
+    this.heatmap = heatmap;
     this.xHeatmapSize = heatmap.maxColumn - heatmap.minColumn;
     this.yHeatmapSize = heatmap.maxRow - heatmap.minRow;
     this.minHeatmapColumn = heatmap.minColumn;
     this.minHeatmapRow = heatmap.minRow;
     return [{
       z: heatmap.data,
-      type: 'heatmap'
+      type: 'heatmap',
+      colorscale: this.selectedValue
     }];
   }
 

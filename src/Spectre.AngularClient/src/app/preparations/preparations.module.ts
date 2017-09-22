@@ -31,7 +31,10 @@ import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
 import { DivikComponent } from '../divik-results/divik/divik.component';
 import { GrowlModule, TabViewModule} from 'primeng/primeng';
 import { BlockUIModule } from 'ng-block-ui';
-import { MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule} from '@angular/material';
+import {
+  MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule,
+  MdSelectModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -41,6 +44,7 @@ import { MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansio
     PreparationRoutingModule,
     PlotlyModule,
     MdSliderModule,
+    MdSelectModule,
     GrowlModule,
     TabViewModule,
     BlockUIModule,
