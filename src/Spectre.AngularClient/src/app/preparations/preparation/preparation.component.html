@@ -3,7 +3,7 @@
 <div id="mainContainer">
   <div id="tabsManu">
     <p-tabView>
-      <p-tabPanel header="Heatmap & Spectrum" [headerStyle]="{'width': '165px', 'margin':'0 auto'}">
+      <p-tabPanel header="Heatmap & Spectrum" leftIcon="fa-thermometer (alias)" rightIcon="fa-bar-chart" [headerStyle]="{'width': '195px', 'margin':'0 auto'}">
         <div>
           <md-slider
             class="slider-x"
@@ -62,7 +62,7 @@
           [spectrumData]=spectrumData>
         </app-spectrum>
       </p-tabPanel>
-      <p-tabPanel header="Heatmap" [headerStyle]="{'width': '165px'}">
+      <p-tabPanel header="Heatmap" leftIcon="fa fa-thermometer (alias)" [headerStyle]="{'width': '165px', 'color': 'green'}">
         <app-heatmap
           [heatmapData]=heatmapData>
         </app-heatmap>
@@ -87,7 +87,7 @@
             </md-slider>
           </div>
         </p-tabPanel>
-      <p-tabPanel header="Spectrum" [headerStyle]="{'width': '165px'}">
+      <p-tabPanel header="Spectrum" leftIcon="fa fa-bar-chart" [headerStyle]="{'width': '165px'}">
         <app-spectrum
           [spectrumData]=spectrumData>
         </app-spectrum>
@@ -106,7 +106,7 @@
           </button>
         </div>
         </p-tabPanel>
-      <p-tabPanel header="Divik" [headerStyle]="{'width': '165px'}">
+      <p-tabPanel header="Divik" leftIcon="fa fa-sitemap" [headerStyle]="{'width': '165px'}">
         <app-divik></app-divik>
       </p-tabPanel>
     </p-tabView>
