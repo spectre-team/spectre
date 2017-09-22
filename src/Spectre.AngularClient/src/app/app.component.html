@@ -1,24 +1,22 @@
 <div id="header">
   <md-toolbar color="primary">
     <button
-      id="listButton"
+      id="list-button"
       (click) ="sidenav.toggle()"
       class="btn btn-info btn-sm">
       <span
-        id="listBootstrapIcon"
+        id="list-bootstrap-icon"
         class="glyphicon glyphicon-th-list">
       </span>
     </button>
   </md-toolbar>
-  <h2 id="headerName">
-    {{title}}
-  </h2>
+  <img id="logo-image" src="../assets/images/logo.PNG">
 </div>
 
 <md-sidenav-container>
   <md-sidenav
     #sidenav mode="side"
-    class="appSidenav">
+    class="app-side-nav">
     <md-list>
       <div class="btn-group-vertical">
         <button

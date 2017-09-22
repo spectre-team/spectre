@@ -2,7 +2,7 @@
  * preparation-list.component.css
  * Styling of preparations list.
  *
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
+   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa, Daniel Babiak
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -35,4 +35,9 @@ div.preparation {
         width: 260px;
         height: 260px;
     }
+}
+
+#main-container
+{
+  height:100vh;
 }

@@ -2,7 +2,7 @@
  * app.component.spec.ts
  * Unit tests for application root element.
  *
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
+   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa, Daniel Babiak
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -59,18 +59,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'Spectre'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Spectre');
-  }));
-
-  it('should render title in a h2 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h2').textContent).toContain('Spectre');
   }));
 });

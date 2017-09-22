@@ -20,16 +20,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { MdSliderModule } from '@angular/material';
+import { MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {GrowlModule, TabViewModule} from 'primeng/primeng';
 import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../../../mocks/mock-activated-router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
+import { BlockUIModule } from 'ng-block-ui';
 
 import { PlotlyModule } from '../../plotly/plotly.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreparationComponent } from './preparation.component';
 import { SpectrumService } from '../../spectra/shared/spectrum.service';
 import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
@@ -48,7 +49,9 @@ describe('PreparationComponent', () => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
       declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent],
-      imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule, GrowlModule, TabViewModule],
+      imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule, GrowlModule, TabViewModule, MdExpansionModule,
+        MdInputModule, MdButtonModule, MdTabsModule, BlockUIModule, BrowserAnimationsModule
+      ],
       providers: [
           MockBackend,
           BaseRequestOptions,

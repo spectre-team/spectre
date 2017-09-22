@@ -1,49 +1,51 @@
 #header
 {
-  background-color: #292b2c;
-  height: 60px;
-  margin: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+background-color: #231F20;
+height: 60px;
+margin: 0px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
 }
 
-#headerName
+#list-button
 {
-  margin-left: 30px;
-  font-fimily: 'Roboto', sans-serif;
-  color: #e9e9e9;
-  margin-top: 10px;
+height: 40px;
+width: 40px;
+background-color: #231F20;
+border-color: #e9e9e9;
+margin-left: 20px;
 }
 
-#listButton
+#list-bootstrap-icon
 {
-  height: 40px;
-  width: 40px;
-  background-color: #292b2c;
-  border-color: #e9e9e9;
-  margin-left: 20px;
+color: #e9e9e9;
 }
 
-#listBootstrapIcon
+.app-side-nav
 {
-  color: #e9e9e9;
-}
-
-.appSidenav
-{
-  background-color: #fafafa;
-  width: 200px;
-  -webkit-box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
-  -moz-box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
-  box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
+background-color: #fafafa;
+width: 200px;
+-webkit-box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
+box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
 }
 
 .btn-default
 {
-  width: 200px;
-  text-align: left;
-  font-fimily: 'Roboto', sans-serif;
-  font-size: medium;
+width: 200px;
+text-align: left;
+font-family: 'PT Sans', sans-serif;
+font-size: medium;
+}
+
+.mat-drawer-container
+{
+background-color: #ffffff;
+}
+
+#logo-image
+{
+margin-left: 30px;
+height: 50px;
 }

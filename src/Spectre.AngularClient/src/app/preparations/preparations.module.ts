@@ -21,7 +21,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MdSliderModule } from '@angular/material';
 
 import { PreparationRoutingModule } from './preparation-routing.module';
 import { PlotlyModule } from '../plotly/plotly.module';
@@ -30,7 +29,9 @@ import { PreparationComponent } from './preparation/preparation.component';
 import { HeatmapComponent } from '../heatmaps/heatmap/heatmap.component';
 import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
 import { DivikComponent } from '../divik-results/divik/divik.component';
-import {GrowlModule, TabViewModule} from 'primeng/primeng';
+import { GrowlModule, TabViewModule} from 'primeng/primeng';
+import { BlockUIModule } from 'ng-block-ui';
+import { MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -41,7 +42,12 @@ import {GrowlModule, TabViewModule} from 'primeng/primeng';
     PlotlyModule,
     MdSliderModule,
     GrowlModule,
-    TabViewModule
+    TabViewModule,
+    BlockUIModule,
+    MdInputModule,
+    MdButtonModule,
+    MdTabsModule,
+    MdExpansionModule
   ],
   declarations: [
     PreparationComponent,

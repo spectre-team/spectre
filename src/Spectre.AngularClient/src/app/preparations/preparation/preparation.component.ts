@@ -26,7 +26,7 @@ import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { PreparationService } from '../shared/preparation.service';
 import { Preparation } from '../shared/preparation';
 import {MessageService} from 'primeng/components/common/messageservice';
-
+import {  BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-preparation',
@@ -38,7 +38,7 @@ export class PreparationComponent implements OnInit {
   public id: number;
   public heatmapData: any;
   public spectrumData: any;
-  public mzLenth: number;
+  public mzLength: number;
   public mzValue: number;
   public currentChannelId = 0;
   public mz = [];
@@ -49,6 +49,8 @@ export class PreparationComponent implements OnInit {
   public yHeatmapSize: number;
   public minHeatmapColumn: number;
   public minHeatmapRow: number;
+  public disabledChanelIdSlider = true;
+  @BlockUI() blockUI: NgBlockUI;
 
   constructor(
       private route: ActivatedRoute,
@@ -79,9 +81,17 @@ export class PreparationComponent implements OnInit {
   }
 
   onChangedChannelId(event: any) {
-    this.heatmapService
-      .get(this.id, this.currentChannelId)
-      .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
+    if(this.disabledChanelIdSlider == true){
+      this.showError("Please select spectrum by coordinates")
+    } else{
+      this.blockUI.start("Getting heatmap...");
+      this.heatmapService
+        .get(this.id, this.currentChannelId)
+        .subscribe(heatmap => {
+          this.heatmapData = this.toHeatmapDataset(heatmap);
+          this.blockUI.stop();
+        });
+    }
   }
 
   onChangedXCoordinate(event: any) {
@@ -95,9 +105,16 @@ export class PreparationComponent implements OnInit {
   }
 
   getSpectrum(selectNumber: number) {
+    this.blockUI.start("Getting spectrum...");
     this.spectrumService
       .get(this.id, selectNumber)
-      .subscribe(spectrum => this.spectrumData = this.toSpectrumDataset(spectrum));
+      .subscribe(spectrum => {
+        this.spectrumData = this.toSpectrumDataset(spectrum);
+        this.blockUI.stop();
+      }, error => {
+        this.spectrumData = [{}];
+        this.showError("Spectrum not found");
+      });
   }
 
   /*
@@ -110,23 +127,38 @@ export class PreparationComponent implements OnInit {
   getSpectrumByCoordinates() {
     const x = this.xCoordinate + this.minHeatmapColumn;
     const y = (this.yCoordinate - this.yHeatmapSize)*(-1) + this.minHeatmapRow;
+    this.blockUI.start("Getting spectrum...");
     this.spectrumService
       .getByCoordinates(this.id, x, y)
       .subscribe(spectrum => {
         this.spectrumData = this.toSpectrumDataset(spectrum);
+        this.disableChanelIdSlider(false);
         this.showSuccess("Spectrum found");
       }, error => {
         this.spectrumData = [{}];
+        this.disableChanelIdSlider(true);
         this.showError("Spectrum not found");
       });
   }
 
+  disableChanelIdSlider(disableFlag: boolean){
+    if(disableFlag){
+      this.mzValue = 0;
+      this.currentChannelId = 0;
+      this.disabledChanelIdSlider = true;
+    } else {
+      this.disabledChanelIdSlider = false;
+    }
+  }
+
   showError(msg: string) {
+    this.blockUI.stop();
     console.log(msg);
     this.messageService.add({severity:'error', summary:'Error Message', detail:msg});
   }
 
   showSuccess(msg: string){
+    this.blockUI.stop();
     this.messageService.add({severity:'success', summary:'Success Message', detail:msg});
   }
 
@@ -151,7 +183,7 @@ export class PreparationComponent implements OnInit {
   }
 
   toSpectrumDataset(spectrum: Spectrum) {
-    this.mzLenth = spectrum.mz.length - 1;
+    this.mzLength = spectrum.mz.length - 1;
     this.mz = spectrum.mz;
     return [{
       x: spectrum.mz,

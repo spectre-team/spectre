@@ -1,12 +1,12 @@
 <p-growl [(value)]="msgs"></p-growl>
-
+<block-ui [template]="blockTemplate">
 <div id="mainContainer">
   <div id="tabsManu">
     <p-tabView>
-      <p-tabPanel header="Heatmap & Spectrum" class="tabPanel">
+      <p-tabPanel header="Heatmap & Spectrum" [headerStyle]="{'width': '165px', 'margin':'0 auto'}">
         <div>
           <md-slider
-            class="sliderX"
+            class="slider-x"
             [(ngModel)]="xCoordinate"
             showTicks="true"
             min="0"
@@ -18,9 +18,9 @@
             (change)="onChangedXCoordinate($event)">
           </md-slider>
 
-          <div class="inlineItemsContainer">
+          <div class="inline-items-container">
             <md-slider
-              class="sliderY"
+              class="slider-y"
               [(ngModel)]="yCoordinate"
               showTicks="true"
               min="0"
@@ -31,23 +31,24 @@
               tick-interval="true"
               (change)="onChangedYCoordinate($event)">
             </md-slider>
-
             <app-heatmap
               [heatmapData]=heatmapData>
             </app-heatmap>
           </div>
         </div>
 
-        <div>
-          <label>Mz:</label>
-          <input [(ngModel)]="mzValue" type="number"/>
+        <div class="column-item-position">
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Mz" disabled [(ngModel)]="mzValue">
+          </md-form-field>
 
           <md-slider
             class="slider"
             [(ngModel)]="currentChannelId"
             showTicks="true"
+            disabled="{{disabledChanelIdSlider}}"
             min="0"
-            max={{mzLenth}}
+            max={{mzLength}}
             step="1"
             (input)="onInputChannelId($event)"
             (change)="onChangedChannelId($event)"
@@ -60,30 +61,23 @@
         <app-spectrum
           [spectrumData]=spectrumData>
         </app-spectrum>
-
-        <pre>
-          <input type="text"  #titleInput>
-          <button
-            type="submit"
-            (click) = 'selectSpectrum(titleInput.value)'>
-            Select
-          </button>
-        </pre>
-        </p-tabPanel>
-      <p-tabPanel header="Heatmap">
+      </p-tabPanel>
+      <p-tabPanel header="Heatmap" [headerStyle]="{'width': '165px'}">
         <app-heatmap
           [heatmapData]=heatmapData>
         </app-heatmap>
-          <div>
-            <label>Mz:</label>
-            <input [(ngModel)]="mzValue" type="number"/>
+          <div class="column-item-position">
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="Mz" disabled [(ngModel)]="mzValue">
+            </md-form-field>
 
             <md-slider
               class="slider"
               [(ngModel)]="currentChannelId"
+              disabled="{{disabledChanelIdSlider}}"
               showTicks="true"
               min="0"
-              max={{mzLenth}}
+              max={{mzLength}}
               step="1"
               (input)="onInputChannelId($event)"
               (change)="onChangedChannelId($event)"
@@ -93,25 +87,32 @@
             </md-slider>
           </div>
         </p-tabPanel>
-      <p-tabPanel header="Spectrum">
+      <p-tabPanel header="Spectrum" [headerStyle]="{'width': '165px'}">
         <app-spectrum
           [spectrumData]=spectrumData>
         </app-spectrum>
 
-        <pre>
-          <input type="text"  #titleInput>
+        <div class="column-item-position">
+          <md-form-field>
+            <input mdInput #myInput placeholder="Spectrum number" type="text">
+          </md-form-field>
+
           <button
+            md-raised-button
+            class="md-button"
             type="submit"
-            (click) = 'selectSpectrum(titleInput.value)'>
+            (click) = 'selectSpectrum(myInput.value)'>
             Select
           </button>
-        </pre>
+        </div>
         </p-tabPanel>
-      <p-tabPanel header="Divik">
+      <p-tabPanel header="Divik" [headerStyle]="{'width': '165px'}">
         <app-divik></app-divik>
       </p-tabPanel>
     </p-tabView>
   </div>
 </div>
+</block-ui>
+
 
 
