@@ -53,7 +53,7 @@ namespace Spectre.Database.Tests
             
             var mockContext = new Mock<Context>();
             mockContext.Setup(c => c.Datasets).Returns(mockSet.Object);
-
+            
             var service = new PathFinder(mockContext.Object);
             var dataset1 = service.ReturnForHash("1");
             var dataset2 = service.ReturnForFriendlyName("Bajer2");

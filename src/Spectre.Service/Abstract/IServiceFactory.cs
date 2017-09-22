@@ -36,5 +36,11 @@ namespace Spectre.Service.Abstract
         /// <param name="updateInterval">The update interval.</param>
         /// <returns>IConsoleCaptureService instance</returns>
         IConsoleCaptureService GetConsoleCaptureService(double updateInterval = 1000.0);
+
+        /// <summary>
+        /// Gets the path finder service.
+        /// </summary>
+        /// <returns>IPathFinderInstance</returns>
+        IPathFinderService GetPathFinderService();
     }
 }
