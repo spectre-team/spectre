@@ -38,7 +38,7 @@ export class HeatmapUtil {
     for (let i = min_row; i < max_row + 1; i++) {
       data[i - min_row] = [];
       for (let j = min_column; j < max_column + 1; j++) {
-        data[i - min_row][j - min_column] = 0;
+        data[i - min_row][j - min_column] = undefined;
       }
     }
     console.log(className + ' processing heatmap');

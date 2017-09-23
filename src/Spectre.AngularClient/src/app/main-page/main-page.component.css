@@ -1,5 +1,5 @@
-div {
-  vertical-align: middle;
+.mainContainer
+{
   text-align: center;
   height: 100vh;
 }
