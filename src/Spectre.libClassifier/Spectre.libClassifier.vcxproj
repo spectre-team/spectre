@@ -84,6 +84,7 @@
     <ClCompile Include="Empty.cpp" />
     <ClCompile Include="RandomSplitter.cpp" />
     <ClCompile Include="SplittedOpenCvDataset.cpp" />
+    <ClCompile Include="SVM.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EmptyOpenCvDatasetException.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Empty.h" />
     <ClInclude Include="RandomSplitter.h" />
     <ClInclude Include="SplittedOpevCvDataset.h" />
+    <ClInclude Include="SVM.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
