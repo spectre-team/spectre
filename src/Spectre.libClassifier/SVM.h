@@ -25,10 +25,10 @@ class SVM
 {
 public:
     SVM();
-    long getResult(Spectre::libClassifier::SplittedOpenCvDataset&& data);
+    cv::Mat getResult(Spectre::libClassifier::SplittedOpenCvDataset&& data) const;
 private:
     cv::Ptr<cv::ml::SVM> mSVM;
 
     void train(Spectre::libClassifier::OpenCvDataset data) const;
-    long predict(Spectre::libClassifier::OpenCvDataset data) const;
+    cv::Mat predict(Spectre::libClassifier::OpenCvDataset data) const;
 };

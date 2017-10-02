@@ -32,7 +32,7 @@ TEST(SVMInitializationTest, correct_svm_initialization)
 class SVMTest : public ::testing::Test
 {
 public:
-    SVMTest();
+    SVMTest() {};
 
 protected:
     const std::vector<DataType> training_data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f,
@@ -42,12 +42,18 @@ protected:
     const std::vector<Label> test_labels{ 8, 11, 5 };
     OpenCvDataset trainingSet = OpenCvDataset(training_data, training_labels);
     OpenCvDataset testSet = OpenCvDataset(test_data, test_labels);
-    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
 
     void SetUp() override
     {
     }
 };
 
+TEST_F(SVMTest, svm_train)
+{
+    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
+    SVM svm = SVM();
+    cv::Mat result = svm.getResult(std::move(data));
+    EXPECT_EQ(result.cols*result.rows, 3);
+}
 
 }

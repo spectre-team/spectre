@@ -7,10 +7,10 @@ SVM::SVM()
     mSVM->setKernel(cv::ml::SVM::LINEAR);
 }
 
-long SVM::getResult(Spectre::libClassifier::SplittedOpenCvDataset&& data)
+cv::Mat SVM::getResult(Spectre::libClassifier::SplittedOpenCvDataset&& data) const
 {
     train(std::move(data.trainingSet));
-    long goodNr = predict(std::move(data.testSet));
+    cv::Mat goodNr = predict(std::move(data.testSet));
     return goodNr;
 }
 
@@ -19,10 +19,10 @@ void SVM::train(Spectre::libClassifier::OpenCvDataset trainingSet) const
     mSVM->train(trainingSet.getMatData(), cv::ml::ROW_SAMPLE, trainingSet.getMatLabels());
 }
 
-long SVM::predict(Spectre::libClassifier::OpenCvDataset testSet) const
+cv::Mat SVM::predict(Spectre::libClassifier::OpenCvDataset testSet) const
 {
-    long goodNr = 0;
     cv::Mat results;
+    long goodNr = 0;
     mSVM->predict(testSet.getMatData(), results);
 
     for(auto i = 0; i < testSet.size(); i++)
@@ -32,5 +32,5 @@ long SVM::predict(Spectre::libClassifier::OpenCvDataset testSet) const
             goodNr++;
         }
     }
-    return goodNr;
+    return results;
 }

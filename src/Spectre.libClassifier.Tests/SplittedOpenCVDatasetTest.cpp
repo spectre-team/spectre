@@ -27,7 +27,7 @@ namespace
     class SplittedOpenCVDatasetTest : public ::testing::Test
     {
     public:
-        SplittedOpenCVDatasetTest();
+        SplittedOpenCVDatasetTest() { }
 
     protected:
         const std::vector<DataType> training_data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f,
@@ -57,7 +57,7 @@ namespace
         }
         for (auto i = 0; i < testSet.size(); i++)
         {
-            EXPECT_EQ(data.testSet[i], testSet[i]);
+            EXPECT_EQ(data.testSet[i], trainingSet[i]);
         }
     }
 
