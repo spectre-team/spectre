@@ -2,12 +2,11 @@
 
 namespace Spectre.Service.Tests
 {
-    [TestFixture, Category("Service")]
+    [TestFixture]
+    [Category(name: "Service")]
     public class ServiceTest
     {
         [Test]
-        public void TestMethod()
-        {
-        }
+        public void TestMethod() { }
     }
 }

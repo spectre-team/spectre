@@ -23,6 +23,6 @@
              xmlns:vm="clr-namespace:Spectre.DivikWpfClient.ViewModel"
              StartupUri="MainWindow.xaml" DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
-         <vm:MainPageVm x:Key="MainPageVm"/>
+        <vm:MainPageVm x:Key="MainPageVm" />
     </Application.Resources>
 </Application>

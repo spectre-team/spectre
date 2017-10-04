@@ -16,6 +16,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 using NUnit.Framework;
 using Spectre.Mvvm.Base;
@@ -23,57 +24,65 @@ using Spectre.Mvvm.Helpers;
 
 namespace Spectre.Mvvm.Tests.Base
 {
-    [TestFixture, Category("MvvmFramework")]
+    [TestFixture]
+    [Category(name: "MvvmFramework")]
     public class RelayCommandTests
     {
         #region SetUp
+
         [OneTimeSetUp]
         public void SetUpClass()
         {
-            RelayCommand.IntroduceUiMock(new UiServiceMock());
+            RelayCommand.IntroduceUiMock(mock: new UiServiceMock());
         }
 
-        private class UiServiceMock: UiService
+        private class UiServiceMock : UiService
         {
             public override void SetBusyState()
             {
                 // do nothing
             }
         }
+
         #endregion
 
         #region constructor
+
         #region action constructor
+
         [Test]
         public void TestActionConstructor()
         {
-            int n = 0;
-            var command = new RelayCommand(() => ++n);
+            var n = 0;
+            var command = new RelayCommand(execute: () => ++n);
 
-            Assert.IsTrue(command.CanExecute(null),
-                "Should always be able to execute.");
-            command.Execute(null);
-            Assert.AreEqual(1, n, "Action did not execute.");
+            Assert.IsTrue(condition: command.CanExecute(parameter: null),
+                message: "Should always be able to execute.");
+            command.Execute(parameter: null);
+            Assert.AreEqual(expected: 1, actual: n, message: "Action did not execute.");
         }
+
         #endregion
 
         #region action-func constructor
+
         [Test]
         public void TestActionFuncConstructor()
         {
-            int n = 0;
-            bool canExecute = false;
-            var command = new RelayCommand(() => ++n, () => canExecute);
+            var n = 0;
+            var canExecute = false;
+            var command = new RelayCommand(execute: () => ++n, canExecute: () => canExecute);
 
-            Assert.IsFalse(command.CanExecute(null), "Can execute was set to false.");
+            Assert.IsFalse(condition: command.CanExecute(parameter: null), message: "Can execute was set to false.");
 
             canExecute = true;
             command.OnCanExecuteChanged();
 
-            Assert.IsTrue(command.CanExecute(null), "Can execute was set true.");
-            command.Execute(null);
-            Assert.AreEqual(1, n, "Action did not execute.");
+            Assert.IsTrue(condition: command.CanExecute(parameter: null), message: "Can execute was set true.");
+            command.Execute(parameter: null);
+            Assert.AreEqual(expected: 1, actual: n, message: "Action did not execute.");
         }
+
         #endregion
 
         #region action-predicate constructor
@@ -81,20 +90,21 @@ namespace Spectre.Mvvm.Tests.Base
         [Test]
         public void TestActionPredicateConstructor()
         {
-            int n = 0;
-            Predicate<object> predicate = obj => (obj is int) && ((int)obj == 0);
-            var command = new RelayCommand(() => ++n, predicate);
+            var n = 0;
+            Predicate<object> predicate = obj => obj is int && ((int) obj == 0);
+            var command = new RelayCommand(execute: () => ++n, canExecute: predicate);
 
-            Assert.IsTrue(command.CanExecute(n),
-                "Should be able to execute for n equal zero.");
+            Assert.IsTrue(condition: command.CanExecute(n),
+                message: "Should be able to execute for n equal zero.");
 
-            command.Execute(null);
+            command.Execute(parameter: null);
             command.OnCanExecuteChanged();
 
-            Assert.AreEqual(1, n, "Action did not execute.");
-            Assert.IsFalse(command.CanExecute(n),
-                "Should not be able to execute for n equal to 1.");
+            Assert.AreEqual(expected: 1, actual: n, message: "Action did not execute.");
+            Assert.IsFalse(condition: command.CanExecute(n),
+                message: "Should not be able to execute for n equal to 1.");
         }
+
         #endregion
 
         #region action generic constructor
@@ -102,15 +112,16 @@ namespace Spectre.Mvvm.Tests.Base
         [Test]
         public void TestActionGenericConstructor()
         {
-            int n = 0;
-            var command = new RelayCommand(num => n = num as int? ?? -1);
+            var n = 0;
+            var command = new RelayCommand(execute: num => n = num as int? ?? -1);
 
-            Assert.IsTrue(command.CanExecute(null), "Should always be able to execute");
-            command.Execute(1);
-            Assert.AreEqual(1, n, "Action did not run.");
-            command.Execute(null);
-            Assert.AreEqual(-1, n, "Action did not run.");
+            Assert.IsTrue(condition: command.CanExecute(parameter: null), message: "Should always be able to execute");
+            command.Execute(parameter: 1);
+            Assert.AreEqual(expected: 1, actual: n, message: "Action did not run.");
+            command.Execute(parameter: null);
+            Assert.AreEqual(expected: -1, actual: n, message: "Action did not run.");
         }
+
         #endregion
 
         #region action generic with predicate
@@ -118,16 +129,18 @@ namespace Spectre.Mvvm.Tests.Base
         [Test]
         public void TestActionGenericPredicateConstructor()
         {
-            int n = 0;
+            var n = 0;
             Predicate<object> predicate = obj => obj is int;
-            var command = new RelayCommand(num => n = (int)num, predicate);
+            var command = new RelayCommand(execute: num => n = (int) num, canExecute: predicate);
 
-            Assert.IsTrue(command.CanExecute(1), "Should be able to execute for int");
-            command.Execute(1);
-            Assert.AreEqual(1, n, "Action did not run.");
-            Assert.IsFalse(command.CanExecute(null), "Allows to run for non-int");
+            Assert.IsTrue(condition: command.CanExecute(parameter: 1), message: "Should be able to execute for int");
+            command.Execute(parameter: 1);
+            Assert.AreEqual(expected: 1, actual: n, message: "Action did not run.");
+            Assert.IsFalse(condition: command.CanExecute(parameter: null), message: "Allows to run for non-int");
         }
+
         #endregion
+
         #endregion
 
         #region CanExecuteChanged
@@ -135,17 +148,18 @@ namespace Spectre.Mvvm.Tests.Base
         [Test]
         public void TestCanExecuteChanged()
         {
-            int n1 = 0;
-            int n2 = 0;
-            bool canExecute = false;
-            var command = new RelayCommand(() => ++n1, () => canExecute);
+            var n1 = 0;
+            var n2 = 0;
+            var canExecute = false;
+            var command = new RelayCommand(execute: () => ++n1, canExecute: () => canExecute);
             command.CanExecuteChanged += (obj, e) => ++n2;
 
             canExecute = true;
             command.OnCanExecuteChanged();
 
-            Assert.AreEqual(1, n2, "Event has not been called.");
+            Assert.AreEqual(expected: 1, actual: n2, message: "Event has not been called.");
         }
+
         #endregion
     }
 }

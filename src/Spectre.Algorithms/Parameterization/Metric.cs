@@ -1,7 +1,7 @@
 ﻿/*
  * Metric.cs
  * Metrics used in DiviK
- * 
+ *
    Copyright 2017 Grzegorz Mrukwa
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,20 +19,59 @@
 
 namespace Spectre.Algorithms.Parameterization
 {
-	/// <summary>
-	/// Contains metrics supported in DiviK.
-	/// </summary>
-	public enum Metric
-	{
-		Euclidean,
-		Pearson,
-		Spearman,
-		Cityblock,
-		Minkowski,
-		Chebychev,
-		Mahalanobis,
-		Cosine,
-		Hamming,
-		Jaccard
-	}
+    /// <summary>
+    /// Contains metrics supported in DiviK.
+    /// </summary>
+    public enum Metric
+    {
+        /// <summary>
+        /// The euclidean
+        /// </summary>
+        Euclidean,
+
+        /// <summary>
+        /// The pearson
+        /// </summary>
+        Pearson,
+
+        /// <summary>
+        /// The spearman
+        /// </summary>
+        Spearman,
+
+        /// <summary>
+        /// The cityblock
+        /// </summary>
+        Cityblock,
+
+        /// <summary>
+        /// The minkowski
+        /// </summary>
+        Minkowski,
+
+        /// <summary>
+        /// The chebychev
+        /// </summary>
+        Chebychev,
+
+        /// <summary>
+        /// The mahalanobis
+        /// </summary>
+        Mahalanobis,
+
+        /// <summary>
+        /// The cosine
+        /// </summary>
+        Cosine,
+
+        /// <summary>
+        /// The hamming
+        /// </summary>
+        Hamming,
+
+        /// <summary>
+        /// The jaccard
+        /// </summary>
+        Jaccard
+    }
 }

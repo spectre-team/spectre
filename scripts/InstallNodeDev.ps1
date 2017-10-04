@@ -5,10 +5,10 @@ Start-Process msiexec.exe -ArgumentList "/i node.msi /quiet" -Wait | Wait-Proces
 Remove-Item node.msi
 $env:Path = $env:Path + ";C:\Program Files\nodejs"
 Write-Host "Installing npm..." -ForegroundColor Yellow
-npm install -g npm
+npm install -g npm@4.4.1
 Write-Host "Installing angular-cli..." -ForegroundColor Yellow
 cmd /C "npm install -g @angular/cli@1.0.0-rc.2 --loglevel=error"
-cd ..\src\Spectre.Angular2Client
+cd ..\src\Spectre.AngularClient
 Write-Host "Installing dependencies..." -ForegroundColor Yellow
 npm install --loglevel=error | Out-Null
 cd ..\..\scripts

@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -19,77 +18,123 @@ using Spectre.Results;
 
 namespace Spectre.Controllers
 {
+    /// <summary>
+    /// Provides basic authentication capabilities
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     [Authorize]
-    [RoutePrefix("api/Account")]
+    [RoutePrefix(prefix: "account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
-        public AccountController()
-        {
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        public AccountController() { }
 
-        public AccountController(ApplicationUserManager userManager,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="accessTokenFormat">The access token format.</param>
+        public AccountController(
+            ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
-        public ApplicationUserManager UserManager
+        /// <summary>
+        /// Gets the user manager.
+        /// </summary>
+        /// <value>
+        /// The user manager.
+        /// </value>
+        public ApplicationUserManager UserManager // @gmrukwa: This property does not support expression body. No one knows why.
         {
             get
             {
                 return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+
             private set
             {
                 _userManager = value;
             }
         }
 
+        /// <summary>
+        /// Gets the access token format.
+        /// </summary>
+        /// <value>
+        /// The access token format.
+        /// </value>
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        // GET api/Account/UserInfo
+        private IAuthenticationManager Authentication
+        {
+            get
+            {
+                return Request.GetOwinContext()
+                    .Authentication;
+            }
+        }
+
+        /// <summary>
+        /// Gets the user information.
+        /// GET account/UserInfo
+        /// </summary>
+        /// <returns>User info</returns>
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("UserInfo")]
+        [Route(template: "UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLogin = ExternalLoginData.FromIdentity(identity: User.Identity as ClaimsIdentity);
 
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = externalLogin?.LoginProvider
             };
         }
 
-        // POST api/Account/Logout
-        [Route("Logout")]
+        /// <summary>
+        /// Logs user out.
+        /// POST account/Logout
+        /// </summary>
+        /// <returns>OK</returns>
+        [Route(template: "Logout")]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
 
-        // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        [Route("ManageInfo")]
+        /// <summary>
+        /// Gets the manage information.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <param name="generateState">if set to <c>true</c> [generate state].</param>
+        /// <returns>Manage info</returns>
+        [Route(template: "ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            IdentityUser user = await UserManager.FindByIdAsync(userId: User.Identity.GetUserId());
 
             if (user == null)
             {
                 return null;
             }
 
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
+            var logins = new List<UserLoginInfoViewModel>();
 
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
+            foreach (var linkedAccount in user.Logins)
             {
-                logins.Add(new UserLoginInfoViewModel
+                logins.Add(item: new UserLoginInfoViewModel
                 {
                     LoginProvider = linkedAccount.LoginProvider,
                     ProviderKey = linkedAccount.ProviderKey
@@ -98,24 +143,29 @@ namespace Spectre.Controllers
 
             if (user.PasswordHash != null)
             {
-                logins.Add(new UserLoginInfoViewModel
+                logins.Add(item: new UserLoginInfoViewModel
                 {
-                    LoginProvider = LocalLoginProvider,
+                    LoginProvider = AccountController.LocalLoginProvider,
                     ProviderKey = user.UserName,
                 });
             }
 
             return new ManageInfoViewModel
             {
-                LocalLoginProvider = LocalLoginProvider,
+                LocalLoginProvider = AccountController.LocalLoginProvider,
                 Email = user.UserName,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
         }
 
-        // POST api/Account/ChangePassword
-        [Route("ChangePassword")]
+        /// <summary>
+        /// Changes the password.
+        /// POST account/ChangePassword
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Password change result</returns>
+        [Route(template: "ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -123,9 +173,11 @@ namespace Spectre.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-                model.NewPassword);
-            
+            var result = await UserManager.ChangePasswordAsync(
+                userId: User.Identity.GetUserId(),
+                currentPassword: model.OldPassword,
+                newPassword: model.NewPassword);
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -134,8 +186,13 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/SetPassword
-        [Route("SetPassword")]
+        /// <summary>
+        /// Sets the password.
+        /// POST account/SetPassword
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Password set result</returns>
+        [Route(template: "SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -143,7 +200,9 @@ namespace Spectre.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+            var result = await UserManager.AddPasswordAsync(
+                userId: User.Identity.GetUserId(),
+                password: model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -153,8 +212,13 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/AddExternalLogin
-        [Route("AddExternalLogin")]
+        /// <summary>
+        /// Adds the external login.
+        /// POST account/AddExternalLogin
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>External login status</returns>
+        [Route(template: "AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -164,24 +228,27 @@ namespace Spectre.Controllers
 
             Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-            AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+            var ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
 
-            if (ticket == null || ticket.Identity == null || (ticket.Properties != null
-                && ticket.Properties.ExpiresUtc.HasValue
-                && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
+            if ((ticket == null)
+                || (ticket.Identity == null)
+                || ((ticket.Properties != null)
+                    && ticket.Properties.ExpiresUtc.HasValue
+                    && (ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow)))
             {
-                return BadRequest("External login failure.");
+                return BadRequest(message: "External login failure.");
             }
 
-            ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
+            var externalData = ExternalLoginData.FromIdentity(ticket.Identity);
 
             if (externalData == null)
             {
-                return BadRequest("The external login is already associated with an account.");
+                return BadRequest(message: "The external login is already associated with an account.");
             }
 
-            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
-                new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
+            var result = await UserManager.AddLoginAsync(
+                userId: User.Identity.GetUserId(),
+                login: new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
             if (!result.Succeeded)
             {
@@ -191,8 +258,13 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/RemoveLogin
-        [Route("RemoveLogin")]
+        /// <summary>
+        /// Removes the login.
+        /// POST account/RemoveLogin
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Login removal status</returns>
+        [Route(template: "RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -202,14 +274,15 @@ namespace Spectre.Controllers
 
             IdentityResult result;
 
-            if (model.LoginProvider == LocalLoginProvider)
+            if (model.LoginProvider == AccountController.LocalLoginProvider)
             {
-                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
+                result = await UserManager.RemovePasswordAsync(userId: User.Identity.GetUserId());
             }
             else
             {
-                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
-                    new UserLoginInfo(model.LoginProvider, model.ProviderKey));
+                result = await UserManager.RemoveLoginAsync(
+                    userId: User.Identity.GetUserId(),
+                    login: new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
 
             if (!result.Succeeded)
@@ -220,24 +293,30 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // GET api/Account/ExternalLogin
+        /// <summary>
+        /// Gets the external login.
+        /// GET account/ExternalLogin
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="error">The error.</param>
+        /// <returns>External login status</returns>
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
-        [Route("ExternalLogin", Name = "ExternalLogin")]
+        [Route(template: "ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
             if (error != null)
             {
-                return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
+                return Redirect(location: Url.Content(path: "~/") + "#error=" + Uri.EscapeDataString(error));
             }
 
             if (!User.Identity.IsAuthenticated)
             {
-                return new ChallengeResult(provider, this);
+                return new ChallengeResult(provider, controller: this);
             }
 
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLogin = ExternalLoginData.FromIdentity(identity: User.Identity as ClaimsIdentity);
 
             if (externalLogin == null)
             {
@@ -247,43 +326,52 @@ namespace Spectre.Controllers
             if (externalLogin.LoginProvider != provider)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                return new ChallengeResult(provider, this);
+                return new ChallengeResult(provider, controller: this);
             }
 
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-                externalLogin.ProviderKey));
+            var user = await UserManager.FindAsync(
+                login: new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
-            bool hasRegistered = user != null;
+            var hasRegistered = user != null;
 
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+
+#pragma warning disable SA1305 // Field names must not use Hungarian notation
+                var oAuthIdentity = await user.GenerateUserIdentityAsync(
+#pragma warning restore SA1305 // Field names must not use Hungarian notation
+                    UserManager,
                     OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                var cookieIdentity = await user.GenerateUserIdentityAsync(
+                    UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
             {
                 IEnumerable<Claim> claims = externalLogin.GetClaims();
-                ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
                 Authentication.SignIn(identity);
             }
 
             return Ok();
         }
 
-        // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
+        /// <summary>
+        /// Gets the external logins.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <param name="generateState">if set to <c>true</c> [generate state].</param>
+        /// <returns>External logins status</returns>
         [AllowAnonymous]
-        [Route("ExternalLogins")]
+        [Route(template: "ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
-            IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
-            List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
+            var descriptions = Authentication.GetExternalAuthenticationTypes();
+            var logins = new List<ExternalLoginViewModel>();
 
             string state;
 
@@ -297,19 +385,22 @@ namespace Spectre.Controllers
                 state = null;
             }
 
-            foreach (AuthenticationDescription description in descriptions)
+            foreach (var description in descriptions)
             {
-                ExternalLoginViewModel login = new ExternalLoginViewModel
+                var routeValues = new
+                {
+                    provider = description.AuthenticationType,
+                    response_type = "token",
+                    client_id = Startup.PublicClientId,
+                    redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                    state = state
+                };
+                var login = new ExternalLoginViewModel
                 {
                     Name = description.Caption,
-                    Url = Url.Route("ExternalLogin", new
-                    {
-                        provider = description.AuthenticationType,
-                        response_type = "token",
-                        client_id = Startup.PublicClientId,
-                        redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
-                        state = state
-                    }),
+                    Url = Url.Route(
+                        routeName: "ExternalLogin",
+                        routeValues: routeValues),
                     State = state
                 };
                 logins.Add(login);
@@ -318,9 +409,14 @@ namespace Spectre.Controllers
             return logins;
         }
 
-        // POST api/Account/Register
+        /// <summary>
+        /// Registers the specified model.
+        /// POST account/Register
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Registration status</returns>
         [AllowAnonymous]
-        [Route("Register")]
+        [Route(template: "Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -330,7 +426,7 @@ namespace Spectre.Controllers
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
@@ -340,10 +436,15 @@ namespace Spectre.Controllers
             return Ok();
         }
 
-        // POST api/Account/RegisterExternal
+        /// <summary>
+        /// Registers the external.
+        /// POST account/RegisterExternal
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>External registration status</returns>
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("RegisterExternal")]
+        [Route(template: "RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -359,7 +460,7 @@ namespace Spectre.Controllers
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
-            IdentityResult result = await UserManager.CreateAsync(user);
+            var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -368,14 +469,18 @@ namespace Spectre.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }
 
+        /// <summary>
+        /// Releases the unmanaged resources that are used by the object and, optionally, releases the managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && _userManager != null)
+            if (disposing && (_userManager != null))
             {
                 _userManager.Dispose();
                 _userManager = null;
@@ -385,11 +490,6 @@ namespace Spectre.Controllers
         }
 
         #region Helpers
-
-        private IAuthenticationManager Authentication
-        {
-            get { return Request.GetOwinContext().Authentication; }
-        }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
@@ -402,9 +502,9 @@ namespace Spectre.Controllers
             {
                 if (result.Errors != null)
                 {
-                    foreach (string error in result.Errors)
+                    foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("", error);
+                        ModelState.AddModelError(key: string.Empty, errorMessage: error);
                     }
                 }
 
@@ -420,24 +520,36 @@ namespace Spectre.Controllers
             return null;
         }
 
+        private static class RandomOAuthStateGenerator
+        {
+            private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
+
+            public static string Generate(int strengthInBits)
+            {
+                const int bitsPerByte = 8;
+
+                if ((strengthInBits % bitsPerByte) != 0)
+                {
+                    throw new ArgumentException(
+                        message: "strengthInBits must be evenly divisible by 8.",
+                        paramName: "strengthInBits");
+                }
+
+                var strengthInBytes = strengthInBits / bitsPerByte;
+
+                var data = new byte[strengthInBytes];
+                RandomOAuthStateGenerator._random.GetBytes(data);
+                return HttpServerUtility.UrlTokenEncode(data);
+            }
+        }
+
         private class ExternalLoginData
         {
             public string LoginProvider { get; set; }
+
             public string ProviderKey { get; set; }
+
             public string UserName { get; set; }
-
-            public IList<Claim> GetClaims()
-            {
-                IList<Claim> claims = new List<Claim>();
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, ProviderKey, null, LoginProvider));
-
-                if (UserName != null)
-                {
-                    claims.Add(new Claim(ClaimTypes.Name, UserName, null, LoginProvider));
-                }
-
-                return claims;
-            }
 
             public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
             {
@@ -446,10 +558,11 @@ namespace Spectre.Controllers
                     return null;
                 }
 
-                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+                var providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 
-                if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer)
-                    || String.IsNullOrEmpty(providerKeyClaim.Value))
+                if ((providerKeyClaim == null)
+                    || string.IsNullOrEmpty(providerKeyClaim.Issuer)
+                    || string.IsNullOrEmpty(providerKeyClaim.Value))
                 {
                     return null;
                 }
@@ -466,26 +579,22 @@ namespace Spectre.Controllers
                     UserName = identity.FindFirstValue(ClaimTypes.Name)
                 };
             }
-        }
 
-        private static class RandomOAuthStateGenerator
-        {
-            private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
-
-            public static string Generate(int strengthInBits)
+            public IList<Claim> GetClaims()
             {
-                const int bitsPerByte = 8;
+                IList<Claim> claims = new List<Claim>();
+                claims.Add(item: new Claim(
+                    ClaimTypes.NameIdentifier,
+                    ProviderKey,
+                    valueType: null,
+                    issuer: LoginProvider));
 
-                if (strengthInBits % bitsPerByte != 0)
+                if (UserName != null)
                 {
-                    throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
+                    claims.Add(item: new Claim(ClaimTypes.Name, UserName, valueType: null, issuer: LoginProvider));
                 }
 
-                int strengthInBytes = strengthInBits / bitsPerByte;
-
-                byte[] data = new byte[strengthInBytes];
-                _random.GetBytes(data);
-                return HttpServerUtility.UrlTokenEncode(data);
+                return claims;
             }
         }
 
