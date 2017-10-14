@@ -34,7 +34,7 @@ import 'hammerjs';
 import { MessagesService } from 'ng2-messages/ng2-messages.service';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdListModule, MdSidenavModule} from '@angular/material';
+import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 
 @NgModule({
@@ -58,8 +58,8 @@ import { MainPageComponent } from './main-page/main-page.component';
     BrowserAnimationsModule,
     PreparationsModule,
     BrowserAnimationsModule,
-    MdSidenavModule,
-    MdListModule,
+    MatSidenavModule,
+    MatListModule,
     routing
   ],
   bootstrap: [AppComponent]

@@ -28,7 +28,7 @@
   width: 650px;
 }
 
-.md-form-field
+.mat-form-field
 {
   width: 250px;
 }
@@ -45,7 +45,7 @@ a:hover, a:visited, a:link, a:active
   text-decoration: none;
 }
 
-.md-button
+.mat-button
 {
   margin-left: 82px;
 }
