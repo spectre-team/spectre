@@ -1,4 +1,5 @@
 ﻿#include "SVM.h"
+#include "Spectre.libClassifier/PredictionResultsMatrix.h"
 
 SVM::SVM()
 {
@@ -7,10 +8,10 @@ SVM::SVM()
     mSVM->setKernel(cv::ml::SVM::LINEAR);
 }
 
-cv::Mat SVM::getResult(Spectre::libClassifier::SplittedOpenCvDataset&& data) const
+Spectre::libClassifier::PredictionResultsMatrix SVM::getResult(Spectre::libClassifier::SplittedOpenCvDataset&& data) const
 {
     train(std::move(data.trainingSet));
-    cv::Mat goodNr = predict(std::move(data.testSet));
+    Spectre::libClassifier::PredictionResultsMatrix goodNr = predict(std::move(data.testSet));
     return goodNr;
 }
 
@@ -19,17 +20,34 @@ void SVM::train(Spectre::libClassifier::OpenCvDataset trainingSet) const
     mSVM->train(trainingSet.getMatData(), cv::ml::ROW_SAMPLE, trainingSet.getMatLabels());
 }
 
-cv::Mat SVM::predict(Spectre::libClassifier::OpenCvDataset testSet) const
+Spectre::libClassifier::PredictionResultsMatrix SVM::predict(Spectre::libClassifier::OpenCvDataset testSet) const
 {
-    cv::Mat results;
-    long goodNr = 0;
-    mSVM->predict(testSet.getMatData(), results);
-
-    for(auto i = 0; i < testSet.size(); i++)
+    Spectre::libClassifier::PredictionResultsMatrix results = Spectre::libClassifier::PredictionResultsMatrix();
+    for(auto i = 0; i < testSet.getMatData().rows; i++)
     {
-        if (testSet.GetSampleMetadata(i) == results.data[i])
+        float prediction = mSVM->predict(testSet.getMatData().row(i));
+        auto tmp = testSet.getMatData().row(i).data;
+        if (*tmp == 1)
         {
-            goodNr++;
+            if (prediction == 1)
+            {
+                results.true_positive++;
+            }
+            else
+            {
+                results.true_negative++;
+            }
+        }
+        else
+        {
+            if (prediction == 1)
+            {
+                results.false_positive++;
+            }
+            else
+            {
+                results.false_negative++;
+            }
         }
     }
     return results;

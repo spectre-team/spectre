@@ -38,8 +38,8 @@ protected:
     const std::vector<DataType> training_data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f,
                                                0.4f, 1.6f, 0.9f, 1.2f, 2.2f, 0.7f, 1.3f, 2.0f, 1.4f, 0.7f, 0.7f, 0.9f};
     const std::vector<DataType> test_data{ 0.8f, 0.3f, 1.2f, 0.7f, 1.9f, 0.2f, 1.2f, 1.3f, 1.2f };
-    const std::vector<Label> training_labels{ 2, 7, 5, 9, 13, 4, 10 };
-    const std::vector<Label> test_labels{ 8, 11, 5 };
+    const std::vector<Label> training_labels{ 1, 1, -1, 1, -1, -1, 1 };
+    const std::vector<Label> test_labels{ 1, -1, -1 };
     OpenCvDataset trainingSet = OpenCvDataset(training_data, training_labels);
     OpenCvDataset testSet = OpenCvDataset(test_data, test_labels);
 
@@ -51,9 +51,10 @@ protected:
 TEST_F(SVMTest, svm_train)
 {
     SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
+    size_t test_size = data.testSet.size();
     SVM svm = SVM();
-    cv::Mat result = svm.getResult(std::move(data));
-    EXPECT_EQ(result.cols*result.rows, 3);
+    PredictionResultsMatrix result = svm.getResult(std::move(data));
+    EXPECT_EQ(result.true_positive + result.true_negative + result.false_positive + result.false_negative, test_size);
 }
 
 }

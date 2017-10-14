@@ -1,8 +1,8 @@
-﻿/*
-* SVM.h
-* 
+/*
+* PredictionResultsMatrix.cpp
+* It contains knowledge about true positive, true negative etc. prediction of SVM
 *
-Copyright 2017 Spectre Team
+Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,19 +17,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-#include <opencv2/ml/ml.hpp>
-#include "Spectre.libClassifier/SplittedOpevCvDataset.h"
 #include "Spectre.libClassifier/PredictionResultsMatrix.h"
 
-class SVM
-{
-public:
-    SVM();
-    Spectre::libClassifier::PredictionResultsMatrix getResult(Spectre::libClassifier::SplittedOpenCvDataset&& data) const;
-private:
-    cv::Ptr<cv::ml::SVM> mSVM;
+namespace Spectre::libClassifier {
 
-    void train(Spectre::libClassifier::OpenCvDataset data) const;
-    Spectre::libClassifier::PredictionResultsMatrix predict(Spectre::libClassifier::OpenCvDataset data) const;
-};
+PredictionResultsMatrix::PredictionResultsMatrix()
+{
+    true_positive = 0;
+    true_negative = 0;
+    false_positive = 0;
+    false_negative = 0;
+}
+
+
+}

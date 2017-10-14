@@ -36,6 +36,9 @@
     <ClCompile Include="SVM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PredictionResultsMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Empty.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SVM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PredictionResultsMatrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
