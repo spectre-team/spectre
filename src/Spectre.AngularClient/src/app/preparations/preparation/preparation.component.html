@@ -5,7 +5,7 @@
     <p-tabView>
       <p-tabPanel header="Heatmap & Spectrum" leftIcon="fa-thermometer (alias)" rightIcon="fa-bar-chart" [headerStyle]="{'width': '195px', 'margin':'0 auto'}">
         <div>
-          <md-slider
+          <mat-slider
             class="slider-x"
             [(ngModel)]="xCoordinate"
             showTicks="true"
@@ -16,10 +16,10 @@
             thumb-label="true"
             tick-interval="true"
             (change)="onChangedXCoordinate($event)">
-          </md-slider>
+          </mat-slider>
 
           <div class="inline-items-container">
-            <md-slider
+            <mat-slider
               class="slider-y"
               [(ngModel)]="yCoordinate"
               showTicks="true"
@@ -30,26 +30,27 @@
               thumb-label="true"
               tick-interval="true"
               (change)="onChangedYCoordinate($event)">
-            </md-slider>
+            </mat-slider>
             <app-heatmap
-              [heatmapData]=heatmapData>
+              [heatmapData]=heatmapData
+              [onClickFunction]="onClickBind">
             </app-heatmap>
           </div>
         </div>
 
         <div class="column-item-position">
           <form>
-            <md-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
-              <md-option *ngFor="let color of colors" [value]="color.value" selected="$first">
+            <mat-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
+              <mat-option *ngFor="let color of colors" [value]="color.value" selected="$first">
                 {{color.value}}
-              </md-option>
-            </md-select>
+              </mat-option>
+            </mat-select>
           </form>
-          <md-form-field class="example-full-width">
-            <input mdInput placeholder="Mz" disabled [(ngModel)]="mzValue">
-          </md-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Mz" disabled [(ngModel)]="mzValue">
+          </mat-form-field>
 
-          <md-slider
+          <mat-slider
             class="slider"
             [(ngModel)]="currentChannelId"
             showTicks="true"
@@ -62,7 +63,7 @@
             vertical="false"
             thumb-label="true"
             tick-interval="true">
-          </md-slider>
+          </mat-slider>
         </div>
 
         <app-spectrum
@@ -71,21 +72,22 @@
       </p-tabPanel>
       <p-tabPanel header="Heatmap" leftIcon="fa fa-thermometer (alias)" [headerStyle]="{'width': '165px', 'color': 'green'}">
         <app-heatmap
-          [heatmapData]=heatmapData>
+          [heatmapData]=heatmapData
+          [onClickFunction]="onClickBind">
         </app-heatmap>
           <div class="column-item-position">
             <form>
-              <md-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
-                <md-option *ngFor="let color of colors" [value]="color.value" selected="$first">
+              <mat-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
+                <mat-option *ngFor="let color of colors" [value]="color.value" selected="$first">
                   {{color.value}}
-                </md-option>
-              </md-select>
+                </mat-option>
+              </mat-select>
             </form>
-            <md-form-field class="example-full-width">
-              <input mdInput placeholder="Mz" disabled [(ngModel)]="mzValue">
-            </md-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mz" disabled [(ngModel)]="mzValue">
+            </mat-form-field>
 
-            <md-slider
+            <mat-slider
               class="slider"
               [(ngModel)]="currentChannelId"
               disabled="{{disabledChanelIdSlider}}"
@@ -98,7 +100,7 @@
               vertical="false"
               thumb-label="true"
               tick-interval="true">
-            </md-slider>
+            </mat-slider>
           </div>
         </p-tabPanel>
       <p-tabPanel header="Spectrum" leftIcon="fa fa-bar-chart" [headerStyle]="{'width': '165px'}">
@@ -107,12 +109,12 @@
         </app-spectrum>
 
         <div class="column-item-position">
-          <md-form-field>
-            <input mdInput #myInput placeholder="Spectrum number" type="text">
-          </md-form-field>
+          <mat-form-field>
+            <input matInput #myInput placeholder="Spectrum number" type="text">
+          </mat-form-field>
 
           <button
-            md-raised-button
+            mat-raised-button
             class="md-button"
             type="submit"
             (click) = 'selectSpectrum(myInput.value)'>

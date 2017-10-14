@@ -1,5 +1,5 @@
 <div id="header">
-  <md-toolbar color="primary">
+  <mat-toolbar color="primary">
     <button
       id="list-button"
       (click) ="sidenav.toggle()"
@@ -9,19 +9,19 @@
         class="glyphicon glyphicon-th-list">
       </span>
     </button>
-  </md-toolbar>
+  </mat-toolbar>
   <a href="./"><img id="logo-image" src="../assets/images/logo.PNG"></a>
 </div>
 
-<md-sidenav-container>
-  <md-sidenav
+<mat-sidenav-container>
+  <mat-sidenav
     #sidenav mode="side"
     class="app-side-nav">
-    <md-list>
+    <mat-list>
       <div class="btn-group-vertical">
         <button
           class="btn btn-default"
-          md-list-item routerLink="mainPage">
+          mat-list-item routerLink="mainPage">
           <i
             class="fa fa-home"
             aria-hidden="true">
@@ -29,18 +29,18 @@
         </button>
         <button
           class="btn btn-default"
-          md-list-item routerLink="preparations">
+          mat-list-item routerLink="preparations">
           <i
             class="fa fa-list-ol"
             aria-hidden="true">
           </i> Preparations
         </button>
       </div>
-    </md-list>
-  </md-sidenav>
+    </mat-list>
+  </mat-sidenav>
 
   <div class="app-content">
     <router-outlet></router-outlet>
   </div>
-</md-sidenav-container>
+</mat-sidenav-container>
 
