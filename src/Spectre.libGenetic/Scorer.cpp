@@ -40,7 +40,7 @@ std::vector<ScoreType> Scorer::Score(const Generation &generation)
 {
     std::vector<ScoreType> scores(generation.size());
     std::transform(generation.begin(), generation.end(), scores.begin(),
-                   [this](const Individual &individual) { return m_FitnessFunction->operator()(individual); });
+                   [this](const Individual &individual) { return m_FitnessFunction->fit(individual); });
     return std::move(scores);
 }
 }

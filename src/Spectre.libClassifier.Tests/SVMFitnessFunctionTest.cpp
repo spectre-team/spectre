@@ -18,21 +18,18 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
-#include "Spectre.libClassifier/SVM.h"
+#include "Spectre.libClassifier/SVMFitnessFunction.h"
+#include "Spectre.libException/InconsistentArgumentSizesException.h"
+#include "Spectre.libPlatform/Filter.h"
 
 namespace
 {
 using namespace Spectre::libClassifier;
 
-TEST(SVMInitializationTest, correct_svm_initialization)
-{
-    EXPECT_NO_THROW(SVM::SVM());
-}
-
-class SVMTest : public ::testing::Test
+class SVMFitnessFunctionTest : public ::testing::Test
 {
 public:
-    SVMTest() {};
+    SVMFitnessFunctionTest() {};
 
 protected:
     const std::vector<DataType> training_data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f,
@@ -48,13 +45,26 @@ protected:
     }
 };
 
-TEST_F(SVMTest, svm_train)
+TEST_F(SVMFitnessFunctionTest, correct_svm_initialization)
 {
     SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
-    size_t test_size = data.testSet.size();
-    SVM svm = SVM();
-    PredictionResultsMatrix result = svm.getResult(std::move(data));
-    EXPECT_EQ(result.true_positive + result.true_negative + result.false_positive + result.false_negative, test_size);
+    EXPECT_NO_THROW(SVMFitnessFunction::SVMFitnessFunction(std::move(data)));
+}
+
+TEST_F(SVMFitnessFunctionTest, svm_fit)
+{
+    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
+    SVMFitnessFunction svm(std::move(data));
+    Spectre::libGenetic::Individual individual(std::vector<bool> { true, false, true, true, false, false, true });
+    EXPECT_NO_THROW(svm.fit(individual));
+}
+
+TEST_F(SVMFitnessFunctionTest, svm_fit_with_inconsistent_size)
+{
+    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
+    SVMFitnessFunction svm(std::move(data));
+    Spectre::libGenetic::Individual too_short_individual({ true, false, true, true, false, true });
+    EXPECT_THROW(svm.fit(too_short_individual), Spectre::libException::InconsistentArgumentSizesException);
 }
 
 }

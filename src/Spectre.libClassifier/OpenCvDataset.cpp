@@ -47,7 +47,7 @@ OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
     other.m_observations.clear();
 }
 
-    OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
+OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
     m_Data(data.begin(), data.end()),
     m_labels(labels.begin(), labels.end()),
     m_observations(static_cast<int>(labels.size()))

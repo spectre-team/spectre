@@ -26,7 +26,7 @@ namespace Spectre::libGenetic::Tests
 class DummyFitnessFunction: public FitnessFunction
 {
 public:
-    ScoreType operator()(const Individual &) override { throw std::logic_error("DummyFitnessFunction"); }
+    ScoreType fit(const Individual &) override { throw std::logic_error("DummyFitnessFunction"); }
 };
 
 class MockScorer: public Scorer

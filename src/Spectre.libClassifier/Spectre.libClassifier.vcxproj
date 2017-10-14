@@ -82,20 +82,20 @@
     <ClCompile Include="ObservationExtractor.cpp" />
     <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
-    <ClCompile Include="PredictionResultsMatrix.cpp" />
+    <ClCompile Include="ConfusionMatrix.cpp" />
     <ClCompile Include="RandomSplitter.cpp" />
     <ClCompile Include="SplittedOpenCvDataset.cpp" />
-    <ClCompile Include="SVM.cpp" />
+    <ClCompile Include="SVMFitnessFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EmptyOpenCvDatasetException.h" />
     <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />
-    <ClInclude Include="PredictionResultsMatrix.h" />
+    <ClInclude Include="ConfusionMatrix.h" />
     <ClInclude Include="RandomSplitter.h" />
     <ClInclude Include="SplittedOpevCvDataset.h" />
-    <ClInclude Include="SVM.h" />
+    <ClInclude Include="SVMFitnessFunction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

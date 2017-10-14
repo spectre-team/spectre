@@ -29,6 +29,11 @@ namespace Spectre::libGenetic
 Individual::Individual(std::vector<bool> &&binaryData):
     m_BinaryData(binaryData) { }
 
+std::vector<bool> Individual::getData() const
+{
+    return m_BinaryData;
+}
+
 std::vector<bool>::reference Individual::operator[](size_t index)
 {
     if (index < m_BinaryData.size())

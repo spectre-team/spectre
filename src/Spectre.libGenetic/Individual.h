@@ -34,6 +34,11 @@ public:
     /// <param name="binaryData">The binary data.</param>
     explicit Individual(std::vector<bool> &&binaryData);
     /// <summary>
+    /// Gets the immutable data.
+    /// </summary>
+    /// <returns>Vector of binary data.</returns>
+    std::vector<bool> getData() const;
+    /// <summary>
     /// Gets the mutable data under specified index.
     /// </summary>
     /// <param name="index">The index.</param>

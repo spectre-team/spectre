@@ -1,5 +1,5 @@
 /*
-* PredictionResultsMatrix.h
+* PredictionResultsMatrix.cpp
 * It contains knowledge about true positive, true negative etc. prediction of SVM
 *
 Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
@@ -17,18 +17,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
+#include "Spectre.libClassifier/ConfusionMatrix.h"
 
 namespace Spectre::libClassifier {
 
-class PredictionResultsMatrix
+ConfusionMatrix::ConfusionMatrix()
 {
-public:
-    int true_positive;
-    int true_negative;
-    int false_positive;
-    int false_negative;
-    PredictionResultsMatrix();
-};
+    true_positive = 0;
+    true_negative = 0;
+    false_positive = 0;
+    false_negative = 0;
+}
+
+libGenetic::ScoreType ConfusionMatrix::getScore() const
+{
+    return (2 * true_positive) / (2 * true_positive + false_positive + false_negative);
+}
+
 
 }

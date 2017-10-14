@@ -18,7 +18,7 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
-#include "Spectre.libClassifier/SVM.h"
+#include "Spectre.libClassifier/SVMFitnessFunction.h"
 
 namespace
 {
