@@ -52,7 +52,7 @@ namespace Spectre.Controllers
                 new DataRootConfig(
                     ConfigurationManager.AppSettings["LocalDataDirectory"],
                     ConfigurationManager.AppSettings["RemoteDataDirectory"]));
-            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor.txt");
+            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor");
 
             var mz = dataset.GetRawMzArray();
 
@@ -94,7 +94,7 @@ namespace Spectre.Controllers
                 new DataRootConfig(
                     ConfigurationManager.AppSettings["LocalDataDirectory"],
                     ConfigurationManager.AppSettings["RemoteDataDirectory"]));
-            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor.txt");
+            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor");
 
             var spectrumId = dataset.SpatialCoordinates.ToList()
                 .FindIndex(sc => sc.X == x && sc.Y == y);

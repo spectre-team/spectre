@@ -59,7 +59,7 @@ namespace Spectre.Controllers
                 new DataRootConfig(
                     ConfigurationManager.AppSettings["LocalDataDirectory"],
                     ConfigurationManager.AppSettings["RemoteDataDirectory"]));
-            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor.txt");
+            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor");
 
             var mz = dataset.GetRawMzValue(channelId);
             var intensities = dataset.GetRawIntensityRow(channelId);

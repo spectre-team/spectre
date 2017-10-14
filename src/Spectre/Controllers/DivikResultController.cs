@@ -68,7 +68,7 @@ namespace Spectre.Controllers
                 new DataRootConfig(
                     ConfigurationManager.AppSettings["LocalDataDirectory"],
                     ConfigurationManager.AppSettings["RemoteDataDirectory"]));
-            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor.txt");
+            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor");
 
             var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
 
