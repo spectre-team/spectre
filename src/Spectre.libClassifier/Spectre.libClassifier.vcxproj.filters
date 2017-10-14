@@ -33,8 +33,10 @@
     <ClCompile Include="EmptyOpenCvDatasetException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SVMFitnessFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConfusionMatrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,8 +59,10 @@
     <ClInclude Include="EmptyOpenCvDatasetException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SVMFitnessFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConfusionMatrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
