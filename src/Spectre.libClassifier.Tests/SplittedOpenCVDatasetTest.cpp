@@ -48,6 +48,19 @@ namespace
         EXPECT_NO_THROW(SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet)));
     }
 
+    TEST_F(SplittedOpenCVDatasetTest, test_splitted_opencvdataset_data)
+    {
+        SplittedOpenCvDataset splittedData = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
+        EXPECT_EQ(splittedData.trainingSet.size(), 7);
+        EXPECT_EQ(splittedData.trainingSet.GetData().size(), 7);
+        EXPECT_EQ(splittedData.trainingSet.getMatData().rows, 7);
+        EXPECT_EQ(splittedData.trainingSet.getMatLabels().rows, 7);
+        EXPECT_EQ(splittedData.testSet.size(), 3);
+        EXPECT_EQ(splittedData.testSet.GetData().size(), 3);
+        EXPECT_EQ(splittedData.testSet.getMatData().rows, 3);
+        EXPECT_EQ(splittedData.testSet.getMatLabels().rows, 3);
+    }
+
     TEST_F(SplittedOpenCVDatasetTest, check_correctness_of_structure_data)
     {
         SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));

@@ -38,7 +38,7 @@ OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
       m_Mat(std::move(other.m_Mat)),
       m_labels(std::move(other.m_labels)),
       m_MatLabels(std::move(other.m_MatLabels)),
-      m_observations(std::move(m_observations))
+      m_observations(std::move(other.m_observations))
 {
     other.m_Data.clear();
     other.m_Mat.release();

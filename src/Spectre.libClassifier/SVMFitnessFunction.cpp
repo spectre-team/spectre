@@ -19,17 +19,18 @@ libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &indi
     {
         throw libException::InconsistentArgumentSizesException("data", m_Dataset.trainingSet.size(), "individual", individual.size());
     }
-    std::vector<Observation> filteredData = libPlatform::Functional::filter(m_Dataset.trainingSet.GetData(), individual.getData());
-    std::vector<DataType> filteredData2;
-    for (Observation observation: filteredData)
+    gsl::span<const Observation> dataToFilter = m_Dataset.trainingSet.GetData();
+    std::vector<Observation> twoDimentionalFilteredData = libPlatform::Functional::filter(dataToFilter, individual.getData());
+    std::vector<DataType> oneDimentionalFilteredData;
+    for (Observation observation: twoDimentionalFilteredData)
     {
         for (float number: observation)
         {
-            filteredData2.push_back(number);
+            oneDimentionalFilteredData.push_back(number);
         }
     }
     std::vector<Label> filteredLabels = libPlatform::Functional::filter(m_Dataset.trainingSet.GetSampleMetadata(), individual.getData());
-    OpenCvDataset individualDataset(filteredData2, filteredLabels);
+    OpenCvDataset individualDataset(oneDimentionalFilteredData, filteredLabels);
     ConfusionMatrix result = getResultMatrix(std::move(individualDataset));
     return result.getScore();
 }
