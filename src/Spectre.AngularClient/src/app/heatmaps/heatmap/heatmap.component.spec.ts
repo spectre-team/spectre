@@ -27,7 +27,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { PlotlyModule } from '../../plotly/plotly.module';
 
 import { HeatmapService } from '../shared/heatmap.service';
-import {HeatmapComponent} from './heatmap.component';
+import { HeatmapComponent } from './heatmap.component';
 
 describe('HeatmapComponent', () => {
   let component: HeatmapComponent;
