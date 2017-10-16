@@ -10,33 +10,33 @@
         [href]='downloadJsonHref'
         download='result.json'>
         <button
-          md-raised-button
-          class="md-button">
+          Mat-raised-button
+          class="mat-button">
           Download JSON result
         </button>
       </a>
   </div>
 
   <div>
-    <md-expansion-panel id="divik-info-expansion-panel">
-      <md-expansion-panel-header id="expansionPanelHeader">
-        <md-panel-title>
+    <mat-expansion-panel id="divik-info-expansion-panel">
+      <mat-expansion-panel-header id="expansionPanelHeader">
+        <mat-panel-title>
           Option
-        </md-panel-title>
-        <md-panel-description>
+        </mat-panel-title>
+        <mat-panel-description>
           Value
-        </md-panel-description>
-      </md-expansion-panel-header>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
       <div *ngFor="let configElement of config.entries()">
-        <md-form-field class="md-form-field">
-          <input mdInput disabled="true" value={{configElement[0]}}>
-        </md-form-field>
-        <md-form-field  class="md-form-field">
-          <input mdInput disabled="true" value={{configElement[1]}}>
-        </md-form-field>
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{configElement[0]}}>
+        </mat-form-field>
+        <mat-form-field  class="mat-form-field">
+          <input matInput disabled="true" value={{configElement[1]}}>
+        </mat-form-field>
       </div>
-    </md-expansion-panel>
+    </mat-expansion-panel>
   </div>
 </div>
 

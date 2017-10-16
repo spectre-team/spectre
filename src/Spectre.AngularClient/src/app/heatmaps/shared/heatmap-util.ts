@@ -17,10 +17,10 @@
  limitations under the License.
  */
 
-import {Response} from '@angular/http';
+import { Response } from '@angular/http';
 import 'rxjs/Rx';
 
-import {Heatmap} from './heatmap';
+import { Heatmap } from './heatmap';
 
 export class HeatmapUtil {
   static toHeatmap(response: Response, className = '[HeatmapService]'): Heatmap {
