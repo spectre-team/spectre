@@ -64,13 +64,21 @@ namespace
     TEST_F(SplittedOpenCVDatasetTest, check_correctness_of_structure_data)
     {
         SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
-        for (auto i = 0; i < trainingSet.size(); i++)
+        OpenCvDataset verifyTrainingSet = OpenCvDataset(training_data, training_labels);
+        OpenCvDataset verifyTestSet = OpenCvDataset(test_data, test_labels);
+        for (auto i = 0; i < verifyTrainingSet.size(); i++)
         {
-            EXPECT_EQ(data.trainingSet[i], trainingSet[i]);
+            for (auto j = 0; j < verifyTrainingSet[i].size(); j++)
+            {
+                EXPECT_EQ(data.trainingSet[i][j], verifyTrainingSet[i][j]);
+            }
         }
-        for (auto i = 0; i < testSet.size(); i++)
+        for (auto i = 0; i < verifyTestSet.size(); i++)
         {
-            EXPECT_EQ(data.testSet[i], trainingSet[i]);
+            for (auto j = 0; j < verifyTestSet[i].size(); j++)
+            {
+                EXPECT_EQ(data.testSet[i][j], verifyTestSet[i][j]);
+            }
         }
     }
 
