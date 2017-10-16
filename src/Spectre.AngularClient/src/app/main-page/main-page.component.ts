@@ -1,8 +1,8 @@
 /*
- * styles.css
- * Global styling for the application.
+ * main-page.component.ts
+ * Component of single preparation.
  *
-   Copyright 2017 Grzegorz Mrukwa
+   Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,19 +17,15 @@
    limitations under the License.
 */
 
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "../node_modules/font-awesome/css/font-awesome.min.css";
-@import "../node_modules/primeng/resources/primeng.min.css";
-@import "../node_modules/primeng/resources/themes/omega/theme.css";
+import { Component, OnInit } from '@angular/core';
 
-html
-{
-  height: 100%;
-  font-family: 'PT Sans', sans-serif;
-}
 
-body
-{
-  height: 100%;
-  font-family: 'PT Sans', sans-serif;
+@Component({
+  selector: 'app-main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.css'],
+  providers: []
+})
+export class MainPageComponent implements OnInit {
+  ngOnInit() { }
 }

@@ -3,20 +3,37 @@
   width: 600px;
 }
 
-.sliderX
+.slider-x
 {
   width: 435px;
   margin-left: 118px;
 }
 
-.sliderY
+.slider-y
 {
   height: 435px;
   margin-top: 93px;
 }
 
-.inlineItemsContainer
+.column-item-position
+{
+  display: flex;
+  flex-direction: column;
+  margin-left: 67px;
+}
+
+.inline-items-container
 {
   display: flex;
   justify-content: flex-start;
+}
+
+.mat-button
+{
+  width: 200px;
+}
+
+.fa-bar-chart
+{
+  color: #F69736;
 }

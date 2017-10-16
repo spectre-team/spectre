@@ -17,10 +17,10 @@
  limitations under the License.
  */
 
-import {Response} from '@angular/http';
+import { Response } from '@angular/http';
 import 'rxjs/Rx';
 
-import {Heatmap} from './heatmap';
+import { Heatmap } from './heatmap';
 
 export class HeatmapUtil {
   static toHeatmap(response: Response, className = '[HeatmapService]'): Heatmap {
@@ -38,7 +38,7 @@ export class HeatmapUtil {
     for (let i = min_row; i < max_row + 1; i++) {
       data[i - min_row] = [];
       for (let j = min_column; j < max_column + 1; j++) {
-        data[i - min_row][j - min_column] = 0;
+        data[i - min_row][j - min_column] = undefined;
       }
     }
     console.log(className + ' processing heatmap');

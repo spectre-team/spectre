@@ -43,7 +43,7 @@ export class HeatmapService extends Service {
     console.log('[HeatmapService] preparationId: ' + preparationId + ' channelId ' + channelId);
     const queryUrl = `${this.getBaseUrl()}/heatmap/${preparationId}?channelId=${channelId}&flag=false`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    const spectrum = response.map((res: Response) => HeatmapUtil.toHeatmap(res));
-    return spectrum;
+    const heatmap = response.map((res: Response) => HeatmapUtil.toHeatmap(res));
+    return heatmap;
   }
 }
