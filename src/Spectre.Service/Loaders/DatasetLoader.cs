@@ -17,9 +17,9 @@
    limitations under the License.
 */
 
-using System;
 using System.IO;
 using System.IO.Abstractions;
+using System.Linq;
 using Ninject;
 using Spectre.Data.Datasets;
 using Spectre.Dependencies;
@@ -81,17 +81,24 @@ namespace Spectre.Service.Loaders
         /// <exception cref="DatasetFormatException">Throws when the loader fails to create dataset from the file.</exception>
         public IDataset GetFromName(string name)
         {
-            string fullPathLocal = Path.Combine(_localRoot, name);
+            string fullPathLocal;
 
-            if (!FileSystem.File.Exists(fullPathLocal))
+            var foundLocalFiles = FileSystem.Directory.GetFiles(_localRoot, name + ".*");
+            if (foundLocalFiles.Length == 0)
             {
-                string fullPathRemote = Path.Combine(_remoteRoot, name);
-                if (!FileSystem.File.Exists(fullPathRemote))
+                var foundRemoteFiles = FileSystem.Directory.GetFiles(_remoteRoot, name + ".*");
+                if (foundRemoteFiles.Length == 0)
                 {
                     throw new DatasetNotFoundException("Dataset file not found neither locally nor remotely.", name);
                 }
 
-                FileSystem.File.Copy(fullPathRemote, fullPathLocal);
+                var foundRemotePath = foundRemoteFiles.First();
+                fullPathLocal = _localRoot + name + Path.GetExtension(foundRemotePath);
+                FileSystem.File.Copy(foundRemotePath, fullPathLocal);
+            }
+            else
+            {
+                fullPathLocal = foundLocalFiles.First();
             }
 
             try

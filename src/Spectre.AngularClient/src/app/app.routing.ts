@@ -22,11 +22,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
-import { PreparationComponent } from './preparations/preparation/preparation.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: PreparationListComponent, pathMatch: 'full'}, // redirect to home page on load
   { path: 'preparations', component: PreparationListComponent, pathMatch: 'full'},
+  { path: 'mainPage', component: MainPageComponent, pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];
 
