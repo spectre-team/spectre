@@ -36,7 +36,7 @@ namespace Spectre.Database.Entities
         /// </value>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ItemId { get; set; }
+        public int DatasetId { get; set; }
 
         /// <summary>
         /// Gets or sets the hash.

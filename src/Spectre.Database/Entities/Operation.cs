@@ -18,6 +18,8 @@
 */
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -57,7 +59,7 @@ namespace Spectre.Database.Entities
         /// </value>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string DatasetId { get; set; }
+        public int OperationId { get; set; }
 
         /// <summary>
         /// Gets or sets the inputs.
@@ -65,7 +67,7 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The inputs.
         /// </value>
-        public string Inputs { get; set; }
+        public IEnumerable<Dataset> Inputs { get; set; }
 
         /// <summary>
         /// Gets or sets the outputs.
@@ -73,7 +75,7 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The outputs.
         /// </value>
-        public string Outputs { get; set; }
+        public IEnumerable<Dataset> Outputs { get; set; }
 
         /// <summary>
         /// Gets or sets the parameters.

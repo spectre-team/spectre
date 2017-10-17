@@ -42,7 +42,7 @@ namespace Spectre.Database.Contexts
         /// <value>
         /// The operation datasets.
         /// </value>
-        public virtual DbSet<Operation> OperationDatasets { get; set; }
+        public virtual DbSet<Operation> Operations { get; set; }
 
         /// <summary>
         /// Gets or sets the owner datasets.
@@ -50,6 +50,6 @@ namespace Spectre.Database.Contexts
         /// <value>
         /// The owner datasets.
         /// </value>
-        public virtual DbSet<OwnerDataset> OwnerDatasets { get; set; }
+        public virtual DbSet<OwnerDataset> Owners { get; set; }
     }
 }
