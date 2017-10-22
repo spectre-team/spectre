@@ -30,6 +30,9 @@
     <ClInclude Include="InconsistentArgumentSizesException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EmptyArgumentException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExceptionBase.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InconsistentArgumentSizesException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EmptyArgumentException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -21,6 +21,7 @@ limitations under the License.
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Spectre.libGenetic/Individual.h"
 #include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
+#include "Spectre.libGenetic/InconsistentIndividualSizeAndTrueAmountException.h"
 
 namespace
 {
@@ -31,6 +32,12 @@ TEST(IndividualInitialization, initializes)
     EXPECT_NO_THROW(Individual({ true, true, true, true }));
     EXPECT_NO_THROW(Individual({ false, false, false, false }));
     EXPECT_NO_THROW(Individual({ true, false, true, false }));
+}
+
+TEST(IndividualInitialization, initializes_by_shuffle)
+{
+    EXPECT_NO_THROW(Individual(6, 4));
+    EXPECT_THROW(Individual(4, 6), InconsistentIndividualSizeAndTrueAmountException);
 }
 
 class IndividualTest : public ::testing::Test
@@ -153,5 +160,19 @@ TEST_F(IndividualTest, unequality_same_individuals_marked_equal)
 {
     const Individual copy { std::vector<bool>(MIXED_DATA) };
     EXPECT_FALSE(copy != mixedIndividual);
+}
+
+TEST_F(IndividualTest, true_amount_equal_to_parameter)
+{
+    Individual individual(10, 6);
+    int trueAmount = 0;
+    for (auto i = 0; i < individual.size(); i++)
+    {
+        if (individual[i] == true)
+        {
+            trueAmount++;
+        }
+    }
+    EXPECT_EQ(trueAmount, 6);
 }
 }

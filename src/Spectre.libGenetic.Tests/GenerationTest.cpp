@@ -21,11 +21,28 @@ limitations under the License.
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Spectre.libGenetic/Generation.h"
 #include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
+#include "Spectre.libGenetic/InconsistentIndividualSizeAndTrueAmountException.h"
 
 namespace
 {
 using namespace Spectre::libGenetic;
 using namespace Spectre::libException;
+
+TEST(GenerationInitialization, initializes)
+{
+    EXPECT_NO_THROW(Generation(5, 6, 4));
+}
+
+TEST(GenerationInitialization, initializes_with_error)
+{
+    EXPECT_THROW(Generation(5, 4, 6), InconsistentIndividualSizeAndTrueAmountException);
+}
+
+TEST(GenerationInitialization, creation_of_generation_and_checking_size)
+{
+    Generation generation(8, 10, 6);
+    EXPECT_EQ(generation.size(), 8);
+}
 
 class GenerationInitializationTest: public ::testing::Test
 {
@@ -177,4 +194,5 @@ TEST_F(GenerationTest, iterators_allow_to_iterate_the_individuals)
     EXPECT_EQ(generationIterator, generation1.end());
     EXPECT_EQ(dataIterator, generation1Data.end());
 }
+
 }

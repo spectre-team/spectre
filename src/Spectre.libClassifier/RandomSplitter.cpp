@@ -22,6 +22,9 @@ limitations under the License.
 #include "Spectre.libPlatform/Filter.h"
 #include "Spectre.libPlatform/Math.h"
 #include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libClassifier/NegativeTrainingRateException.h"
+#include "Spectre.libClassifier/ExcessiveTrainingRateException.h"
+#include "Spectre.libException/EmptyArgumentException.h"
 
 namespace Spectre::libClassifier {
 
@@ -30,10 +33,32 @@ using namespace libPlatform::Math;
 
 RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
     : m_trainingRate(trainingRate),
-      m_randomNumberGenerator(rngSeed) {}
+      m_randomNumberGenerator(rngSeed)
+{
+    if (trainingRate >= 0)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw NegativeTrainingRateException(trainingRate);
+    }
+    if (trainingRate <= 1)
+    {
+        // @gmrukwa: usual empty execution branch
+    }
+    else
+    {
+        throw ExcessiveTrainingRateException(trainingRate);
+    }
+}
 
 SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
 {
+    if (data.empty())
+    {
+        throw libException::EmptyArgumentException("data");
+    }
     std::vector<int> indexes = range(0, int(data.size()));
     libGenetic::RandomDevice randomDevice;
     libGenetic::RandomNumberGenerator g(randomDevice());

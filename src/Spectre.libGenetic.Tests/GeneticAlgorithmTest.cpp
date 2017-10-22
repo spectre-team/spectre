@@ -1,5 +1,5 @@
 /*
-* GeneticAlgorithm.cpp
+* GeneticAlgorithmTest.cpp
 * Tests general-purpose genetic algorithm.
 *
 Copyright 2017 Grzegorz Mrukwa

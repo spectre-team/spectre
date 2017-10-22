@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{5bedc81d-e7c3-4673-8929-c00f71a4ddd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exceptions">
+      <UniqueIdentifier>{e7ef017c-cb25-40a1-9ba7-87fc1d9d6877}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Empty.cpp">
@@ -39,6 +45,12 @@
     <ClCompile Include="ConfusionMatrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ExcessiveTrainingRateException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="NegativeTrainingRateException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Empty.h">
@@ -64,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="ConfusionMatrix.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcessiveTrainingRateException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="NegativeTrainingRateException.h">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

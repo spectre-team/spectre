@@ -21,15 +21,28 @@ limitations under the License.
 #include <gmock/gmock-matchers.h>
 #include "Spectre.libClassifier/RandomSplitter.h"
 #include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libClassifier/ExcessiveTrainingRateException.h"
+#include "Spectre.libClassifier/NegativeTrainingRateException.h"
+#include "Spectre.libException/EmptyArgumentException.h"
 
 namespace
 {
 using namespace ::testing;
 using namespace Spectre::libClassifier;
 
-TEST(RandomSplitterInitializationTest, correct_dataset_opencv_initialization)
+TEST(RandomSplitterInitializationTest, correct_random_splitter_initialization)
 {
     EXPECT_NO_THROW(RandomSplitter(0.7));
+}
+
+TEST(RandomSplitterInitializationTest, initialization_with_excessive_error)
+{
+    EXPECT_THROW(RandomSplitter(1.2), ExcessiveTrainingRateException);
+}
+
+TEST(RandomSplitterInitializationTest, initialization_with_negative_error)
+{
+    EXPECT_THROW(RandomSplitter(-0.4), NegativeTrainingRateException);
 }
 
 class RandomSplitterTest : public ::testing::Test

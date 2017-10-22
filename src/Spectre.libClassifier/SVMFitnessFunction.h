@@ -26,7 +26,7 @@ limitations under the License.
 namespace Spectre::libClassifier
 {
 
-class SVMFitnessFunction : Spectre::libGenetic::FitnessFunction
+class SVMFitnessFunction : public Spectre::libGenetic::FitnessFunction
 {
 public:
     SVMFitnessFunction(SplittedOpenCvDataset&& data);

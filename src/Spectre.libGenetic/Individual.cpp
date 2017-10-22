@@ -21,6 +21,9 @@ limitations under the License.
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Individual.h"
 #include "InconsistentChromosomeLengthException.h"
+#include "Spectre.libGenetic/InconsistentIndividualSizeAndTrueAmountException.h"
+#include "Spectre.libGenetic/DataTypes.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -28,6 +31,25 @@ namespace Spectre::libGenetic
 {
 Individual::Individual(std::vector<bool> &&binaryData):
     m_BinaryData(binaryData) { }
+
+Individual::Individual(_int64 size, _int64 trueAmount)
+{
+    if (trueAmount > size)
+    {
+        throw InconsistentIndividualSizeAndTrueAmountException(size, trueAmount);
+    }
+    for (auto i = 0; i < trueAmount; i++)
+    {
+        m_BinaryData.push_back(true);
+    }
+    for (auto i = trueAmount; i < size; i++)
+    {
+        m_BinaryData.push_back(false);
+    }
+    libGenetic::RandomDevice randomDevice;
+    libGenetic::RandomNumberGenerator g(randomDevice());
+    std::shuffle(m_BinaryData.begin(), m_BinaryData.end(), g);
+}
 
 std::vector<bool> Individual::getData() const
 {

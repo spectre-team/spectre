@@ -34,6 +34,13 @@ public:
     /// <param name="binaryData">The binary data.</param>
     explicit Individual(std::vector<bool> &&binaryData);
     /// <summary>
+    /// Initializes a new individual with trueAmount of true values inside.
+    /// </summary>
+    /// <returns>Individual.</returns>
+    /// <param name="int">Size of individual.</param>
+    /// <param name="int">Amount of true values.</param>
+    Individual::Individual(_int64 size, _int64 trueAmount);
+    /// <summary>
     /// Gets the immutable data.
     /// </summary>
     /// <returns>Vector of binary data.</returns>

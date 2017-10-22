@@ -79,6 +79,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EmptyOpenCvDatasetException.cpp" />
+    <ClCompile Include="ExcessiveTrainingRateException.cpp" />
+    <ClCompile Include="NegativeTrainingRateException.cpp" />
     <ClCompile Include="ObservationExtractor.cpp" />
     <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
@@ -89,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EmptyOpenCvDatasetException.h" />
+    <ClInclude Include="ExcessiveTrainingRateException.h" />
+    <ClInclude Include="NegativeTrainingRateException.h" />
     <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />
