@@ -35,8 +35,10 @@ namespace Spectre.Database.Tests
     [TestFixture]
     public class QueryTests
     {
-        [Test]
-        public void QueryTest()
+        private Mock<Context> _mockContext = new Mock<Context>();
+
+        [SetUp]
+        public void SetUp()
         {
             var data = new List<Dataset>
             {
@@ -50,18 +52,48 @@ namespace Spectre.Database.Tests
             mockSet.As<IQueryable<Dataset>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<Dataset>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<Dataset>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            
-            var mockContext = new Mock<Context>();
-            mockContext.Setup(c => c.Datasets).Returns(mockSet.Object);
-            
-            var service = new PathFinder(mockContext.Object);
-            var dataset1 = service.ReturnForHash("1");
-            var dataset2 = service.ReturnForFriendlyName("Bajer2");
-            var dataset3 = service.ReturnForHash("4");
 
-            NUnit.Framework.Assert.AreEqual("path1", dataset1);
-            NUnit.Framework.Assert.AreEqual("path2", dataset2);
-            NUnit.Framework.Assert.AreEqual(null, dataset3);
+            _mockContext.Setup(c => c.Datasets).Returns(mockSet.Object);
+        }
+
+        [Test]
+        public void Return_for_hash_Test()
+        {
+            var service = new PathFinder(_mockContext.Object);
+
+            var dataset = service.ReturnForHash("1");            
+
+            NUnit.Framework.Assert.AreEqual("path1", dataset);
+        }
+
+        [Test]
+        public void Return_for_friendly_name_test()
+        {
+            var service = new PathFinder(_mockContext.Object);
+
+            var dataset = service.ReturnForFriendlyName("Bajer2");
+
+            NUnit.Framework.Assert.AreEqual("path2", dataset);
+        }
+
+        [Test]
+        public void Return_for_not_existing_hash_test()
+        {
+            var service = new PathFinder(_mockContext.Object);
+
+            var dataset = service.ReturnForHash("4");
+
+            NUnit.Framework.Assert.AreEqual(null, dataset);
+        }
+
+        [Test]
+        public void Return_for_not_existing_friendly_name_test()
+        {
+            var service = new PathFinder(_mockContext.Object);
+
+            var dataset = service.ReturnForFriendlyName("TestName");
+
+            NUnit.Framework.Assert.AreEqual(null, dataset);
         }
     }
 }

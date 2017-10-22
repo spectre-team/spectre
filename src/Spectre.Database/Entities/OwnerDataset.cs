@@ -57,7 +57,7 @@ namespace Spectre.Database.Entities
         /// </value>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string OwnerId { get; set; }
+        public int OwnerId { get; set; }
 
         /// <summary>
         /// The upload number
