@@ -1,6 +1,6 @@
 ﻿/*
 * SVMFitnessFunction.h
-* 
+*
 *
 Copyright 2017 Spectre Team
 

@@ -23,21 +23,20 @@ limitations under the License.
 
 namespace Spectre::libGenetic {
 
-    class GeneticTrainingSetSelectionScenario
-    {
-    public:
-        GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, int generationSize, 
-                int trueAmount, Seed seed = 0);
-        Generation execute(libClassifier::OpenCvDataset data);
-    private:
-        int mGenerationAmount;
-        int mGenerationSize;
-        int mTrueAmount;
-        double mTrainingRate;
-        double mMutationRate;
-        double mBitSwapRate;
-        double mPreservationRate;
-        Seed mSeed;
-    };
+class GeneticTrainingSetSelectionScenario
+{
+public:
+    GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, int generationSize, int trueAmount, Seed seed = 0);
+    Generation execute(libClassifier::OpenCvDataset data);
+private:
+    int mGenerationAmount;
+    int mGenerationSize;
+    int mTrueAmount;
+    double mTrainingRate;
+    double mMutationRate;
+    double mBitSwapRate;
+    double mPreservationRate;
+    Seed mSeed;
+};
 
 }
