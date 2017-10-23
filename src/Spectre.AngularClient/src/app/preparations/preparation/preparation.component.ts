@@ -25,8 +25,8 @@ import { Spectrum } from '../../spectra/shared/spectrum';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { PreparationService } from '../shared/preparation.service';
 import { Preparation } from '../shared/preparation';
-import {MessageService} from 'primeng/components/common/messageservice';
-import {  BlockUI, NgBlockUI } from 'ng-block-ui';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-preparation',
