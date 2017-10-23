@@ -1,6 +1,6 @@
 /*
 * NegativeTrainingRateException.cpp
-* Thrown when preservation rate is negative.
+* Thrown when training rate is negative.
 *
 Copyright 2017 Grzegorz Mrukwa
 

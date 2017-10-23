@@ -21,6 +21,6 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
-    ExcessiveTrainingRateException::ExcessiveTrainingRateException(double actual) :
-        ArgumentOutOfRangeException<double>("trainingRate", 0, 1, actual) { }
+ExcessiveTrainingRateException::ExcessiveTrainingRateException(double actual) :
+    ArgumentOutOfRangeException<double>("trainingRate", 0, 1, actual) { }
 }

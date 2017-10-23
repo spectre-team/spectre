@@ -1,6 +1,6 @@
 /*
-* SVMTest.cpp
-* Tests SVM
+* SVMFitnessFunctionTest.cpp
+* Tests SVMFitnessFunction.
 *
 Copyright 2017 Wojciech Wilgierz
 
@@ -39,30 +39,34 @@ protected:
     const std::vector<Label> test_labels{ 1, -1, -1 };
     OpenCvDataset trainingSet = OpenCvDataset(training_data, training_labels);
     OpenCvDataset testSet = OpenCvDataset(test_data, test_labels);
+    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
+    RaportGenerator raportGenerator = RaportGenerator("SVMFitnessFunctionTest");
 
     void SetUp() override
     {
+    }
+
+    void TearDown() override 
+    {
+        raportGenerator.close();
     }
 };
 
 TEST_F(SVMFitnessFunctionTest, correct_svm_initialization)
 {
-    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
-    EXPECT_NO_THROW(SVMFitnessFunction::SVMFitnessFunction(std::move(data)));
+    EXPECT_NO_THROW(SVMFitnessFunction::SVMFitnessFunction(std::move(data), raportGenerator));
 }
 
 TEST_F(SVMFitnessFunctionTest, svm_fit)
 {
-    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
-    SVMFitnessFunction svm(std::move(data));
+    SVMFitnessFunction svm(std::move(data), raportGenerator);
     Spectre::libGenetic::Individual individual(std::vector<bool> { true, false, true, true, false, false, true });
     EXPECT_NO_THROW(svm.fit(individual));
 }
 
-TEST_F(SVMFitnessFunctionTest, svm_fit_with_inconsistent_size)
+TEST_F(SVMFitnessFunctionTest, throws_when_fitting_svm_on_inconsistent_size_individual)
 {
-    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
-    SVMFitnessFunction svm(std::move(data));
+    SVMFitnessFunction svm(std::move(data), raportGenerator);
     Spectre::libGenetic::Individual too_short_individual({ true, false, true, true, false, true });
     EXPECT_THROW(svm.fit(too_short_individual), Spectre::libException::InconsistentArgumentSizesException);
 }

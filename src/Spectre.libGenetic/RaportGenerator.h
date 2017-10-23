@@ -1,8 +1,8 @@
-/*
-* ConfusionMatrix.h
-* It contains knowledge about true positive, true negative etc. prediction of SVM
+﻿/*
+* RaportGenerator.h
+* Class that has static functions to create raport during for example genetic algorithm execution.
 *
-Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
+Copyright 2017 Spectre Team
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,20 +18,18 @@ limitations under the License.
 */
 
 #pragma once
-#include "Spectre.libGenetic/DataTypes.h"
+#include <fstream>
+#include "Spectre.libClassifier/ConfusionMatrix.h"
+#include "Spectre.libClassifier/OpenCvDataset.h"
 
-namespace Spectre::libClassifier {
-
-class ConfusionMatrix
+class RaportGenerator
 {
 public:
-    int true_positive;
-    int true_negative;
-    int false_positive;
-    int false_negative;
-    ConfusionMatrix();
-    libGenetic::ScoreType getScore() const;
-    std::string toString() const;
+    RaportGenerator(std::string filename);
+    void close();
+    void write(std::string text);
+    void write(Spectre::libClassifier::ConfusionMatrix matrix);
+    void write(Spectre::libClassifier::OpenCvDataset* dataset);
+private:
+    std::ofstream mFile;
 };
-
-}
