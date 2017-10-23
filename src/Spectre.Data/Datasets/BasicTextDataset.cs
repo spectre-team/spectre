@@ -108,7 +108,7 @@ namespace Spectre.Data.Datasets
         public IEnumerable<int> Labels
         {
             get { return _labels; }
-            private set { _labels = value.ToList(); }
+            set { _labels = value.ToList(); }
         }
 
         /// <summary>
