@@ -62,7 +62,7 @@ ConfusionMatrix SVMFitnessFunction::getResultMatrix(OpenCvDataset data) const
 {
     clock_t begin = clock();
     train(std::move(data));
-    clock_t end = clock(); 
+    clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     std::string time_difference = std::to_string(elapsed_secs);
     mRaportGenerator->write("Time needed to teach this individual: " + time_difference + " seconds.");

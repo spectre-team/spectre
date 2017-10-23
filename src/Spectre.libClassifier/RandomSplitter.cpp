@@ -37,7 +37,6 @@ RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
 {
     if (trainingRate >= 0)
     {
-        
     }
     else
     {
@@ -45,7 +44,6 @@ RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
     }
     if (trainingRate <= 1)
     {
-        
     }
     else
     {

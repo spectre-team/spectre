@@ -46,7 +46,7 @@ protected:
     {
     }
 
-    void TearDown() override 
+    void TearDown() override
     {
         raportGenerator.close();
     }
