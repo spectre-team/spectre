@@ -52,12 +52,11 @@
   <ItemGroup>
     <Compile Include="Entities\Dataset.cs" />
     <Compile Include="Entities\Operation.cs" />
-    <Compile Include="Entities\OwnerDataset.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Contexts\Context.cs" />
-    <Compile Include="Utils\IPathFinder.cs" />
-    <Compile Include="Utils\PathFinder.cs" />
+    <Compile Include="Utils\IFinder.cs" />
+    <Compile Include="Utils\Finder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -51,9 +51,9 @@ namespace Spectre.Service
         /// <returns>
         /// IPathFinderInstance
         /// </returns>
-        public IPathFinderService GetPathFinderService()
+        public IFinderService GetPathFinderService()
         {
-            return new PathFinderService();
+            return new FinderService();
         }
     }
 }

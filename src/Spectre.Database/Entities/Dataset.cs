@@ -1,6 +1,6 @@
 ﻿/*
  * Dataset.cs
- * Database model of dataset metadata
+ * Database model of dataset metadata.
  *
    Copyright 2017 Roman Lisak
 
@@ -24,6 +24,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Spectre.Database.Entities
 {
     /// <summary>
+    /// Specifying the type of access for given dataset.
+    /// </summary>
+    public enum AccessType
+    {
+        /// <summary>
+        /// Dataset available to the public.
+        /// </summary>
+        Public,
+
+        /// <summary>
+        /// Dataset available only to the owner.
+        /// </summary>
+        Private,
+
+        /// <summary>
+        /// Dataset available to users with link.
+        /// </summary>
+        Shared
+    }
+
+    /// <summary>
     /// Abstraction of dataset metadata needed to load a dataset
     /// </summary>
     public class Dataset
@@ -37,6 +58,14 @@ namespace Spectre.Database.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DatasetId { get; set; }
+
+        /// <summary>
+        /// The upload number
+        /// </summary>
+        /// <value>
+        /// The upload number.
+        /// </value>
+        public string UploadNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the hash.
@@ -60,7 +89,7 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The owner.
         /// </value>
-        public string Owner { get; set; }
+        /// public string Owner { get; set; } will be implemented with proper User entity when OAuth support lands
 
         /// <summary>
         /// Gets or sets the upload time.
@@ -71,7 +100,7 @@ namespace Spectre.Database.Entities
         public DateTime UploadTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the description.
+        /// Gets or sets the description of the dataset.
         /// </summary>
         /// <value>
         /// The description.
@@ -79,11 +108,11 @@ namespace Spectre.Database.Entities
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the location on the disk.
+        /// Gets or sets the type dataset. Either public, private or shared.
         /// </summary>
         /// <value>
-        /// The location on the disk.
+        /// The type.
         /// </value>
-        public string Location { get; set; }
+        public AccessType Type { get; set; }
     }
 }

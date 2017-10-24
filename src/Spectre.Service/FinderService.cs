@@ -12,8 +12,8 @@
     /// <summary>
     /// PathFinder service.
     /// </summary>
-    /// <seealso cref="Spectre.Service.Abstract.IPathFinderService" />
-    internal class PathFinderService : IPathFinderService
+    /// <seealso cref="Spectre.Service.Abstract.IFinderService" />
+    internal class FinderService : IFinderService
     {
         /// <summary>
         /// The context
@@ -23,14 +23,14 @@
         /// <summary>
         /// The service
         /// </summary>
-        private readonly PathFinder _service = new PathFinder(PathFinderService._context);
+        private readonly Finder _service = new Finder(FinderService._context);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PathFinderService" /> class.
+        /// Initializes a new instance of the <see cref="FinderService" /> class.
         /// </summary>
-        public PathFinderService()
+        public FinderService()
         {
-            PathFinderService._context = new Context();
+            FinderService._context = new Context();
         }
 
         /// <summary>

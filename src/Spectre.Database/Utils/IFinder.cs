@@ -9,7 +9,7 @@ namespace Spectre.Database.Utils
     /// <summary>
     /// Interface for the PathFinder class
     /// </summary>
-    public interface IPathFinder
+    public interface IFinder
     {
         /// <summary>
         /// Returns for hash.

@@ -30,7 +30,7 @@ namespace Spectre.Service.Abstract
     /// <summary>
     /// Interface for PathFinderService
     /// </summary>
-    public interface IPathFinderService
+    public interface IFinderService
     {
         /// <summary>
         /// Finds the hash using friendly name.

@@ -56,13 +56,13 @@
   <ItemGroup>
     <Compile Include="Abstract\IConsoleCaptureService.cs" />
     <Compile Include="Abstract\IDivikService.cs" />
-    <Compile Include="Abstract\IPathFinderService.cs" />
+    <Compile Include="Abstract\IFinderService.cs" />
     <Compile Include="Abstract\IServiceFactory.cs" />
     <Compile Include="Configuration\ConfigValidationException.cs" />
     <Compile Include="Configuration\DataRootConfig.cs" />
     <Compile Include="ConsoleCaptureService.cs" />
     <Compile Include="DivikService.cs" />
-    <Compile Include="PathFinderService.cs" />
+    <Compile Include="FinderService.cs" />
     <Compile Include="Loaders\DatasetLoader.cs" />
     <Compile Include="Loaders\DatasetFormatException.cs" />
     <Compile Include="Loaders\DatasetNotFoundException.cs" />

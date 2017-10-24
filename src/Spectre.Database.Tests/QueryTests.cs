@@ -19,15 +19,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Spectre.Database.Entities;
 using Spectre.Database.Utils;
 using Spectre.Database.Contexts;
 using System.Data.Entity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
-using NUnit.Mocks;
 using Moq;
 
 namespace Spectre.Database.Tests
@@ -42,9 +39,9 @@ namespace Spectre.Database.Tests
         {
             var data = new List<Dataset>
             {
-                new Dataset { FriendlyName = "Jacek1", Hash = "1", Location = "path1"},
-                new Dataset { FriendlyName = "Bajer2", Hash = "2", Location = "path2"},
-                new Dataset { FriendlyName = "Janusz3", Hash = "3", Location = "path3"},
+                new Dataset { FriendlyName = "Jacek1", Hash = "1", UploadNumber = "1"},
+                new Dataset { FriendlyName = "Bajer2", Hash = "2", UploadNumber = "2"},
+                new Dataset { FriendlyName = "Janusz3", Hash = "3", UploadNumber = "3"},
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Dataset>>();
@@ -59,27 +56,27 @@ namespace Spectre.Database.Tests
         [Test]
         public void Return_for_hash_Test()
         {
-            var service = new PathFinder(_mockContext.Object);
+            var service = new Finder(_mockContext.Object);
 
             var dataset = service.ReturnForHash("1");            
 
-            NUnit.Framework.Assert.AreEqual("path1", dataset);
+            NUnit.Framework.Assert.AreEqual("1", dataset);
         }
 
         [Test]
         public void Return_for_friendly_name_test()
         {
-            var service = new PathFinder(_mockContext.Object);
+            var service = new Finder(_mockContext.Object);
 
             var dataset = service.ReturnForFriendlyName("Bajer2");
 
-            NUnit.Framework.Assert.AreEqual("path2", dataset);
+            NUnit.Framework.Assert.AreEqual("2", dataset);
         }
 
         [Test]
         public void Return_for_not_existing_hash_test()
         {
-            var service = new PathFinder(_mockContext.Object);
+            var service = new Finder(_mockContext.Object);
 
             var dataset = service.ReturnForHash("4");
 
@@ -89,7 +86,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void Return_for_not_existing_friendly_name_test()
         {
-            var service = new PathFinder(_mockContext.Object);
+            var service = new Finder(_mockContext.Object);
 
             var dataset = service.ReturnForFriendlyName("TestName");
 

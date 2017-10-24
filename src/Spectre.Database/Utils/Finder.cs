@@ -31,7 +31,7 @@ namespace Spectre.Database.Utils
     /// <summary>
     /// Class for finding the path of chosen property.
     /// </summary>
-    public class PathFinder : IPathFinder
+    public class Finder : IFinder
     {
         /// <summary>
         /// The context description
@@ -44,10 +44,10 @@ namespace Spectre.Database.Utils
         private Dataset _dataset = new Dataset();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PathFinder"/> class.
+        /// Initializes a new instance of the <see cref="Finder"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public PathFinder(Context context)
+        public Finder(Context context)
         {
             _context = context;
         }
@@ -67,7 +67,7 @@ namespace Spectre.Database.Utils
                     .Where(b => b.Hash == hash)
                     .FirstOrDefault();
 
-                return _dataset.Location.ToString();
+                return _dataset.UploadNumber.ToString();
             }
             else
             {
@@ -90,7 +90,7 @@ namespace Spectre.Database.Utils
                     .Where(b => b.FriendlyName == friendlyname)
                     .FirstOrDefault();
 
-                return _dataset.Location.ToString();
+                return _dataset.UploadNumber.ToString();
             }
             else
             {

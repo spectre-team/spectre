@@ -1,6 +1,6 @@
 ﻿/*
  * Operation.cs
- * Entity providing information about operation status.
+ * Entity providing information about operation.
  *
    Copyright 2017 Roman Lisak
 
@@ -43,7 +43,12 @@ namespace Spectre.Database.Entities
         /// <summary>
         /// Operation is finished.
         /// </summary>
-        Finished
+        Finished,
+
+        /// <summary>
+        /// The operation is invalid.
+        /// </summary>
+        Invalid
     }
 
     /// <summary>
@@ -67,7 +72,7 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The inputs.
         /// </value>
-        public IEnumerable<Dataset> Inputs { get; set; }
+        public List<Dataset> Inputs { get; set; }
 
         /// <summary>
         /// Gets or sets the outputs.
@@ -75,13 +80,13 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The outputs.
         /// </value>
-        public IEnumerable<Dataset> Outputs { get; set; }
+        public List<Dataset> Outputs { get; set; }
 
         /// <summary>
         /// Gets or sets the parameters.
         /// </summary>
         /// <value>
-        /// The parameters.
+        /// The parameters. (JSON string)
         /// </value>
         public string Parameters { get; set; }
 
@@ -100,5 +105,13 @@ namespace Spectre.Database.Entities
         /// The operation status.
         /// </value>
         public Status OperationStatus { get; set; }
+
+        /// <summary>
+        /// Gets or sets the information about the validation error.
+        /// </summary>
+        /// <value>
+        /// The log.
+        /// </value>
+        public string Log { get; set; }
     }
 }
