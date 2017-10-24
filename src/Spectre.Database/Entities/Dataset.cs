@@ -83,13 +83,13 @@ namespace Spectre.Database.Entities
         /// </value>
         public string FriendlyName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the owner.
-        /// </summary>
-        /// <value>
-        /// The owner.
-        /// </value>
-        /// public string Owner { get; set; } will be implemented with proper User entity when OAuth support lands
+        ///// <summary>
+        ///// Gets or sets the owner.
+        ///// </summary>
+        ///// <value>
+        ///// The owner.
+        ///// </value>
+        // public string Owner { get; set; } will be implemented with proper User entity when OAuth support lands
 
         /// <summary>
         /// Gets or sets the upload time.
