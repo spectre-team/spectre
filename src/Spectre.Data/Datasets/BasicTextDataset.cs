@@ -348,8 +348,9 @@ namespace Spectre.Data.Datasets
                     xyz[j] = coordinates[i, j];
                 }
                 _spatialCoordinates.Add(item: new SpatialCoordinates(x: xyz[0], y: xyz[1], z: xyz[2]));
-
                 _intensityArray.Add(item: new double[data.GetLength(dimension: 1)]);
+                _labels.Add(item: -1);
+
                 var backIdx = _intensityArray.Count - 1;
                 for (var j = 0; j < data.GetLength(dimension: 1); j++)
                 {
@@ -488,7 +489,7 @@ namespace Spectre.Data.Datasets
             {
                 AppendMetadata(fileBuilder);
                 AppendMzValues(fileBuilder);
-                AppendIntensitiesAndCoordinates(fileBuilder);
+                AppendIntensitiesAndLocalMetadata(fileBuilder);
 
                 SaveDataToFile(path, fileBuilder);
             }
@@ -507,17 +508,17 @@ namespace Spectre.Data.Datasets
             }
         }
 
-        private void AppendIntensitiesAndCoordinates(StringBuilder fileBuilder)
+        private void AppendIntensitiesAndLocalMetadata(StringBuilder fileBuilder)
         {
             var spectrumBuilder = new StringBuilder();
             var coordinates = _spatialCoordinates.ToArray();
+            var labels = _labels.ToArray();
             var intensities = _intensityArray.ToArray();
 
             for (var i = 0; i < intensities.Length; i++)
             {
-                fileBuilder.AppendLine(
-                    value: coordinates[i]
-                        .ToString());
+                fileBuilder.AppendLine(value: $"{coordinates[i].ToString()} {labels[i].ToString()}");
+
                 for (var j = 0;
                     j
                     < intensities[0]
