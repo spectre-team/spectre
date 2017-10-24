@@ -14,9 +14,9 @@ namespace Spectre.DataValidatorApp
         /// <param name="args">The command line arguments.</param>
         public static void Main(string[] args)
         {
-            if (args.Length != 1)
+            if ((args.Length != 1) || ((args.Length == 2) && (args[1] != "--nonblocking")))
             {
-                Console.Write(value: $"Usage: {AppDomain.CurrentDomain.FriendlyName} path_to_data_file");
+                Console.Write(value: $"Usage: {AppDomain.CurrentDomain.FriendlyName} path_to_data_file [--nonblocking]");
             }
             else
             {
@@ -30,6 +30,10 @@ namespace Spectre.DataValidatorApp
                     Console.WriteLine(e);
                     Console.WriteLine(value: "Validation failure.");
                 }
+            }
+            if (args.Length == 1)
+            {
+                Console.ReadLine();
             }
         }
     }
