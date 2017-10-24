@@ -1,8 +1,8 @@
 /*
-* EmptyDatasetException.h
-* Thrown when data is empty.
+* RaportGeneratorTest.cpp
+* Tests RaportGenerator.
 *
-Copyright 2017 Grzegorz Mrukwa
+Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,14 +17,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-#include "Spectre.libException/ArgumentOutOfRangeException.h"
+#include <gtest/gtest.h>
+#include "Spectre.libGenetic/Individual.h"
+#include "Spectre.libGenetic/RaportGenerator.h"
 
-namespace Spectre::libClassifier
+namespace
 {
-    class EmptyDatasetException : public libException::ArgumentOutOfRangeException<double>
-    {
-    public:
-        explicit EmptyDatasetException(double actual);
-    };
+using namespace Spectre::libGenetic;
+
+TEST(RaportGeneratorInitialization, initializes)
+{
+    EXPECT_NO_THROW(RaportGenerator("raportGeneratorTest"));
+}
+
 }

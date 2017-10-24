@@ -1,5 +1,5 @@
 /*
-* PredictionResultsMatrix.cpp
+* ConfusionMatrix.cpp
 * It contains knowledge about true positive, true negative etc. prediction of SVM
 *
 Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #include "Spectre.libClassifier/ConfusionMatrix.h"
+#include <string>
 
 namespace Spectre::libClassifier {
 
@@ -32,6 +33,4 @@ ConfusionMatrix::ConfusionMatrix(int truePositivesNumber,
     DiceIndex(static_cast<double>(2 * TruePositive) / (2 * TruePositive + FalsePositive + FalseNegative))
 {
 }
-
-
 }

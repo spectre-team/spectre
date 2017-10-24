@@ -1,6 +1,6 @@
 ﻿/*
 * SVMFitnessFunction.h
-*
+* Trains data in svm and returns score of a Individual.
 *
 Copyright 2017 Spectre Team
 
@@ -22,6 +22,7 @@ limitations under the License.
 #include "Spectre.libClassifier/ConfusionMatrix.h"
 #include "Spectre.libClassifier/SplittedOpevCvDataset.h"
 #include "Spectre.libGenetic/FitnessFunction.h"
+#include "Spectre.libGenetic/RaportGenerator.h"
 
 namespace Spectre::libClassifier
 {
@@ -29,12 +30,13 @@ namespace Spectre::libClassifier
 class SVMFitnessFunction : public Spectre::libGenetic::FitnessFunction
 {
 public:
-    SVMFitnessFunction(SplittedOpenCvDataset&& data);
+    SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator);
     libGenetic::ScoreType fit(const libGenetic::Individual &individual) override;
     ~SVMFitnessFunction() override;
 private:
     cv::Ptr<cv::ml::SVM> m_SVM;
     SplittedOpenCvDataset m_Dataset;
+    RaportGenerator* mRaportGenerator;
 
     ConfusionMatrix getResultMatrix(OpenCvDataset data) const;
     void train(OpenCvDataset data) const;

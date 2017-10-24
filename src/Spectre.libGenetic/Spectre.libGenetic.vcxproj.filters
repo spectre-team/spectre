@@ -81,6 +81,9 @@
     <ClInclude Include="InconsistentIndividualSizeAndTrueAmountException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="RaportGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutationOperator.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="InconsistentIndividualSizeAndTrueAmountException.cpp">
       <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="RaportGenerator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

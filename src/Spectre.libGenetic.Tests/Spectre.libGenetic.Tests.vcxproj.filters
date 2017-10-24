@@ -92,5 +92,8 @@
     <ClCompile Include="C:\Users\regis\Documents\GitHub\spectre\src\Spectre.libGenetic.Tests\..\..\lib\native\src\gmock\gmock-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RaportGeneratorTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

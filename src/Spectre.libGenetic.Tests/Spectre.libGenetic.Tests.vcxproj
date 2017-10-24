@@ -108,6 +108,7 @@
     <ClCompile Include="OffspringGeneratorTest.cpp" />
     <ClCompile Include="ParentSelectionStrategyTest.cpp" />
     <ClCompile Include="PreservationStrategyTest.cpp" />
+    <ClCompile Include="RaportGeneratorTest.cpp" />
     <ClCompile Include="ScorerTest.cpp" />
     <ClCompile Include="StopConditionTest.cpp" />
   </ItemGroup>

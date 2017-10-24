@@ -1,6 +1,6 @@
 ﻿/*
 * GeneticAlgorithmExecutor.h
-* Executes whole genetic algorithm and returns results
+* Executes whole genetic algorithm and returns results.
 *
 Copyright 2017 Spectre Team
 
@@ -26,7 +26,7 @@ namespace Spectre::libGenetic {
 class GeneticTrainingSetSelectionScenario
 {
 public:
-    GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, int generationSize, int trueAmount, Seed seed = 0);
+    GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, int generationSize, int trueAmount, std::string filename, Seed seed = 0);
     Generation execute(libClassifier::OpenCvDataset data);
 private:
     int mGenerationAmount;
@@ -36,6 +36,7 @@ private:
     double mMutationRate;
     double mBitSwapRate;
     double mPreservationRate;
+    std::string mFilename;
     Seed mSeed;
 };
 

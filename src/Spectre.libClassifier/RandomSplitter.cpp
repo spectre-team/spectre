@@ -37,7 +37,6 @@ RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
 {
     if (trainingRate >= 0)
     {
-        // @gmrukwa: usual empty execution branch
     }
     else
     {
@@ -45,7 +44,6 @@ RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
     }
     if (trainingRate <= 1)
     {
-        // @gmrukwa: usual empty execution branch
     }
     else
     {

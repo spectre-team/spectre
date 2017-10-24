@@ -22,11 +22,13 @@ limitations under the License.
 #include "Spectre.libClassifier/RandomSplitter.h"
 #include "Spectre.libClassifier/SVMFitnessFunction.h"
 #include "Spectre.libGenetic/GeneticAlgorithm.h"
+#include "Spectre.libGenetic/RaportGenerator.h"
+#include <ctime>
 
 namespace Spectre::libGenetic {
 
     GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, int generationSize,
-        int trueAmount, Seed seed)
+        int trueAmount, std::string filename, Seed seed)
         : mTrainingRate(trainingRate),
         mMutationRate(mutationRate),
         mBitSwapRate(bitSwapRate),
@@ -34,14 +36,20 @@ namespace Spectre::libGenetic {
         mGenerationAmount(generationAmount),
         mGenerationSize(generationSize),
         mTrueAmount(trueAmount),
+        mFilename(filename),
         mSeed(seed)
     {}
 
     Generation GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data)
     {
+        clock_t begin = clock();
+        RaportGenerator raportGenerator(mFilename);
+        raportGenerator.write("Data:");
+        raportGenerator.write(&data);
+
         libClassifier::RandomSplitter splitter(mTrainingRate, mSeed);
         libClassifier::SplittedOpenCvDataset splittedDataset = splitter.split(data);
-        auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset));
+        auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
         std::unique_ptr<CrossoverOperator> crossoverOperator = std::make_unique<CrossoverOperator>(mSeed);
         std::unique_ptr<MutationOperator> mutationOperator = std::make_unique<MutationOperator>(mMutationRate, mBitSwapRate, mSeed);
         std::unique_ptr<ParentSelectionStrategy> parentSelectionStrategy = std::make_unique<ParentSelectionStrategy>(mSeed);
@@ -58,6 +66,11 @@ namespace Spectre::libGenetic {
 
         Generation initialGeneration(mGenerationSize, int(data.size()), mTrueAmount);
         Generation finalGeneration = algorithm->evolve(std::move(initialGeneration));
+
+        clock_t end = clock();
+        double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+        raportGenerator.write("Time needed for Genetic algorithm: " + std::to_string(elapsed_secs) + " seconds.");
+        raportGenerator.close();
         return finalGeneration;
     }
 
