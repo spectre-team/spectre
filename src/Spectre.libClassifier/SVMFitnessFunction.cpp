@@ -32,7 +32,7 @@ libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &indi
     std::vector<Label> filteredLabels = libPlatform::Functional::filter(m_Dataset.trainingSet.GetSampleMetadata(), individual.getData());
     OpenCvDataset individualDataset(oneDimentionalFilteredData, filteredLabels);
     ConfusionMatrix result = getResultMatrix(std::move(individualDataset));
-    return result.getScore();
+    return result.DiceIndex;
 }
 
 ConfusionMatrix SVMFitnessFunction::getResultMatrix(OpenCvDataset data) const
@@ -49,35 +49,39 @@ void SVMFitnessFunction::train(OpenCvDataset data) const
 
 ConfusionMatrix SVMFitnessFunction::predict() const
 {
-    ConfusionMatrix results = ConfusionMatrix();
+    auto truePositives = 0u;
+    auto trueNegatives = 0u;
+    auto falsePositives = 0u;
+    auto falseNegatives = 0u;
     for (auto i = 0; i < m_Dataset.testSet.getMatData().rows; i++)
     {
-        float prediction = m_SVM->predict(m_Dataset.testSet.getMatData().row(i));
+        // @gmrukwa: TODO: Fix line below
+        auto prediction = m_SVM->predict(m_Dataset.testSet.getMatData().row(i));
         auto tmp = m_Dataset.testSet.getMatData().row(i).data;
         if (*tmp == 1)
         {
             if (prediction == 1)
             {
-                results.true_positive++;
+                truePositives++;
             }
             else
             {
-                results.true_negative++;
+                trueNegatives++;
             }
         }
         else
         {
             if (prediction == 1)
             {
-                results.false_positive++;
+                falsePositives++;
             }
             else
             {
-                results.false_negative++;
+                falseNegatives++;
             }
         }
     }
-    return results;
+    return ConfusionMatrix(truePositives, trueNegatives, falsePositives, falseNegatives);
 }
 
 SVMFitnessFunction::~SVMFitnessFunction() {}

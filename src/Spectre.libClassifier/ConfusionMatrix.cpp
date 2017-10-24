@@ -21,17 +21,16 @@ limitations under the License.
 
 namespace Spectre::libClassifier {
 
-ConfusionMatrix::ConfusionMatrix()
+ConfusionMatrix::ConfusionMatrix(int truePositivesNumber,
+                                 int trueNegativesNumber,
+                                 int falsePositivesNumber,
+                                 int falseNegativesNumber):
+    TruePositive(truePositivesNumber),
+    TrueNegative(trueNegativesNumber),
+    FalsePositive(falsePositivesNumber),
+    FalseNegative(falseNegativesNumber),
+    DiceIndex(static_cast<double>(2 * TruePositive) / (2 * TruePositive + FalsePositive + FalseNegative))
 {
-    true_positive = 0;
-    true_negative = 0;
-    false_positive = 0;
-    false_negative = 0;
-}
-
-libGenetic::ScoreType ConfusionMatrix::getScore() const
-{
-    return (2 * true_positive) / (2 * true_positive + false_positive + false_negative);
 }
 
 

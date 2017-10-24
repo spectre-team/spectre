@@ -18,19 +18,21 @@ limitations under the License.
 */
 
 #pragma once
-#include "Spectre.libGenetic/DataTypes.h"
 
 namespace Spectre::libClassifier {
 
 class ConfusionMatrix
 {
 public:
-    int true_positive;
-    int true_negative;
-    int false_positive;
-    int false_negative;
-    ConfusionMatrix();
-    libGenetic::ScoreType getScore() const;
+    const int TruePositive;
+    const int TrueNegative;
+    const int FalsePositive;
+    const int FalseNegative;
+    const double DiceIndex;
+    ConfusionMatrix(int truePositivesNumber,
+                    int trueNegativesNumber,
+                    int falsePositivesNumber,
+                    int falseNegativesNumber);
 };
 
 }
