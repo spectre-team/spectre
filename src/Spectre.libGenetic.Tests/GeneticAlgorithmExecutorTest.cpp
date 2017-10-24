@@ -27,7 +27,7 @@ using namespace Spectre::libGenetic;
 
 TEST(GeneticTrainingSetSelectionScenarioInitialization, initializes)
 {
-    EXPECT_NO_THROW(Spectre::libGenetic::GeneticTrainingSetSelectionScenario(0.7, 0.5, 0.5, 0.5, 20, 30, 5, "initialize_test", 1));
+    EXPECT_NO_THROW(Spectre::libGenetic::GeneticTrainingSetSelectionScenario(0.7, 0.5, 0.5, 0.5, 20, { 30 }, { 5 }, "initialize_test", 1));
 }
 
 class GeneticTrainingSetSelectionScenarioInitializationTest : public ::testing::Test
@@ -48,9 +48,8 @@ protected:
 
 TEST_F(GeneticTrainingSetSelectionScenarioInitializationTest, few_data_scenario)
 {
-    GeneticTrainingSetSelectionScenario scenario(0.7, 0.5, 0.5, 0.5, 20, 30, 5, "few_data_scenario", 1);
-    Generation generation = scenario.execute(std::move(dataSet));
-    EXPECT_EQ(generation.size(), 30);
+    GeneticTrainingSetSelectionScenario scenario(0.7, 0.5, 0.5, 0.5, 20, { 30 }, { 5 }, "few_data_scenario", 1, 1);
+    EXPECT_NO_THROW(scenario.execute(std::move(dataSet)));
 }
 
 }

@@ -21,8 +21,8 @@ void RaportGenerator::write(std::string text)
 
 void RaportGenerator::write(Spectre::libClassifier::ConfusionMatrix matrix)
 {
-    std::basic_string<char> s = "true_positive," + std::to_string(matrix.true_positive) + ",true_negative," + std::to_string(matrix.true_negative) +
-        ",false_positive," + std::to_string(matrix.false_positive) + ",false_negative," + std::to_string(matrix.false_negative);
+    std::basic_string<char> s = "true_positive," + std::to_string(matrix.TruePositive) + ",true_negative," + std::to_string(matrix.TrueNegative) +
+        ",false_positive," + std::to_string(matrix.FalsePositive) + ",false_negative," + std::to_string(matrix.FalseNegative);
     mFile << s + "\n";
 }
 
