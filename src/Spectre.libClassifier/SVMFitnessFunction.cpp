@@ -29,9 +29,6 @@ SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGener
     : m_Dataset(std::move(data)),
       mRaportGenerator(&raportGenerator)
 {
-    m_SVM = cv::ml::SVM::create();
-    m_SVM->setType(cv::ml::SVM::C_SVC);
-    m_SVM->setKernel(cv::ml::SVM::LINEAR);
 }
 
 libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &individual)
@@ -58,38 +55,35 @@ libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &indi
     return result.DiceIndex;
 }
 
-ConfusionMatrix SVMFitnessFunction::getResultMatrix(OpenCvDataset data) const
+ConfusionMatrix SVMFitnessFunction::getResultMatrix(const OpenCvDataset& data) const
 {
-    clock_t begin = clock();
-    train(std::move(data));
-    clock_t end = clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    Svm svm;
+    const auto begin = clock();
+    svm.Fit(data);
+    const auto end = clock();
+    const auto elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     std::string time_difference = std::to_string(elapsed_secs);
     mRaportGenerator->write("Time needed to teach this individual: " + time_difference + " seconds.");
 
-    ConfusionMatrix goodNr = predict();
+    ConfusionMatrix goodNr = predict(svm);
     return goodNr;
 }
 
-void SVMFitnessFunction::train(OpenCvDataset data) const
-{
-    m_SVM->train(data.getMatData(), cv::ml::ROW_SAMPLE, data.getMatLabels());
-}
-
-ConfusionMatrix SVMFitnessFunction::predict() const
+// @gmrukwa: TODO: Move ConfusionMatrix calculations to libClassifier
+// @gmrukwa: TODO: Loosen dependencies
+ConfusionMatrix SVMFitnessFunction::predict(const Svm& svm) const
 {
     auto truePositives = 0u;
     auto trueNegatives = 0u;
     auto falsePositives = 0u;
     auto falseNegatives = 0u;
+    auto predictions = svm.Predict(m_Dataset.testSet);
     for (auto i = 0; i < m_Dataset.testSet.getMatData().rows; i++)
     {
-        // @gmrukwa: TODO: Fix line below
-        auto prediction = m_SVM->predict(m_Dataset.testSet.getMatData().row(i));
         auto tmp = m_Dataset.testSet.getMatData().row(i).data;
         if (*tmp == 1)
         {
-            if (prediction == 1)
+            if (predictions[i] == 1)
             {
                 truePositives++;
             }
@@ -100,7 +94,7 @@ ConfusionMatrix SVMFitnessFunction::predict() const
         }
         else
         {
-            if (prediction == 1)
+            if (predictions[i] == 1)
             {
                 falsePositives++;
             }
