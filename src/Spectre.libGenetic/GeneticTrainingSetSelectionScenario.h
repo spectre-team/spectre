@@ -1,5 +1,5 @@
 ﻿/*
-* GeneticAlgorithmExecutor.h
+* GeneticTrainingSetSelectionScenario.h
 * Executes whole genetic algorithm and returns results.
 *
 Copyright 2017 Spectre Team
@@ -20,25 +20,33 @@ limitations under the License.
 #pragma once
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libGenetic/GeneticAlgorithmFactory.h"
 
-namespace Spectre::libGenetic {
+namespace Spectre::libGenetic
+{
 
 class GeneticTrainingSetSelectionScenario
 {
 public:
-    GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, std::vector<int> generationSize, std::vector<int> trueAmount, std::string filename, int runAmount, Seed seed = 0);
-    void execute(libClassifier::OpenCvDataset data);
+    GeneticTrainingSetSelectionScenario(double trainingSetSplitRate,
+                                        double mutationRate,
+                                        double bitSwapRate,
+                                        double preservationRate,
+                                        unsigned int generationsNumber,
+                                        const std::vector<unsigned int>& populationSizes,
+                                        const std::vector<unsigned int>& initialFillups,
+                                        const std::string& reportFilename,
+                                        unsigned int numberOfRestarts,
+                                        Seed seed = 0);
+    void execute(libClassifier::OpenCvDataset data) const;
 private:
-    int mGenerationAmount;
-    std::vector<int> mGenerationSize;
-    std::vector<int> mTrueAmount;
-    double mTrainingRate;
-    double mMutationRate;
-    double mBitSwapRate;
-    double mPreservationRate;
-    std::string mFilename;
-    int mRunAmount;
-    Seed mSeed;
+    const std::vector<unsigned int> m_GenerationSizes;
+    const std::vector<unsigned int> m_InitialIndividualFillups;
+    const double m_TrainingDatasetSizeRate;
+    const std::string m_Filename;
+    const unsigned int m_RestartsNumber;
+    const Seed m_Seed;
+    const GeneticAlgorithmFactory m_GaFactory;
 };
 
 }

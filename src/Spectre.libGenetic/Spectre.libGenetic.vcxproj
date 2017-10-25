@@ -83,6 +83,7 @@
     <ClInclude Include="Generation.h" />
     <ClInclude Include="GeneticAlgorithm.h" />
     <ClInclude Include="CrossoverOperator.h" />
+    <ClInclude Include="GeneticAlgorithmFactory.h" />
     <ClInclude Include="GeneticTrainingSetSelectionScenario.h" />
     <ClInclude Include="InconsistentChromosomeLengthException.h" />
     <ClInclude Include="InconsistentGenerationAndScoresLengthException.h" />
@@ -104,6 +105,7 @@
     <ClCompile Include="Generation.cpp" />
     <ClCompile Include="GeneticAlgorithm.cpp" />
     <ClCompile Include="CrossoverOperator.cpp" />
+    <ClCompile Include="GeneticAlgorithmFactory.cpp" />
     <ClCompile Include="GeneticTrainingSetSelectionScenario.cpp" />
     <ClCompile Include="InconsistentChromosomeLengthException.cpp" />
     <ClCompile Include="InconsistentGenerationAndScoresLengthException.cpp" />

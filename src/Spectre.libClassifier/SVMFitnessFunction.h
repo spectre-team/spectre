@@ -18,9 +18,9 @@ limitations under the License.
 */
 
 #pragma once
-#include <opencv2/ml/ml.hpp>
 #include "Spectre.libClassifier/ConfusionMatrix.h"
 #include "Spectre.libClassifier/SplittedOpevCvDataset.h"
+#include "Spectre.libClassifier/Svm.h"
 #include "Spectre.libGenetic/FitnessFunction.h"
 #include "Spectre.libGenetic/RaportGenerator.h"
 
@@ -34,13 +34,11 @@ public:
     libGenetic::ScoreType fit(const libGenetic::Individual &individual) override;
     ~SVMFitnessFunction() override;
 private:
-    cv::Ptr<cv::ml::SVM> m_SVM;
     SplittedOpenCvDataset m_Dataset;
     RaportGenerator* mRaportGenerator;
 
-    ConfusionMatrix getResultMatrix(OpenCvDataset data) const;
-    void train(OpenCvDataset data) const;
-    ConfusionMatrix predict() const;
+    ConfusionMatrix getResultMatrix(const OpenCvDataset& data) const;
+    ConfusionMatrix predict(const Svm& svm) const;
 };
 
 }
