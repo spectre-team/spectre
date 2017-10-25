@@ -39,33 +39,30 @@ namespace Spectre::libGenetic
                                                                              const std::string& filename,
                                                                              int runAmount,
                                                                              Seed seed)
-        : mGenerationAmount(generationAmount),
-        mGenerationSize(generationSize.begin(), generationSize.end()),
-        mTrueAmount(trueAmount.begin(), trueAmount.end()),
-        mTrainingRate(trainingRate),
-        mMutationRate(mutationRate),
-        mBitSwapRate(bitSwapRate),
-        mPreservationRate(preservationRate),
-        mFilename(filename),
-        mRunAmount(runAmount),
-        mSeed(seed)
+        : m_GenerationAmount(generationAmount),
+        m_GenerationSize(generationSize.begin(), generationSize.end()),
+        m_InitialIndividualFillup(trueAmount.begin(), trueAmount.end()),
+        m_TrainingDatasetSizeRate(trainingRate),
+        m_Filename(filename),
+        m_RestartsNumber(runAmount),
+        m_Seed(seed),
+        m_GaFactory(seed, mutationRate, bitSwapRate, preservationRate, generationAmount)
     {}
 
     void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data)
     {
-        for (auto i = 0; i < mGenerationAmount; i++) {
-            for (auto popSize : mGenerationSize) {
-                for (auto trueAmount : mTrueAmount) {
+        for (auto i = 0; i < m_GenerationAmount; i++) {
+            for (auto popSize : m_GenerationSize) {
+                for (auto trueAmount : m_InitialIndividualFillup) {
                     auto begin = clock();
-                    RaportGenerator raportGenerator(mFilename + "_" + std::to_string(popSize) + "_" + std::to_string(trueAmount));
+                    RaportGenerator raportGenerator(m_Filename + "_" + std::to_string(popSize) + "_" + std::to_string(trueAmount));
                     //raportGenerator.write("Data:");
                     //raportGenerator.write(&data);
 
-                    libClassifier::RandomSplitter splitter(mTrainingRate, mSeed);
+                    libClassifier::RandomSplitter splitter(m_TrainingDatasetSizeRate, m_Seed);
                     auto splittedDataset = splitter.split(data);
                     auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
-                    auto factory = GeneticAlgorithmFactory(mSeed, mMutationRate, mBitSwapRate, mPreservationRate, mGenerationAmount);
-                    auto algorithm = factory.BuildDefault(std::move(fitnessFunction));
+                    auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction));
 
                     Generation initialGeneration(popSize, int(data.size()), trueAmount);
                     auto finalGeneration = algorithm->evolve(std::move(initialGeneration));

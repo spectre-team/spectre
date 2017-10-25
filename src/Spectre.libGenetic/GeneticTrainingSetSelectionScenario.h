@@ -20,6 +20,7 @@ limitations under the License.
 #pragma once
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libGenetic/GeneticAlgorithmFactory.h"
 
 namespace Spectre::libGenetic
 {
@@ -39,16 +40,14 @@ public:
                                         Seed seed = 0);
     void execute(libClassifier::OpenCvDataset data);
 private:
-    const int mGenerationAmount;
-    const std::vector<int> mGenerationSize;
-    const std::vector<int> mTrueAmount;
-    const double mTrainingRate;
-    const double mMutationRate;
-    const double mBitSwapRate;
-    const double mPreservationRate;
-    const std::string mFilename;
-    const int mRunAmount;
-    const Seed mSeed;
+    const int m_GenerationAmount;
+    const std::vector<int> m_GenerationSize;
+    const std::vector<int> m_InitialIndividualFillup;
+    const double m_TrainingDatasetSizeRate;
+    const std::string m_Filename;
+    const int m_RestartsNumber;
+    const Seed m_Seed;
+    const GeneticAlgorithmFactory m_GaFactory;
 };
 
 }
