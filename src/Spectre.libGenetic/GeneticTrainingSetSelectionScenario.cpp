@@ -64,10 +64,11 @@ namespace Spectre::libGenetic
 
                     libClassifier::RandomSplitter splitter(m_TrainingDatasetSizeRate, m_Seed + runNumber);
                     auto splittedDataset = splitter.split(data);
+                    auto trainingSetSize = splittedDataset.trainingSet.size();
                     auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
                     auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction), m_Seed + runNumber);
 
-                    Generation initialGeneration(popSize, splittedDataset.trainingSet.size(), trueAmount);
+                    Generation initialGeneration(popSize, trainingSetSize, trueAmount);
                     auto finalGeneration = algorithm->evolve(std::move(initialGeneration));
 
                     auto end = clock();
