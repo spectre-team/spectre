@@ -33,36 +33,38 @@ namespace Spectre::libGenetic
                                                                              double mutationRate,
                                                                              double bitSwapRate,
                                                                              double preservationRate,
-                                                                             int generationAmount,
-                                                                             const std::vector<int>& generationSize,
-                                                                             const std::vector<int>& trueAmount,
+                                                                             unsigned int generationAmount,
+                                                                             const std::vector<unsigned int>& generationSize,
+                                                                             const std::vector<unsigned int>& trueAmount,
                                                                              const std::string& filename,
-                                                                             int runAmount,
-                                                                             Seed seed)
-        : m_GenerationAmount(generationAmount),
-        m_GenerationSize(generationSize.begin(), generationSize.end()),
-        m_InitialIndividualFillup(trueAmount.begin(), trueAmount.end()),
+                                                                             unsigned int runAmount,
+                                                                             Seed seed):
+        m_GenerationSizes(generationSize.begin(), generationSize.end()),
+        m_InitialIndividualFillups(trueAmount.begin(), trueAmount.end()),
         m_TrainingDatasetSizeRate(trainingRate),
         m_Filename(filename),
         m_RestartsNumber(runAmount),
         m_Seed(seed),
-        m_GaFactory(seed, mutationRate, bitSwapRate, preservationRate, generationAmount)
+        m_GaFactory(mutationRate, bitSwapRate, preservationRate, generationAmount)
     {}
 
-    void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data)
+    void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data) const
     {
-        for (auto i = 0; i < m_GenerationAmount; i++) {
-            for (auto popSize : m_GenerationSize) {
-                for (auto trueAmount : m_InitialIndividualFillup) {
+        for (auto runNumber = 0u; runNumber < m_RestartsNumber; runNumber++)
+        {
+            for (auto popSize : m_GenerationSizes)
+            {
+                for (auto trueAmount : m_InitialIndividualFillups)
+                {
                     auto begin = clock();
                     RaportGenerator raportGenerator(m_Filename + "_" + std::to_string(popSize) + "_" + std::to_string(trueAmount));
                     //raportGenerator.write("Data:");
                     //raportGenerator.write(&data);
 
-                    libClassifier::RandomSplitter splitter(m_TrainingDatasetSizeRate, m_Seed);
+                    libClassifier::RandomSplitter splitter(m_TrainingDatasetSizeRate, m_Seed + runNumber);
                     auto splittedDataset = splitter.split(data);
                     auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
-                    auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction));
+                    auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction), m_Seed + runNumber);
 
                     Generation initialGeneration(popSize, int(data.size()), trueAmount);
                     auto finalGeneration = algorithm->evolve(std::move(initialGeneration));

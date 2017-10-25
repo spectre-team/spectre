@@ -22,12 +22,10 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
-GeneticAlgorithmFactory::GeneticAlgorithmFactory(Seed seed,
-                                                 double mutationRate,
+GeneticAlgorithmFactory::GeneticAlgorithmFactory(double mutationRate,
                                                  double bitSwapRate,
                                                  double preservationRate,
                                                  unsigned generationsNumber):
-    m_Seed(seed),
     m_MutationRate(mutationRate),
     m_BitSwapRate(bitSwapRate),
     m_PreservationRate(preservationRate),
@@ -37,11 +35,12 @@ GeneticAlgorithmFactory::GeneticAlgorithmFactory(Seed seed,
 }
 
 
-std::unique_ptr<GeneticAlgorithm> GeneticAlgorithmFactory::BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction) const
+std::unique_ptr<GeneticAlgorithm> GeneticAlgorithmFactory::BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction,
+                                                                        Seed seed) const
 {
-    auto crossoverOperator = std::make_unique<CrossoverOperator>(m_Seed);
-    auto mutationOperator = std::make_unique<MutationOperator>(m_MutationRate, m_BitSwapRate, m_Seed);
-    auto parentSelectionStrategy = std::make_unique<ParentSelectionStrategy>(m_Seed);
+    auto crossoverOperator = std::make_unique<CrossoverOperator>(seed);
+    auto mutationOperator = std::make_unique<MutationOperator>(m_MutationRate, m_BitSwapRate, seed);
+    auto parentSelectionStrategy = std::make_unique<ParentSelectionStrategy>(seed);
     auto individualsBuilderStrategy = std::make_unique<IndividualsBuilderStrategy>(std::move(crossoverOperator), std::move(mutationOperator), std::move(parentSelectionStrategy));
 
     auto preservationStrategy = std::make_unique<PreservationStrategy>(m_PreservationRate);

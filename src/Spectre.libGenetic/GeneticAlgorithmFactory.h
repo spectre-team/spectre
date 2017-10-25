@@ -26,14 +26,13 @@ namespace Spectre::libGenetic
 class GeneticAlgorithmFactory
 {
 public:
-    GeneticAlgorithmFactory(Seed seed,
-                            double mutationRate,
+    GeneticAlgorithmFactory(double mutationRate,
                             double bitSwapRate,
                             double preservationRate,
                             unsigned generationsNumber);
-    std::unique_ptr<GeneticAlgorithm> BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction) const;
+    std::unique_ptr<GeneticAlgorithm> BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction,
+                                                   Seed seed=0) const;
 private:
-    const Seed m_Seed;
     const double m_MutationRate;
     const double m_BitSwapRate;
     const double m_PreservationRate;

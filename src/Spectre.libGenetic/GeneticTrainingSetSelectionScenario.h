@@ -32,20 +32,19 @@ public:
                                         double mutationRate,
                                         double bitSwapRate,
                                         double preservationRate,
-                                        int generationsNumber,
-                                        const std::vector<int>& populationSizes,
-                                        const std::vector<int>& initialFillups,
+                                        unsigned int generationsNumber,
+                                        const std::vector<unsigned int>& populationSizes,
+                                        const std::vector<unsigned int>& initialFillups,
                                         const std::string& reportFilename,
-                                        int numberOfRestarts,
+                                        unsigned int numberOfRestarts,
                                         Seed seed = 0);
-    void execute(libClassifier::OpenCvDataset data);
+    void execute(libClassifier::OpenCvDataset data) const;
 private:
-    const int m_GenerationAmount;
-    const std::vector<int> m_GenerationSize;
-    const std::vector<int> m_InitialIndividualFillup;
+    const std::vector<unsigned int> m_GenerationSizes;
+    const std::vector<unsigned int> m_InitialIndividualFillups;
     const double m_TrainingDatasetSizeRate;
     const std::string m_Filename;
-    const int m_RestartsNumber;
+    const unsigned int m_RestartsNumber;
     const Seed m_Seed;
     const GeneticAlgorithmFactory m_GaFactory;
 };
