@@ -37,6 +37,25 @@ libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &indi
     {
         throw libException::InconsistentArgumentSizesException("data", m_Dataset.trainingSet.size(), "individual", individual.size());
     }
+    //JEZELI INDIVIDUAL MA WARTOSCI TYLKO FALSE TO USTAWIAM PIERWSZA WARTOSC NA TRUE
+    //DO POPRAWKI, BRZYDKIE, TYMCZASOWE ROZWIAZANIE
+    bool onlyFalse = true;
+    for (bool flag: individual)
+    {
+        if (flag == true)
+        {
+            onlyFalse = false;
+            break;
+        }
+    }
+    if (onlyFalse)
+    {
+        libGenetic::Individual tmp(individual.getData());
+        tmp[0] = true;
+        const_cast<libGenetic::Individual&>(individual) = tmp;
+    }
+    //KONIEC BRZYDKIEGO ROZWIAZANIA PROBLEMU
+        
     gsl::span<const Observation> dataToFilter = m_Dataset.trainingSet.GetData();
     std::vector<Observation> twoDimentionalFilteredData = libPlatform::Functional::filter(dataToFilter, individual.getData());
     std::vector<DataType> oneDimentionalFilteredData;

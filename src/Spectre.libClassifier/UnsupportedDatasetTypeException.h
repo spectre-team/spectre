@@ -28,7 +28,6 @@ public:
     template <class TDatasetType>
     explicit UnsupportedDatasetTypeException(const TDatasetType& /*dataset*/): ExceptionBase(typeid(TDatasetType).name())
     {
-        
     }
 };
 }

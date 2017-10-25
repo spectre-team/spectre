@@ -40,7 +40,7 @@ TEST(GeneticTrainingSetSelectionScenarioInitialization, initializes)
     EXPECT_NO_THROW(Spectre::libGenetic::GeneticTrainingSetSelectionScenario(TRAINING_SET_SPLIT_RATE,
                                                                              MUTATION_RATE,
                                                                              BIT_SWAP_RATE,
-                                                                             PRESERVATION_RATE, 
+                                                                             PRESERVATION_RATE,
                                                                              GENERATIONS_NUMBER,
                                                                              { POPULATION_SIZE },
                                                                              { INITIAL_FILLUP },
