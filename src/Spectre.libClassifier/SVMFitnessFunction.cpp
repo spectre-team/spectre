@@ -55,7 +55,6 @@ libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &indi
         const_cast<libGenetic::Individual&>(individual) = tmp;
     }
     //KONIEC BRZYDKIEGO ROZWIAZANIA PROBLEMU
-        
     gsl::span<const Observation> dataToFilter = m_Dataset.trainingSet.GetData();
     std::vector<Observation> twoDimentionalFilteredData = libPlatform::Functional::filter(dataToFilter, individual.getData());
     std::vector<DataType> oneDimentionalFilteredData;
