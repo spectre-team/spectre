@@ -26,19 +26,28 @@ namespace Spectre::libGenetic {
 class GeneticTrainingSetSelectionScenario
 {
 public:
-    GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, std::vector<int> generationSize, std::vector<int> trueAmount, std::string filename, int runAmount, Seed seed = 0);
+    GeneticTrainingSetSelectionScenario(double trainingSetSplitRate,
+                                        double mutationRate,
+                                        double bitSwapRate,
+                                        double preservationRate,
+                                        int generationsNumber,
+                                        const std::vector<int>& populationSizes,
+                                        const std::vector<int>& initialFillups,
+                                        const std::string& reportFilename,
+                                        int numberOfRestarts,
+                                        Seed seed = 0);
     void execute(libClassifier::OpenCvDataset data);
 private:
-    int mGenerationAmount;
-    std::vector<int> mGenerationSize;
-    std::vector<int> mTrueAmount;
-    double mTrainingRate;
-    double mMutationRate;
-    double mBitSwapRate;
-    double mPreservationRate;
-    std::string mFilename;
-    int mRunAmount;
-    Seed mSeed;
+    const int mGenerationAmount;
+    const std::vector<int> mGenerationSize;
+    const std::vector<int> mTrueAmount;
+    const double mTrainingRate;
+    const double mMutationRate;
+    const double mBitSwapRate;
+    const double mPreservationRate;
+    const std::string mFilename;
+    const int mRunAmount;
+    const Seed mSeed;
 };
 
 }

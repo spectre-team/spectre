@@ -27,15 +27,23 @@ limitations under the License.
 
 namespace Spectre::libGenetic {
 
-    GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double trainingRate, double mutationRate, double bitSwapRate, double preservationRate, int generationAmount, std::vector<int> generationSize,
-        std::vector<int> trueAmount, std::string filename, int runAmount, Seed seed)
-        : mTrainingRate(trainingRate),
+    GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double trainingRate,
+                                                                             double mutationRate,
+                                                                             double bitSwapRate,
+                                                                             double preservationRate,
+                                                                             int generationAmount,
+                                                                             const std::vector<int>& generationSize,
+                                                                             const std::vector<int>& trueAmount,
+                                                                             const std::string& filename,
+                                                                             int runAmount,
+                                                                             Seed seed)
+        : mGenerationAmount(generationAmount),
+        mGenerationSize(generationSize.begin(), generationSize.end()),
+        mTrueAmount(trueAmount.begin(), trueAmount.end()),
+        mTrainingRate(trainingRate),
         mMutationRate(mutationRate),
         mBitSwapRate(bitSwapRate),
         mPreservationRate(preservationRate),
-        mGenerationAmount(generationAmount),
-        mGenerationSize(generationSize.begin(), generationSize.end()),
-        mTrueAmount(trueAmount.begin(), trueAmount.end()),
         mFilename(filename),
         mRunAmount(runAmount),
         mSeed(seed)
