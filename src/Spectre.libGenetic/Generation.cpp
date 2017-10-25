@@ -45,7 +45,7 @@ Generation::Generation(std::vector<Individual> &&generation):
     else { }
 }
 
-Generation::Generation(_int64 size, _int64 individualSize, _int64 trueAmount)
+Generation::Generation(size_t size, size_t individualSize, size_t trueAmount)
 {
     if (trueAmount > individualSize)
     {

@@ -40,7 +40,7 @@ public:
     /// <param name="size">Size of generation.</param>
     /// <param name="individualSize">Size of every individual in generation.</param>
     /// <param name="trueAmount">Amount of true values in every individual.</param>
-    Generation::Generation(_int64 size, _int64 individualSize, _int64 trueAmount);
+    Generation::Generation(size_t size, size_t individualSize, size_t trueAmount);
     /// <summary>
     /// Concatenates populations.
     /// </summary>

@@ -67,7 +67,7 @@ namespace Spectre::libGenetic
                     auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
                     auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction), m_Seed + runNumber);
 
-                    Generation initialGeneration(popSize, int(data.size()), trueAmount);
+                    Generation initialGeneration(popSize, splittedDataset.trainingSet.size(), trueAmount);
                     auto finalGeneration = algorithm->evolve(std::move(initialGeneration));
 
                     auto end = clock();

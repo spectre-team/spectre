@@ -35,8 +35,8 @@ TEST(StopCondition, iterates_fixed_number_of_times)
     StopCondition stop(ITERATIONS_NUMBER);
     for (auto i = 0u; i < ITERATIONS_NUMBER; ++i)
     {
-        EXPECT_TRUE(stop());
+        EXPECT_FALSE(stop());
     }
-    EXPECT_FALSE(stop());
+    EXPECT_TRUE(stop());
 }
 }

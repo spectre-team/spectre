@@ -31,9 +31,9 @@ bool StopCondition::operator()()
     if (m_RemainingIterations == 0)
     {
         m_RemainingIterations = m_IterationsNumber;
-        return false;
+        return true;
     }
     --m_RemainingIterations;
-    return true;
+    return false;
 }
 }

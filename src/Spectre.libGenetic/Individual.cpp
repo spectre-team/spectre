@@ -32,7 +32,7 @@ namespace Spectre::libGenetic
 Individual::Individual(std::vector<bool> &&binaryData):
     m_BinaryData(binaryData) { }
 
-Individual::Individual(_int64 size, _int64 trueAmount)
+Individual::Individual(size_t size, size_t trueAmount)
 {
     if (trueAmount > size)
     {
