@@ -1,8 +1,8 @@
 ﻿/*
-* GeneticAlgorithmExecutor.cpp
+* GeneticTrainingSetSelectionScenario.cpp
 * Executes whole genetic algorithm and returns results
 *
-Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
+Copyright 2017 Spectre Team
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

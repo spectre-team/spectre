@@ -1,5 +1,5 @@
 ﻿/*
-* GeneticAlgorithmExecutor.h
+* GeneticTrainingSetSelectionScenario.h
 * Executes whole genetic algorithm and returns results.
 *
 Copyright 2017 Spectre Team
