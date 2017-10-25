@@ -21,7 +21,8 @@ limitations under the License.
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libGenetic/DataTypes.h"
 
-namespace Spectre::libGenetic {
+namespace Spectre::libGenetic
+{
 
 class GeneticTrainingSetSelectionScenario
 {

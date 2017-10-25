@@ -24,8 +24,10 @@ limitations under the License.
 #include "Spectre.libGenetic/GeneticAlgorithm.h"
 #include "Spectre.libGenetic/RaportGenerator.h"
 #include <ctime>
+#include "Spectre.libGenetic/GeneticAlgorithmFactory.h"
 
-namespace Spectre::libGenetic {
+namespace Spectre::libGenetic
+{
 
     GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double trainingRate,
                                                                              double mutationRate,
@@ -52,35 +54,24 @@ namespace Spectre::libGenetic {
     void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data)
     {
         for (auto i = 0; i < mGenerationAmount; i++) {
-            for (int popSize : mGenerationSize) {
-                for (int trueAmount : mTrueAmount) {
-                    clock_t begin = clock();
+            for (auto popSize : mGenerationSize) {
+                for (auto trueAmount : mTrueAmount) {
+                    auto begin = clock();
                     RaportGenerator raportGenerator(mFilename + "_" + std::to_string(popSize) + "_" + std::to_string(trueAmount));
                     //raportGenerator.write("Data:");
                     //raportGenerator.write(&data);
 
                     libClassifier::RandomSplitter splitter(mTrainingRate, mSeed);
-                    libClassifier::SplittedOpenCvDataset splittedDataset = splitter.split(data);
+                    auto splittedDataset = splitter.split(data);
                     auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
-                    std::unique_ptr<CrossoverOperator> crossoverOperator = std::make_unique<CrossoverOperator>(mSeed);
-                    std::unique_ptr<MutationOperator> mutationOperator = std::make_unique<MutationOperator>(mMutationRate, mBitSwapRate, mSeed);
-                    std::unique_ptr<ParentSelectionStrategy> parentSelectionStrategy = std::make_unique<ParentSelectionStrategy>(mSeed);
-                    std::unique_ptr<IndividualsBuilderStrategy> individualsBuilderStrategy = std::make_unique<IndividualsBuilderStrategy>(std::move(crossoverOperator), std::move(mutationOperator), std::move(parentSelectionStrategy));
-
-                    std::unique_ptr<PreservationStrategy> preservationStrategy = std::make_unique<PreservationStrategy>(std::move(mPreservationRate));
-
-                    std::unique_ptr<OffspringGenerator> offspringGenerator = std::make_unique<OffspringGenerator>(std::move(individualsBuilderStrategy), std::move(preservationStrategy));
-
-                    std::unique_ptr<Scorer> scorer = std::make_unique<Scorer>(std::move(fitnessFunction));
-                    std::unique_ptr<StopCondition> stopCondition = std::make_unique<StopCondition>(std::move(mGenerationAmount));
-
-                    std::unique_ptr<GeneticAlgorithm> algorithm = std::make_unique<GeneticAlgorithm>(std::move(offspringGenerator), std::move(scorer), std::move(stopCondition));
+                    auto factory = GeneticAlgorithmFactory(mSeed, mMutationRate, mBitSwapRate, mPreservationRate, mGenerationAmount);
+                    auto algorithm = factory.BuildDefault(std::move(fitnessFunction));
 
                     Generation initialGeneration(popSize, int(data.size()), trueAmount);
-                    Generation finalGeneration = algorithm->evolve(std::move(initialGeneration));
+                    auto finalGeneration = algorithm->evolve(std::move(initialGeneration));
 
-                    clock_t end = clock();
-                    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+                    auto end = clock();
+                    auto elapsed_secs = static_cast<double>(end - begin) / CLOCKS_PER_SEC;
                     raportGenerator.write("Time needed for Genetic algorithm: " + std::to_string(elapsed_secs) + " seconds.");
                     raportGenerator.close();
                 }
