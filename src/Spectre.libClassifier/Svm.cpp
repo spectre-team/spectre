@@ -57,7 +57,7 @@ const OpenCvDataset& Svm::asSupported(LabeledDataset dataset)
         const auto& casted = dynamic_cast<const OpenCvDataset&>(dataset);
         return casted;
     }
-    catch (const std::bad_cast& exception)
+    catch (const std::bad_cast&)
     {
         throw UnsupportedDatasetTypeException(dataset);
     }

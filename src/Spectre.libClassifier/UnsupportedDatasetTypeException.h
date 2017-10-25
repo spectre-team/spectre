@@ -26,7 +26,7 @@ class UnsupportedDatasetTypeException final: public libException::ExceptionBase
 {
 public:
     template <class TDatasetType>
-    explicit UnsupportedDatasetTypeException(const TDatasetType& dataset): ExceptionBase(typeid(TDatasetType).name())
+    explicit UnsupportedDatasetTypeException(const TDatasetType& /*dataset*/): ExceptionBase(typeid(TDatasetType).name())
     {
         
     }
