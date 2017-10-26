@@ -27,9 +27,11 @@ namespace Spectre::GaSvmNative
 using namespace libClassifier;
 using namespace libGenetic;
 
-SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator)
+SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator, uint svmIterations, double svmTolerance)
     : m_Dataset(std::move(data)),
-      m_RaportGenerator(raportGenerator)
+      m_RaportGenerator(raportGenerator),
+      m_SvmIterations(svmIterations),
+      m_SvmTolerance(svmTolerance)
 {
 }
 
@@ -58,7 +60,7 @@ ScoreType SVMFitnessFunction::computeFitness(const Individual &individual)
 
 ConfusionMatrix SVMFitnessFunction::getResultMatrix(const OpenCvDataset& data, const Individual& individual) const
 {
-    Svm svm;
+    Svm svm(m_SvmIterations, m_SvmTolerance);
     const auto trainingBegin = clock();
     svm.Fit(data);
     const auto trainingEnd = clock();

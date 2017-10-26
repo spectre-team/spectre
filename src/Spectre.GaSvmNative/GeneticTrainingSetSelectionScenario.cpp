@@ -17,7 +17,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <ctime>
 #include <omp.h>
 #include "Spectre.libClassifier/SplittedOpevCvDataset.h"
 #include "Spectre.libClassifier/RandomSplitter.h"
@@ -42,7 +41,9 @@ GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double 
                                                                          unsigned int numberOfCores,
                                                                          libGenetic::Seed seed,
                                                                          size_t minimalFillup,
-                                                                         size_t maximalFillup) :
+                                                                         size_t maximalFillup,
+                                                                         uint svmIterations,
+                                                                         double svmTolerance) :
     m_PopulationSizes(populationSize.begin(), populationSize.end()),
     m_InitialIndividualFillups(initialFillup.begin(), initialFillup.end()),
     m_TrainingDatasetSizeRate(trainingSetSplitRate),
@@ -56,7 +57,9 @@ GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double 
                 numberOfGenerations,
                 numberOfCores / numberOfRestarts > 0 ? numberOfCores / numberOfRestarts : 1u,
                 minimalFillup,
-                maximalFillup)
+                maximalFillup),
+    m_SvmIterations(svmIterations),
+    m_SvmTolerance(svmTolerance)
 {
     if (m_NumberOfCores != 0)
     {
@@ -89,7 +92,10 @@ void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset d
                 auto splittedDataset = splitter.split(data);
                 auto trainingSetSize = splittedDataset.trainingSet.size();
                 
-                auto fitnessFunction = std::make_unique<SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
+                auto fitnessFunction = std::make_unique<SVMFitnessFunction>(std::move(splittedDataset),
+                                                                            raportGenerator,
+                                                                            m_SvmIterations,
+                                                                            m_SvmTolerance);
                 auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction), m_Seed + runNumber);
 
                 libGenetic::Generation initialGeneration(popSize, trainingSetSize, initialFillup);

@@ -23,12 +23,12 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
-Svm::Svm()
+Svm::Svm(uint iterationsLimit, double tolerance)
 {
     m_Svm = cv::ml::SVM::create();
     m_Svm->setType(cv::ml::SVM::C_SVC);
     m_Svm->setKernel(cv::ml::SVM::LINEAR);
-    const auto termination = cv::TermCriteria(cv::TermCriteria::MAX_ITER, 100, 1e-6);
+    const auto termination = cv::TermCriteria(cv::TermCriteria::MAX_ITER, iterationsLimit, tolerance);
     m_Svm->setTermCriteria(termination);
 }
 

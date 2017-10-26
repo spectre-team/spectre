@@ -39,7 +39,9 @@ public:
                                         unsigned int numberOfCores=1u,
                                         libGenetic::Seed seed = 0,
                                         size_t minimalFillup=1ul,
-                                        size_t maximalFillup=std::numeric_limits<size_t>::max());
+                                        size_t maximalFillup=std::numeric_limits<size_t>::max(),
+                                        uint svmIterations=100u,
+                                        double svmTolerance=1e-6);
     void execute(libClassifier::OpenCvDataset data) const;
 private:
     const std::vector<unsigned int> m_PopulationSizes;
@@ -50,5 +52,7 @@ private:
     const unsigned int m_NumberOfCores;
     const libGenetic::Seed m_Seed;
     const libGenetic::GeneticAlgorithmFactory m_GaFactory;
+    const uint m_SvmIterations;
+    const double m_SvmTolerance;
 };
 }
