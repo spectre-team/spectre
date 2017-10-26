@@ -79,7 +79,10 @@ void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset d
         {
             for (auto initialFillup : m_InitialIndividualFillups)
             {
-                RaportGenerator raportGenerator(m_Filename + "-" + std::to_string(popSize) + "-" + std::to_string(initialFillup),
+                RaportGenerator raportGenerator(m_Filename
+                                                + "-run-" + std::to_string(runNumber)
+                                                + "-popsize-" + std::to_string(popSize)
+                                                + "-fillup-" + std::to_string(initialFillup),
                                                 popSize);
 
                 libClassifier::RandomSplitter splitter(m_TrainingDatasetSizeRate, m_Seed + runNumber);
