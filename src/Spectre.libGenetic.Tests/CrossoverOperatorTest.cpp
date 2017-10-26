@@ -19,6 +19,7 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include <numeric>
+#include <memory>
 #include "Spectre.libGenetic/CrossoverOperator.h"
 #include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
 
@@ -41,11 +42,11 @@ protected:
     const Seed SEED = 0;
     const Individual true_individual = Individual({ true, true, true, true });
     const Individual false_individual = Individual({ false, false, false, false });
-    CrossoverOperator crossover;
+    std::unique_ptr<CrossoverOperator> crossover;
 
     void SetUp() override
     {
-        crossover = CrossoverOperator(SEED);
+        crossover = std::make_unique<CrossoverOperator>(SEED);
     }
 };
 
@@ -53,13 +54,13 @@ TEST_F(CrossoverOperatorTest, throws_on_inconsistent_sizes)
 {
     const Individual shorter({ false });
     const Individual longer({ false, true });
-    EXPECT_THROW(crossover(shorter, longer), InconsistentChromosomeLengthException);
+    EXPECT_THROW(crossover->operator()(shorter, longer), InconsistentChromosomeLengthException);
 }
 
 TEST_F(CrossoverOperatorTest, child_has_the_same_size)
 {
     const auto parentsSize = true_individual.size();
-    const auto child = crossover(true_individual, false_individual);
+    const auto child = crossover->operator()(true_individual, false_individual);
     EXPECT_EQ(child.size(), parentsSize);
 }
 
@@ -68,7 +69,7 @@ TEST_F(CrossoverOperatorTest, crossover_of_same_parents_result_in_copy)
     const auto singleParent = true_individual;
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
-        const auto child = crossover(singleParent, singleParent);
+        const auto child = crossover->operator()(singleParent, singleParent);
         for (size_t j = 0; j < child.size(); ++j)
         {
             EXPECT_EQ(child[j], singleParent[j]);
@@ -83,7 +84,7 @@ TEST_F(CrossoverOperatorTest, cuts_with_symmetric_distribution)
     unsigned counts = 0;
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
-        const auto child = crossover(true_individual, false_individual);
+        const auto child = crossover->operator()(true_individual, false_individual);
         counts = std::accumulate(child.begin(), child.end(), counts);
     }
     EXPECT_GT(counts, expectedCounts - allowedCountsMiss);
@@ -128,7 +129,7 @@ TEST_F(CrossoverOperatorTest, child_is_constructed_with_single_cut)
 {
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
-        const auto child = crossover(true_individual, false_individual);
+        const auto child = crossover->operator()(true_individual, false_individual);
         const unsigned bitCounts = std::accumulate(child.begin(), child.end(), 0);
         const unsigned frontBitCounts = std::accumulate(child.begin(), child.begin() + bitCounts, 0);
         EXPECT_EQ(bitCounts, frontBitCounts);
@@ -140,7 +141,7 @@ TEST_F(CrossoverOperatorTest, cuts_are_from_uniform_distribution)
     std::vector<unsigned> counts(true_individual.size() + 1, 0);
     for (unsigned i = 0; i < NUMBER_OF_TRIALS; ++i)
     {
-        const auto child = crossover(true_individual, false_individual);
+        const auto child = crossover->operator()(true_individual, false_individual);
         const unsigned bitCounts = std::accumulate(child.begin(), child.end(), 0);
         ++counts[bitCounts];
     }

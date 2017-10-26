@@ -36,24 +36,7 @@ libGenetic::ScoreType SVMFitnessFunction::computeFitness(const libGenetic::Indiv
     if (m_Dataset.trainingSet.size() != individual.size())
     {
         throw libException::InconsistentArgumentSizesException("data", m_Dataset.trainingSet.size(), "individual", individual.size());
-    }
-
-
-    // @gmrukwa: TODO: Unhack this. Such logic should be in genetic algorithm.
-    bool onlyFalse = true;
-    for (bool flag: individual)
-    {
-        if (flag == true)
-        {
-            onlyFalse = false;
-            break;
-        }
-    }
-    if (onlyFalse)
-    {
-        const_cast<libGenetic::Individual&>(individual)[0] = true;
-    }
-    
+    }    
 
     const auto& dataToFilter = m_Dataset.trainingSet.GetData();
     const auto twoDimensionalFilteredData = libPlatform::Functional::filter(dataToFilter, individual.getData());

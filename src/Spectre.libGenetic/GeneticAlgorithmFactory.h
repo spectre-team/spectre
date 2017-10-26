@@ -30,7 +30,9 @@ public:
                             double bitSwapRate,
                             double preservationRate,
                             unsigned generationsNumber,
-                            unsigned numberOfCores);
+                            unsigned numberOfCores,
+                            size_t minimalFillup,
+                            size_t maximalFillup);
     std::unique_ptr<GeneticAlgorithm> BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction,
                                                    Seed seed=0) const;
 private:
@@ -39,5 +41,7 @@ private:
     const double m_PreservationRate;
     const unsigned m_GenerationsNumber;
     const unsigned m_NumberOfCores;
+    const size_t m_MinimalFillup;
+    const size_t m_MaximalFillup;
 };
 }

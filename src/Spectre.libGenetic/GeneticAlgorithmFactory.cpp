@@ -26,12 +26,16 @@ GeneticAlgorithmFactory::GeneticAlgorithmFactory(double mutationRate,
                                                  double bitSwapRate,
                                                  double preservationRate,
                                                  unsigned generationsNumber,
-                                                 unsigned numberOfCores):
+                                                 unsigned numberOfCores,
+                                                 size_t minimalFillup,
+                                                 size_t maximalFillup):
     m_MutationRate(mutationRate),
     m_BitSwapRate(bitSwapRate),
     m_PreservationRate(preservationRate),
     m_GenerationsNumber(generationsNumber),
-    m_NumberOfCores(numberOfCores)
+    m_NumberOfCores(numberOfCores),
+    m_MinimalFillup(minimalFillup),
+    m_MaximalFillup(maximalFillup)
 {
     
 }
@@ -40,8 +44,8 @@ GeneticAlgorithmFactory::GeneticAlgorithmFactory(double mutationRate,
 std::unique_ptr<GeneticAlgorithm> GeneticAlgorithmFactory::BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction,
                                                                         Seed seed) const
 {
-    auto crossoverOperator = std::make_unique<CrossoverOperator>(seed);
-    auto mutationOperator = std::make_unique<MutationOperator>(m_MutationRate, m_BitSwapRate, seed);
+    auto crossoverOperator = std::make_unique<CrossoverOperator>(seed, m_MinimalFillup, m_MaximalFillup);
+    auto mutationOperator = std::make_unique<MutationOperator>(m_MutationRate, m_BitSwapRate, seed, m_MinimalFillup, m_MaximalFillup);
     auto parentSelectionStrategy = std::make_unique<ParentSelectionStrategy>(seed);
     auto individualsBuilderStrategy = std::make_unique<IndividualsBuilderStrategy>(std::move(crossoverOperator), std::move(mutationOperator), std::move(parentSelectionStrategy));
 

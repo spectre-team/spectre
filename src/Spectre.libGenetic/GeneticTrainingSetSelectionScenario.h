@@ -38,7 +38,9 @@ public:
                                         const std::string& reportFilename,
                                         unsigned int numberOfRestarts,
                                         unsigned int numberOfCores=1u,
-                                        Seed seed = 0);
+                                        Seed seed = 0,
+                                        size_t minimalFillup=1ul,
+                                        size_t maximalFillup=std::numeric_limits<size_t>::max());
     void execute(libClassifier::OpenCvDataset data) const;
 private:
     const std::vector<unsigned int> m_GenerationSizes;

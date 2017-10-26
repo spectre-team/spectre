@@ -41,7 +41,9 @@ namespace Spectre::libGenetic
                                                                              const std::string& filename,
                                                                              unsigned int numberOfRestarts,
                                                                              unsigned int numberOfCores,
-                                                                             Seed seed) :
+                                                                             Seed seed,
+                                                                             size_t minimalFillup,
+                                                                             size_t maximalFillup) :
         m_GenerationSizes(populationSize.begin(), populationSize.end()),
         m_InitialIndividualFillups(initialFillup.begin(), initialFillup.end()),
         m_TrainingDatasetSizeRate(trainingSetSplitRate),
@@ -49,7 +51,13 @@ namespace Spectre::libGenetic
         m_RestartsNumber(numberOfRestarts),
         m_NumberOfCores(numberOfCores),
         m_Seed(seed),
-        m_GaFactory(mutationRate, bitSwapRate, preservationRate, numberOfGenerations, numberOfCores / numberOfRestarts > 0 ? numberOfCores / numberOfRestarts : 1u)
+        m_GaFactory(mutationRate,
+                    bitSwapRate,
+                    preservationRate,
+                    numberOfGenerations,
+                    numberOfCores / numberOfRestarts > 0 ? numberOfCores / numberOfRestarts : 1u,
+                    minimalFillup,
+                    maximalFillup)
     {
         if (m_NumberOfCores != 0)
         {
