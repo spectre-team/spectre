@@ -39,7 +39,8 @@ public:
     /// Initializes a new instance of the <see cref="Scorer"/> class.
     /// </summary>
     /// <param name="fitnessFunction">The fitness function.</param>
-    explicit Scorer(std::unique_ptr<FitnessFunction> fitnessFunction);
+    /// <param name="numberOfCores">The number of cores used in scoring of the generation.</param>
+    explicit Scorer(std::unique_ptr<FitnessFunction> fitnessFunction, unsigned int numberOfCores=1u);
     /// <summary>
     /// Scores the specified generation.
     /// </summary>
@@ -52,5 +53,9 @@ private:
     /// The fitness function.
     /// </summary>
     std::unique_ptr<FitnessFunction> m_FitnessFunction;
+    /// <summary>
+    /// The number of cores used in scoring of the generation.
+    /// </summary>
+    const unsigned int m_NumberOfCores;
 };
 }
