@@ -23,7 +23,7 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
-class NotABinaryLabelException final: libException::ExceptionBase
+class NotABinaryLabelException final: public libException::ExceptionBase
 {
 public:
     NotABinaryLabelException(Label label, size_t location, std::string collection);

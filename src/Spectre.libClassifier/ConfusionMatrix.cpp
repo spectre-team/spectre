@@ -35,7 +35,7 @@ ConfusionMatrix::ConfusionMatrix(unsigned int truePositivesNumber,
 {
 }
 
-ConfusionMatrix::ConfusionMatrix(gsl::span<Label> actual, gsl::span<Label> expected): ConfusionMatrix([&]()
+ConfusionMatrix::ConfusionMatrix(const gsl::span<const Label> actual, const gsl::span<const Label> expected): ConfusionMatrix([&]()
 {
     if(actual.size() != expected.size())
     {

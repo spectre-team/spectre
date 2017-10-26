@@ -66,7 +66,7 @@ protected:
         0.7f, 1.9f, 0.2f,
         1.2f, 1.3f, 1.2f
     };
-    const std::vector<Spectre::libClassifier::Label> labels{ 1, 1, -1, 1, -1, -1, 1, 1, -1, -1 };
+    const std::vector<Spectre::libClassifier::Label> labels{ 1, 1, 0, 1, 0, 0, 1, 1, 0, 0 };
     Spectre::libClassifier::OpenCvDataset dataSet = Spectre::libClassifier::OpenCvDataset(data, labels);
 
     void SetUp() override

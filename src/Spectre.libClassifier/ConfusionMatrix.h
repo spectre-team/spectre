@@ -36,7 +36,7 @@ public:
                     unsigned int trueNegativesNumber,
                     unsigned int falsePositivesNumber,
                     unsigned int falseNegativesNumber);
-    ConfusionMatrix(gsl::span<Label> actual, gsl::span<Label> expected);
+    ConfusionMatrix(const gsl::span<const Label> actual, const gsl::span<const Label> expected);
 };
 
 }

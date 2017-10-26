@@ -32,7 +32,7 @@ class SVMFitnessFunction : public Spectre::libGenetic::FitnessFunction
 public:
     SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator);
     libGenetic::ScoreType fit(const libGenetic::Individual &individual) override;
-    ~SVMFitnessFunction() override;
+    virtual ~SVMFitnessFunction() = default;
 private:
     SplittedOpenCvDataset m_Dataset;
     RaportGenerator* mRaportGenerator;
