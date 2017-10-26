@@ -2,7 +2,7 @@
 * NegativeTrainingRateException.h
 * Thrown when training rate is negative.
 *
-Copyright 2017 Grzegorz Mrukwa
+Copyright 2017 Spectre Team
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
-    class NegativeTrainingRateException : public libException::ArgumentOutOfRangeException<double>
-    {
-    public:
-        explicit NegativeTrainingRateException(double actual);
-    };
+class NegativeTrainingRateException final : public libException::ArgumentOutOfRangeException<double>
+{
+public:
+    explicit NegativeTrainingRateException(double actual);
+};
 }

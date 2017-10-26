@@ -21,7 +21,6 @@ limitations under the License.
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Spectre.libGenetic/Individual.h"
 #include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
-#include "Spectre.libGenetic/InconsistentIndividualSizeAndTrueAmountException.h"
 
 namespace
 {
@@ -37,7 +36,7 @@ TEST(IndividualInitialization, initializes)
 TEST(IndividualInitialization, initializes_by_shuffle)
 {
     EXPECT_NO_THROW(Individual(6, 4));
-    EXPECT_THROW(Individual(4, 6), InconsistentIndividualSizeAndTrueAmountException);
+    EXPECT_THROW(Individual(4, 6), Spectre::libException::ArgumentOutOfRangeException<size_t>);
 }
 
 class IndividualTest : public ::testing::Test

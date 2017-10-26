@@ -24,7 +24,7 @@ limitations under the License.
 #include "Spectre.libGenetic/DataTypes.h"
 #include "Spectre.libClassifier/NegativeTrainingRateException.h"
 #include "Spectre.libClassifier/ExcessiveTrainingRateException.h"
-#include "Spectre.libException/EmptyArgumentException.h"
+#include "Spectre.libClassifier/EmptyOpenCvDatasetException.h"
 
 namespace Spectre::libClassifier {
 
@@ -55,9 +55,10 @@ SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCv
 {
     if (data.empty())
     {
-        throw libException::EmptyArgumentException("data");
+        throw libException::EmptyOpenCvDatasetException("data");
     }
     std::vector<int> indexes = range(0, int(data.size()));
+    // @gmrukwa: TODO: Add seeding!
     libGenetic::RandomDevice randomDevice;
     libGenetic::RandomNumberGenerator g(randomDevice());
     std::shuffle(indexes.begin(), indexes.end(), g);

@@ -53,7 +53,7 @@ std::vector<ScoreType> Scorer::Score(const Generation &generation)
     if (m_NumberOfCores == 1)
     {
         std::transform(generation.begin(), generation.end(), scores.begin(),
-                       [this](const Individual &individual) { return m_FitnessFunction->fit(individual); });
+                       [this](const Individual &individual) { return m_FitnessFunction->computeFitness(individual); });
     }
     else
     {
@@ -64,7 +64,7 @@ std::vector<ScoreType> Scorer::Score(const Generation &generation)
         for (auto i = 0; i < populationSize; ++i)
         {
             const auto& individual = *(firstIndividual + i);
-            scores[i] = m_FitnessFunction->fit(individual);
+            scores[i] = m_FitnessFunction->computeFitness(individual);
         }
     }
     return std::move(scores);

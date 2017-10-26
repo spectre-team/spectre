@@ -27,18 +27,17 @@ limitations under the License.
 namespace Spectre::libClassifier
 {
 
-class SVMFitnessFunction : public Spectre::libGenetic::FitnessFunction
+class SVMFitnessFunction : public libGenetic::FitnessFunction
 {
 public:
     SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator);
-    libGenetic::ScoreType fit(const libGenetic::Individual &individual) override;
+    libGenetic::ScoreType computeFitness(const libGenetic::Individual &individual) override;
     virtual ~SVMFitnessFunction() = default;
 private:
     SplittedOpenCvDataset m_Dataset;
     RaportGenerator* mRaportGenerator;
 
     ConfusionMatrix getResultMatrix(const OpenCvDataset& data) const;
-    ConfusionMatrix predict(const Svm& svm) const;
 };
 
 }

@@ -30,7 +30,7 @@ public:
     // https://groups.google.com/forum/#!topic/googlemock/O-5cTVVtswE
     MOCK_CONST_METHOD1(CallOperator, ScoreType(const Individual&));
 
-    ScoreType fit(const Individual &individual) override
+    ScoreType computeFitness(const Individual &individual) override
     {
         return CallOperator(individual);
     }

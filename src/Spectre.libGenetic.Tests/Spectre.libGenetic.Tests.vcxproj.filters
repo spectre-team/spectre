@@ -86,10 +86,10 @@
     <ClCompile Include="GeneticAlgorithmExecutorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\regis\Documents\GitHub\spectre\src\Spectre.libGenetic.Tests\..\..\lib\native\src\gtest\gtest-all.cc">
+    <ClCompile Include="..\..\lib\native\src\gtest\gtest-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\regis\Documents\GitHub\spectre\src\Spectre.libGenetic.Tests\..\..\lib\native\src\gmock\gmock-all.cc">
+    <ClCompile Include="..\..\lib\native\src\gmock\gmock-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RaportGeneratorTest.cpp">

@@ -89,7 +89,6 @@
     <ClInclude Include="GeneticTrainingSetSelectionScenario.h" />
     <ClInclude Include="InconsistentChromosomeLengthException.h" />
     <ClInclude Include="InconsistentGenerationAndScoresLengthException.h" />
-    <ClInclude Include="InconsistentIndividualSizeAndTrueAmountException.h" />
     <ClInclude Include="IndividualsBuilderStrategy.h" />
     <ClInclude Include="MutationOperator.h" />
     <ClInclude Include="Individual.h" />
@@ -111,7 +110,6 @@
     <ClCompile Include="GeneticTrainingSetSelectionScenario.cpp" />
     <ClCompile Include="InconsistentChromosomeLengthException.cpp" />
     <ClCompile Include="InconsistentGenerationAndScoresLengthException.cpp" />
-    <ClCompile Include="InconsistentIndividualSizeAndTrueAmountException.cpp" />
     <ClCompile Include="IndividualsBuilderStrategy.cpp" />
     <ClCompile Include="MutationOperator.cpp" />
     <ClCompile Include="Individual.cpp" />

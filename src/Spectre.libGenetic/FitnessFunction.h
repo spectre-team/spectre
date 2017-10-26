@@ -33,7 +33,7 @@ public:
     /// </summary>
     /// <param name="individual">The individual.</param>
     /// <returns>Non-negative score, which is greater for more optimal individuals.</returns>
-    virtual ScoreType fit(const Individual &individual) = 0;
+    virtual ScoreType computeFitness(const Individual &individual) = 0;
     virtual ~FitnessFunction() = default;
 };
 }

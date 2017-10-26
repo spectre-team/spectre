@@ -22,7 +22,6 @@ limitations under the License.
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Generation.h"
 #include "InconsistentChromosomeLengthException.h"
-#include "Spectre.libGenetic/InconsistentIndividualSizeAndTrueAmountException.h"
 
 using namespace std;
 
@@ -45,15 +44,15 @@ Generation::Generation(std::vector<Individual> &&generation):
     else { }
 }
 
-Generation::Generation(size_t size, size_t individualSize, size_t trueAmount)
+Generation::Generation(size_t size, size_t individualSize, size_t initialFillup)
 {
-    if (trueAmount > individualSize)
+    if (initialFillup > individualSize)
     {
-        throw InconsistentIndividualSizeAndTrueAmountException(individualSize, trueAmount);
+        throw libException::ArgumentOutOfRangeException<size_t>("initialFillup", 0, individualSize, initialFillup);
     }
     for (auto i = 0; i < size; i++)
     {
-        Individual individual(individualSize, trueAmount);
+        Individual individual(individualSize, initialFillup);
         m_Generation.push_back(individual);
     }
 }

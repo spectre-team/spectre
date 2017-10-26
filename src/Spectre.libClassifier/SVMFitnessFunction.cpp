@@ -17,10 +17,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "SVMFitnessFunction.h"
+#include <ctime>
 #include "Spectre.libClassifier/ConfusionMatrix.h"
 #include "Spectre.libPlatform/Filter.h"
-#include <ctime>
+#include "SVMFitnessFunction.h"
 
 namespace Spectre::libClassifier
 {
@@ -31,14 +31,15 @@ SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGener
 {
 }
 
-libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &individual)
+libGenetic::ScoreType SVMFitnessFunction::computeFitness(const libGenetic::Individual &individual)
 {
     if (m_Dataset.trainingSet.size() != individual.size())
     {
         throw libException::InconsistentArgumentSizesException("data", m_Dataset.trainingSet.size(), "individual", individual.size());
     }
-    //JEZELI INDIVIDUAL MA WARTOSCI TYLKO FALSE TO USTAWIAM PIERWSZA WARTOSC NA TRUE
-    //DO POPRAWKI, BRZYDKIE, TYMCZASOWE ROZWIAZANIE
+
+
+    // @gmrukwa: TODO: Unhack this. Such logic should be in genetic algorithm.
     bool onlyFalse = true;
     for (bool flag: individual)
     {
@@ -52,20 +53,17 @@ libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &indi
     {
         const_cast<libGenetic::Individual&>(individual)[0] = true;
     }
-    //KONIEC BRZYDKIEGO ROZWIAZANIA PROBLEMU
+    
+
     const auto& dataToFilter = m_Dataset.trainingSet.GetData();
     const auto twoDimensionalFilteredData = libPlatform::Functional::filter(dataToFilter, individual.getData());
-    // @gmrukwa: TODO: Reserve space.
     std::vector<DataType> oneDimensionalFilteredData;
     oneDimensionalFilteredData.reserve(twoDimensionalFilteredData.size() * twoDimensionalFilteredData[0].size());
     for (const auto& observation: twoDimensionalFilteredData)
     {
-        for (float number: observation)
-        {
-            oneDimensionalFilteredData.push_back(number);
-        }
+        oneDimensionalFilteredData.insert(oneDimensionalFilteredData.end(), observation.begin(), observation.end());
     }
-    std::vector<Label> filteredLabels = libPlatform::Functional::filter(m_Dataset.trainingSet.GetSampleMetadata(), individual.getData());
+    const auto filteredLabels = libPlatform::Functional::filter(m_Dataset.trainingSet.GetSampleMetadata(), individual.getData());
     OpenCvDataset individualDataset(oneDimensionalFilteredData, filteredLabels);
     const auto result = getResultMatrix(std::move(individualDataset));
     mRaportGenerator->write(result);

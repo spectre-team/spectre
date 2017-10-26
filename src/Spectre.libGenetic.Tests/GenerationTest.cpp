@@ -2,7 +2,7 @@
 * GenerationTest.cpp
 * Tests generation.
 *
-Copyright 2017 Grzegorz Mrukwa
+Copyright 2017 Spectre Team
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ limitations under the License.
 #include "Spectre.libException/OutOfRangeException.h"
 #include "Spectre.libGenetic/Generation.h"
 #include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
-#include "Spectre.libGenetic/InconsistentIndividualSizeAndTrueAmountException.h"
 
 namespace
 {
@@ -33,12 +32,12 @@ TEST(GenerationInitialization, initializes)
     EXPECT_NO_THROW(Generation(5, 6, 4));
 }
 
-TEST(GenerationInitialization, initializes_with_error)
+TEST(GenerationInitialization, throws_when_required_number_of_active_is_bigger_than_length)
 {
-    EXPECT_THROW(Generation(5, 4, 6), InconsistentIndividualSizeAndTrueAmountException);
+    EXPECT_THROW(Generation(5, 4, 6), ArgumentOutOfRangeException<size_t>);
 }
 
-TEST(GenerationInitialization, creation_of_generation_and_checking_size)
+TEST(GenerationInitialization, initializes_with_proper_size)
 {
     Generation generation(8, 10, 6);
     EXPECT_EQ(generation.size(), 8);

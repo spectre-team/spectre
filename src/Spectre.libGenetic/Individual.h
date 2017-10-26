@@ -39,7 +39,7 @@ public:
     /// <returns>Individual.</returns>
     /// <param name="int">Size of individual.</param>
     /// <param name="int">Amount of true values.</param>
-    Individual::Individual(size_t size, size_t trueAmount);
+    Individual::Individual(size_t size, size_t initialFillup);
     /// <summary>
     /// Gets the immutable data.
     /// </summary>

@@ -78,9 +78,6 @@
     <ClInclude Include="GeneticTrainingSetSelectionScenario.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InconsistentIndividualSizeAndTrueAmountException.h">
-      <Filter>Header Files\Exceptions</Filter>
-    </ClInclude>
     <ClInclude Include="RaportGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -136,9 +133,6 @@
     </ClCompile>
     <ClCompile Include="GeneticTrainingSetSelectionScenario.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InconsistentIndividualSizeAndTrueAmountException.cpp">
-      <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
     <ClCompile Include="RaportGenerator.cpp">
       <Filter>Source Files</Filter>

@@ -2,7 +2,7 @@
 * EmptyArgumentException.h
 * Thrown when argument is empty.
 *
-Copyright 2017 Grzegorz Mrukwa
+Copyright 2017 Spectre Team
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -32,6 +32,6 @@ public:
     /// Initializes a new instance of the <see cref="ArgumentOutOfRangeException"/> class.
     /// </summary>
     /// <param name="variableName">Name of the variable.</param>
-    EmptyArgumentException(const std::string &variableName);
+    explicit EmptyArgumentException(const std::string &variableName);
 };
 }
