@@ -50,9 +50,7 @@ libGenetic::ScoreType SVMFitnessFunction::fit(const libGenetic::Individual &indi
     }
     if (onlyFalse)
     {
-        libGenetic::Individual tmp(individual.getData());
-        tmp[0] = true;
-        const_cast<libGenetic::Individual&>(individual) = tmp;
+        const_cast<libGenetic::Individual&>(individual)[0] = true;
     }
     //KONIEC BRZYDKIEGO ROZWIAZANIA PROBLEMU
     gsl::span<const Observation> dataToFilter = m_Dataset.trainingSet.GetData();
