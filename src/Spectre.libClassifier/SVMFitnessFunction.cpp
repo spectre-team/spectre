@@ -89,38 +89,9 @@ ConfusionMatrix SVMFitnessFunction::getResultMatrix(const OpenCvDataset& data) c
 // @gmrukwa: TODO: Loosen dependencies
 ConfusionMatrix SVMFitnessFunction::predict(const Svm& svm) const
 {
-    auto truePositives = 0u;
-    auto trueNegatives = 0u;
-    auto falsePositives = 0u;
-    auto falseNegatives = 0u;
     auto predictions = svm.Predict(m_Dataset.testSet);
-    for (auto i = 0; i < m_Dataset.testSet.getMatData().rows; i++)
-    {
-        auto tmp = m_Dataset.testSet.getMatData().row(i).data;
-        if (*tmp == 1)
-        {
-            if (predictions[i] == 1)
-            {
-                truePositives++;
-            }
-            else
-            {
-                trueNegatives++;
-            }
-        }
-        else
-        {
-            if (predictions[i] == 1)
-            {
-                falsePositives++;
-            }
-            else
-            {
-                falseNegatives++;
-            }
-        }
-    }
-    return ConfusionMatrix(truePositives, trueNegatives, falsePositives, falseNegatives);
+    ConfusionMatrix confusion(predictions, m_Dataset.testSet.GetSampleMetadata());
+    return confusion;
 }
 
 SVMFitnessFunction::~SVMFitnessFunction() {}

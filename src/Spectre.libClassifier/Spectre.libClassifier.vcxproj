@@ -83,6 +83,7 @@
     <ClCompile Include="EmptyOpenCvDatasetException.cpp" />
     <ClCompile Include="ExcessiveTrainingRateException.cpp" />
     <ClCompile Include="NegativeTrainingRateException.cpp" />
+    <ClCompile Include="NotABinaryLabelException.cpp" />
     <ClCompile Include="ObservationExtractor.cpp" />
     <ClCompile Include="OpenCvDataset.cpp" />
     <ClCompile Include="Empty.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="ExcessiveTrainingRateException.h" />
     <ClInclude Include="IClassifier.h" />
     <ClInclude Include="NegativeTrainingRateException.h" />
+    <ClInclude Include="NotABinaryLabelException.h" />
     <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
     <ClInclude Include="Empty.h" />

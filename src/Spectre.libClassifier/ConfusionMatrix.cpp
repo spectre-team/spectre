@@ -17,20 +17,78 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libClassifier/ConfusionMatrix.h"
-#include <string>
+#include "NotABinaryLabelException.h"
 
 namespace Spectre::libClassifier {
 
-ConfusionMatrix::ConfusionMatrix(int truePositivesNumber,
-                                 int trueNegativesNumber,
-                                 int falsePositivesNumber,
-                                 int falseNegativesNumber):
+ConfusionMatrix::ConfusionMatrix(unsigned int truePositivesNumber,
+                                 unsigned int trueNegativesNumber,
+                                 unsigned int falsePositivesNumber,
+                                 unsigned int falseNegativesNumber):
     TruePositive(truePositivesNumber),
     TrueNegative(trueNegativesNumber),
     FalsePositive(falsePositivesNumber),
     FalseNegative(falseNegativesNumber),
-    DiceIndex(static_cast<double>(2 * TruePositive) / (2 * TruePositive + FalsePositive + FalseNegative))
+    DiceIndex(2 * TruePositive / (2. * TruePositive + FalsePositive + FalseNegative))
 {
 }
+
+ConfusionMatrix::ConfusionMatrix(gsl::span<Label> actual, gsl::span<Label> expected): ConfusionMatrix([&]()
+{
+    if(actual.size() != expected.size())
+    {
+        throw libException::InconsistentArgumentSizesException("actual", actual.size(), "expected", expected.size());
+    }
+
+    auto truePositives = 0u;
+    auto trueNegatives = 0u;
+    auto falsePositives = 0u;
+    auto falseNegatives = 0u;
+
+    const auto NEGATIVE = 0u;
+    const auto POSITIVE = 1u;
+
+    for(auto i = 0; i < actual.size(); ++i)
+    {
+        if(actual[i] == POSITIVE)
+        {
+            if(expected[i] == POSITIVE)
+            {
+                ++truePositives;
+            }
+            else if(expected[i] == NEGATIVE)
+            {
+                ++falsePositives;
+            }
+            else
+            {
+                throw NotABinaryLabelException(expected[i], i, "expected");
+            }
+        }
+        else if(actual[i] == NEGATIVE)
+        {
+            if(expected[i] == POSITIVE)
+            {
+                ++falseNegatives;
+            }
+            else if(expected[i] == NEGATIVE)
+            {
+                ++trueNegatives;
+            }
+            else
+            {
+                throw NotABinaryLabelException(expected[i], i, "expected");
+            }
+        }
+        else
+        {
+            throw NotABinaryLabelException(actual[i], i, "actual");
+        }
+    }
+
+    return ConfusionMatrix(truePositives, trueNegatives, falsePositives, falseNegatives);
+}()){}
+
 }

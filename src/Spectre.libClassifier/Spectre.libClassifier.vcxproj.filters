@@ -60,6 +60,9 @@
     <ClCompile Include="Svm.cpp">
       <Filter>Source Files\Classifiers</Filter>
     </ClCompile>
+    <ClCompile Include="NotABinaryLabelException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Empty.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files\Classifiers</Filter>
     </ClInclude>
     <ClInclude Include="UnsupportedDatasetTypeException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="NotABinaryLabelException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,8 +1,8 @@
 /*
 * ConfusionMatrix.h
-* It contains knowledge about true positive, true negative etc. prediction of SVM
+* It contains knowledge about classifier performance
 *
-Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
+Copyright 2017 Spectre Team
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,21 +18,25 @@ limitations under the License.
 */
 
 #pragma once
+#include <span.h>
+#include "Types.h"
 
 namespace Spectre::libClassifier {
 
 class ConfusionMatrix
 {
 public:
-    const int TruePositive;
-    const int TrueNegative;
-    const int FalsePositive;
-    const int FalseNegative;
+    const unsigned int TruePositive;
+    const unsigned int TrueNegative;
+    const unsigned int FalsePositive;
+    const unsigned int FalseNegative;
     const double DiceIndex;
-    ConfusionMatrix(int truePositivesNumber,
-                    int trueNegativesNumber,
-                    int falsePositivesNumber,
-                    int falseNegativesNumber);
+
+    ConfusionMatrix(unsigned int truePositivesNumber,
+                    unsigned int trueNegativesNumber,
+                    unsigned int falsePositivesNumber,
+                    unsigned int falseNegativesNumber);
+    ConfusionMatrix(gsl::span<Label> actual, gsl::span<Label> expected);
 };
 
 }
