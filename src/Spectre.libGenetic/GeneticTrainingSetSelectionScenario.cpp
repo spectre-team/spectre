@@ -25,6 +25,8 @@ limitations under the License.
 #include "Spectre.libGenetic/RaportGenerator.h"
 #include <ctime>
 #include "Spectre.libGenetic/GeneticAlgorithmFactory.h"
+#include <omp.h>
+#include "Spectre.libException/ArgumentOutOfRangeException.h"
 
 namespace Spectre::libGenetic
 {
@@ -45,13 +47,26 @@ namespace Spectre::libGenetic
         m_TrainingDatasetSizeRate(trainingSetSplitRate),
         m_Filename(filename),
         m_RestartsNumber(numberOfRestarts),
+        m_NumberOfCores(numberOfCores),
         m_Seed(seed),
-        m_GaFactory(mutationRate, bitSwapRate, preservationRate, numberOfGenerations, numberOfCores)
-    {}
+        m_GaFactory(mutationRate, bitSwapRate, preservationRate, numberOfGenerations, numberOfCores / numberOfRestarts > 0 ? numberOfCores / numberOfRestarts : 1u)
+    {
+        if (m_NumberOfCores != 0)
+        {
+            // @gmrukwa: usual empty execution branch
+        }
+        else
+        {
+            throw libException::ArgumentOutOfRangeException<unsigned>("numberOfCores", 1, omp_get_num_procs(), m_NumberOfCores);
+        }
+    }
 
     void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data) const
     {
-        for (auto runNumber = 0u; runNumber < m_RestartsNumber; runNumber++)
+        const auto optimalChunksNumber = 1;
+        omp_set_nested(1);
+        #pragma omp parallel for schedule(dynamic, optimalChunksNumber) num_threads (m_NumberOfCores)
+        for (auto runNumber = 0; runNumber < static_cast<int>(m_RestartsNumber); runNumber++)
         {
             for (auto popSize : m_GenerationSizes)
             {

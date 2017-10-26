@@ -1,5 +1,5 @@
 Genetic algorithm 0 run with 30 population size and 5for true amount in individuals in initial generation.
-Time needed to teach this individual: 0.002000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -29,7 +29,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -38,22 +38,22 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -68,13 +68,16 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -95,13 +98,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -137,7 +140,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -185,16 +188,16 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -236,7 +239,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -267,15 +270,12 @@ Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
-Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -287,13 +287,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -344,13 +344,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -362,7 +362,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -386,7 +386,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -398,13 +398,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -419,7 +419,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -446,25 +446,25 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -476,7 +476,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -492,9 +492,6 @@ Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
-Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -503,13 +500,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -545,7 +542,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -555,9 +552,6 @@ Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
-Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -587,7 +581,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -603,12 +597,15 @@ Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -647,7 +644,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -659,7 +656,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -671,7 +668,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -695,7 +692,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -707,7 +704,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -731,7 +728,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -755,7 +752,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -782,6 +779,9 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
+Time needed to teach this individual: 0.001000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
@@ -794,7 +794,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -818,7 +818,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -860,9 +860,6 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
@@ -872,7 +869,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -899,7 +896,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -908,7 +905,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -917,7 +914,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -953,7 +950,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -968,7 +965,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -980,13 +977,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -998,9 +995,15 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
+Time needed to teach this individual: 0.001000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
+Time needed to teach this individual: 0.001000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
@@ -1022,13 +1025,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1043,6 +1046,9 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
+Time needed to teach this individual: 0.001000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
@@ -1094,7 +1100,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1112,7 +1118,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1128,9 +1134,6 @@ Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
-Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1148,7 +1151,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1169,6 +1172,9 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
+Time needed to teach this individual: 0.001000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
@@ -1184,7 +1190,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1238,7 +1244,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1253,10 +1259,10 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1316,7 +1322,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1335,6 +1341,9 @@ Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
+true_positive,0,true_negative,0,false_positive,0,false_negative,3
+0.000000
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1346,13 +1355,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1386,9 +1395,6 @@ Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
-Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1409,7 +1415,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1436,13 +1442,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1463,7 +1469,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1475,13 +1481,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1490,7 +1496,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1502,22 +1508,19 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
-Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1526,19 +1529,19 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1568,7 +1571,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1595,7 +1598,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1614,12 +1617,9 @@ Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
-true_positive,0,true_negative,0,false_positive,0,false_negative,3
-0.000000
-Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1637,22 +1637,22 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1679,7 +1679,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1703,7 +1703,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1721,7 +1721,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1745,7 +1745,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1760,13 +1760,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1781,13 +1781,13 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.001000 seconds.
+Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
 Time needed to teach this individual: 0.000000 seconds.
@@ -1796,7 +1796,7 @@ true_positive,0,true_negative,0,false_positive,0,false_negative,3
 Time needed to teach this individual: 0.000000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed to teach this individual: 0.000000 seconds.
+Time needed to teach this individual: 0.001000 seconds.
 true_positive,0,true_negative,0,false_positive,0,false_negative,3
 0.000000
-Time needed for Genetic algorithm - 0 number of execution for parameters 30 population size and 5for true amount in individuals in initial generation is: 0.438000 seconds.
+Time needed for Genetic algorithm - 0 number of execution for parameters 30 population size and 5for true amount in individuals in initial generation is: 0.439000 seconds.

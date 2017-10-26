@@ -46,6 +46,7 @@ private:
     const double m_TrainingDatasetSizeRate;
     const std::string m_Filename;
     const unsigned int m_RestartsNumber;
+    const unsigned int m_NumberOfCores;
     const Seed m_Seed;
     const GeneticAlgorithmFactory m_GaFactory;
 };
