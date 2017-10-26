@@ -18,7 +18,9 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
-#include "Spectre.libClassifier/SVMFitnessFunction.h"
+#include "Spectre.libClassifier/Types.h"
+#include "Spectre.libClassifier/OpenCvDataset.h"
+#include "Spectre.libClassifier/SplittedOpevCvDataset.h"
 
 namespace
 {
