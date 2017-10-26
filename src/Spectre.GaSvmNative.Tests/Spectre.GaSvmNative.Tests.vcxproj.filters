@@ -27,5 +27,14 @@
     <ClCompile Include="SVMFitnessFunctionTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.GaSvmNative.Tests\..\..\lib\native\src\gtest\gtest-all.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.GaSvmNative.Tests\..\..\lib\native\src\gmock\gmock-all.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
