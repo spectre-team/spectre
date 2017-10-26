@@ -25,11 +25,13 @@ namespace Spectre::libGenetic
 GeneticAlgorithmFactory::GeneticAlgorithmFactory(double mutationRate,
                                                  double bitSwapRate,
                                                  double preservationRate,
-                                                 unsigned generationsNumber):
+                                                 unsigned generationsNumber,
+                                                 unsigned numberOfCores):
     m_MutationRate(mutationRate),
     m_BitSwapRate(bitSwapRate),
     m_PreservationRate(preservationRate),
-    m_GenerationsNumber(generationsNumber)
+    m_GenerationsNumber(generationsNumber),
+    m_NumberOfCores(numberOfCores)
 {
     
 }
@@ -47,7 +49,7 @@ std::unique_ptr<GeneticAlgorithm> GeneticAlgorithmFactory::BuildDefault(std::uni
 
     auto offspringGenerator = std::make_unique<OffspringGenerator>(std::move(individualsBuilderStrategy), std::move(preservationStrategy));
 
-    auto scorer = std::make_unique<Scorer>(std::move(fitnessFunction));
+    auto scorer = std::make_unique<Scorer>(std::move(fitnessFunction), m_NumberOfCores);
     auto stopCondition = std::make_unique<StopCondition>(m_GenerationsNumber);
 
     auto algorithm = std::make_unique<GeneticAlgorithm>(std::move(offspringGenerator), std::move(scorer), std::move(stopCondition));

@@ -37,6 +37,7 @@ public:
                                         const std::vector<unsigned int>& initialFillups,
                                         const std::string& reportFilename,
                                         unsigned int numberOfRestarts,
+                                        unsigned int numberOfCores=1u,
                                         Seed seed = 0);
     void execute(libClassifier::OpenCvDataset data) const;
 private:

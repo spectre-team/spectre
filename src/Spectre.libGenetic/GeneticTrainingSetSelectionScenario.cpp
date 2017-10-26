@@ -29,23 +29,24 @@ limitations under the License.
 namespace Spectre::libGenetic
 {
 
-    GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double trainingRate,
+    GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double trainingSetSplitRate,
                                                                              double mutationRate,
                                                                              double bitSwapRate,
                                                                              double preservationRate,
-                                                                             unsigned int generationAmount,
-                                                                             const std::vector<unsigned int>& generationSize,
-                                                                             const std::vector<unsigned int>& trueAmount,
+                                                                             unsigned int numberOfGenerations,
+                                                                             const std::vector<unsigned int>& populationSize,
+                                                                             const std::vector<unsigned int>& initialFillup,
                                                                              const std::string& filename,
-                                                                             unsigned int runAmount,
+                                                                             unsigned int numberOfRestarts,
+                                                                             unsigned int numberOfCores,
                                                                              Seed seed) :
-        m_GenerationSizes(generationSize.begin(), generationSize.end()),
-        m_InitialIndividualFillups(trueAmount.begin(), trueAmount.end()),
-        m_TrainingDatasetSizeRate(trainingRate),
+        m_GenerationSizes(populationSize.begin(), populationSize.end()),
+        m_InitialIndividualFillups(initialFillup.begin(), initialFillup.end()),
+        m_TrainingDatasetSizeRate(trainingSetSplitRate),
         m_Filename(filename),
-        m_RestartsNumber(runAmount),
+        m_RestartsNumber(numberOfRestarts),
         m_Seed(seed),
-        m_GaFactory(mutationRate, bitSwapRate, preservationRate, generationAmount)
+        m_GaFactory(mutationRate, bitSwapRate, preservationRate, numberOfGenerations, numberOfCores)
     {}
 
     void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data) const

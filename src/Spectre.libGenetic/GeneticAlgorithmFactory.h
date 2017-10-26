@@ -29,7 +29,8 @@ public:
     GeneticAlgorithmFactory(double mutationRate,
                             double bitSwapRate,
                             double preservationRate,
-                            unsigned generationsNumber);
+                            unsigned generationsNumber,
+                            unsigned numberOfCores);
     std::unique_ptr<GeneticAlgorithm> BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction,
                                                    Seed seed=0) const;
 private:
@@ -37,5 +38,6 @@ private:
     const double m_BitSwapRate;
     const double m_PreservationRate;
     const unsigned m_GenerationsNumber;
+    const unsigned m_NumberOfCores;
 };
 }
