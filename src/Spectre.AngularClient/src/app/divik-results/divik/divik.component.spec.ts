@@ -25,11 +25,11 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { PlotlyModule } from '../../plotly/plotly.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DivikComponent } from './divik.component';
 import { DivikService } from '../shared/divik.service';
 import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
-import { MdFormFieldModule, MdInputModule, MdSliderModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatExpansionModule} from '@angular/material';
 
 describe('DivikComponent', () => {
   let component: DivikComponent;
@@ -38,7 +38,7 @@ describe('DivikComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DivikComponent, HeatmapComponent],
-      imports: [RouterTestingModule, PlotlyModule,  MdFormFieldModule, MdInputModule, MdSliderModule],
+      imports: [RouterTestingModule, PlotlyModule, MatInputModule, MatButtonModule, MatExpansionModule, BrowserAnimationsModule],
       providers: [
         MockBackend,
         BaseRequestOptions,

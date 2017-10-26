@@ -24,6 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { DivikService } from '../shared/divik.service';
 import { DivikConfig } from '../shared/divik-config';
+import 'rxjs/Rx';
 
 
 @Component({
@@ -33,9 +34,10 @@ import { DivikConfig } from '../shared/divik-config';
 })
 export class DivikComponent implements OnInit {
   public data: any;
-  public configDescription: string;
   public divikConfig: DivikConfig;
   public downloadJsonHref: any;
+  public config: Map<string, string> = new Map<string, string>();
+
   @Input() public preparationId;
   constructor(
       private route: ActivatedRoute,
@@ -49,7 +51,7 @@ export class DivikComponent implements OnInit {
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
     this.divikService
       .getConfig(this.preparationId, 1)
-      .subscribe(config => this.configDescription = this.buildConfigInfo(config));
+      .subscribe(config => this.buildConfigInfo(config));
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
@@ -58,14 +60,13 @@ export class DivikComponent implements OnInit {
       type: 'heatmap'
     }];
   }
-  buildConfigInfo(config: DivikConfig): string {
+
+  buildConfigInfo(config: DivikConfig) {
     this.divikConfig = config;
-    let description = '';
     Object.keys(config).forEach((key) => {
-      description += key + ': ' +  config[key] + '\n';
+      this.config.set(key, config[key]);
     });
     this.generateDownloadJsonUri(config);
-    return description;
   }
 
   changeLevel(value) {

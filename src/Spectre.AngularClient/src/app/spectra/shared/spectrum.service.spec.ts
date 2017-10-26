@@ -64,4 +64,24 @@ describe('SpectrumService', () => {
         expect(spectrum.intensities).toEqual([1.11, 4.44, 9.99]);
       });
   }));
+
+  it('should parse preparation 1 spectrum data by coordinates', inject([SpectrumService, MockBackend],
+    (spectrumService: SpectrumService, mockBackend: MockBackend) => {
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+        const options = new ResponseOptions({
+          body: JSON.stringify({ Id: 1, X: 10, Y: 20, Mz: [1, 2, 3], Intensities: [1.11, 4.44, 9.99] })
+        });
+        connection.mockRespond(new Response(options));
+      });
+
+      spectrumService.getByCoordinates(1, 10, 20).subscribe((spectrum) => {
+        expect(spectrum.id).toEqual(1);
+        expect(spectrum.x).toEqual(10);
+        expect(spectrum.y).toEqual(20);
+        expect(spectrum.mz.length).toEqual(3);
+        expect(spectrum.mz).toEqual([1, 2, 3]);
+        expect(spectrum.intensities.length).toEqual(3);
+        expect(spectrum.intensities).toEqual([1.11, 4.44, 9.99]);
+      });
+    }));
 });

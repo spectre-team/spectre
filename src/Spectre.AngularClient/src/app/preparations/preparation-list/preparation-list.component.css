@@ -2,7 +2,7 @@
  * preparation-list.component.css
  * Styling of preparations list.
  *
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa
+   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa, Daniel Babiak
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -19,19 +19,30 @@
 
 div.preparation {
     width: 100%;
+    height: 100%;
     margin: 10px;
     padding: 10px;
     color: #ffffff;
-    background-color: #3399FF;
-    border-radius: 20px;
+    background-color: #F69736;
+    border-radius: 5px;
     text-align: center;
-    vertical-align: bottom;
+    vertical-align: center;
     display: inline-grid;
+}
+
+.preparation-text {
+  color: #ffffff;
 }
 
 @media only screen and (min-width: 800px) {
     div.preparation {
-        width: 260px;
-        height: 260px;
+        width: 500px;
+        height: 50px;
     }
+}
+
+#main-container
+{
+  text-align: center;
+  height: 100vh;
 }

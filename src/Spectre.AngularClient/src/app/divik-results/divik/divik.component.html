@@ -1,21 +1,52 @@
+<div class="inline-items-container">
+  <div id="divikHeatmapWithDownloadButton">
+    <mat-form-field *ngIf="divikConfig">
+      <label>
+        Divik level
+        <input matInput
+               type='number'
+               min="1"
+               max={{divikConfig.Level}}
+               (change)="changeLevel($event.target.value)"/>
+      </label>
+      <mat-hint align="center">Max value: {{divikConfig.Level}}</mat-hint>
+    </mat-form-field>
+    <app-heatmap
+      [heatmapData]=data>
+    </app-heatmap>
+    <a
+      [href]='downloadJsonHref'
+      download='result.json'>
+      <button
+        Mat-raised-button
+        class="mat-button">
+        Download JSON result
+      </button>
+    </a>
+  </div>
 
-<div class="multi_lines_text">
-  {{configDescription}}
+
+  <div>
+    <mat-expansion-panel id="divik-info-expansion-panel">
+      <mat-expansion-panel-header id="expansionPanelHeader">
+        <mat-panel-title>
+          Option
+        </mat-panel-title>
+        <mat-panel-description>
+          Value
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let configElement of config.entries()">
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{configElement[0]}}>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{configElement[1]}}>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </div>
 </div>
 
-<md-form-field *ngIf="divikConfig">
-  <input mdInput
-         type='number'
-         min="0"
-         max={{divikConfig.Level}}
-         (change)="changeLevel($event.target.value)"/>
-  <md-hint align="center">Max value: {{divikConfig.Level}}</md-hint>
-</md-form-field>
 
-
-<app-heatmap
-  [heatmapData]=data>
-</app-heatmap>
-
-<div><a [href]='downloadJsonHref'
-        download='result.json'>Download JSON result</a></div>

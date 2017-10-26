@@ -2,7 +2,7 @@
  * spectrum.service.ts
  * Service providing spectrum.
  *
-   Copyright 2017 Grzegorz Mrukwa
+   Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -28,7 +28,9 @@ import {Service} from '../../app.service';
 @Injectable()
 export class SpectrumService extends Service {
 
-  constructor(private http: Http) { super(); }
+  constructor(private http: Http) {
+    super();
+  }
 
   get(preparationId: number, spectrumId: number): Observable<Spectrum> {
     const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?spectrumId=${spectrumId}`;
@@ -37,6 +39,12 @@ export class SpectrumService extends Service {
     return spectrum;
   }
 
+  getByCoordinates(preparationId: number, x: number, y: number): Observable<Spectrum> {
+    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?x=${x}&y=${y}`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    const spectrum = response.map(toSpectrum);
+    return spectrum;
+  }
 
   private getHeaders() {
     const headers = new Headers();
@@ -53,5 +61,5 @@ function toSpectrum(response: Response): Spectrum {
     intensities: json.Intensities,
     x: json.X,
     y: json.Y
-  });
+  })
 }

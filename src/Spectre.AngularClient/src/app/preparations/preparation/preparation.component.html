@@ -1,25 +1,134 @@
-<label>Mz:</label>
+<p-growl [(value)]="msgs"></p-growl>
+<block-ui [template]="blockTemplate">
+<div id="mainContainer" class="mainContainer">
+  <div id="tabsManu">
+    <p-tabView>
+      <p-tabPanel header="Heatmap & Spectrum" leftIcon="fa-thermometer (alias)" rightIcon="fa-bar-chart" [headerStyle]="{'width': '195px', 'margin':'0 auto'}">
+        <div>
+          <mat-slider
+            class="slider-x"
+            [(ngModel)]="xCoordinate"
+            showTicks="true"
+            min="0"
+            max={{xHeatmapSize}}
+            step="1"
+            vertical="false"
+            thumb-label="true"
+            tick-interval="true"
+            (change)="onChangedXCoordinate($event)">
+          </mat-slider>
 
-<input [(ngModel)]="mzValue" type="number"/>
+          <div class="inline-items-container">
+            <mat-slider
+              class="slider-y"
+              [(ngModel)]="yCoordinate"
+              showTicks="true"
+              min="0"
+              max={{yHeatmapSize}}
+              step="1"
+              vertical="true"
+              thumb-label="true"
+              tick-interval="true"
+              (change)="onChangedYCoordinate($event)">
+            </mat-slider>
+            <app-heatmap
+              [heatmapData]=heatmapData>
+            </app-heatmap>
+          </div>
+        </div>
 
-<md-slider class="slider" [(ngModel)]="currentChannelId" showTicks="true" min="0" max={{mzLenth}} step="1" (input)="onInputChannelId($event)"
-           (change)="onChangedChannelId($event)" vertical="false" thumb-label="true" tick-interval="true"></md-slider>
+        <div class="column-item-position">
+          <form>
+            <mat-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
+              <mat-option *ngFor="let color of colors" [value]="color.value" selected="$first">
+                {{color.value}}
+              </mat-option>
+            </mat-select>
+          </form>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Mz" disabled [(ngModel)]="mzValue">
+          </mat-form-field>
 
-<app-heatmap
-  [heatmapData]=heatmapData>
-</app-heatmap>
+          <mat-slider
+            class="slider"
+            [(ngModel)]="currentChannelId"
+            showTicks="true"
+            disabled="{{disabledChanelIdSlider}}"
+            min="0"
+            max={{mzLength}}
+            step="1"
+            (input)="onInputChannelId($event)"
+            (change)="onChangedChannelId($event)"
+            vertical="false"
+            thumb-label="true"
+            tick-interval="true">
+          </mat-slider>
+        </div>
 
-<app-spectrum
-  [spectrumData]=spectrumData>
-</app-spectrum>
-<ng2-messages></ng2-messages>
-<pre>
-  <input type="text"  #titleInput>
-  <button type="submit" (click) = 'selectSpectrum(titleInput.value)'>Select</button>
-</pre>
+        <app-spectrum
+          [spectrumData]=spectrumData>
+        </app-spectrum>
+      </p-tabPanel>
+      <p-tabPanel header="Heatmap" leftIcon="fa fa-thermometer (alias)" [headerStyle]="{'width': '165px', 'color': 'green'}">
+        <app-heatmap
+          [heatmapData]=heatmapData>
+        </app-heatmap>
+          <div class="column-item-position">
+            <form>
+              <mat-select placeholder="Color" [(ngModel)]="selectedValue" name="color" (change)="changeColor()">
+                <mat-option *ngFor="let color of colors" [value]="color.value" selected="$first">
+                  {{color.value}}
+                </mat-option>
+              </mat-select>
+            </form>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mz" disabled [(ngModel)]="mzValue">
+            </mat-form-field>
 
-<app-divik
-  [preparationId]=id>
-</app-divik>
+            <mat-slider
+              class="slider"
+              [(ngModel)]="currentChannelId"
+              disabled="{{disabledChanelIdSlider}}"
+              showTicks="true"
+              min="0"
+              max={{mzLength}}
+              step="1"
+              (input)="onInputChannelId($event)"
+              (change)="onChangedChannelId($event)"
+              vertical="false"
+              thumb-label="true"
+              tick-interval="true">
+            </mat-slider>
+          </div>
+        </p-tabPanel>
+      <p-tabPanel header="Spectrum" leftIcon="fa fa-bar-chart" [headerStyle]="{'width': '165px'}">
+        <app-spectrum
+          [spectrumData]=spectrumData>
+        </app-spectrum>
+
+        <div class="column-item-position">
+          <mat-form-field>
+            <input matInput #myInput placeholder="Spectrum number" type="text">
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            class="mat-button"
+            type="submit"
+            (click) = 'selectSpectrum(myInput.value)'>
+            Select
+          </button>
+        </div>
+        </p-tabPanel>
+      <p-tabPanel header="Divik" leftIcon="fa fa-sitemap" [headerStyle]="{'width': '165px'}">
+        <app-divik
+          [preparationId]=id>
+        </app-divik>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
+</block-ui>
+
 
 
