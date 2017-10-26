@@ -23,42 +23,50 @@ limitations under the License.
 
 namespace Spectre::GaSvmNative
 {
-RaportGenerator::RaportGenerator(std::string filename)
+RaportGenerator::RaportGenerator(std::string filename, uint populationSize, const std::string& separator):
+    m_Separator(separator),
+    m_IndividualsProcessed(0),
+    m_PopulationSize(populationSize)
 {
-    mFile.open(filename + ".csv");
+    m_File.open(filename + ".csv");
+    m_File << "generation" << m_Separator;
+    m_File << "true positives" << m_Separator;
+    m_File << "true negatives" << m_Separator;
+    m_File << "false positives" << m_Separator;
+    m_File << "false negatives" << m_Separator;
+    m_File << "Dice" << m_Separator;
+    m_File << "number of observations used" << m_Separator;
+    m_File << "percent of observations used" << m_Separator;
+    m_File << "mean training time [ms]" << m_Separator;
+    m_File << "mean classification time [ms]\n";
 }
 
-void RaportGenerator::close()
+void RaportGenerator::Write(const libClassifier::ConfusionMatrix& matrix,
+                            const libGenetic::Individual& individual,
+                            double trainingTime,
+                            double meanClassificationTime)
 {
-    if (!mFile) return;
-    mFile.close();
-}
-
-void RaportGenerator::write(std::string text)
-{
-    std::basic_string<char> s = text;
-    mFile << s + "\n";
-}
-
-void RaportGenerator::write(libClassifier::ConfusionMatrix matrix)
-{
-    std::basic_string<char> s = "true_positive," + std::to_string(matrix.TruePositive) + ",true_negative," + std::to_string(matrix.TrueNegative) +
-        ",false_positive," + std::to_string(matrix.FalsePositive) + ",false_negative," + std::to_string(matrix.FalseNegative);
-    mFile << s + "\n";
-}
-
-void RaportGenerator::write(libClassifier::OpenCvDataset* dataset)
-{
-    std::basic_string<char> s;
-    for (auto i = 0; i < dataset->size(); i++)
+    auto count = 0u;
+    for(auto bit: individual)
     {
-        for (libClassifier::DataType data : (*dataset)[i])
-        {
-            s.append(std::to_string(data) + ",");
-        }
-        s.append("\n");
+        count += bit;
     }
-    s.append("\n\n");
-    mFile << s;
+
+    m_File << m_IndividualsProcessed++ / m_PopulationSize << m_Separator;
+    m_File << matrix.TruePositive << m_Separator;
+    m_File << matrix.TrueNegative << m_Separator;
+    m_File << matrix.FalsePositive << m_Separator;
+    m_File << matrix.FalseNegative << m_Separator;
+    m_File << matrix.DiceIndex << m_Separator;
+    m_File << count << m_Separator;
+    m_File << static_cast<double>(count) / individual.size() << m_Separator;
+    m_File << 1000 * trainingTime << m_Separator;
+    m_File << 1000 * meanClassificationTime << "\n";
+}
+
+
+RaportGenerator::~RaportGenerator()
+{
+    m_File.close();
 }
 }

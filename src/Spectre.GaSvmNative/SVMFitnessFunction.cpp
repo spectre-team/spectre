@@ -29,7 +29,7 @@ using namespace libGenetic;
 
 SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator)
     : m_Dataset(std::move(data)),
-      mRaportGenerator(&raportGenerator)
+      m_RaportGenerator(raportGenerator)
 {
 }
 
@@ -50,23 +50,28 @@ ScoreType SVMFitnessFunction::computeFitness(const Individual &individual)
     }
     const auto filteredLabels = libPlatform::Functional::filter(m_Dataset.trainingSet.GetSampleMetadata(), individual.getData());
     OpenCvDataset individualDataset(oneDimensionalFilteredData, filteredLabels);
-    const auto result = getResultMatrix(std::move(individualDataset));
-    mRaportGenerator->write(result);
-    mRaportGenerator->write(std::to_string(result.DiceIndex));
+    
+    const auto result = getResultMatrix(std::move(individualDataset), individual);
+
     return result.DiceIndex;
 }
 
-ConfusionMatrix SVMFitnessFunction::getResultMatrix(const OpenCvDataset& data) const
+ConfusionMatrix SVMFitnessFunction::getResultMatrix(const OpenCvDataset& data, const Individual& individual) const
 {
     Svm svm;
-    const auto begin = clock();
+    const auto trainingBegin = clock();
     svm.Fit(data);
-    const auto end = clock();
-    const auto elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    const auto time_difference = std::to_string(elapsed_secs);
-    mRaportGenerator->write("Time needed to teach this individual: " + time_difference + " seconds.");
+    const auto trainingEnd = clock();
+    const auto trainingTime = double(trainingEnd - trainingBegin) / CLOCKS_PER_SEC;
 
+    const auto classificationBegin = clock();
     const auto predictions = svm.Predict((m_Dataset.testSet));
-    return ConfusionMatrix(predictions, m_Dataset.testSet.GetSampleMetadata());
+    const auto classificationEnd = clock();
+    const auto classificationTime = double(classificationEnd - classificationBegin) / CLOCKS_PER_SEC;
+    ConfusionMatrix confusions(predictions, m_Dataset.testSet.GetSampleMetadata());
+
+    m_RaportGenerator.Write(confusions, individual, trainingTime, classificationTime / m_Dataset.testSet.size());
+
+    return confusions;
 }
 }

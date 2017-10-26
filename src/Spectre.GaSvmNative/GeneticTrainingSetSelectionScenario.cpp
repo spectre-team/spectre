@@ -43,7 +43,7 @@ GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double 
                                                                          libGenetic::Seed seed,
                                                                          size_t minimalFillup,
                                                                          size_t maximalFillup) :
-    m_GenerationSizes(populationSize.begin(), populationSize.end()),
+    m_PopulationSizes(populationSize.begin(), populationSize.end()),
     m_InitialIndividualFillups(initialFillup.begin(), initialFillup.end()),
     m_TrainingDatasetSizeRate(trainingSetSplitRate),
     m_Filename(filename),
@@ -75,30 +75,22 @@ void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset d
     #pragma omp parallel for schedule(dynamic, optimalChunksNumber) num_threads (m_NumberOfCores)
     for (auto runNumber = 0; runNumber < static_cast<int>(m_RestartsNumber); runNumber++)
     {
-        for (auto popSize : m_GenerationSizes)
+        for (auto popSize : m_PopulationSizes)
         {
-            for (auto trueAmount : m_InitialIndividualFillups)
+            for (auto initialFillup : m_InitialIndividualFillups)
             {
-                auto begin = clock();
-                RaportGenerator raportGenerator(m_Filename + "_" + std::to_string(popSize) + "_" + std::to_string(trueAmount));
-                raportGenerator.write("Genetic algorithm " + std::to_string(runNumber) + " run with " + std::to_string(popSize) + " population size and " + std::to_string(trueAmount) + "for true amount in individuals in initial generation.");
-                //raportGenerator.write("Data:");
-                //raportGenerator.write(&data);
+                RaportGenerator raportGenerator(m_Filename + "-" + std::to_string(popSize) + "-" + std::to_string(initialFillup),
+                                                popSize);
 
                 libClassifier::RandomSplitter splitter(m_TrainingDatasetSizeRate, m_Seed + runNumber);
                 auto splittedDataset = splitter.split(data);
                 auto trainingSetSize = splittedDataset.trainingSet.size();
+                
                 auto fitnessFunction = std::make_unique<SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
                 auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction), m_Seed + runNumber);
 
-                libGenetic::Generation initialGeneration(popSize, trainingSetSize, trueAmount);
+                libGenetic::Generation initialGeneration(popSize, trainingSetSize, initialFillup);
                 auto finalGeneration = algorithm->evolve(std::move(initialGeneration));
-
-                auto end = clock();
-                auto elapsed_secs = static_cast<double>(end - begin) / CLOCKS_PER_SEC;
-                raportGenerator.write("Time needed for Genetic algorithm - " + std::to_string(runNumber) + " number of execution for parameters " + std::to_string(popSize) + " population size and " +
-                    std::to_string(trueAmount) + "for true amount in individuals in initial generation is: " + std::to_string(elapsed_secs) + " seconds.");
-                raportGenerator.close();
             }
         }
     }

@@ -42,7 +42,7 @@ public:
                                         size_t maximalFillup=std::numeric_limits<size_t>::max());
     void execute(libClassifier::OpenCvDataset data) const;
 private:
-    const std::vector<unsigned int> m_GenerationSizes;
+    const std::vector<unsigned int> m_PopulationSizes;
     const std::vector<unsigned int> m_InitialIndividualFillups;
     const double m_TrainingDatasetSizeRate;
     const std::string m_Filename;

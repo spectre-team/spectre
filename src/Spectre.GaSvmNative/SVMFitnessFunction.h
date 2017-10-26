@@ -34,8 +34,8 @@ public:
     virtual ~SVMFitnessFunction() = default;
 private:
     libClassifier::SplittedOpenCvDataset m_Dataset;
-    RaportGenerator* mRaportGenerator;
+    RaportGenerator& m_RaportGenerator;
 
-    libClassifier::ConfusionMatrix getResultMatrix(const libClassifier::OpenCvDataset& data) const;
+    libClassifier::ConfusionMatrix getResultMatrix(const libClassifier::OpenCvDataset& data, const libGenetic::Individual& individual) const;
 };
 }

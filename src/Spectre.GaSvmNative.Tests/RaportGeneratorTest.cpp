@@ -26,7 +26,6 @@ using namespace Spectre::GaSvmNative;
 
 TEST(RaportGeneratorInitialization, initializes)
 {
-    EXPECT_NO_THROW(RaportGenerator("raportGeneratorTest"));
+    EXPECT_NO_THROW(RaportGenerator("raportGeneratorTest", 2));
 }
-
 }
