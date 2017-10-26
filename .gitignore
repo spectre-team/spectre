@@ -1,3 +1,6 @@
+## Data files
+*.csv
+
 ## Large test files
 test_files/single.txt
 
