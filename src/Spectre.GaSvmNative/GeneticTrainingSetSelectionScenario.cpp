@@ -21,12 +21,12 @@ limitations under the License.
 #include <omp.h>
 #include "Spectre.libClassifier/SplittedOpevCvDataset.h"
 #include "Spectre.libClassifier/RandomSplitter.h"
-#include "Spectre.libClassifier/SVMFitnessFunction.h"
 #include "Spectre.libException/ArgumentOutOfRangeException.h"
 #include "Spectre.libGenetic/GeneticAlgorithm.h"
 #include "Spectre.libGenetic/GeneticAlgorithmFactory.h"
 #include "GeneticTrainingSetSelectionScenario.h"
 #include "RaportGenerator.h"
+#include "SVMFitnessFunction.h"
 
 namespace Spectre::GaSvmNative
 {
@@ -88,7 +88,7 @@ void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset d
                 libClassifier::RandomSplitter splitter(m_TrainingDatasetSizeRate, m_Seed + runNumber);
                 auto splittedDataset = splitter.split(data);
                 auto trainingSetSize = splittedDataset.trainingSet.size();
-                auto fitnessFunction = std::make_unique<libClassifier::SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
+                auto fitnessFunction = std::make_unique<SVMFitnessFunction>(std::move(splittedDataset), raportGenerator);
                 auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction), m_Seed + runNumber);
 
                 libGenetic::Generation initialGeneration(popSize, trainingSetSize, trueAmount);

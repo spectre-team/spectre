@@ -42,9 +42,6 @@
     <ClCompile Include="SplittedOpenCvDataset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SVMFitnessFunction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ConfusionMatrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,9 +75,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SplittedOpevCvDataset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SVMFitnessFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConfusionMatrix.h">

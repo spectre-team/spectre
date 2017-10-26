@@ -18,12 +18,13 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
-#include "Spectre.libGenetic/GeneticTrainingSetSelectionScenario.h"
-#include "Spectre.libGenetic/RaportGenerator.h"
+#include "Spectre.GaSvmNative/GeneticTrainingSetSelectionScenario.h"
+#include "Spectre.GaSvmNative/RaportGenerator.h"
 
 namespace
 {
 using namespace Spectre::libGenetic;
+using namespace Spectre::GaSvmNative;
 
 const double TRAINING_SET_SPLIT_RATE = 0.7;
 const double MUTATION_RATE = 0.5;
@@ -37,15 +38,15 @@ const Seed SEED = 1;
 
 TEST(GeneticTrainingSetSelectionScenarioInitialization, initializes)
 {
-    EXPECT_NO_THROW(Spectre::libGenetic::GeneticTrainingSetSelectionScenario(TRAINING_SET_SPLIT_RATE,
-                                                                             MUTATION_RATE,
-                                                                             BIT_SWAP_RATE,
-                                                                             PRESERVATION_RATE,
-                                                                             GENERATIONS_NUMBER,
-                                                                             { POPULATION_SIZE },
-                                                                             { INITIAL_FILLUP },
-                                                                             "initialize_test",
-                                                                             NUMBER_OF_RESTARTS));
+    EXPECT_NO_THROW(GeneticTrainingSetSelectionScenario(TRAINING_SET_SPLIT_RATE,
+                                                        MUTATION_RATE,
+                                                        BIT_SWAP_RATE,
+                                                        PRESERVATION_RATE,
+                                                        GENERATIONS_NUMBER,
+                                                        { POPULATION_SIZE },
+                                                        { INITIAL_FILLUP },
+                                                        "initialize_test",
+                                                        NUMBER_OF_RESTARTS));
 }
 
 class GeneticTrainingSetSelectionScenarioInitializationTest : public ::testing::Test

@@ -18,13 +18,14 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
-#include "Spectre.libClassifier/SVMFitnessFunction.h"
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 #include "Spectre.libPlatform/Filter.h"
+#include "Spectre.GaSvmNative/SVMFitnessFunction.h"
 
 namespace
 {
 using namespace Spectre::libClassifier;
+using namespace Spectre::GaSvmNative;
 
 class SVMFitnessFunctionTest : public ::testing::Test
 {

@@ -23,7 +23,7 @@ limitations under the License.
 
 namespace Spectre::GaSvmNative
 {
-RaportGenerator::RaportGenerator(std::basic_string<char> filename)
+RaportGenerator::RaportGenerator(std::string filename)
 {
     mFile.open(filename + ".csv");
 }
