@@ -53,6 +53,11 @@ namespace Spectre.Data.Datasets
         /// </summary>
         private List<double[]> _intensityArray;
 
+        /// <summary>
+        ///     Container for storing label values for every spectrum.
+        /// </summary>
+        private List<int> _labels;
+
         #endregion
 
         #region Constructors
@@ -95,6 +100,15 @@ namespace Spectre.Data.Datasets
         {
             get { return _spatialCoordinates; }
             private set { _spatialCoordinates = value.ToList(); }
+        }
+
+        /// <summary>
+        ///     See <see cref="IDataset" /> for description.
+        /// </summary>
+        public IEnumerable<int> Labels
+        {
+            get { return _labels; }
+            set { _labels = value.ToList(); }
         }
 
         /// <summary>
@@ -178,6 +192,7 @@ namespace Spectre.Data.Datasets
 
             _intensityArray = new List<double[]>();
             _spatialCoordinates = new List<SpatialCoordinates>();
+            _labels = new List<int>();
             AppendFromFile(filePath);
         }
 
@@ -200,6 +215,7 @@ namespace Spectre.Data.Datasets
 
             _intensityArray = new List<double[]>();
             _spatialCoordinates = new List<SpatialCoordinates>();
+            _labels = new List<int>();
             _mz = mz;
             AppendFromRawData(data, coordinates);
         }
@@ -238,7 +254,8 @@ namespace Spectre.Data.Datasets
 
                         int x,
                             y,
-                            z;
+                            z,
+                            label;
 
                         if (!int.TryParse(
                             s: metadata.Length > 0 ? metadata[0] : null,
@@ -264,9 +281,18 @@ namespace Spectre.Data.Datasets
                         {
                             z = -1;
                         }
+                        if (!int.TryParse(
+                            s: metadata.Length > 3 ? metadata[3] : null,
+                            style: NumberStyles.Any,
+                            provider: CultureInfo.InvariantCulture,
+                            result: out label))
+                        {
+                            label = -1;
+                        }
 
                         _spatialCoordinates.Add(item: new SpatialCoordinates(x, y, z));
                         _intensityArray.Add(item: new double[_mz.Length]);
+                        _labels.Add(label);
 
                         var backIdx = _intensityArray.Count - 1;
                         for (var i = 0; i < intensities.Length; i++)
@@ -322,8 +348,9 @@ namespace Spectre.Data.Datasets
                     xyz[j] = coordinates[i, j];
                 }
                 _spatialCoordinates.Add(item: new SpatialCoordinates(x: xyz[0], y: xyz[1], z: xyz[2]));
-
                 _intensityArray.Add(item: new double[data.GetLength(dimension: 1)]);
+                _labels.Add(item: -1);
+
                 var backIdx = _intensityArray.Count - 1;
                 for (var j = 0; j < data.GetLength(dimension: 1); j++)
                 {
@@ -462,7 +489,7 @@ namespace Spectre.Data.Datasets
             {
                 AppendMetadata(fileBuilder);
                 AppendMzValues(fileBuilder);
-                AppendIntensitiesAndCoordinates(fileBuilder);
+                AppendIntensitiesAndLocalMetadata(fileBuilder);
 
                 SaveDataToFile(path, fileBuilder);
             }
@@ -481,17 +508,17 @@ namespace Spectre.Data.Datasets
             }
         }
 
-        private void AppendIntensitiesAndCoordinates(StringBuilder fileBuilder)
+        private void AppendIntensitiesAndLocalMetadata(StringBuilder fileBuilder)
         {
             var spectrumBuilder = new StringBuilder();
             var coordinates = _spatialCoordinates.ToArray();
+            var labels = _labels.ToArray();
             var intensities = _intensityArray.ToArray();
 
             for (var i = 0; i < intensities.Length; i++)
             {
-                fileBuilder.AppendLine(
-                    value: coordinates[i]
-                        .ToString());
+                fileBuilder.AppendLine(value: $"{coordinates[i].ToString()} {labels[i].ToString()}");
+
                 for (var j = 0;
                     j
                     < intensities[0]
