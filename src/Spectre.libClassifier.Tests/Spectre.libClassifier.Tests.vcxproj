@@ -89,6 +89,7 @@
     <ClCompile Include="OpenCvDatasetTest.cpp" />
     <ClCompile Include="RandomSplitterTest.cpp" />
     <ClCompile Include="SplittedOpenCVDatasetTest.cpp" />
+    <ClCompile Include="SvmTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

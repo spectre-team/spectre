@@ -44,10 +44,13 @@ std::vector<Label> Svm::Predict(LabeledDataset dataset) const
 {
     const auto& data = asSupported(dataset);
     const auto numberOfObservations = static_cast<unsigned>(data.getMatData().rows);
-    std::vector<Label> predictions(numberOfObservations, 0);
-    cv::Mat predictionOutput(numberOfObservations, 1, CV_LABEL_TYPE, predictions.data());
+    std::vector<float> predictions(numberOfObservations, 0);
+    cv::Mat predictionOutput(numberOfObservations, 1, CV_TYPE, predictions.data());
     m_Svm->predict(data.getMatData(), predictionOutput);
-    return predictions;
+    std::vector<Label> labels(numberOfObservations, 0);
+    cv::Mat labelsOutput(numberOfObservations, 1, CV_LABEL_TYPE, labels.data());
+    predictionOutput.convertTo(labelsOutput, CV_LABEL_TYPE);
+    return labels;
 }
 
 const OpenCvDataset& Svm::asSupported(LabeledDataset dataset)
