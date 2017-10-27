@@ -19,6 +19,7 @@ limitations under the License.
 
 #pragma once
 #include <fstream>
+#include <omp.h>
 #include "Spectre.libClassifier/ConfusionMatrix.h"
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libGenetic/Individual.h"
@@ -41,5 +42,7 @@ private:
     const std::string m_Separator;
     uint m_IndividualsProcessed;
     const uint m_PopulationSize;
+    const std::string m_Filenane;
+    omp_lock_t m_WriteLock;
 };
 }
