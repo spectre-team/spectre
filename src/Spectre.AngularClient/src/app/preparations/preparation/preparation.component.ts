@@ -105,16 +105,6 @@ export class PreparationComponent implements OnInit {
     this.heatmapData = this.toHeatmapDataset(this.heatmap);
   }
 
-  onChangedXCoordinate(event: any) {
-    this.xCoordinate = event.value;
-    this.getSpectrumByCoordinates();
-  }
-
-  onChangedYCoordinate(event: any) {
-    this.yCoordinate = event.value;
-    this.getSpectrumByCoordinates();
-  }
-
   getSpectrum(selectNumber: number) {
     this.blockUI.start('Getting spectrum...');
     this.spectrumService
