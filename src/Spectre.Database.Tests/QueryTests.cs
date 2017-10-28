@@ -33,7 +33,7 @@ namespace Spectre.Database.Tests
     [TestFixture]
     public class QueryTests
     {
-        private Mock<Context> _mockContext = new Mock<Context>();
+        private Mock<DatasetsContext> _mockContext = new Mock<DatasetsContext>();
 
         [SetUp]
         public void SetUp()

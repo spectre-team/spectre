@@ -26,7 +26,7 @@ namespace Spectre.Database.Contexts
     /// Context for database access.
     /// </summary>
     /// <seealso cref="System.Data.Entity.DbContext" />
-    public class Context : DbContext
+    public class DatasetsContext : DbContext
     {
         /// <summary>
         /// Gets or sets the datasets.

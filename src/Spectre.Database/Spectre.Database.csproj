@@ -54,7 +54,7 @@
     <Compile Include="Entities\Operation.cs" />
     <Compile Include="Configurations\Migrations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Contexts\Context.cs" />
+    <Compile Include="Contexts\DatasetsContext.cs" />
     <Compile Include="Utils\IFinder.cs" />
     <Compile Include="Utils\Finder.cs" />
   </ItemGroup>

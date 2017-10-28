@@ -18,7 +18,7 @@
         /// <summary>
         /// The context
         /// </summary>
-        private static Context _context;
+        private static DatasetsContext _context;
 
         /// <summary>
         /// The service
@@ -30,7 +30,7 @@
         /// </summary>
         public FinderService()
         {
-            FinderService._context = new Context();
+            FinderService._context = new DatasetsContext();
         }
 
         /// <summary>

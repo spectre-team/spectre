@@ -36,7 +36,7 @@ namespace Spectre.Database.Utils
         /// <summary>
         /// The context description
         /// </summary>
-        private Context _context;
+        private DatasetsContext _context;
 
         /// <summary>
         /// The dataset
@@ -47,7 +47,7 @@ namespace Spectre.Database.Utils
         /// Initializes a new instance of the <see cref="Finder"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public Finder(Context context)
+        public Finder(DatasetsContext context)
         {
             _context = context;
         }
