@@ -1,6 +1,6 @@
 ﻿/*
  * Context.cs
- * Databse context for connections with database.
+ * Database context for connections with database.
  *
    Copyright 2017 Roman Lisak
 

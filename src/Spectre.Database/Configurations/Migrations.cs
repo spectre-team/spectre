@@ -19,18 +19,18 @@
 
 using System.Data.Entity.Migrations;
 
-namespace Spectre.Database.Migrations
+namespace Spectre.Database.Configurations
 {
     /// <summary>
     /// Configuration of dataset migrations.
     /// </summary>
     /// <seealso cref="Contexts.Context" />
-    internal sealed class Configuration : DbMigrationsConfiguration<Contexts.Context>
+    internal sealed class Migrations : DbMigrationsConfiguration<Contexts.Context>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Configuration"/> class.
+        /// Initializes a new instance of the <see cref="Migrations"/> class.
         /// </summary>
-        public Configuration()
+        public Migrations()
         {
             AutomaticMigrationsEnabled = true;
         }

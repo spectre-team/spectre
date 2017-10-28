@@ -27,6 +27,7 @@ using System.Data.Entity;
 using NUnit.Framework;
 using Moq;
 
+
 namespace Spectre.Database.Tests
 {
     [TestFixture]
@@ -39,9 +40,9 @@ namespace Spectre.Database.Tests
         {
             var data = new List<Dataset>
             {
-                new Dataset { FriendlyName = "Jacek1", Hash = "1", UploadNumber = "1"},
-                new Dataset { FriendlyName = "Bajer2", Hash = "2", UploadNumber = "2"},
-                new Dataset { FriendlyName = "Janusz3", Hash = "3", UploadNumber = "3"},
+                new Dataset { FriendlyName = "FriendlyName1", Hash = "Hash1", UploadNumber = "UploadNumber1"},
+                new Dataset { FriendlyName = "FriendlyName2", Hash = "Hash2", UploadNumber = "UploadNumber2"},
+                new Dataset { FriendlyName = "FriendlyName3", Hash = "Hash3", UploadNumber = "UploadNumber3"},
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Dataset>>();
@@ -58,9 +59,9 @@ namespace Spectre.Database.Tests
         {
             var service = new Finder(_mockContext.Object);
 
-            var dataset = service.ReturnForHash("1");            
+            var dataset = service.ReturnForHash("Hash1");            
 
-            NUnit.Framework.Assert.AreEqual("1", dataset);
+            Assert.AreEqual("UploadNumber1", dataset);
         }
 
         [Test]
@@ -68,9 +69,9 @@ namespace Spectre.Database.Tests
         {
             var service = new Finder(_mockContext.Object);
 
-            var dataset = service.ReturnForFriendlyName("Bajer2");
+            var dataset = service.ReturnForFriendlyName("FriendlyName2");
 
-            NUnit.Framework.Assert.AreEqual("2", dataset);
+            Assert.AreEqual("UploadNumber2", dataset);
         }
 
         [Test]
@@ -78,9 +79,9 @@ namespace Spectre.Database.Tests
         {
             var service = new Finder(_mockContext.Object);
 
-            var dataset = service.ReturnForHash("4");
+            var dataset = service.ReturnForHash("NotExistingHash");
 
-            NUnit.Framework.Assert.AreEqual(null, dataset);
+            Assert.AreEqual(null, dataset);
         }
 
         [Test]
@@ -88,9 +89,9 @@ namespace Spectre.Database.Tests
         {
             var service = new Finder(_mockContext.Object);
 
-            var dataset = service.ReturnForFriendlyName("TestName");
+            var dataset = service.ReturnForFriendlyName("NotExistingFriendlyName");
 
-            NUnit.Framework.Assert.AreEqual(null, dataset);
+            Assert.AreEqual(null, dataset);
         }
     }
 }
