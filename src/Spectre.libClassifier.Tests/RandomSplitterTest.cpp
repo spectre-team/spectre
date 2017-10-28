@@ -83,11 +83,25 @@ TEST_F(RandomSplitterTest, splits_differently_for_different_seeds)
     FAIL() << "Outputs for different seeds are exactly the same.";
 }
 
-TEST_F(RandomSplitterTest, splits_consistently_for_the_same_seed)
+TEST_F(RandomSplitterTest, splits_consistently_for_the_same_seed_with_different_splitters)
 {
     randomSplitter = RandomSplitter(training, seed);
     const auto first = randomSplitter.split(dataset);
     randomSplitter = RandomSplitter(training, seed);
+    const auto second = randomSplitter.split(dataset);
+    for (auto i = 0u; i < first.trainingSet.size(); ++i)
+    {
+        if (first.trainingSet.GetSampleMetadata(i) != second.trainingSet.GetSampleMetadata(i))
+        {
+            FAIL() << "Outputs for the same seeds differ.";
+        }
+    }
+}
+
+TEST_F(RandomSplitterTest, splits_consistently_for_the_same_seed_with_the_same_splitter)
+{
+    randomSplitter = RandomSplitter(training, seed);
+    const auto first = randomSplitter.split(dataset);
     const auto second = randomSplitter.split(dataset);
     for (auto i = 0u; i < first.trainingSet.size(); ++i)
     {
