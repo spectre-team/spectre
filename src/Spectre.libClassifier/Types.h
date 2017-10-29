@@ -29,4 +29,5 @@ namespace Spectre::libClassifier
     using Label = signed;
     const auto CV_TYPE = CV_32FC1;
     const auto CV_LABEL_TYPE = CV_32SC1;
+    using Seed = _ULonglong; // @gmrukwa: from mt19937_64
 }

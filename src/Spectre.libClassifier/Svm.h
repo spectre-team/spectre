@@ -30,7 +30,7 @@ namespace Spectre::libClassifier
 class Svm: public IClassifier
 {
 public:
-    Svm(uint iterationsLimit=100, double tolerance=1e-6);
+    explicit Svm(uint iterationsLimit=100, double tolerance=1e-6);
     void Fit(LabeledDataset dataset) override;
     std::vector<Label> Predict(LabeledDataset dataset) const override;
     virtual ~Svm() = default;

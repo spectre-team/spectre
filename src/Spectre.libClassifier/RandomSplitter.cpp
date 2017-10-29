@@ -21,7 +21,7 @@ limitations under the License.
 #include "RandomSplitter.h"
 #include "Spectre.libPlatform/Filter.h"
 #include "Spectre.libPlatform/Math.h"
-#include "Spectre.libGenetic/DataTypes.h"
+#include "Types.h"
 #include "Spectre.libClassifier/NegativeTrainingRateException.h"
 #include "Spectre.libClassifier/ExcessiveTrainingRateException.h"
 #include "Spectre.libClassifier/EmptyOpenCvDatasetException.h"
@@ -31,7 +31,7 @@ namespace Spectre::libClassifier {
 using namespace libPlatform::Functional;
 using namespace libPlatform::Math;
 
-RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
+RandomSplitter::RandomSplitter(double trainingRate, Seed rngSeed)
     : m_trainingRate(trainingRate),
     m_Seed(rngSeed)
 {

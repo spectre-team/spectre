@@ -19,14 +19,12 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include "Spectre.libException/NullPointerException.h"
-#include "Spectre.libGenetic/Individual.h"
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/ObservationExtractor.h"
 
 namespace
 {
 using namespace Spectre::libClassifier;
-using namespace Spectre::libGenetic;
 using namespace Spectre::libException;
 
 class ObservationExtractorInitializationTest : public ::testing::Test
@@ -64,7 +62,7 @@ protected:
     const std::vector<DataType> expectedFilteredRow1{ 2.1f, 1.0f, 0.6f };
     const unsigned trueBits = 2;
     size_t rowSize = data.size() / labels.size();
-    const Individual individual{ std::vector<bool>{ true, false, true } };
+    const std::vector<bool> individual{ true, false, true };
     const OpenCvDataset dataset;
     std::unique_ptr<ObservationExtractor> extractor;
 
