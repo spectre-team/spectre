@@ -27,7 +27,6 @@ using System.Data.Entity;
 using NUnit.Framework;
 using Moq;
 
-
 namespace Spectre.Database.Tests
 {
     [TestFixture]
@@ -59,7 +58,7 @@ namespace Spectre.Database.Tests
         {
             var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.HashToUploadNumber("Hash1");            
+            var dataset = service.HashToUploadNumber("Hash1");
 
             Assert.AreEqual("UploadNumber1", dataset);
         }
@@ -101,7 +100,7 @@ namespace Spectre.Database.Tests
 
             var dataset = service.UploadNumberToHash("UploadNumber3");
 
-            Assert.AreEqual(dataset,"Hash3");
+            Assert.AreEqual(dataset, "Hash3");
         }
 
         [Test]
