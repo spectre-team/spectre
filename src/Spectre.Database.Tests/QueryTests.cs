@@ -55,21 +55,21 @@ namespace Spectre.Database.Tests
         }
 
         [Test]
-        public void Return_for_hash_Test()
+        public void HashToUploadNumber_Test()
         {
-            var service = new Finder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.ReturnForHash("Hash1");            
+            var dataset = service.HashToUploadNumber("Hash1");            
 
             Assert.AreEqual("UploadNumber1", dataset);
         }
 
         [Test]
-        public void Return_for_friendly_name_test()
+        public void FriendlyNameToUploadNumber_test()
         {
-            var service = new Finder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.ReturnForFriendlyName("FriendlyName2");
+            var dataset = service.FriendlyNameToUploadNumber("FriendlyName2");
 
             Assert.AreEqual("UploadNumber2", dataset);
         }
@@ -77,9 +77,9 @@ namespace Spectre.Database.Tests
         [Test]
         public void Return_for_not_existing_hash_test()
         {
-            var service = new Finder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.ReturnForHash("NotExistingHash");
+            var dataset = service.HashToUploadNumber("NotExistingHash");
 
             Assert.AreEqual(null, dataset);
         }
@@ -87,11 +87,31 @@ namespace Spectre.Database.Tests
         [Test]
         public void Return_for_not_existing_friendly_name_test()
         {
-            var service = new Finder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.ReturnForFriendlyName("NotExistingFriendlyName");
+            var dataset = service.FriendlyNameToUploadNumber("NotExistingFriendlyName");
 
             Assert.AreEqual(null, dataset);
+        }
+
+        [Test]
+        public void UploadNumberToHash_Test()
+        {
+            var service = new DatasetDetailsFinder(_mockContext.Object);
+
+            var dataset = service.UploadNumberToHash("UploadNumber3");
+
+            Assert.AreEqual(dataset,"Hash3");
+        }
+
+        [Test]
+        public void Return_for_not_existing_Upload_Name_Test()
+        {
+            var service = new DatasetDetailsFinder(_mockContext.Object);
+
+            var dataset = service.UploadNumberToHash("NotExistingUploadNumber");
+
+            Assert.AreEqual(dataset, null);
         }
     }
 }

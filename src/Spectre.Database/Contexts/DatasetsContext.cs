@@ -1,5 +1,5 @@
 ﻿/*
- * Context.cs
+ * DatasetsContext.cs
  * Database context for connections with database.
  *
    Copyright 2017 Roman Lisak

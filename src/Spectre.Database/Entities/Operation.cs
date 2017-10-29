@@ -1,6 +1,6 @@
 ﻿/*
  * Operation.cs
- * Entity providing information about operation.
+ * Entity providing informations about operation.
  *
    Copyright 2017 Roman Lisak
 
@@ -25,32 +25,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spectre.Database.Entities
 {
-    /// <summary>
-    /// Enumeration for types of the operation status.
-    /// </summary>
-    public enum Status
-    {
-        /// <summary>
-        /// Operation is idling.
-        /// </summary>
-        Idle,
-
-        /// <summary>
-        /// Operation is working.
-        /// </summary>
-        Working,
-
-        /// <summary>
-        /// Operation is finished.
-        /// </summary>
-        Finished,
-
-        /// <summary>
-        /// The operation is invalid.
-        /// </summary>
-        Invalid
-    }
-
     /// <summary>
     /// Class for specifying information about the operation performed on the dataset.
     /// </summary>
@@ -96,7 +70,7 @@ namespace Spectre.Database.Entities
         /// <value>
         /// The type of the operation.
         /// </value>
-        public string OperationType { get; set; }
+        public OperationType Type { get; set; }
 
         /// <summary>
         /// Gets or sets the operation status.

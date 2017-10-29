@@ -24,27 +24,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Spectre.Database.Entities
 {
     /// <summary>
-    /// Specifying the type of access for given dataset.
-    /// </summary>
-    public enum AccessType
-    {
-        /// <summary>
-        /// Dataset available to the public.
-        /// </summary>
-        Public,
-
-        /// <summary>
-        /// Dataset available only to the owner.
-        /// </summary>
-        Private,
-
-        /// <summary>
-        /// Dataset available to users with link.
-        /// </summary>
-        Shared
-    }
-
-    /// <summary>
     /// Abstraction of dataset metadata needed to load a dataset
     /// </summary>
     public class Dataset

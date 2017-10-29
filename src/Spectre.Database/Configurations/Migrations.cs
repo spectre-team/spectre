@@ -1,5 +1,5 @@
 ﻿/*
- * Configuration.cs
+ * Migrations.cs
  * Configuration which creates automatic migrations
  *
    Copyright 2017 Roman Lisak

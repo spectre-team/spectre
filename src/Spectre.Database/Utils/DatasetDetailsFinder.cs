@@ -1,5 +1,5 @@
 ﻿/*
- * PathFinder.cs
+ * DatasetDetailsFinder.cs
  * Class for translating hash and friendly name to name of the file.
  *
    Copyright 2017 Roman Lisak
@@ -31,39 +31,34 @@ namespace Spectre.Database.Utils
     /// <summary>
     /// Class for finding the path of chosen property.
     /// </summary>
-    public class Finder : IFinder
+    public class DatasetDetailsFinder : IDatasetDetailsFinder
     {
         /// <summary>
-        /// The context description
+        /// The context used for queries.
         /// </summary>
         private DatasetsContext _context;
 
         /// <summary>
-        /// The dataset
-        /// </summary>
-        private Dataset _dataset = new Dataset();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Finder"/> class.
+        /// Initializes a new instance of the <see cref="DatasetDetailsFinder"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public Finder(DatasetsContext context)
+        public DatasetDetailsFinder(DatasetsContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Returns for hash.
+        /// Query for translating hash to upload number.
         /// </summary>
         /// <param name="hash">The hash.</param>
         /// <returns>
-        /// Returns location having hash.
+        /// Returns UploadNumber for Hash.
         /// </returns>
-        public virtual string ReturnForHash(string hash)
+        public virtual string HashToUploadNumber(string hash)
         {
             if (_context.Datasets.Any(o => o.Hash == hash))
             {
-                _dataset = _context.Datasets
+                var _dataset = _context.Datasets
                     .Where(b => b.Hash == hash)
                     .FirstOrDefault();
 
@@ -76,21 +71,44 @@ namespace Spectre.Database.Utils
         }
 
         /// <summary>
-        /// Returns the name of friendly name.
+        /// Query for translating friendly name to upload number.
         /// </summary>
         /// <param name="friendlyname">The friendlyname.</param>
         /// <returns>
-        /// Returns location having friendly name.
+        /// Returns UploadNumber for friendly name.
         /// </returns>
-        public virtual string ReturnForFriendlyName(string friendlyname)
+        public virtual string FriendlyNameToUploadNumber(string friendlyname)
         {
             if (_context.Datasets.Any(o => o.FriendlyName == friendlyname))
             {
-                _dataset = _context.Datasets
+                var _dataset = _context.Datasets
                     .Where(b => b.FriendlyName == friendlyname)
                     .FirstOrDefault();
 
-                return _dataset.UploadNumber.ToString();
+                return _dataset.UploadNumber;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Query for translating upload number to hash.
+        /// </summary>
+        /// <param name="uploadnumber">The uploadnumber.</param>
+        /// <returns>
+        /// Returns hash for upload name.
+        /// </returns>
+        public virtual string UploadNumberToHash(string uploadnumber)
+        {
+            if (_context.Datasets.Any(o => o.UploadNumber == uploadnumber))
+            {
+                var _dataset = _context.Datasets
+                    .Where(b => b.UploadNumber == uploadnumber)
+                    .FirstOrDefault();
+
+                return _dataset.Hash;
             }
             else
             {

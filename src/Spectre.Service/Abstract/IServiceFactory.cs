@@ -41,6 +41,6 @@ namespace Spectre.Service.Abstract
         /// Gets the path finder service.
         /// </summary>
         /// <returns>IPathFinderInstance</returns>
-        IFinderService GetPathFinderService();
+        IDatasetDetailsFinderService GetPathFinderService();
     }
 }

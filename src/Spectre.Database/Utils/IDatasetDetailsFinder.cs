@@ -1,6 +1,6 @@
 ﻿/*
- * IPathFinderService.cs
- * Class providing interface for PathFinderService
+ * IDatasetDetailsFinder.cs
+ * Interface for DatasetDetailsFinder.
  *
    Copyright 2017 Roman Lisak
 
@@ -17,37 +17,40 @@
    limitations under the License.
 */
 
-namespace Spectre.Service.Abstract
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Spectre.Database.Contexts;
-    using Spectre.Database.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
+namespace Spectre.Database.Utils
+{
     /// <summary>
-    /// Interface for PathFinderService
+    /// Interface for the PathFinder class
     /// </summary>
-    public interface IFinderService
+    public interface IDatasetDetailsFinder
     {
         /// <summary>
-        /// Finds the hash using friendly name.
+        /// Query for translating hash to upload number.
         /// </summary>
         /// <param name="hash">The hash.</param>
-        /// <returns>
-        /// Friendly name basing on hash
-        /// </returns>
-        string FindHash(string hash);
+        /// <returns>Hash</returns>
+        string HashToUploadNumber(string hash);
 
         /// <summary>
-        /// Finds the friendky name using hash.
+        /// Query for translating friendly name to upload number.
         /// </summary>
         /// <param name="friendlyname">The friendlyname.</param>
+        /// <returns>Friendly Name</returns>
+        string FriendlyNameToUploadNumber(string friendlyname);
+
+        /// <summary>
+        /// Query for translating upload number to hash.
+        /// </summary>
+        /// <param name="uploadnumber">The uploadnumber.</param>
         /// <returns>
-        /// Hash basing on riendly name
+        /// Returns hash for upload name.
         /// </returns>
-        string FindFriendlyName(string friendlyname);
+        string UploadNumberToHash(string uploadnumber);
     }
 }
