@@ -25,6 +25,7 @@ import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
+import { PreparationService } from './preparations/shared/preparation.service';
 import { PreparationsModule } from './preparations/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
