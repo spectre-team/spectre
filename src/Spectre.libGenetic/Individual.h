@@ -19,6 +19,7 @@ limitations under the License.
 
 #pragma once
 #include <vector>
+#include "DataTypes.h"
 
 namespace Spectre::libGenetic
 {
@@ -36,10 +37,11 @@ public:
     /// <summary>
     /// Initializes a new individual with trueAmount of true values inside.
     /// </summary>
+    /// <param name="size">The size.</param>
+    /// <param name="initialFillup">The initial fillup.</param>
+    /// <param name="seed">The seed.</param>
     /// <returns>Individual.</returns>
-    /// <param name="int">Size of individual.</param>
-    /// <param name="int">Amount of true values.</param>
-    Individual::Individual(size_t size, size_t initialFillup);
+    Individual(size_t size, size_t initialFillup, Seed seed);
     /// <summary>
     /// Gets the immutable data.
     /// </summary>

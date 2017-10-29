@@ -26,6 +26,8 @@ namespace
 {
 using namespace Spectre::libGenetic;
 
+const auto seed = 0ul;
+
 TEST(IndividualInitialization, initializes)
 {
     EXPECT_NO_THROW(Individual({ true, true, true, true }));
@@ -35,8 +37,11 @@ TEST(IndividualInitialization, initializes)
 
 TEST(IndividualInitialization, initializes_by_shuffle)
 {
-    EXPECT_NO_THROW(Individual(6, 4));
-    EXPECT_THROW(Individual(4, 6), Spectre::libException::ArgumentOutOfRangeException<size_t>);
+    const auto individualSize = 6u;
+    const auto initialFillup = 4u;
+    const auto excessiveFillup = 8u;
+    EXPECT_NO_THROW(Individual(individualSize, initialFillup, seed));
+    EXPECT_THROW(Individual(individualSize, excessiveFillup, seed), Spectre::libException::ArgumentOutOfRangeException<size_t>);
 }
 
 class IndividualTest : public ::testing::Test
@@ -163,8 +168,10 @@ TEST_F(IndividualTest, unequality_same_individuals_marked_equal)
 
 TEST_F(IndividualTest, true_amount_equal_to_parameter)
 {
-    Individual individual(10, 6);
-    int trueAmount = 0;
+    const auto individualSize = 10u;
+    const auto initialFillup = 6u;
+    Individual individual(individualSize, initialFillup, seed);
+    auto trueAmount = 0u;
     for (auto i = 0; i < individual.size(); i++)
     {
         if (individual[i] == true)
@@ -172,6 +179,6 @@ TEST_F(IndividualTest, true_amount_equal_to_parameter)
             trueAmount++;
         }
     }
-    EXPECT_EQ(trueAmount, 6);
+    EXPECT_EQ(trueAmount, initialFillup);
 }
 }

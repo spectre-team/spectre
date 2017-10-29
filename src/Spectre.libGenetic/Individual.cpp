@@ -20,7 +20,6 @@ limitations under the License.
 #include <vector>
 #include <algorithm>
 #include "Spectre.libException/OutOfRangeException.h"
-#include "Spectre.libGenetic/DataTypes.h"
 #include "Individual.h"
 #include "InconsistentChromosomeLengthException.h"
 
@@ -31,7 +30,8 @@ namespace Spectre::libGenetic
 Individual::Individual(std::vector<bool> &&binaryData):
     m_BinaryData(binaryData) { }
 
-Individual::Individual(size_t size, size_t initialFillup)
+
+Individual::Individual(size_t size, size_t initialFillup, Seed seed)
 {
     if (initialFillup > size)
     {
@@ -45,10 +45,8 @@ Individual::Individual(size_t size, size_t initialFillup)
     {
         m_BinaryData.push_back(false);
     }
-    // @gmrukwa: TODO: Add seed!
-    libGenetic::RandomDevice randomDevice;
-    libGenetic::RandomNumberGenerator g(randomDevice());
-    std::shuffle(m_BinaryData.begin(), m_BinaryData.end(), g);
+    RandomNumberGenerator rng(seed);
+    std::shuffle(m_BinaryData.begin(), m_BinaryData.end(), rng);
 }
 
 std::vector<bool> Individual::getData() const
