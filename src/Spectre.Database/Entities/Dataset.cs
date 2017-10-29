@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Spectre.Database.Entities
 {
     /// <summary>
-    /// Abstraction of dataset metadata needed to load a dataset
+    /// Abstraction of dataset metadata needed to load a dataset.
     /// </summary>
     public class Dataset
     {
