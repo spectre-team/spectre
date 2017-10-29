@@ -1,6 +1,6 @@
 ﻿/*
- * Enumerations.cs
- * File providing enumerations for entity classes.
+ * AccessType.cs
+ * File providing enumeration for entity class.
  *
    Copyright 2017 Roman Lisak
 
@@ -43,36 +43,4 @@ namespace Spectre.Database.Entities.Enums
         /// </summary>
         Shared
     }
-
-    /// <summary>
-    /// Enumeration for types of the operation status.
-    /// </summary>
-    public enum Status
-    {
-        /// <summary>
-        /// Operation is idling.
-        /// </summary>
-        Idle,
-
-        /// <summary>
-        /// Operation is working.
-        /// </summary>
-        Working,
-
-        /// <summary>
-        /// Operation is finished.
-        /// </summary>
-        Finished,
-
-        /// <summary>
-        /// The operation is invalid.
-        /// </summary>
-        Invalid
-    }
-
-    /// <summary>
-    /// Enumeration for types of the operation type.
-    /// </summary>
-    public enum OperationType
-    { }
 }
