@@ -20,10 +20,9 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
 #include "Spectre.libClassifier/RandomSplitter.h"
-#include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libClassifier/Types.h"
 #include "Spectre.libClassifier/ExcessiveTrainingRateException.h"
 #include "Spectre.libClassifier/NegativeTrainingRateException.h"
-#include "Spectre.libException/EmptyArgumentException.h"
 
 namespace
 {
@@ -53,7 +52,7 @@ public:
          randomSplitter(training, seed) {}
 
 protected:
-    const Spectre::libGenetic::Seed seed = 1;
+    const Seed seed = 1;
     const double training = 0.7;
     const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.9f, 0.8f };
     // @gmrukwa: We're assuming labels are unique in tests below
