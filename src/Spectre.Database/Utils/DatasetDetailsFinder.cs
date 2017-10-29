@@ -53,6 +53,7 @@ namespace Spectre.Database.Utils
         /// <param name="hash">The hash.</param>
         /// <returns>
         /// Returns UploadNumber for Hash.
+        /// Null for not existing Hash.
         /// </returns>
         public virtual string HashToUploadNumber(string hash)
         {
@@ -76,6 +77,7 @@ namespace Spectre.Database.Utils
         /// <param name="friendlyname">The friendlyname.</param>
         /// <returns>
         /// Returns UploadNumber for friendly name.
+        /// Null for not existing friendly name.
         /// </returns>
         public virtual string FriendlyNameToUploadNumber(string friendlyname)
         {
@@ -99,6 +101,7 @@ namespace Spectre.Database.Utils
         /// <param name="uploadnumber">The uploadnumber.</param>
         /// <returns>
         /// Returns hash for upload name.
+        /// Null for not existing upload name.
         /// </returns>
         public virtual string UploadNumberToHash(string uploadnumber)
         {

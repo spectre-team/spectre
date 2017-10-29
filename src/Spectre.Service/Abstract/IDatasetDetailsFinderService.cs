@@ -37,7 +37,8 @@ namespace Spectre.Service.Abstract
         /// </summary>
         /// <param name="hash">The hash.</param>
         /// <returns>
-        /// Returns UploadNumber basing on hash
+        /// Returns UploadNumber basing on hash.
+        /// Null for not existing hash.
         /// </returns>
         string HashToUploadNumber_Service(string hash);
 
@@ -47,6 +48,7 @@ namespace Spectre.Service.Abstract
         /// <param name="friendlyname">The friendlyname.</param>
         /// <returns>
         /// Returns UploadNumber basing on friendly name.
+        /// Null for not existing friendly name.
         /// </returns>
         string FriendlyNameToUploadNumber_Service(string friendlyname);
 
@@ -56,6 +58,7 @@ namespace Spectre.Service.Abstract
         /// <param name="uploadnumber">The uploadnumber.</param>
         /// <returns>
         /// Returns Hash having upload number.
+        /// Null for not existing upload number.
         /// </returns>
         string UploadNumberToHash_Service(string uploadnumber);
     }
