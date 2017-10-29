@@ -38,7 +38,7 @@ namespace Spectre.Database.Utils
         /// Returns UploadNumber for Hash.
         /// Null for not existing Hash.
         /// </returns>
-        string HashToUploadNumberOrDefaultOrDefault(string hash);
+        string HashToUploadNumberOrDefault(string hash);
 
         /// <summary>
         /// Query for translating friendly name to upload number.
