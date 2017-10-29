@@ -21,6 +21,7 @@ limitations under the License.
 #include <memory>
 #include "DataTypes.h"
 #include "FitnessFunction.h"
+#include "Generation.h"
 
 namespace Spectre::libGenetic
 {

@@ -20,6 +20,8 @@ limitations under the License.
 #pragma once
 #include <span.h>
 #include "DataTypes.h"
+#include "Individual.h"
+#include "Generation.h"
 
 namespace Spectre::libGenetic
 {

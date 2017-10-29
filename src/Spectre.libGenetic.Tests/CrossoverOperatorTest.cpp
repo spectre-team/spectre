@@ -20,6 +20,7 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include <numeric>
 #include <memory>
+#include "Spectre.libGenetic/Individual.h"
 #include "Spectre.libGenetic/CrossoverOperator.h"
 #include "Spectre.libGenetic/InconsistentChromosomeLengthException.h"
 
