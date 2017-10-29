@@ -38,7 +38,7 @@ namespace Spectre.Database.Utils
         /// Returns UploadNumber for Hash.
         /// Null for not existing Hash.
         /// </returns>
-        string HashToUploadNumber(string hash);
+        string HashToUploadNumberOrDefaultOrDefault(string hash);
 
         /// <summary>
         /// Query for translating friendly name to upload number.
@@ -48,7 +48,7 @@ namespace Spectre.Database.Utils
         /// Returns UploadNumber for friendly name.
         /// Null for not existing friendly name.
         /// </returns>
-        string FriendlyNameToUploadNumber(string friendlyname);
+        string FriendlyNameToUploadNumberOrDefault(string friendlyname);
 
         /// <summary>
         /// Query for translating upload number to hash.
@@ -58,6 +58,6 @@ namespace Spectre.Database.Utils
         /// Returns hash for upload name.
         /// Null for not existing upload name.
         /// </returns>
-        string UploadNumberToHash(string uploadnumber);
+        string UploadNumberToHashOrDefault(string uploadnumber);
     }
 }

@@ -40,7 +40,7 @@ namespace Spectre.Service.Abstract
         /// Returns UploadNumber basing on hash.
         /// Null for not existing hash.
         /// </returns>
-        string HashToUploadNumber_Service(string hash);
+        string HashToUploadNumberOrDefault(string hash);
 
         /// <summary>
         /// Finds the friendky name using hash.
@@ -50,7 +50,7 @@ namespace Spectre.Service.Abstract
         /// Returns UploadNumber basing on friendly name.
         /// Null for not existing friendly name.
         /// </returns>
-        string FriendlyNameToUploadNumber_Service(string friendlyname);
+        string FriendlyNameToUploadNumberOrDefault(string friendlyname);
 
         /// <summary>
         /// Service translating uploadnumber to hash.
@@ -60,6 +60,6 @@ namespace Spectre.Service.Abstract
         /// Returns Hash having upload number.
         /// Null for not existing upload number.
         /// </returns>
-        string UploadNumberToHash_Service(string uploadnumber);
+        string UploadNumberToHashOrDefault(string uploadnumber);
     }
 }

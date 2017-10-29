@@ -51,7 +51,7 @@ namespace Spectre.Service
         /// <returns>
         /// IPathFinderInstance
         /// </returns>
-        public IDatasetDetailsFinderService GetPathFinderService()
+        public IDatasetDetailsFinderService GetDatasetDetailsFinderService()
         {
             return new DatasetDetailsFinderService();
         }

@@ -58,7 +58,7 @@ namespace Spectre.Database.Tests
         {
             var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.HashToUploadNumber("Hash1");
+            var dataset = service.HashToUploadNumberOrDefault("Hash1");
 
             Assert.AreEqual("UploadNumber1", dataset);
         }
@@ -68,7 +68,7 @@ namespace Spectre.Database.Tests
         {
             var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.FriendlyNameToUploadNumber("FriendlyName2");
+            var dataset = service.FriendlyNameToUploadNumberOrDefault("FriendlyName2");
 
             Assert.AreEqual("UploadNumber2", dataset);
         }
@@ -78,7 +78,7 @@ namespace Spectre.Database.Tests
         {
             var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.HashToUploadNumber("NotExistingHash");
+            var dataset = service.HashToUploadNumberOrDefault("NotExistingHash");
 
             Assert.AreEqual(null, dataset);
         }
@@ -88,7 +88,7 @@ namespace Spectre.Database.Tests
         {
             var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.FriendlyNameToUploadNumber("NotExistingFriendlyName");
+            var dataset = service.FriendlyNameToUploadNumberOrDefault("NotExistingFriendlyName");
 
             Assert.AreEqual(null, dataset);
         }
@@ -98,7 +98,7 @@ namespace Spectre.Database.Tests
         {
             var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.UploadNumberToHash("UploadNumber3");
+            var dataset = service.UploadNumberToHashOrDefault("UploadNumber3");
 
             Assert.AreEqual(dataset, "Hash3");
         }
@@ -108,7 +108,7 @@ namespace Spectre.Database.Tests
         {
             var service = new DatasetDetailsFinder(_mockContext.Object);
 
-            var dataset = service.UploadNumberToHash("NotExistingUploadNumber");
+            var dataset = service.UploadNumberToHashOrDefault("NotExistingUploadNumber");
 
             Assert.AreEqual(dataset, null);
         }

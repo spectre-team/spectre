@@ -55,7 +55,7 @@ namespace Spectre.Database.Utils
         /// Returns UploadNumber for Hash.
         /// Null for not existing Hash.
         /// </returns>
-        public virtual string HashToUploadNumber(string hash)
+        public virtual string HashToUploadNumberOrDefault(string hash)
         {
             if (_context.Datasets.Any(o => o.Hash == hash))
             {
@@ -79,7 +79,7 @@ namespace Spectre.Database.Utils
         /// Returns UploadNumber for friendly name.
         /// Null for not existing friendly name.
         /// </returns>
-        public virtual string FriendlyNameToUploadNumber(string friendlyname)
+        public virtual string FriendlyNameToUploadNumberOrDefault(string friendlyname)
         {
             if (_context.Datasets.Any(o => o.FriendlyName == friendlyname))
             {
@@ -103,7 +103,7 @@ namespace Spectre.Database.Utils
         /// Returns hash for upload name.
         /// Null for not existing upload name.
         /// </returns>
-        public virtual string UploadNumberToHash(string uploadnumber)
+        public virtual string UploadNumberToHashOrDefault(string uploadnumber)
         {
             if (_context.Datasets.Any(o => o.UploadNumber == uploadnumber))
             {

@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Dataset.cs" />
-    <Compile Include="Entities\Enums\Enumerations.cs" />
+    <Compile Include="Entities\Enums\AccessType.cs" />
+    <Compile Include="Entities\Enums\OperationType.cs" />
+    <Compile Include="Entities\Enums\Status.cs" />
     <Compile Include="Entities\Operation.cs" />
     <Compile Include="Configurations\Migrations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
