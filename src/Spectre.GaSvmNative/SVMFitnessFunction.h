@@ -29,11 +29,16 @@ namespace Spectre::GaSvmNative
 class SVMFitnessFunction : public libGenetic::FitnessFunction
 {
 public:
-    SVMFitnessFunction(libClassifier::SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator, uint svmIterations=100u, double svmTolerance=1e-6);
+    SVMFitnessFunction(libClassifier::SplittedOpenCvDataset&& data,
+                       RaportGenerator& raportGenerator,
+                       const libClassifier::OpenCvDataset* independentValidation = nullptr,
+                       uint svmIterations=100u,
+                       double svmTolerance=1e-6);
     libGenetic::ScoreType computeFitness(const libGenetic::Individual &individual) override;
     virtual ~SVMFitnessFunction() = default;
 private:
     libClassifier::SplittedOpenCvDataset m_Dataset;
+    const libClassifier::OpenCvDataset* m_IndependentValidation;
     RaportGenerator& m_RaportGenerator;
     const uint m_SvmIterations;
     const double m_SvmTolerance;

@@ -27,8 +27,13 @@ namespace Spectre::GaSvmNative
 using namespace libClassifier;
 using namespace libGenetic;
 
-SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data, RaportGenerator& raportGenerator, uint svmIterations, double svmTolerance)
+SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data,
+                                       RaportGenerator& raportGenerator,
+                                       const libClassifier::OpenCvDataset* independentValidation,
+                                       uint svmIterations,
+                                       double svmTolerance)
     : m_Dataset(std::move(data)),
+      m_IndependentValidation(independentValidation),
       m_RaportGenerator(raportGenerator),
       m_SvmIterations(svmIterations),
       m_SvmTolerance(svmTolerance)
@@ -72,7 +77,18 @@ ConfusionMatrix SVMFitnessFunction::getResultMatrix(const OpenCvDataset& data, c
     const auto classificationTime = double(classificationEnd - classificationBegin) / CLOCKS_PER_SEC;
     ConfusionMatrix confusions(predictions, m_Dataset.testSet.GetSampleMetadata());
 
-    m_RaportGenerator.Write(confusions, individual, trainingTime, classificationTime / m_Dataset.testSet.size());
+    std::unique_ptr<ConfusionMatrix> validationConfusions;
+    if (m_IndependentValidation != nullptr)
+    {
+        const auto validationPredictions = svm.Predict(*m_IndependentValidation);
+        validationConfusions = std::make_unique<ConfusionMatrix>(validationPredictions, m_IndependentValidation->GetSampleMetadata());
+    }
+
+    m_RaportGenerator.Write(confusions,
+                            individual,
+                            trainingTime,
+                            classificationTime / m_Dataset.testSet.size(),
+                            validationConfusions.get());
 
     return confusions;
 }

@@ -35,7 +35,8 @@ public:
     void Write(const libClassifier::ConfusionMatrix& matrix,
                const libGenetic::Individual& individual,
                double trainingTime,
-               double meanClassificationTime);
+               double meanClassificationTime,
+               const libClassifier::ConfusionMatrix* validationResults);
     ~RaportGenerator();
 private:
     std::ofstream m_File;

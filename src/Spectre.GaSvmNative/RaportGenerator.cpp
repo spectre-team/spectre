@@ -40,6 +40,11 @@ RaportGenerator::RaportGenerator(std::string filename, uint populationSize, cons
     m_File << "percent of observations used" << m_Separator;
     m_File << "mean training time [ms]" << m_Separator;
     m_File << "mean classification time [ms]\n";
+    m_File << "independent true positives" << m_Separator;
+    m_File << "independent true negatives" << m_Separator;
+    m_File << "independent false positives" << m_Separator;
+    m_File << "independent false negatives" << m_Separator;
+    m_File << "independent Dice" << m_Separator;
     m_File.flush();
     omp_init_lock(&m_WriteLock);
 }
@@ -47,7 +52,8 @@ RaportGenerator::RaportGenerator(std::string filename, uint populationSize, cons
 void RaportGenerator::Write(const libClassifier::ConfusionMatrix& matrix,
                             const libGenetic::Individual& individual,
                             double trainingTime,
-                            double meanClassificationTime)
+                            double meanClassificationTime,
+                            const libClassifier::ConfusionMatrix* validationResults)
 {
     auto count = 0u;
     for(auto bit: individual)
@@ -66,6 +72,21 @@ void RaportGenerator::Write(const libClassifier::ConfusionMatrix& matrix,
     m_File << static_cast<double>(count) / individual.size() << m_Separator;
     m_File << 1000 * trainingTime << m_Separator;
     m_File << 1000 * meanClassificationTime << "\n";
+    if (validationResults != nullptr)
+    {
+        m_File << validationResults->TruePositive << m_Separator;
+        m_File << validationResults->TrueNegative << m_Separator;
+        m_File << validationResults->FalsePositive << m_Separator;
+        m_File << validationResults->FalseNegative << m_Separator;
+        m_File << validationResults->DiceIndex << m_Separator;
+    }
+    else
+    {
+        for (auto i = 0u; i < 5; ++i)
+        {
+            m_File << m_Separator;
+        }
+    }
     m_File.flush();
     omp_unset_lock(&m_WriteLock);
 }

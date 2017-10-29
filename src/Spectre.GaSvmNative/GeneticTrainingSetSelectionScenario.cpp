@@ -71,7 +71,8 @@ GeneticTrainingSetSelectionScenario::GeneticTrainingSetSelectionScenario(double 
     }
 }
 
-void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset data) const
+void GeneticTrainingSetSelectionScenario::execute(const libClassifier::OpenCvDataset& data,
+                                                  const libClassifier::OpenCvDataset* independentValidation) const
 {
     const auto optimalChunksNumber = 1;
     omp_set_nested(1);
@@ -94,6 +95,7 @@ void GeneticTrainingSetSelectionScenario::execute(libClassifier::OpenCvDataset d
                 
                 auto fitnessFunction = std::make_unique<SVMFitnessFunction>(std::move(splittedDataset),
                                                                             raportGenerator,
+                                                                            independentValidation,
                                                                             m_SvmIterations,
                                                                             m_SvmTolerance);
                 auto algorithm = m_GaFactory.BuildDefault(std::move(fitnessFunction), m_Seed + runNumber);
