@@ -47,11 +47,6 @@ protected:
     const std::vector<Label> labels{ 3, 7, 14, 2, 12, 5, 8, 4, 19, 11 };
     const OpenCvDataset dataset;
     RandomSplitter randomSplitter;
-
-    void SetUp() override
-    {
-        randomSplitter = RandomSplitter(training, seed);
-    }
 };
 
 TEST_F(RandomSplitterTest, split_dataset)
@@ -69,26 +64,28 @@ TEST_F(RandomSplitterTest, check_size_of_splitted_vectors)
 
 TEST_F(RandomSplitterTest, splits_differently_for_different_seeds)
 {
-    randomSplitter = RandomSplitter(training, seed);
-    const auto first = randomSplitter.split(dataset);
-    randomSplitter = RandomSplitter(training, seed + 1);
-    const auto second = randomSplitter.split(dataset);
+    RandomSplitter firstSplitter(training, seed);
+    const auto first = firstSplitter.split(dataset);
+    RandomSplitter secondSplitter(training, seed + 1);
+    const auto second = secondSplitter.split(dataset);
+    bool differs = false;
     for (auto i = 0u; i < first.trainingSet.size(); ++i)
     {
         if(first.trainingSet.GetSampleMetadata(i) != second.trainingSet.GetSampleMetadata(i))
         {
-            SUCCEED();
+            differs = true;
+            break;
         }
     }
-    FAIL() << "Outputs for different seeds are exactly the same.";
+    EXPECT_TRUE(differs) << "Outputs for different seeds are exactly the same.";
 }
 
 TEST_F(RandomSplitterTest, splits_consistently_for_the_same_seed_with_different_splitters)
 {
-    randomSplitter = RandomSplitter(training, seed);
-    const auto first = randomSplitter.split(dataset);
-    randomSplitter = RandomSplitter(training, seed);
-    const auto second = randomSplitter.split(dataset);
+    RandomSplitter firstSplitter(training, seed);
+    const auto first = firstSplitter.split(dataset);
+    RandomSplitter secondSplitter(training, seed);
+    const auto second = secondSplitter.split(dataset);
     for (auto i = 0u; i < first.trainingSet.size(); ++i)
     {
         if (first.trainingSet.GetSampleMetadata(i) != second.trainingSet.GetSampleMetadata(i))
@@ -100,7 +97,6 @@ TEST_F(RandomSplitterTest, splits_consistently_for_the_same_seed_with_different_
 
 TEST_F(RandomSplitterTest, splits_consistently_for_the_same_seed_with_the_same_splitter)
 {
-    randomSplitter = RandomSplitter(training, seed);
     const auto first = randomSplitter.split(dataset);
     const auto second = randomSplitter.split(dataset);
     for (auto i = 0u; i < first.trainingSet.size(); ++i)
