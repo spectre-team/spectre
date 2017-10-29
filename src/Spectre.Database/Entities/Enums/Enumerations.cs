@@ -21,7 +21,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Spectre.Database.Entities
+namespace Spectre.Database.Entities.Enums
 {
     /// <summary>
     /// Enumeration for types of the AccessType.
