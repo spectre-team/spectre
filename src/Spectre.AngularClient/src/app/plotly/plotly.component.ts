@@ -34,6 +34,7 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() layout: any;
   @Input() options: any;
   @Input() displayRawData: boolean;
+  @Input() onClickFunction: Function;
   randomId: string;
   initialized: boolean;
 
@@ -66,6 +67,8 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
       console.log('[PlotlyComponent] nfAfterViewInit');
       Plotly.newPlot('plotly-' + this.randomId, this.data, this.layout, this.options);
+      const plotlyElement = <PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
+      plotlyElement.on('plotly_click', (event) => this.onClickFunction(event));
       this.initialized = true;
       this.cdRef.detectChanges();
       console.log('[PlotlyComponent] created plotly-' + this.randomId);

@@ -50,6 +50,7 @@ export class PreparationComponent implements OnInit {
   public minHeatmapColumn: number;
   public minHeatmapRow: number;
   public disabledChanelIdSlider = true;
+  public onClickBind: Function;
   @BlockUI() blockUI: NgBlockUI;
   public colors = [ {value:  'RdBu'}, {value: 'Greys'}, {value:  'YlGnBu'} , {value: 'Greens'}, {value:  'YlOrRd'},
     {value:  'Bluered'}, {value:  'Reds'}, {value: 'Blues'}, {value:  'Picnic'}, {value:  'Rainbow'}, {value: 'Portland'},
@@ -66,6 +67,7 @@ export class PreparationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onClickBind = this.onClickFunction.bind(this);
       this.route.params.subscribe(params => {
         console.log('[PreparationComponent] ngOnInit');
         this.id = Number.parseInt(params['id']);
@@ -103,16 +105,6 @@ export class PreparationComponent implements OnInit {
     this.heatmapData = this.toHeatmapDataset(this.heatmap);
   }
 
-  onChangedXCoordinate(event: any) {
-    this.xCoordinate = event.value;
-    this.getSpectrumByCoordinates();
-  }
-
-  onChangedYCoordinate(event: any) {
-    this.yCoordinate = event.value;
-    this.getSpectrumByCoordinates();
-  }
-
   getSpectrum(selectNumber: number) {
     this.blockUI.start('Getting spectrum...');
     this.spectrumService
@@ -125,6 +117,13 @@ export class PreparationComponent implements OnInit {
         this.showError('Spectrum not found');
       });
   }
+
+  onClickFunction(event) {
+    const point = event.points[0];
+    this.xCoordinate = point.x;
+    this.yCoordinate = point.y;
+    this.getSpectrumByCoordinates();
+}
 
   /*
    * Parameters:

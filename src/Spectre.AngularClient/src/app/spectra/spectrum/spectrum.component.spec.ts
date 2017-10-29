@@ -26,7 +26,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { PlotlyModule } from '../../plotly/plotly.module';
 
 import { SpectrumService } from '../shared/spectrum.service';
-import {SpectrumComponent} from './spectrum.component';
+import { SpectrumComponent } from './spectrum.component';
 
 describe('SpectrumComponent', () => {
   let component: SpectrumComponent;
