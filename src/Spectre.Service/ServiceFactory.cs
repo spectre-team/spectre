@@ -44,5 +44,16 @@ namespace Spectre.Service
         {
             return new ConsoleCaptureService(updateInterval);
         }
+
+        /// <summary>
+        /// Gets the path finder service.
+        /// </summary>
+        /// <returns>
+        /// IPathFinderInstance
+        /// </returns>
+        public IDatasetDetailsFinderService GetDatasetDetailsFinderService()
+        {
+            return new DatasetDetailsFinderService();
+        }
     }
 }
