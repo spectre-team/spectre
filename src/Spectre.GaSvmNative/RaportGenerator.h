@@ -36,6 +36,7 @@ public:
                const libGenetic::Individual& individual,
                double trainingTime,
                double meanClassificationTime,
+               unsigned int numberOfSupportVectors,
                const libClassifier::ConfusionMatrix* validationResults);
     ~RaportGenerator();
 private:

@@ -88,6 +88,7 @@ ConfusionMatrix SVMFitnessFunction::getResultMatrix(const OpenCvDataset& data, c
                             individual,
                             trainingTime,
                             classificationTime / m_Dataset.testSet.size(),
+                            svm.GetNumberOfSupportVectors(),
                             validationConfusions.get());
 
     return confusions;

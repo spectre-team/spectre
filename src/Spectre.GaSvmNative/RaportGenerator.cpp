@@ -40,6 +40,7 @@ RaportGenerator::RaportGenerator(std::string filename, uint populationSize, cons
     m_File << "percent of observations used" << m_Separator;
     m_File << "mean training time [ms]" << m_Separator;
     m_File << "mean classification time [ms]" << m_Separator;
+    m_File << "number of support vectors" << m_Separator;
     m_File << "independent true positives" << m_Separator;
     m_File << "independent true negatives" << m_Separator;
     m_File << "independent false positives" << m_Separator;
@@ -53,6 +54,7 @@ void RaportGenerator::Write(const libClassifier::ConfusionMatrix& matrix,
                             const libGenetic::Individual& individual,
                             double trainingTime,
                             double meanClassificationTime,
+                            unsigned int numberOfSupportVectors,
                             const libClassifier::ConfusionMatrix* validationResults)
 {
     auto count = 0u;
@@ -72,6 +74,7 @@ void RaportGenerator::Write(const libClassifier::ConfusionMatrix& matrix,
     m_File << static_cast<double>(count) / individual.size() << m_Separator;
     m_File << 1000 * trainingTime << m_Separator;
     m_File << 1000 * meanClassificationTime << m_Separator;
+    m_File << numberOfSupportVectors << m_Separator;
     if (validationResults != nullptr)
     {
         m_File << validationResults->TruePositive << m_Separator;
