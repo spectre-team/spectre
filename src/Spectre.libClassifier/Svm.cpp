@@ -53,6 +53,12 @@ std::vector<Label> Svm::Predict(LabeledDataset dataset) const
     return labels;
 }
 
+unsigned int Svm::GetNumberOfSupportVectors() const
+{
+    return m_Svm->getSupportVectors().rows;
+}
+
+
 const OpenCvDataset& Svm::asSupported(LabeledDataset dataset)
 {
     try
