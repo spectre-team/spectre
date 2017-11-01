@@ -29,7 +29,7 @@ class EmptyArgumentException : public ExceptionBase
 {
 public:
     /// <summary>
-    /// Initializes a new instance of the <see cref="ArgumentOutOfRangeException"/> class.
+    /// Initializes a new instance of the <see cref="EmptyArgumentException"/> class.
     /// </summary>
     /// <param name="variableName">Name of the variable.</param>
     explicit EmptyArgumentException(const std::string &variableName);

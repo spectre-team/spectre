@@ -1,6 +1,6 @@
 ﻿/*
 * ObservationExtractor.h
-* 
+* class for getting data from Individual object
 *
 Copyright 2017 Spectre Team
 
