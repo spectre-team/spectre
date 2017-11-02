@@ -36,9 +36,7 @@ GeneticAlgorithmFactory::GeneticAlgorithmFactory(double mutationRate,
     m_NumberOfCores(numberOfCores),
     m_MinimalFillup(minimalFillup),
     m_MaximalFillup(maximalFillup)
-{
-    
-}
+{ }
 
 
 std::unique_ptr<GeneticAlgorithm> GeneticAlgorithmFactory::BuildDefault(std::unique_ptr<FitnessFunction> fitnessFunction,
