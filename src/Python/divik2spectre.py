@@ -16,6 +16,21 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+================================================================================
+
+Expected content of input data file:
+
+a. m x n matrix data - contains m observations (measurement spots) described by
+   n features (mass channels or convolutions of subsequent components
+b. m x 2 matrix xy - for m observations contains X coordinate in first column
+   and Y coordinate in second column
+c. m x 1 matrix region - describes distinct biological structures; contains all
+   numbers from 1 to p, where p is the number of distinct biological structures
+d. p x 1 cell array region_names - content of i-th cell contains biological
+   interpretation of region with label i in vector region
+e. 1 x n matrix mz - contains m/z properties of mass channels or component means
+
 """
 
 import argparse as agp
