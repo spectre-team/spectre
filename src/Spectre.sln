@@ -105,6 +105,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libPlatform.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Dependencies", "Spectre.Dependencies\Spectre.Dependencies.csproj", "{2B9F4DFD-C222-477A-9107-1A3C356002A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.DataValidatorApp", "Spectre.DataValidatorApp\Spectre.DataValidatorApp.csproj", "{3D932849-312C-473C-B74C-ABD1F11A0739}"
+	ProjectSection(ProjectDependencies) = postProject
+		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC} = {70C87AF7-3189-4F6C-AC85-93309CF7CFDC}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -235,6 +240,10 @@ Global
 		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Debug|x64.Build.0 = Debug|x64
 		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Release|x64.ActiveCfg = Debug|x64
 		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Release|x64.Build.0 = Debug|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Debug|x64.ActiveCfg = Debug|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Debug|x64.Build.0 = Debug|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Release|x64.ActiveCfg = Release|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -257,6 +266,7 @@ Global
 		{B6B8D608-32E7-4F09-B91D-EA5832D74C07} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 		{76542909-5FC8-405B-8E6D-D2E529162A7A} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 		{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
+		{3D932849-312C-473C-B74C-ABD1F11A0739} = {D3C36686-9667-48B2-A14B-FF46E6350A51}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED57AF8B-7937-40C6-9764-D313AB08FEC9}
