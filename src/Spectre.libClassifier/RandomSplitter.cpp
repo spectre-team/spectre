@@ -30,14 +30,13 @@ using namespace libPlatform::Math;
 
 RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
     : m_trainingRate(trainingRate),
-      m_randomNumberGenerator(rngSeed) {}
+      m_Seed(rngSeed) { }
 
-SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCvDataset& data)
+SplittedOpenCvDataset RandomSplitter::split(const OpenCvDataset& data) const
 {
-    std::vector<int> indexes = range(0, int(data.size()));
-    libGenetic::RandomDevice randomDevice;
-    libGenetic::RandomNumberGenerator g(randomDevice());
-    std::shuffle(indexes.begin(), indexes.end(), g);
+    auto indexes = range(0, int(data.size()));
+    libGenetic::RandomNumberGenerator rng(m_Seed);
+    std::shuffle(indexes.begin(), indexes.end(), rng);
 
     std::vector<DataType> trainingData{};
     std::vector<DataType> validationData{};
@@ -50,15 +49,15 @@ SplittedOpenCvDataset RandomSplitter::split(const Spectre::libClassifier::OpenCv
     int trainingLimit = static_cast<int>(data.size() * m_trainingRate);
     for (auto i = 0; i < trainingLimit; i++)
     {
-        Observation observation(data[i]);
+        Observation observation(data[indexes[i]]);
         trainingData.insert(trainingData.end(), observation.begin(), observation.end());
-        trainingLabels.push_back(data.GetSampleMetadata(i));
+        trainingLabels.push_back(data.GetSampleMetadata(indexes[i]));
     }
     for (auto i = trainingLimit; i < data.size(); i++)
     {
-        Observation observation(data[i]);
+        Observation observation(data[indexes[i]]);
         validationData.insert(validationData.end(), observation.begin(), observation.end());
-        validationLabels.push_back(data.GetSampleMetadata(i));
+        validationLabels.push_back(data.GetSampleMetadata(indexes[i]));
     }
     OpenCvDataset dataset1(trainingData, trainingLabels);
     OpenCvDataset dataset2(validationData, validationLabels);
