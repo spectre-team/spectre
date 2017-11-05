@@ -21,6 +21,7 @@ limitations under the License.
 #include "CrossoverOperator.h"
 #include "InconsistentChromosomeLengthException.h"
 #include "Individual.h"
+#include "Spectre.libGenetic/InconsistentMinimalAndMaximalFillupException.h"
 
 namespace Spectre::libGenetic
 {
@@ -29,7 +30,10 @@ CrossoverOperator::CrossoverOperator(Seed rngSeed, size_t minimalFillup, size_t 
     m_MinimalFillup(minimalFillup),
     m_MaximalFillup(maximalFillup)
 {
-    // @gmrukwa: TODO: Add exception when maximalFillup < minimalFillup.
+    if (m_MinimalFillup > m_MaximalFillup)
+    {
+        throw InconsistentMinimalAndMaximalFillupException(m_MinimalFillup, m_MaximalFillup);
+    }
 }
 
 Individual CrossoverOperator::operator()(const Individual &first, const Individual &second)
@@ -51,7 +55,6 @@ Individual CrossoverOperator::operator()(const Individual &first, const Individu
     phenotype.insert(phenotype.end(), first.begin(), endOfFirst);
     phenotype.insert(phenotype.end(), beginningOfSecond, second.end());
 
-    // @gmrukwa: TODO: test this behaviour
     auto fillup = 0u;
     for(auto bit: phenotype)
     {

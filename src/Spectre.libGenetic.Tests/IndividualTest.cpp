@@ -181,4 +181,24 @@ TEST_F(IndividualTest, true_amount_equal_to_parameter)
     }
     EXPECT_EQ(trueAmount, initialFillup);
 }
+
+TEST_F(IndividualTest, create_different_individuals_for_different_seeds)
+{
+    const auto individualSize = 100u;
+    const auto initialFillup = 60u;
+    Seed seed1 = 1;
+    Seed seed2 = 2;
+    Individual individual1(individualSize, initialFillup, seed1);
+    Individual individual2(individualSize, initialFillup, seed2);
+    bool different = false;
+
+    for (auto i = 0u; i < individual1.size(); i++)
+    {
+        if (individual1[i] != individual2[i])
+        {
+            different = true;
+        }
+    }
+    EXPECT_EQ(different, true);
+}
 }

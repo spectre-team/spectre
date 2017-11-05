@@ -128,6 +128,12 @@
     <ClCompile Include="GeneticAlgorithmFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

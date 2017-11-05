@@ -20,6 +20,7 @@ limitations under the License.
 #include <algorithm>
 #include "Spectre.libException/ArgumentOutOfRangeException.h"
 #include "MutationOperator.h"
+#include "Spectre.libGenetic/InconsistentMinimalAndMaximalFillupException.h"
 
 namespace Spectre::libGenetic
 {
@@ -40,7 +41,10 @@ MutationOperator::MutationOperator(double mutationRate, double bitSwapRate, Seed
     {
         throw libException::ArgumentOutOfRangeException<double>("bitSwapRate", 0, 1, m_BitSwapRate);
     }
-    // @gmrukwa: TODO: Add exception when maximalFillup < minimalFillup.
+    if (m_MinimalFillup > m_MaximalFillup)
+    {
+        throw InconsistentMinimalAndMaximalFillupException(m_MinimalFillup, m_MaximalFillup);
+    }
 }
 
 Individual MutationOperator::operator()(Individual &&individual)
