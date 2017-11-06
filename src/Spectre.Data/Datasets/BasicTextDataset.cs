@@ -502,7 +502,7 @@ namespace Spectre.Data.Datasets
 
         private void SaveDataToFile(string path, StringBuilder fileBuilder)
         {
-            using (var sw = File.CreateText(path))
+            using (var sw = FileSystem.File.CreateText(path))
             {
                 sw.Write(value: fileBuilder.ToString());
             }

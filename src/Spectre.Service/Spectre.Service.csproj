@@ -67,6 +67,7 @@
     <Compile Include="Loaders\DatasetLoader.cs" />
     <Compile Include="Loaders\DatasetFormatException.cs" />
     <Compile Include="Loaders\DatasetNotFoundException.cs" />
+    <Compile Include="Savers\DatasetSaver.cs" />
     <Compile Include="ServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TooSmallUpdateIntervalException.cs" />

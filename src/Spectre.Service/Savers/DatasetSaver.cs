@@ -17,10 +17,13 @@
    limitations under the License.
 */
 
+using System.IO;
 using System.IO.Abstractions;
+using System.Linq;
 using Spectre.Data.Datasets;
 using Spectre.Dependencies;
 using Spectre.Service.Configuration;
+using Spectre.Service.Loaders;
 
 namespace Spectre.Service.Savers
 {
@@ -75,14 +78,26 @@ namespace Spectre.Service.Savers
         /// <param name="name">Name of the dataset.</param>
         public void SaveFromCache(string name)
         {
+            var foundCachedFiles = FileSystem.Directory.GetFiles(_cacheRoot, name + ".*");
+            if (foundCachedFiles.Length == 0)
+            {
+                throw new DatasetNotFoundException("Dataset file could not be found in the cache.", name);
+            }
+            var cachedFilePath = foundCachedFiles.First();
+            string fullPathRemote = Path.Combine(_remoteRoot, Path.GetFileName(cachedFilePath));
+            FileSystem.File.Copy(cachedFilePath, fullPathRemote);
         }
 
         /// <summary>
         /// Method for saving given dataset from application's memory into remote root.
         /// </summary>
         /// <param name="dataset">Dataset to be saved.</param>
-        public void SaveFromMemory(IDataset dataset)
+        /// <param name="name">User-friendly name given to the dataset.</param>
+        public void SaveFromMemory(IDataset dataset, string name)
         {
+            string extension = ".txt";
+            string fullPathRemote = FileSystem.Path.Combine(_remoteRoot, name + extension);
+            dataset.SaveToFile(fullPathRemote);
         }
 
         #endregion
