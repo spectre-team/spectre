@@ -22,10 +22,10 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
-    class InconsistentMinimalAndMaximalFillupException :
-        public libException::InconsistentArgumentSizesException
-    {
-    public:
-        InconsistentMinimalAndMaximalFillupException(size_t minimal, size_t maximal);
-    };
+class InconsistentMinimalAndMaximalFillupException :
+    public libException::InconsistentArgumentSizesException
+{
+public:
+    InconsistentMinimalAndMaximalFillupException(size_t minimal, size_t maximal);
+};
 }

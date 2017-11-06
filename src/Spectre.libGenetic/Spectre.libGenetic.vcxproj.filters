@@ -75,6 +75,9 @@
     <ClInclude Include="ExcessivePreservationRateException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
+    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClCompile>
     <ClInclude Include="GeneticAlgorithmFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -125,14 +128,11 @@
     <ClCompile Include="ExcessivePreservationRateException.cpp">
       <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
-    <ClCompile Include="GeneticAlgorithmFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.h">
-      <Filter>Header Files\Exceptions</Filter>
-    </ClCompile>
     <ClCompile Include="InconsistentMinimalAndMaximalFillupException.cpp">
       <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneticAlgorithmFactory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

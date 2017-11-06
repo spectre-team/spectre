@@ -20,8 +20,8 @@ limitations under the License.
 #include "Spectre.libPlatform/Statistics.h"
 #include "CrossoverOperator.h"
 #include "InconsistentChromosomeLengthException.h"
+#include "InconsistentMinimalAndMaximalFillupException.h"
 #include "Individual.h"
-#include "Spectre.libGenetic/InconsistentMinimalAndMaximalFillupException.h"
 
 namespace Spectre::libGenetic
 {
