@@ -36,7 +36,11 @@ namespace Spectre.Dependencies
         /// Method for loading new modules containing bindings to types for dependency resolving.
         /// </summary>
         /// <param name="newModule">Module to load.</param>
-        public static void AddModule(INinjectModule newModule) => Kernel.Load(newModule);
+        public static void AddModule(INinjectModule newModule)
+        {
+            if(!Kernel.HasModule(newModule.Name))
+                Kernel.Load(newModule);
+        }
 
         /// <summary>
         /// Method for getting a certain service according to its type.
