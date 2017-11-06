@@ -88,6 +88,7 @@
     <ClInclude Include="GeneticAlgorithmFactory.h" />
     <ClInclude Include="InconsistentChromosomeLengthException.h" />
     <ClInclude Include="InconsistentGenerationAndScoresLengthException.h" />
+    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.h" />
     <ClInclude Include="IndividualsBuilderStrategy.h" />
     <ClInclude Include="MutationOperator.h" />
     <ClInclude Include="Individual.h" />
@@ -108,7 +109,6 @@
     <ClCompile Include="InconsistentChromosomeLengthException.cpp" />
     <ClCompile Include="InconsistentGenerationAndScoresLengthException.cpp" />
     <ClCompile Include="InconsistentMinimalAndMaximalFillupException.cpp" />
-    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.h" />
     <ClCompile Include="IndividualsBuilderStrategy.cpp" />
     <ClCompile Include="MutationOperator.cpp" />
     <ClCompile Include="Individual.cpp" />
