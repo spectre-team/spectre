@@ -95,7 +95,7 @@ namespace Spectre.Service.Savers
         /// <param name="name">User-friendly name given to the dataset.</param>
         public void SaveFromMemory(IDataset dataset, string name)
         {
-            string extension = ".txt";
+            string extension = ".txt"; // TODO @dkuchta: extension recognition
             string fullPathRemote = FileSystem.Path.Combine(_remoteRoot, name + extension);
             dataset.SaveToFile(fullPathRemote);
         }
