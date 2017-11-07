@@ -88,7 +88,7 @@
     <ClInclude Include="GeneticAlgorithmFactory.h" />
     <ClInclude Include="InconsistentChromosomeLengthException.h" />
     <ClInclude Include="InconsistentGenerationAndScoresLengthException.h" />
-    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.h" />
+    <ClInclude Include="InconsistentMinimalAndMaximalFillupException.h" />
     <ClInclude Include="IndividualsBuilderStrategy.h" />
     <ClInclude Include="MutationOperator.h" />
     <ClInclude Include="Individual.h" />

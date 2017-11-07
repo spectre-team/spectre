@@ -1,5 +1,5 @@
 /*
-* InconsistentMinimalAndMaximalFillupException.h
+* InconsistentMinimalAndMaximalFillupException.cpp
 * Thrown when minimal fillup is greater than maximal.
 *
 Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
