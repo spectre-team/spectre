@@ -17,18 +17,47 @@
    limitations under the License.
 */
 
+using System.IO;
 using NUnit.Framework;
+using Spectre.Algorithms.Io;
+using Spectre.Algorithms.Results;
 
 namespace Spectre.Algorithms.Tests.Io
 {
     [TestFixture]
-    //[Category(name: "Algorithm")]
+    [Category(name: "Algorithm")]
     public class DivikResultLoaderTests
     {
+        private readonly string _testFilesDirectory = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files";
+
         [Test]
-        public void CreateTestsForThisClass()
+        public void InitializesWithMcrBackend()
         {
-            Assert.Fail();
+            Assert.DoesNotThrow(
+                code: () =>
+                {
+                    using (var loader = new DivikResultLoader())
+                    { }
+                });
+        }
+
+        [Test]
+        public void LoadsTree()
+        {
+            var samplePath = Path.GetFullPath(Path.Combine(_testFilesDirectory, "sample_divik_result.mat"));
+            DivikResult tree = null;
+            using (var loader = new DivikResultLoader())
+            {
+                Assert.DoesNotThrow(code: () => tree = loader.Load(samplePath));
+            }
+            Assert.NotNull(tree);
+            Assert.AreEqual(expected: 12.3806, actual: tree.AmplitudeThreshold, delta: 0.001);
+            Assert.AreEqual(expected: float.NegativeInfinity, actual: tree.VarianceThreshold);
+            Assert.AreEqual(expected: 2398, actual: tree.AmplitudeFilter.Length);
+            Assert.AreEqual(expected: 2263, actual: tree.VarianceFilter.Length);
+            Assert.AreEqual(expected: 7671, actual: tree.Merged.Length);
+            Assert.AreEqual(expected: 2, actual: tree.Subregions.Length);
+            Assert.NotNull(anObject: tree.Subregions[0]);
         }
     }
 }
