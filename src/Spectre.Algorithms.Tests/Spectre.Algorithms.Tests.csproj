@@ -39,10 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MatlabAlgorithmsNative, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.0\lib\MatlabAlgorithmsNative.dll</HintPath>
+      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.1\lib\MatlabAlgorithmsNative.dll</HintPath>
     </Reference>
     <Reference Include="MWArray, Version=2.16.1.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.0\lib\MWArray.dll</HintPath>
+      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.1\lib\MWArray.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

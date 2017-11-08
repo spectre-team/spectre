@@ -81,10 +81,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="MatlabAlgorithmsNative">
-      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.0\lib\MatlabAlgorithmsNative.dll</HintPath>
+      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.1\lib\MatlabAlgorithmsNative.dll</HintPath>
     </Reference>
     <Reference Include="MWArray">
-      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.0\lib\MWArray.dll</HintPath>
+      <HintPath>..\packages\MatlabAlgorithmsNative.1.0.1\lib\MWArray.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
