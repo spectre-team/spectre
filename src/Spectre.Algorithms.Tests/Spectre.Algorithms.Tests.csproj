@@ -64,6 +64,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Io\DivikResultLoaderTests.cs" />
     <Compile Include="Methods\GmmFilteringTests.cs" />
     <Compile Include="Methods\GmmModellingTests.cs" />
     <Compile Include="Methods\PreprocessingTests.cs" />
