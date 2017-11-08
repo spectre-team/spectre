@@ -22,7 +22,7 @@ using NUnit.Framework;
 namespace Spectre.Algorithms.Tests.Io
 {
     [TestFixture]
-    [Category(name: "Algorithm")]
+    //[Category(name: "Algorithm")]
     public class DivikResultLoaderTests
     {
         [Test]
