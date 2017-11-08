@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1298587968" file="${PROJECT_ROOT}\algorithms.prj" location="${PROJECT_ROOT}" name="algorithms" preferred-package-location="${PROJECT_ROOT}\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
+  <configuration build-checksum="1298587968" file="$.\algorithms.prj" location="." name="algorithms" preferred-package-location="${PROJECT_ROOT}\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
     <param.appname>MsiAlgorithms</param.appname>
     <param.icon />
     <param.icons />
@@ -52,7 +52,7 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
     <param.net.tsa.namespace>MatlabAlgorithms</param.net.tsa.namespace>
     <param.net.tsa.superclass>Preprocessing</param.net.tsa.superclass>
     <param.net.tsa.metadata />
-    <param.net.tsa.metadata.assembly>C:\WINDOWS\System32</param.net.tsa.metadata.assembly>
+    <param.net.tsa.metadata.assembly>C:\Users\Grzegorz</param.net.tsa.metadata.assembly>
     <param.net.saved.interface />
     <unset>
       <param.icon />
@@ -94,6 +94,7 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
       <file>${PROJECT_ROOT}\DiviK\libs\divik_library\divik.m</file>
       <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
       <file>${PROJECT_ROOT}\estimate_gmm.m</file>
+      <file>${PROJECT_ROOT}\load_divik_result.m</file>
       <file>${PROJECT_ROOT}\merge_gmm_model_components.m</file>
       <file>${PROJECT_ROOT}\pafft.m</file>
       <file>${PROJECT_ROOT}\reduce_gmm_by_component_area.m</file>
@@ -105,6 +106,7 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
       <entity.package name="">
         <entity.class name="Preprocessing">
           <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
+          <file>${PROJECT_ROOT}\load_divik_result.m</file>
           <file>${PROJECT_ROOT}\pafft.m</file>
           <file>${PROJECT_ROOT}\remove_baseline.m</file>
           <file>${PROJECT_ROOT}\ticnorm.m</file>
@@ -127,6 +129,7 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
     <fileset.resources>
       <file>${PROJECT_ROOT}\DiviK\libs</file>
       <file>${PROJECT_ROOT}\GMM</file>
+      <file>${PROJECT_ROOT}\load_divik_result.m</file>
     </fileset.resources>
     <fileset.depfun>
       <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>
