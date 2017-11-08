@@ -47,12 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datasets\RoiDataset.cs" />
     <Compile Include="Structures\DataPoint.cs" />
     <Compile Include="Datasets\BasicTextDataset.cs" />
     <Compile Include="Datasets\IDataset.cs" />
     <Compile Include="Structures\Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structures\SpatialCoordinates.cs" />
+    <Compile Include="Utils\IRoiUtilites.cs" />
+    <Compile Include="Utils\RoiUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
