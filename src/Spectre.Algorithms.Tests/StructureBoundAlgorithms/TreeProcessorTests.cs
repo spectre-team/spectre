@@ -49,7 +49,7 @@ namespace Spectre.Algorithms.Tests.StructureBoundAlgorithms
             {
                 new DummyTree(new DummyTree[]{}),
                 null,
-                new DummyTree(new DummyTree[]{}),
+                new DummyTree(null),
                 new DummyTree(new DummyTree[]{}),
             })
         });
@@ -65,7 +65,7 @@ namespace Spectre.Algorithms.Tests.StructureBoundAlgorithms
             _sampleUnbalancedTree.Fold(
                 (subtree, subresults) =>
                 {
-                    subresults.ToArray();
+                    subresults?.ToArray();
                     return ++visits;
                 }, 0u);
             Assert.AreEqual(_expectedNumberOfLeaves, visits);
@@ -78,7 +78,7 @@ namespace Spectre.Algorithms.Tests.StructureBoundAlgorithms
             var resultForRoot = _sampleUnbalancedTree.Fold(
                 (subtree, subresults) =>
                 {
-                    subresults.ToArray();
+                    subresults?.ToArray();
                     return ++visits;
                 }, 0u);
             Assert.AreEqual(_expectedNumberOfLeaves, resultForRoot);
@@ -127,8 +127,8 @@ namespace Spectre.Algorithms.Tests.StructureBoundAlgorithms
             _sampleUnbalancedTree.Fold(
                 (subtree, subresults) =>
                 {
-                    Assert.AreEqual(subtree.Children.Count(child => child == null),
-                                    subresults.Sum());
+                    Assert.AreEqual(subtree?.Children?.Count(child => child == null) ?? 0,
+                                    subresults?.Sum() ?? 0);
                     return 0;
                 },
                 initialValue: 1);

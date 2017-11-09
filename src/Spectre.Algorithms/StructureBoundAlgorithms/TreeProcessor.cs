@@ -41,7 +41,7 @@ namespace Spectre.Algorithms.StructureBoundAlgorithms
         public static TOutput Fold<TOutput>(this ITree tree, Func<ITree, IEnumerable<TOutput>, TOutput> foldNode, TOutput initialValue)
         {
             var subresults = tree.Children
-                .Select(selector: child =>
+                ?.Select(selector: child =>
                     child != null ? child.Fold(foldNode, initialValue) : initialValue);
             return foldNode(tree, subresults);
         }
@@ -56,7 +56,7 @@ namespace Spectre.Algorithms.StructureBoundAlgorithms
             return tree.Fold<uint>(
                 foldNode: (subtree, subdepths) =>
                 {
-                    var depths = subdepths as uint[] ?? subdepths.ToArray();
+                    var depths = subdepths as uint[] ?? subdepths?.ToArray() ?? new uint[] { };
                     return depths.Any() ? depths.Max() + 1 : 1;
                 },
                 initialValue: 0);
