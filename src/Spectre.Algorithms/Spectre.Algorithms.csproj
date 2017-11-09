@@ -63,6 +63,7 @@
     <Compile Include="Methods\Utils\Partition.cs" />
     <Compile Include="Parameterization\DivikOptions.cs" />
     <Compile Include="Parameterization\Metric.cs" />
+    <Compile Include="ResultsProcessors\DivikResultSummary.cs" />
     <Compile Include="Results\DivikResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\GmmModel.cs" />
