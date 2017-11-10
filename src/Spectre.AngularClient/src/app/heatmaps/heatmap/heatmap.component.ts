@@ -27,6 +27,7 @@ export class HeatmapComponent implements OnInit {
   @Input() public heatmapData: any;
   @Input() public height = 600;
   @Input() public width = 600;
+  @Input() public onClickFunction: Function;
   public heatmapLayout: any;
   public options: any;
 
@@ -59,7 +60,6 @@ export class HeatmapComponent implements OnInit {
       }
     };
   }
-
 
   defaultData() {
     return [{}];

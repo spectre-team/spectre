@@ -5,34 +5,12 @@
     <p-tabView>
       <p-tabPanel header="Heatmap & Spectrum" leftIcon="fa-thermometer (alias)" rightIcon="fa-bar-chart" [headerStyle]="{'width': '195px', 'margin':'0 auto'}">
         <div>
-          <mat-slider
-            class="slider-x"
-            [(ngModel)]="xCoordinate"
-            showTicks="true"
-            min="0"
-            max={{xHeatmapSize}}
-            step="1"
-            vertical="false"
-            thumb-label="true"
-            tick-interval="true"
-            (change)="onChangedXCoordinate($event)">
-          </mat-slider>
+
 
           <div class="inline-items-container">
-            <mat-slider
-              class="slider-y"
-              [(ngModel)]="yCoordinate"
-              showTicks="true"
-              min="0"
-              max={{yHeatmapSize}}
-              step="1"
-              vertical="true"
-              thumb-label="true"
-              tick-interval="true"
-              (change)="onChangedYCoordinate($event)">
-            </mat-slider>
             <app-heatmap
-              [heatmapData]=heatmapData>
+              [heatmapData]=heatmapData
+              [onClickFunction]="onClickBind">
             </app-heatmap>
           </div>
         </div>
@@ -71,7 +49,8 @@
       </p-tabPanel>
       <p-tabPanel header="Heatmap" leftIcon="fa fa-thermometer (alias)" [headerStyle]="{'width': '165px', 'color': 'green'}">
         <app-heatmap
-          [heatmapData]=heatmapData>
+          [heatmapData]=heatmapData
+          [onClickFunction]="onClickBind">
         </app-heatmap>
           <div class="column-item-position">
             <form>

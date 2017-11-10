@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
@@ -93,6 +92,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CSharpCodingConvention.ruleset = CSharpCodingConvention.ruleset
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Database", "Spectre.Database\Spectre.Database.csproj", "{B5B60F79-653C-4E41-9721-06C478CE9E7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Database.Tests", "Spectre.Database.Tests\Spectre.Database.Tests.csproj", "{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libPlatform", "Spectre.libPlatform\Spectre.libPlatform.vcxproj", "{76542909-5FC8-405B-8E6D-D2E529162A7A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libPlatform.Tests", "Spectre.libPlatform.Tests\Spectre.libPlatform.Tests.vcxproj", "{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14}"
@@ -113,6 +116,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.GaSvmNative.Tests", "Spectre.GaSvmNative.Tests\Spectre.GaSvmNative.Tests.vcxproj", "{268F145F-5CFE-4634-9D59-0688CEBBF340}"
 	ProjectSection(ProjectDependencies) = postProject
 		{ACC9B0E5-4106-4392-A7B6-A8A050759AFB} = {ACC9B0E5-4106-4392-A7B6-A8A050759AFB}
+    EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.DataValidatorApp", "Spectre.DataValidatorApp\Spectre.DataValidatorApp.csproj", "{3D932849-312C-473C-B74C-ABD1F11A0739}"
+	ProjectSection(ProjectDependencies) = postProject
+		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC} = {70C87AF7-3189-4F6C-AC85-93309CF7CFDC}
 	EndProjectSection
 EndProject
 Global
@@ -225,6 +233,14 @@ Global
 		{B6B8D608-32E7-4F09-B91D-EA5832D74C07}.Debug|x64.Build.0 = Debug|x64
 		{B6B8D608-32E7-4F09-B91D-EA5832D74C07}.Release|x64.ActiveCfg = Release|x64
 		{B6B8D608-32E7-4F09-B91D-EA5832D74C07}.Release|x64.Build.0 = Release|x64
+		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Debug|x64.ActiveCfg = Debug|x64
+		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Debug|x64.Build.0 = Debug|x64
+		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Release|x64.ActiveCfg = Release|x64
+		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Release|x64.Build.0 = Release|x64
+		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Debug|x64.ActiveCfg = Debug|x64
+		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Debug|x64.Build.0 = Debug|x64
+		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Release|x64.ActiveCfg = Release|x64
+		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Release|x64.Build.0 = Release|x64
 		{76542909-5FC8-405B-8E6D-D2E529162A7A}.Debug|x64.ActiveCfg = Debug|x64
 		{76542909-5FC8-405B-8E6D-D2E529162A7A}.Debug|x64.Build.0 = Debug|x64
 		{76542909-5FC8-405B-8E6D-D2E529162A7A}.Release|x64.ActiveCfg = Release|x64
@@ -245,6 +261,10 @@ Global
 		{268F145F-5CFE-4634-9D59-0688CEBBF340}.Debug|x64.Build.0 = Debug|x64
 		{268F145F-5CFE-4634-9D59-0688CEBBF340}.Release|x64.ActiveCfg = Release|x64
 		{268F145F-5CFE-4634-9D59-0688CEBBF340}.Release|x64.Build.0 = Release|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Debug|x64.ActiveCfg = Debug|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Debug|x64.Build.0 = Debug|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Release|x64.ActiveCfg = Release|x64
+		{3D932849-312C-473C-B74C-ABD1F11A0739}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -269,5 +289,9 @@ Global
 		{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 		{ACC9B0E5-4106-4392-A7B6-A8A050759AFB} = {25CCDEF0-96A1-4F4E-94F8-CCF93DFFAC5B}
 		{268F145F-5CFE-4634-9D59-0688CEBBF340} = {25CCDEF0-96A1-4F4E-94F8-CCF93DFFAC5B}
+		{3D932849-312C-473C-B74C-ABD1F11A0739} = {D3C36686-9667-48B2-A14B-FF46E6350A51}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED57AF8B-7937-40C6-9764-D313AB08FEC9}
 	EndGlobalSection
 EndGlobal
