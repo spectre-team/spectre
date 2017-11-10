@@ -17,17 +17,19 @@
    limitations under the License.
 */
 
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using MathWorks.MATLAB.NET.Arrays.native;
 using Newtonsoft.Json;
+using Spectre.Algorithms.DataStructures;
 
 namespace Spectre.Algorithms.Results
 {
     /// <summary>
     /// Wraps DiviK algorithm results.
     /// </summary>
-    public sealed class DivikResult
+    public sealed class DivikResult : ITree
     {
         #region Constructor
 
@@ -104,6 +106,13 @@ namespace Spectre.Algorithms.Results
         /// Result of further splits
         /// </summary>
         public DivikResult[] Subregions { get; set; }
+
+        #endregion
+
+        #region Implementation of ITree
+
+        /// <inheritdoc />
+        public IEnumerable<ITree> Children => Subregions;
 
         #endregion
 
