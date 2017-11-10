@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1298587968" file="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms.prj" location="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB" name="algorithms" preferred-package-location="C:\Users\Grzegorz\${PROJECT_ROOT}\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
+  <configuration build-checksum="1298587968" file=".\algorithms.prj" location="." name="algorithms" preferred-package-location="${PROJECT_ROOT}\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
     <param.appname>MsiAlgorithms</param.appname>
     <param.icon />
     <param.icons />
@@ -52,7 +52,7 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
     <param.net.tsa.namespace>MatlabAlgorithms</param.net.tsa.namespace>
     <param.net.tsa.superclass>Preprocessing</param.net.tsa.superclass>
     <param.net.tsa.metadata />
-    <param.net.tsa.metadata.assembly>C:\Users\Grzegorz</param.net.tsa.metadata.assembly>
+    <param.net.tsa.metadata.assembly>C:\WINDOWS\System32</param.net.tsa.metadata.assembly>
     <param.net.saved.interface />
     <unset>
       <param.icon />
@@ -136,10 +136,10 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
     </fileset.depfun>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithmsNative.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithmsNative.dll</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms_overview.html" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms_overview.html</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms.dll" optional="false">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\MatlabAlgorithms.dll</file>
-      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="readme.txt" optional="true">C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\MATLAB\algorithms-compile\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithmsNative.dll" optional="false">${PROJECT_ROOT}\algorithms-compile\for_testing\MatlabAlgorithmsNative.dll</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms_overview.html" optional="false">${PROJECT_ROOT}\algorithms-compile\for_testing\MatlabAlgorithms_overview.html</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="MatlabAlgorithms.dll" optional="false">${PROJECT_ROOT}\algorithms-compile\for_testing\MatlabAlgorithms.dll</file>
+      <file location="${PROJECT_ROOT}\algorithms-compile\for_testing" name="readme.txt" optional="true">${PROJECT_ROOT}\algorithms-compile\for_testing\readme.txt</file>
     </build-deliverables>
     <workflow />
     <matlab>
