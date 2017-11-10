@@ -14,6 +14,21 @@ colorlinks: true
 
 # Installation
 
+## MATLAB MCR
+
+In order to make DiviK software fully operational, a MCR (MATLAB Compiler
+Runtime) has to be installed.
+
+However, due to the [licensing by MathWorks](https://www.mathworks.com/matlabcentral/answers/25863-mcr-installer-is-there-a-license-file-whic#comment_57242),
+it is not available through project website. Nevertheless, we are still eligible
+to share it with you personally, so feel free to contact us by
+[mail](mailto:Grzegorz.Mrukwa@polsl.pl?subject=[Spectre] MCR installer).
+
+Please note, that it can be also downloaded through
+[MathWorks website](https://www.mathworks.com/products/compiler/mcr.html) for
+free, but this way has not been tested yet.
+
+## Conversion software
 No installation required. Once the files are unpacked from the `.zip ` archive,
 software can be used without further delay.
 
