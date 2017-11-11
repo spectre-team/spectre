@@ -255,6 +255,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ComputationController.cs" />
     <Compile Include="Controllers\DivikResultController.cs" />
     <Compile Include="Controllers\HeatmapController.cs" />
     <Compile Include="Controllers\PreparationsController.cs" />
