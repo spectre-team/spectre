@@ -24,8 +24,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Hangfire;
 using Spectre.Algorithms.Parameterization;
-using Spectre.Data.Datasets;
-using Spectre.Dependencies;
 using Spectre.Service.Abstract;
 
 namespace Spectre.Service.Scheduling
@@ -35,12 +33,15 @@ namespace Spectre.Service.Scheduling
     /// </summary>
     public class JobScheduler : IJobScheduler
     {
+        private readonly IDivikService _divikService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JobScheduler"/> class.
         /// </summary>
-        public JobScheduler()
+        /// <param name="divikService">Handle to DiviK computation service.</param>
+        public JobScheduler(IDivikService divikService)
         {
-            DivikService = DependencyResolver.GetService<IDivikService>();
+            _divikService = divikService;
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace Spectre.Service.Scheduling
         private IDivikService DivikService { get; }
 
         /// <inheritdoc/>
-        public string ScheduleDivikJob(IDataset dataset, DivikOptions options)
+        public string ScheduleDivikJob(string datasetName, DivikOptions options)
         {
             var identifier = BackgroundJob.Enqueue(() => Console.WriteLine("Works!!"));
             return identifier;

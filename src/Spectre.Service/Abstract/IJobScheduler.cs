@@ -35,9 +35,9 @@ namespace Spectre.Service.Abstract
         /// <summary>
         /// Schedule DiviK calculation.
         /// </summary>
-        /// <param name="dataset">The source dataset being passed to the target.</param>
+        /// <param name="datasetName">The source dataset name to be opened.</param>
         /// <param name="options">The options passed to the divik algorithm.</param>
         /// <returns>Job idenifier.</returns>
-        string ScheduleDivikJob(IDataset dataset, DivikOptions options);
+        string ScheduleDivikJob(string datasetName, DivikOptions options);
     }
 }

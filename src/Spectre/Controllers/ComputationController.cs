@@ -37,17 +37,13 @@ namespace Spectre.Controllers
     {
         private IJobScheduler _jobScheduler;
 
-        private DatasetLoader _datasetLoader;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ComputationController"/> class.
         /// </summary>
         /// <param name="jobScheduler">Handle to job scheduling service.</param>
-        /// <param name="datasetLoader">Handle to dataset loader.</param>
-        public ComputationController(IJobScheduler jobScheduler, DatasetLoader datasetLoader)
+        public ComputationController(IJobScheduler jobScheduler)
         {
             _jobScheduler = jobScheduler;
-            _datasetLoader = datasetLoader;
         }
 
         /// <summary>
@@ -59,8 +55,7 @@ namespace Spectre.Controllers
         [HttpPost]
         public string Post(string datasetName, [FromBody] DivikOptions divikOptions)
         {
-            var dataset = _datasetLoader.GetFromName(datasetName);
-            var identifier = _jobScheduler.ScheduleDivikJob(dataset, divikOptions);
+            var identifier = _jobScheduler.ScheduleDivikJob(datasetName, divikOptions);
             return identifier;
         }
     }

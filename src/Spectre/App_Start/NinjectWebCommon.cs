@@ -12,6 +12,7 @@ namespace Spectre.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
+    using Service;
     using Service.Abstract;
     using Service.Configuration;
     using Service.Loaders;
@@ -75,6 +76,7 @@ namespace Spectre.App_Start
                     ConfigurationManager.AppSettings["RemoteDataDirectory"]));
 
             kernel.Rebind<DatasetLoader>().ToSelf();
+            kernel.Rebind<IDivikService>().To<DivikService>();
             kernel.Rebind<IJobScheduler>().To<JobScheduler>();
         }
     }
