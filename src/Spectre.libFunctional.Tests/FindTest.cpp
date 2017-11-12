@@ -20,7 +20,7 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
 #include <span.h>
-#include "Spectre.libPlatform/Find.h"
+#include "Spectre.libFunctional/Find.h"
 
 namespace
 {

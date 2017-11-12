@@ -20,7 +20,7 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
-#include "Spectre.libPlatform/Transform.h"
+#include "Spectre.libFunctional/Transform.h"
 
 namespace
 {

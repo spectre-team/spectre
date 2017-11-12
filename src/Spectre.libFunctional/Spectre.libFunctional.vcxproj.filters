@@ -15,22 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Range.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Find.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZeroStepException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Common\Main.cpp">
+    <ClCompile Include="ZeroStepException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MathTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StatisticsTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.libPlatform.Tests\..\..\lib\native\src\gtest\gtest-all.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.libPlatform.Tests\..\..\lib\native\src\gmock\gmock-all.cc">
+    <ClCompile Include="Find.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

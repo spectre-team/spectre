@@ -20,8 +20,7 @@ limitations under the License.
 #pragma once
 #include <vector>
 #include <span.h>
-#include "Transform.h"
-#include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libFunctional/Transform.h"
 
 namespace Spectre::libPlatform::Math
 {

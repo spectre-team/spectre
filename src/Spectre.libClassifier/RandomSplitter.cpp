@@ -19,7 +19,7 @@ limitations under the License.
 
 #include <random>
 #include "RandomSplitter.h"
-#include "Spectre.libPlatform/Filter.h"
+#include "Spectre.libFunctional/Filter.h"
 #include "Spectre.libPlatform/Math.h"
 #include "Spectre.libGenetic/DataTypes.h"
 
