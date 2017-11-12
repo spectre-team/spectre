@@ -19,7 +19,7 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
-#include "Spectre.libPlatform/Math.h"
+#include "Spectre.libStatistics/Math.h"
 
 namespace
 {

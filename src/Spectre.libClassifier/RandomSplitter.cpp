@@ -20,7 +20,7 @@ limitations under the License.
 #include <random>
 #include "RandomSplitter.h"
 #include "Spectre.libFunctional/Filter.h"
-#include "Spectre.libPlatform/Math.h"
+#include "Spectre.libStatistics/Math.h"
 #include "Spectre.libGenetic/DataTypes.h"
 
 namespace Spectre::libClassifier {

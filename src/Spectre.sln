@@ -98,9 +98,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Database", "Spectre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Database.Tests", "Spectre.Database.Tests\Spectre.Database.Tests.csproj", "{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libPlatform", "Spectre.libPlatform\Spectre.libPlatform.vcxproj", "{76542909-5FC8-405B-8E6D-D2E529162A7A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libStatistics", "Spectre.libStatistics\Spectre.libStatistics.vcxproj", "{76542909-5FC8-405B-8E6D-D2E529162A7A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libPlatform.Tests", "Spectre.libPlatform.Tests\Spectre.libPlatform.Tests.vcxproj", "{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libStatistics.Tests", "Spectre.libStatistics.Tests\Spectre.libStatistics.Tests.vcxproj", "{81F10DE8-B9EF-400F-B3A7-57F2AFF35A14}"
 	ProjectSection(ProjectDependencies) = postProject
 		{76542909-5FC8-405B-8E6D-D2E529162A7A} = {76542909-5FC8-405B-8E6D-D2E529162A7A}
 	EndProjectSection
