@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Abstractions, Version=2.0.0.143, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Abstractions.2.0.0.143\lib\net40\System.IO.Abstractions.dll</HintPath>
     </Reference>
@@ -47,15 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datasets\RoiDataset.cs" />
+    <Compile Include="Datasets\Roi.cs" />
     <Compile Include="Structures\DataPoint.cs" />
     <Compile Include="Datasets\BasicTextDataset.cs" />
     <Compile Include="Datasets\IDataset.cs" />
     <Compile Include="Structures\Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structures\SpatialCoordinates.cs" />
-    <Compile Include="Utils\IRoiUtilites.cs" />
-    <Compile Include="Utils\RoiUtilities.cs" />
+    <Compile Include="RoiIo\IRoiUtilites.cs" />
+    <Compile Include="RoiIo\RoiUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

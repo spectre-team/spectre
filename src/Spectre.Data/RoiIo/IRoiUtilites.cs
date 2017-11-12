@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Spectre.Data.Datasets;
 
-namespace Spectre.Data.Utils
+namespace Spectre.Data.RoiIo
 {
     /// <summary>
     /// Interface for RoiUtilities.
@@ -37,7 +37,7 @@ namespace Spectre.Data.Utils
         /// <returns>
         /// Returns list doubles.
         /// </returns>
-        RoiDataset RoiReader();
+        Roi RoiReader();
 
         /// <summary>
         /// Writes roi dataset into a png file.
@@ -46,6 +46,14 @@ namespace Spectre.Data.Utils
         /// <returns>
         /// Returns true if operation was successfull.
         /// </returns>
-        bool RoiWriter(RoiDataset prototyp);
+        bool RoiWriter(Roi prototyp);
+
+        /// <summary>
+        /// Lists the rois from directory.
+        /// </summary>
+        /// <returns>
+        /// Returns names of all Roi files in the directory.
+        /// </returns>
+        List<string> ListRoisFromDirectory();
     }
 }

@@ -28,7 +28,7 @@ namespace Spectre.Data.Datasets
     /// <summary>
     /// Dataset for regions of interest.
     /// </summary>
-    public class RoiDataset
+    public class Roi
     {
         /// <summary>
         /// Gets or sets the x coordinates.

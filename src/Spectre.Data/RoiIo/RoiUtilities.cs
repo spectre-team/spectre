@@ -17,15 +17,16 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectre.Data.Datasets;
-
-namespace Spectre.Data.Utils
+namespace Spectre.Data.RoiIo
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO;
+    using System.IO.Abstractions;
+    using System.Linq;
+    using Spectre.Data.Datasets;
+
     /// <summary>
     /// Class with utilities for managing the regions of interest data.
     /// </summary>
@@ -38,11 +39,10 @@ namespace Spectre.Data.Utils
         /// <returns>
         /// Returns list doubles.
         /// </returns>
-        public RoiDataset RoiReader()
+        public Roi RoiReader()
         {
-            RoiDataset prototyp = new RoiDataset();
+            Roi prototyp = new Roi();
 
-            // read from png file to the object.
             return prototyp;
         }
 
@@ -53,10 +53,31 @@ namespace Spectre.Data.Utils
         /// <returns>
         /// Returns true if operation was succeded.
         /// </returns>
-        public bool RoiWriter(RoiDataset prototyp)
+        public bool RoiWriter(Roi prototyp)
         {
             // write from list to png file.
             return false;
+        }
+
+        /// <summary>
+        /// Lists the rois from directory.
+        /// </summary>
+        /// <returns>
+        /// Names of all roi files in the directory.
+        /// </returns>
+        public List<string> ListRoisFromDirectory()
+        {
+            List<string> names = new List<string>();
+
+            string[] allfiles = System.IO.Directory.GetFiles(
+                Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,
+                "*.png",
+                SearchOption.AllDirectories);
+
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            names = allfiles.ToList();
+
+            return names;
         }
     }
 }
