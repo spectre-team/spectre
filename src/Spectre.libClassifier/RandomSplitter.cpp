@@ -25,7 +25,7 @@ limitations under the License.
 
 namespace Spectre::libClassifier {
 
-using namespace libPlatform::Functional;
+using namespace libFunctional;
 using namespace libPlatform::Math;
 
 RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)

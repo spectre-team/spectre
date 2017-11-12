@@ -26,7 +26,7 @@ namespace
 {
 using namespace testing;
 using namespace Spectre::libException;
-using namespace Spectre::libPlatform::Functional;
+using namespace Spectre::libFunctional;
 
 const std::vector<int> empty{};
 const std::vector<int> ints{ 1,2,3 };

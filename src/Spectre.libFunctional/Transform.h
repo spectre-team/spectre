@@ -22,7 +22,7 @@ limitations under the License.
 #include <span.h>
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
 
-namespace Spectre::libPlatform::Functional
+namespace Spectre::libFunctional
 {
 /// <summary>
 /// Transform a vector.

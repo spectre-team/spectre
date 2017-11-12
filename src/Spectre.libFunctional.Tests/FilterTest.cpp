@@ -26,7 +26,7 @@ namespace
 {
 using namespace testing;
 using namespace Spectre::libException;
-using namespace Spectre::libPlatform::Functional;
+using namespace Spectre::libFunctional;
 
 using Filter = const std::vector<bool>;
 using Indexes = const std::vector<size_t>;
