@@ -59,8 +59,8 @@ DataType Variance(gsl::span<const DataType> data, bool unbiased = true)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     const auto mean = Mean(data);
-    const auto differences = minus<DataType>(data, mean);
-    const auto squaredDifferences = multiplyBy<DataType>(differences, differences);
+    const auto differences = basic_math::minus<DataType>(data, mean);
+    const auto squaredDifferences = basic_math::multiplyBy<DataType>(differences, differences);
     const auto normalizationFactor = static_cast<DataType>(data.size()) - static_cast<DataType>(unbiased);
     return Sum<DataType>(squaredDifferences) / (normalizationFactor == 0 ? static_cast<DataType>(1) : normalizationFactor);
 }
@@ -75,8 +75,8 @@ DataType MeanAbsoluteDeviation(gsl::span<const DataType> data)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     const auto mean = Mean(data);
-    const auto deviation = minus(data, mean);
-    const auto absoluteDeviation = abs(gsl::as_span(deviation));
+    const auto deviation = basic_math::minus(data, mean);
+    const auto absoluteDeviation = basic_math::abs(gsl::as_span(deviation));
     return Mean(gsl::as_span(absoluteDeviation));
 }
 }
