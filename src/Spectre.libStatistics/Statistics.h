@@ -49,6 +49,23 @@ constexpr DataType Mean(gsl::span<const DataType> data)
 }
 
 /// <summary>
+/// Calculate variance the specified data.
+/// </summary>
+/// <param name="data">The data.</param>
+/// <param name="unbiased">if set to <c>true</c>, unbiased estimator is obtained, biased otherwise.</param>
+/// <returns>Sample variance</returns>
+template <class DataType>
+DataType Variance(gsl::span<const DataType> data, bool unbiased = true)
+{
+    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
+    const auto mean = Mean(data);
+    const auto differences = minus<DataType>(data, mean);
+    const auto squaredDifferences = multiplyBy<DataType>(differences, differences);
+    const auto normalizationFactor = static_cast<DataType>(data.size()) - static_cast<DataType>(unbiased);
+    return Sum<DataType>(squaredDifferences) / (normalizationFactor == 0 ? static_cast<DataType>(1) : normalizationFactor);
+}
+
+/// <summary>
 /// Find mean absolute deviation of the data.
 /// </summary>
 /// <param name="data">The data.</param>

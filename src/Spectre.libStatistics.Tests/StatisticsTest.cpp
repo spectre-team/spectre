@@ -53,6 +53,22 @@ TEST(MeanTest, mean_of_empty_is_zero)
     EXPECT_THAT(Mean(empty), 0.);
 }
 
+TEST(VarianceTest, calculates_unbiased_vector_variance_by_default)
+{
+    EXPECT_THAT(Variance(data), DoubleEq(1.0));
+}
+
+TEST(VarianceTest, calculates_biased_vector_variance_on_demand)
+{
+    EXPECT_THAT(Variance(data, false), DoubleEq(2. / 3.));
+}
+
+TEST(VarianceTest, variance_of_empty_is_zero)
+{
+    EXPECT_THAT(Variance(empty), DoubleEq(0.));
+    EXPECT_THAT(Variance(empty, false), DoubleEq(0.));
+}
+
 TEST(MeanAbsoluteDeviationTest, calculates_mean_absolute_deviation_of_vector)
 {
     EXPECT_THAT(MeanAbsoluteDeviation(data), DoubleEq(2. / 3.));
