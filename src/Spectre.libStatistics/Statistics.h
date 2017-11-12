@@ -22,7 +22,7 @@ limitations under the License.
 #include <span.h>
 #include "Math.h"
 
-namespace Spectre::libPlatform::Statistics
+namespace Spectre::libStatistics
 {
 /// <summary>
 /// Sum the specified data.
@@ -58,8 +58,8 @@ DataType MeanAbsoluteDeviation(gsl::span<const DataType> data)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
     const auto mean = Mean(data);
-    const auto deviation = Math::minus(data, mean);
-    const auto absoluteDeviation = Math::abs(gsl::as_span(deviation));
+    const auto deviation = minus(data, mean);
+    const auto absoluteDeviation = abs(gsl::as_span(deviation));
     return Mean(gsl::as_span(absoluteDeviation));
 }
 }

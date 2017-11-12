@@ -24,7 +24,7 @@ limitations under the License.
 namespace
 {
 using namespace testing;
-using namespace Spectre::libPlatform::Math;
+using namespace Spectre::libStatistics;
 
 using Data = const std::vector<double>;
 using IntData = const std::vector<int>;

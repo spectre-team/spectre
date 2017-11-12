@@ -22,7 +22,7 @@ limitations under the License.
 #include <span.h>
 #include "Spectre.libFunctional/Transform.h"
 
-namespace Spectre::libPlatform::Math
+namespace Spectre::libStatistics
 {
 // @gmrukwa: vector vs vector
 
