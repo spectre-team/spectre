@@ -29,7 +29,7 @@ namespace Spectre.Service
     /// <summary>
     ///     Class for calaculating divik.
     /// </summary>
-    internal class DivikService : IDivikService, IDisposable
+    public class DivikService : IDivikService, IDisposable
     {
         /// <summary>
         ///     Private field for holding <see cref="Segmentation" /> for the service.
