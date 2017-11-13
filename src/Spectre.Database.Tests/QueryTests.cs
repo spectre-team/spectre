@@ -112,5 +112,45 @@ namespace Spectre.Database.Tests
 
             Assert.AreEqual(dataset, null);
         }
+
+        [Test]
+        public void HashToFriendlyName_finds_proper_friendlyname_for_given_hash()
+        {
+            var service = new DatasetDetailsFinder(_mockContext.Object);
+
+            var dataset = service.HashToFriendlyNameOrDefault("Hash1");
+
+            Assert.AreEqual(dataset, "FriendlyName1");
+        }
+
+        [Test]
+        public void HashToFriendlyName_returns_null_for_not_existing_Hash()
+        {
+            var service = new DatasetDetailsFinder(_mockContext.Object);
+
+            var dataset = service.HashToFriendlyNameOrDefault("NotExistingHash");
+
+            Assert.AreEqual(dataset, null);
+        }
+
+        [Test]
+        public void UploadNumberToFriendlyName_finds_proper_friendlyname_for_given_uploadnumber()
+        {
+            var service = new DatasetDetailsFinder(_mockContext.Object);
+
+            var dataset = service.UploadNumberToFriendlyNameOrDefault("UploadNumber2");
+
+            Assert.AreEqual(dataset, "FriendlyName2");
+        }
+
+        [Test]
+        public void UploadNumberToFriendlyName_returns_null_for_not_existing_uploadnumber()
+        {
+            var service = new DatasetDetailsFinder(_mockContext.Object);
+
+            var dataset = service.HashToFriendlyNameOrDefault("NotExistingUploadNumber");
+
+            Assert.AreEqual(dataset, null);
+        }
     }
 }

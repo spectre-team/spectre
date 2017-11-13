@@ -118,5 +118,53 @@ namespace Spectre.Database.Utils
                 return null;
             }
         }
+
+        /// <summary>
+        /// Query for translating hash to friendly name.
+        /// </summary>
+        /// <param name="hash">The hash.</param>
+        /// <returns>
+        /// Returns FriendlyName for Hash.
+        /// Null for not existing Hash.
+        /// </returns>
+        public virtual string HashToFriendlyNameOrDefault(string hash)
+        {
+            if (_context.Datasets.Any(o => o.Hash == hash))
+            {
+                var _dataset = _context.Datasets
+                    .Where(b => b.Hash == hash)
+                    .FirstOrDefault();
+
+                return _dataset.FriendlyName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Query for translating upload number to friendly name.
+        /// </summary>
+        /// <param name="uploadnumber">The uploadnumber.</param>
+        /// <returns>
+        /// Returns friendly name for given upload number.
+        /// Null for not existing upload number.
+        /// </returns>
+        public virtual string UploadNumberToFriendlyNameOrDefault(string uploadnumber)
+        {
+            if (_context.Datasets.Any(o => o.UploadNumber == uploadnumber))
+            {
+                var _dataset = _context.Datasets
+                    .Where(b => b.UploadNumber == uploadnumber)
+                    .FirstOrDefault();
+
+                return _dataset.FriendlyName;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
