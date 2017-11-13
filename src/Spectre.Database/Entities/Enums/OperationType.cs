@@ -1,8 +1,8 @@
-/*
- * divik.component.css
- * Styling of divik result.
+﻿/*
+ * OperationType.cs
+ * File providing enumeration for entity class.
  *
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa, Daniel Babiak
+   Copyright 2017 Roman Lisak
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,35 +17,15 @@
    limitations under the License.
 */
 
-.multi_lines_text
-{
-  white-space: pre-line;
-}
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-#divik-info-expansion-panel
+namespace Spectre.Database.Entities.Enums
 {
-  margin-left: 60px;
-  width: 650px;
-}
-
-.mat-form-field
-{
-  width: 250px;
-}
-
-.inline-items-container
-{
-  display: flex;
-  justify-content: flex-start;
-  height: 100vh;
-}
-
-a:hover, a:visited, a:link, a:active
-{
-  text-decoration: none;
-}
-
-.mat-button
-{
-  margin-left: 82px;
+    /// <summary>
+    /// Enumeration for types of the operation type.
+    /// </summary>
+    public enum OperationType
+    { }
 }

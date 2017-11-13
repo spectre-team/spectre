@@ -21,8 +21,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import {
-  MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule,
-  MdSelectModule
+  MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
+  MatSelectModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {GrowlModule, TabViewModule} from 'primeng/primeng';
@@ -52,8 +52,8 @@ describe('PreparationComponent', () => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
       declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent],
-      imports: [RouterTestingModule, PlotlyModule, MdSliderModule, FormsModule, GrowlModule, TabViewModule, MdExpansionModule,
-        MdInputModule, MdButtonModule, MdTabsModule, BlockUIModule, BrowserAnimationsModule, MdSelectModule
+      imports: [RouterTestingModule, PlotlyModule, MatSliderModule, FormsModule, GrowlModule, TabViewModule, MatExpansionModule,
+        MatInputModule, MatButtonModule, MatTabsModule, BlockUIModule, BrowserAnimationsModule, MatSelectModule
       ],
       providers: [
           MockBackend,

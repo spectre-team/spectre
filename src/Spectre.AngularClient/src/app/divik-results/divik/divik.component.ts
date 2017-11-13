@@ -17,7 +17,7 @@
    limitations under the License.
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -34,10 +34,11 @@ import 'rxjs/Rx';
 })
 export class DivikComponent implements OnInit {
   public data: any;
-  public configDescription: string;
+  public divikConfig: DivikConfig;
   public downloadJsonHref: any;
   public config: Map<string, string> = new Map<string, string>();
 
+  @Input() public preparationId;
   constructor(
       private route: ActivatedRoute,
       private divikService: DivikService,
@@ -46,10 +47,10 @@ export class DivikComponent implements OnInit {
 
   ngOnInit() {
     this.divikService
-      .get(1, 1, 1)
+      .get(this.preparationId, 1, 1)
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
     this.divikService
-      .getConfig(1, 1)
+      .getConfig(this.preparationId, 1)
       .subscribe(config => this.buildConfigInfo(config));
   }
 
@@ -61,10 +62,19 @@ export class DivikComponent implements OnInit {
   }
 
   buildConfigInfo(config: DivikConfig) {
+    this.divikConfig = config;
     Object.keys(config).forEach((key) => {
       this.config.set(key, config[key]);
     });
     this.generateDownloadJsonUri(config);
+  }
+
+  changeLevel(value) {
+    if (value > 0 && value <= this.divikConfig.Level) {
+      this.divikService
+        .get(this.preparationId, 1, value)
+        .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
+    }
   }
 
   generateDownloadJsonUri(config: DivikConfig) {

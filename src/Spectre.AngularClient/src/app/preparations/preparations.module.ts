@@ -32,8 +32,8 @@ import { DivikComponent } from '../divik-results/divik/divik.component';
 import { GrowlModule, TabViewModule} from 'primeng/primeng';
 import { BlockUIModule } from 'ng-block-ui';
 import {
-  MdSliderModule, MdInputModule, MdButtonModule, MdTabsModule, MdExpansionModule,
-  MdSelectModule
+  MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
+  MatSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -43,15 +43,15 @@ import {
     FormsModule,
     PreparationRoutingModule,
     PlotlyModule,
-    MdSliderModule,
-    MdSelectModule,
+    MatSliderModule,
+    MatSelectModule,
     GrowlModule,
     TabViewModule,
     BlockUIModule,
-    MdInputModule,
-    MdButtonModule,
-    MdTabsModule,
-    MdExpansionModule
+    MatInputModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatExpansionModule
   ],
   declarations: [
     PreparationComponent,

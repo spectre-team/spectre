@@ -66,14 +66,14 @@ namespace Spectre.Service.Tests.Loaders
         [Test]
         public void ReturnsFromCorrectNameLocal()
         {
-            Assert.IsNotNull(anObject: _datasetLoader.GetFromName(name: "local_correct.txt"),
+            Assert.IsNotNull(anObject: _datasetLoader.GetFromName(name: "local_correct"),
                 message: "Loader did not manage to load local file.");
         }
 
         [Test]
         public void ReturnsFromCorrectNameRemote()
         {
-            Assert.IsNotNull(anObject: _datasetLoader.GetFromName(name: "remote_correct.txt"),
+            Assert.IsNotNull(anObject: _datasetLoader.GetFromName(name: "remote_correct"),
                 message: "Loader did not manage to load remote file.");
         }
 
@@ -87,7 +87,7 @@ namespace Spectre.Service.Tests.Loaders
         [Test]
         public void ThrowsOnIncorrectFileContents()
         {
-            Assert.Throws<DatasetFormatException>(code: () => _datasetLoader.GetFromName(name: "local_incorrect.txt"),
+            Assert.Throws<DatasetFormatException>(code: () => _datasetLoader.GetFromName(name: "local_incorrect"),
                 message: "Loader did not manage to load remote file.");
         }
 
@@ -96,13 +96,13 @@ namespace Spectre.Service.Tests.Loaders
         {
             try
             {
-                _datasetLoader.GetFromName(name: "remote_incorrect.txt");
+                _datasetLoader.GetFromName(name: "remote_incorrect");
             }
             catch (DatasetFormatException)
             {
                 // ignored
             }
-            var result = _mockFileSystem.AllFiles.FirstOrDefault(predicate: file => file.Contains(value: Path.Combine(_localDir, "remote_incorrect.txt")));
+            var result = _mockFileSystem.AllFiles.FirstOrDefault(predicate: file => file.Contains(value: Path.Combine(_localDir, "remote_incorrect")));
             Assert.IsNull(result, message: "Loader leaves copies of incorrect files in local directory.");
         }
     }
