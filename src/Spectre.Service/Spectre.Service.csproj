@@ -64,10 +64,10 @@
     <Compile Include="ConsoleCaptureService.cs" />
     <Compile Include="DivikService.cs" />
     <Compile Include="DatasetDetailsFinderService.cs" />
-    <Compile Include="Loaders\DatasetLoader.cs" />
-    <Compile Include="Loaders\DatasetFormatException.cs" />
-    <Compile Include="Loaders\DatasetNotFoundException.cs" />
-    <Compile Include="Savers\DatasetSaver.cs" />
+    <Compile Include="Io\DatasetLoader.cs" />
+    <Compile Include="Io\DatasetFormatException.cs" />
+    <Compile Include="Io\DatasetNotFoundException.cs" />
+    <Compile Include="Io\DatasetSaver.cs" />
     <Compile Include="ServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TooSmallUpdateIntervalException.cs" />

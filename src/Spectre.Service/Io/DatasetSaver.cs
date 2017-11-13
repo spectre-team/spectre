@@ -23,9 +23,8 @@ using System.Linq;
 using Spectre.Data.Datasets;
 using Spectre.Dependencies;
 using Spectre.Service.Configuration;
-using Spectre.Service.Loaders;
 
-namespace Spectre.Service.Savers
+namespace Spectre.Service.Io
 {
     /// <summary>
     /// Class saving datasets from either local cache or memory.

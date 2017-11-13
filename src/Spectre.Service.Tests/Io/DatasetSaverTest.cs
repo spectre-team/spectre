@@ -25,10 +25,9 @@ using Spectre.Data.Datasets;
 using Spectre.Dependencies;
 using Spectre.Dependencies.Modules;
 using Spectre.Service.Configuration;
-using Spectre.Service.Loaders;
-using Spectre.Service.Savers;
+using Spectre.Service.Io;
 
-namespace Spectre.Service.Tests.Savers
+namespace Spectre.Service.Tests.Io
 {
     [TestFixture]
     public class DatasetSaverTest

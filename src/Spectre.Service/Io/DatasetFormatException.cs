@@ -16,9 +16,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 using System;
 
-namespace Spectre.Service.Loaders
+namespace Spectre.Service.Io
 {
     /// <summary>
     /// Thrown when dataset loader fails to load dataset from a file.

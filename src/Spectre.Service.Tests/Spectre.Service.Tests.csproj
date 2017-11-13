@@ -58,9 +58,9 @@
   <ItemGroup>
     <Compile Include="ConsoleCaptureServiceTest.cs" />
     <Compile Include="DataRootConfigTest.cs" />
-    <Compile Include="Loaders\DatasetLoaderTest.cs" />
+    <Compile Include="Io\DatasetLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Savers\DatasetSaverTest.cs" />
+    <Compile Include="Io\DatasetSaverTest.cs" />
     <Compile Include="ServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>

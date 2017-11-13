@@ -18,13 +18,9 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Spectre.Service.Loaders
+namespace Spectre.Service.Io
 {
     /// <summary>
     /// Thrown when dataset loader fails to find file with dataset.
