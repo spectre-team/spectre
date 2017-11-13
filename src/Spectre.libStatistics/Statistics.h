@@ -22,7 +22,7 @@ limitations under the License.
 #include <span.h>
 #include "Math.h"
 
-namespace Spectre::libStatistics
+namespace Spectre::libStatistics::simple_statistics
 {
 /// <summary>
 /// Sum the specified data.
