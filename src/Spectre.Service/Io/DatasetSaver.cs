@@ -17,10 +17,14 @@
    limitations under the License.
 */
 
+using System;
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
+using System.Security.Cryptography;
 using Spectre.Data.Datasets;
+using Spectre.Database.Contexts;
+using Spectre.Database.Entities;
 using Spectre.Dependencies;
 using Spectre.Service.Configuration;
 
@@ -85,6 +89,7 @@ namespace Spectre.Service.Io
             var cachedFilePath = foundCachedFiles.First();
             string fullPathRemote = Path.Combine(_remoteRoot, Path.GetFileName(cachedFilePath));
             FileSystem.File.Copy(cachedFilePath, fullPathRemote);
+            MakeEntryInDatabase(name);
         }
 
         /// <summary>
@@ -97,6 +102,28 @@ namespace Spectre.Service.Io
             string extension = ".txt"; // TODO @dkuchta: extension recognition
             string fullPathRemote = FileSystem.Path.Combine(_remoteRoot, name + extension);
             dataset.SaveToFile(fullPathRemote);
+            MakeEntryInDatabase(name);
+        }
+
+        private void MakeEntryInDatabase(string datasetName)
+        {
+            using (var datasetsContext = new DatasetsContext())
+            {
+                var uploadNumber = Guid.NewGuid()
+                    .ToString();
+                var hash = SHA256.Create()
+                    .ComputeHash(System.Text.Encoding.Unicode.GetBytes(uploadNumber))
+                    .ToString();
+
+                datasetsContext.Datasets.Add(
+                    new Dataset
+                    {
+                        UploadNumber = uploadNumber,
+                        Hash = hash,
+                        FriendlyName = datasetName,
+                        UploadTime = DateTime.Now
+                    });
+            }
         }
 
         #endregion
