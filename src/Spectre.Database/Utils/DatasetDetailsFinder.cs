@@ -59,11 +59,11 @@ namespace Spectre.Database.Utils
         {
             if (_context.Datasets.Any(o => o.Hash == hash))
             {
-                var _dataset = _context.Datasets
+                var dataset = _context.Datasets
                     .Where(b => b.Hash == hash)
                     .FirstOrDefault();
 
-                return _dataset.UploadNumber.ToString();
+                return dataset.UploadNumber.ToString();
             }
             else
             {
@@ -83,11 +83,11 @@ namespace Spectre.Database.Utils
         {
             if (_context.Datasets.Any(o => o.FriendlyName == friendlyname))
             {
-                var _dataset = _context.Datasets
+                var dataset = _context.Datasets
                     .Where(b => b.FriendlyName == friendlyname)
                     .FirstOrDefault();
 
-                return _dataset.UploadNumber;
+                return dataset.UploadNumber;
             }
             else
             {
@@ -107,11 +107,11 @@ namespace Spectre.Database.Utils
         {
             if (_context.Datasets.Any(o => o.UploadNumber == uploadnumber))
             {
-                var _dataset = _context.Datasets
+                var dataset = _context.Datasets
                     .Where(b => b.UploadNumber == uploadnumber)
                     .FirstOrDefault();
 
-                return _dataset.Hash;
+                return dataset.Hash;
             }
             else
             {
