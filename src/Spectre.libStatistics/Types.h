@@ -18,8 +18,10 @@ limitations under the License.
 */
 
 #pragma once
+#include <span.h>
 
 namespace Spectre::libStatistics
 {
 using PrecisionType = double;
+using Values = gsl::span<const PrecisionType>;
 }

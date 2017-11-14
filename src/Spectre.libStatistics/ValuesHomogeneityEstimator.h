@@ -34,7 +34,7 @@ public:
     /// </summary>
     /// <param name="first">First set.</param>
     /// <param name="second">Second set.</param>
-    virtual StatisticalIndex Compare(gsl::span<const PrecisionType> first, gsl::span<const PrecisionType> second) const = 0;
+    virtual StatisticalIndex Compare(Values first, Values second) const = 0;
 
     /// <summary>
     /// Finalizes an instance of the <see cref="ValuesHomogeneityEstimator"/> class.
