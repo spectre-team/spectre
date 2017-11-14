@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp" />
+    <ClCompile Include="DifferentiatingFeaturesEstimatorTest.cpp">
+      <SubType>Source Files</SubType>
+    </ClCompile>
     <ClCompile Include="MathTest.cpp" />
     <ClCompile Include="StatisticalIndexTest.cpp">
       <SubType>Source Files</SubType>
