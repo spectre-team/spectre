@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Testing">
       <UniqueIdentifier>{aa7493d5-8a3e-4707-8f5d-1034b4293534}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Testing">
+      <UniqueIdentifier>{b056f02a-3908-47a9-b13f-f8a7ece821c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -39,5 +42,9 @@
     <ClCompile Include="StatisticalIndexTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
+  <ItemGroup>
+    <ClInclude Include="ValuesHomogeneityEstimatorMock.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
