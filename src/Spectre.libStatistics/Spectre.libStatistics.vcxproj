@@ -82,6 +82,7 @@
     <ClInclude Include="Types.h">
       <SubType>Header Files</SubType>
     </ClInclude>
+    <ClInclude Include="ValuesHomogeneityEstimator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

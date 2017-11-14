@@ -36,6 +36,9 @@
     <ClInclude Include="InconsistentNumberOfFeaturesException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ValuesHomogeneityEstimator.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
