@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{76542909-5FC8-405B-8E6D-D2E529162A7A}</ProjectGuid>
-    <RootNamespace>SpectrelibStatistics</RootNamespace>
+    <RootNamespace>Spectre::libStatistics</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
