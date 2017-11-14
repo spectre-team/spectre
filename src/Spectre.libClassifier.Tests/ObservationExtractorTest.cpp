@@ -18,6 +18,7 @@ limitations under the License.
 */
 
 #include <gtest/gtest.h>
+#include <memory>
 #include "Spectre.libException/NullPointerException.h"
 #include "Spectre.libGenetic/Individual.h"
 #include "Spectre.libClassifier/OpenCvDataset.h"
