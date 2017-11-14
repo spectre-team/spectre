@@ -80,7 +80,7 @@ namespace Spectre.Database.Tests
 
             var dataset = service.HashToUploadNumberOrDefault("NotExistingHash");
 
-            Assert.AreEqual(null, dataset);
+            Assert.IsNull(dataset);
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace Spectre.Database.Tests
 
             var dataset = service.FriendlyNameToUploadNumberOrDefault("NotExistingFriendlyName");
 
-            Assert.AreEqual(null, dataset);
+            Assert.IsNull(dataset);
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace Spectre.Database.Tests
 
             var dataset = service.UploadNumberToHashOrDefault("NotExistingUploadNumber");
 
-            Assert.AreEqual(dataset, null);
+            Assert.IsNull(dataset);
         }
 
         [Test]
@@ -130,7 +130,7 @@ namespace Spectre.Database.Tests
 
             var dataset = service.HashToFriendlyNameOrDefault("NotExistingHash");
 
-            Assert.AreEqual(dataset, null);
+            Assert.IsNull(dataset);
         }
 
         [Test]
@@ -150,7 +150,7 @@ namespace Spectre.Database.Tests
 
             var dataset = service.HashToFriendlyNameOrDefault("NotExistingUploadNumber");
 
-            Assert.AreEqual(dataset, null);
+            Assert.IsNull(dataset);
         }
     }
 }
