@@ -40,12 +40,12 @@ public:
     /// <summary>
     /// Human-readable interpretation of the index value.
     /// </summary>
-    const std::string& interpretation;
+    const std::string &interpretation;
     /// <summary>
     /// Initializes a new instance of the <see cref="StatisticalIndex"/> class.
     /// </summary>
     /// <param name="value">The value of the index.</param>
     /// <param name="strength">The strength of the index.</param>
-    StatisticalIndex(PrecisionType value, unsigned strength, const std::string& interpretation);
+    StatisticalIndex(PrecisionType value, unsigned strength, const std::string &interpretation);
 };
 }
