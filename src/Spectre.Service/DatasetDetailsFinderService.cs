@@ -37,24 +37,6 @@ namespace Spectre.Service
     internal class DatasetDetailsFinderService : IDatasetDetailsFinderService
     {
         /// <summary>
-        /// The context
-        /// </summary>
-        private static DatasetsContext _context;
-
-        /// <summary>
-        /// The service object used durring calling the querries.
-        /// </summary>
-        private readonly DatasetDetailsFinder _service = new DatasetDetailsFinder(DatasetDetailsFinderService._context);
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DatasetDetailsFinderService" /> class.
-        /// </summary>
-        public DatasetDetailsFinderService()
-        {
-            DatasetDetailsFinderService._context = new DatasetsContext();
-        }
-
-        /// <summary>
         /// Service translating hash to upload number.
         /// </summary>
         /// <param name="hash">The hash.</param>
@@ -64,7 +46,11 @@ namespace Spectre.Service
         /// </returns>
         public string HashToUploadNumberOrDefault(string hash)
         {
-            return _service.HashToUploadNumberOrDefault(hash);
+            using (var context = new DatasetsContext())
+            {
+                DatasetDetailsFinder service = new DatasetDetailsFinder(context);
+                return service.HashToUploadNumberOrDefault(hash);
+            }
         }
 
         /// <summary>
@@ -77,7 +63,11 @@ namespace Spectre.Service
         /// </returns>
         public string FriendlyNameToUploadNumberOrDefault(string friendlyname)
         {
-            return _service.FriendlyNameToUploadNumberOrDefault(friendlyname);
+            using (var context = new DatasetsContext())
+            {
+                DatasetDetailsFinder service = new DatasetDetailsFinder(context);
+                return service.FriendlyNameToUploadNumberOrDefault(friendlyname);
+            }
         }
 
         /// <summary>
@@ -90,7 +80,11 @@ namespace Spectre.Service
         /// </returns>
         public string UploadNumberToHashOrDefault(string uploadnumber)
         {
-            return _service.UploadNumberToHashOrDefault(uploadnumber);
+            using (var context = new DatasetsContext())
+            {
+                DatasetDetailsFinder service = new DatasetDetailsFinder(context);
+                return service.UploadNumberToHashOrDefault(uploadnumber);
+            }
         }
 
         /// <summary>
@@ -103,7 +97,11 @@ namespace Spectre.Service
         /// </returns>
         public string HashToFriendlyNameOrDefault(string hash)
         {
-            return _service.HashToFriendlyNameOrDefault(hash);
+            using (var context = new DatasetsContext())
+            {
+                DatasetDetailsFinder service = new DatasetDetailsFinder(context);
+                return service.HashToFriendlyNameOrDefault(hash);
+            }
         }
 
         /// <summary>
@@ -116,7 +114,11 @@ namespace Spectre.Service
         /// </returns>
         public string UploadNumberToFriendlyNameOrDefault(string uploadnumber)
         {
-            return _service.UploadNumberToFriendlyNameOrDefault(uploadnumber);
+            using (var context = new DatasetsContext())
+            {
+                DatasetDetailsFinder service = new DatasetDetailsFinder(context);
+                return service.UploadNumberToFriendlyNameOrDefault(uploadnumber);
+            }
         }
     }
 }
