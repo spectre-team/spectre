@@ -17,6 +17,7 @@ test_files/single.txt
 octave-workspace
 
 ## Python artifacts
+*.pyc
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/

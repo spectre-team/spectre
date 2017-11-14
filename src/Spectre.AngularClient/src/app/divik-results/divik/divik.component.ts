@@ -17,9 +17,8 @@
    limitations under the License.
 */
 
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, Input, OnInit} from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { DivikService } from '../shared/divik.service';
@@ -35,14 +34,13 @@ import 'rxjs/Rx';
 export class DivikComponent implements OnInit {
   public data: any;
   public divikConfig: DivikConfig;
-  public downloadJsonHref: any;
-  public config: Map<string, string> = new Map<string, string>();
+  public downloadJsonHref: SafeUrl;
+  public divikConfigKeys: Array<string>;
 
   @Input() public preparationId;
   constructor(
-      private route: ActivatedRoute,
       private divikService: DivikService,
-      private sanitizer: DomSanitizer
+      private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -63,10 +61,8 @@ export class DivikComponent implements OnInit {
 
   buildConfigInfo(config: DivikConfig) {
     this.divikConfig = config;
-    Object.keys(config).forEach((key) => {
-      this.config.set(key, config[key]);
-    });
-    this.generateDownloadJsonUri(config);
+    this.divikConfigKeys = Object.keys(this.divikConfig);
+    this.generateDownloadJsonUri();
   }
 
   changeLevel(value) {
@@ -77,8 +73,8 @@ export class DivikComponent implements OnInit {
     }
   }
 
-  generateDownloadJsonUri(config: DivikConfig) {
-    const theJSON = JSON.stringify(config);
+  generateDownloadJsonUri() {
+    const theJSON = JSON.stringify(this.divikConfig);
     this.downloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
   }
 }
