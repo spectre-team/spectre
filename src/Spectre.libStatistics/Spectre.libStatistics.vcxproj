@@ -73,6 +73,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="InconsistentNumberOfFeaturesException.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
     <ClInclude Include="Math.h" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="Types.h">
@@ -81,6 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="InconsistentNumberOfFeaturesException.cpp">
+      <SubType>Source Files</SubType>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
