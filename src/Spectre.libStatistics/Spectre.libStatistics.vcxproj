@@ -77,6 +77,7 @@
       <SubType>Header Files</SubType>
     </ClInclude>
     <ClInclude Include="Math.h" />
+    <ClInclude Include="StatisticalIndex.h" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="Types.h">
       <SubType>Header Files</SubType>
@@ -89,6 +90,7 @@
     <ClCompile Include="InconsistentNumberOfFeaturesException.cpp">
       <SubType>Source Files</SubType>
     </ClCompile>
+    <ClCompile Include="StatisticalIndex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
