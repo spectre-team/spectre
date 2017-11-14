@@ -75,6 +75,9 @@
   <ItemGroup>
     <ClInclude Include="Math.h" />
     <ClInclude Include="Statistics.h" />
+    <ClInclude Include="Types.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
