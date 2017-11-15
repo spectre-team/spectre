@@ -22,6 +22,6 @@ limitations under the License.
 
 namespace Spectre::libStatistics
 {
-using PrecisionType = double;
+using PrecisionType = float;
 using Values = gsl::span<const PrecisionType>;
 }
