@@ -66,6 +66,22 @@ DataType Variance(gsl::span<const DataType> data, bool unbiased = true)
 }
 
 /// <summary>
+/// Calculate variance in two independent samples.
+/// </summary>
+/// <param name="first">The first sample.</param>
+/// <param name="second">The second sample.</param>
+/// <returns>Two-samples variance.</returns>
+template <class DataType>
+DataType Variance(gsl::span<const DataType> first, gsl::span<const DataType> second)
+{
+    static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
+    const auto weightedFirst = static_cast<DataType>(first.size()) * Variance(first);
+    const auto weightedSecond = static_cast<DataType>(second.size()) * Variance(second);
+    const auto normalizationConstant = static_cast<DataType>(first.size() + second.size()) - static_cast<DataType>(2.);
+    return (weightedFirst + weightedSecond) / normalizationConstant;
+}
+
+/// <summary>
 /// Find mean absolute deviation of the data.
 /// </summary>
 /// <param name="data">The data.</param>
