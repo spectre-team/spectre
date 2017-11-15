@@ -1,8 +1,8 @@
 /*
- * divik.component.spec.ts
+ * divik-start.component.spec.ts
  * Unit tests for single divik component.
  *
- Copyright 2017 Grzegorz Mrukwa, Sebastian Pustelnik, Daniel Babiak
+ Copyright 2017 Sebastian Pustelnik
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -26,20 +26,20 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { PlotlyModule } from '../../plotly/plotly.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DivikComponent } from './divik.component';
+import { DivikStartComponent } from './divik-start.component';
 import { DivikService } from '../shared/divik.service';
 import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
-import { MatInputModule, MatButtonModule, MatExpansionModule, MatOptionModule} from '@angular/material';
+import {MatInputModule, MatButtonModule, MatExpansionModule, MatSelectModule} from '@angular/material';
 
-describe('DivikComponent', () => {
-  let component: DivikComponent;
-  let fixture: ComponentFixture<DivikComponent>;
+describe('DivikStartComponent', () => {
+  let component: DivikStartComponent;
+  let fixture: ComponentFixture<DivikStartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DivikComponent, HeatmapComponent],
-      imports: [RouterTestingModule, PlotlyModule, MatOptionModule, MatInputModule, MatButtonModule, MatExpansionModule,
-        BrowserAnimationsModule],
+      declarations: [DivikStartComponent, HeatmapComponent],
+      imports: [RouterTestingModule, PlotlyModule, MatInputModule, MatSelectModule,
+        MatButtonModule, MatExpansionModule, BrowserAnimationsModule],
       providers: [
         MockBackend,
         BaseRequestOptions,
@@ -57,7 +57,7 @@ describe('DivikComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DivikComponent);
+    fixture = TestBed.createComponent(DivikStartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

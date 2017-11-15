@@ -42,6 +42,7 @@ import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
 import { MessagesService, MessagesComponent } from 'ng2-messages/ng2-messages';
 import { DivikComponent } from '../../divik-results/divik/divik.component';
 import { DivikService } from '../../divik-results/shared/divik.service';
+import { DivikStartComponent } from '../../divik-results/divik-start/divik-start.component';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -51,7 +52,7 @@ describe('PreparationComponent', () => {
   beforeEach(async(() => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
-      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent],
+      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent, DivikStartComponent],
       imports: [RouterTestingModule, PlotlyModule, MatSliderModule, FormsModule, GrowlModule, TabViewModule, MatExpansionModule,
         MatInputModule, MatButtonModule, MatTabsModule, BlockUIModule, BrowserAnimationsModule, MatSelectModule
       ],
@@ -69,7 +70,7 @@ describe('PreparationComponent', () => {
           SpectrumService,
           HeatmapService,
           MessagesService,
-          DivikService
+          DivikService,
       ]
     })
     .compileComponents();

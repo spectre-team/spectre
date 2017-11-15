@@ -35,6 +35,7 @@ import {
   MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
   MatSelectModule
 } from '@angular/material';
+import {DivikStartComponent} from '../divik-results/divik-start/divik-start.component';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import {
     PreparationComponent,
     HeatmapComponent,
     SpectrumComponent,
-    DivikComponent
+    DivikComponent,
+    DivikStartComponent
 ]
 })
 export class PreparationsModule {}
