@@ -17,6 +17,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include <omp.h>
 #include "Spectre.libException/EmptyDatasetException.h"
 #include "Spectre.libFunctional/Transform.h"
 #include "Spectre.libStatistics/InconsistentNumberOfFeaturesException.h"
@@ -45,7 +46,8 @@ std::vector<statistical_testing::StatisticalIndex> DifferentiatingFeaturesEstima
     using namespace libFunctional;
     std::vector<statistical_testing::StatisticalIndex> indexes;
     indexes.reserve(first[0].size());
-    for (auto featureNumber = 0u; featureNumber < first[0].size(); ++featureNumber)
+    #pragma omp parallel for schedule(static, 1) num_threads(omp_get_num_procs())
+    for (auto featureNumber = 0; featureNumber < static_cast<int>(first[0].size()); ++featureNumber)
     {
         const auto selectIth = [featureNumber](const auto &observation) { return observation[featureNumber]; };
         const auto featureOfFirst = transform(first, selectIth, static_cast<PrecisionType*>(nullptr));
