@@ -48,6 +48,9 @@
     <ClInclude Include="ValuesHomogeneityEstimator.h">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
+    <ClInclude Include="CohenEffectSize.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -61,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="InconsistentNumberOfFeaturesException.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CohenEffectSize.cpp">
+      <Filter>Source Files\Testing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
