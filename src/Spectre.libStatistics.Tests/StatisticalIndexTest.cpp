@@ -23,11 +23,12 @@ limitations under the License.
 
 namespace
 {
-using namespace Spectre::libStatistics::statistical_testing;
+using namespace Spectre::libStatistics;
+using namespace statistical_testing;
 using namespace ::testing;
 
 const std::string INTERPRETATION = "BLAH";
-const double VALUE = 1.0;
+const PrecisionType VALUE = 1.0;
 const unsigned STRENGTH = 0;
 
 TEST(StatisticalIndex, initializes)
@@ -37,7 +38,7 @@ TEST(StatisticalIndex, initializes)
 
 TEST(StatisticalIndex, keeps_value)
 {
-    EXPECT_THAT(StatisticalIndex(VALUE, STRENGTH, INTERPRETATION).value, DoubleEq(VALUE));
+    EXPECT_THAT(StatisticalIndex(VALUE, STRENGTH, INTERPRETATION).value, FloatEq(VALUE));
 }
 
 TEST(StatisticalIndex, keeps_strength)

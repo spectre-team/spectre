@@ -22,6 +22,7 @@ limitations under the License.
 #include "Spectre.libDataset/Dataset.h"
 #include "Spectre.libDataset/Empty.h"
 #include "Spectre.libException/EmptyDatasetException.h"
+#include "Spectre.libStatistics/Types.h"
 #include "Spectre.libStatistics/DifferentiatingFeaturesEstimator.h"
 #include "Spectre.libStatistics.Tests/ValuesHomogeneityEstimatorMock.h"
 #include "Spectre.libStatistics/InconsistentNumberOfFeaturesException.h"
@@ -34,7 +35,8 @@ using namespace Spectre::libStatistics::Tests;
 using namespace Spectre::libStatistics;
 using namespace statistical_learning;
 
-using SimplestDataset = Dataset<std::vector<PrecisionType>, const Empty*, const Empty*>;
+using Spectre::libStatistics::Values;
+using SimplestDataset = Dataset<Values, const Empty*, const Empty*>;
 
 const Empty *justNothing = &Empty::instance();
 
@@ -43,13 +45,13 @@ const std::vector<PrecisionType> row2 { 4., 5., 6. };
 const std::vector<PrecisionType> row3 { 7., 8., 9. };
 const std::vector<PrecisionType> narrowRow { 10. };
 
-const std::vector<std::vector<PrecisionType>> first { row1 };
+const std::vector<Values> first { row1 };
 const std::vector<const Empty*> firstMetadata { justNothing };
-const std::vector<std::vector<PrecisionType>> second { row2, row3 };
+const std::vector<Values> second { row2, row3 };
 const std::vector<const Empty*> secondMetadata { justNothing, justNothing };
-const std::vector<std::vector<PrecisionType>> emptyData;
+const std::vector<Values> emptyData;
 const std::vector<const Empty*> emptyMetadata;
-const std::vector<std::vector<PrecisionType>> narrowData { narrowRow };
+const std::vector<Values> narrowData { narrowRow };
 
 const SimplestDataset firstDataset(first, firstMetadata, justNothing);
 const SimplestDataset secondDataset(second, secondMetadata, justNothing);
