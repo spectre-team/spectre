@@ -30,6 +30,7 @@ namespace
 {
 using namespace testing;
 using namespace Spectre::libDataset;
+using namespace Spectre::libException;
 using namespace Spectre::libStatistics::Tests;
 using namespace Spectre::libStatistics;
 using namespace statistical_learning;
@@ -77,9 +78,9 @@ TEST(DifferentiatingFeaturesEstimator, throws_for_empty_dataset)
 {
     const ValuesHomogeneityEstimatorMock mock;
     DifferentiatingFeaturesEstimator estimator(mock);
-    EXPECT_THROW(estimator.Estimate(empty, secondDataset), SpectrelibException::EmptyDatasetException);
-    EXPECT_THROW(estimator.Estimate(firstDataset, empty), SpectrelibException::EmptyDatasetException);
-    EXPECT_THROW(estimator.Estimate(empty, empty), SpectrelibException::EmptyDatasetException);
+    EXPECT_THROW(estimator.Estimate(empty, secondDataset), EmptyDatasetException);
+    EXPECT_THROW(estimator.Estimate(firstDataset, empty), EmptyDatasetException);
+    EXPECT_THROW(estimator.Estimate(empty, empty), EmptyDatasetException);
 }
 
 TEST(DifferentiatingFeaturesEstimator, throws_for_inconsistent_number_of_features)
