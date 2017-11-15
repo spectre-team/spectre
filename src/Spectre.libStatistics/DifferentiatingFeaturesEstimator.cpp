@@ -46,7 +46,8 @@ std::vector<statistical_testing::StatisticalIndex> DifferentiatingFeaturesEstima
     using namespace libFunctional;
     std::vector<statistical_testing::StatisticalIndex> indexes;
     indexes.reserve(first[0].size());
-    #pragma omp parallel for schedule(static, 1) num_threads(omp_get_num_procs())
+    const auto numberOfThreads = omp_get_num_procs() > 1 ? omp_get_num_procs() : 1;
+    #pragma omp parallel for schedule(static, 1) num_threads(numberOfThreads)
     for (auto featureNumber = 0; featureNumber < static_cast<int>(first[0].size()); ++featureNumber)
     {
         const auto selectIth = [featureNumber](const auto &observation) { return observation[featureNumber]; };
