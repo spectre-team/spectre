@@ -46,7 +46,7 @@ TEST(CohenEffectSize, throws_for_empty_inputs)
 TEST(CohenEffectSize, returns_zero_for_two_single_element_collections)
 {
     const auto result = estimator.Compare(firstSingle, secondSingle);
-    EXPECT_THAT(result.value, DoubleNear(0.0, 1e-4));
+    EXPECT_THAT(result.value, FloatNear(0.0f, 1e-4f));
     EXPECT_THAT(result.strength, Eq(0u));
     EXPECT_THAT(result.interpretation, StrEq("None"));
 }
@@ -54,7 +54,7 @@ TEST(CohenEffectSize, returns_zero_for_two_single_element_collections)
 TEST(CohenEffectSize, computes_reasonable_value)
 {
     const auto result = estimator.Compare(first, second);
-    EXPECT_THAT(result.value, DoubleNear(2.06815, 1e-5));
+    EXPECT_THAT(result.value, FloatNear(2.06815f, 1e-5f));
     EXPECT_THAT(result.strength, Eq(4u));
     EXPECT_THAT(result.interpretation, StrEq("Very Large"));
 }

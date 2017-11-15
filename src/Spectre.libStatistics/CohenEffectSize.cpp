@@ -35,10 +35,10 @@ const std::array<std::string, 5> CohenEffectSize::interpretations = {
 
 const std::array<PrecisionType, 5> CohenEffectSize::thresholds = {
     -std::numeric_limits<PrecisionType>::infinity(),
-    0.3,
-    0.5,
-    0.8,
-    1.2
+    0.3f,
+    0.5f,
+    0.8f,
+    1.2f
 };
 
 using namespace simple_statistics;
