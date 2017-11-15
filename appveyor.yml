@@ -48,6 +48,8 @@ build_script:
 after_build:
 - ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
 - cmd: C:\projects\spectre\scripts\package_project.bat DiviK Spectre.DivikWpfClient
+- cmd: C:\projects\spectre\scripts\package_project.bat DataValidatorApp Spectre.DataValidatorApp
+- cmd: C:\projects\spectre\scripts\package_project.bat DivikResultConverter Spectre.DivikResultConverter
 - cmd: C:\projects\spectre\scripts\package_web_project.bat WebAPI Spectre
 - cmd: C:\projects\spectre\scripts\package_angular_client.bat
 
@@ -60,6 +62,10 @@ test_script:
 artifacts:
 - path: DiviK-$(configuration).zip
   name: DivikExecutables
+- path: DataValidatorApp-$(configuration).zip
+  name: DataValidatorExecutables
+- path: DivikResultConverter-$(configuration).zip
+  name: DivikResultConverterExecutables
 - path: WebClient-$(configuration).zip
   name: WebClient
 - path: WebAPI-$(configuration).zip
@@ -71,6 +77,18 @@ deploy:
   auth_token:
     secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
   artifact: DivikExecutables
+  draft: true
+- provider: GitHub
+  release: Spectre-v$(appveyor_build_version)
+  auth_token:
+    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
+  artifact: DataValidatorExecutables
+  draft: true
+- provider: GitHub
+  release: Spectre-v$(appveyor_build_version)
+  auth_token:
+    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
+  artifact: DivikResultConverterExecutables
   draft: true
 - provider: GitHub
   release: Spectre-v$(appveyor_build_version)

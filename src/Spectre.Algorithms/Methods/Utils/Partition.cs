@@ -101,5 +101,25 @@ namespace Spectre.Algorithms.Methods.Utils
 
             return newLabeling;
         }
+
+        /// <summary>
+        /// Gets the cluster sizes.
+        /// </summary>
+        /// <typeparam name="T">Type of class descriptions.</typeparam>
+        /// <param name="partition">The partition.</param>
+        /// <returns>Numbers of observations in each cluster.</returns>
+        public static Dictionary<T, uint> GetClusterSizes<T>(IEnumerable<T> partition)
+        {
+            var counts = new Dictionary<T, uint>();
+            foreach (var assignment in partition)
+            {
+                if (!counts.ContainsKey(assignment))
+                {
+                    counts[assignment] = 0;
+                }
+                ++counts[assignment];
+            }
+            return counts;
+        }
     }
 }

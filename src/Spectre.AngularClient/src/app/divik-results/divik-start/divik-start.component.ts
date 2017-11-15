@@ -44,7 +44,6 @@ export class DivikStartComponent implements OnInit {
   }
 
   startDivik() {
-    console.log(this.selectedValue);
     this.divikService.startDivik(this.selectedValue, this.divikConfig);
   }
 

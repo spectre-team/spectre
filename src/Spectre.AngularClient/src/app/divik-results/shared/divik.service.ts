@@ -48,7 +48,6 @@ export class DivikService extends Service {
 
   startDivik(datasetName: string, divikConfig: DivikConfig) {
     const queryUrl = `${this.getBaseUrl()}/computation/${datasetName}`;
-    console.log('Send');
     const result = this.http.post(queryUrl, divikConfig);
     console.log(result);
   }

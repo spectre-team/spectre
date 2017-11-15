@@ -28,7 +28,7 @@ namespace Spectre.Service.Abstract
     using Spectre.Database.Utils;
 
     /// <summary>
-    /// Interface for PathFinderService
+    /// Interface for DatasetDetailsFinderService
     /// </summary>
     public interface IDatasetDetailsFinderService
     {
@@ -61,5 +61,25 @@ namespace Spectre.Service.Abstract
         /// Null for not existing upload number.
         /// </returns>
         string UploadNumberToHashOrDefault(string uploadnumber);
+
+        /// <summary>
+        /// Query for translating hash to friendly name.
+        /// </summary>
+        /// <param name="hash">The hash.</param>
+        /// <returns>
+        /// Returns FriendlyName for Hash.
+        /// Null for not existing Hash.
+        /// </returns>
+        string HashToFriendlyNameOrDefault(string hash);
+
+        /// <summary>
+        /// Query for translating upload number to friendly name.
+        /// </summary>
+        /// <param name="uploadnumber">The uploadnumber.</param>
+        /// <returns>
+        /// Returns friendly name for given upload number.
+        /// Null for not existing upload number.
+        /// </returns>
+        string UploadNumberToFriendlyNameOrDefault(string uploadnumber);
     }
 }

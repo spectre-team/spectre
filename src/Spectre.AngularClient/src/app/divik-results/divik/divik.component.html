@@ -37,12 +37,12 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <div *ngFor="let configElement of config.entries()">
+      <div *ngFor="let configElement of divikConfigKeys">
         <mat-form-field class="mat-form-field">
-          <input matInput disabled="true" value={{configElement[0]}}>
+          <input matInput disabled="true" value={{configElement}}>
         </mat-form-field>
         <mat-form-field class="mat-form-field">
-          <input matInput disabled="true" value={{configElement[1]}}>
+          <input matInput disabled="true" value={{divikConfig[configElement]}}>
         </mat-form-field>
       </div>
     </mat-expansion-panel>
