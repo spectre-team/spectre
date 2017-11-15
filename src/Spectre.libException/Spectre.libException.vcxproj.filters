@@ -33,6 +33,9 @@
     <ClInclude Include="EmptyDatasetException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ReachedUnreachableCodeException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="EmptyArgumentException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InconsistentArgumentSizesException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReachedUnreachableCodeException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EmptyArgumentException.cpp">
