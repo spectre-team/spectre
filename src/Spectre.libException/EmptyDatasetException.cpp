@@ -19,8 +19,8 @@ limitations under the License.
 
 #include "EmptyDatasetException.h"
 
-namespace SpectrelibException
+namespace Spectre::libException
 {
 EmptyDatasetException::EmptyDatasetException(const std::string &name) :
-    ExceptionBase(name) { }
+    EmptyArgumentException(name) { }
 }

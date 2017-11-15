@@ -1,6 +1,6 @@
 /*
-* EmptyDatasetException.h
-* Thrown when input dataset was empty.
+* EmptyArgumentException.cpp
+* Thrown when argument is empty.
 *
 Copyright 2017 Spectre Team
 
@@ -17,21 +17,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#pragma once
-#include "Spectre.libException/EmptyArgumentException.h"
+#include "EmptyArgumentException.h"
 
 namespace Spectre::libException
 {
-/// <summary>
-/// Thrown when input dataset was empty.
-/// </summary>
-class EmptyDatasetException final: public EmptyArgumentException
-{
-public:
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EmptyDatasetException"/> class.
-    /// </summary>
-    /// <param name="name">The name.</param>
-    explicit EmptyDatasetException(const std::string &name);
-};
+EmptyArgumentException::EmptyArgumentException(const std::string &argumentName) :
+    ExceptionBase(argumentName + " cannot be empty.") { }
 }

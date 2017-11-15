@@ -12,6 +12,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentOutOfRangeException.h" />
+    <ClInclude Include="EmptyArgumentException.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
     <ClInclude Include="EmptyDatasetException.h">
       <SubType>Header Files</SubType>
     </ClInclude>
@@ -21,6 +24,9 @@
     <ClInclude Include="OutOfRangeException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EmptyArgumentException.cpp">
+      <SubType>Source Files</SubType>
+    </ClCompile>
     <ClCompile Include="EmptyDatasetException.cpp" />
     <ClCompile Include="ExceptionBase.cpp" />
     <ClCompile Include="InconsistentArgumentSizesException.cpp" />
@@ -31,7 +37,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{7417BF00-028B-4797-B58A-6058CA338493}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>SpectrelibException</RootNamespace>
+    <RootNamespace>Spectre::libException</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
