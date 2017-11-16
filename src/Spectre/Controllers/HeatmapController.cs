@@ -14,35 +14,36 @@
    limitations under the License.
 */
 
-using Spectre.Service.Configuration;
-using Spectre.Service.Loaders;
+using System;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using Spectre.Data.Datasets;
+using Spectre.Models.Msi;
+using Spectre.Providers;
 
 namespace Spectre.Controllers
 {
-    using System;
-    using System.Configuration;
-    using System.IO;
-    using System.Web.Http;
-    using System.Web.Http.Cors;
-    using Spectre.Data.Datasets;
-    using Spectre.Models.Msi;
-
     /// <summary>
-    /// Controller for the needs of Heatmap providing
+    ///     Controller for the needs of Heatmap providing
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class HeatmapController : ApiController
     {
+        private readonly CachingDatasetProvider _datasetProvider = new CachingDatasetProvider();
+        private readonly AccessPathProvider _pathProvider = new AccessPathProvider();
+
         /// <summary>
-        /// Gets single heatmap of a specified preparation based on provided mz.
+        ///     Gets single heatmap of a specified preparation based on provided mz.
         /// </summary>
         /// <param name="id">Preparation identifier.</param>
         /// <param name="channelId">Identifier of channel.</param>
         /// <param name="flag">Does nothing but allows to define this function.</param>
         /// <returns>Heatmap</returns>
-        /// <exception cref="ArgumentException">Thrown when provided mz is lower
-        /// than zero, or is invalid for a given dataset</exception>
+        /// <exception cref="ArgumentException">
+        ///     Thrown when provided mz is lower
+        ///     than zero, or is invalid for a given dataset
+        /// </exception>
         public Heatmap Get(int id, int channelId, bool flag)
         {
             if (channelId < 0)
@@ -50,16 +51,8 @@ namespace Spectre.Controllers
                 throw new ArgumentException(message: nameof(channelId));
             }
 
-            if (id != 1)
-            {
-                return null;
-            }
-
-            DatasetLoader datasetLoader = new DatasetLoader(
-                new DataRootConfig(
-                    ConfigurationManager.AppSettings["LocalDataDirectory"],
-                    ConfigurationManager.AppSettings["RemoteDataDirectory"]));
-            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor");
+            var datasetPath = _pathProvider.GetPath<IDataset>(id);
+            var dataset = _datasetProvider.Read(datasetPath);
 
             var mz = dataset.GetRawMzValue(channelId);
             var intensities = dataset.GetRawIntensityRow(channelId);
@@ -76,7 +69,7 @@ namespace Spectre.Controllers
                 yCoordinates[i] = coordinates[i, 1];
             }
 
-            return new Heatmap() { Mz = mz, Intensities = intensities, X = xCoordinates, Y = yCoordinates };
+            return new Heatmap { Mz = mz, Intensities = intensities, X = xCoordinates, Y = yCoordinates };
         }
     }
 }
