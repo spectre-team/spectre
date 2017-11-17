@@ -1,21 +1,21 @@
 <div class="inline-items-container">
   <div id="divikHeatmapWithDownloadButton">
-    <mat-form-field *ngIf="divikConfig">
+    <mat-form-field *ngIf="divikSummary">
       <label>
         Divik level
         <input matInput
                type='number'
                min="1"
-               max={{divikConfig.Level}}
+               max={{divikSummary.Depth}}
                (change)="changeLevel($event.target.value)"/>
       </label>
-      <mat-hint align="center">Max value: {{divikConfig.Level}}</mat-hint>
+      <mat-hint align="center">Max value: {{divikSummary.Depth}}</mat-hint>
     </mat-form-field>
     <app-heatmap
       [heatmapData]=data>
     </app-heatmap>
     <a
-      [href]='downloadJsonHref'
+      [href]='resultDownloadJsonHref'
       download='result.json'>
       <button
         Mat-raised-button
@@ -23,12 +23,22 @@
         Download JSON result
       </button>
     </a>
+    <a
+      [href]='summaryDownloadJsonHref'
+      download='summary.json'>
+      <button
+        Mat-raised-button
+        class="mat-button">
+        Download JSON summary
+      </button>
+    </a>
   </div>
 
 
   <div>
-    <mat-expansion-panel id="divik-info-expansion-panel">
-      <mat-expansion-panel-header id="expansionPanelHeader">
+    Config info:
+    <mat-expansion-panel class="divik-info-expansion-panel">
+      <mat-expansion-panel-header class="expansionPanelHeader">
         <mat-panel-title>
           Option
         </mat-panel-title>
@@ -43,6 +53,26 @@
         </mat-form-field>
         <mat-form-field class="mat-form-field">
           <input matInput disabled="true" value={{divikConfig[configElement]}}>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+    Summary info:
+    <mat-expansion-panel class="divik-info-expansion-panel">
+      <mat-expansion-panel-header class="expansionPanelHeader">
+        <mat-panel-title>
+          Option
+        </mat-panel-title>
+        <mat-panel-description>
+          Value
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let summaryElement of divikSummaryKeys">
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{summaryElement}}>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{divikSummary[summaryElement]}}>
         </mat-form-field>
       </div>
     </mat-expansion-panel>

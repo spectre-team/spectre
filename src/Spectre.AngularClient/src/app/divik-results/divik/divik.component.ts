@@ -23,6 +23,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { DivikService } from '../shared/divik.service';
 import { DivikConfig } from '../shared/divik-config';
+import { DivikSummary } from '../shared/divik-summary';
+
 import 'rxjs/Rx';
 
 
@@ -34,8 +36,11 @@ import 'rxjs/Rx';
 export class DivikComponent implements OnInit {
   public data: any;
   public divikConfig: DivikConfig;
-  public downloadJsonHref: SafeUrl;
+  public divikSummary: DivikSummary;
+  public resultDownloadJsonHref: SafeUrl;
+  public summaryDownloadJsonHref: SafeUrl;
   public divikConfigKeys: Array<string>;
+  public divikSummaryKeys: Array<string>;
 
   @Input() public preparationId;
   constructor(
@@ -50,6 +55,9 @@ export class DivikComponent implements OnInit {
     this.divikService
       .getConfig(this.preparationId, 1)
       .subscribe(config => this.buildConfigInfo(config));
+    this.divikService
+      .getSummary(this.preparationId, 1)
+      .subscribe(summary => this.buildSummaryInfo(summary));
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
@@ -62,19 +70,31 @@ export class DivikComponent implements OnInit {
   buildConfigInfo(config: DivikConfig) {
     this.divikConfig = config;
     this.divikConfigKeys = Object.keys(this.divikConfig);
-    this.generateDownloadJsonUri();
+    this.generateResultDownloadJsonUri();
+  }
+
+  buildSummaryInfo(summary: DivikSummary) {
+    this.divikSummary = summary;
+    this.divikSummaryKeys = Object.keys(this.divikSummary);
+    this.generateSummaryDownloadJsonUri();
   }
 
   changeLevel(value) {
-    if (value > 0 && value <= this.divikConfig.Level) {
+    if (value > 0 && value <= this.divikSummary.Depth) {
       this.divikService
         .get(this.preparationId, 1, value)
         .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
     }
   }
 
-  generateDownloadJsonUri() {
+  generateResultDownloadJsonUri() {
     const theJSON = JSON.stringify(this.divikConfig);
-    this.downloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
+    this.resultDownloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
+  }
+
+
+  generateSummaryDownloadJsonUri() {
+    const theJSON = JSON.stringify(this.divikSummary);
+    this.summaryDownloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
   }
 }

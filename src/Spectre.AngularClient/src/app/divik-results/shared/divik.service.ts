@@ -17,15 +17,16 @@
  limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import {Heatmap} from '../../heatmaps/shared/heatmap';
-import {Service} from '../../app.service';
-import {DivikConfig} from './divik-config';
-import {HeatmapUtil} from '../../heatmaps/shared/heatmap-util';
+import { Heatmap } from '../../heatmaps/shared/heatmap';
+import { Service } from '../../app.service';
+import { DivikConfig } from './divik-config';
+import { HeatmapUtil } from '../../heatmaps/shared/heatmap-util';
+import { DivikSummary } from './divik-summary';
 
 @Injectable()
 export class DivikService extends Service {
@@ -51,6 +52,23 @@ export class DivikService extends Service {
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     return response.map(toDivikConfig);
   }
+
+  getSummary(preparationId: number, divikId: number): Observable<DivikSummary> {
+    const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}&summary=true`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    return response.map(toDivikSummary);
+  }
+}
+
+function toDivikSummary(response: Response): DivikSummary {
+  const json = response.json();
+  return <DivikSummary>({
+    Depth: json.Depth,
+  'Cluster Size Mean': json.ClusterSizeMean,
+  'Cluster Size Variance': json.ClusterSizeVariance,
+  'Number of clusters': json.NumberOfClusters,
+  'Size Reduction': json.SizeReduction
+  });
 }
 
 function toDivikConfig(response: Response): DivikConfig {
