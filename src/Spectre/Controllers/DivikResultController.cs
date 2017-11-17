@@ -17,18 +17,19 @@
    limitations under the License.
 */
 
-using System;
-using System.IO;
-using System.Web.Http;
-using System.Web.Http.Cors;
-using Newtonsoft.Json;
-using Spectre.Algorithms.Parameterization;
-using Spectre.Data.Datasets;
-using Spectre.Models.Msi;
-using Spectre.Providers;
-
 namespace Spectre.Controllers
 {
+    using System;
+    using System.IO;
+    using System.Web.Http;
+    using System.Web.Http.Cors;
+    using Newtonsoft.Json;
+    using Spectre.Algorithms.Parameterization;
+    using Spectre.Algorithms.ResultsProcessors;
+    using Spectre.Data.Datasets;
+    using Spectre.Models.Msi;
+    using Spectre.Providers;
+
     /// <summary>
     ///     Allows to read divik result.
     /// </summary>
@@ -77,6 +78,28 @@ namespace Spectre.Controllers
             }
 
             return new DivikResult { X = xCoordinates, Y = yCoordinates, Data = data };
+        }
+
+        /// <summary>
+        /// Gets summary of DiviK for the dataset of specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the preparation.</param>
+        /// <param name="divikId">The divik identifier.</param>
+        /// <param name="summary">Must be true.</param>
+        /// <returns>Summary of DiviK</returns>
+        /// <exception cref="System.ArgumentException">When IDs are wrong</exception>
+        public DivikResultSummary Get(int id, int divikId, bool summary)
+        {
+            if (divikId < 0 || !summary)
+            {
+                throw new ArgumentException(message: nameof(divikId));
+            }
+
+            var path = _pathProvider.GetPath<Algorithms.Results.DivikResult>(id);
+            var jsonText = File.ReadAllText(path);
+            var divikResult = JsonConvert.DeserializeObject<Algorithms.Results.DivikResult>(jsonText);
+
+            return new DivikResultSummary(divikResult);
         }
 
         /// <summary>
