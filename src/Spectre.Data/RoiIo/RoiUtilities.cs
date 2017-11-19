@@ -36,14 +36,30 @@ namespace Spectre.Data.RoiIo
         /// <summary>
         /// Reads regions of interest from a png file.
         /// </summary>
+        /// <param name="path">Path for the rois directory, either Spectre.Data or test_files director.</param>
         /// <returns>
         /// Returns list doubles.
         /// </returns>
-        public Roi RoiReader()
+        public List<RoiPixel> RoiReader(string path)
         {
-            Roi prototyp = new Roi();
+            List<RoiPixel> roipixels = new List<RoiPixel>();
 
-            return prototyp;
+            Color clr = default(Color);
+            Bitmap bitmap = new Bitmap(path);
+
+            for (int width = 0; width < bitmap.Width; width++)
+            {
+                for (int height = 0; height < bitmap.Height; height++)
+                {
+                    clr = bitmap.GetPixel(width, height);
+                    if (clr.B == 0)
+                    {
+                        roipixels.Add(new RoiPixel(Path.GetFileNameWithoutExtension(path), width, height));
+                    }
+                }
+            }
+
+            return roipixels;
         }
 
         /// <summary>
@@ -53,7 +69,7 @@ namespace Spectre.Data.RoiIo
         /// <returns>
         /// Returns true if operation was succeded.
         /// </returns>
-        public bool RoiWriter(Roi prototyp)
+        public bool RoiWriter(List<RoiPixel> prototyp)
         {
             // write from list to png file.
             return false;
@@ -62,20 +78,22 @@ namespace Spectre.Data.RoiIo
         /// <summary>
         /// Lists the rois from directory.
         /// </summary>
+        /// <param name="path">Path for the rois directory, either Spectre.Data or test_files director.</param>
         /// <returns>
         /// Names of all roi files in the directory.
         /// </returns>
-        public List<string> ListRoisFromDirectory()
+        public List<string> ListRoisFromDirectory(string path)
         {
             List<string> names = new List<string>();
 
-            string[] allfiles = System.IO.Directory.GetFiles(
-                Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,
-                "*.png",
-                SearchOption.AllDirectories);
+            string[] allfiles = System.IO.Directory.GetFiles(path, "*.png", SearchOption.AllDirectories);
 
-            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             names = allfiles.ToList();
+
+            if (names.Count == 0)
+            {
+                throw new FileNotFoundException("No *.png files found in directory or subdirectories");
+            }
 
             return names;
         }
