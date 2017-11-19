@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datasets\RoiDataset.cs" />
     <Compile Include="Datasets\RoiPixel.cs" />
     <Compile Include="Structures\DataPoint.cs" />
     <Compile Include="Datasets\BasicTextDataset.cs" />

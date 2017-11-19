@@ -40,12 +40,16 @@ namespace Spectre.Data.RoiIo
         /// <returns>
         /// Returns list doubles.
         /// </returns>
-        public List<RoiPixel> RoiReader(string path)
+        public RoiDataset RoiReader(string path)
         {
-            List<RoiPixel> roipixels = new List<RoiPixel>();
-
             Color clr = default(Color);
             Bitmap bitmap = new Bitmap(path);
+            RoiDataset roidataset = new RoiDataset();
+
+            roidataset.RoiPixels = new List<RoiPixel>();
+            roidataset.Name = Path.GetFileNameWithoutExtension(path);
+            roidataset.Height = bitmap.Height;
+            roidataset.Width = bitmap.Width;
 
             for (int width = 0; width < bitmap.Width; width++)
             {
@@ -54,12 +58,12 @@ namespace Spectre.Data.RoiIo
                     clr = bitmap.GetPixel(width, height);
                     if (clr.B == 0)
                     {
-                        roipixels.Add(new RoiPixel(Path.GetFileNameWithoutExtension(path), width, height));
+                        roidataset.RoiPixels.Add(new RoiPixel(width, height));
                     }
                 }
             }
 
-            return roipixels;
+            return roidataset;
         }
 
         /// <summary>
@@ -69,7 +73,7 @@ namespace Spectre.Data.RoiIo
         /// <returns>
         /// Returns true if operation was succeded.
         /// </returns>
-        public bool RoiWriter(List<RoiPixel> prototyp)
+        public bool RoiWriter(RoiDataset prototyp)
         {
             // write from list to png file.
             return false;

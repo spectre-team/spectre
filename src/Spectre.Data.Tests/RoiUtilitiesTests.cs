@@ -34,11 +34,22 @@ namespace Spectre.Data.Tests
     {
         private readonly string _path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\Rois";
         private string _testpath;
+        private string _readpath1;
+        private int _properheight;
+        private int _properwidth;
+        private readonly List<RoiPixel> _properroipixels = new List<RoiPixel>();
 
         [SetUp]
         public void SetUp()
         {
             _testpath = Path.GetFullPath(_path);
+            _readpath1 = _testpath + "\\image1.png";
+            _properheight = 6;
+            _properwidth = 6;
+
+            _properroipixels.Add(new RoiPixel(1, 1));
+            _properroipixels.Add(new RoiPixel(2, 1));
+            _properroipixels.Add(new RoiPixel(3, 1));
         }
 
         [Test]
@@ -47,19 +58,35 @@ namespace Spectre.Data.Tests
             RoiUtilities service = new RoiUtilities();
 
             var names = service.ListRoisFromDirectory(_testpath);
-            
-            Assert.AreEqual("image1.png",Path.GetFileName(names[0]));
-            Assert.AreEqual("image2.png",Path.GetFileName(names[1]));
+
+            Assert.AreEqual("image1.png", Path.GetFileName(names[0]));
+            Assert.AreEqual("image2.png", Path.GetFileName(names[1]));
         }
 
         [Test]
-        public void ReadRoi_returns_proper_Rois_object()
+        public void ReadRoi_returns_proper_roi_pixels()
         {
             RoiUtilities service = new RoiUtilities();
+            var roi = service.RoiReader(_readpath1);
 
-            string readpath1 = _testpath + "\\image1.png";
+            Assert.AreEqual(roi.RoiPixels[0].GetXCoord(), _properroipixels[0].GetXCoord());
+            Assert.AreEqual(roi.RoiPixels[0].GetYCoord(), _properroipixels[0].GetYCoord());
 
-            var roi1 = service.RoiReader(readpath1);
+            Assert.AreEqual(roi.RoiPixels[1].GetXCoord(), _properroipixels[1].GetXCoord());
+            Assert.AreEqual(roi.RoiPixels[1].GetYCoord(), _properroipixels[1].GetYCoord());
+
+            Assert.AreEqual(roi.RoiPixels[2].GetXCoord(), _properroipixels[2].GetXCoord());
+            Assert.AreEqual(roi.RoiPixels[2].GetYCoord(), _properroipixels[2].GetYCoord());
+        }
+
+        [Test]
+        public void ReadRoi_returns_proper_dimensions()
+        {
+            RoiUtilities service = new RoiUtilities();
+            var roi = service.RoiReader(_readpath1);
+
+            Assert.AreEqual(roi.Height, _properheight);
+            Assert.AreEqual(roi.Width, _properwidth);
         }
     }
 }

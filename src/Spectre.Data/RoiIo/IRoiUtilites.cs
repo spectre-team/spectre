@@ -38,7 +38,7 @@ namespace Spectre.Data.RoiIo
         /// <returns>
         /// Returns list doubles.
         /// </returns>
-        List<RoiPixel> RoiReader(string path);
+        RoiDataset RoiReader(string path);
 
         /// <summary>
         /// Writes roi dataset into a png file.
@@ -47,7 +47,7 @@ namespace Spectre.Data.RoiIo
         /// <returns>
         /// Returns true if operation was successfull.
         /// </returns>
-        bool RoiWriter(List<RoiPixel> prototyp);
+        bool RoiWriter(RoiDataset prototyp);
 
         /// <summary>
         /// Lists the rois from directory.

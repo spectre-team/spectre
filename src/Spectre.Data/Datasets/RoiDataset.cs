@@ -26,41 +26,40 @@ using System.Threading.Tasks;
 namespace Spectre.Data.Datasets
 {
     /// <summary>
-    /// Dataset for regions of interest.
+    /// Dataset containing information about a single roi.
     /// </summary>
-    public class RoiPixel
+    public class RoiDataset
     {
         /// <summary>
-        /// The x coordinate
+        /// Gets or sets the name.
         /// </summary>
-        private readonly double _xcoordinate;
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; set; }
 
         /// <summary>
-        /// The ycoordinate
+        /// Gets or sets the roi pixels.
         /// </summary>
-        private readonly double _ycoordinate;
+        /// <value>
+        /// The roi pixels.
+        /// </value>
+        public List<RoiPixel> RoiPixels { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RoiPixel" /> class.
+        /// Gets or sets the width.
         /// </summary>
-        /// <param name="xcoord">The xcoord.</param>
-        /// <param name="ycoord">The ycoord.</param>
-        public RoiPixel(double xcoord, double ycoord)
-        {
-            _xcoordinate = xcoord;
-            _ycoordinate = ycoord;
-        }
+        /// <value>
+        /// The width.
+        /// </value>
+        public int Width { get; set; }
 
         /// <summary>
-        /// Gets the x coord.
+        /// Gets or sets the height.
         /// </summary>
-        /// <returns>X coordinate of the object</returns>
-        public double GetXCoord() => _xcoordinate;
-
-        /// <summary>
-        /// Gets the y coord.
-        /// </summary>
-        /// <returns>Y Coordinate of the object</returns>
-        public double GetYCoord() => _ycoordinate;
-        }
+        /// <value>
+        /// The height.
+        /// </value>
+        public int Height { get; set; }
+    }
 }
