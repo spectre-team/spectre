@@ -34,22 +34,35 @@ namespace Spectre.Data.Tests
     {
         private readonly string _path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\Rois";
         private string _testpath;
-        private string _readpath1;
-        private int _properheight;
-        private int _properwidth;
-        private readonly List<RoiPixel> _properroipixels = new List<RoiPixel>();
+        private string _testfilespath;
+        private readonly RoiDataset _readroidataset = new RoiDataset();
+        private readonly RoiDataset _writeroidataset = new RoiDataset();
 
         [SetUp]
         public void SetUp()
         {
             _testpath = Path.GetFullPath(_path);
-            _readpath1 = _testpath + "\\image1.png";
-            _properheight = 6;
-            _properwidth = 6;
+            _testfilespath = _testpath + "\\image1.png";
+            _readroidataset.Name = "image1";
+            _readroidataset.Height = 6;
+            _readroidataset.Width = 6;
+            _readroidataset.RoiPixels = new List<RoiPixel>
+            {
+                new RoiPixel(1, 1),
+                new RoiPixel(2, 1),
+                new RoiPixel(3, 1)
+            };
 
-            _properroipixels.Add(new RoiPixel(1, 1));
-            _properroipixels.Add(new RoiPixel(2, 1));
-            _properroipixels.Add(new RoiPixel(3, 1));
+            _writeroidataset.Name = "writetestfile";
+            _writeroidataset.Height = 10;
+            _writeroidataset.Width = 10;
+            _writeroidataset.RoiPixels = new List<RoiPixel>
+            {
+                new RoiPixel(1, 5),
+                new RoiPixel(2, 5),
+                new RoiPixel(3, 5),
+                new RoiPixel(4, 5),
+            };
         }
 
         [Test]
@@ -67,26 +80,34 @@ namespace Spectre.Data.Tests
         public void ReadRoi_returns_proper_roi_pixels()
         {
             RoiUtilities service = new RoiUtilities();
-            var roi = service.RoiReader(_readpath1);
+            var roi = service.RoiReader(_testfilespath);
 
-            Assert.AreEqual(roi.RoiPixels[0].GetXCoord(), _properroipixels[0].GetXCoord());
-            Assert.AreEqual(roi.RoiPixels[0].GetYCoord(), _properroipixels[0].GetYCoord());
+            Assert.AreEqual(roi.RoiPixels[0].GetXCoord(), _readroidataset.RoiPixels[0].GetXCoord());
+            Assert.AreEqual(roi.RoiPixels[0].GetYCoord(), _readroidataset.RoiPixels[0].GetYCoord());
 
-            Assert.AreEqual(roi.RoiPixels[1].GetXCoord(), _properroipixels[1].GetXCoord());
-            Assert.AreEqual(roi.RoiPixels[1].GetYCoord(), _properroipixels[1].GetYCoord());
+            Assert.AreEqual(roi.RoiPixels[1].GetXCoord(), _readroidataset.RoiPixels[1].GetXCoord());
+            Assert.AreEqual(roi.RoiPixels[1].GetYCoord(), _readroidataset.RoiPixels[1].GetYCoord());
 
-            Assert.AreEqual(roi.RoiPixels[2].GetXCoord(), _properroipixels[2].GetXCoord());
-            Assert.AreEqual(roi.RoiPixels[2].GetYCoord(), _properroipixels[2].GetYCoord());
+            Assert.AreEqual(roi.RoiPixels[2].GetXCoord(), _readroidataset.RoiPixels[2].GetXCoord());
+            Assert.AreEqual(roi.RoiPixels[2].GetYCoord(), _readroidataset.RoiPixels[2].GetYCoord());
         }
 
         [Test]
         public void ReadRoi_returns_proper_dimensions()
         {
             RoiUtilities service = new RoiUtilities();
-            var roi = service.RoiReader(_readpath1);
+            var roi = service.RoiReader(_testfilespath);
 
-            Assert.AreEqual(roi.Height, _properheight);
-            Assert.AreEqual(roi.Width, _properwidth);
+            Assert.AreEqual(roi.Height, _readroidataset.Height);
+            Assert.AreEqual(roi.Width, _readroidataset.Width);
+        }
+
+        [Test]
+        public void WriteRoi_writes_file_properly()
+        {
+            RoiUtilities service = new RoiUtilities();
+
+            service.RoiWriter(_writeroidataset, _testpath);
         }
     }
 }

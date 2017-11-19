@@ -33,19 +33,19 @@ namespace Spectre.Data.Datasets
         /// <summary>
         /// The x coordinate
         /// </summary>
-        private readonly double _xcoordinate;
+        private readonly int _xcoordinate;
 
         /// <summary>
         /// The ycoordinate
         /// </summary>
-        private readonly double _ycoordinate;
+        private readonly int _ycoordinate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoiPixel" /> class.
         /// </summary>
         /// <param name="xcoord">The xcoord.</param>
         /// <param name="ycoord">The ycoord.</param>
-        public RoiPixel(double xcoord, double ycoord)
+        public RoiPixel(int xcoord, int ycoord)
         {
             _xcoordinate = xcoord;
             _ycoordinate = ycoord;
@@ -55,12 +55,12 @@ namespace Spectre.Data.Datasets
         /// Gets the x coord.
         /// </summary>
         /// <returns>X coordinate of the object</returns>
-        public double GetXCoord() => _xcoordinate;
+        public int GetXCoord() => _xcoordinate;
 
         /// <summary>
         /// Gets the y coord.
         /// </summary>
         /// <returns>Y Coordinate of the object</returns>
-        public double GetYCoord() => _ycoordinate;
+        public int GetYCoord() => _ycoordinate;
         }
 }

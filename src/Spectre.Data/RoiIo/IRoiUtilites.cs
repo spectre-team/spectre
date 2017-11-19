@@ -44,10 +44,8 @@ namespace Spectre.Data.RoiIo
         /// Writes roi dataset into a png file.
         /// </summary>
         /// <param name="prototyp">The prototyp.</param>
-        /// <returns>
-        /// Returns true if operation was successfull.
-        /// </returns>
-        bool RoiWriter(RoiDataset prototyp);
+        /// <param name="path">The path.</param>
+        void RoiWriter(RoiDataset prototyp, string path);
 
         /// <summary>
         /// Lists the rois from directory.

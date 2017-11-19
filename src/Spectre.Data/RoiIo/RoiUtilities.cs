@@ -22,8 +22,8 @@ namespace Spectre.Data.RoiIo
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.IO;
-    using System.IO.Abstractions;
     using System.Linq;
     using Spectre.Data.Datasets;
 
@@ -70,13 +70,24 @@ namespace Spectre.Data.RoiIo
         /// Writes list of doubles into a png file.
         /// </summary>
         /// <param name="prototyp">The prototyp.</param>
-        /// <returns>
-        /// Returns true if operation was succeded.
-        /// </returns>
-        public bool RoiWriter(RoiDataset prototyp)
+        /// <param name="path">The path.</param>
+        public void RoiWriter(RoiDataset prototyp, string path)
         {
-            // write from list to png file.
-            return false;
+            Bitmap bitmap = new Bitmap(prototyp.Width, prototyp.Height);
+
+            Graphics graphicsobject = Graphics.FromImage(bitmap);
+            graphicsobject.Clear(Color.White);
+
+            for (int listiterator = 0; listiterator < prototyp.RoiPixels.Count; listiterator++)
+            {
+                bitmap.SetPixel(
+                   prototyp.RoiPixels[listiterator].GetXCoord(),
+                   prototyp.RoiPixels[listiterator].GetYCoord(),
+                   Color.Black);
+            }
+
+            var writepath = path + "\\" + prototyp.Name + ".png";
+            bitmap.Save(writepath, ImageFormat.Png);
         }
 
         /// <summary>
