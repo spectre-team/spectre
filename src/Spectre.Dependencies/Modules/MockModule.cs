@@ -18,9 +18,16 @@
    limitations under the License.
 */
 
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
+using System.Linq;
+using Moq;
 using Ninject.Modules;
+using Spectre.Database.Contexts;
+using Spectre.Database.Entities;
 
 namespace Spectre.Dependencies.Modules
 {
@@ -38,6 +45,28 @@ namespace Spectre.Dependencies.Modules
             Rebind<IFileSystem>()
                 .To<MockFileSystem>()
                 .InSingletonScope();
+
+            Rebind<DatasetsContext>()
+                .ToMethod(method: x =>
+                {
+                    var data = new List<Dataset>
+                    {
+                        new Dataset { FriendlyName = "FriendlyName1", Hash = "Hash1", UploadNumber = "UploadNumber1"},
+                        new Dataset { FriendlyName = "FriendlyName2", Hash = "Hash2", UploadNumber = "UploadNumber2"},
+                        new Dataset { FriendlyName = "FriendlyName3", Hash = "Hash3", UploadNumber = "UploadNumber3"},
+                    }.AsQueryable();
+
+                    var mockSet = new Mock<DbSet<Dataset>>();
+                    mockSet.As<IQueryable<Dataset>>().Setup(m => m.Provider).Returns(data.Provider);
+                    mockSet.As<IQueryable<Dataset>>().Setup(m => m.Expression).Returns(data.Expression);
+                    mockSet.As<IQueryable<Dataset>>().Setup(m => m.ElementType).Returns(data.ElementType);
+                    mockSet.As<IQueryable<Dataset>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+                    var mockContext = new Mock<DatasetsContext>();
+                    mockContext.Setup(c => c.Datasets).Returns(mockSet.Object);
+                    return mockContext.Object;
+                })
+                .InTransientScope();
         }
 
         #endregion

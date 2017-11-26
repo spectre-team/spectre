@@ -19,6 +19,7 @@
 
 using System.IO.Abstractions;
 using Ninject.Modules;
+using Spectre.Database.Contexts;
 
 namespace Spectre.Dependencies.Modules
 {
@@ -35,6 +36,9 @@ namespace Spectre.Dependencies.Modules
             Rebind<IFileSystem>()
                 .To<FileSystem>()
                 .InSingletonScope();
+
+            Rebind<DatasetsContext>()
+                .ToSelf();
         }
 
         #endregion
