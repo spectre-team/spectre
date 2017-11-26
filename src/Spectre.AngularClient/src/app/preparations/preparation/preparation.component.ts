@@ -1,4 +1,4 @@
-/*
+ /*
  * preparation.component.ts
  * Component of single preparation.
  *
