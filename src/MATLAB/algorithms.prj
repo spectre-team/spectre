@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1298587968" file="${PROJECT_ROOT}\algorithms.prj" location="${PROJECT_ROOT}" name="algorithms" preferred-package-location="${PROJECT_ROOT}\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
+  <configuration build-checksum="1298587968" file=".\algorithms.prj" location="." name="algorithms" preferred-package-location="${PROJECT_ROOT}\algorithms-compile\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
     <param.appname>MsiAlgorithms</param.appname>
     <param.icon />
     <param.icons />
@@ -91,20 +91,21 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
     </unset>
     <fileset.exports>
       <file>${PROJECT_ROOT}\apply_gmm.m</file>
+      <file>${PROJECT_ROOT}\dependencies\fetch_thresholds.m</file>
       <file>${PROJECT_ROOT}\DiviK\libs\divik_library\divik.m</file>
-      <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
       <file>${PROJECT_ROOT}\estimate_gmm.m</file>
+      <file>${PROJECT_ROOT}\load_divik_result.m</file>
       <file>${PROJECT_ROOT}\merge_gmm_model_components.m</file>
       <file>${PROJECT_ROOT}\pafft.m</file>
       <file>${PROJECT_ROOT}\reduce_gmm_by_component_area.m</file>
       <file>${PROJECT_ROOT}\reduce_gmm_by_component_height.m</file>
       <file>${PROJECT_ROOT}\remove_baseline.m</file>
+      <file>${PROJECT_ROOT}\ROI_approximation\summarize_similarity_classes_binding.m</file>
       <file>${PROJECT_ROOT}\ticnorm.m</file>
     </fileset.exports>
     <fileset.classes>
       <entity.package name="">
         <entity.class name="Preprocessing">
-          <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
           <file>${PROJECT_ROOT}\pafft.m</file>
           <file>${PROJECT_ROOT}\remove_baseline.m</file>
           <file>${PROJECT_ROOT}\ticnorm.m</file>
@@ -118,15 +119,22 @@ A. Polanski, M. Marczyk, M. Pietrowska, P. Widlak and J. Polanska, "Signal parti
         </entity.class>
         <entity.class name="Segmentation">
           <file>${PROJECT_ROOT}\DiviK\libs\divik_library\divik.m</file>
+          <file>${PROJECT_ROOT}\load_divik_result.m</file>
         </entity.class>
         <entity.class name="GmmFiltering">
-          <file>${PROJECT_ROOT}\DiviK\libs\miscellaneous\fetch_thresholds.m</file>
+          <file>${PROJECT_ROOT}\dependencies\fetch_thresholds.m</file>
+        </entity.class>
+        <entity.class name="RoiApproximation">
+          <file>${PROJECT_ROOT}\ROI_approximation\summarize_similarity_classes_binding.m</file>
         </entity.class>
       </entity.package>
     </fileset.classes>
     <fileset.resources>
+      <file>${PROJECT_ROOT}\dependencies</file>
       <file>${PROJECT_ROOT}\DiviK\libs</file>
       <file>${PROJECT_ROOT}\GMM</file>
+      <file>${PROJECT_ROOT}\load_divik_result.m</file>
+      <file>${PROJECT_ROOT}\ROI_approximation</file>
     </fileset.resources>
     <fileset.depfun>
       <file>${PROJECT_ROOT}\adaptive_PAFFT.m</file>

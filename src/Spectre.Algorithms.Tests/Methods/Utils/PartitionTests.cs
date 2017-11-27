@@ -166,5 +166,28 @@ namespace Spectre.Algorithms.Tests.Methods.Utils
         }
 
         #endregion
+
+        #region GetClusterSize
+
+        [Test]
+        public void ReturnsCountsForEachLabel()
+        {
+            var partition = new[] {1, 2, 3};
+            var counts = Partition.GetClusterSizes(partition);
+            Assert.IsTrue(partition.All(assignment => counts.ContainsKey(assignment)));
+            Assert.AreEqual(3, counts.Count);
+        }
+
+        [Test]
+        public void CountsOccurencesOfEachLabel()
+        {
+            var partition = new[] {1, 3, 2, 3, 2, 3};
+            var counts = Partition.GetClusterSizes(partition);
+            foreach (var i in new[] {1, 2, 3})
+            {
+                Assert.AreEqual(i, counts[i]);
+            }
+        }
+        #endregion
     }
 }
