@@ -19,12 +19,12 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
-#include "Spectre.libPlatform/Statistics.h"
+#include "Spectre.libStatistics/Statistics.h"
 
 namespace
 {
 using namespace testing;
-using namespace Spectre::libPlatform::Statistics;
+using namespace Spectre::libStatistics;
 
 using Data = const std::vector<double>;
 

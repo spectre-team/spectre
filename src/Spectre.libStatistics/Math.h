@@ -20,10 +20,9 @@ limitations under the License.
 #pragma once
 #include <vector>
 #include <span.h>
-#include "Transform.h"
-#include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libFunctional/Transform.h"
 
-namespace Spectre::libPlatform::Math
+namespace Spectre::libStatistics
 {
 // @gmrukwa: vector vs vector
 
@@ -37,7 +36,7 @@ template< class DataType >
 constexpr std::vector<DataType> plus(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left + right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left + right; });
 }
 
 /// <summary>
@@ -50,7 +49,7 @@ template< class DataType >
 constexpr std::vector<DataType> minus(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left - right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left - right; });
 }
 
 /// <summary>
@@ -63,7 +62,7 @@ template< class DataType >
 constexpr std::vector<DataType> multiplyBy(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left * right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left * right; });
 }
 
 /// <summary>
@@ -76,7 +75,7 @@ template< class DataType >
 constexpr std::vector<DataType> divideBy(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left / right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left / right; });
 }
 
 /// <summary>
@@ -89,7 +88,7 @@ template< class DataType >
 constexpr std::vector<DataType> modulo(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left % right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left % right; });
 }
 
 /// <summary>
@@ -102,7 +101,7 @@ template< class DataType >
 constexpr std::vector<DataType> bitwiseAnd(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left & right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left & right; });
 }
 
 /// <summary>
@@ -115,7 +114,7 @@ template< class DataType >
 constexpr std::vector<DataType> logicalAnd(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left && right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left && right; });
 }
 
 /// <summary>
@@ -128,7 +127,7 @@ template< class DataType >
 constexpr std::vector<DataType> bitwiseOr(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left | right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left | right; });
 }
 
 /// <summary>
@@ -141,7 +140,7 @@ template< class DataType >
 constexpr std::vector<DataType> logicalOr(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left || right; });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left || right; });
 }
 
 /// <summary>
@@ -154,7 +153,7 @@ template<class DataType>
 constexpr std::vector<DataType> max(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return std::max(left, right); });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return std::max(left, right); });
 }
 
 /// <summary>
@@ -167,7 +166,7 @@ template<class DataType>
 constexpr std::vector<DataType> min(gsl::span<const DataType> first, gsl::span<const DataType> second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, second, [](DataType left, DataType right) { return std::min(left, right); });
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return std::min(left, right); });
 }
 
 /// <summary>
@@ -179,7 +178,7 @@ constexpr std::vector<DataType> min(gsl::span<const DataType> first, gsl::span<c
 template<class DataType>
 constexpr std::vector<bool> equals(gsl::span<const DataType> first, gsl::span<const DataType> second, DataType* /*dummy*/ = static_cast<DataType *>(nullptr))
 {
-    return Functional::transform(first, second, [](DataType left, DataType right) { return left == right; }, static_cast<bool*>(nullptr));
+    return libFunctional::transform(first, second, [](DataType left, DataType right) { return left == right; }, static_cast<bool*>(nullptr));
 }
 
 // @gmrukwa: vector vs scalar
@@ -194,7 +193,7 @@ template< class DataType >
 constexpr std::vector<DataType> plus(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left + second; });
+    return libFunctional::transform(first, [second](DataType left) { return left + second; });
 }
 
 /// <summary>
@@ -207,7 +206,7 @@ template< class DataType >
 constexpr std::vector<DataType> minus(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left - second; });
+    return libFunctional::transform(first, [second](DataType left) { return left - second; });
 }
 
 /// <summary>
@@ -220,7 +219,7 @@ template< class DataType >
 constexpr std::vector<DataType> multiplyBy(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left * second; });
+    return libFunctional::transform(first, [second](DataType left) { return left * second; });
 }
 
 /// <summary>
@@ -233,7 +232,7 @@ template< class DataType >
 constexpr std::vector<DataType> divideBy(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left / second; });
+    return libFunctional::transform(first, [second](DataType left) { return left / second; });
 }
 
 /// <summary>
@@ -246,7 +245,7 @@ template< class DataType >
 constexpr std::vector<DataType> modulo(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left % second; });
+    return libFunctional::transform(first, [second](DataType left) { return left % second; });
 }
 
 /// <summary>
@@ -259,7 +258,7 @@ template< class DataType >
 constexpr std::vector<DataType> bitwiseAnd(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left & second; });
+    return libFunctional::transform(first, [second](DataType left) { return left & second; });
 }
 
 /// <summary>
@@ -272,7 +271,7 @@ template< class DataType >
 constexpr std::vector<DataType> logicalAnd(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left && second; });
+    return libFunctional::transform(first, [second](DataType left) { return left && second; });
 }
 
 /// <summary>
@@ -285,7 +284,7 @@ template< class DataType >
 constexpr std::vector<DataType> bitwiseOr(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left | second; });
+    return libFunctional::transform(first, [second](DataType left) { return left | second; });
 }
 
 /// <summary>
@@ -298,7 +297,7 @@ template< class DataType >
 constexpr std::vector<DataType> logicalOr(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return left || second; });
+    return libFunctional::transform(first, [second](DataType left) { return left || second; });
 }
 
 /// <summary>
@@ -311,7 +310,7 @@ template<class DataType>
 constexpr std::vector<DataType> max(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return std::max(left, second); });
+    return libFunctional::transform(first, [second](DataType left) { return std::max(left, second); });
 }
 
 /// <summary>
@@ -324,7 +323,7 @@ template<class DataType>
 constexpr std::vector<DataType> min(gsl::span<const DataType> first, DataType second)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(first, [second](DataType left) { return std::min(left, second); });
+    return libFunctional::transform(first, [second](DataType left) { return std::min(left, second); });
 }
 
 /// <summary>
@@ -336,7 +335,7 @@ constexpr std::vector<DataType> min(gsl::span<const DataType> first, DataType se
 template<class DataType>
 constexpr std::vector<bool> equals(gsl::span<const DataType> first, DataType second)
 {
-    return Functional::transform(first, [second](DataType left) { return left == second; }, static_cast<bool*>(nullptr));
+    return libFunctional::transform(first, [second](DataType left) { return left == second; }, static_cast<bool*>(nullptr));
 }
 
 // @gmrukwa: unary
@@ -350,7 +349,7 @@ template <class DataType>
 constexpr std::vector<DataType> abs(gsl::span<const DataType> data)
 {
     static_assert(std::is_arithmetic_v<DataType>, "DataType: expected arithmetic.");
-    return Functional::transform(data, [](DataType entry) { return std::abs(entry); });
+    return libFunctional::transform(data, [](DataType entry) { return std::abs(entry); });
 }
 
 /// <summary>
@@ -360,7 +359,7 @@ constexpr std::vector<DataType> abs(gsl::span<const DataType> data)
 /// <returns>Vector of bools consisting of opposite values of elements of data</returns>
 inline std::vector<bool> negate(std::vector<bool> data)
 {
-    return Functional::transform(data, [](bool entry) { return !entry; });
+    return libFunctional::transform(data, [](bool entry) { return !entry; });
 }
 
 /// <summary>

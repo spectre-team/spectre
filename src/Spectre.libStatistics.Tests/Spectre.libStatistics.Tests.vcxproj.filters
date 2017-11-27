@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Functional">
-      <UniqueIdentifier>{3cd3f362-9b3e-4e19-af8c-d68965229aac}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -23,18 +20,6 @@
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RangeTest.cpp">
-      <Filter>Source Files\Functional</Filter>
-    </ClCompile>
-    <ClCompile Include="FindTest.cpp">
-      <Filter>Source Files\Functional</Filter>
-    </ClCompile>
-    <ClCompile Include="FilterTest.cpp">
-      <Filter>Source Files\Functional</Filter>
-    </ClCompile>
-    <ClCompile Include="TransformTest.cpp">
-      <Filter>Source Files\Functional</Filter>
     </ClCompile>
     <ClCompile Include="MathTest.cpp">
       <Filter>Source Files</Filter>

@@ -1,6 +1,6 @@
 /*
-* ZeroStepException.cpp
-* Thrown when step is zero.
+* Find.cpp
+* Finds nonzero elements.
 *
 Copyright 2017 Grzegorz Mrukwa
 
@@ -17,13 +17,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "ZeroStepException.h"
+#include "Find.h"
 
-namespace Spectre::libPlatform::Functional
+namespace Spectre::libFunctional
 {
-ZeroStepException::ZeroStepException()
-    : ExceptionBase("")
+std::vector<size_t> find(std::vector<bool> collection)
 {
-    
+    const auto indexRange = range(collection.size());
+    std::vector<std::size_t> preservedIndexes;
+    std::copy_if(
+        indexRange.begin(),
+        indexRange.end(),
+        std::back_inserter(preservedIndexes),
+        [&collection](size_t index) { return collection[index]; });
+    return preservedIndexes;
 }
 }

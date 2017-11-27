@@ -19,12 +19,12 @@ limitations under the License.
 
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
-#include "Spectre.libPlatform/Range.h"
+#include "Spectre.libFunctional/Range.h"
 
 namespace
 {
 using namespace testing;
-using namespace Spectre::libPlatform::Functional;
+using namespace Spectre::libFunctional;
 
 TEST(RangeTest, throws_for_step_zero)
 {

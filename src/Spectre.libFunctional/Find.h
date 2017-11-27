@@ -24,7 +24,7 @@ limitations under the License.
 #include <span.h>
 #include "Range.h"
 
-namespace Spectre::libPlatform::Functional
+namespace Spectre::libFunctional
 {
 /// <summary>
 /// Finds the nonzero elements in specified collection.

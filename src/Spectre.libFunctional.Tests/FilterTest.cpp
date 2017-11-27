@@ -20,13 +20,13 @@ limitations under the License.
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
 #include "Spectre.libException/InconsistentArgumentSizesException.h"
-#include "Spectre.libPlatform/Filter.h"
+#include "Spectre.libFunctional/Filter.h"
 
 namespace
 {
 using namespace testing;
 using namespace Spectre::libException;
-using namespace Spectre::libPlatform::Functional;
+using namespace Spectre::libFunctional;
 
 using Filter = const std::vector<bool>;
 using Indexes = const std::vector<size_t>;
