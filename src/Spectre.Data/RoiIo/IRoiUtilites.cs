@@ -34,26 +34,23 @@ namespace Spectre.Data.RoiIo
         /// <summary>
         /// Reads regions of interest from a png file.
         /// </summary>
-        /// <param name="path">Path for the rois directory, either Spectre.Data or test_files director.</param>
         /// <returns>
         /// Returns list doubles.
         /// </returns>
-        RoiDataset RoiReader(string path);
+        RoiDataset RoiReader();
 
         /// <summary>
         /// Writes roi dataset into a png file.
         /// </summary>
-        /// <param name="prototyp">The prototyp.</param>
-        /// <param name="path">The path.</param>
-        void RoiWriter(RoiDataset prototyp, string path);
+        /// <param name="dataset">The prototyp.</param>
+        void RoiWriter(RoiDataset dataset);
 
         /// <summary>
         /// Lists the rois from directory.
         /// </summary>
-        /// <param name="path">Path for the rois directory, either Spectre.Data or test_files director.</param>
         /// <returns>
         /// Returns names of all Roi files in the directory.
         /// </returns>
-        List<string> ListRoisFromDirectory(string path);
+        List<string> ListRoisFromDirectory();
     }
 }

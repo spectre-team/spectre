@@ -20,9 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Spectre.Data.Datasets;
 using Spectre.Data.RoiIo;
@@ -68,9 +65,9 @@ namespace Spectre.Data.Tests
         [Test]
         public void ListRoisFromDirectory_returns_proper_names()
         {
-            RoiUtilities service = new RoiUtilities();
+            RoiUtilities service = new RoiUtilities(_testpath);
 
-            var names = service.ListRoisFromDirectory(_testpath);
+            var names = service.ListRoisFromDirectory();
 
             Assert.AreEqual("image1.png", Path.GetFileName(names[0]));
             Assert.AreEqual("image2.png", Path.GetFileName(names[1]));
@@ -79,8 +76,8 @@ namespace Spectre.Data.Tests
         [Test]
         public void ReadRoi_returns_proper_roi_pixels()
         {
-            RoiUtilities service = new RoiUtilities();
-            var roi = service.RoiReader(_testfilespath);
+            RoiUtilities service = new RoiUtilities(_testfilespath);
+            var roi = service.RoiReader();
 
             Assert.AreEqual(roi.RoiPixels[0].GetXCoord(), _readroidataset.RoiPixels[0].GetXCoord());
             Assert.AreEqual(roi.RoiPixels[0].GetYCoord(), _readroidataset.RoiPixels[0].GetYCoord());
@@ -95,8 +92,8 @@ namespace Spectre.Data.Tests
         [Test]
         public void ReadRoi_returns_proper_dimensions()
         {
-            RoiUtilities service = new RoiUtilities();
-            var roi = service.RoiReader(_testfilespath);
+            RoiUtilities service = new RoiUtilities(_testfilespath);
+            var roi = service.RoiReader();
 
             Assert.AreEqual(roi.Height, _readroidataset.Height);
             Assert.AreEqual(roi.Width, _readroidataset.Width);
@@ -105,9 +102,9 @@ namespace Spectre.Data.Tests
         [Test]
         public void WriteRoi_writes_file_properly()
         {
-            RoiUtilities service = new RoiUtilities();
+            RoiUtilities service = new RoiUtilities(_testpath);
 
-            service.RoiWriter(_writeroidataset, _testpath);
+            service.RoiWriter(_writeroidataset);
         }
     }
 }

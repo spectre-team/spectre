@@ -30,26 +30,50 @@ namespace Spectre.Data.RoiIo
     /// <summary>
     /// Class with utilities for managing the regions of interest data.
     /// </summary>
-    /// <seealso cref="IRoiUtilites" />
+    /// <seealso cref="Spectre.Data.RoiIo.IRoiUtilites" />
     public class RoiUtilities : IRoiUtilites
     {
         /// <summary>
+        /// The path
+        /// </summary>
+        private readonly string _path;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoiUtilities"/> class.
+        /// </summary>
+        public RoiUtilities()
+        {
+            _path = System.IO.Path.GetFullPath(@"..\..\..\");
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoiUtilities" /> class.
+        /// Used to pass exact path to methods. Default constructor sets project directory
+        /// as current path.
+        /// </summary>
+        /// <param name="testpath">The testpath.</param>
+        public RoiUtilities(string testpath)
+        {
+            _path = testpath;
+        }
+
+        /// <summary>
         /// Reads regions of interest from a png file.
         /// </summary>
-        /// <param name="path">Path for the rois directory, either Spectre.Data or test_files director.</param>
         /// <returns>
         /// Returns list doubles.
         /// </returns>
-        public RoiDataset RoiReader(string path)
+        public RoiDataset RoiReader()
         {
-            Color clr = default(Color);
-            Bitmap bitmap = new Bitmap(path);
-            RoiDataset roidataset = new RoiDataset();
-
-            roidataset.RoiPixels = new List<RoiPixel>();
-            roidataset.Name = Path.GetFileNameWithoutExtension(path);
-            roidataset.Height = bitmap.Height;
-            roidataset.Width = bitmap.Width;
+            var clr = default(Color);
+            var bitmap = new Bitmap(_path);
+            var roidataset = new RoiDataset
+            {
+                RoiPixels = new List<RoiPixel>(),
+                Name = Path.GetFileNameWithoutExtension(_path),
+                Height = bitmap.Height,
+                Width = bitmap.Width
+            };
 
             for (int width = 0; width < bitmap.Width; width++)
             {
@@ -69,39 +93,38 @@ namespace Spectre.Data.RoiIo
         /// <summary>
         /// Writes list of doubles into a png file.
         /// </summary>
-        /// <param name="prototyp">The prototyp.</param>
-        /// <param name="path">The path.</param>
-        public void RoiWriter(RoiDataset prototyp, string path)
+        /// <param name="roidataset">The prototyp.</param>
+        public void RoiWriter(RoiDataset roidataset)
         {
-            Bitmap bitmap = new Bitmap(prototyp.Width, prototyp.Height);
+            var bitmap = new Bitmap(roidataset.Width, roidataset.Height);
 
-            Graphics graphicsobject = Graphics.FromImage(bitmap);
+            var graphicsobject = Graphics.FromImage(bitmap);
             graphicsobject.Clear(Color.White);
 
-            for (int listiterator = 0; listiterator < prototyp.RoiPixels.Count; listiterator++)
+            for (int listiterator = 0; listiterator < roidataset.RoiPixels.Count; listiterator++)
             {
                 bitmap.SetPixel(
-                   prototyp.RoiPixels[listiterator].GetXCoord(),
-                   prototyp.RoiPixels[listiterator].GetYCoord(),
+                   roidataset.RoiPixels[listiterator].GetXCoord(),
+                   roidataset.RoiPixels[listiterator].GetYCoord(),
                    Color.Black);
             }
 
-            var writepath = path + "\\" + prototyp.Name + ".png";
+            var writepath = _path + "\\" + roidataset.Name + ".png";
             bitmap.Save(writepath, ImageFormat.Png);
         }
 
         /// <summary>
         /// Lists the rois from directory.
         /// </summary>
-        /// <param name="path">Path for the rois directory, either Spectre.Data or test_files director.</param>
         /// <returns>
         /// Names of all roi files in the directory.
         /// </returns>
-        public List<string> ListRoisFromDirectory(string path)
+        /// <exception cref="FileNotFoundException">No *.png files found in directory or subdirectories</exception>
+        public List<string> ListRoisFromDirectory()
         {
-            List<string> names = new List<string>();
+            var names = new List<string>();
 
-            string[] allfiles = System.IO.Directory.GetFiles(path, "*.png", SearchOption.AllDirectories);
+            var allfiles = System.IO.Directory.GetFiles(_path, "*.png", SearchOption.AllDirectories);
 
             names = allfiles.ToList();
 
