@@ -106,7 +106,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void HashToFriendlyName_finds_proper_friendlyname_for_given_hash()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToFriendlyNameOrDefault("Hash1");
 
@@ -116,7 +116,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void HashToFriendlyName_returns_null_for_not_existing_Hash()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToFriendlyNameOrDefault("NotExistingHash");
 
@@ -126,7 +126,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void UploadNumberToFriendlyName_finds_proper_friendlyname_for_given_uploadnumber()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.UploadNumberToFriendlyNameOrDefault("UploadNumber2");
 
@@ -136,7 +136,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void UploadNumberToFriendlyName_returns_null_for_not_existing_uploadnumber()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToFriendlyNameOrDefault("NotExistingUploadNumber");
 
