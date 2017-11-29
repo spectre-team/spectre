@@ -26,23 +26,60 @@ limitations under the License.
 
 namespace Spectre::GaSvmNative
 {
+/// <summary>
+/// Fitness function based on openCV SVM algorithm.
+/// </summary>
 class SVMFitnessFunction : public libGenetic::FitnessFunction
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SVMFitnessFunction"/> class.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="raportGenerator">The raport generator.</param>
+    /// <param name="independentValidation">The independent validation.</param>
+    /// <param name="svmIterations">The number of SVM iterations.</param>
+    /// <param name="svmTolerance">The SVM tolerance.</param>
     SVMFitnessFunction(libClassifier::SplittedOpenCvDataset&& data,
                        RaportGenerator& raportGenerator,
                        const libClassifier::OpenCvDataset* independentValidation = nullptr,
-                       uint svmIterations=100u,
+                       unsigned int svmIterations=100u,
                        double svmTolerance=1e-6);
+    /// <summary>
+    /// Computes fitness.
+    /// </summary>
+    /// <param name="other">The other population.</param>
+    /// <returns>Self.</returns>
     libGenetic::ScoreType computeFitness(const libGenetic::Individual &individual) override;
     virtual ~SVMFitnessFunction() = default;
 private:
+    /// <summary>
+    /// The dataset.
+    /// </summary>
     libClassifier::SplittedOpenCvDataset m_Dataset;
+    /// <summary>
+    /// The independent validation.
+    /// </summary>
     const libClassifier::OpenCvDataset* m_IndependentValidation;
+    /// <summary>
+    /// The report generator.
+    /// </summary>
     RaportGenerator& m_RaportGenerator;
+    /// <summary>
+    /// The number of SVM iterations.
+    /// </summary>
     const uint m_SvmIterations;
+    /// <summary>
+    /// The SVM tolerance.
+    /// </summary>
     const double m_SvmTolerance;
 
+    /// <summary>
+    /// Gets individual confusion matrix.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="individual">The individual.</param>
+    /// <returns>The confusion matrix.</returns>
     libClassifier::ConfusionMatrix getResultMatrix(const libClassifier::OpenCvDataset& data, const libGenetic::Individual& individual) const;
 };
 }

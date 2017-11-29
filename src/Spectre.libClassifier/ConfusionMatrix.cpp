@@ -1,6 +1,6 @@
 /*
 * ConfusionMatrix.cpp
-* It contains knowledge about true positive, true negative etc. prediction of SVM
+* It contains knowledge about true positive, true negative etc. prediction of fitness function
 *
 Copyright 2017 Grzegorz Mrukwa, Wojciech Wilgierz
 

@@ -22,9 +22,16 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
+/// <summary>
+/// Thrown, when training rate would be excessive.
+/// </summary>
 class ExcessiveTrainingRateException final : public libException::ArgumentOutOfRangeException<double>
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ExcessiveTrainingRateException"/> class.
+    /// </summary>
+    /// <param name="actual">The value of training rate.</param>
     explicit ExcessiveTrainingRateException(double actual);
 };
 }

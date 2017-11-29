@@ -180,7 +180,7 @@ TEST_F(MutationTest, toggles_in_approximate_percentage_of_cases_for_specified_bi
     EXPECT_GT(numberOfToggles, expectedNumberOfToggles - allowedMissCount);
 }
 
-TEST_F(MutationTest, test_fillup_returns_original)
+TEST_F(MutationTest, test_if_returns_original_if_fillup_is_too_low)
 {
     const auto BIT_SWAP_RATE = 0.5;
     MutationOperator mutate(ALWAYS, BIT_SWAP_RATE, SEED, 8, 9);

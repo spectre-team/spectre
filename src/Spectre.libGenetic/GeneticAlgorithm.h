@@ -46,8 +46,6 @@ public:
     /// <returns>Next, evolved generation.</returns>
     Generation evolve(Generation &&generation) const;
     virtual ~GeneticAlgorithm() = default;
-    double mBestDice;
-    double mAverageDice;
 
 private:
     /// <summary>

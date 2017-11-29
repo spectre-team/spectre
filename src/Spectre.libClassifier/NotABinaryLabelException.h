@@ -23,9 +23,18 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
+/// <summary>
+/// Thrown, when label is not a binary.
+/// </summary>
 class NotABinaryLabelException final: public libException::ExceptionBase
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NotABinaryLabelException"/> class.
+    /// </summary>
+    /// <param name="label">The label.</param>
+    /// <param name="location">The location.</param>
+    /// <param name="collection">The collection.</param>
     NotABinaryLabelException(Label label, size_t location, std::string collection);
 };
 }

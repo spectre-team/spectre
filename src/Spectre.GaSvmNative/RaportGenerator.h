@@ -1,6 +1,6 @@
 ﻿/*
 * RaportGenerator.h
-* Class that has static functions to create raport during for example genetic algorithm execution.
+* Class that generates reports for Genetic Algorithm execution into a file.
 *
 Copyright 2017 Spectre Team
 
@@ -26,12 +26,31 @@ limitations under the License.
 
 namespace Spectre::GaSvmNative
 {
+/// <summary>
+/// Class used to create file reports from genetic algorithm execution results.
+/// </summary>
 class RaportGenerator final
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RaportGenerator"/> class.
+    /// </summary>
+    /// <param name="filename">The filename.</param>
+    /// <param name="populationSize">The population size.</param>
+    /// <param name="separator">The separator.</param>
     explicit RaportGenerator(std::string filename,
-                             uint populationSize,
+                             unsigned int populationSize,
                              const std::string& separator=",");
+    /// <summary>
+    /// Writes results.
+    /// </summary>
+    /// <param name="matrix">The confusion matrix.</param>
+    /// <param name="individual">The individual.</param>
+    /// <param name="trainingTime">The training time.</param>
+    /// <param name="meanClassificationTime">The mean classification time.</param>
+    /// <param name="numberOfSupportVectors">The number of support vectors.</param>
+    /// <param name="validationResults">The validation results.</param>
+    /// <returns>void</returns>
     void Write(const libClassifier::ConfusionMatrix& matrix,
                const libGenetic::Individual& individual,
                double trainingTime,
@@ -40,11 +59,29 @@ public:
                const libClassifier::ConfusionMatrix* validationResults);
     ~RaportGenerator();
 private:
+    /// <summary>
+    /// The file.
+    /// </summary>
     std::ofstream m_File;
+    /// <summary>
+    /// The separator.
+    /// </summary>
     const std::string m_Separator;
+    /// <summary>
+    /// The number of processed individuals.
+    /// </summary>
     uint m_IndividualsProcessed;
+    /// <summary>
+    /// The population size.
+    /// </summary>
     const uint m_PopulationSize;
-    const std::string m_Filenane;
+    /// <summary>
+    /// The filename.
+    /// </summary>
+    const std::string m_Filename;
+    /// <summary>
+    /// The writelock.
+    /// </summary>
     omp_lock_t m_WriteLock;
 };
 }

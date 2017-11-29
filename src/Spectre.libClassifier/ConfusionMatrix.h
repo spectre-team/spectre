@@ -1,6 +1,6 @@
 /*
 * ConfusionMatrix.h
-* It contains knowledge about classifier performance
+* It contains knowledge about true positive, true negative etc. prediction of fitness function
 *
 Copyright 2017 Spectre Team
 
@@ -23,20 +23,50 @@ limitations under the License.
 
 namespace Spectre::libClassifier {
 
+/// <summary>
+/// Class having results of fitness function predictions: true positive, true negative, false positive and false negative.
+/// </summary>
 class ConfusionMatrix
 {
 public:
-    const unsigned int TruePositive;
-    const unsigned int TrueNegative;
-    const unsigned int FalsePositive;
-    const unsigned int FalseNegative;
-    const double DiceIndex;
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConfusionMatrix"/> class.
+    /// </summary>
+    /// <param name="truePositivesNumber">The number of true positives.</param>
+    /// <param name="trueNegativesNumber">The number of true negatives.</param>
+    /// <param name="falsePositivesNumber">The number of false positives.</param>
+    /// <param name="falseNegativesNumber">The number of false negatives.</param>
     ConfusionMatrix(unsigned int truePositivesNumber,
                     unsigned int trueNegativesNumber,
                     unsigned int falsePositivesNumber,
                     unsigned int falseNegativesNumber);
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConfusionMatrix"/> class.
+    /// </summary>
+    /// <param name="actual">The number of actual correct labels.</param>
+    /// <param name="expected">The number of expected correct labels.</param>
     ConfusionMatrix(const gsl::span<const Label> actual, const gsl::span<const Label> expected);
+
+    /// <summary>
+    /// The number of true positives.
+    /// </summary>
+    const unsigned int TruePositive;
+    /// <summary>
+    /// The number of true negatives.
+    /// </summary>
+    const unsigned int TrueNegative;
+    /// <summary>
+    /// The number of false positives.
+    /// </summary>
+    const unsigned int FalsePositive;
+    /// <summary>
+    /// The number of false negatives.
+    /// </summary>
+    const unsigned int FalseNegative;
+    /// <summary>
+    /// The dice index.
+    /// </summary>
+    const double DiceIndex;
 };
 
 }

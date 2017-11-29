@@ -23,7 +23,7 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
-Svm::Svm(uint iterationsLimit, double tolerance)
+Svm::Svm(unsigned int iterationsLimit, double tolerance)
 {
     m_Svm = cv::ml::SVM::create();
     m_Svm->setType(cv::ml::SVM::C_SVC);

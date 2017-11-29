@@ -30,7 +30,7 @@ using namespace libGenetic;
 SVMFitnessFunction::SVMFitnessFunction(SplittedOpenCvDataset&& data,
                                        RaportGenerator& raportGenerator,
                                        const libClassifier::OpenCvDataset* independentValidation,
-                                       uint svmIterations,
+                                       unsigned int svmIterations,
                                        double svmTolerance)
     : m_Dataset(std::move(data)),
       m_IndependentValidation(independentValidation),

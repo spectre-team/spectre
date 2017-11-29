@@ -24,11 +24,24 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
+/// <summary>
+/// Classifier base class.
+/// </summary>
 class IClassifier
 {
 public:
     using LabeledDataset = const libDataset::IReadOnlyDataset<Observation, Label, Empty>&;
+    /// <summary>
+    /// Try to fit dataset in fitness function.
+    /// </summary>
+    /// <param name="dataset">The dataset.</param>
+    /// <returns>void</returns>
     virtual void Fit(LabeledDataset dataset) = 0;
+    /// <summary>
+    /// Predicts labels on test set.
+    /// </summary>
+    /// <param name="dataset">The dataset.</param>
+    /// <returns>vector of labels</returns>
     virtual std::vector<Label> Predict(LabeledDataset dataset) const = 0;
     virtual ~IClassifier() = default;
 };

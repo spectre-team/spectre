@@ -162,7 +162,7 @@ TEST_F(CrossoverOperatorTest, cuts_are_from_uniform_distribution)
     }
 }
 
-TEST_F(CrossoverOperatorTest, test_fillup_returns_first)
+TEST_F(CrossoverOperatorTest, test_if_return_first_individual_if_fillup_is_too_low)
 {
     CrossoverOperator crossoverOperator(SEED, 8, 9);
     const auto child = crossover->operator()(true_individual, false_individual);

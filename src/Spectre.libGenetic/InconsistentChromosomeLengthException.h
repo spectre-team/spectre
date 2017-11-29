@@ -23,10 +23,18 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Thrown when chromosomes length are inconsistent.
+/// </summary>
 class InconsistentChromosomeLengthException:
     public Spectre::libException::InconsistentArgumentSizesException
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InconsistentChromosomeLengthException"/> class.
+    /// </summary>
+    /// <param name="first">The first chromosome length.</param>
+    /// <param name="second">The second chromosome length.</param>
     InconsistentChromosomeLengthException(size_t first, size_t second);
 };
 }

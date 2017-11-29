@@ -23,10 +23,18 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Thrown when minimal and maximal fillup values are inconsistent.
+/// </summary>
 class InconsistentMinimalAndMaximalFillupException :
     public libException::InconsistentArgumentSizesException
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InconsistentMinimalAndMaximalFillupException"/> class.
+    /// </summary>
+    /// <param name="minimal">The minimal fillup value.</param>
+    /// <param name="maximal">The maximal fillup value.</param>
     InconsistentMinimalAndMaximalFillupException(size_t minimal, size_t maximal);
 };
 }

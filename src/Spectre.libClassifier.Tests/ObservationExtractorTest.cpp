@@ -50,10 +50,7 @@ class ObservationExtractorTest : public ::testing::Test
 {
 public:
     ObservationExtractorTest() :
-        dataset(data, labels)
-    {
-        
-    };
+        dataset(data, labels) {};
 
 protected:
     const std::vector<DataType> data{ 0.5f, 0.4f, 0.6f, 1.1f, 1.6f, 0.7f, 2.1f, 1.0f, 0.6f };
@@ -62,7 +59,7 @@ protected:
     const std::vector<DataType> expectedFilteredRow1{ 2.1f, 1.0f, 0.6f };
     const unsigned trueBits = 2;
     size_t rowSize = data.size() / labels.size();
-    const std::vector<bool> individual{ true, false, true };
+    const std::vector<bool> selector{ true, false, true };
     const OpenCvDataset dataset;
     std::unique_ptr<ObservationExtractor> extractor;
 
@@ -74,20 +71,20 @@ protected:
 
 TEST_F(ObservationExtractorTest, returns_dataset_of_expected_size)
 {
-    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    auto result = extractor->getOpenCvDatasetFromIndividual(selector);
     EXPECT_EQ(trueBits, result.size());
 }
 
 TEST_F(ObservationExtractorTest, observations_have_proper_size)
 {
-    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    auto result = extractor->getOpenCvDatasetFromIndividual(selector);
     EXPECT_EQ(rowSize, result[0].size());
     EXPECT_EQ(rowSize, result[1].size());
 }
 
 TEST_F(ObservationExtractorTest, observations_are_rewritten)
 {
-    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    auto result = extractor->getOpenCvDatasetFromIndividual(selector);
     const Observation row0Data = result[0];
     const Observation row1Data = result[1];
     for (auto i = 0u; i < row0Data.size(); ++i)
@@ -99,7 +96,7 @@ TEST_F(ObservationExtractorTest, observations_are_rewritten)
 
 TEST_F(ObservationExtractorTest, labels_are_rewritten)
 {
-    auto result = extractor->getOpenCvDatasetFromIndividual(individual);
+    auto result = extractor->getOpenCvDatasetFromIndividual(selector);
     std::vector<Label> labelTest{ 3, 14 };
     gsl::span<const Label> labelData = result.GetSampleMetadata();
     for (auto i = 0u; i < labelData.size(); i++)

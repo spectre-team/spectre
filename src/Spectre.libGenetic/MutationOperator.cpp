@@ -62,7 +62,6 @@ Individual MutationOperator::operator()(Individual &&individual)
         std::transform(individual.begin(), individual.end(), individual.begin(), swap_random_bits);
     }
 
-    // @gmrukwa: TODO: test this behaviour
     auto fillup = 0u;
     for (auto bit : individual)
     {

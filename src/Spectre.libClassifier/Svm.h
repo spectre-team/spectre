@@ -27,12 +27,33 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
+/// <summary>
+/// SVM classifier.
+/// </summary>
 class Svm: public IClassifier
 {
 public:
-    explicit Svm(uint iterationsLimit=100, double tolerance=1e-6);
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Svm"/> class.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    explicit Svm(unsigned int iterationsLimit=100, double tolerance=1e-6);
+    /// <summary>
+    /// Try to fit dataset in fitness function.
+    /// </summary>
+    /// <param name="dataset">The dataset.</param>
+    /// <returns>void</returns>
     void Fit(LabeledDataset dataset) override;
+    /// <summary>
+    /// Predicts labels on test set.
+    /// </summary>
+    /// <param name="dataset">The dataset.</param>
+    /// <returns>vector of labels</returns>
     std::vector<Label> Predict(LabeledDataset dataset) const override;
+    /// <summary>
+    /// Gets number of support vectors.
+    /// </summary>
+    /// <returns>unsigned int</returns>
     unsigned int GetNumberOfSupportVectors() const;
     virtual ~Svm() = default;
 private:

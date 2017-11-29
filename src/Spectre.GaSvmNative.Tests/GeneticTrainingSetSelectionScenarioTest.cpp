@@ -1,6 +1,6 @@
 /*
-* GeneticAlgorithmExecutorTest.cpp
-* Tests GeneticAlgorithmExecutor class
+* GeneticTrainingSetSelectionScenarioTest.cpp
+* Tests GeneticTrainingSetSelectionScenario class
 *
 Copyright 2017 Spectre Team
 
@@ -52,7 +52,8 @@ TEST(GeneticTrainingSetSelectionScenarioInitialization, initializes)
 class GeneticTrainingSetSelectionScenarioInitializationTest : public ::testing::Test
 {
 public:
-    GeneticTrainingSetSelectionScenarioInitializationTest() {}
+    GeneticTrainingSetSelectionScenarioInitializationTest():
+        dataSet(std::make_unique<Spectre::libClassifier::OpenCvDataset>(data, labels)) {}
 
 protected:
     const std::vector<Spectre::libClassifier::DataType> data{
@@ -68,10 +69,11 @@ protected:
         1.2f, 1.3f, 1.2f
     };
     const std::vector<Spectre::libClassifier::Label> labels{ 1, 1, 0, 1, 0, 0, 1, 1, 0, 0 };
-    Spectre::libClassifier::OpenCvDataset dataSet = Spectre::libClassifier::OpenCvDataset(data, labels);
+    std::unique_ptr<Spectre::libClassifier::OpenCvDataset> dataSet;
 
     void SetUp() override
     {
+        dataSet = std::make_unique<Spectre::libClassifier::OpenCvDataset>(data, labels);
     }
 };
 
@@ -87,7 +89,7 @@ TEST_F(GeneticTrainingSetSelectionScenarioInitializationTest, few_data_scenario)
                                                  "few_data_scenario",
                                                  NUMBER_OF_RESTARTS,
                                                  SEED);
-    EXPECT_NO_THROW(scenario.execute(std::move(dataSet)));
+    EXPECT_NO_THROW(scenario.execute(*dataSet));
 }
 
 }

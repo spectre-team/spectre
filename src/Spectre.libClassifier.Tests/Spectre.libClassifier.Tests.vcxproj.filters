@@ -36,12 +36,6 @@
     <ClCompile Include="SvmTest.cpp">
       <Filter>Source Files\Classifiers</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.libClassifier.Tests\..\..\lib\native\src\gtest\gtest-all.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Grzegorz\Source\Repos\MSI-dev\spectre\src\Spectre.libClassifier.Tests\..\..\lib\native\src\gmock\gmock-all.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

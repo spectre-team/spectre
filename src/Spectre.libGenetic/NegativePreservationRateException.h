@@ -22,9 +22,16 @@ limitations under the License.
 
 namespace Spectre::libGenetic
 {
+/// <summary>
+/// Thrown when preservation rate is negative.
+/// </summary>
 class NegativePreservationRateException: public libException::ArgumentOutOfRangeException<double>
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NegativePreservationRateException"/> class.
+    /// </summary>
+    /// <param name="actual">The value of preservation rate.</param>
     explicit NegativePreservationRateException(double actual);
 };
 }

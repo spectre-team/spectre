@@ -1,6 +1,6 @@
 ﻿/*
 * RaportGenerator.cpp
-* Class that has static functions to create raport during for example genetic algorithm execution.
+* Class that generates reports for Genetic Algorithm execution into a file.
 *
 Copyright 2017 Spectre Team
 
@@ -20,15 +20,20 @@ limitations under the License.
 #include <string>
 #include "Spectre.libClassifier/ConfusionMatrix.h"
 #include "RaportGenerator.h"
+#include "Spectre.libException/ArgumentEqualZeroException.h"
 
 namespace Spectre::GaSvmNative
 {
-RaportGenerator::RaportGenerator(std::string filename, uint populationSize, const std::string& separator):
+RaportGenerator::RaportGenerator(std::string filename, unsigned int populationSize, const std::string& separator):
     m_Separator(separator),
     m_IndividualsProcessed(0),
     m_PopulationSize(populationSize),
-    m_Filenane(filename)
+    m_Filename(filename)
 {
+    if (m_PopulationSize == 0)
+    {
+        throw libException::ArgumentEqualZeroException(populationSize);
+    }
     m_File.open(filename + ".csv");
     m_File << "generation" << m_Separator;
     m_File << "true positives" << m_Separator;

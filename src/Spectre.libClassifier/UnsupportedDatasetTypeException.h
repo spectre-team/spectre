@@ -22,10 +22,17 @@ limitations under the License.
 
 namespace Spectre::libClassifier
 {
+/// <summary>
+/// Thrown, when dataset type is unsupported.
+/// </summary>
 class UnsupportedDatasetTypeException final: public libException::ExceptionBase
 {
 public:
     template <class TDatasetType>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UnsupportedDatasetTypeException"/> class.
+    /// </summary>
+    /// <param name="dataset">The dataset.</param>
     explicit UnsupportedDatasetTypeException(const TDatasetType& /*dataset*/): ExceptionBase(typeid(TDatasetType).name())
     {
     }

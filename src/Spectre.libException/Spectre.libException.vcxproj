@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArgumentEqualZeroException.h" />
     <ClInclude Include="ArgumentOutOfRangeException.h" />
     <ClInclude Include="EmptyArgumentException.h" />
     <ClInclude Include="ExceptionBase.h" />
@@ -19,6 +20,7 @@
     <ClInclude Include="OutOfRangeException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArgumentEqualZeroException.cpp" />
     <ClCompile Include="EmptyArgumentException.cpp" />
     <ClCompile Include="ExceptionBase.cpp" />
     <ClCompile Include="InconsistentArgumentSizesException.cpp" />

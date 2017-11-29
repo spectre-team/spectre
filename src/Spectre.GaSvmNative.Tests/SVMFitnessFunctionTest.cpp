@@ -31,7 +31,10 @@ class SVMFitnessFunctionTest : public ::testing::Test
 {
 public:
     SVMFitnessFunctionTest():
-        m_ReportGenerator("SVMFitnessFunctionTest", 2)
+        m_ReportGenerator("SVMFitnessFunctionTest", 2),
+        trainingSet(training_data, training_labels),
+        testSet(test_data, test_labels),
+        data(std::move(trainingSet), std::move(testSet))
     {};
 
 protected:
@@ -40,18 +43,10 @@ protected:
     const std::vector<DataType> test_data{ 0.8f, 0.3f, 1.2f, 0.7f, 1.9f, 0.2f, 1.2f, 1.3f, 1.2f };
     const std::vector<Label> training_labels{ 1, 1, 0, 1, 0, 0, 1 };
     const std::vector<Label> test_labels{ 1, 0, 0 };
-    OpenCvDataset trainingSet = OpenCvDataset(training_data, training_labels);
-    OpenCvDataset testSet = OpenCvDataset(test_data, test_labels);
-    SplittedOpenCvDataset data = SplittedOpenCvDataset(std::move(trainingSet), std::move(testSet));
+    OpenCvDataset trainingSet;
+    OpenCvDataset testSet;
+    SplittedOpenCvDataset data;
     RaportGenerator m_ReportGenerator;
-
-    void SetUp() override
-    {
-    }
-
-    void TearDown() override
-    {
-    }
 };
 
 TEST_F(SVMFitnessFunctionTest, correct_svm_initialization)

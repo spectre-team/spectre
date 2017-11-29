@@ -1,6 +1,6 @@
-/*
-* NegativeTrainingRateException.h
-* Thrown when training rate is negative.
+﻿/*
+* ArgumentEqualZeroException.h
+* Thrown when argument is equal zero.
 *
 Copyright 2017 Spectre Team
 
@@ -18,20 +18,20 @@ limitations under the License.
 */
 
 #pragma once
-#include "Spectre.libException/ArgumentOutOfRangeException.h"
+#include "ExceptionBase.h"
 
-namespace Spectre::libClassifier
+namespace Spectre::libException
 {
-/// <summary>
-/// Thrown, when training rate would be negative.
-/// </summary>
-class NegativeTrainingRateException final : public libException::ArgumentOutOfRangeException<double>
-{
-public:
     /// <summary>
-    /// Initializes a new instance of the <see cref="NegativeTrainingRateException"/> class.
+    /// Thrown when function argument is empty.
     /// </summary>
-    /// <param name="actual">The value of training rate.</param>
-    explicit NegativeTrainingRateException(double actual);
-};
+    class ArgumentEqualZeroException : public ExceptionBase
+    {
+    public:
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArgumentEqualZeroException"/> class.
+        /// </summary>
+        /// <param name="variableName">Name of the variable.</param>
+        explicit ArgumentEqualZeroException(const int &variableName);
+    };
 }
