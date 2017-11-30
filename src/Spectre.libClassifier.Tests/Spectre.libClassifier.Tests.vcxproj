@@ -61,7 +61,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OutputPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Spectre.libPlatform.lib;Spectre.libGenetic.lib;Spectre.libException.lib;Spectre.libClassifier.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Spectre.libPlatform.lib;Spectre.libException.lib;Spectre.libClassifier.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -80,7 +80,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(OutputPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Spectre.libPlatform.lib;Spectre.libGenetic.lib;Spectre.libException.lib;Spectre.libClassifier.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Spectre.libPlatform.lib;Spectre.libException.lib;Spectre.libClassifier.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -88,6 +88,8 @@
     <ClCompile Include="ObservationExtractorTest.cpp" />
     <ClCompile Include="OpenCvDatasetTest.cpp" />
     <ClCompile Include="RandomSplitterTest.cpp" />
+    <ClCompile Include="SplittedOpenCVDatasetTest.cpp" />
+    <ClCompile Include="SvmTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

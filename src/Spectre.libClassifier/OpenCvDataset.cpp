@@ -38,7 +38,7 @@ OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
       m_Mat(std::move(other.m_Mat)),
       m_labels(std::move(other.m_labels)),
       m_MatLabels(std::move(other.m_MatLabels)),
-      m_observations(std::move(m_observations))
+      m_observations(std::move(other.m_observations))
 {
     other.m_Data.clear();
     other.m_Mat.release();
@@ -47,7 +47,7 @@ OpenCvDataset::OpenCvDataset(OpenCvDataset &&other) noexcept
     other.m_observations.clear();
 }
 
-    OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
+OpenCvDataset::OpenCvDataset(gsl::span<const DataType> data, gsl::span<const Label> labels):
     m_Data(data.begin(), data.end()),
     m_labels(labels.begin(), labels.end()),
     m_observations(static_cast<int>(labels.size()))

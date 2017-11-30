@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Classifiers">
+      <UniqueIdentifier>{fc6dbc64-4657-4fdb-a7eb-68c9e1e4285d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\Main.cpp">
@@ -27,11 +30,11 @@
     <ClCompile Include="RandomSplitterTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\regis\Documents\GitHub\spectre\src\Spectre.libClassifier.Tests\..\..\lib\native\src\gtest\gtest-all.cc">
+    <ClCompile Include="SplittedOpenCVDatasetTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\regis\Documents\GitHub\spectre\src\Spectre.libClassifier.Tests\..\..\lib\native\src\gmock\gmock-all.cc">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SvmTest.cpp">
+      <Filter>Source Files\Classifiers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

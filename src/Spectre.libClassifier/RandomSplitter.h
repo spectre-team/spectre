@@ -20,8 +20,7 @@ limitations under the License.
 #pragma once
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/SplittedOpevCvDataset.h"
-// @gmrukwa: TODO: Fix this include. It should be local to this project.
-#include "Spectre.libGenetic/DataTypes.h"
+#include "Spectre.libClassifier/Types.h"
 
 namespace Spectre::libClassifier
 {
@@ -41,7 +40,7 @@ public:
     /// </summary>
     /// <param name="trainingPercent">The percent of observations included in training set.</param>
     /// <param name="rngSeed">The RNG seed.</param>
-    explicit RandomSplitter(double trainingPercent, libGenetic::Seed rngSeed = 0);
+    explicit RandomSplitter(double trainingPercent, Seed rngSeed = 0);
     /// <summary>
     /// Splits the specified data.
     /// </summary>
@@ -50,6 +49,6 @@ public:
     SplittedOpenCvDataset RandomSplitter::split(const OpenCvDataset& data) const;
 private:
     const double m_trainingRate;
-    const libGenetic::Seed m_Seed;
+    const Seed m_Seed;
 };
 }

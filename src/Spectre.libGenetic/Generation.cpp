@@ -44,6 +44,19 @@ Generation::Generation(std::vector<Individual> &&generation):
     else { }
 }
 
+
+Generation::Generation(size_t size, size_t individualSize, size_t initialFillup, Seed seed)
+{
+    if (initialFillup > individualSize)
+    {
+        throw libException::ArgumentOutOfRangeException<size_t>("initialFillup", 0, individualSize, initialFillup);
+    }
+    for (auto i = 0; i < size; i++)
+    {
+        m_Generation.push_back(Individual(individualSize, initialFillup, seed + i));
+    }
+}
+
 Generation Generation::operator+(const Generation &other) const
 {
     if (size() == 0

@@ -26,11 +26,22 @@ namespace
 {
 using namespace Spectre::libGenetic;
 
+const auto seed = 0ul;
+
 TEST(IndividualInitialization, initializes)
 {
     EXPECT_NO_THROW(Individual({ true, true, true, true }));
     EXPECT_NO_THROW(Individual({ false, false, false, false }));
     EXPECT_NO_THROW(Individual({ true, false, true, false }));
+}
+
+TEST(IndividualInitialization, initializes_by_shuffle)
+{
+    const auto individualSize = 6u;
+    const auto initialFillup = 4u;
+    const auto excessiveFillup = 8u;
+    EXPECT_NO_THROW(Individual(individualSize, initialFillup, seed));
+    EXPECT_THROW(Individual(individualSize, excessiveFillup, seed), Spectre::libException::ArgumentOutOfRangeException<size_t>);
 }
 
 class IndividualTest : public ::testing::Test
@@ -153,5 +164,41 @@ TEST_F(IndividualTest, unequality_same_individuals_marked_equal)
 {
     const Individual copy { std::vector<bool>(MIXED_DATA) };
     EXPECT_FALSE(copy != mixedIndividual);
+}
+
+TEST_F(IndividualTest, true_amount_equal_to_parameter)
+{
+    const auto individualSize = 10u;
+    const auto initialFillup = 6u;
+    Individual individual(individualSize, initialFillup, seed);
+    auto trueAmount = 0u;
+    for (auto i = 0; i < individual.size(); i++)
+    {
+        if (individual[i] == true)
+        {
+            trueAmount++;
+        }
+    }
+    EXPECT_EQ(trueAmount, initialFillup);
+}
+
+TEST_F(IndividualTest, create_different_individuals_for_different_seeds)
+{
+    const auto individualSize = 100u;
+    const auto initialFillup = 60u;
+    Seed seed1 = 1;
+    Seed seed2 = 2;
+    Individual individual1(individualSize, initialFillup, seed1);
+    Individual individual2(individualSize, initialFillup, seed2);
+    bool different = false;
+
+    for (auto i = 0u; i < individual1.size(); i++)
+    {
+        if (individual1[i] != individual2[i])
+        {
+            different = true;
+        }
+    }
+    EXPECT_EQ(different, true);
 }
 }

@@ -19,6 +19,7 @@ limitations under the License.
 
 #pragma once
 #include "DataTypes.h"
+#include "Individual.h"
 
 namespace Spectre::libGenetic
 {
@@ -32,7 +33,7 @@ public:
     /// Initializes a new instance of the <see cref="CrossoverOperator"/> class.
     /// </summary>
     /// <param name="rngSeed">The RNG seed.</param>
-    explicit CrossoverOperator(Seed rngSeed = 0);
+    explicit CrossoverOperator(Seed rngSeed = 0, size_t minimalFillup=0, size_t maximalFillup=std::numeric_limits<size_t>::max());
     virtual ~CrossoverOperator() = default;
     /// <summary>
     /// Create new individual.
@@ -44,5 +45,7 @@ public:
 
 private:
     RandomNumberGenerator m_RandomNumberGenerator;
+    const size_t m_MinimalFillup;
+    const size_t m_MaximalFillup;
 };
 }

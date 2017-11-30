@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{5bedc81d-e7c3-4673-8929-c00f71a4ddd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exceptions">
+      <UniqueIdentifier>{e7ef017c-cb25-40a1-9ba7-87fc1d9d6877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classifiers">
+      <UniqueIdentifier>{cf4eb121-1f52-4b53-bade-3bb048a7dea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classifiers">
+      <UniqueIdentifier>{c0f53c58-a555-4960-916f-eac536dfc18a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Empty.cpp">
@@ -30,8 +42,23 @@
     <ClCompile Include="SplittedOpenCvDataset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EmptyOpenCvDatasetException.cpp">
+    <ClCompile Include="ConfusionMatrix.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExcessiveTrainingRateException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="NegativeTrainingRateException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="EmptyOpenCvDatasetException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="Svm.cpp">
+      <Filter>Source Files\Classifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="NotABinaryLabelException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,8 +77,32 @@
     <ClInclude Include="SplittedOpevCvDataset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EmptyOpenCvDatasetException.h">
+    <ClInclude Include="ConfusionMatrix.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcessiveTrainingRateException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="NegativeTrainingRateException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptyOpenCvDatasetException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="IClassifier.h">
+      <Filter>Header Files\Classifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Svm.h">
+      <Filter>Header Files\Classifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="UnsupportedDatasetTypeException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="NotABinaryLabelException.h">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

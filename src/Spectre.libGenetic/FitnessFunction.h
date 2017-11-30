@@ -19,6 +19,7 @@ limitations under the License.
 
 #pragma once
 #include "DataTypes.h"
+#include "Individual.h"
 
 namespace Spectre::libGenetic
 {
@@ -33,7 +34,7 @@ public:
     /// </summary>
     /// <param name="individual">The individual.</param>
     /// <returns>Non-negative score, which is greater for more optimal individuals.</returns>
-    virtual ScoreType operator()(const Individual &individual) = 0;
+    virtual ScoreType computeFitness(const Individual &individual) = 0;
     virtual ~FitnessFunction() = default;
 };
 }

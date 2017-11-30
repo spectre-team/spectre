@@ -1,6 +1,6 @@
 ﻿/*
 * ObservationExtractor.h
-* 
+* class for getting data from Individual object
 *
 Copyright 2017 Spectre Team
 
@@ -18,22 +18,37 @@ limitations under the License.
 */
 
 #pragma once
+#include <vector>
 #include "Spectre.libDataset/IReadOnlyDataset.h"
 #include "Spectre.libClassifier/Empty.h"
 #include "Spectre.libClassifier/OpenCvDataset.h"
-#include "Spectre.libGenetic/Individual.h"
 
 namespace Spectre::libClassifier {
 
 using DataPointer = const libDataset::IReadOnlyDataset<Observation, Label, Empty>*;
 
+/// <summary>
+/// Class used for getting dataset from individual.
+/// </summary>
 class ObservationExtractor
 {
 public:
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ObservationExtractor"/> class.
+    /// </summary>
+    /// <param name="data">The data.</param>
     explicit ObservationExtractor(const DataPointer data);
-    OpenCvDataset getOpenCvDatasetFromIndividual(const libGenetic::Individual &individual);
+    /// <summary>
+    /// Gets data.
+    /// </summary>
+    /// <param name="individual">The individual.</param>
+    /// <returns>OpenCvDataset</returns>
+    OpenCvDataset getOpenCvDatasetFromIndividual(const std::vector<bool>& individual) const;
 
 private:
+    /// <summary>
+    /// The dataset.
+    /// </summary>
     const DataPointer m_Data;
 };
 

@@ -75,6 +75,12 @@
     <ClInclude Include="ExcessivePreservationRateException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="GeneticAlgorithmFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InconsistentMinimalAndMaximalFillupException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutationOperator.cpp">
@@ -120,6 +126,12 @@
       <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
     <ClCompile Include="ExcessivePreservationRateException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneticAlgorithmFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InconsistentMinimalAndMaximalFillupException.cpp">
       <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
   </ItemGroup>

@@ -35,6 +35,14 @@ public:
     /// <param name="generation">The container with generation.</param>
     explicit Generation(std::vector<Individual> &&generation);
     /// <summary>
+    /// Creates generation from parameters.
+    /// </summary>
+    /// <param name="size">Size of generation.</param>
+    /// <param name="individualSize">Size of every individual in generation.</param>
+    /// <param name="initialFillup">The initial fillup.</param>
+    /// <param name="seed">The seed.</param>
+    Generation(size_t size, size_t individualSize, size_t initialFillup, Seed seed);
+    /// <summary>
     /// Concatenates populations.
     /// </summary>
     /// <param name="other">The other population.</param>

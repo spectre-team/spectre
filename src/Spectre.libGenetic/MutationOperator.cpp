@@ -20,13 +20,16 @@ limitations under the License.
 #include <algorithm>
 #include "Spectre.libException/ArgumentOutOfRangeException.h"
 #include "MutationOperator.h"
+#include "Spectre.libGenetic/InconsistentMinimalAndMaximalFillupException.h"
 
 namespace Spectre::libGenetic
 {
-MutationOperator::MutationOperator(double mutationRate, double bitSwapRate, Seed rngSeed):
+MutationOperator::MutationOperator(double mutationRate, double bitSwapRate, Seed rngSeed, size_t minimalFillup, size_t maximalFillup):
     m_MutationRate(mutationRate),
     m_BitSwapRate(bitSwapRate),
-    m_RandomNumberGenerator(rngSeed)
+    m_RandomNumberGenerator(rngSeed),
+    m_MinimalFillup(minimalFillup),
+    m_MaximalFillup(maximalFillup)
 {
     if (m_MutationRate >= 0 && m_MutationRate <= 1) { }
     else
@@ -38,10 +41,16 @@ MutationOperator::MutationOperator(double mutationRate, double bitSwapRate, Seed
     {
         throw libException::ArgumentOutOfRangeException<double>("bitSwapRate", 0, 1, m_BitSwapRate);
     }
+    if (m_MinimalFillup > m_MaximalFillup)
+    {
+        throw InconsistentMinimalAndMaximalFillupException(m_MinimalFillup, m_MaximalFillup);
+    }
 }
 
 Individual MutationOperator::operator()(Individual &&individual)
 {
+    auto original(individual);
+
     std::bernoulli_distribution mutationProbability(m_MutationRate);
     if (mutationProbability(m_RandomNumberGenerator))
     {
@@ -52,6 +61,23 @@ Individual MutationOperator::operator()(Individual &&individual)
         };
         std::transform(individual.begin(), individual.end(), individual.begin(), swap_random_bits);
     }
-    return individual;
+
+    auto fillup = 0u;
+    for (auto bit : individual)
+    {
+        if (bit)
+        {
+            ++fillup;
+        }
+    }
+
+    if (fillup >= m_MinimalFillup && fillup <= m_MaximalFillup)
+    {
+        return individual;
+    }
+    else
+    {
+        return original;
+    }
 }
 }

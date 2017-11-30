@@ -34,13 +34,13 @@ ObservationExtractor::ObservationExtractor(const DataPointer data): m_Data(data)
     }
 }
 
-OpenCvDataset ObservationExtractor::getOpenCvDatasetFromIndividual(const libGenetic::Individual &individual)
+OpenCvDataset ObservationExtractor::getOpenCvDatasetFromIndividual(const std::vector<bool>& individual) const
 {
     std::vector<DataType> data;
     std::vector<Label> labels;
     for (auto i = 0u; i < individual.size(); ++i)
     {
-        if (individual[i] == true)
+        if (individual[i])
         {
             const auto& observation = m_Data->operator[](i);
             data.insert(data.end(), observation.begin(), observation.end());

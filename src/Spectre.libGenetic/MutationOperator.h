@@ -19,6 +19,7 @@ limitations under the License.
 
 #pragma once
 #include "DataTypes.h"
+#include "Individual.h"
 
 namespace Spectre::libGenetic
 {
@@ -34,7 +35,7 @@ public:
     /// <param name="mutationRate">The mutation rate.</param>
     /// <param name="bitSwapRate">The bit swap rate, in the case of mutation.</param>
     /// <param name="rngSeed">The RNG seed.</param>
-    explicit MutationOperator(double mutationRate, double bitSwapRate, Seed rngSeed = 0);
+    explicit MutationOperator(double mutationRate, double bitSwapRate, Seed rngSeed = 0, size_t minimalFillup=0, size_t maximalFillup=std::numeric_limits<size_t>::max());
     /// <summary>
     /// Mutates the specified individual.
     /// </summary>
@@ -55,5 +56,7 @@ private:
     /// The random number generator.
     /// </summary>
     RandomNumberGenerator m_RandomNumberGenerator;
+    const size_t m_MinimalFillup;
+    const size_t m_MaximalFillup;
 };
 }

@@ -19,7 +19,6 @@ limitations under the License.
 
 #pragma once
 #include <random>
-#include "Generation.h"
 
 namespace Spectre::libGenetic
 {

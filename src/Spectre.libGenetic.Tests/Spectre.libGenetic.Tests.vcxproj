@@ -38,10 +38,12 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\PropertySheets\NativeTestProject.props" />
+    <Import Project="..\PropertySheets\OpenCvDependencies.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\PropertySheets\NativeTestProject.props" />
+    <Import Project="..\PropertySheets\OpenCvDependencies.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -57,7 +59,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Spectre.libGenetic.lib;Spectre.libException.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Spectre.libClassifier.lib;Spectre.libPlatform.lib;Spectre.libGenetic.lib;Spectre.libException.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -76,7 +78,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Spectre.libGenetic.lib;Spectre.libException.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Spectre.libClassifier.lib;Spectre.libPlatform.lib;Spectre.libGenetic.lib;Spectre.libException.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
