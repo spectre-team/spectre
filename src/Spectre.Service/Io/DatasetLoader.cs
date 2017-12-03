@@ -20,12 +20,11 @@
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
-using Ninject;
 using Spectre.Data.Datasets;
 using Spectre.Dependencies;
 using Spectre.Service.Configuration;
 
-namespace Spectre.Service.Loaders
+namespace Spectre.Service.Io
 {
     /// <summary>
     /// Class for loading datasets from specified directories.

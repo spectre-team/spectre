@@ -17,7 +17,6 @@
    limitations under the License.
 */
 
-using System;
 using System.IO;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
@@ -26,9 +25,9 @@ using NUnit.Framework;
 using Spectre.Dependencies;
 using Spectre.Dependencies.Modules;
 using Spectre.Service.Configuration;
-using Spectre.Service.Loaders;
+using Spectre.Service.Io;
 
-namespace Spectre.Service.Tests.Loaders
+namespace Spectre.Service.Tests.Io
 {
     [TestFixture]
     public class DatasetLoaderTest

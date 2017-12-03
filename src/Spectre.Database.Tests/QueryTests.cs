@@ -17,46 +17,36 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Spectre.Database.Entities;
+using Moq;
 using Spectre.Database.Utils;
 using Spectre.Database.Contexts;
-using System.Data.Entity;
 using NUnit.Framework;
-using Moq;
+using Spectre.Dependencies;
+using Spectre.Dependencies.Modules;
 
 namespace Spectre.Database.Tests
 {
     [TestFixture]
     public class QueryTests
     {
-        private Mock<DatasetsContext> _mockContext = new Mock<DatasetsContext>();
+        private DatasetsContext _mockContext;
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            DependencyResolver.AddModule(new MockModule());
+        }
 
         [SetUp]
         public void SetUp()
         {
-            var data = new List<Dataset>
-            {
-                new Dataset { FriendlyName = "FriendlyName1", Hash = "Hash1", UploadNumber = "UploadNumber1"},
-                new Dataset { FriendlyName = "FriendlyName2", Hash = "Hash2", UploadNumber = "UploadNumber2"},
-                new Dataset { FriendlyName = "FriendlyName3", Hash = "Hash3", UploadNumber = "UploadNumber3"},
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Dataset>>();
-            mockSet.As<IQueryable<Dataset>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Dataset>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Dataset>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Dataset>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            _mockContext.Setup(c => c.Datasets).Returns(mockSet.Object);
+           _mockContext = DependencyResolver.GetService<DatasetsContext>();
         }
 
         [Test]
         public void HashToUploadNumber_finds_proper_uploadnumber_for_given_hash()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToUploadNumberOrDefault("Hash1");
 
@@ -66,7 +56,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void FriendlyNameToUploadNumber_finds_proper_uploadnumber_for_given_friendlyname()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.FriendlyNameToUploadNumberOrDefault("FriendlyName2");
 
@@ -76,7 +66,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void HashToUploadNumer_returns_null_for_not_existing_hash()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToUploadNumberOrDefault("NotExistingHash");
 
@@ -86,7 +76,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void FriendlyNameToUploadNumer_returns_null_for_not_existing_friendly_name()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.FriendlyNameToUploadNumberOrDefault("NotExistingFriendlyName");
 
@@ -96,7 +86,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void UploadNumberToHash_finds_proper_hash_for_given_uploadnumber()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.UploadNumberToHashOrDefault("UploadNumber3");
 
@@ -106,7 +96,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void UploadNumberToHash_returns_null_for_not_existing_Upload_Name()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.UploadNumberToHashOrDefault("NotExistingUploadNumber");
 
@@ -116,7 +106,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void HashToFriendlyName_finds_proper_friendlyname_for_given_hash()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToFriendlyNameOrDefault("Hash1");
 
@@ -126,7 +116,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void HashToFriendlyName_returns_null_for_not_existing_Hash()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToFriendlyNameOrDefault("NotExistingHash");
 
@@ -136,7 +126,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void UploadNumberToFriendlyName_finds_proper_friendlyname_for_given_uploadnumber()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.UploadNumberToFriendlyNameOrDefault("UploadNumber2");
 
@@ -146,7 +136,7 @@ namespace Spectre.Database.Tests
         [Test]
         public void UploadNumberToFriendlyName_returns_null_for_not_existing_uploadnumber()
         {
-            var service = new DatasetDetailsFinder(_mockContext.Object);
+            var service = new DatasetDetailsFinder(_mockContext);
 
             var dataset = service.HashToFriendlyNameOrDefault("NotExistingUploadNumber");
 
