@@ -88,6 +88,9 @@ namespace Spectre.Service.Tests.Io
             Assert.IsNotEmpty(collection: _mockFileSystem.Directory.GetFiles(Path.Combine(_rootDir, _remoteDir),
                     searchPattern: "testDataset.*"),
                 message: "Saver did not manage to save the dataset from memory to remote directory.");
+            Assert.IsNotEmpty(collection: _mockFileSystem.Directory.GetFiles(Path.Combine(_rootDir, _cacheDir),
+                    searchPattern: "testDataset.*"),
+                message: "Saver did not manage to save the dataset from memory to cache directory.");
         }
     }
 }

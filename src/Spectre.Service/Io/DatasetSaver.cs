@@ -99,15 +99,17 @@ namespace Spectre.Service.Io
         /// <param name="name">User-friendly name given to the dataset.</param>
         public void SaveFromMemory(IDataset dataset, string name)
         {
-            string extension = ".txt"; // TODO @dkuchta: extension recognition
-            string fullPathRemote = FileSystem.Path.Combine(_remoteRoot, name + extension);
+            string nameWithExtension = name + ".txt"; // TODO @dkuchta: extension recognition
+            string fullPathRemote = FileSystem.Path.Combine(_remoteRoot, nameWithExtension);
+            string fullPathCache = FileSystem.Path.Combine(_cacheRoot, nameWithExtension);
             dataset.SaveToFile(fullPathRemote);
+            dataset.SaveToFile(fullPathCache);
             MakeEntryInDatabase(name);
         }
 
         private void MakeEntryInDatabase(string datasetName)
         {
-            using (var datasetsContext = new DatasetsContext())
+            using (var datasetsContext = DependencyResolver.GetService<DatasetsContext>())
             {
                 var uploadNumber = Guid.NewGuid()
                     .ToString();
