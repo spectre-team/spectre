@@ -29,9 +29,10 @@ namespace Spectre.Data.Tests
     [TestFixture]
     public class RoiUtilitiesTests
     {
-        private readonly string _path = TestContext.CurrentContext.TestDirectory + "\\..\\..\\..\\..\\..\\test_files\\Rois";
+        private readonly string _path = Path.Combine(TestContext.CurrentContext.TestDirectory, "..\\..\\..\\..\\..\\test_files\\Rois");
         private string _testpath;
         private string _testfilespath;
+        private string _writetestpath;
         private readonly RoiDataset _readroidataset = new RoiDataset();
         private readonly RoiDataset _writeroidataset = new RoiDataset();
 
@@ -39,7 +40,8 @@ namespace Spectre.Data.Tests
         public void SetUp()
         {
             _testpath = Path.GetFullPath(_path);
-            _testfilespath = _testpath + "\\image1.png";
+            _testfilespath = Path.Combine(_testpath, "image1.png");
+            _writetestpath = Path.Combine(_testpath, "writetestfile.png");
             _readroidataset.Name = "image1";
             _readroidataset.Height = 6;
             _readroidataset.Width = 6;
@@ -105,6 +107,22 @@ namespace Spectre.Data.Tests
             RoiUtilities service = new RoiUtilities(_testpath);
 
             service.RoiWriter(_writeroidataset);
+            
+            RoiUtilities checkIfProperlyWrittenService = new RoiUtilities(_writetestpath);
+
+            var writetestroi = checkIfProperlyWrittenService.RoiReader();
+
+            Assert.AreEqual(writetestroi.RoiPixels[0].GetXCoord(), _writeroidataset.RoiPixels[0].GetXCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[0].GetYCoord(), _writeroidataset.RoiPixels[0].GetYCoord());
+
+            Assert.AreEqual(writetestroi.RoiPixels[1].GetXCoord(), _writeroidataset.RoiPixels[1].GetXCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[1].GetYCoord(), _writeroidataset.RoiPixels[1].GetYCoord());
+
+            Assert.AreEqual(writetestroi.RoiPixels[2].GetXCoord(), _writeroidataset.RoiPixels[2].GetXCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[2].GetYCoord(), _writeroidataset.RoiPixels[2].GetYCoord());
+
+            Assert.AreEqual(writetestroi.RoiPixels[3].GetXCoord(), _writeroidataset.RoiPixels[3].GetXCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[3].GetYCoord(), _writeroidataset.RoiPixels[3].GetYCoord());
         }
     }
 }

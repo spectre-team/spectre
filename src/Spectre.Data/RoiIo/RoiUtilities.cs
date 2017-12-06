@@ -109,8 +109,9 @@ namespace Spectre.Data.RoiIo
                    Color.Black);
             }
 
-            var writepath = _path + "\\" + roidataset.Name + ".png";
-            bitmap.Save(writepath, ImageFormat.Png);
+            var writepath = Path.GetFullPath(Path.Combine(_path, roidataset.Name));
+
+            bitmap.Save(writepath + ".png", ImageFormat.Png);
         }
 
         /// <summary>
