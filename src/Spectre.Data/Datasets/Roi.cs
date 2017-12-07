@@ -1,6 +1,6 @@
 ﻿/*
- * IRoiUtilities.cs
- * Interface for RoiUtilities.
+ * Roi.cs
+ * Class represents a region over an image.
 
    Copyright 2017 Roman Lisak
 
@@ -22,35 +22,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Spectre.Data.Datasets;
 
-namespace Spectre.Data.RoiIo
+namespace Spectre.Data.Datasets
 {
     /// <summary>
-    /// Interface for RoiUtilities.
+    /// Dataset containing information about a single roi.
     /// </summary>
-    public interface IRoiUtilites
+    public class Roi
     {
         /// <summary>
-        /// Reads regions of interest from a png file.
+        /// Gets or sets the name.
         /// </summary>
-        /// <returns>
-        /// Returns list doubles.
-        /// </returns>
-        RoiDataset RoiReader();
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; set; }
 
         /// <summary>
-        /// Writes roi dataset into a png file.
+        /// Gets or sets the roi pixels.
         /// </summary>
-        /// <param name="roidataset">The prototyp.</param>
-        void RoiWriter(RoiDataset roidataset);
+        /// <value>
+        /// The roi pixels.
+        /// </value>
+        public IList<RoiPixel> RoiPixels { get; set; }
 
         /// <summary>
-        /// Lists the rois from directory.
+        /// Gets or sets the width.
         /// </summary>
-        /// <returns>
-        /// Returns names of all Roi files in the directory.
-        /// </returns>
-        List<string> ListRoisFromDirectory();
+        /// <value>
+        /// The width.
+        /// </value>
+        public int Width { get; set; }
+
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        /// <value>
+        /// The height.
+        /// </value>
+        public int Height { get; set; }
     }
 }

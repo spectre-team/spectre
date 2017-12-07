@@ -1,5 +1,5 @@
 ﻿/*
- * Roi.cs
+ * RoiPixel.cs
  * Class represeting dataset with data of regions of interest.
 
    Copyright 2017 Roman Lisak
@@ -33,34 +33,44 @@ namespace Spectre.Data.Datasets
         /// <summary>
         /// The x coordinate
         /// </summary>
-        private readonly int _xcoordinate;
+        private readonly int _xCoordinate;
 
         /// <summary>
         /// The ycoordinate
         /// </summary>
-        private readonly int _ycoordinate;
+        private readonly int _yCoordinate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoiPixel" /> class.
         /// </summary>
-        /// <param name="xcoord">The xcoord.</param>
-        /// <param name="ycoord">The ycoord.</param>
-        public RoiPixel(int xcoord, int ycoord)
+        /// <param name="xCoordinate">The xcoord.</param>
+        /// <param name="yCoordinate">The ycoord.</param>
+        public RoiPixel(int xCoordinate, int yCoordinate)
         {
-            _xcoordinate = xcoord;
-            _ycoordinate = ycoord;
+            _xCoordinate = xCoordinate;
+            _yCoordinate = yCoordinate;
         }
 
         /// <summary>
-        /// Gets the x coord.
+        /// Gets the x coordinate.
         /// </summary>
-        /// <returns>X coordinate of the object</returns>
-        public int GetXCoord() => _xcoordinate;
+        /// <value>
+        /// The x coordinate.
+        /// </value>
+        public int XCoordinate
+        {
+            get { return _xCoordinate; }
+        }
 
         /// <summary>
-        /// Gets the y coord.
+        /// Gets the y coordinate.
         /// </summary>
-        /// <returns>Y Coordinate of the object</returns>
-        public int GetYCoord() => _ycoordinate;
+        /// <value>
+        /// The y coordinate.
+        /// </value>
+        public int YCoordinate
+        {
+            get { return _yCoordinate; }
         }
+    }
 }

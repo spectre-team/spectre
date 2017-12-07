@@ -48,16 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datasets\RoiDataset.cs" />
+    <Compile Include="Datasets\Roi.cs" />
     <Compile Include="Datasets\RoiPixel.cs" />
+    <Compile Include="RoiIo\IRoiWriter.cs" />
+    <Compile Include="RoiIo\RoiReader.cs" />
+    <Compile Include="RoiIo\RoiWriter.cs" />
     <Compile Include="Structures\DataPoint.cs" />
     <Compile Include="Datasets\BasicTextDataset.cs" />
     <Compile Include="Datasets\IDataset.cs" />
     <Compile Include="Structures\Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structures\SpatialCoordinates.cs" />
-    <Compile Include="RoiIo\IRoiUtilites.cs" />
-    <Compile Include="RoiIo\RoiUtilities.cs" />
+    <Compile Include="RoiIo\IRoiReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

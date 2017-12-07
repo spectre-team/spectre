@@ -30,32 +30,32 @@ namespace Spectre.Data.Tests
     public class RoiUtilitiesTests
     {
         private readonly string _path = Path.Combine(TestContext.CurrentContext.TestDirectory, "..\\..\\..\\..\\..\\test_files\\Rois");
-        private string _testpath;
-        private string _testfilespath;
-        private string _writetestpath;
-        private readonly RoiDataset _readroidataset = new RoiDataset();
-        private readonly RoiDataset _writeroidataset = new RoiDataset();
+        private string _testPath;
+        private string _testFilesPath;
+        private string _writeTestPath;
+        private readonly Roi _readRoiDataset = new Roi();
+        private readonly Roi _writeRoiRataset = new Roi();
 
         [SetUp]
         public void SetUp()
         {
-            _testpath = Path.GetFullPath(_path);
-            _testfilespath = Path.Combine(_testpath, "image1.png");
-            _writetestpath = Path.Combine(_testpath, "writetestfile.png");
-            _readroidataset.Name = "image1";
-            _readroidataset.Height = 6;
-            _readroidataset.Width = 6;
-            _readroidataset.RoiPixels = new List<RoiPixel>
+            _testPath = Path.GetFullPath(_path);
+            _testFilesPath = Path.Combine(_testPath, "image1.png");
+            _writeTestPath = Path.Combine(_testPath, "writetestfile.png");
+            _readRoiDataset.Name = "image1";
+            _readRoiDataset.Height = 6;
+            _readRoiDataset.Width = 6;
+            _readRoiDataset.RoiPixels = new List<RoiPixel>
             {
                 new RoiPixel(1, 1),
                 new RoiPixel(2, 1),
                 new RoiPixel(3, 1)
             };
 
-            _writeroidataset.Name = "writetestfile";
-            _writeroidataset.Height = 10;
-            _writeroidataset.Width = 10;
-            _writeroidataset.RoiPixels = new List<RoiPixel>
+            _writeRoiRataset.Name = "writetestfile";
+            _writeRoiRataset.Height = 10;
+            _writeRoiRataset.Width = 10;
+            _writeRoiRataset.RoiPixels = new List<RoiPixel>
             {
                 new RoiPixel(1, 5),
                 new RoiPixel(2, 5),
@@ -67,7 +67,7 @@ namespace Spectre.Data.Tests
         [Test]
         public void ListRoisFromDirectory_returns_proper_names()
         {
-            RoiUtilities service = new RoiUtilities(_testpath);
+            RoiReader service = new RoiReader(_testPath);
 
             var names = service.ListRoisFromDirectory();
 
@@ -78,51 +78,51 @@ namespace Spectre.Data.Tests
         [Test]
         public void ReadRoi_returns_proper_roi_pixels()
         {
-            RoiUtilities service = new RoiUtilities(_testfilespath);
-            var roi = service.RoiReader();
+            RoiReader service = new RoiReader(_testFilesPath);
+            var roi = service.RoiLoader();
 
-            Assert.AreEqual(roi.RoiPixels[0].GetXCoord(), _readroidataset.RoiPixels[0].GetXCoord());
-            Assert.AreEqual(roi.RoiPixels[0].GetYCoord(), _readroidataset.RoiPixels[0].GetYCoord());
+            Assert.AreEqual(roi.RoiPixels[0].XCoordinate, _readRoiDataset.RoiPixels[0].XCoordinate);
+            Assert.AreEqual(roi.RoiPixels[0].YCoordinate, _readRoiDataset.RoiPixels[0].YCoordinate);
 
-            Assert.AreEqual(roi.RoiPixels[1].GetXCoord(), _readroidataset.RoiPixels[1].GetXCoord());
-            Assert.AreEqual(roi.RoiPixels[1].GetYCoord(), _readroidataset.RoiPixels[1].GetYCoord());
+            Assert.AreEqual(roi.RoiPixels[1].XCoordinate, _readRoiDataset.RoiPixels[1].XCoordinate);
+            Assert.AreEqual(roi.RoiPixels[1].YCoordinate, _readRoiDataset.RoiPixels[1].YCoordinate);
 
-            Assert.AreEqual(roi.RoiPixels[2].GetXCoord(), _readroidataset.RoiPixels[2].GetXCoord());
-            Assert.AreEqual(roi.RoiPixels[2].GetYCoord(), _readroidataset.RoiPixels[2].GetYCoord());
+            Assert.AreEqual(roi.RoiPixels[2].XCoordinate, _readRoiDataset.RoiPixels[2].XCoordinate);
+            Assert.AreEqual(roi.RoiPixels[2].YCoordinate, _readRoiDataset.RoiPixels[2].YCoordinate);
         }
 
         [Test]
         public void ReadRoi_returns_proper_dimensions()
         {
-            RoiUtilities service = new RoiUtilities(_testfilespath);
-            var roi = service.RoiReader();
+            RoiReader service = new RoiReader(_testFilesPath);
+            var roi = service.RoiLoader();
 
-            Assert.AreEqual(roi.Height, _readroidataset.Height);
-            Assert.AreEqual(roi.Width, _readroidataset.Width);
+            Assert.AreEqual(roi.Height, _readRoiDataset.Height);
+            Assert.AreEqual(roi.Width, _readRoiDataset.Width);
         }
 
         [Test]
         public void WriteRoi_writes_file_properly()
         {
-            RoiUtilities service = new RoiUtilities(_testpath);
+            RoiWriter service = new RoiWriter(_testPath);
 
-            service.RoiWriter(_writeroidataset);
+            service.RoiUploader(_writeRoiRataset);
             
-            RoiUtilities checkIfProperlyWrittenService = new RoiUtilities(_writetestpath);
+            RoiReader checkIfProperlyWrittenService = new RoiReader(_writeTestPath);
 
-            var writetestroi = checkIfProperlyWrittenService.RoiReader();
+            var writetestroi = checkIfProperlyWrittenService.RoiLoader();
 
-            Assert.AreEqual(writetestroi.RoiPixels[0].GetXCoord(), _writeroidataset.RoiPixels[0].GetXCoord());
-            Assert.AreEqual(writetestroi.RoiPixels[0].GetYCoord(), _writeroidataset.RoiPixels[0].GetYCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[0].XCoordinate, _writeRoiRataset.RoiPixels[0].XCoordinate);
+            Assert.AreEqual(writetestroi.RoiPixels[0].YCoordinate, _writeRoiRataset.RoiPixels[0].YCoordinate);
 
-            Assert.AreEqual(writetestroi.RoiPixels[1].GetXCoord(), _writeroidataset.RoiPixels[1].GetXCoord());
-            Assert.AreEqual(writetestroi.RoiPixels[1].GetYCoord(), _writeroidataset.RoiPixels[1].GetYCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[1].XCoordinate, _writeRoiRataset.RoiPixels[1].XCoordinate);
+            Assert.AreEqual(writetestroi.RoiPixels[1].YCoordinate, _writeRoiRataset.RoiPixels[1].YCoordinate);
 
-            Assert.AreEqual(writetestroi.RoiPixels[2].GetXCoord(), _writeroidataset.RoiPixels[2].GetXCoord());
-            Assert.AreEqual(writetestroi.RoiPixels[2].GetYCoord(), _writeroidataset.RoiPixels[2].GetYCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[2].XCoordinate, _writeRoiRataset.RoiPixels[2].XCoordinate);
+            Assert.AreEqual(writetestroi.RoiPixels[2].YCoordinate, _writeRoiRataset.RoiPixels[2].YCoordinate);
 
-            Assert.AreEqual(writetestroi.RoiPixels[3].GetXCoord(), _writeroidataset.RoiPixels[3].GetXCoord());
-            Assert.AreEqual(writetestroi.RoiPixels[3].GetYCoord(), _writeroidataset.RoiPixels[3].GetYCoord());
+            Assert.AreEqual(writetestroi.RoiPixels[3].XCoordinate, _writeRoiRataset.RoiPixels[3].XCoordinate);
+            Assert.AreEqual(writetestroi.RoiPixels[3].YCoordinate, _writeRoiRataset.RoiPixels[3].YCoordinate);
         }
     }
 }
