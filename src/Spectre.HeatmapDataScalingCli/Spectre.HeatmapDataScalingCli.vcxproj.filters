@@ -21,19 +21,22 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HeatmapDataScallingWrapper.h">
+    <ClInclude Include="IntensitiesDataConverter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NormalizationCli.h">
+    <ClInclude Include="Normalization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BilateralFilteringCli.h">
+    <ClInclude Include="BilateralBlur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AlgorithmCli.h">
+    <ClInclude Include="SuppressionAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SuppressionAlgorithmCli.h">
+    <ClInclude Include="GaussianBlur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeatmapDataScalingAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,9 +47,9 @@
     <ClCompile Include="Stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <ClCompile Include="Spectre.HeatmapDataScalingCli.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -57,5 +60,8 @@
     <Image Include="app.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

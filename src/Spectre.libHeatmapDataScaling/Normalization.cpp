@@ -18,28 +18,24 @@ limitations under the License.
 #include <algorithm>
 #include <vector>
 
-Normalization::Normalization()
+namespace Spectre::libHeatmapDataScaling
 {
-	this->min = 0;
-	max = 100;
-}
+	Normalization::Normalization(const int _min, const int _max) 
+		: min(_min), max(_max) { };
 
-Normalization::Normalization(int min, int max)
-{
-	this->min = min;
-	this->max = max;
-}
 
-Normalization::~Normalization() {}
 
-std::vector<double> Normalization::scaleData(std::vector<double> intensities)
-{
-	double oldMin = *min_element(std::begin(intensities), std::end(intensities));
-	double oldMax = *max_element(std::begin(intensities), std::end(intensities));
-
-	for (auto &singleIntensity : intensities)
+	std::vector<double> *Normalization::scaleData(const gsl::span<double> intensities)
 	{
-		singleIntensity = ((singleIntensity - oldMin) * (max - min) / (oldMax - oldMin)) + min;
+		std::vector<double> *newIntensities = new std::vector<double>();
+		newIntensities->reserve(intensities.size());
+		double oldMin = *min_element(std::begin(intensities), std::end(intensities));
+		double oldMax = *max_element(std::begin(intensities), std::end(intensities));
+
+		for (int i = 0; i< newIntensities->size(); i++)
+		{
+			(*newIntensities)[i] = ((intensities[i] - oldMin) * (max - min) / (oldMax - oldMin)) + min;
+		}
+		return newIntensities;
 	}
-	return intensities;
 }

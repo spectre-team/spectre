@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -306,6 +307,10 @@
       <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
       <Name>Spectre.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spectre.HeatmapDataScalingCli\Spectre.HeatmapDataScalingCli.vcxproj">
+      <Project>{4f4f4936-deda-4b42-84bb-16435d0de6e7}</Project>
+      <Name>Spectre.HeatmapDataScalingCli</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spectre.Service\Spectre.Service.csproj">
       <Project>{287A1A8D-C029-4D47-96BC-755C91B7985D}</Project>
       <Name>Spectre.Service</Name>
@@ -314,6 +319,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -350,11 +358,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56522</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/spectre_api</IISUrl>
+          <IISUrl>http://localhost/Spectre</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

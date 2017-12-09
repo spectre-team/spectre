@@ -1,6 +1,6 @@
 /*
-* GaussianFiltering.h
-* Class with gaussian filtering algorithm implementation.
+* GaussianFilter.h
+* Class which implements algorithm for filtering data with Gaussian function.
 *
 Copyright 2017 Daniel Babiak
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,19 +15,15 @@ limitations under the License.
 */
 
 #pragma once
-#include "Algorithm.h"
+#include<vector>
+#include "gsl.h"
 
-class GaussianFiltering : public Algorithm
+namespace Spectre::libHeatmapDataScaling
 {
-private:
-	int window;
-	int numberOfRows;
-	int numberOfColumns;
-	std::vector<double> gaussianFilter(std::vector<double> intensities, double sd, int r, std::vector<double> beta);
-public:
-	GaussianFiltering(int numberOfRows, int numberOfColumns);
-	GaussianFiltering(int numberOfRows, int numberOfColumns, int window);
-	~GaussianFiltering();
-	virtual std::vector<double> scaleData(std::vector<double> intensities);
-};
-
+	class GaussianFilter
+	{
+	public:
+		std::vector<double> *GaussianFilter::filterDataWithGaussianFunction(const gsl::span<double> intensities, const int numberOfRows, const int numberOfColumns,
+			const double sd, const int r, const gsl::span<double> beta);
+	};
+}

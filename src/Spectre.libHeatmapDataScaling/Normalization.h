@@ -1,6 +1,6 @@
 /*
-* SupressionAlgorithm.h
-* Class with suppresion algorithm implementation for contrast enhancement.
+* Normalization.h
+* Class with normalization algorithm implementation.
 *
 Copyright 2017 Daniel Babiak
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,17 +15,16 @@ limitations under the License.
 */
 
 #pragma once
-#include "Algorithm.h"
+#include "HeatmapDataScalingAlgorithm.h"
 
-class SuppressionAlgorithm : public Algorithm
+namespace Spectre::libHeatmapDataScaling
 {
-private:
-	double topPercent;
-	double quantile(std::vector<double> intensities, double prob);
-public:
-	SuppressionAlgorithm();
-	SuppressionAlgorithm(double topPercent);
-	~SuppressionAlgorithm();
-	virtual std::vector<double> scaleData(std::vector<double> intensities);
-};
-
+	class Normalization : public HeatmapDataScalingAlgorithm
+	{
+	public:
+		Normalization(const int _min = 0, const int _max = 100);
+		std::vector<double> *scaleData(const gsl::span<double> intensities) override;
+	private:
+		const int min, max;
+	};
+}

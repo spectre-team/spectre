@@ -1,5 +1,5 @@
 /*
-* AlgorithmCli.h
+* HeatmapDataScalingAlgorithm.h
 * Abstract class with scaleData virtual method.
 *
 Copyright 2017 Daniel Babiak
@@ -17,31 +17,11 @@ limitations under the License.
 #pragma once
 #include <vector>
 
-public ref class AlgorithmCli
+namespace Spectre::HeatmapDataScalingCli 
 {
-protected:
-	Algorithm * algorithm;
-	std::vector<double> * intensities;
-	template <typename T>
-	static std::vector<T> toNative(array<T>^ managedCollection)
+	public interface class HeatmapDataScalingAlgorithm
 	{
-		std::vector<T> native;
-		native.reserve(managedCollection->Length);
-		for (auto i = 0; i < managedCollection->Length; ++i)
-		{
-			native.push_back(managedCollection[i]);
-		}
-		return native;
-	}
-public:
-	AlgorithmCli() {}
-
-	~AlgorithmCli()
-	{
-		delete algorithm;
-		delete intensities;
-	}
-
-	virtual std::vector<double> scaleData() = 0;
-};
-
+	public:
+		virtual array<double>^ scaleData() = 0;
+	};
+}

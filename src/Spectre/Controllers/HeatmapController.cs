@@ -25,6 +25,7 @@ namespace Spectre.Controllers
     using System.Web.Http;
     using System.Web.Http.Cors;
     using Spectre.Data.Datasets;
+    using Spectre.HeatmapDataScalingCli;
     using Spectre.Models.Msi;
 
     /// <summary>
@@ -65,6 +66,9 @@ namespace Spectre.Controllers
             var intensities = dataset.GetRawIntensityRow(channelId);
             var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
 
+            // test heatmap scaling algorithms
+            HeatmapDataScalingAlgorithm normalization = new Normalization(intensities);
+            intensities = normalization.scaleData();
 #pragma warning disable SA1305 // Field names must not use Hungarian notation
             var xCoordinates = new int[intensities.Length];
             var yCoordinates = new int[intensities.Length];

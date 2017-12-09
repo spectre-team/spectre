@@ -1,6 +1,6 @@
 /*
-* GaussianFiltering.cpp
-* Class with gaussian filtering algorithm implementation.
+* GaussianFilter.h
+* Class which implements algorithm for filtering data with Gaussian function.
 *
 Copyright 2017 Daniel Babiak
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,46 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "GaussianFiltering.h"
+#include "GaussianFilter.h"
 
-GaussianFiltering::GaussianFiltering(int numberOfRows, int numberOfColumns)
+namespace Spectre::libHeatmapDataScaling
 {
-	this->window = 3;
-	this->numberOfRows = numberOfRows;
-	this->numberOfColumns = numberOfColumns;
-}
-
-GaussianFiltering::GaussianFiltering(int numberOfRows, int numberOfColumns, int window)
+std::vector<double> *GaussianFilter::filterDataWithGaussianFunction(const gsl::span<double> intensities, const int numberOfRows, const int numberOfColumns,
+	const double sd, const int r, const gsl::span<double> beta)
 {
-	this->window = window;
-	this->numberOfRows = numberOfRows;
-	this->numberOfColumns = numberOfColumns;
-}
-
-GaussianFiltering::~GaussianFiltering()
-{
-}
-
-std::vector<double> GaussianFiltering::scaleData(std::vector<double> intensities)
-{
-	int r = floor(window / 2);
-	double sd = window / 4;
-	int nrow = pow((2 * (r)) + 1, 2);
-	int ncol = intensities.size();
-	std::vector<double> beta;
-	int betaSize = nrow*ncol;
-	for (int i = 0; i < betaSize; i++)
-	{
-		beta.push_back(1);
-	}
-	
-	return gaussianFilter(intensities, sd, r, beta);
-}
-
-std::vector<double> GaussianFiltering::gaussianFilter(std::vector<double> intensities, double sd, int r, std::vector<double> beta)
-{
-	std::vector<double> newIntensities(intensities.size());
-	int window = pow((2 * (r)) + 1, 2);
+	std::vector<double> *newIntensities = new std::vector<double>();
+	newIntensities->reserve(intensities.size());
+	int gaussianKernel = (int)pow((2 * (r)) + 1, 2);
 	double gamma_raw[9];
 	int ix = 0;
 	for (int i = 0; i < numberOfRows; ++i) {
@@ -63,7 +33,7 @@ std::vector<double> GaussianFiltering::gaussianFilter(std::vector<double> intens
 			for (int ii = -(r); ii <= r; ++ii) {
 				for (int jj = -(r); jj <= r; ++jj) {
 					double alpha = exp(-(double)(ii*ii + jj*jj) / (2.0 * pow(sd, 2)));
-					gamma_raw[k] = alpha * beta[ix * window + k];
+					gamma_raw[k] = alpha * beta[ix * gaussianKernel + k];
 					gamma_sum += gamma_raw[k];
 					++k;
 				}
@@ -84,7 +54,7 @@ std::vector<double> GaussianFiltering::gaussianFilter(std::vector<double> intens
 						temp_j = j;
 					}
 					double gamma = gamma_raw[k] / gamma_sum;
-					newIntensities[(j * (numberOfRows)) + i] += gamma * intensities[(temp_j * (numberOfRows)) + temp_i];
+					(*newIntensities)[(j * (numberOfRows)) + i] += gamma * intensities[(temp_j * (numberOfRows)) + temp_i];
 					++k;
 				}
 			}
@@ -92,4 +62,5 @@ std::vector<double> GaussianFiltering::gaussianFilter(std::vector<double> intens
 		}
 	}
 	return newIntensities;
+}
 }

@@ -11,11 +11,11 @@ using namespace System::Security::Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly:AssemblyTitleAttribute(L"SpectreHeatmapDataScallingCli")];
+[assembly:AssemblyTitleAttribute(L"SpectreHeatmapDataScalingCli")];
 [assembly:AssemblyDescriptionAttribute(L"")];
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"")];
-[assembly:AssemblyProductAttribute(L"SpectreHeatmapDataScallingCli")];
+[assembly:AssemblyProductAttribute(L"SpectreHeatmapDataScalingCli")];
 [assembly:AssemblyCopyrightAttribute(L"Copyright (c)  2017")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];

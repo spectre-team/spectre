@@ -1,6 +1,6 @@
 /*
-* Algorithm.h
-* Abstract class with scaleData virtual method.
+* GaussianBlur.h
+* Class with gaussian blur algorithm implementation.
 *
 Copyright 2017 Daniel Babiak
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +15,19 @@ limitations under the License.
 */
 
 #pragma once
-#include <vector>
+#include "HeatmapDataScalingAlgorithm.h"
+#include "GaussianFilter.h"
 
-class Algorithm
+namespace Spectre::libHeatmapDataScaling
 {
-public:
-	Algorithm() {};
-	~Algorithm() {};
-	virtual std::vector<double> scaleData(std::vector<double> intensities) = 0;
-};
-
+	class GaussianBlur : public HeatmapDataScalingAlgorithm
+	{
+	public:
+		GaussianBlur(const int _numberOfRows, const int _numberOfColumns, const int _window = 3);
+		std::vector<double> *scaleData(const gsl::span<double> intensities) override;
+	private:
+		const int window;
+		const int numberOfRows;
+		const int numberOfColumns;
+	};
+}
