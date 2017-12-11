@@ -86,6 +86,9 @@
     <ClInclude Include="BilateralBlur.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="IntensitiesDataConverter.h" />
+    <ClInclude Include="NativeProcessor.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
     <ClInclude Include="Normalization.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />

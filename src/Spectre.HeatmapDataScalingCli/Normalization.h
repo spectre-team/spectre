@@ -20,6 +20,14 @@ limitations under the License.
 #include "Spectre.libHeatmapDataScaling/HeatmapDataScalingAlgorithm.h"
 #include "IntensitiesDataConverter.h"
 #include <iostream>
+
+#include "NativeProcessor.h"
+
+std::vector<double> testMap(gsl::span<double> src)
+{
+    return std::vector<double>(src.begin(), src.end());
+}
+
 namespace Spectre::HeatmapDataScalingCli
 {
 	public ref class Normalization : HeatmapDataScalingAlgorithm
@@ -39,14 +47,19 @@ namespace Spectre::HeatmapDataScalingCli
 
 		//TODO: Memory lakes (heatmapDataScalingAlgorithm, intensities), return correct double array from native C++
 		virtual array<double>^ scaleData()
-		{	
-			array<double>^ managedCollection = gcnew array<double>((int)(*intensities).size());
+		{
+            array<double>^ managedCollection = gcnew array<double>((int)(*intensities).size());
 			intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
 			for (auto i = 0; i < intensities->size(); ++i)
 			{
 				managedCollection[i] = (*intensities)[i];
 			}
-			return managedCollection;
+
+            DummyProcessor^ nativeProcessor = gcnew DummyProcessor(&testMap);
+            array<double>^ managedResult = nativeProcessor->map(managedCollection);
+
+			//return managedCollection;
+            return managedResult;
 		}
 	private:
 		Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm * heatmapDataScalingAlgorithm;
