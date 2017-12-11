@@ -113,6 +113,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.DivikResultConverter", "Spectre.DivikResultConverter\Spectre.DivikResultConverter.csproj", "{74E04873-BB6F-4115-841D-50C162928B19}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.HeatmapDataScalingCli", "Spectre.HeatmapDataScalingCli\Spectre.HeatmapDataScalingCli.vcxproj", "{4F4F4936-DEDA-4B42-84BB-16435D0DE6E7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6B7BF168-E96C-44D6-ADB7-CADE77E2A654} = {6B7BF168-E96C-44D6-ADB7-CADE77E2A654}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libHeatmapDataScaling", "Spectre.libHeatmapDataScaling\Spectre.libHeatmapDataScaling.vcxproj", "{6B7BF168-E96C-44D6-ADB7-CADE77E2A654}"
 EndProject

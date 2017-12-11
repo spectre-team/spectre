@@ -42,12 +42,10 @@ namespace Spectre::HeatmapDataScalingCli
 		{	
 			array<double>^ managedCollection = gcnew array<double>((int)(*intensities).size());
 			intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
-			for (auto i = 0; i < 998; ++i)
+			for (auto i = 0; i < intensities->size(); ++i)
 			{
 				managedCollection[i] = (*intensities)[i];
 			}
-			//delete heatmapDataScalingAlgorithm;
-			//return IntensitiesDataConverter::toManaged(*intensities);
 			return managedCollection;
 		}
 	private:

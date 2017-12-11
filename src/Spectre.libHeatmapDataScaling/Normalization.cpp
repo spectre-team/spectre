@@ -32,9 +32,9 @@ namespace Spectre::libHeatmapDataScaling
 		double oldMin = *min_element(std::begin(intensities), std::end(intensities));
 		double oldMax = *max_element(std::begin(intensities), std::end(intensities));
 
-		for (int i = 0; i< newIntensities->size(); i++)
+		for (int i = 0; i< intensities.size(); i++)
 		{
-			(*newIntensities)[i] = ((intensities[i] - oldMin) * (max - min) / (oldMax - oldMin)) + min;
+			newIntensities->push_back(((intensities[i] - oldMin) * (max - min) / (oldMax - oldMin)) + min);
 		}
 		return newIntensities;
 	}
