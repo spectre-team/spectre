@@ -128,14 +128,16 @@
       <Project>{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}</Project>
       <Name>Spectre.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spectre.HeatmapDataScalingCli\Spectre.HeatmapDataScalingCli.vcxproj">
+      <Project>{4f4f4936-deda-4b42-84bb-16435d0de6e7}</Project>
+      <Name>Spectre.HeatmapDataScalingCli</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spectre\Spectre.csproj">
       <Project>{0E4F265B-8702-4D70-AB70-AA566D7A2E40}</Project>
       <Name>Spectre</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />

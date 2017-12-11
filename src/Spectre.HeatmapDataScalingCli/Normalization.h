@@ -44,7 +44,6 @@ namespace Spectre::HeatmapDataScalingCli
 			intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
 			for (auto i = 0; i < 998; ++i)
 			{
-				managedCollection[i] = 1;
 				managedCollection[i] = (*intensities)[i];
 			}
 			//delete heatmapDataScalingAlgorithm;
