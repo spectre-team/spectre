@@ -76,7 +76,7 @@ namespace Spectre.Data.RoiIo
             var bitmap = new Bitmap(path);
 
             var roidataset = roiConverter.BitmapToRoi(bitmap, Path.GetFileNameWithoutExtension(path));
-
+            bitmap.Dispose();
             return roidataset;
         }
     }
