@@ -182,4 +182,3 @@ namespace Spectre.Data.Tests
         }
     }
  }
-
