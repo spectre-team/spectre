@@ -65,6 +65,7 @@ namespace Spectre.Data.RoiIo
             var writepath = Path.GetFullPath(Path.Combine(_path, roidataset.Name));
 
             bitmap.Save(writepath + ".png", ImageFormat.Png);
+            bitmap.Dispose();
         }
     }
 }
