@@ -38,14 +38,13 @@ public:
     }
     array<T4>^ map(array<T3>^ source)
     {
-        std::vector<T1>* nativeSource = new std::vector<T1>(source->Length);
-        for(auto i=0u; i< nativeSource->size(); ++i)
+        std::vector<T1> nativeSource(source->Length);
+        for(auto i=0u; i< nativeSource.size(); ++i)
         {
-            (*nativeSource)[i] = source[i];
+            nativeSource[i] = source[i];
         }
 
-        auto nativeResult = mMap(gsl::as_span(*nativeSource));
-        delete nativeSource;
+        auto nativeResult = mMap(gsl::as_span(nativeSource));
         
         //translate native to managed
         array<T4>^ managedResult = gcnew array<T4>(static_cast<int>(nativeResult.size()));
