@@ -20,8 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectre.Data.Datasets
 {
@@ -31,12 +29,27 @@ namespace Spectre.Data.Datasets
     public class Roi
     {
         /// <summary>
-        /// Gets or sets the name.
+        /// Initializes a new instance of the <see cref="Roi" /> class.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string Name { get; set; }
+        /// <param name="name">The name.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="roiPixels">The roipixel.</param>
+        public Roi(string name, int width, int height, IList<RoiPixel> roiPixels)
+        {
+            Name = name;
+            Width = width;
+            Height = height;
+
+            if (roiPixels.Any(r => r.XCoordinate > width) || roiPixels.Any(r => r.YCoordinate > height))
+            {
+                throw new ArgumentOutOfRangeException("Given roi pixels cannot exceed specified dimensions.");
+            }
+            else
+            {
+                RoiPixels = roiPixels;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the roi pixels.
@@ -44,22 +57,30 @@ namespace Spectre.Data.Datasets
         /// <value>
         /// The roi pixels.
         /// </value>
-        public IList<RoiPixel> RoiPixels { get; set; }
+        public IList<RoiPixel> RoiPixels { get; }
 
         /// <summary>
-        /// Gets or sets the width.
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; }
+
+        /// <summary>
+        /// Gets the width.
         /// </summary>
         /// <value>
         /// The width.
         /// </value>
-        public int Width { get; set; }
+        public int Width { get; }
 
         /// <summary>
-        /// Gets or sets the height.
+        /// Gets the height.
         /// </summary>
         /// <value>
         /// The height.
         /// </value>
-        public int Height { get; set; }
+        public int Height { get; }
     }
 }

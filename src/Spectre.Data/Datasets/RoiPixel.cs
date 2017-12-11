@@ -17,29 +17,13 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Spectre.Data.Datasets
 {
     /// <summary>
-    /// Dataset for regions of interest.
+    /// Class representing single ROI pixel.
     /// </summary>
     public class RoiPixel
     {
-        /// <summary>
-        /// The x coordinate
-        /// </summary>
-        private readonly int _xCoordinate;
-
-        /// <summary>
-        /// The ycoordinate
-        /// </summary>
-        private readonly int _yCoordinate;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RoiPixel" /> class.
         /// </summary>
@@ -47,30 +31,18 @@ namespace Spectre.Data.Datasets
         /// <param name="yCoordinate">The ycoord.</param>
         public RoiPixel(int xCoordinate, int yCoordinate)
         {
-            _xCoordinate = xCoordinate;
-            _yCoordinate = yCoordinate;
+            XCoordinate = xCoordinate;
+            YCoordinate = yCoordinate;
         }
 
         /// <summary>
-        /// Gets the x coordinate.
+        /// The x coordinate
         /// </summary>
-        /// <value>
-        /// The x coordinate.
-        /// </value>
-        public int XCoordinate
-        {
-            get { return _xCoordinate; }
-        }
+        public int XCoordinate { get; }
 
         /// <summary>
-        /// Gets the y coordinate.
+        /// The ycoordinate
         /// </summary>
-        /// <value>
-        /// The y coordinate.
-        /// </value>
-        public int YCoordinate
-        {
-            get { return _yCoordinate; }
-        }
+        public int YCoordinate { get; }
     }
 }

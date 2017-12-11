@@ -27,88 +27,55 @@ namespace Spectre.Data.RoiIo
     using Spectre.Data.Datasets;
 
     /// <summary>
-    /// Provides listing all available ROI's from directory and subdirectories.
+    /// Provides listing all available ROI's from directory.
     /// Provides reading a ROI from a directory.
     /// </summary>
     public class RoiReader
     {
         /// <summary>
-        /// The path
-        /// </summary>
-        private readonly string _path;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RoiReader"/> class.
-        /// </summary>
-        public RoiReader()
-        {
-            _path = System.IO.Path.GetFullPath(@"..\..\..\");
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RoiReader" /> class.
-        /// Used to pass exact path to methods. Default constructor sets project directory
-        /// as current path.
-        /// </summary>
-        /// <param name="testpath">The testpath.</param>
-        public RoiReader(string testpath)
-        {
-            _path = testpath;
-        }
-
-        /// <summary>
         /// Lists the rois from directory.
         /// </summary>
+        /// <param name="path">The path.</param>
         /// <returns>
-        /// Names of all roi files in the directory.
+        /// All ROIs in specified directory.
         /// </returns>
         /// <exception cref="FileNotFoundException">No *.png files found in directory or subdirectories</exception>
-        public List<string> ListRoisFromDirectory()
+        public List<Roi> GetAllRoisFromDirectory(string path)
         {
             var names = new List<string>();
-
-            var allfiles = System.IO.Directory.GetFiles(_path, "*.png", SearchOption.AllDirectories);
+            var rois = new List<Roi>();
+            var allfiles = System.IO.Directory.GetFiles(path, "*.png", SearchOption.TopDirectoryOnly);
 
             names = allfiles.ToList();
 
             if (names.Count == 0)
             {
-                throw new FileNotFoundException("No *.png files found in directory or subdirectories");
+                throw new FileNotFoundException("No *.png files found in directory.");
             }
 
-            return names;
+            var roiReader = new RoiReader();
+
+            for (var listIterator = 0; listIterator < names.Count; listIterator++)
+            {
+                rois.Add(roiReader.RoiDownloader(Path.Combine(path, names[listIterator])));
+            }
+
+            return rois;
         }
 
         /// <summary>
         /// Loads single ROI from specified folded.
         /// </summary>
+        /// <param name="path">The path.</param>
         /// <returns>
         /// ROI dataset.
         /// </returns>
-        public Roi RoiLoader()
+        public Roi RoiDownloader(string path)
         {
-            var blackColor = 0;
-            var color = default(Color);
-            var bitmap = new Bitmap(_path);
-            var roidataset = new Roi
-            {
-                RoiPixels = new List<RoiPixel>(),
-                Name = Path.GetFileNameWithoutExtension(_path),
-                Height = bitmap.Height,
-                Width = bitmap.Width
-            };
+            var roiConverter = new RoiConverter();
+            var bitmap = new Bitmap(path);
 
-            for (int width = 0; width < bitmap.Width; width++)
-            {
-                for (int height = 0; height < bitmap.Height; height++)
-                {
-                    color = bitmap.GetPixel(width, height);
-                    if (color.B == blackColor)
-                    {
-                        roidataset.RoiPixels.Add(new RoiPixel(width, height));
-                    }
-                }
-            }
+            var roidataset = roiConverter.BitmapToRoi(bitmap, Path.GetFileNameWithoutExtension(path));
 
             return roidataset;
         }

@@ -1,6 +1,6 @@
 ﻿/*
  * RoiWriter.cs
- * Class with utilities for managing the regions of interest data.
+ * Class with utilities for writing to a file the regions of interest data.
 
    Copyright 2017 Roman Lisak
 
@@ -17,14 +17,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectre.Data.Datasets;
 
 namespace Spectre.Data.RoiIo
@@ -64,18 +58,9 @@ namespace Spectre.Data.RoiIo
         /// <param name="roidataset">The prototyp.</param>
         public void RoiUploader(Roi roidataset)
         {
-            var bitmap = new Bitmap(roidataset.Width, roidataset.Height);
+            var roiConverter = new RoiConverter();
 
-            var graphicsobject = Graphics.FromImage(bitmap);
-            graphicsobject.Clear(Color.White);
-
-            for (int listiterator = 0; listiterator < roidataset.RoiPixels.Count; listiterator++)
-            {
-                bitmap.SetPixel(
-                    roidataset.RoiPixels[listiterator].XCoordinate,
-                    roidataset.RoiPixels[listiterator].YCoordinate,
-                    Color.Black);
-            }
+            var bitmap = roiConverter.RoiToBitmap(roidataset);
 
             var writepath = Path.GetFullPath(Path.Combine(_path, roidataset.Name));
 

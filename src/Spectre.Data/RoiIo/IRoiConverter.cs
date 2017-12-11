@@ -1,6 +1,6 @@
 ﻿/*
- * IRoiReader.cs
- * Interface for RoiReader.
+ * IRoiConverter.cs
+ * Interface for RoiConverter.
 
    Copyright 2017 Roman Lisak
 
@@ -17,34 +17,33 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectre.Data.Datasets;
-
 namespace Spectre.Data.RoiIo
 {
+    using System.Drawing;
+    using Spectre.Data.Datasets;
+
     /// <summary>
-    /// Interface for RoiUtilities.
+    /// Interface for RoiConverter.
     /// </summary>
-    public interface IRoiReader
+    public interface IRoiConverter
     {
         /// <summary>
-        /// Reads regions of interest from a png file.
+        /// Bitmap to roi converter.
         /// </summary>
+        /// <param name="bitmap">The bitmap.</param>
+        /// <param name="name">The name.</param>
         /// <returns>
-        /// Returns list doubles.
+        /// Roi dataset.
         /// </returns>
-        Roi RoiReader();
+        Roi BitmapToRoi(Bitmap bitmap, string name);
 
         /// <summary>
-        /// Lists the rois from directory.
+        /// ROIs to bitmap converter.
         /// </summary>
+        /// <param name="roidataset">The roidataset.</param>
         /// <returns>
-        /// Returns names of all Roi files in the directory.
+        /// Bitmap.
         /// </returns>
-        List<string> ListRoisFromDirectory();
+        Bitmap RoiToBitmap(Roi roidataset);
     }
 }
