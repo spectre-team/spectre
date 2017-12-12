@@ -28,27 +28,34 @@ namespace Spectre::libHeatmapDataScaling
 		newIntensities->reserve(intensities.size());
 		double maxIntensity = *max_element(std::begin(intensities), std::end(intensities));
 		double cutoff = quantile(intensities, 1 - topPercent);
-		for (int i = 0; i < newIntensities->size(); i++)
+		for (int i = 0; i < intensities.size(); i++)
 		{
 			if (intensities[i] > cutoff)
-				(*newIntensities)[i] = cutoff;
-			(*newIntensities)[i] = maxIntensity * intensities[i] / cutoff;
+                newIntensities->push_back(cutoff);
+            else
+                newIntensities->push_back(maxIntensity * intensities[i] / cutoff);
 		}
 		return newIntensities;
 	}
 
 	double SuppressionAlgorithm::quantile(gsl::span<double> intensities, const double prob)
 	{
+        std::vector<double> sortedIntensities;
+        sortedIntensities.reserve(intensities.size());
+        for (int i = 0; i< intensities.size(); i++)
+        {
+            sortedIntensities.push_back(intensities[i]);
+        }
 		size_t size = intensities.size();
 		double index = 1 + (size - 1) * prob;
 		int lo = (int)floor(index);
 		int hi = (int)ceil(index);
-		std::sort(intensities.begin(), intensities.end());
-		double qs = intensities[lo - 1];
-		if ((index > lo) && (intensities[hi - 1] != qs))
+		std::sort(sortedIntensities.begin(), sortedIntensities.end());
+		double qs = sortedIntensities[lo - 1];
+		if ((index > lo) && (sortedIntensities[hi - 1] != qs))
 		{
 			double h = index - lo;
-			qs = (1 - h) * qs + h * intensities[hi - 1];
+			qs = (1 - h) * qs + h * sortedIntensities[hi - 1];
 		}
 		return qs;
 	}

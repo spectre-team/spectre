@@ -40,9 +40,13 @@ namespace Spectre::HeatmapDataScalingCli
 		//TODO: Memory lakes (heatmapDataScalingAlgorithm, intensities), return correct double array from native C++
 		virtual array<double>^scaleData()
 		{
-			intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
-			delete heatmapDataScalingAlgorithm;
-			return gcnew array<double>(12);
+            array<double>^ managedCollection = gcnew array<double>((int)(*intensities).size());
+            intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
+            for (auto i = 0; i < intensities->size(); ++i)
+            {
+                managedCollection[i] = (*intensities)[i];
+            }
+            return managedCollection;
 		}
 	private:
 		Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm * heatmapDataScalingAlgorithm;

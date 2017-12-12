@@ -23,7 +23,7 @@ namespace Spectre::libHeatmapDataScaling
 	class GaussianFilter
 	{
 	public:
-		std::vector<double> *GaussianFilter::filterDataWithGaussianFunction(const gsl::span<double> intensities, const int numberOfRows, const int numberOfColumns,
-			const double sd, const int r, const gsl::span<double> beta);
+		std::vector<double> *GaussianFilter::filterDataWithGaussianFunction(const gsl::span<double> &intensities, const int numberOfRows, const int numberOfColumns,
+			const double sd, const int r, const gsl::span<double> &beta);
 	};
 }
