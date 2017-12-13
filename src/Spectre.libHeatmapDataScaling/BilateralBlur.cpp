@@ -26,23 +26,17 @@ namespace Spectre::libHeatmapDataScaling
 	{
 		int r = (int)floor(window / 2);
 		double sd = window / 4;
-		int nrow = (int)pow((2 * (r)) + 1, 2);
-		size_t ncol = intensities.size();
-		std::vector<double> beta;
-		size_t betaSize = nrow*ncol;
-		beta.reserve(betaSize);
-		for (int i = 0; i < betaSize; i++)
-		{
-			beta[i] = 1;
-		}
-
-		beta = calculateWeightsForBilateralBlur(intensities, beta, r);
+		auto beta = calculateWeightsForBilateralBlur(intensities, r);
 		return gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
 	}
 
-	std::vector<double> &BilateralBlur::calculateWeightsForBilateralBlur(const gsl::span<double> intensities, std::vector<double> &beta, const int r)
+	std::vector<double> BilateralBlur::calculateWeightsForBilateralBlur(const gsl::span<double> intensities, const int r) const
 	{
-		int gaussianKernel = (int)pow((2 * (r)) + 1, 2);
+        int nrow = (int)pow((2 * (r)) + 1, 2);
+        size_t ncol = intensities.size();
+        std::vector<double> beta(nrow * ncol, 1);
+
+        int gaussianKernel = (int)pow((2 * (r)) + 1, 2);
 		int ix = 0;
 		for (int i = 0; i < numberOfRows; ++i) {
 			for (int j = 0; j < numberOfColumns; ++j) {

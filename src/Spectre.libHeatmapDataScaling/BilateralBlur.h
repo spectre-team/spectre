@@ -24,7 +24,7 @@ namespace Spectre::libHeatmapDataScaling
 	{
 	public:
 		BilateralBlur(const int _numberOfRows, const int _numberOfColumns, const int _window = 3);
-		std::vector<double> &BilateralBlur::calculateWeightsForBilateralBlur(const gsl::span<double> intensities, std::vector<double> &beta, const int r);
+		std::vector<double> BilateralBlur::calculateWeightsForBilateralBlur(const gsl::span<double> intensities, const int r) const;
 		std::vector<double> scaleData(const gsl::span<double> intensities) override;
 	private:
 		const int window;
