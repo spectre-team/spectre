@@ -27,14 +27,7 @@ namespace Spectre::libHeatmapDataScaling
 		double sd = window / 4.0;
 		int nrow = (int)pow((2 * (r)) + 1, 2);
 		size_t ncol = intensities.size();
-        std::vector<double> beta;
-		size_t betaSize = nrow*ncol;
-        beta.reserve(betaSize);
-		for (int i = 0; i < betaSize; i++)
-		{
-			beta.push_back(1);
-		}
-
+        std::vector<double> beta(nrow * ncol, 1);
 		return gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
 	}
 }
