@@ -37,7 +37,7 @@ namespace Spectre::libHeatmapDataScaling
 		}
 
 		beta = calculateWeightsForBilateralBlur(intensities, beta, r);
-		return *gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
+		return gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
 	}
 
 	std::vector<double> &BilateralBlur::calculateWeightsForBilateralBlur(const gsl::span<double> intensities, std::vector<double> &beta, const int r)

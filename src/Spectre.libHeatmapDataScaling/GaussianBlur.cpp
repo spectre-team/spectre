@@ -35,6 +35,6 @@ namespace Spectre::libHeatmapDataScaling
 			beta.push_back(1);
 		}
 
-		return *gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
+		return gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
 	}
 }

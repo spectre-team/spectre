@@ -18,10 +18,10 @@ limitations under the License.
 
 namespace Spectre::libHeatmapDataScaling
 {
-std::vector<double> *GaussianFilter::filterDataWithGaussianFunction(const gsl::span<double> &intensities, const int numberOfRows, const int numberOfColumns,
-	const double sd, const int r, const gsl::span<double> &beta)
+std::vector<double> GaussianFilter::filterDataWithGaussianFunction(const gsl::span<double> intensities, const int numberOfRows, const int numberOfColumns,
+	const double sd, const int r, const gsl::span<double> beta) const
 {
-	std::vector<double> *newIntensities = new std::vector<double>(intensities.size());
+	std::vector<double> newIntensities(intensities.size());
 	int gaussianKernel = (int)pow((2 * (r)) + 1, 2);
 	double gamma_raw[9];
 	int ix = 0;
@@ -53,7 +53,7 @@ std::vector<double> *GaussianFilter::filterDataWithGaussianFunction(const gsl::s
 						temp_j = j;
 					}
 					double gamma = gamma_raw[k] / gamma_sum;
-					(*newIntensities)[(j * (numberOfRows)) + i] += gamma * intensities[(temp_j * (numberOfRows)) + temp_i];
+					newIntensities[(j * (numberOfRows)) + i] += gamma * intensities[(temp_j * (numberOfRows)) + temp_i];
 					++k;
 				}
 			}
