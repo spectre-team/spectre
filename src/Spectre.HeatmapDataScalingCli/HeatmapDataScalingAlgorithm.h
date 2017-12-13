@@ -16,6 +16,7 @@ limitations under the License.
 
 #pragma once
 #include <vector>
+#include "Spectre.libHeatmapDataScaling/HeatmapDataScalingAlgorithm.h"
 
 namespace Spectre::HeatmapDataScalingCli 
 {
