@@ -33,36 +33,8 @@ namespace Spectre::HeatmapDataScalingCli
 	public ref class Normalization : HeatmapDataScalingAlgorithm
 	{
 	public:
-		Normalization(array<double>^ managedIntensitiets)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::Normalization();
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
+		Normalization() : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::Normalization()) { }
 
-		Normalization(array<double>^ managedIntensitiets, const int min, const int max)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::Normalization(min, max);
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
-
-		//TODO: Memory lakes (heatmapDataScalingAlgorithm, intensities), return correct double array from native C++
-		virtual array<double>^ scaleData()
-		{
-            array<double>^ managedCollection = gcnew array<double>((int)(*intensities).size());
-			intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
-			for (auto i = 0; i < intensities->size(); ++i)
-			{
-				managedCollection[i] = (*intensities)[i];
-			}
-
-            DummyProcessor^ nativeProcessor = gcnew DummyProcessor(&testMap);
-            array<double>^ managedResult = nativeProcessor->map(managedCollection);
-
-			//return managedCollection;
-            return managedResult;
-		}
-	private:
-		Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm * heatmapDataScalingAlgorithm;
-		std::vector<double> * intensities;
+        Normalization(const int min, const int max) : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::Normalization(min, max)) { }
 	};
 }

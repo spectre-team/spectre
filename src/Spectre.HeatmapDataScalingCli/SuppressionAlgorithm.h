@@ -25,32 +25,9 @@ namespace Spectre::HeatmapDataScalingCli
 	public ref class SuppressionAlgorithm : HeatmapDataScalingAlgorithm
 	{
 	public:
-		SuppressionAlgorithm(array<double>^ managedIntensitiets)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::SuppressionAlgorithm();
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
+		SuppressionAlgorithm() : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::SuppressionAlgorithm()) { }
 
-		SuppressionAlgorithm(array<double>^ managedIntensitiets, const double topPercent)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::SuppressionAlgorithm(topPercent);
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
-
-		//TODO: Memory lakes (heatmapDataScalingAlgorithm, intensities), return correct double array from native C++
-		virtual array<double>^scaleData()
-		{
-			intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
-            array<double>^ managedCollection = gcnew array<double>((int)(*intensities).size());
-            intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
-            for (auto i = 0; i < intensities->size(); ++i)
-            {
-                managedCollection[i] = (*intensities)[i];
-            }
-            return managedCollection;
-		}
-	private:
-		Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm * heatmapDataScalingAlgorithm;
-		std::vector<double> * intensities;
+		SuppressionAlgorithm(const double topPercent) 
+	        : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::SuppressionAlgorithm(topPercent)) { }
 	};
 }

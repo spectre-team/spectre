@@ -27,6 +27,6 @@ namespace Spectre::libHeatmapDataScaling
 		GaussianFilter gaussianFilter;
 	public:
 		virtual ~HeatmapDataScalingAlgorithm() {};
-		virtual std::vector<double> *scaleData(const gsl::span<double> intensities) = 0;
+		virtual std::vector<double> scaleData(const gsl::span<double> intensities) = 0;
 	};
 }

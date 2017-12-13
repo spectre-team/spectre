@@ -21,7 +21,7 @@ namespace Spectre::libHeatmapDataScaling
 	GaussianBlur::GaussianBlur(const int _numberOfRows, const int _numberOfColumns, const int _window)
 		: numberOfRows(_numberOfRows), numberOfColumns(_numberOfColumns), window(_window) { }
 
-	std::vector<double> *GaussianBlur::scaleData(const gsl::span<double> intensities)
+	std::vector<double> GaussianBlur::scaleData(const gsl::span<double> intensities)
 	{
 		int r = (int)floor(window / 2);
 		double sd = window / 4.0;
@@ -35,6 +35,6 @@ namespace Spectre::libHeatmapDataScaling
 			beta.push_back(1);
 		}
 
-		return gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
+		return *gaussianFilter.filterDataWithGaussianFunction(intensities, numberOfRows, numberOfColumns, sd, r, beta);
 	}
 }

@@ -25,16 +25,16 @@ namespace Spectre::libHeatmapDataScaling
 
 
 
-	std::vector<double> *Normalization::scaleData(const gsl::span<double> intensities)
+	std::vector<double> Normalization::scaleData(const gsl::span<double> intensities)
 	{
-		std::vector<double> *newIntensities = new std::vector<double>();
-		newIntensities->reserve(intensities.size());
+        std::vector<double> newIntensities;
+		newIntensities.reserve(intensities.size());
 		double oldMin = *min_element(std::begin(intensities), std::end(intensities));
 		double oldMax = *max_element(std::begin(intensities), std::end(intensities));
 
 		for (int i = 0; i< intensities.size(); i++)
 		{
-			newIntensities->push_back(((intensities[i] - oldMin) * (max - min) / (oldMax - oldMin)) + min);
+			newIntensities.push_back(((intensities[i] - oldMin) * (max - min) / (oldMax - oldMin)) + min);
 		}
 		return newIntensities;
 	}

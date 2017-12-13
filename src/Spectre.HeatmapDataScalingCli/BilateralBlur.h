@@ -25,28 +25,11 @@ namespace Spectre::HeatmapDataScalingCli
 	public ref class BilateralBlur : HeatmapDataScalingAlgorithm
 	{
 	public:
-		BilateralBlur(array<double>^ managedIntensitiets, const int numberOfRows, const int numberOfColumns)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::BilateralBlur(numberOfRows, numberOfColumns);
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
+		BilateralBlur(const int numberOfRows, const int numberOfColumns)
+            : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::BilateralBlur(numberOfRows, numberOfColumns)) { }
 
-		BilateralBlur(array<double>^ managedIntensitiets, const int numberOfRows, const int numberOfColumns, const int window)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::BilateralBlur(numberOfRows, numberOfColumns, window);
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
-
-		//TODO: Memory lakes (heatmapDataScalingAlgorithm, intensities), return correct double array from native C++
-		virtual array<double>^scaleData()
-		{
-			intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
-			delete heatmapDataScalingAlgorithm;
-			return gcnew array<double>(12);
-		}
-	private:
-		Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm * heatmapDataScalingAlgorithm;
-		std::vector<double> * intensities;
+		BilateralBlur(const int numberOfRows, const int numberOfColumns, const int window)
+            : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::BilateralBlur(numberOfRows, numberOfColumns, window)) { }
 	};
 }
 

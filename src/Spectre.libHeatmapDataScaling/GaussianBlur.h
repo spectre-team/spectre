@@ -24,7 +24,7 @@ namespace Spectre::libHeatmapDataScaling
 	{
 	public:
 		GaussianBlur(const int _numberOfRows, const int _numberOfColumns, const int _window = 3);
-		std::vector<double> *scaleData(const gsl::span<double> intensities) override;
+		std::vector<double> scaleData(const gsl::span<double> intensities) override;
 	private:
 		const int window;
 		const int numberOfRows;

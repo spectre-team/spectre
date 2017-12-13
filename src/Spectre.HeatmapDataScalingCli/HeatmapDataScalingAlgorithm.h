@@ -19,9 +19,37 @@ limitations under the License.
 
 namespace Spectre::HeatmapDataScalingCli 
 {
-	public interface class HeatmapDataScalingAlgorithm
+	public ref class HeatmapDataScalingAlgorithm
 	{
 	public:
-		virtual array<double>^ scaleData() = 0;
+        HeatmapDataScalingAlgorithm(Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm* _heatmapDataScalingAlgorithm)
+	        : heatmapDataScalingAlgorithm(_heatmapDataScalingAlgorithm){ }
+
+        ~HeatmapDataScalingAlgorithm()
+        {
+            delete heatmapDataScalingAlgorithm;
+        }
+
+		array<double>^ scaleData(array<double>^ managedIntensitiets)
+		{
+            std::vector<double> nativeSource(managedIntensitiets->Length);
+            for (auto i = 0u; i< nativeSource.size(); ++i)
+            {
+                nativeSource[i] = managedIntensitiets[i];
+            }
+
+            auto nativeResult = heatmapDataScalingAlgorithm->scaleData(nativeSource);
+
+            //translate native to managed
+            array<double>^ managedResult = gcnew array<double>(static_cast<int>(nativeResult.size()));
+            for (auto i = 0u; i<nativeResult.size(); ++i)
+            {
+                managedResult[i] = nativeResult[i];
+            }
+
+            return managedResult;
+		}
+	private:
+        Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm* heatmapDataScalingAlgorithm;
 	};
 }

@@ -23,7 +23,7 @@ namespace Spectre::libHeatmapDataScaling
 	{
 	public:
 		Normalization(const int _min = 0, const int _max = 100);
-		std::vector<double> *scaleData(const gsl::span<double> intensities) override;
+		std::vector<double> scaleData(const gsl::span<double> intensities) override;
 	private:
 		const int min, max;
 	};

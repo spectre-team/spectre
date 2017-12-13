@@ -24,7 +24,7 @@ namespace Spectre::libHeatmapDataScaling
 	public:
 		SuppressionAlgorithm(const double _topPercent = 0.01);
 		double quantile(const gsl::span<double> intensities, const double prob);
-		std::vector<double> *scaleData(const gsl::span<double> intensities) override;
+		std::vector<double> scaleData(const gsl::span<double> intensities) override;
 	private:
 		const double topPercent;
 	};

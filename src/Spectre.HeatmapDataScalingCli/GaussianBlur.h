@@ -25,32 +25,11 @@ namespace Spectre::HeatmapDataScalingCli
 	public ref class GaussianBlur : HeatmapDataScalingAlgorithm
 	{
 	public:
-		GaussianBlur(array<double>^ managedIntensitiets, const int numberOfRows, const int numberOfColumns)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::GaussianBlur(numberOfRows, numberOfColumns);
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
+		GaussianBlur(const int numberOfRows, const int numberOfColumns)
+            : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::GaussianBlur(numberOfRows, numberOfColumns)) { }
 
-		GaussianBlur(array<double>^ managedIntensitiets, const int numberOfRows, const int numberOfColumns, const int window)
-		{
-			heatmapDataScalingAlgorithm = new Spectre::libHeatmapDataScaling::GaussianBlur(numberOfRows, numberOfColumns, window);
-			intensities = IntensitiesDataConverter::toNative(managedIntensitiets);
-		}
-
-		//TODO: Memory lakes (heatmapDataScalingAlgorithm, intensities), return correct double array from native C++
-		virtual array<double>^scaleData()
-		{
-            array<double>^ managedCollection = gcnew array<double>((int)(*intensities).size());
-            intensities = heatmapDataScalingAlgorithm->scaleData(*intensities);
-            for (auto i = 0; i < intensities->size(); ++i)
-            {
-                managedCollection[i] = (*intensities)[i];
-            }
-            return managedCollection;
-		}
-	private:
-		Spectre::libHeatmapDataScaling::HeatmapDataScalingAlgorithm * heatmapDataScalingAlgorithm;
-		std::vector<double> * intensities;
+		GaussianBlur(const int numberOfRows, const int numberOfColumns, const int window)
+            : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::GaussianBlur(numberOfRows, numberOfColumns, window)) { }
 	};
 }
 

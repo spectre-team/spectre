@@ -22,18 +22,18 @@ namespace Spectre::libHeatmapDataScaling
 	SuppressionAlgorithm::SuppressionAlgorithm(double _topPercent)
 		: topPercent(_topPercent) { }
 
-	std::vector<double> *SuppressionAlgorithm::scaleData(const gsl::span<double> intensities)
+	std::vector<double> SuppressionAlgorithm::scaleData(const gsl::span<double> intensities)
 	{
-		std::vector<double> *newIntensities = new std::vector<double>();
-		newIntensities->reserve(intensities.size());
+        std::vector<double> newIntensities;
+		newIntensities.reserve(intensities.size());
 		double maxIntensity = *max_element(std::begin(intensities), std::end(intensities));
 		double cutoff = quantile(intensities, 1 - topPercent);
 		for (int i = 0; i < intensities.size(); i++)
 		{
 			if (intensities[i] > cutoff)
-                newIntensities->push_back(cutoff);
+                newIntensities.push_back(cutoff);
             else
-                newIntensities->push_back(maxIntensity * intensities[i] / cutoff);
+                newIntensities.push_back(maxIntensity * intensities[i] / cutoff);
 		}
 		return newIntensities;
 	}

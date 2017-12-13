@@ -68,12 +68,12 @@ namespace Spectre.Controllers
             var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
 
             // Use normalization algorithm
-            HeatmapDataScalingAlgorithm heatmapDataScalingAlgorithm = new Normalization(intensities);
-            intensities = heatmapDataScalingAlgorithm.scaleData();
+            HeatmapDataScalingAlgorithm heatmapDataScalingAlgorithm = new Normalization();
+            intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
 
             // Use suppression algorithm for contrast enhancement
-            heatmapDataScalingAlgorithm = new SuppressionAlgorithm(intensities);
-            intensities = heatmapDataScalingAlgorithm.scaleData();
+            heatmapDataScalingAlgorithm = new SuppressionAlgorithm();
+            intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
 
 #pragma warning disable SA1305 // Field names must not use Hungarian notation
             var xCoordinates = new int[intensities.Length];
@@ -101,8 +101,8 @@ namespace Spectre.Controllers
             {
                 multiDimensionalIntensities[xCoordinates[i] - xCoordinates.Min(), yCoordinates[i] - yCoordinates.Min()] = intensities[i];
             }
-            heatmapDataScalingAlgorithm = new GaussianBlur(multiDimensionalIntensities.Cast<double>().ToArray(), numberOfRows, numberOfColumns);
-            var gaussianAlgorithmIntensitiesResult = heatmapDataScalingAlgorithm.scaleData();
+            heatmapDataScalingAlgorithm = new GaussianBlur(numberOfRows, numberOfColumns);
+            var gaussianAlgorithmIntensitiesResult = heatmapDataScalingAlgorithm.scaleData(multiDimensionalIntensities.Cast<double>().ToArray());
 
             for (var i = 0; i < intensities.Length; i++)
             {
