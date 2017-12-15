@@ -88,6 +88,7 @@
     <ClCompile Include="ObservationExtractorTest.cpp" />
     <ClCompile Include="OpenCvDatasetTest.cpp" />
     <ClCompile Include="RandomSplitterTest.cpp" />
+    <ClCompile Include="SvmTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
