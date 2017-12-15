@@ -22,14 +22,9 @@ limitations under the License.
 #include <opencv2/core/mat.hpp>
 #include "Spectre.libDataset/IReadOnlyDataset.h"
 #include "Empty.h"
+#include "Spectre.libClassifier/Types.h"
 
 namespace Spectre::libClassifier {
-    using DataType = float;
-    using Observation = gsl::span<const DataType>;
-    using Label = signed;
-    const auto CV_TYPE = CV_32FC1;
-    const auto CV_LABEL_TYPE = CV_32SC1;
-
 /// <summary>
 /// Data-owning structure which couples our typed with OpenCV cv::Mat
 /// </summary>
