@@ -12,12 +12,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentOutOfRangeException.h" />
+    <ClInclude Include="EmptyDatasetException.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
     <ClInclude Include="ExceptionBase.h" />
     <ClInclude Include="InconsistentArgumentSizesException.h" />
     <ClInclude Include="NullPointerException.h" />
     <ClInclude Include="OutOfRangeException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EmptyDatasetException.cpp" />
     <ClCompile Include="ExceptionBase.cpp" />
     <ClCompile Include="InconsistentArgumentSizesException.cpp" />
     <ClCompile Include="NullPointerException.cpp" />

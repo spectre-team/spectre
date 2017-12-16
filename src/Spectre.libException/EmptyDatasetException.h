@@ -1,6 +1,6 @@
-﻿/*
-* ObservationExtractor.h
-* 
+/*
+* EmptyDatasetException.h
+* Thrown when input dataset was empty.
 *
 Copyright 2017 Spectre Team
 
@@ -18,23 +18,20 @@ limitations under the License.
 */
 
 #pragma once
-#include "Spectre.libDataset/IReadOnlyDataset.h"
-#include "Spectre.libDataset/Empty.h"
-#include "Spectre.libClassifier/OpenCvDataset.h"
-#include "Spectre.libGenetic/Individual.h"
+#include "Spectre.libException/ExceptionBase.h"
 
-namespace Spectre::libClassifier {
-
-using DataPointer = const libDataset::IReadOnlyDataset<Observation, Label, libDataset::Empty>*;
-
-class ObservationExtractor
+namespace SpectrelibException
+{
+/// <summary>
+/// Thrown when input dataset was empty.
+/// </summary>
+class EmptyDatasetException final: public Spectre::libException::ExceptionBase
 {
 public:
-    explicit ObservationExtractor(const DataPointer data);
-    OpenCvDataset getOpenCvDatasetFromIndividual(const libGenetic::Individual &individual);
-
-private:
-    const DataPointer m_Data;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EmptyDatasetException"/> class.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    explicit EmptyDatasetException(const std::string &name);
 };
-
 }

@@ -30,9 +30,15 @@
     <ClInclude Include="InconsistentInputSizeException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Empty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InconsistentInputSizeException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Empty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

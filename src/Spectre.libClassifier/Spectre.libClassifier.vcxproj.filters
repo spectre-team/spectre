@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Empty.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OpenCvDataset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -35,9 +32,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Empty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OpenCvDataset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
