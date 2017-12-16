@@ -25,7 +25,7 @@ namespace Spectre::libException
 /// <summary>
 /// Thrown when input dataset was empty.
 /// </summary>
-class EmptyDatasetException final: public EmptyArgumentException
+class EmptyDatasetException final : public EmptyArgumentException
 {
 public:
     /// <summary>
