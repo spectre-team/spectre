@@ -1,6 +1,6 @@
 /*
-* OrderableIndex.cpp
-* ENTER CLASS DESCRIPTION HERE.
+* StatisticalIndex.cpp
+* Represents a statistical index that has information about its strength.
 *
 Copyright 2017 Spectre Team
 
