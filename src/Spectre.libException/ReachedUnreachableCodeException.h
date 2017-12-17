@@ -1,6 +1,6 @@
 /*
-* EmptyDatasetException.cpp
-* Thrown when input dataset was empty.
+* ReachedUnreachableCodeException.h
+* Thrown when unreachable code is reached.
 *
 Copyright 2017 Spectre Team
 
@@ -17,10 +17,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include "EmptyDatasetException.h"
+#pragma once
+#include "Spectre.libException/ExceptionBase.h"
 
 namespace Spectre::libException
 {
-EmptyDatasetException::EmptyDatasetException(const std::string &name) :
-    EmptyArgumentException(name) { }
+/// <summary>
+/// Thrown when unreachable code is reached.
+///
+/// If this exception is thrown, it means that assumptions made over the
+/// code are no longer held and should be more closely investigated.
+/// </summary>
+class ReachedUnreachableCodeException final : public ExceptionBase
+{
+public:
+    ReachedUnreachableCodeException();
+};
 }

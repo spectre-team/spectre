@@ -75,6 +75,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CohenEffectSize.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
     <ClInclude Include="DifferentiatingFeaturesEstimator.h">
       <SubType>Header Files</SubType>
     </ClInclude>
@@ -93,6 +96,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CohenEffectSize.cpp">
+      <SubType>Source Files</SubType>
+    </ClCompile>
     <ClCompile Include="DifferentiatingFeaturesEstimator.cpp">
       <SubType>Source Files</SubType>
     </ClCompile>

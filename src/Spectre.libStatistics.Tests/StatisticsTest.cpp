@@ -28,9 +28,9 @@ using namespace Spectre::libStatistics::simple_statistics;
 
 using Data = const std::vector<double>;
 
-Data dataStorage{ 1,2,3 };
+Data dataStorage { 1,2,3 };
 auto data = gsl::as_span(dataStorage);
-Data emptyStorage{};
+Data emptyStorage {};
 auto empty = gsl::as_span(emptyStorage);
 
 TEST(SumTest, calculates_vector_sum)
@@ -67,6 +67,22 @@ TEST(VarianceTest, variance_of_empty_is_zero)
 {
     EXPECT_THAT(Variance(empty), DoubleEq(0.));
     EXPECT_THAT(Variance(empty, false), DoubleEq(0.));
+}
+
+TEST(TwoSampleVariance, variance_of_but_differing_internally_homogeneous_samples_is_zero)
+{
+    const Data first { 1., 1., 1. };
+    const Data second { 2., 2., 2., 2. };
+    EXPECT_THAT(Variance(gsl::as_span(first), gsl::as_span(second)), DoubleEq(0.));
+}
+
+TEST(TwoSampleVariance, evaluates_to_proper_value)
+{
+    const Data first { 1., 2., 3. };
+    const Data second { 4., 6., 8., 10., 12. };
+    const auto two_sample_variance = Variance(gsl::as_span(first), gsl::as_span(second));
+    const auto expected_variance = ((1.0 + 0.0 + 1.0) * 3.0 / 2.0 + (16.0 + 4.0 + 0.0 + 4.0 + 16.0) * 5.0 / 4.0) / (3. + 5. - 2.);
+    EXPECT_THAT(two_sample_variance, DoubleEq(expected_variance));
 }
 
 TEST(MeanAbsoluteDeviationTest, calculates_mean_absolute_deviation_of_vector)

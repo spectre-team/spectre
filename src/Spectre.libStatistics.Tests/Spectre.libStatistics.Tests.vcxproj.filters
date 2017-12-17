@@ -48,6 +48,9 @@
     <ClCompile Include="DifferentiatingFeaturesEstimatorTest.cpp">
       <Filter>Source Files\Learning</Filter>
     </ClCompile>
+    <ClCompile Include="CohenEffectSizeTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ValuesHomogeneityEstimatorMock.h">

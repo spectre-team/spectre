@@ -1,6 +1,6 @@
 /*
-* EmptyDatasetException.h
-* Thrown when input dataset was empty.
+* CohenEffectSize.h
+* Estimates effect size.
 *
 Copyright 2017 Spectre Team
 
@@ -18,20 +18,26 @@ limitations under the License.
 */
 
 #pragma once
-#include "Spectre.libException/EmptyArgumentException.h"
 
-namespace Spectre::libException
+#include "ValuesHomogeneityEstimator.h"
+
+namespace Spectre::libStatistics::statistical_testing
 {
 /// <summary>
-/// Thrown when input dataset was empty.
+/// Estimates effect size.
 /// </summary>
-class EmptyDatasetException final : public EmptyArgumentException
+class CohenEffectSize final : public ValuesHomogeneityEstimator
 {
 public:
     /// <summary>
-    /// Initializes a new instance of the <see cref="EmptyDatasetException"/> class.
+    /// Estimates effect size of difference of mean in two sets.
     /// </summary>
-    /// <param name="name">The name.</param>
-    explicit EmptyDatasetException(const std::string &name);
+    /// <param name="first">First set.</param>
+    /// <param name="second">Second set.</param>
+    /// <returns>Cohen's D statistic.</returns>
+    StatisticalIndex Compare(Values first, Values second) const override;
+private:
+    static const std::array<std::string, 5> interpretations;
+    static const std::array<PrecisionType, 5> thresholds;
 };
 }
