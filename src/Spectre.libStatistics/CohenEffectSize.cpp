@@ -61,7 +61,7 @@ StatisticalIndex CohenEffectSize::Compare(Values first, Values second) const
     const auto firstMean = Mean(first);
     const auto secondMean = Mean(second);
     const auto std = sqrt(Variance(first, second));
-    const auto DCohen = std::abs(Mean(first) - Mean(second)) / sqrt(Variance(first, second));
+    const auto DCohen = std::abs(firstMean - secondMean) / std;
     for (auto thresholdNumber = thresholds.size() - 1; thresholdNumber >= 0; --thresholdNumber)
     {
         if (DCohen >= thresholds[thresholdNumber])
