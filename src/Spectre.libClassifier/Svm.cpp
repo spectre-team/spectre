@@ -20,6 +20,7 @@ limitations under the License.
 #include "Svm.h"
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/UnsupportedDatasetTypeException.h"
+#include "Spectre.libClassifier/UntrainedClassifierException.h"
 
 namespace Spectre::libClassifier
 {
@@ -42,6 +43,10 @@ namespace Spectre::libClassifier
 
     std::vector<Label> Svm::Predict(LabeledDataset dataset) const
     {
+        if (!m_Svm->isTrained())
+        {
+            throw UntrainedClassifierException();
+        }
         const auto& data = asSupported(dataset);
         const auto numberOfObservations = static_cast<unsigned>(data.getMatData().rows);
         std::vector<float> predictions(numberOfObservations, 0);
