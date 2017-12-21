@@ -40,7 +40,7 @@ namespace Spectre::libClassifier
         /// <param name="tolerance">The tolerance.</param>
         explicit Svm(unsigned int iterationsLimit = 100, double tolerance = 1e-6);
         /// <summary>
-        /// Try to fit dataset in fitness function.
+        /// Try to fit classifier to the data.
         /// </summary>
         /// <param name="dataset">The dataset.</param>
         /// <returns>void</returns>

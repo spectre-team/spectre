@@ -32,10 +32,9 @@ namespace Spectre::libClassifier
     public:
         using LabeledDataset = const libDataset::IReadOnlyDataset<Observation, Label, Empty>&;
         /// <summary>
-        /// Try to fit dataset in fitness function.
+        /// Try to fit classifier to the data.
         /// </summary>
         /// <param name="dataset">The dataset.</param>
-        /// <returns>void</returns>
         virtual void Fit(LabeledDataset dataset) = 0;
         /// <summary>
         /// Predicts labels on test set.
