@@ -1,6 +1,6 @@
 /*
-* UnsupportedDatasetTypeException.h
-* Thrown when a data set type is not supported by the classifier.
+* UnsupportedSvmTypeException.h
+* Thrown when a svm type is not supported.
 *
 Copyright 2017 Spectre Team
 
@@ -23,17 +23,15 @@ limitations under the License.
 namespace Spectre::libClassifier
 {
     /// <summary>
-    /// Thrown, when dataset type is unsupported.
+    /// Thrown when a svm type is not supported.
     /// </summary>
-    class UnsupportedDatasetTypeException final : public libException::ExceptionBase
+    class UnsupportedSvmTypeException final : public libException::ExceptionBase
     {
     public:
-        template <class TDatasetType>
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnsupportedDatasetTypeException"/> class.
+        /// Initializes a new instance of the <see cref="UnsupportedSvmTypeException"/> class.
         /// </summary>
-        /// <param name="dataset">The dataset.</param>
-        explicit UnsupportedDatasetTypeException(const TDatasetType& /*dataset*/) : ExceptionBase(typeid(TDatasetType).name())
+        explicit UnsupportedSvmTypeException(SVM_TYPE type) : ExceptionBase(*ToString(type) + " type of Svm is not supported")
         {
         }
     };

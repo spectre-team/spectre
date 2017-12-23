@@ -22,6 +22,7 @@ limitations under the License.
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/Svm.h"
 #include "Spectre.libClassifier/UntrainedClassifierException.h"
+#include "Spectre.libClassifier/UnsupportedSvmTypeException.h"
 
 namespace
 {
@@ -70,11 +71,11 @@ namespace
         }
     }
 
-    TEST_F(SvmTest, get_support_vectors)
+    TEST_F(SvmTest, fail_on_c_svc_svm_type)
     {
         Svm svm;
         svm.Fit(m_Data);
-        EXPECT_EQ(svm.GetNumberOfSupportVectors(), 1);
+        EXPECT_THROW(svm.GetNumberOfSupportVectors(), UnsupportedSvmTypeException);
     }
 
     TEST_F(SvmTest, predicts_without_train)

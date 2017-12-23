@@ -97,6 +97,7 @@
     <ClInclude Include="Svm.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="UnsupportedDatasetTypeException.h" />
+    <ClInclude Include="UnsupportedSvmTypeException.h" />
     <ClInclude Include="UntrainedClassifierException.h" />
   </ItemGroup>
   <ItemGroup>

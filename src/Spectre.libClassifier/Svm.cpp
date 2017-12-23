@@ -21,18 +21,39 @@ limitations under the License.
 #include "Spectre.libClassifier/OpenCvDataset.h"
 #include "Spectre.libClassifier/UnsupportedDatasetTypeException.h"
 #include "Spectre.libClassifier/UntrainedClassifierException.h"
+#include "Spectre.libClassifier/UnsupportedSvmTypeException.h"
 
 namespace Spectre::libClassifier
 {
-    Svm::Svm(unsigned int iterationsLimit, double tolerance)
+    Svm::Svm(SVM_TYPE type, unsigned int iterationsLimit, double tolerance)
+        :m_SvmType(type)
     {
         m_Svm = cv::ml::SVM::create();
-        m_Svm->setType(cv::ml::SVM::C_SVC);
+        switch (m_SvmType)
+        {
+        case C_SVC:
+            m_Svm->setType(cv::ml::SVM::C_SVC);
+            break;
+        case NU_SVC:
+            m_Svm->setType(cv::ml::SVM::NU_SVC);
+            break;
+        case ONE_CLASS:
+            m_Svm->setType(cv::ml::SVM::ONE_CLASS);
+            break;
+        case EPS_SVR:
+            m_Svm->setType(cv::ml::SVM::EPS_SVR);
+            break;
+        case NU_SVR:
+            m_Svm->setType(cv::ml::SVM::NU_SVR);
+            break;
+        default:
+            m_Svm->setType(cv::ml::SVM::NU_SVC);
+            break;
+        }
         m_Svm->setKernel(cv::ml::SVM::LINEAR);
         const auto termination = cv::TermCriteria(cv::TermCriteria::MAX_ITER, iterationsLimit, tolerance);
         m_Svm->setTermCriteria(termination);
     }
-
 
     void Svm::Fit(LabeledDataset dataset)
     {
@@ -60,6 +81,10 @@ namespace Spectre::libClassifier
 
     unsigned int Svm::GetNumberOfSupportVectors() const
     {
+        if (m_SvmType == C_SVC)
+        {
+            throw UnsupportedSvmTypeException(m_SvmType);
+        }
         return m_Svm->getSupportVectors().rows;
     }
 

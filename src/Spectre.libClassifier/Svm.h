@@ -38,7 +38,7 @@ namespace Spectre::libClassifier
         /// </summary>
         /// <param name="iterationsLimit">The iterations limit.</param>
         /// <param name="tolerance">The tolerance.</param>
-        explicit Svm(unsigned int iterationsLimit = 100, double tolerance = 1e-6);
+        explicit Svm(SVM_TYPE type = C_SVC, unsigned int iterationsLimit = 100, double tolerance = 1e-6);
         /// <summary>
         /// Try to fit classifier to the data.
         /// </summary>
@@ -60,5 +60,6 @@ namespace Spectre::libClassifier
     private:
         static const OpenCvDataset& asSupported(LabeledDataset);
         cv::Ptr<cv::ml::SVM> m_Svm;
+        SVM_TYPE m_SvmType;
     };
 }
