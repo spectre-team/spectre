@@ -77,9 +77,6 @@
     <ClInclude Include="UntrainedClassifierException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="UnsupportedSvmTypeException.h">
-      <Filter>Header Files\Exceptions</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
