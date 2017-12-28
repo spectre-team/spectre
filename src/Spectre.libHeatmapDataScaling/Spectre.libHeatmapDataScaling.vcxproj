@@ -120,6 +120,7 @@
     <ClInclude Include="HeatmapDataScalingAlgorithm.h" />
     <ClInclude Include="BilateralBlur.h" />
     <ClInclude Include="GaussianBlur.h" />
+    <ClInclude Include="HistogramEqualization.h" />
     <ClInclude Include="Normalization.h" />
     <ClInclude Include="SuppressionAlgorithm.h" />
   </ItemGroup>
@@ -127,6 +128,7 @@
     <ClCompile Include="BilateralBlur.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="GaussianFilter.cpp" />
+    <ClCompile Include="HistogramEqualization.cpp" />
     <ClCompile Include="Normalization.cpp" />
     <ClCompile Include="SuppressionAlgorithm.cpp" />
   </ItemGroup>

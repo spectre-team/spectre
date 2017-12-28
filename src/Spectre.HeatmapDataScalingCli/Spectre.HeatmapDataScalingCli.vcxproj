@@ -85,6 +85,7 @@
     <ClInclude Include="HeatmapDataScalingAlgorithm.h" />
     <ClInclude Include="BilateralBlur.h" />
     <ClInclude Include="GaussianBlur.h" />
+    <ClInclude Include="HistogramEqualization.h" />
     <ClInclude Include="IntensitiesDataConverter.h" />
     <ClInclude Include="NativeProcessor.h">
       <SubType>Header Files</SubType>

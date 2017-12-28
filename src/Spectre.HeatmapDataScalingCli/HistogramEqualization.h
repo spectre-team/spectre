@@ -1,6 +1,6 @@
 /*
-* BilateralBlur.h
-* Class with bilateral filtering algorithm implementation.
+* HistogramEqualization.h
+* Bridge class for C# and native C++ for histogram equalization algorithm.
 *
 Copyright 2017 Daniel Babiak
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,20 +15,15 @@ limitations under the License.
 */
 
 #pragma once
+#include "Spectre.libHeatmapDataScaling/HeatmapDataScalingAlgorithm.h"
+#include "Spectre.libHeatmapDataScaling/HistogramEqualization.h"
 #include "HeatmapDataScalingAlgorithm.h"
-#include "GaussianFilter.h"
 
-namespace Spectre::libHeatmapDataScaling
+namespace Spectre::HeatmapDataScalingCli
 {
-	class BilateralBlur : public HeatmapDataScalingAlgorithm
-	{
-	public:
-		BilateralBlur(const int _numberOfRows, const int _numberOfColumns, const int _window = 3);
-		std::vector<double> BilateralBlur::calculateWeightsForBilateralBlur(const gsl::span<double> intensities, const int r) const;
-		std::vector<double> scaleData(const gsl::span<double> intensities) override;
-	private:
-		const int window;
-		const int numberOfRows;
-		const int numberOfColumns;
-	};
+    public ref class HistogramEqualization : HeatmapDataScalingAlgorithm
+    {
+    public:
+        HistogramEqualization() : HeatmapDataScalingAlgorithm(new Spectre::libHeatmapDataScaling::HistogramEqualization()) { }
+    };
 }

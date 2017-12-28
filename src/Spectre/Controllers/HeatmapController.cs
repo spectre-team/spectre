@@ -68,13 +68,16 @@ namespace Spectre.Controllers
             var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
 
             // Use normalization algorithm
-            HeatmapDataScalingAlgorithm heatmapDataScalingAlgorithm = new Normalization();
+            HeatmapDataScalingAlgorithm heatmapDataScalingAlgorithm = new Normalization(0, 255);
+            intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
+
+            // Use histogram equalization algorithm
+            heatmapDataScalingAlgorithm = new HistogramEqualization();
             intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
 
             // Use suppression algorithm for contrast enhancement
-            heatmapDataScalingAlgorithm = new SuppressionAlgorithm();
-            intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
-
+            // heatmapDataScalingAlgorithm = new SuppressionAlgorithm();
+            // intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
 #pragma warning disable SA1305 // Field names must not use Hungarian notation
             var xCoordinates = new int[intensities.Length];
             var yCoordinates = new int[intensities.Length];
@@ -87,29 +90,29 @@ namespace Spectre.Controllers
             }
 
             // Use gaussian filtering algorithm
-            int numberOfRows = xCoordinates.Max() - xCoordinates.Min() + 1;
-            int numberOfColumns = yCoordinates.Max() - yCoordinates.Min() + 1;
-            double[,] multiDimensionalIntensities = new double[numberOfRows, numberOfColumns];
-            for (var i = 0; i < numberOfRows; i++)
-            {
-                for (var j = 0; j < numberOfColumns; j++)
-                {
-                    multiDimensionalIntensities[i, j] = -1;
-                }
-            }
-            for (var i = 0; i < intensities.Length; i++)
-            {
-                multiDimensionalIntensities[xCoordinates[i] - xCoordinates.Min(), yCoordinates[i] - yCoordinates.Min()] = intensities[i];
-            }
-            heatmapDataScalingAlgorithm = new GaussianBlur(numberOfRows, numberOfColumns);
-            var gaussianAlgorithmIntensitiesResult = heatmapDataScalingAlgorithm.scaleData(multiDimensionalIntensities.Cast<double>().ToArray());
-
-            for (var i = 0; i < intensities.Length; i++)
-            {
-                intensities[i] = gaussianAlgorithmIntensitiesResult[
-                    (xCoordinates[i] - xCoordinates.Min()) * numberOfColumns
-                    + (yCoordinates[i] - yCoordinates.Min())];
-            }
+//            int numberOfRows = xCoordinates.Max() - xCoordinates.Min() + 1;
+//            int numberOfColumns = yCoordinates.Max() - yCoordinates.Min() + 1;
+//            double[,] multiDimensionalIntensities = new double[numberOfRows, numberOfColumns];
+//            for (var i = 0; i < numberOfRows; i++)
+//            {
+//                for (var j = 0; j < numberOfColumns; j++)
+//                {
+//                    multiDimensionalIntensities[i, j] = -1;
+//                }
+//            }
+//            for (var i = 0; i < intensities.Length; i++)
+//            {
+//                multiDimensionalIntensities[xCoordinates[i] - xCoordinates.Min(), yCoordinates[i] - yCoordinates.Min()] = intensities[i];
+//            }
+//            heatmapDataScalingAlgorithm = new GaussianBlur(numberOfRows, numberOfColumns);
+//            var gaussianAlgorithmIntensitiesResult = heatmapDataScalingAlgorithm.scaleData(multiDimensionalIntensities.Cast<double>().ToArray());
+//
+//            for (var i = 0; i < intensities.Length; i++)
+//            {
+//                intensities[i] = gaussianAlgorithmIntensitiesResult[
+//                    (xCoordinates[i] - xCoordinates.Min()) * numberOfColumns
+//                    + (yCoordinates[i] - yCoordinates.Min())];
+//            }
             return new Heatmap() { Mz = mz, Intensities = intensities, X = xCoordinates, Y = yCoordinates };
         }
     }

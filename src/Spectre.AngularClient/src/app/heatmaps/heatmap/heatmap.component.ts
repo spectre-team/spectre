@@ -25,8 +25,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class HeatmapComponent implements OnInit {
   @Input() public heatmapData: any;
-  @Input() public height = 600;
-  @Input() public width = 600;
+  @Input() public height: number;
+  @Input() public width: number;
   @Input() public onClickFunction: Function;
   public heatmapLayout: any;
   public options: any;
@@ -42,8 +42,8 @@ export class HeatmapComponent implements OnInit {
 
   defaultHeatmapLayout() {
     return {
-      height: this.height,
-      width: this.width,
+      height: 800,
+      width: 800 / 109 * 44,
       xaxis: {
         autotick: false,
         dtick: 1,
@@ -56,7 +56,7 @@ export class HeatmapComponent implements OnInit {
         dtick: 1,
         ticklen: 1,
         tickwidth: 1,
-        showticklabels: false
+        showticklabels: false,
       }
     };
   }
