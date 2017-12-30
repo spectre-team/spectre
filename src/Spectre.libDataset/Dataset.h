@@ -20,6 +20,7 @@ limitations under the License.
 #pragma once
 
 #include <vector>
+#include "Spectre.libException/OutOfRangeException.h"
 #include "IDataset.h"
 #include "InconsistentInputSizeException.h"
 
@@ -67,7 +68,7 @@ public:
         }
         else
         {
-            throw OutOfRangeException(idx, m_Data.size());
+            throw libException::OutOfRangeException(idx, m_Data.size());
         }
     }
 
@@ -84,7 +85,7 @@ public:
         }
         else
         {
-            throw OutOfRangeException(idx, m_SampleMetadata.size());
+            throw libException::OutOfRangeException(idx, m_SampleMetadata.size());
         }
     }
 
@@ -110,7 +111,7 @@ public:
         }
         else
         {
-            throw OutOfRangeException(idx, m_Data.size());
+            throw libException::OutOfRangeException(idx, m_Data.size());
         }
     }
 
@@ -127,7 +128,7 @@ public:
         }
         else
         {
-            throw OutOfRangeException(idx, m_SampleMetadata.size());
+            throw libException::OutOfRangeException(idx, m_SampleMetadata.size());
         }
     }
 

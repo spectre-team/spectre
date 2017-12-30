@@ -81,7 +81,6 @@
     <ClCompile Include="EmptyOpenCvDatasetException.cpp" />
     <ClCompile Include="ObservationExtractor.cpp" />
     <ClCompile Include="OpenCvDataset.cpp" />
-    <ClCompile Include="Empty.cpp" />
     <ClCompile Include="RandomSplitter.cpp" />
     <ClCompile Include="SplittedOpenCvDataset.cpp" />
   </ItemGroup>
@@ -89,7 +88,6 @@
     <ClInclude Include="EmptyOpenCvDatasetException.h" />
     <ClInclude Include="ObservationExtractor.h" />
     <ClInclude Include="OpenCvDataset.h" />
-    <ClInclude Include="Empty.h" />
     <ClInclude Include="RandomSplitter.h" />
     <ClInclude Include="SplittedOpevCvDataset.h" />
   </ItemGroup>

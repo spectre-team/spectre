@@ -1,6 +1,6 @@
-﻿/*
-* ObservationExtractor.h
-* 
+/*
+* ValuesHomogeneityEstimatorMock.h
+* Mocks ValuesHomogeneityEstimator.
 *
 Copyright 2017 Spectre Team
 
@@ -18,23 +18,17 @@ limitations under the License.
 */
 
 #pragma once
-#include "Spectre.libDataset/IReadOnlyDataset.h"
-#include "Spectre.libDataset/Empty.h"
-#include "Spectre.libClassifier/OpenCvDataset.h"
-#include "Spectre.libGenetic/Individual.h"
+#include <gmock/gmock.h>
+#include "Spectre.libStatistics/ValuesHomogeneityEstimator.h"
 
-namespace Spectre::libClassifier {
-
-using DataPointer = const libDataset::IReadOnlyDataset<Observation, Label, libDataset::Empty>*;
-
-class ObservationExtractor
+namespace Spectre::libStatistics::Tests
+{
+/// <summary>
+/// Mocks ValuesHomogeneityEstimator.
+/// </summary>
+class ValuesHomogeneityEstimatorMock final : public statistical_testing::ValuesHomogeneityEstimator
 {
 public:
-    explicit ObservationExtractor(const DataPointer data);
-    OpenCvDataset getOpenCvDatasetFromIndividual(const libGenetic::Individual &individual);
-
-private:
-    const DataPointer m_Data;
+    MOCK_CONST_METHOD2(Compare, statistical_testing::StatisticalIndex(Values first, Values second));
 };
-
 }

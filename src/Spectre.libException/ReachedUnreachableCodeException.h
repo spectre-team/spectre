@@ -1,6 +1,6 @@
-﻿/*
-* ObservationExtractor.h
-* 
+/*
+* ReachedUnreachableCodeException.h
+* Thrown when unreachable code is reached.
 *
 Copyright 2017 Spectre Team
 
@@ -18,23 +18,19 @@ limitations under the License.
 */
 
 #pragma once
-#include "Spectre.libDataset/IReadOnlyDataset.h"
-#include "Spectre.libDataset/Empty.h"
-#include "Spectre.libClassifier/OpenCvDataset.h"
-#include "Spectre.libGenetic/Individual.h"
+#include "Spectre.libException/ExceptionBase.h"
 
-namespace Spectre::libClassifier {
-
-using DataPointer = const libDataset::IReadOnlyDataset<Observation, Label, libDataset::Empty>*;
-
-class ObservationExtractor
+namespace Spectre::libException
+{
+/// <summary>
+/// Thrown when unreachable code is reached.
+///
+/// If this exception is thrown, it means that assumptions made over the
+/// code are no longer held and should be more closely investigated.
+/// </summary>
+class ReachedUnreachableCodeException final : public ExceptionBase
 {
 public:
-    explicit ObservationExtractor(const DataPointer data);
-    OpenCvDataset getOpenCvDatasetFromIndividual(const libGenetic::Individual &individual);
-
-private:
-    const DataPointer m_Data;
+    ReachedUnreachableCodeException();
 };
-
 }

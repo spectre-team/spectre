@@ -19,14 +19,14 @@ limitations under the License.
 
 #include <random>
 #include "RandomSplitter.h"
-#include "Spectre.libPlatform/Filter.h"
-#include "Spectre.libPlatform/Math.h"
+#include "Spectre.libFunctional/Filter.h"
+#include "Spectre.libStatistics/Math.h"
 #include "Spectre.libGenetic/DataTypes.h"
 
 namespace Spectre::libClassifier {
 
-using namespace libPlatform::Functional;
-using namespace libPlatform::Math;
+using namespace libFunctional;
+using namespace libStatistics;
 
 RandomSplitter::RandomSplitter(double trainingRate, libGenetic::Seed rngSeed)
     : m_trainingRate(trainingRate),
