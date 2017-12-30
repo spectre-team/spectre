@@ -21,26 +21,26 @@ limitations under the License.
 #include <span.h>
 #include <opencv2/core/mat.hpp>
 #include "Spectre.libDataset/IReadOnlyDataset.h"
-#include "Empty.h"
+#include "Spectre.libDataset/Empty.h"
 #include "Spectre.libClassifier/Types.h"
 
 namespace Spectre::libClassifier {
 /// <summary>
 /// Data-owning structure which couples our typed with OpenCV cv::Mat
 /// </summary>
-class OpenCvDataset final : public Spectre::libDataset::IReadOnlyDataset<Observation, Label, Empty>
+class OpenCvDataset final : public libDataset::IReadOnlyDataset<Observation, Label, libDataset::Empty>
 {
 public:
     /// <summary>
     /// Deleted default copy constructor.
     /// </summary>
     /// <param name="">The other.</param>
-    OpenCvDataset(const OpenCvDataset&) = delete;
+    OpenCvDataset(const OpenCvDataset &) = delete;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpenCvDataset"/> class.
     /// </summary>
     /// <param name="other">The other.</param>
-    OpenCvDataset(OpenCvDataset&& other) noexcept;
+    OpenCvDataset(OpenCvDataset &&other) noexcept;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpenCvDataset"/> class.
     /// </summary>
@@ -70,7 +70,7 @@ public:
     /// Gets the dataset metadata in read-only fashion.
     /// </summary>
     /// <returns>Dataset metadata</returns>
-    const Empty& GetDatasetMetadata() const override;
+    const libDataset::Empty& GetDatasetMetadata() const override;
 
     /// <summary>
     /// Gets the data in read-only fashion.

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -11,8 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B7DB309D-3ED6-4771-993D-A1CF3A6436D9}</ProjectGuid>
-    <RootNamespace>Spectre::libDataset</RootNamespace>
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{76542909-5FC8-405B-8E6D-D2E529162A7A}</ProjectGuid>
+    <RootNamespace>Spectre::libStatistics</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -43,15 +44,19 @@
     <Import Project="..\PropertySheets\NativeProject.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -62,8 +67,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -71,22 +75,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CohenEffectSize.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
+    <ClInclude Include="DifferentiatingFeaturesEstimator.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
+    <ClInclude Include="InconsistentNumberOfFeaturesException.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="StatisticalIndex.h" />
+    <ClInclude Include="Statistics.h" />
+    <ClInclude Include="Types.h">
+      <SubType>Header Files</SubType>
+    </ClInclude>
+    <ClInclude Include="ValuesHomogeneityEstimator.h" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dataset.h" />
-    <ClInclude Include="Empty.h">
-      <SubType>Header Files</SubType>
-    </ClInclude>
-    <ClInclude Include="InconsistentInputSizeException.h" />
-    <ClInclude Include="IDataset.h" />
-    <ClInclude Include="IReadOnlyDataset.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Empty.cpp">
+    <ClCompile Include="CohenEffectSize.cpp">
       <SubType>Source Files</SubType>
     </ClCompile>
-    <ClCompile Include="InconsistentInputSizeException.cpp" />
+    <ClCompile Include="DifferentiatingFeaturesEstimator.cpp">
+      <SubType>Source Files</SubType>
+    </ClCompile>
+    <ClCompile Include="InconsistentNumberOfFeaturesException.cpp">
+      <SubType>Source Files</SubType>
+    </ClCompile>
+    <ClCompile Include="StatisticalIndex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
