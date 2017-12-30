@@ -77,7 +77,7 @@ namespace
         EXPECT_EQ(svm.GetNumberOfSupportVectors(), 1);
     }
 
-    TEST_F(SvmTest, predicts_without_train)
+    TEST_F(SvmTest, predict_throws_without_train)
     {
         Svm svm;
         EXPECT_THROW(svm.Predict(m_Data), UntrainedClassifierException);
