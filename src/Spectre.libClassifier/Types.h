@@ -20,7 +20,7 @@ limitations under the License.
 #pragma once
 #include <opencv2/core/mat.hpp>
 #include <span.h>
-#include "Empty.h"
+#include "Spectre.libDataset/Empty.h"
 
 namespace Spectre::libClassifier
 {
