@@ -59,12 +59,6 @@ test_script:
 - cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
 
 artifacts:
-- path: DiviK-$(configuration).zip
-  name: DivikExecutables
-- path: DataValidatorApp-$(configuration).zip
-  name: DataValidatorExecutables
-- path: DivikResultConverter-$(configuration).zip
-  name: DivikResultConverterExecutables
 - path: WebClient-$(configuration).zip
   name: WebClient
 - path: WebAPI-$(configuration).zip
@@ -73,24 +67,6 @@ artifacts:
   name: WebClientBit
 
 deploy:
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: DivikExecutables
-  draft: true
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: DataValidatorExecutables
-  draft: true
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: DivikResultConverterExecutables
-  draft: true
 - provider: GitHub
   release: Spectre-v$(appveyor_build_version)
   auth_token:
