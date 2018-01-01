@@ -53,7 +53,6 @@ after_build:
 - cmd: C:\projects\spectre\scripts\package_bit_client.bat
 
 test_script:
-- cmd: C:\projects\spectre\scripts\test_native_code.bat
 - cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
 - cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
