@@ -21,7 +21,6 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using Spectre.AlgorithmsCli.Methods;
 using Spectre.Algorithms.Parameterization;
 using Spectre.Algorithms.Results;
 using Spectre.Data.Datasets;
@@ -29,40 +28,30 @@ using Spectre.Data.Datasets;
 namespace Spectre.Algorithms.Tests.Results
 {
     [TestFixture]
-    [Category(name: "Algorithm")]
-    [Category(name: "VeryLong")]
     public class DivikResultTests
     {
         private DivikResult _result;
-        private Segmentation _segmentation;
 
         private readonly string TestDirectory = TestContext.CurrentContext.TestDirectory
                                                 + "\\..\\..\\..\\..\\..\\test_files";
 
-        private readonly string _testFilePath = TestContext.CurrentContext.TestDirectory
-                                                + "\\..\\..\\..\\..\\..\\test_files\\hnc1_tumor.txt";
-
         [OneTimeSetUp]
         public void SetUpFixture()
         {
-            var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(levels: 1);
-            options.MaxK = 2;
-            options.Caching = false;
-            options.PlottingPartitions = false;
-            options.PlottingDecomposition = false;
-            options.PlottingDecompositionRecursively = false;
-            options.PlottingRecursively = false;
-            options.UsingAmplitudeFiltration = false;
-            _segmentation = new Segmentation();
-            _result = _segmentation.Divik(dataset, options);
-        }
-
-        [OneTimeTearDown]
-        public void TearDownFixture()
-        {
-            _segmentation.Dispose();
-            _segmentation = null;
+            _result = new DivikResult()
+            {
+                Partition = new[] { 1, 1, 1, 2, 2, 2 },
+                Merged = new[] { 1, 1, 2, 3, 3, 3 },
+                Subregions = new[]
+                {
+                    new DivikResult()
+                    {
+                        Partition = new []{1,1,2},
+                        Merged = new []{1,1,2}
+                    },
+                    null
+                }
+            };
         }
 
         [Test]
@@ -82,7 +71,7 @@ namespace Spectre.Algorithms.Tests.Results
         }
 
         [Test]
-        public void SavedIdented()
+        public void SavedIndented()
         {
             var path = TestDirectory + "\\test-path.json";
             _result.Save(path, indentation: false);
@@ -96,16 +85,20 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void EqualsAgainstIdenticalInstance()
         {
-            var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(levels: 1);
-            options.MaxK = 2;
-            options.Caching = false;
-            options.PlottingPartitions = false;
-            options.PlottingDecomposition = false;
-            options.PlottingDecompositionRecursively = false;
-            options.PlottingRecursively = false;
-            options.UsingAmplitudeFiltration = false;
-            var result = _segmentation.Divik(dataset, options);
+            var result = new DivikResult()
+            {
+                Partition = new[] { 1, 1, 1, 2, 2, 2 },
+                Merged = new[] { 1, 1, 2, 3, 3, 3 },
+                Subregions = new[]
+                {
+                    new DivikResult()
+                    {
+                        Partition = new []{1,1,2},
+                        Merged = new []{1,1,2}
+                    },
+                    null
+                }
+            };
 
             Assert.True(condition: result.Equals(_result), message: "Equal objects not indicated.");
         }
@@ -113,16 +106,20 @@ namespace Spectre.Algorithms.Tests.Results
         [Test]
         public void EqualsAgainstDifferentInstance()
         {
-            var dataset = new BasicTextDataset(_testFilePath);
-            var options = DivikOptions.ForLevels(levels: 1);
-            options.MaxK = 2;
-            options.Caching = false;
-            options.PlottingPartitions = false;
-            options.PlottingDecomposition = false;
-            options.PlottingDecompositionRecursively = false;
-            options.PlottingRecursively = false;
-            options.UsingVarianceFiltration = false;
-            var result = _segmentation.Divik(dataset, options);
+            var result = new DivikResult()
+            {
+                Partition = new[] { 1, 2 },
+                Merged = new[] { 1, 2 },
+                Subregions = new[]
+                {
+                    new DivikResult()
+                    {
+                        Partition = new []{1},
+                        Merged = new []{1}
+                    },
+                    null
+                }
+            };
 
             Assert.False(condition: result.Equals(_result), message: "Unequal objects not indicated.");
         }

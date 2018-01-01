@@ -27,15 +27,6 @@ namespace Spectre.Service
     public class ServiceFactory : IServiceFactory
     {
         /// <summary>
-        /// Factory method for getting <see cref="IDivikService"/>.
-        /// </summary>
-        /// <returns>New instance of <see cref="DivikService"/></returns>
-        public IDivikService GetDivikService()
-        {
-            return new DivikService();
-        }
-
-        /// <summary>
         /// Gets the console capture service.
         /// </summary>
         /// <param name="updateInterval">The update interval.</param>

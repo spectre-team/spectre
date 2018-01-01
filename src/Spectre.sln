@@ -22,14 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Service", "Spectre.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Service.Tests", "Spectre.Service.Tests\Spectre.Service.Tests.csproj", "{1D79FD14-1DF4-4AED-94DF-62E595206DEF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.AlgorithmsCli", "Spectre.AlgorithmsCli\Spectre.AlgorithmsCli.vcxproj", "{7C9D29C3-E8F6-46A2-9905-B0776EB85EA3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.AlgorithmsCli.Tests", "Spectre.AlgorithmsCli.Tests\Spectre.AlgorithmsCli.Tests.vcxproj", "{8463BCA2-41C7-4992-A704-7CEE66AC6E89}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native Libraries", "Native Libraries", "{7C77A75B-F387-4E4E-9C34-FA904927C7BF}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Spectre.libDivik", "Spectre.libDivik\Spectre.libDivik.vcxproj", "{369BDAFF-9E57-40D0-830D-B9232F35E4F4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9660DC51-B40B-454B-84B7-7FF830DA2D34}"
 	ProjectSection(SolutionItems) = preProject
 		CSharpCodingConvention.ruleset = CSharpCodingConvention.ruleset
@@ -81,20 +73,6 @@ Global
 		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Debug|x64.Build.0 = Debug|x64
 		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Release|x64.ActiveCfg = Release|x64
 		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Release|x64.Build.0 = Release|x64
-		{7C9D29C3-E8F6-46A2-9905-B0776EB85EA3}.Debug|x64.ActiveCfg = Debug|x64
-		{7C9D29C3-E8F6-46A2-9905-B0776EB85EA3}.Debug|x64.Build.0 = Debug|x64
-		{7C9D29C3-E8F6-46A2-9905-B0776EB85EA3}.Release|x64.ActiveCfg = Release|x64
-		{7C9D29C3-E8F6-46A2-9905-B0776EB85EA3}.Release|x64.Build.0 = Release|x64
-		{7C9D29C3-E8F6-46A2-9905-B0776EB85EA3}.Release|x64.Deploy.0 = Release|x64
-		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Debug|x64.ActiveCfg = Debug|x64
-		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Debug|x64.Build.0 = Debug|x64
-		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Debug|x64.Deploy.0 = Debug|x64
-		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Release|x64.ActiveCfg = Release|x64
-		{8463BCA2-41C7-4992-A704-7CEE66AC6E89}.Release|x64.Build.0 = Release|x64
-		{369BDAFF-9E57-40D0-830D-B9232F35E4F4}.Debug|x64.ActiveCfg = Debug|x64
-		{369BDAFF-9E57-40D0-830D-B9232F35E4F4}.Debug|x64.Build.0 = Debug|x64
-		{369BDAFF-9E57-40D0-830D-B9232F35E4F4}.Release|x64.ActiveCfg = Release|x64
-		{369BDAFF-9E57-40D0-830D-B9232F35E4F4}.Release|x64.Build.0 = Release|x64
 		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Debug|x64.ActiveCfg = Debug|x64
 		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Debug|x64.Build.0 = Debug|x64
 		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Release|x64.ActiveCfg = Release|x64
@@ -110,9 +88,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{369BDAFF-9E57-40D0-830D-B9232F35E4F4} = {7C77A75B-F387-4E4E-9C34-FA904927C7BF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED57AF8B-7937-40C6-9764-D313AB08FEC9}

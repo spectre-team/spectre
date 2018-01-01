@@ -76,10 +76,6 @@
     <Compile Include="StructureBoundAlgorithms\TreeProcessorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Spectre.AlgorithmsCli\Spectre.AlgorithmsCli.vcxproj">
-      <Project>{7c9d29c3-e8f6-46a2-9905-b0776eb85ea3}</Project>
-      <Name>Spectre.AlgorithmsCli</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Spectre.Algorithms\Spectre.Algorithms.csproj">
       <Project>{9A886AEC-58DB-410D-91B9-C62E157501FA}</Project>
       <Name>Spectre.Algorithms</Name>
@@ -95,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Results\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
