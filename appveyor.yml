@@ -48,9 +48,6 @@ build_script:
 - cmd: C:\projects\spectre\scripts\build_ng_client.bat Bit
 after_build:
 - ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
-- cmd: C:\projects\spectre\scripts\package_project.bat DiviK Spectre.DivikWpfClient
-- cmd: C:\projects\spectre\scripts\package_project.bat DataValidatorApp Spectre.DataValidatorApp
-- cmd: C:\projects\spectre\scripts\package_project.bat DivikResultConverter Spectre.DivikResultConverter
 - cmd: C:\projects\spectre\scripts\package_web_project.bat WebAPI Spectre
 - cmd: C:\projects\spectre\scripts\package_angular_client.bat
 - cmd: C:\projects\spectre\scripts\package_bit_client.bat
