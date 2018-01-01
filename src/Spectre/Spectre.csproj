@@ -25,8 +25,12 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -60,9 +64,33 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq, Version=4.7.99.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.99\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Spectre.Data, Version=3.0.0.72, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Spectre.Service.3.0.0.72\lib\net461\Spectre.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Spectre.Database, Version=3.0.0.72, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Spectre.Service.3.0.0.72\lib\net461\Spectre.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Spectre.Dependencies, Version=3.0.0.72, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Spectre.Service.3.0.0.72\lib\net461\Spectre.Dependencies.dll</HintPath>
+    </Reference>
+    <Reference Include="Spectre.Service, Version=3.0.0.72, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Spectre.Service.3.0.0.72\lib\net461\Spectre.Service.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Abstractions, Version=2.0.0.143, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.2.0.0.143\lib\net40\System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions.TestingHelpers, Version=2.0.0.143, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.TestingHelpers.2.0.0.143\lib\net40\System.IO.Abstractions.TestingHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
@@ -279,6 +307,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Spectre.ico" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -301,14 +330,6 @@
     <ProjectReference Include="..\Spectre.Algorithms\Spectre.Algorithms.csproj">
       <Project>{9a886aec-58db-410d-91b9-c62e157501fa}</Project>
       <Name>Spectre.Algorithms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Spectre.Data\Spectre.Data.csproj">
-      <Project>{70c87af7-3189-4f6c-ac85-93309cf7cfdc}</Project>
-      <Name>Spectre.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Spectre.Service\Spectre.Service.csproj">
-      <Project>{287A1A8D-C029-4D47-96BC-755C91B7985D}</Project>
-      <Name>Spectre.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

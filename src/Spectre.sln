@@ -10,28 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Algorithms", "Spectre.Algorithms\Spectre.Algorithms.csproj", "{9A886AEC-58DB-410D-91B9-C62E157501FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Algorithms.Tests", "Spectre.Algorithms.Tests\Spectre.Algorithms.Tests.csproj", "{BBF6329D-7BEC-494E-9FC9-B24B12D94EA0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{287A1A8D-C029-4D47-96BC-755C91B7985D} = {287A1A8D-C029-4D47-96BC-755C91B7985D}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Data", "Spectre.Data\Spectre.Data.csproj", "{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Data.Tests", "Spectre.Data.Tests\Spectre.Data.Tests.csproj", "{01391E76-3D20-4B4B-B727-2A133B35A144}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Service", "Spectre.Service\Spectre.Service.csproj", "{287A1A8D-C029-4D47-96BC-755C91B7985D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Service.Tests", "Spectre.Service.Tests\Spectre.Service.Tests.csproj", "{1D79FD14-1DF4-4AED-94DF-62E595206DEF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9660DC51-B40B-454B-84B7-7FF830DA2D34}"
 	ProjectSection(SolutionItems) = preProject
 		CSharpCodingConvention.ruleset = CSharpCodingConvention.ruleset
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Database", "Spectre.Database\Spectre.Database.csproj", "{B5B60F79-653C-4E41-9721-06C478CE9E7C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Database.Tests", "Spectre.Database.Tests\Spectre.Database.Tests.csproj", "{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Dependencies", "Spectre.Dependencies\Spectre.Dependencies.csproj", "{2B9F4DFD-C222-477A-9107-1A3C356002A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,34 +40,6 @@ Global
 		{BBF6329D-7BEC-494E-9FC9-B24B12D94EA0}.Debug|x64.Build.0 = Debug|x64
 		{BBF6329D-7BEC-494E-9FC9-B24B12D94EA0}.Release|x64.ActiveCfg = Release|x64
 		{BBF6329D-7BEC-494E-9FC9-B24B12D94EA0}.Release|x64.Build.0 = Release|x64
-		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Debug|x64.ActiveCfg = Debug|x64
-		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Debug|x64.Build.0 = Debug|x64
-		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Release|x64.ActiveCfg = Release|x64
-		{70C87AF7-3189-4F6C-AC85-93309CF7CFDC}.Release|x64.Build.0 = Release|x64
-		{01391E76-3D20-4B4B-B727-2A133B35A144}.Debug|x64.ActiveCfg = Debug|x64
-		{01391E76-3D20-4B4B-B727-2A133B35A144}.Debug|x64.Build.0 = Debug|x64
-		{01391E76-3D20-4B4B-B727-2A133B35A144}.Release|x64.ActiveCfg = Release|x64
-		{01391E76-3D20-4B4B-B727-2A133B35A144}.Release|x64.Build.0 = Release|x64
-		{287A1A8D-C029-4D47-96BC-755C91B7985D}.Debug|x64.ActiveCfg = Debug|x64
-		{287A1A8D-C029-4D47-96BC-755C91B7985D}.Debug|x64.Build.0 = Debug|x64
-		{287A1A8D-C029-4D47-96BC-755C91B7985D}.Release|x64.ActiveCfg = Release|x64
-		{287A1A8D-C029-4D47-96BC-755C91B7985D}.Release|x64.Build.0 = Release|x64
-		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Debug|x64.ActiveCfg = Debug|x64
-		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Debug|x64.Build.0 = Debug|x64
-		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Release|x64.ActiveCfg = Release|x64
-		{1D79FD14-1DF4-4AED-94DF-62E595206DEF}.Release|x64.Build.0 = Release|x64
-		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Debug|x64.ActiveCfg = Debug|x64
-		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Debug|x64.Build.0 = Debug|x64
-		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Release|x64.ActiveCfg = Release|x64
-		{B5B60F79-653C-4E41-9721-06C478CE9E7C}.Release|x64.Build.0 = Release|x64
-		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Debug|x64.ActiveCfg = Debug|x64
-		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Debug|x64.Build.0 = Debug|x64
-		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Release|x64.ActiveCfg = Release|x64
-		{2D5AD568-F2EE-4B8C-AF81-2C46EB45B0ED}.Release|x64.Build.0 = Release|x64
-		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Debug|x64.ActiveCfg = Debug|x64
-		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Debug|x64.Build.0 = Debug|x64
-		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Release|x64.ActiveCfg = Debug|x64
-		{2B9F4DFD-C222-477A-9107-1A3C356002A4}.Release|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
