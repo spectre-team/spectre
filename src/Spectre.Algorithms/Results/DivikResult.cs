@@ -221,11 +221,19 @@ namespace Spectre.Algorithms.Results
             {
                 return false;
             }
-            if (other.Centroids.Length != Centroids.Length)
+            if ((other.Centroids != null) != (Centroids != null))
             {
                 return false;
             }
-            if (other.Partition.Length != Partition.Length)
+            if (other.Centroids != null && Centroids != null && other.Centroids.Length != Centroids.Length)
+            {
+                return false;
+            }
+            if ((other.Partition != null) != (Partition != null))
+            {
+                return false;
+            }
+            if (other.Partition != null && Partition != null && other.Partition.Length != Partition.Length)
             {
                 return false;
             }
@@ -253,8 +261,8 @@ namespace Spectre.Algorithms.Results
             {
                 return false;
             }
-            if (!other.Centroids.Cast<double>()
-                .SequenceEqual(second: Centroids.Cast<double>()))
+            if (other.Centroids != null
+                && !other.Centroids.Cast<double>().SequenceEqual(second: Centroids.Cast<double>()))
             {
                 return false;
             }
