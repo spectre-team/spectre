@@ -1,0 +1,34 @@
+<div class="inline-items-container">
+  <div id="divikHeatmapWithDownloadButton">
+    <mat-form-field>
+      <mat-select [(value)]="selectedValue">
+        <mat-option *ngFor="let dataset of datasets" [value]="dataset.filename">
+          {{dataset.filename}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="buttonClass" mat-raised-button (click)="startDivik()">Start divik</button>
+  </div>
+  <div>
+    <mat-expansion-panel id="divik-info-expansion-panel">
+      <mat-expansion-panel-header id="expansionPanelHeader">
+        <mat-panel-title>
+          Option
+        </mat-panel-title>
+        <mat-panel-description>
+          Value
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let configElement of divikConfigKeys">
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{configElement}}>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field">
+          <input matInput value={{divikConfig[configElement]}}
+                 (change)="changeValue(configElement, $event.target.value)"/>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>

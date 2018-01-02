@@ -46,6 +46,12 @@ export class DivikService extends Service {
     return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'));
   }
 
+  startDivik(datasetName: string, divikConfig: DivikConfig) {
+    const queryUrl = `${this.getBaseUrl()}/computation/${datasetName}`;
+    const result = this.http.post(queryUrl, divikConfig);
+    console.log(result);
+  }
+
   getConfig(preparationId: number, divikId: number): Observable<DivikConfig> {
     const queryUrl = `${this.getBaseUrl()}/divikResult/${preparationId}?divikId=${divikId}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
