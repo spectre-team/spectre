@@ -12,7 +12,9 @@
       <mat-hint align="center">Max value: {{divikConfig.Level}}</mat-hint>
     </mat-form-field>
     <app-heatmap
-      [heatmapData]=data>
+      [heatmapData]=data
+      [width]=heatmapWidth
+      [height]=heatmapHeight>
     </app-heatmap>
     <a
       [href]='downloadJsonHref'
@@ -24,7 +26,6 @@
       </button>
     </a>
   </div>
-
 
   <div>
     <mat-expansion-panel id="divik-info-expansion-panel">

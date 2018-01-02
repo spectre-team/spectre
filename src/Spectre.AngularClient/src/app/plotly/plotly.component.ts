@@ -60,6 +60,7 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
       const div = document.getElementById('plotly-' + this.randomId);
       Plotly.deleteTraces(div, 0);
       Plotly.addTraces(div, this.data);
+      Plotly.relayout(div, this.layout);
       console.log('[PlotlyComponent] updated plotly-' + this.randomId);
     }
   }

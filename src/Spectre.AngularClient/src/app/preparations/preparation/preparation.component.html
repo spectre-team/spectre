@@ -6,12 +6,11 @@
       <p-tabPanel header="Heatmap & Spectrum" leftIcon="fa-thermometer (alias)" rightIcon="fa-bar-chart" [headerStyle]="{'width': '195px', 'margin':'0 auto'}">
         <div>
 
-
           <div class="inline-items-container">
             <app-heatmap
               [heatmapData]=heatmapData
-              [width]=xHeatmapSize
-              [height]=yHeatmapSize
+              [width]=heatmapWidth
+              [height]=heatmapHeight
               [onClickFunction]="onClickBind">
             </app-heatmap>
           </div>
@@ -52,6 +51,8 @@
       <p-tabPanel header="Heatmap" leftIcon="fa fa-thermometer (alias)" [headerStyle]="{'width': '165px', 'color': 'green'}">
         <app-heatmap
           [heatmapData]=heatmapData
+          [width]=heatmapWidth
+          [height]=heatmapHeight
           [onClickFunction]="onClickBind">
         </app-heatmap>
           <div class="column-item-position">

@@ -16,34 +16,36 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'app-heatmap',
   templateUrl: './heatmap.component.html',
   styleUrls: ['./heatmap.component.css']
 })
-export class HeatmapComponent implements OnInit {
+export class HeatmapComponent implements OnInit, OnChanges {
   @Input() public heatmapData: any;
   @Input() public height: number;
   @Input() public width: number;
   @Input() public onClickFunction: Function;
-  public heatmapLayout: any;
+  @Input() public heatmapLayout: any;
   public options: any;
 
   constructor() { }
 
   ngOnInit() {
-      this.heatmapLayout = this.defaultHeatmapLayout();
       this.heatmapData = this.defaultData();
       this.options = [];
       console.log('[HeatmapComponent] plot layout set');
   }
 
-  defaultHeatmapLayout() {
+  ngOnChanges() {
+    this.heatmapLayout = this.setHeatmapLayout();
+  }
+  setHeatmapLayout() {
     return {
-      height: 800,
-      width: 800 / 109 * 44,
+      height: this.height,
+      width: this.width,
       xaxis: {
         autotick: false,
         dtick: 1,

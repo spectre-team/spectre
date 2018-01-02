@@ -36,6 +36,8 @@ export class DivikComponent implements OnInit {
   public divikConfig: DivikConfig;
   public downloadJsonHref: SafeUrl;
   public divikConfigKeys: Array<string>;
+  public heatmapWidth: number;
+  public heatmapHeight: number;
 
   @Input() public preparationId;
   constructor(
@@ -53,6 +55,10 @@ export class DivikComponent implements OnInit {
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
+    const xHeatmapSize = heatmap.maxColumn - heatmap.minColumn;
+    const yHeatmapSize = heatmap.maxRow - heatmap.minRow;
+    this.heatmapHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    this.heatmapWidth = this.heatmapHeight / yHeatmapSize * xHeatmapSize;
     return [{
       z: heatmap.data,
       type: 'heatmap'

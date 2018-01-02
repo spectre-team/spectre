@@ -13,11 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Classifier">
+      <UniqueIdentifier>{46b1aa6c-1420-4a03-9817-ceadb4699ce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{79772ca0-59b1-4d1c-ab50-ca07d0551227}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Empty.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OpenCvDataset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,11 +36,11 @@
     <ClCompile Include="EmptyOpenCvDatasetException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Svm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Empty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OpenCvDataset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,6 +55,21 @@
     </ClInclude>
     <ClInclude Include="EmptyOpenCvDatasetException.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Svm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IClassifier.h">
+      <Filter>Header Files\Classifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnsupportedDatasetTypeException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="UntrainedClassifierException.h">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

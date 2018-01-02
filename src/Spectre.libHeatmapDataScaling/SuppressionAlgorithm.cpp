@@ -30,8 +30,8 @@ namespace Spectre::libHeatmapDataScaling
 		double cutoff = quantile(intensities, 1 - topPercent);
 		for (int i = 0; i < intensities.size(); i++)
 		{
-			if (intensities[i] > cutoff)
-                newIntensities.push_back(cutoff);
+            if (intensities[i] > cutoff)
+                newIntensities.push_back(maxIntensity);
             else
                 newIntensities.push_back(maxIntensity * intensities[i] / cutoff);
 		}

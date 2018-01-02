@@ -57,6 +57,8 @@ export class PreparationComponent implements OnInit {
     {value:  'Jet'}, {value:  'Hot'}, {value:  'Blackbody'}, {value:  'Earth'}, {value: 'Electric'}, {value:  'Viridis'}];
   public selectedValue = 'RdBu';
   public heatmap: Heatmap;
+  public heatmapWidth: number;
+  public heatmapHeight: number;
 
   constructor(
       private route: ActivatedRoute,
@@ -183,6 +185,8 @@ export class PreparationComponent implements OnInit {
     this.heatmap = heatmap;
     this.xHeatmapSize = heatmap.maxColumn - heatmap.minColumn;
     this.yHeatmapSize = heatmap.maxRow - heatmap.minRow;
+    this.heatmapHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    this.heatmapWidth = this.heatmapHeight / this.yHeatmapSize * this.xHeatmapSize;
     this.minHeatmapColumn = heatmap.minColumn;
     this.minHeatmapRow = heatmap.minRow;
     return [{
