@@ -59,7 +59,8 @@ test_script:
 - cmd: C:\projects\spectre\scripts\test_native_code.bat
 - cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
-- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
+# temporarily disabled - test entry no longer present
+#- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
 
 artifacts:
 - path: DiviK-$(configuration).zip

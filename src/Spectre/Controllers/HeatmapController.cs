@@ -14,37 +14,42 @@
    limitations under the License.
 */
 
+using System;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using Spectre.Data.Datasets;
+using Spectre.HeatmapDataScalingCli;
+using Spectre.Models.Msi;
+using Spectre.Providers;
 using Spectre.Service.Configuration;
 using Spectre.Service.Loaders;
 
 namespace Spectre.Controllers
 {
-    using System;
-    using System.Configuration;
-    using System.IO;
-    using System.Web.Http;
-    using System.Web.Http.Cors;
-    using Spectre.Data.Datasets;
-    using Spectre.HeatmapDataScalingCli;
-    using Spectre.Models.Msi;
-
     /// <summary>
-    /// Controller for the needs of Heatmap providing
+    ///     Controller for the needs of Heatmap providing
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class HeatmapController : ApiController
     {
+        private readonly CachingDatasetProvider _datasetProvider = new CachingDatasetProvider();
+        private readonly AccessPathProvider _pathProvider = new AccessPathProvider();
+
         /// <summary>
-        /// Gets single heatmap of a specified preparation based on provided mz.
+        ///     Gets single heatmap of a specified preparation based on provided mz.
         /// </summary>
         /// <param name="id">Preparation identifier.</param>
         /// <param name="channelId">Identifier of channel.</param>
         /// <param name="flag">Does nothing but allows to define this function.</param>
         /// <returns>Heatmap</returns>
-        /// <exception cref="ArgumentException">Thrown when provided mz is lower
-        /// than zero, or is invalid for a given dataset</exception>
+        /// <exception cref="ArgumentException">
+        ///     Thrown when provided mz is lower
+        ///     than zero, or is invalid for a given dataset
+        /// </exception>
         public Heatmap Get(int id, int channelId, bool flag)
         {
             if (channelId < 0)
@@ -52,16 +57,8 @@ namespace Spectre.Controllers
                 throw new ArgumentException(message: nameof(channelId));
             }
 
-            if (id != 1)
-            {
-                return null;
-            }
-
-            DatasetLoader datasetLoader = new DatasetLoader(
-                new DataRootConfig(
-                    ConfigurationManager.AppSettings["LocalDataDirectory"],
-                    ConfigurationManager.AppSettings["RemoteDataDirectory"]));
-            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor");
+            var datasetPath = _pathProvider.GetPath<IDataset>(id);
+            var dataset = _datasetProvider.Read(datasetPath);
 
             var mz = dataset.GetRawMzValue(channelId);
             var intensities = dataset.GetRawIntensityRow(channelId);
@@ -72,12 +69,12 @@ namespace Spectre.Controllers
             intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
 
             // Use histogram equalization algorithm
-            heatmapDataScalingAlgorithm = new HistogramEqualization();
-            intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
+             heatmapDataScalingAlgorithm = new HistogramEqualization();
+             intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
 
             // Use suppression algorithm for contrast enhancement
-            // heatmapDataScalingAlgorithm = new SuppressionAlgorithm();
-            // intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
+              // heatmapDataScalingAlgorithm = new SuppressionAlgorithm();
+              // intensities = heatmapDataScalingAlgorithm.scaleData(intensities);
 
             // string[] array = new string[intensities.Length];
 //            for (var i = 0; i < intensities.Length; i++)
@@ -111,7 +108,7 @@ namespace Spectre.Controllers
             {
                 multiDimensionalIntensities[xCoordinates[i] - xCoordinates.Min(), yCoordinates[i] - yCoordinates.Min()] = intensities[i];
             }
-            heatmapDataScalingAlgorithm = new GaussianBlur(numberOfRows, numberOfColumns);
+            heatmapDataScalingAlgorithm = new BilateralBlur(numberOfRows, numberOfColumns);
             var gaussianAlgorithmIntensitiesResult = heatmapDataScalingAlgorithm.scaleData(multiDimensionalIntensities.Cast<double>().ToArray());
 
             for (var i = 0; i < intensities.Length; i++)

@@ -62,18 +62,11 @@ describe('HeatmapComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should properly give default heatmapLayout', () => {
-    component.ngOnInit();
-    expect(component.heatmapLayout).toEqual
-    ({ height: 600, width: 600, xaxis: ({ autotick: false, dtick: 1, ticklen: 1, tickwidth: 1, showticklabels: false }),
-      yaxis: ({ autotick: false, dtick: 1, ticklen: 1, tickwidth: 1, showticklabels: false })});
-  });
-
+.e
   it('should properly define heatmapLayout', () => {
     component.height = 120;
     component.width = 120;
-    component.ngOnInit();
+    component.ngOnChanges();
     expect(component.heatmapLayout).toEqual({ height: 120, width: 120,
       xaxis: ({ autotick: false, dtick: 1, ticklen: 1, tickwidth: 1, showticklabels: false }),
       yaxis: ({ autotick: false, dtick: 1, ticklen: 1, tickwidth: 1, showticklabels: false })});

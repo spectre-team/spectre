@@ -17,33 +17,31 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Cors;
-using Newtonsoft.Json;
-using Spectre.Algorithms.Parameterization;
-using Spectre.Data.Datasets;
-using Spectre.Models.Msi;
-using Spectre.Service.Configuration;
-using Spectre.Service.Loaders;
-
 namespace Spectre.Controllers
 {
+    using System;
+    using System.IO;
+    using System.Web.Http;
+    using System.Web.Http.Cors;
+    using Newtonsoft.Json;
+    using Spectre.Algorithms.Parameterization;
+    using Spectre.Algorithms.ResultsProcessors;
+    using Spectre.Data.Datasets;
+    using Spectre.Models.Msi;
+    using Spectre.Providers;
+
     /// <summary>
-    /// Allows to read divik result.
+    ///     Allows to read divik result.
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DivikResultController : ApiController
     {
+        private readonly CachingDatasetProvider _datasetProvider = new CachingDatasetProvider();
+        private readonly AccessPathProvider _pathProvider = new AccessPathProvider();
+
         /// <summary>
-        /// Gets single divik result of specified preparation.
+        ///     Gets single divik result of specified preparation.
         /// </summary>
         /// <param name="id">Preparation identifier.</param>
         /// <param name="divikId">Identifier of divik.</param>
@@ -51,44 +49,61 @@ namespace Spectre.Controllers
         /// <returns>DivikResult</returns>
         public DivikResult Get(int id, int divikId, int level)
         {
-            if (divikId < 0 || level < 0)
+            if ((divikId < 0) || (level < 0))
             {
                 throw new ArgumentException(message: nameof(divikId));
             }
 
-            if (id != 1)
-            {
-                return null;
-            }
+            var path = _pathProvider.GetPath<Algorithms.Results.DivikResult>(id);
+            var jsonText = File.ReadAllText(path);
+            var divikResult = JsonConvert.DeserializeObject<Algorithms.Results.DivikResult>(jsonText);
 
-            var jsonText = File.ReadAllText("C:\\spectre_data\\expected_divik_results\\hnc1_tumor\\euclidean\\divik-result.json");
-            Algorithms.Results.DivikResult divikResult = JsonConvert.DeserializeObject<Algorithms.Results.DivikResult>(jsonText);
-
-            DatasetLoader datasetLoader = new DatasetLoader(
-                new DataRootConfig(
-                    ConfigurationManager.AppSettings["LocalDataDirectory"],
-                    ConfigurationManager.AppSettings["RemoteDataDirectory"]));
-            IDataset dataset = datasetLoader.GetFromName("hnc1_tumor");
+            var datasetPath = _pathProvider.GetPath<IDataset>(id);
+            var dataset = _datasetProvider.Read(datasetPath);
 
             var coordinates = dataset.GetRawSpacialCoordinates(is2D: true);
 
-            int length = divikResult.Partition.Length;
-            var x_coordinates = new int[length];
-            var y_coordinates = new int[length];
+            var length = divikResult.Partition.Length;
+#pragma warning disable SA1305 // Field names must not use Hungarian notation
+            var xCoordinates = new int[length];
+            var yCoordinates = new int[length];
+#pragma warning restore SA1305 // Field names must not use Hungarian notation
             var data = new int[length];
 
             for (var i = 0; i < length; i++)
             {
-                x_coordinates[i] = coordinates[i, 0];
-                y_coordinates[i] = coordinates[i, 1];
+                xCoordinates[i] = coordinates[i, 0];
+                yCoordinates[i] = coordinates[i, 1];
                 data[i] = divikResult.Partition[i] + 1;
             }
 
-            return new DivikResult() { X = x_coordinates, Y = y_coordinates, Data = data };
+            return new DivikResult { X = xCoordinates, Y = yCoordinates, Data = data };
         }
 
         /// <summary>
-        /// Gets divik config of divik result.
+        /// Gets summary of DiviK for the dataset of specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the preparation.</param>
+        /// <param name="divikId">The divik identifier.</param>
+        /// <param name="summary">Must be true.</param>
+        /// <returns>Summary of DiviK</returns>
+        /// <exception cref="System.ArgumentException">When IDs are wrong</exception>
+        public DivikResultSummary Get(int id, int divikId, bool summary)
+        {
+            if (divikId < 0 || !summary)
+            {
+                throw new ArgumentException(message: nameof(divikId));
+            }
+
+            var path = _pathProvider.GetPath<Algorithms.Results.DivikResult>(id);
+            var jsonText = File.ReadAllText(path);
+            var divikResult = JsonConvert.DeserializeObject<Algorithms.Results.DivikResult>(jsonText);
+
+            return new DivikResultSummary(divikResult);
+        }
+
+        /// <summary>
+        ///     Gets divik config of divik result.
         /// </summary>
         /// <param name="id">Preparation identifier.</param>
         /// <param name="divikId">Identifier of divik.</param>
@@ -100,11 +115,8 @@ namespace Spectre.Controllers
                 throw new ArgumentException(message: nameof(divikId));
             }
 
-            if (id != 1)
-            {
-                return DivikOptions.Default();
-            }
-            var jsonText = File.ReadAllText("C:\\spectre_data\\expected_divik_results\\hnc1_tumor\\euclidean\\config.json");
+            var path = _pathProvider.GetPath<DivikOptions>(id);
+            var jsonText = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<DivikOptions>(jsonText);
         }
     }

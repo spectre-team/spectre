@@ -15,52 +15,66 @@
 */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Spectre.Data.Datasets;
 using Spectre.Models.Msi;
+using Spectre.Providers;
 
 namespace Spectre.Controllers
 {
     /// <summary>
-    /// Allows to read preparation data.
-    /// [Authorize] // should be enabled when authorization is ready
+    ///     Allows to read preparation data.
+    ///     [Authorize] // should be enabled when authorization is ready
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PreparationsController : ApiController
     {
+        private readonly CachingDatasetProvider _datasetProvider = new CachingDatasetProvider();
+        private readonly AccessPathProvider _pathProvider = new AccessPathProvider();
+
         /// <summary>
-        /// GET for the list of preparations.
+        ///     GET for the list of preparations.
         /// </summary>
         /// <returns>List of preparations.</returns>
         public IEnumerable<Preparation> Get()
         {
-            return new[]
-            {
-                new Preparation(
-                    id: 1,
-                    name: "Head & neck cancer, patient 1, tumor region only",
-                    spectraNumber: 997,
-                    xRange: new Range(63, 106),
-                    yRange: new Range(1, 109))
-            };
+            return _pathProvider.GetAvailableDatasets()
+                .Select(
+                    selector: name =>
+                    {
+                        var dataset = _datasetProvider.Read(
+                            path: _pathProvider.GetPath<IDataset>(id: name.GetHashCode()));
+#pragma warning disable SA1305 // Field names must not use Hungarian notation
+                        var xRange = new Range(
+#pragma warning restore SA1305 // Field names must not use Hungarian notation
+                            min: dataset.SpatialCoordinates.Min(selector: c => c.X),
+                            max: dataset.SpatialCoordinates.Max(selector: c => c.X));
+#pragma warning disable SA1305 // Field names must not use Hungarian notation
+                        var yRange = new Range(
+#pragma warning restore SA1305 // Field names must not use Hungarian notation
+                            min: dataset.SpatialCoordinates.Min(selector: c => c.Y),
+                            max: dataset.SpatialCoordinates.Max(selector: c => c.Y));
+                        return new Preparation(
+                            id: name.GetHashCode(),
+                            name: name,
+                            spectraNumber: dataset.SpectrumCount,
+                            xRange: xRange,
+                            yRange: yRange);
+                    });
         }
 
         /// <summary>
-        /// GET for single preparation data.
+        ///     GET for single preparation data.
         /// </summary>
         /// <param name="id">Preparation ID.</param>
         /// <returns>Data of preparation.</returns>
         public Preparation Get(int id)
         {
-            return id == 1
-                ? new Preparation(
-                    id: 1,
-                    name: "Head & neck cancer, patient 1, tumor region only",
-                    spectraNumber: 997,
-                    xRange: new Range(63, 106),
-                    yRange: new Range(1, 109))
-                : null;
+            return Get()
+                .FirstOrDefault(predicate: preparation => preparation.Id == id);
         }
     }
 }

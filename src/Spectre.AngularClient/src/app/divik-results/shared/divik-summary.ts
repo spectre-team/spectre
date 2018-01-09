@@ -1,8 +1,8 @@
 /*
- * divik.component.css
- * Styling of divik result.
+ * divik-summary.ts
+ * Interface describing Divik result summary.
  *
-   Copyright 2017 Sebastian Pustelnik, Grzegorz Mrukwa, Daniel Babiak
+   Copyright 2017 Sebastian Pustelnik
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,36 +16,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
-.multi_lines_text
-{
-  white-space: pre-line;
-}
-
-.divik-info-expansion-panel
-{
-  margin-left: 60px;
-  width: 650px;
-}
-
-.mat-form-field
-{
-  width: 250px;
-}
-
-.inline-items-container
-{
-  display: flex;
-  justify-content: flex-start;
-  height: 100vh;
-}
-
-a:hover, a:visited, a:link, a:active
-{
-  text-decoration: none;
-}
-
-.mat-button
-{
-  margin-left: 82px;
+export interface DivikSummary {
+   Depth: number;
+  'Cluster Size Mean': number;
+  'Cluster Size Variance': number;
+  'Number of clusters': number;
+  'Size Reduction': number;
 }
