@@ -62,7 +62,7 @@ describe('HeatmapComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-.e
+
   it('should properly define heatmapLayout', () => {
     component.height = 120;
     component.width = 120;
