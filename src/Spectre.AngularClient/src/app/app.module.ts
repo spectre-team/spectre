@@ -19,7 +19,7 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 
@@ -37,24 +37,29 @@ import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
+import { UploadService } from './upload/shared/upload.service';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   providers: [
       HeatmapService,
       SpectrumService,
       MessagesService,
-      DivikService
+      DivikService,
+      UploadService
   ],
   declarations: [
     AppComponent,
     PreparationListComponent,
     PageNotFoundComponent,
-    MainPageComponent
+    MainPageComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     PlotlyModule,
     BrowserAnimationsModule,
     PreparationsModule,
