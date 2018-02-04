@@ -3,9 +3,9 @@ environment:
   appveyor_rdp_password:
     secure: Pzvx2CQjxp8eCBP+nFI2eg==
 configuration:
-  - Debug
-  - Release
-  - Bit
+  - dev
+  - prod
+  - bit
 
 # skip branch build if there is an active pull request
 skip_branch_with_pr: true
@@ -23,13 +23,16 @@ install:
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 build_script:
-- cmd: C:\projects\spectre\scripts\build_ng_client.bat %CONFIGURATION%
+- cmd: cd C:\projects\spectre\src\Spectre.AngularClient
+- cmd: ng build -env=%CONFIGURATION% --aot=false >nul 2>&1
 after_build:
-- cmd: C:\projects\spectre\scripts\package_angular_client.bat
+- cmd: cd C:\projects\spectre
+- cmd: 7z a WebClient-%CONFIGURATION%.zip "%APPVEYOR_BUILD_FOLDER%\src\Spectre.AngularClient\dist\*" >nul 2>&1
 
 test_script:
-- cmd: C:\projects\spectre\scripts\test_frontend.bat
-#- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
+- cmd: cd C:\projects\spectre\src\Spectre.AngularClient
+- cmd: ng test --single-run true --reporters junit --progress false
+#- cmd: ng e2e --progress false -env=%CONFIGURATION% --aot=false
 
 artifacts:
 - path: WebClient-$(configuration).zip
