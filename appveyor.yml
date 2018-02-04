@@ -15,9 +15,6 @@ init:
 - cmd: echo Branch - %APPVEYOR_REPO_BRANCH%
 - cmd: echo Author - %APPVEYOR_REPO_COMMIT_AUTHOR%
 - cmd: echo Commit - %APPVEYOR_REPO_COMMIT%
-#- cmd: echo (%APPVEYOR_REPO_COMMIT_MESSAGE%)
-#- cmd: echo (%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%)
-- cmd: echo Platform - %PLATFORM%
 - cmd: echo Configuration - %CONFIGURATION%
 #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
