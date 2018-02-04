@@ -12,7 +12,6 @@ skip_branch_with_pr: true
 
 init:
 - cmd: echo Project - %APPVEYOR_PROJECT_NAME%
-- cmd: echo Worker image - %APPVEYOR_BUILD_WORKER_IMAGE%
 - cmd: echo Branch - %APPVEYOR_REPO_BRANCH%
 - cmd: echo Author - %APPVEYOR_REPO_COMMIT_AUTHOR%
 - cmd: echo Commit - %APPVEYOR_REPO_COMMIT%
