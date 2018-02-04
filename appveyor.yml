@@ -1,23 +1,10 @@
 version: 3.0.0.{build}
-# enable patching of AssemblyInfo.* files
-assembly_info:
-  patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
-platform: x64
 environment:
-  nuget_user:
-    secure: kWtlS49bKmP0IFXmdvDHmxGI8mS0xQGrwiJoco9nYtA=
-  nuget_password:
-    secure: Pzvx2CQjxp8eCBP+nFI2eg==
   appveyor_rdp_password:
     secure: Pzvx2CQjxp8eCBP+nFI2eg==
 configuration:
   - Debug
   - Release
-services: iis
 
 # skip branch build if there is an active pull request
 skip_branch_with_pr: true
@@ -34,34 +21,23 @@ init:
 - cmd: echo Configuration - %CONFIGURATION%
 #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
-nuget:
-  account_feed: false
-  project_feed: false
-
 install:
-- cmd: C:\projects\spectre\scripts\restore_nugets.bat
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 build_script:
-- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /p:Configuration=%CONFIGURATION% /p:Platform=%PLATFORM% /m /verbosity:quiet /p:DeployOnBuild=true /p:PublishProfile=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cmd: C:\projects\spectre\scripts\build_ng_client.bat %CONFIGURATION%
 - cmd: C:\projects\spectre\scripts\build_ng_client.bat Bit
 after_build:
-- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
-- cmd: C:\projects\spectre\scripts\package_web_project.bat WebAPI Spectre
 - cmd: C:\projects\spectre\scripts\package_angular_client.bat
 - cmd: C:\projects\spectre\scripts\package_bit_client.bat
 
 test_script:
-- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
 - cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
 
 artifacts:
 - path: WebClient-$(configuration).zip
   name: WebClient
-- path: WebAPI-$(configuration).zip
-  name: WebAPI
 - path: WebClient-Bit.zip
   name: WebClientBit
 
@@ -77,12 +53,6 @@ deploy:
   auth_token:
     secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
   artifact: WebClientBit
-  draft: true
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: WebAPI
   draft: true
 
 on_finish:
