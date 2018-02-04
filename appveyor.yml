@@ -5,6 +5,7 @@ environment:
 configuration:
   - Debug
   - Release
+  - Bit
 
 # skip branch build if there is an active pull request
 skip_branch_with_pr: true
@@ -23,10 +24,8 @@ install:
 
 build_script:
 - cmd: C:\projects\spectre\scripts\build_ng_client.bat %CONFIGURATION%
-- cmd: if "%CONFIGURATION%" == "Release" ( C:\projects\spectre\scripts\build_ng_client.bat Bit )
 after_build:
 - cmd: C:\projects\spectre\scripts\package_angular_client.bat
-- cmd: if "%CONFIGURATION%" == "Release" ( C:\projects\spectre\scripts\package_bit_client.bat )
 
 test_script:
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
@@ -35,8 +34,6 @@ test_script:
 artifacts:
 - path: WebClient-$(configuration).zip
   name: WebClient
-- path: WebClient-Bit.zip
-  name: WebClientBit
 
 deploy:
 - provider: GitHub
@@ -45,14 +42,6 @@ deploy:
     secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
   artifact: WebClient
   draft: true
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: WebClientBit
-  draft: true
-  on:
-    configuration: Release
 
 on_finish:
 #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
