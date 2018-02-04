@@ -26,10 +26,10 @@ install:
 
 build_script:
 - cmd: C:\projects\spectre\scripts\build_ng_client.bat %CONFIGURATION%
-- cmd: C:\projects\spectre\scripts\build_ng_client.bat Bit
+- cmd: if "%CONFIGURATION%" == "Release" ( C:\projects\spectre\scripts\build_ng_client.bat Bit )
 after_build:
 - cmd: C:\projects\spectre\scripts\package_angular_client.bat
-- cmd: C:\projects\spectre\scripts\package_bit_client.bat
+- cmd: if "%CONFIGURATION%" == "Release" ( C:\projects\spectre\scripts\package_bit_client.bat )
 
 test_script:
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
@@ -54,6 +54,8 @@ deploy:
     secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
   artifact: WebClientBit
   draft: true
+  on:
+    configuration: Release
 
 on_finish:
 #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
