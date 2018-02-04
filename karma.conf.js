@@ -9,6 +9,7 @@ module.exports = function (config) {
   	  require('karma-junit-reporter'),
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
@@ -37,7 +38,7 @@ module.exports = function (config) {
               ? ['progress', 'coverage-istanbul']
               : ['progress', 'kjhtml'],
     junitReporter: {
-        outputDir: 'C:\\projects\\spectre\\src\\Spectre.AngularClient',
+        outputDir: 'C:\\projects\\spectre',
         outputFile: 'karma-tests.xml',
         suite: 'AngularClient',
         useBrowserName: false,
@@ -50,7 +51,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'Firefox'],
     singleRun: false
   });
 };

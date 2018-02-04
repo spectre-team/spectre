@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+- '6'
+env:
+  global:
+  - VERSION=4.0.0
+  matrix:
+  - CONFIGURATION=dev
+  - CONFIGURATION=prod
+  - CONFIGURATION=bit
+install:
+- npm install -g npm@4.4.1 --loglevel=error
+- npm install -g @angular/cli@1.0.0-rc.2 --loglevel=error
+- npm install --loglevel=error
+before_script:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+script:
+- ng test --single-run true --reporters junit --progress false --browsers Firefox
+- ng build -env=$CONFIGURATION
+notifications:
+  webhooks:
+    urls:
+      secure: dzv5OF61he1ShDQKIo8TjdZvxKauA36HIwVU8W3/eYeRK60LDr/2pAi641avANf9dGCr7z9gx+mEP7iYgIMOBPu5obZPWWl5UtpwyQzNsHWDDZ6oHjPZmRFVr2XeLazBWA+nY3LC+vXxb40Gk7YSaNN6JzVrxsbYpiluzj+A9dasAb2waXpLTsVDm8glMyPekUtwYfmOCxEyBFZ5H3oTbPGwGKPt68FW4c1rYLb099Oz2+Mhg8zAh4MaLWEbcWjM6LYw0wMcWEAP7BKvAMCgT34GTEUrZLKu0nOwphjeYDfFN34+8Ge90gQFizwA3eGUTCPR3KIil0GF5ezEIdEwBKAnPTv6J/WB5td+lJKVjGKjhusHPhj43jofgru1w2VRjzD5FdZnMoQ8K4SzEjCw04Rl6nTEIXZhNJ4BUamF0SPDYo0HobujsBhAqsdcbsUgE+ZMfWs1knlUo+cRKCIGfUj2BTfhsTc3thHXClwguQdvPwz7Sttb/mlXF8hBFFNMYgveLgwo1DFwdNXl8H7hg9MN9Az7Y/g31UKE7Uvb5NuryXVTdL/X6+s2iu4jx/rjH/zqa2Zjlm6/KcWhjlt0PXSn/Tu/bmeT/GIQk/CSpK5aLNdCgIF/TBzHWQ1kqtgMZwL1meE8dhae9Kkvj0knkeMJ5xXNnWbihTT6SxrPsAQ=
+    on_success: always
+    on_failure: always
+    on_start: never
+    on_cancel: never
+    on_error: always
