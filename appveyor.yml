@@ -19,21 +19,18 @@ init:
 #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 cache:
-- '%APPVEYOR_BUILD_FOLDER%\src\Spectre.AngularClient\node_modules'
+- '%APPVEYOR_BUILD_FOLDER%\node_modules'
 - '%APPDATA%\npm-cache'
 
 install:
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 build_script:
-- cmd: cd C:\projects\spectre\src\Spectre.AngularClient
 - cmd: ng build -env=%CONFIGURATION% --aot=false >nul 2>&1
 after_build:
-- cmd: cd C:\projects\spectre
-- cmd: 7z a WebClient-%CONFIGURATION%.zip "%APPVEYOR_BUILD_FOLDER%\src\Spectre.AngularClient\dist\*" >nul 2>&1
+- cmd: 7z a WebClient-%CONFIGURATION%.zip "%APPVEYOR_BUILD_FOLDER%\dist\*" >nul 2>&1
 
 test_script:
-- cmd: cd C:\projects\spectre\src\Spectre.AngularClient
 - cmd: ng test --single-run true --reporters junit --progress false
 #- cmd: ng e2e --progress false -env=%CONFIGURATION% --aot=false
 

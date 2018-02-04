@@ -24,11 +24,6 @@ along with supporting statistics.
 
 ## Install
 
-### DiviK local client
-
-Please refer to [this manual](docs/Spectre.DivikWpfClient.pdf), as MATLAB
-Common Runtime has to be installed.
-
 ### Spectre service & web application
 
 The Web service is all the time available [here](http://vaei-bit01.aei.polsl.pl/).
@@ -37,10 +32,6 @@ If you still would like to host it yourself, please contact us by
 explanation.
 
 ## Exemplary usage
-
-### DiviK local client
-
-Please refer to [docs](docs/Spectre.DivikWpfClient.pdf).
 
 ### Spectre service & web application
 
@@ -60,11 +51,45 @@ Short contribution guide is actively constructed on
 [the project's wiki](https://github.com/spectre-team/spectre/wiki)
 as the development progresses.
 
-## Environment
+# Angular
 
-Please refer to [the docs](docs/Spectre.DivikWpfClient.pdf).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.2.
 
-## References
+## Installation
+In order to install Angular CLI, please run `scripts/InstallNodeDev.ps1` using Windows Powershell.
+If the script doesn't have permission to run, please execute `Set-ExecutionPolicy Unrestricted` command to enable running scripts from Powershell, run `InstallNodeDev.ps1`, and finish with `Set-ExecutionPolicy Restricted` (default value) if you will.
+
+Troubleshooting:
+- If nodejs.msi couldn't have been successfully downloaded and installed, please install it manually and the rest of the script should run just fine.
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+If calling `ng serve` causes errors regarding uninstalled packages, please delete `src\Spectre.Angular2Client\node_modules` directory, enter `src\Spectre.Angular2Client\` and run `npm install`.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+# References
 
 This software is part of contribution made by [Data Mining Group of Silesian
 University of Technology](http://www.zaed.polsl.pl/), rest of which is
