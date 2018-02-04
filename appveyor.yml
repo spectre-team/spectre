@@ -33,7 +33,7 @@ after_build:
 
 test_script:
 - cmd: C:\projects\spectre\scripts\test_frontend.bat
-- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
+#- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
 
 artifacts:
 - path: WebClient-$(configuration).zip
