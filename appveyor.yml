@@ -1,69 +1,42 @@
-version: 3.0.0.{build}
-# enable patching of AssemblyInfo.* files
-assembly_info:
-  patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
-platform: x64
+version: 4.0.0.{build}
 environment:
-  nuget_user:
-    secure: kWtlS49bKmP0IFXmdvDHmxGI8mS0xQGrwiJoco9nYtA=
-  nuget_password:
-    secure: Pzvx2CQjxp8eCBP+nFI2eg==
   appveyor_rdp_password:
     secure: Pzvx2CQjxp8eCBP+nFI2eg==
 configuration:
-  - Debug
-  - Release
-services: iis
+  - dev
+  - prod
+  - bit
 
 # skip branch build if there is an active pull request
 skip_branch_with_pr: true
 
 init:
 - cmd: echo Project - %APPVEYOR_PROJECT_NAME%
-- cmd: echo Worker image - %APPVEYOR_BUILD_WORKER_IMAGE%
 - cmd: echo Branch - %APPVEYOR_REPO_BRANCH%
 - cmd: echo Author - %APPVEYOR_REPO_COMMIT_AUTHOR%
 - cmd: echo Commit - %APPVEYOR_REPO_COMMIT%
-#- cmd: echo (%APPVEYOR_REPO_COMMIT_MESSAGE%)
-#- cmd: echo (%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%)
-- cmd: echo Platform - %PLATFORM%
 - cmd: echo Configuration - %CONFIGURATION%
 #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
-nuget:
-  account_feed: false
-  project_feed: false
+cache:
+- '%APPVEYOR_BUILD_FOLDER%\node_modules'
+- '%APPDATA%\npm-cache'
 
 install:
-- cmd: C:\projects\spectre\scripts\restore_nugets.bat
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 build_script:
-- cmd: msbuild "C:\projects\spectre\src\Spectre.sln" /p:Configuration=%CONFIGURATION% /p:Platform=%PLATFORM% /m /verbosity:quiet /p:DeployOnBuild=true /p:PublishProfile=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-- cmd: C:\projects\spectre\scripts\build_ng_client.bat %CONFIGURATION%
-- cmd: C:\projects\spectre\scripts\build_ng_client.bat Bit
+- cmd: ng build -env=%CONFIGURATION% --aot=false >nul 2>&1
 after_build:
-- ps: C:\projects\spectre\scripts\BindPageToIisAndCreateDataDir.ps1 -AppVeyor
-- cmd: C:\projects\spectre\scripts\package_web_project.bat WebAPI Spectre
-- cmd: C:\projects\spectre\scripts\package_angular_client.bat
-- cmd: C:\projects\spectre\scripts\package_bit_client.bat
+- cmd: 7z a WebClient-%CONFIGURATION%.zip "%APPVEYOR_BUILD_FOLDER%\dist\*" >nul 2>&1
 
 test_script:
-- cmd: C:\projects\spectre\scripts\test_dotnet.bat --except Algorithm
-- cmd: C:\projects\spectre\scripts\test_frontend.bat
-- cmd: C:\projects\spectre\scripts\test_frontend_e2e.bat
+- cmd: ng test --single-run true --reporters junit --progress false
+#- cmd: ng e2e --progress false -env=%CONFIGURATION% --aot=false
 
 artifacts:
 - path: WebClient-$(configuration).zip
   name: WebClient
-- path: WebAPI-$(configuration).zip
-  name: WebAPI
-- path: WebClient-Bit.zip
-  name: WebClientBit
 
 deploy:
 - provider: GitHub
@@ -71,18 +44,6 @@ deploy:
   auth_token:
     secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
   artifact: WebClient
-  draft: true
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: WebClientBit
-  draft: true
-- provider: GitHub
-  release: Spectre-v$(appveyor_build_version)
-  auth_token:
-    secure: dQadz+smqtuxpigZ/LmrUKyA0uVZ5kgljKntyoHEdobTycbeMywbfmiJtZPNcOQ2
-  artifact: WebAPI
   draft: true
 
 on_finish:
