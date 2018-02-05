@@ -24,6 +24,8 @@ import 'rxjs/Rx';
 
 import { Spectrum } from './spectrum';
 import {Service} from '../../app.service';
+import { sprintf } from 'sprintf-js';
+import { apiUrl } from '../../../environments/apiUrl';
 
 @Injectable()
 export class SpectrumService extends Service {
@@ -33,14 +35,14 @@ export class SpectrumService extends Service {
   }
 
   get(preparationId: number, spectrumId: number): Observable<Spectrum> {
-    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?spectrumId=${spectrumId}`;
+    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.spectrumByIdUrl, preparationId, spectrumId);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const spectrum = response.map(toSpectrum);
     return spectrum;
   }
 
   getByCoordinates(preparationId: number, x: number, y: number): Observable<Spectrum> {
-    const queryUrl = `${this.getBaseUrl()}/spectrum/${preparationId}?x=${x}&y=${y}`;
+    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.spectrumByCoordUrl, preparationId, x, y);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const spectrum = response.map(toSpectrum);
     return spectrum;
