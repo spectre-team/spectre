@@ -31,16 +31,16 @@ export class UploadService extends Service {
     super();
   }
 
-  uploadData(datasetLink: string, datasetName): Observable<string> {
+  uploadData(datasetLink: string, datasetName): Observable<boolean> {
     return this.http
       .post(`${this.getBaseUrl()}/download/`, {headers: this.getHeaders(), url: datasetLink, datasetName: datasetName})
       .map(r => {
         if (r.status === 200) {
-          return 'Dataset is uploading';
+          return true;
         }
       })
       .catch(() => {
-        return Observable.throw('Error in uploading');
+        return Observable.throw(false);
       });
   }
 

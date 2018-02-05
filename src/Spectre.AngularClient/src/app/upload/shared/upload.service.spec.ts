@@ -44,7 +44,7 @@ describe('UploadService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should return 200', inject([UploadService, MockBackend],
+  it('success after return 200', inject([UploadService, MockBackend],
       (uploadService: UploadService, mockBackend: MockBackend) => {
     mockBackend.connections.subscribe((connection: MockConnection) => {
       const options = new ResponseOptions({
@@ -53,12 +53,12 @@ describe('UploadService', () => {
       connection.mockRespond(new Response(options));
     });
 
-        uploadService.uploadData('www.link.com', 'name').subscribe((message) => {
-        expect(message).toEqual('Dataset is uploading');
+        uploadService.uploadData('www.link.com', 'name').subscribe((value) => {
+        expect(value).toEqual(true);
       });
   }));
 
-  it('should be error', inject([UploadService, MockBackend],
+  it('error after server failure', inject([UploadService, MockBackend],
     (uploadService: UploadService, mockBackend: MockBackend) => {
       mockBackend.connections.subscribe((connection: MockConnection) => {
         const options = new ResponseOptions({
@@ -68,7 +68,7 @@ describe('UploadService', () => {
       });
 
       uploadService.uploadData('www.link.com', 'name').subscribe(() => {},
-          error => expect(error).toEqual('Error in uploading')
+          error => expect(error).toEqual(false)
     );
     }));
 });

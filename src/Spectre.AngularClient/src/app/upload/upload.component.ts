@@ -41,7 +41,15 @@ export class UploadComponent implements OnInit {
 
   uploadData() {
     this.uploadService.uploadData(this.linkInput, this.nameInput)
-      .subscribe(message => this.message = message,
-          error => this.message = error);
+      .subscribe(value => this.displayMessageAfterPost(value),
+          error => this.displayMessageAfterPost(error));
+  }
+
+  displayMessageAfterPost(value: boolean) {
+    if(value) {
+      this.message = 'Dataset is uploading';
+    } else {
+      this.message = 'Error in uploading';
+    }
   }
 }

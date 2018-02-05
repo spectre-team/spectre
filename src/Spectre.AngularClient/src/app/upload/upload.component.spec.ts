@@ -24,7 +24,8 @@ import { MockBackend} from '@angular/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UploadComponent } from "./upload.component";
 import { UploadService } from "./shared/upload.service";
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
+import { By } from "@angular/platform-browser";
 
 
 describe('UploadComponent', () => {
@@ -60,4 +61,17 @@ describe('UploadComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('invalid form when text fields are empty', () => {
+    let form = fixture.debugElement.query(By.css('form'));
+    expect(form.nativeElement.valid).toBeFalsy();
+  });
+
+  it('enabled button when text fields are not empty', () => {
+    component.nameInput='name';
+    component.linkInput='www.link.com';
+    fixture.detectChanges();
+    let button = fixture.debugElement.query(By.css('button'));
+    expect(button.nativeElement.disabled).toBeFalsy();
+  })
 });
