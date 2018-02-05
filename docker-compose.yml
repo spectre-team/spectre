@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+
+    # I have used it for pushing data for testing purposes.
+    # When Maciej states, how to secure it, we may enable it.
+
+    # ftp:
+    #     restart: always
+    #     image: stilliard/pure-ftpd:hardened-1.0.36
+    #     ports:
+    #         - "30000-30009:30000-30009"
+    #         - "21:21"
+    #     volumes:
+    #         - data:/home/ftpusers/
+
+    client:
+        restart: always
+        image: spectreteam/spectre:4.0.0.27
+        ports:
+            - "80:80"
+        depends_on:
+            - visualization-api
+            - upload-api
+
+    visualization-api:
+        restart: always
+        image: spectreteam/spectre-visualization:1.0.0.24
+        ports:
+            - "2001:80"
+        volumes:
+            - data:/data
+
+    upload-api:
+        restart: always
+        image: spectreteam/spectre-upload:1.0.1.88
+        ports:
+            - "2002:80"
+        volumes:
+            - data:/data
+
+volumes:
+    data:
