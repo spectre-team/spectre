@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost/spectre_api'
+  apiUrl: 'http://spectre.westeurope.cloudapp.azure.com'
 };
