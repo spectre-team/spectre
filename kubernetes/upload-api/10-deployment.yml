@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: ReplicationController
+metadata:
+  name: upload
+  labels:
+    component: spectre
+    role: upload
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: spectre
+        role: upload
+    spec:
+      containers:
+      - name: upload
+        image: spectreteam/spectre-upload:1.0.1.88
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        # resources:
+        #   limits:
+        #     memory: 1Gi
+        #   requests:
+        #     memory: 1Gi
+        volumeMounts:
+        - name: storage
+          mountPath: /data
+  volumeClaimTemplates:
+  - name: storage
+      persistentVolumeClaim:
+        claimName: spectredata

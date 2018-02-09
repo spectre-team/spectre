@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    component: spectre
+    role: frontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: spectre
+        role: frontend
+    spec:
+      containers:
+      - name: client
+        image: spectreteam/spectre:4.0.0.16
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        # resources:
+        #   limits:
+        #     memory: 1Gi
+        #   requests:
+        #     memory: 1Gi

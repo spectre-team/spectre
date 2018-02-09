@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: ReplicationController
+metadata:
+  name: visualization
+  labels:
+    component: spectre
+    role: visualization
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: spectre
+        role: visualization
+    spec:
+      containers:
+      - name: visualization
+        image: spectreteam/spectre-visualization:1.0.0.24
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        # resources:
+        #   limits:
+        #     memory: 1Gi
+        #   requests:
+        #     memory: 1Gi
+        volumeMounts:
+        - name: storage
+          mountPath: /data
+  volumeClaimTemplates:
+  - name: storage
+      persistentVolumeClaim:
+        claimName: spectredata
