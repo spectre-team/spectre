@@ -17,12 +17,13 @@
    limitations under the License.
 */
 
-import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import {Service} from '../../app.service';
+import { Service } from '../../app.service';
+import { apiUrl } from '../../../environments/apiUrl';
 
 @Injectable()
 export class UploadService extends Service {
@@ -31,16 +32,11 @@ export class UploadService extends Service {
     super();
   }
 
-  uploadData(datasetLink: string, datasetName): Observable<boolean> {
+  uploadData(datasetLink: string, datasetName): Observable<any> {
     return this.http
-      .post(`${this.getBaseUrl()}/download/`, {headers: this.getHeaders(), url: datasetLink, datasetName: datasetName})
-      .map(r => {
-        if (r.status === 200) {
-          return true;
-        }
-      })
-      .catch(() => {
-        return Observable.throw(false);
+      .post(this.getBaseUrl() + apiUrl.uploadUrl, {headers: this.getHeaders(), url: datasetLink, datasetName: datasetName})
+      .catch((err) => {
+        return Observable.throw(err);
       });
   }
 
