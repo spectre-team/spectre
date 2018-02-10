@@ -8,9 +8,9 @@ Write-Host "Installing npm..." -ForegroundColor Yellow
 npm install -g npm@4.4.1
 Write-Host "Installing angular-cli..." -ForegroundColor Yellow
 cmd /C "npm install -g @angular/cli@1.0.0-rc.2 --loglevel=error"
-cd ..\src\Spectre.AngularClient
+cd ..
 Write-Host "Installing dependencies..." -ForegroundColor Yellow
 npm install --loglevel=error | Out-Null
-cd ..\..\scripts
+cd scripts
 Write-Host "Press any key..."
 $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
