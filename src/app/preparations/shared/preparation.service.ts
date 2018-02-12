@@ -33,13 +33,13 @@ export class PreparationService extends Service {
 
   getAll(): Observable<Preparation[]> {
     return this.http
-      .get(this.getBaseUrl() + apiUrl.preparationsUrl, {headers: this.getHeaders()})
+      .get(this.getBasePreparationUrl() + apiUrl.preparationsUrl, {headers: this.getHeaders()})
       .map(mapPreparations);
   }
 
   getPreparationById(preparationId: number): Observable<Preparation> {
     return this.http
-      .get(this.getBaseUrl() +  sprintf(apiUrl.preparationUrl, preparationId), {headers: this.getHeaders()})
+      .get(this.getBasePreparationUrl() +  sprintf(apiUrl.preparationUrl, preparationId), {headers: this.getHeaders()})
       .map(r => toPreparation(r.json()));
   }
 

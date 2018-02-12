@@ -20,9 +20,12 @@
 import { environment } from '../environments/environment';
 
 export class Service {
-  private baseUrl = environment.apiUrl;
+  private basePreparationUrl = environment.apiPreparationUrl;
+  private baseUploadUrl = environment.apiUploadUrl;
 
-  public getBaseUrl(): string { return this.baseUrl; }
+  public getBasePreparationUrl(): string { return this.basePreparationUrl; }
+  public getBaseUploadUrl(): string { return this.baseUploadUrl; }
+
 
   constructor() { }
 }

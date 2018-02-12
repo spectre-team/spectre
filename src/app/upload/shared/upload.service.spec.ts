@@ -44,6 +44,20 @@ describe('UploadService', () => {
     expect(service).toBeTruthy();
   }));
 
+  it('no error after return 200', inject([UploadService, MockBackend],
+    (uploadService: UploadService, mockBackend: MockBackend) => {
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+        const options = new ResponseOptions({
+          status: 200
+        });
+        connection.mockRespond(new Response(options));
+      });
+
+      uploadService.uploadData('www.link.com', 'name').subscribe(() => {},
+        error =>  expect(error).toBeUndefined()
+      );
+    }));
+
   it('error after server failure', inject([UploadService, MockBackend],
     (uploadService: UploadService, mockBackend: MockBackend) => {
       mockBackend.connections.subscribe((connection: MockConnection) => {

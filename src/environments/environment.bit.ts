@@ -5,5 +5,6 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://vaei-bit01.aei.polsl.pl/spectre_api'
+  apiPreparationUrl: 'http://vaei-bit01.aei.polsl.pl:2001',
+  apiUploadUrl: 'http://vaei-bit01.aei.polsl.pl:2002/api'
 };

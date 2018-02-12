@@ -43,13 +43,13 @@ export class DivikService extends Service {
   }
 
   get(preparationId: number, divikId: number, level: number): Observable<Heatmap> {
-    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.divikResultUrl, preparationId, divikId, level);
+    const queryUrl = this.getBasePreparationUrl() + sprintf(apiUrl.divikResultUrl, preparationId, divikId, level);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'));
   }
 
   getConfig(preparationId: number, divikId: number): Observable<DivikConfig> {
-    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.divikConfigUrl, preparationId, divikId);
+    const queryUrl = this.getBasePreparationUrl() + sprintf(apiUrl.divikConfigUrl, preparationId, divikId);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     return response.map(toDivikConfig);
   }

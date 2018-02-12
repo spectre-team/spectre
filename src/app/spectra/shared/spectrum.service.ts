@@ -35,14 +35,14 @@ export class SpectrumService extends Service {
   }
 
   get(preparationId: number, spectrumId: number): Observable<Spectrum> {
-    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.spectrumByIdUrl, preparationId, spectrumId);
+    const queryUrl = this.getBasePreparationUrl() + sprintf(apiUrl.spectrumByIdUrl, preparationId, spectrumId);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const spectrum = response.map(toSpectrum);
     return spectrum;
   }
 
   getByCoordinates(preparationId: number, x: number, y: number): Observable<Spectrum> {
-    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.spectrumByCoordUrl, preparationId, x, y);
+    const queryUrl = this.getBasePreparationUrl() + sprintf(apiUrl.spectrumByCoordUrl, preparationId, x, y);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const spectrum = response.map(toSpectrum);
     return spectrum;
