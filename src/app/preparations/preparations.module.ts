@@ -28,6 +28,8 @@ import { PlotlyModule } from '../plotly/plotly.module';
 import { PreparationComponent } from './preparation/preparation.component';
 import { HeatmapComponent } from '../heatmaps/heatmap/heatmap.component';
 import { SpectrumComponent } from '../spectra/spectrum/spectrum.component';
+import { AnalysisComponent } from '../algoritms/shared/analysis.component';
+import { AnalysisListComponent } from '../algoritms/shared/analysis-list.component';
 import { DivikComponent } from '../divik-results/divik/divik.component';
 import { GrowlModule, TabViewModule} from 'primeng/primeng';
 import { BlockUIModule } from 'ng-block-ui';
@@ -57,7 +59,9 @@ import {
     PreparationComponent,
     HeatmapComponent,
     SpectrumComponent,
-    DivikComponent
+    DivikComponent,
+    AnalysisComponent,
+    AnalysisListComponent
 ]
 })
 export class PreparationsModule {}

@@ -1,0 +1,19 @@
+<div id="main-container">
+  <div class="analysis-list">
+    <div *ngFor="let analysis of analysisList">
+      <mat-expansion-panel id="analysis-info-expansion-panel">
+        <mat-expansion-panel-header [ngStyle]="{'background-color': getColor(analysis.status)}">
+          {{analysis.name}}
+        </mat-expansion-panel-header>
+        <div *ngIf="analysis.status === 'Done'">
+          <app-analysis
+            [preparationId]="preparationId"
+            [analysisType]="analysisType"
+            [analysisId]="analysis.id">
+          </app-analysis>
+        </div>
+      </mat-expansion-panel>
+      <!--TODO new analysis-->
+    </div>
+  </div>
+</div>

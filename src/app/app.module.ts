@@ -39,6 +39,8 @@ import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
+import { AnalysisService } from './algoritms/shared/analysis.service';
+import { AnalysisListService } from './algoritms/shared/analysis-list.service';
 
 @NgModule({
   providers: [
@@ -46,14 +48,16 @@ import { UploadComponent } from './upload/upload.component';
       SpectrumService,
       MessagesService,
       DivikService,
-      UploadService
+      UploadService,
+      AnalysisService,
+      AnalysisListService,
   ],
   declarations: [
     AppComponent,
     PreparationListComponent,
     PageNotFoundComponent,
     MainPageComponent,
-    UploadComponent
+    UploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,7 @@ import { UploadComponent } from './upload/upload.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
-    routing
+    routing,
   ],
   bootstrap: [AppComponent]
 })

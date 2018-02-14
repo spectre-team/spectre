@@ -1,0 +1,54 @@
+/*
+ * analysis-list.component.ts
+ * Component of analysis list.
+ *
+   Copyright 2018 Sebastian Pustelnik
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
+import {Component, Input, OnInit} from '@angular/core';
+import 'rxjs/Rx';
+import {AnalysisListService} from './analysis-list.service';
+import {AnalysisName} from './analysis-name';
+
+
+@Component({
+  selector: 'app-analysis-list',
+  templateUrl: './analysis-list.component.html',
+  styleUrls: ['./analysis-list.component.css'],
+})
+export class AnalysisListComponent implements OnInit {
+  public analysisList: AnalysisName[];
+  @Input() public preparationId;
+  @Input() public analysisType;
+
+  constructor(private analysisListService: AnalysisListService) {
+  }
+
+  getColor(status) {
+    if (status === 'Done') {
+      return 'green';
+    } else if (status === 'Scheduled') {
+      return 'blue';
+    } else if (status === 'Failed') {
+      return 'red';
+    }
+  }
+
+  ngOnInit() {
+    this.analysisListService.getAnalysisList(this.preparationId, this.analysisType)
+      .subscribe(analysis => this.analysisList = analysis);
+    // this.analysisList = this.analysisListService.getMock();
+  }
+}
