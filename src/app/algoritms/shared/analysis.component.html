@@ -1,0 +1,40 @@
+<div class="inline-items-container">
+  <div id="heatmapWithDownloadButton">
+    <app-heatmap
+      [heatmapData]=data>
+    </app-heatmap>
+    <a
+      [href]='downloadJsonHref'
+      download='result.json'>
+      <button
+        Mat-raised-button
+        class="mat-button">
+        Download JSON result
+      </button>
+    </a>
+  </div>
+
+  <div>
+    <mat-expansion-panel id="analysis-info-expansion-panel">
+      <mat-expansion-panel-header id="expansionPanelHeader">
+        <mat-panel-title>
+          Option
+        </mat-panel-title>
+        <mat-panel-description>
+          Value
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let configElement of analysisConfigKeys">
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{configElement}}>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field">
+          <input matInput disabled="true" value={{analysisConfig[configElement]}}>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>
+
+

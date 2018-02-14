@@ -37,13 +37,17 @@ import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
+import { AnalysisService } from './algoritms/shared/analysis.service';
+import { AnalysisListService } from './algoritms/shared/analysis-list.service';
 
 @NgModule({
   providers: [
       HeatmapService,
       SpectrumService,
       MessagesService,
-      DivikService
+      DivikService,
+      AnalysisService,
+      AnalysisListService
   ],
   declarations: [
     AppComponent,

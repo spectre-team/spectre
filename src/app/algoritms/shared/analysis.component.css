@@ -1,0 +1,32 @@
+.multi_lines_text
+{
+  white-space: pre-line;
+}
+
+#analysis-info-expansion-panel
+{
+  margin-left: 60px;
+  width: 650px;
+}
+
+.mat-form-field
+{
+  width: 250px;
+}
+
+.inline-items-container
+{
+  display: flex;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+  text-decoration: none;
+}
+
+.mat-button
+{
+  margin-left: 82px;
+}
