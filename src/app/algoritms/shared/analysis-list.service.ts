@@ -39,28 +39,13 @@ export class AnalysisListService extends Service {
     return headers;
   }
 
-  getMock() {
-    return [{
-      name: 'Analysis 1',
-      status: 'Done',
-      id: '2'
-    }, {
-        name: 'Analysis 2',
-        status: 'Scheduled',
-        id: '1'
-      },
-      {
-        name: 'Analysis 3',
-        status: 'Failed',
-        id: '3'
-      }
-    ];
-  }
-
   getAnalysisList(preparationId: number, analysis_type: string): Observable<AnalysisName[]> {
     const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysis_type}`;
     return this.http.get(queryUrl, {headers: this.getHeaders()})
-      .map(res => res.json() as AnalysisName[]);
+      .map(res => res.json() as AnalysisName[])
+      .catch(err => {
+        return Observable.throw(err);
+      });
   }
 
   newAnalysis(preparationId: number, analysis_type: string) {

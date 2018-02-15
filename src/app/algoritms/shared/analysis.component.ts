@@ -47,7 +47,8 @@ export class AnalysisComponent implements OnInit {
   ngOnInit() {
     this.analysisService
       .get(this.preparationId, this.analysisType, this.analysisId)
-      .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap));
+      .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap),
+                err => {});
   }
 
   toHeatmapDataset(heatmap: Heatmap) {

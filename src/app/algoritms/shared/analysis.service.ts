@@ -42,7 +42,10 @@ export class AnalysisService extends Service {
   get(preparationId: number, analysisType: string, analysisId: number): Observable<Heatmap> {
     const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisId}$`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]')); // TODO
+    return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'))
+      .catch(err => {
+        return Observable.throw(err);
+      });
   }
 }
 
