@@ -41,6 +41,7 @@ import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
 import { AnalysisService } from './algoritms/shared/analysis.service';
 import { AnalysisListService } from './algoritms/shared/analysis-list.service';
+import { ShortSummaryComponent } from './divik-results/short-summary/short-summary.component';
 
 @NgModule({
   providers: [

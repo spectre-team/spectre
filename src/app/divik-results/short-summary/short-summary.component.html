@@ -1,0 +1,21 @@
+<div>
+  <mat-expansion-panel id="divik-info-expansion-panel">
+    <mat-expansion-panel-header id="expansionPanelHeader">
+      <mat-panel-title>
+        Option
+      </mat-panel-title>
+      <mat-panel-description>
+        Value
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let configElement of divikConfigKeys">
+      <mat-form-field class="mat-form-field">
+        <input matInput disabled="true" value={{configElement}}>
+      </mat-form-field>
+      <mat-form-field class="mat-form-field">
+        <input matInput disabled="true" value={{divikConfig[configElement]}}>
+      </mat-form-field>
+    </div>
+  </mat-expansion-panel>
+</div>
