@@ -37,6 +37,7 @@ import {
   MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
   MatSelectModule
 } from '@angular/material';
+import {ShortSummaryComponent} from '../divik-results/short-summary/short-summary.component';
 
 @NgModule({
   imports: [
@@ -60,6 +61,7 @@ import {
     HeatmapComponent,
     SpectrumComponent,
     DivikComponent,
+    ShortSummaryComponent,
     AnalysisComponent,
     AnalysisListComponent
 ]
