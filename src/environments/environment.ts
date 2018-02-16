@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost/spectre_api'
+  apiPreparationUrl: 'http://localhost:2001',
+  apiUploadUrl: 'http://localhost:2002/api'
 };

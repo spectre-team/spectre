@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://spectre.westeurope.cloudapp.azure.com:2001'
+  apiPreparationUrl: 'http://spectre.westeurope.cloudapp.azure.com:2001',
+  apiUploadUrl: 'http://spectre.westeurope.cloudapp.azure.com:2002/api'
 };
