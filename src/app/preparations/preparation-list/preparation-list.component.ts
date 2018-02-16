@@ -32,11 +32,9 @@ export class PreparationListComponent implements OnInit {
   constructor(private _preparationService: PreparationService) {
   }
 
-
   ngOnInit() {
     this._preparationService
       .getAll()
       .subscribe(p => this.preparations = p);
   }
-
 }

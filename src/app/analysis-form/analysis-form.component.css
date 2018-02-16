@@ -1,0 +1,57 @@
+.mainContainer
+{
+  text-align: left;
+  height: 100vh;
+  margin-top: 5vh;
+  margin-left: 10vh;
+}
+
+.optionsContainer{
+  text-align: left;
+  float: left;
+  display: block;
+  margin: auto;
+  margin-left: 100px;
+  margin-top: 5vh;
+
+}
+
+.imagineText
+{
+  text-align: justify;
+  margin-top: 10%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.inline-items-container
+{
+  display: flex;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+.slider
+{
+  width: 300px;
+}
+
+.slider-x
+{
+  width: 435px;
+  margin-left: 118px;
+}
+
+.slider-y
+{
+  height: 435px;
+  margin-top: 93px;
+}
+
+.column-item-position
+{
+  display: flex;
+  flex-direction: column;
+  margin-left: 67px;
+}
+

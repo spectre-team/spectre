@@ -41,7 +41,7 @@ import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
 import { AnalysisService } from './algoritms/shared/analysis.service';
 import { AnalysisListService } from './algoritms/shared/analysis-list.service';
-import { ShortSummaryComponent } from './divik-results/short-summary/short-summary.component';
+import { MatButtonModule } from '@angular/material';
 
 @NgModule({
   providers: [
@@ -71,6 +71,7 @@ import { ShortSummaryComponent } from './divik-results/short-summary/short-summa
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
+    MatButtonModule,
     routing,
   ],
   bootstrap: [AppComponent]

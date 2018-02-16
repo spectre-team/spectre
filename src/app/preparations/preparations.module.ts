@@ -35,9 +35,10 @@ import { GrowlModule, TabViewModule} from 'primeng/primeng';
 import { BlockUIModule } from 'ng-block-ui';
 import {
   MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
-  MatSelectModule
+  MatSelectModule, MatListModule, MatCheckboxModule
 } from '@angular/material';
 import {ShortSummaryComponent} from '../divik-results/short-summary/short-summary.component';
+import {AnalysisFormComponent} from '../analysis-form/analysis-form.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,9 @@ import {ShortSummaryComponent} from '../divik-results/short-summary/short-summar
     MatInputModule,
     MatButtonModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatListModule,
+    MatCheckboxModule
   ],
   declarations: [
     PreparationComponent,
@@ -63,7 +66,8 @@ import {ShortSummaryComponent} from '../divik-results/short-summary/short-summar
     DivikComponent,
     ShortSummaryComponent,
     AnalysisComponent,
-    AnalysisListComponent
+    AnalysisListComponent,
+    AnalysisFormComponent
 ]
 })
 export class PreparationsModule {}
