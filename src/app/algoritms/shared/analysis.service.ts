@@ -25,6 +25,8 @@ import 'rxjs/Rx';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { Service } from '../../app.service';
 import { HeatmapUtil } from '../../heatmaps/shared/heatmap-util';
+import { DivikConfig } from '../../divik-results/shared/divik-config';
+import { DivikSummary } from '../../divik-results/shared/divik.summary';
 
 @Injectable()
 export class AnalysisService extends Service {
@@ -39,13 +41,25 @@ export class AnalysisService extends Service {
     return headers;
   }
 
-  get(preparationId: number, analysisType: string, analysisId: number): Observable<Heatmap> {
-    const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisId}$`;
+  get(preparationId: number, analysisType: string, analysisName: string): Observable<Heatmap> {
+    const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisName}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'))
       .catch(err => {
         return Observable.throw(err);
       });
+  }
+
+  getConfig(preparationId: number, analysisType: string, analysisName: string): Observable<DivikConfig> {
+    const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisName}/config`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    return response.map(res => res.json() as DivikConfig);
+  }
+
+  getSummary(preparationId, analysisType: string, analysisName: string): Observable<DivikSummary> {
+    const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisName}/summary`;
+    const response = this.http.get(queryUrl, {headers: this.getHeaders()});
+    return response.map(res => res.json() as DivikSummary);
   }
 }
 

@@ -23,6 +23,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import 'rxjs/Rx';
 import { AnalysisService } from './analysis.service';
+import {DivikSummary} from '../../divik-results/shared/divik.summary';
 
 
 @Component({
@@ -33,11 +34,14 @@ import { AnalysisService } from './analysis.service';
 export class AnalysisComponent implements OnInit {
   @Input() public preparationId;
   @Input() public analysisType;
-  @Input() public analysisId;
+  @Input() public analysisName;
   public data: any;
   public analysisConfig: any;
   public analysisConfigKeys: Array<string>;
-  public downloadJsonHref: SafeUrl;
+  public analysisSummaryKeys: Array<string>;
+  public resultDownloadJsonHref: SafeUrl;
+  public summaryDownloadJsonHref: SafeUrl;
+  public analysisSummary: any;
 
   constructor(
       private analysisService: AnalysisService,
@@ -46,9 +50,15 @@ export class AnalysisComponent implements OnInit {
 
   ngOnInit() {
     this.analysisService
-      .get(this.preparationId, this.analysisType, this.analysisId)
+      .get(this.preparationId, this.analysisType, this.analysisName)
       .subscribe(heatmap => this.data = this.toHeatmapDataset(heatmap),
                 err => {});
+    this.analysisService
+      .getConfig(this.preparationId, this.analysisType, this.analysisName)
+      .subscribe(config => this.buildConfigInfo(config));
+    this.analysisService
+      .getSummary(this.preparationId, this.analysisType, this.analysisName)
+      .subscribe(summary => this.buildSummaryInfo(summary));
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
@@ -58,8 +68,26 @@ export class AnalysisComponent implements OnInit {
     }];
   }
 
-  generateDownloadJsonUri() {
+  buildConfigInfo(config: any) {
+    this.analysisConfig = config;
+    this.analysisConfigKeys = Object.keys(this.analysisConfig);
+    this.generateResultDownloadJsonUri();
+  }
+
+  buildSummaryInfo(summary: any) {
+    this.analysisSummary = summary;
+    this.analysisSummaryKeys = Object.keys(this.analysisSummary);
+    this.generateSummaryDownloadJsonUri();
+  }
+
+  generateResultDownloadJsonUri() {
     const theJSON = JSON.stringify(this.analysisConfig);
-    this.downloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
+    this.resultDownloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
+  }
+
+
+  generateSummaryDownloadJsonUri() {
+    const theJSON = JSON.stringify(this.analysisSummary);
+    this.summaryDownloadJsonHref = this.sanitizer.bypassSecurityTrustUrl('data:text/json;charset=UTF-8,' + encodeURIComponent(theJSON));
   }
 }
