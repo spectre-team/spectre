@@ -39,7 +39,7 @@ import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AnalysisService } from './algoritms/shared/analysis.service';
 import { AnalysisListService } from './algoritms/shared/analysis-list.service';
-import { ShortSummaryComponent } from './divik-results/short-summary/short-summary.component';
+import { MatButtonModule } from '@angular/material';
 
 @NgModule({
   providers: [
@@ -54,7 +54,7 @@ import { ShortSummaryComponent } from './divik-results/short-summary/short-summa
     AppComponent,
     PreparationListComponent,
     PageNotFoundComponent,
-    MainPageComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +66,7 @@ import { ShortSummaryComponent } from './divik-results/short-summary/short-summa
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
+    MatButtonModule,
     routing
   ],
   bootstrap: [AppComponent]
