@@ -40,7 +40,7 @@ export class AnalysisListService extends Service {
   }
 
   getAnalysisList(preparationId: number, analysis_type: string): Observable<AnalysisName[]> {
-    const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysis_type}`;
+    const queryUrl = `${this.getBaseAnalysisUrl()}/preparation/${preparationId}/analyses/${analysis_type}`;
     return this.http.get(queryUrl, {headers: this.getHeaders()})
       .map(res => res.json() as AnalysisName[])
       .catch(err => {
@@ -49,7 +49,7 @@ export class AnalysisListService extends Service {
   }
 
   newAnalysis(preparationId: number, analysis_type: string) {
-    const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysis_type}`;
+    const queryUrl = `${this.getBaseAnalysisUrl()}/preparation/${preparationId}/analyses/${analysis_type}`;
     this.http.post(queryUrl, {headers: this.getHeaders()});
   }
 }

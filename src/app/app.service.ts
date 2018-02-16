@@ -22,9 +22,11 @@ import { environment } from '../environments/environment';
 export class Service {
   private basePreparationUrl = environment.apiPreparationUrl;
   private baseUploadUrl = environment.apiUploadUrl;
+  private baseAnalysisUrl = environment.apiAnalysisUrl;
 
   public getBasePreparationUrl(): string { return this.basePreparationUrl; }
   public getBaseUploadUrl(): string { return this.baseUploadUrl; }
+  public getBaseAnalysisUrl(): string { return this.baseAnalysisUrl; }
 
 
   constructor() { }

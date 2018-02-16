@@ -6,5 +6,7 @@
 export const environment = {
   production: false,
   apiPreparationUrl: 'http://localhost:2001',
-  apiUploadUrl: 'http://localhost:2002/api'
+  apiUploadUrl: 'http://localhost:2002/api',
+  apiAnalysisUrl: 'http://localhost:2003'
+
 };

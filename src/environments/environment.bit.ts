@@ -6,5 +6,6 @@
 export const environment = {
   production: true,
   apiPreparationUrl: 'http://vaei-bit01.aei.polsl.pl:2001',
-  apiUploadUrl: 'http://vaei-bit01.aei.polsl.pl:2002/api'
+  apiUploadUrl: 'http://vaei-bit01.aei.polsl.pl:2002/api',
+  apiAnalysisUrl: 'http://vaei-bit01.aei.polsl.pl:2003'
 };
