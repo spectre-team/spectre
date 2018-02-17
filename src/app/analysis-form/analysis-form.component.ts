@@ -39,14 +39,14 @@ export class AnalysisFormComponent implements OnInit {
   ChosenPreparation: string;
   ChosenAnalysis: string;
   OptionsVisible: boolean;
-  MaxK = 2;
-  Level = 0;
-  UseLevels: boolean;
-  PercentSizeLimit: 0;
-  FeaturePreservationLimit: 0;
+  MaxK = 10;
+  Level = 3;
+  UseLevels = true;
+  PercentSizeLimit = 0.001;
+  FeaturePreservationLimit = 0.05;
   Metric: Array<string>;
-  MaxComponentsForDecomposition: 0;
-  KMeansMaxIters: 0;
+  MaxComponentsForDecomposition = 10;
+  KMeansMaxIters = 100;
   ChosenMetric: string;
 
   public AnalysisToChoose = [
@@ -65,14 +65,14 @@ export class AnalysisFormComponent implements OnInit {
     this.AnalysisData = {
       DatasetName: '',
       AnalysisName: '',
-      MaxK: 2,
-      Level: 0,
-      UseLevels: false,
-      PercentSizeLimit: 0,
-      FeaturePreservationLimit: 0,
+      MaxK: 10,
+      Level: 3,
+      UseLevels: true,
+      PercentSizeLimit: 0.001,
+      FeaturePreservationLimit: 0.05,
       Metric: '',
-      MaxComponentsForDecomposition: 0,
-      KmeansMaxIters: 0
+      MaxComponentsForDecomposition: 10,
+      KmeansMaxIters: 100
     };
     this.Metric = ['euclidean', 'jaccard', 'cosine', 'correlation'];
   }
