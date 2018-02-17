@@ -72,7 +72,7 @@ export class AnalysisFormComponent implements OnInit {
       FeaturePreservationLimit: 0,
       Metric: '',
       MaxComponentsForDecomposition: 0,
-      KMeansMaxIters: 0
+      KmeansMaxIters: 0
     };
     this.Metric = ['euclidean', 'jaccard', 'cosine', 'correlation'];
   }
@@ -88,7 +88,7 @@ export class AnalysisFormComponent implements OnInit {
       FeaturePreservationLimit: this.FeaturePreservationLimit,
       Metric: this.ChosenMetric,
       MaxComponentsForDecomposition: this.MaxComponentsForDecomposition,
-      KMeansMaxIters: this.KMeansMaxIters
+      KmeansMaxIters: this.KMeansMaxIters
     };
 
 
@@ -101,7 +101,7 @@ export class AnalysisFormComponent implements OnInit {
     console.log('FeaturePreservationLimit', this.AnalysisData.FeaturePreservationLimit);
     console.log('Metric', this.AnalysisData.Metric);
     console.log('MaxComponentsForDecomposition', this.AnalysisData.MaxComponentsForDecomposition);
-    console.log('KMeansMaxIters', this.AnalysisData.KMeansMaxIters);
+    console.log('KMeansMaxIters', this.AnalysisData.KmeansMaxIters);
 
     const url = `${environment.apiUrl}:2003/schedule/divik`;
     this.http.post(url, {
