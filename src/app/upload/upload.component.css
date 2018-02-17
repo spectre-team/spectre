@@ -1,0 +1,13 @@
+.uploadContainer
+{
+  text-align: center;
+  height: 100vh;
+  margin-top: 10%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.labelStyle
+{
+  margin-left: 0.8em;
+}
