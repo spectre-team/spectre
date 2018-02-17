@@ -16,7 +16,7 @@ services:
 
     client:
         restart: always
-        image: spectreteam/spectre:4.0.0.27
+        image: spectreteam/spectre:4.0.0.52
         ports:
             - "80:80"
         depends_on:
@@ -48,7 +48,7 @@ services:
         restart: always
 
     analysis-api:
-        image: spectreteam/spectre-analysis:1.0.0.15
+        image: spectreteam/spectre-analysis:1.0.0.16
         environment:
           - FLASK_APP=api.py
         command: python -m flask run -p 80 -h 0.0.0.0
@@ -61,7 +61,7 @@ services:
           - data:/data
 
     worker:
-        image: spectreteam/spectre-analysis:1.0.0.15
+        image: spectreteam/spectre-analysis:1.0.0.16
         command: celery -A spectre_analyses worker --loglevel=info
         scale: 2
         depends_on:
