@@ -58,7 +58,7 @@ export class AnalysisListService extends Service {
   }
 
   getAnalysisList(preparationId: number, analysis_type: string): Observable<AnalysisName[]> {
-    const queryUrl = `${this.getBaseUrl()}/preparation/${preparationId}/analyses/${analysis_type}`;
+    const queryUrl = `${this.getBaseUrl()}:2003/preparation/${preparationId}/analyses/${analysis_type}`;
     return this.http.get(queryUrl, {headers: this.getHeaders()})
       .map(res => res.json() as AnalysisName[]);
   }
