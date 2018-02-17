@@ -63,7 +63,7 @@ services:
     worker:
         image: spectreteam/spectre-analysis:1.0.0.16
         command: celery -A spectre_analyses worker --loglevel=info
-        scale: 2
+        #scale: 2
         depends_on:
           - rabbitmq
         volumes:
