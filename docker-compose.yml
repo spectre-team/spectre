@@ -48,7 +48,7 @@ services:
         restart: always
 
     analysis-api:
-        image: spectreteam/spectre-analysis:1.0.0.23
+        image: spectreteam/spectre-analysis:1.0.0.24
         environment:
           - FLASK_APP=api.py
         command: python -m flask run -p 80 -h 0.0.0.0
@@ -61,7 +61,7 @@ services:
           - data:/data
 
     worker:
-        image: spectreteam/spectre-analysis:1.0.0.23
+        image: spectreteam/spectre-analysis:1.0.0.24
         command: celery -A spectre_analyses worker --loglevel=info
         depends_on:
           - rabbitmq
