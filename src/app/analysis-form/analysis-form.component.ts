@@ -20,7 +20,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PreparationService } from '../preparations/shared/preparation.service';
 import { Preparation } from '../preparations/shared/preparation';
-import {IAnalysisData} from './IAnalysisData';
+import { IAnalysisData } from './IAnalysisData';
+import { HttpClient } from '@angular/common/http';
+import { Service } from '../app.service';
 
 @Component({
   moduleId: module.id,
@@ -51,7 +53,7 @@ export class AnalysisFormComponent implements OnInit {
     { value: 'divik', display: 'DiviK' }
   ];
 
-  constructor(private _preparationService: PreparationService) {
+  constructor(private _preparationService: PreparationService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -88,6 +90,8 @@ export class AnalysisFormComponent implements OnInit {
       KMeansMaxIters: this.KMeansMaxIters
     };
 
+    let url = `${this.getBaseUrl()}:2003/preparation/${preparationId}/analyses/${analysis_type}`;
+
     console.log('name', this.AnalysisData.DatasetName);
     console.log('AnalysisName', this.AnalysisData.AnalysisName);
     console.log('MaxK', this.AnalysisData.MaxK);
@@ -98,5 +102,18 @@ export class AnalysisFormComponent implements OnInit {
     console.log('Metric', this.AnalysisData.Metric);
     console.log('MaxComponentsForDecomposition', this.AnalysisData.MaxComponentsForDecomposition);
     console.log('KMeansMaxIters', this.AnalysisData.KMeansMaxIters);
+
+    this.http.post(this.url, {
+        title: 'ChosenAnalysis',
+        body: this.AnalysisData
+      })
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log('Error occured', err);
+        }
+      );
   }
 }
