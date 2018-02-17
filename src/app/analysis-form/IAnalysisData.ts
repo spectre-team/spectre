@@ -27,5 +27,5 @@ export interface IAnalysisData {
   FeaturePreservationLimit: number;
   Metric: string;
   MaxComponentsForDecomposition: number;
-  KMeansMaxIters: number;
+  KmeansMaxIters: number;
 }
