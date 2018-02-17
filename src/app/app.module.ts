@@ -50,7 +50,7 @@ import { UploadComponent } from './upload/upload.component';
       MessagesService,
       DivikService,
       AnalysisService,
-      AnalysisListService
+      AnalysisListService,
       UploadService
   ],
   declarations: [
