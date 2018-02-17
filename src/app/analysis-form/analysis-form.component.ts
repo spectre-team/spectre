@@ -23,6 +23,7 @@ import { Preparation } from '../preparations/shared/preparation';
 import { IAnalysisData } from './IAnalysisData';
 import { HttpClient } from '@angular/common/http';
 import { Service } from '../app.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   moduleId: module.id,
@@ -90,7 +91,6 @@ export class AnalysisFormComponent implements OnInit {
       KMeansMaxIters: this.KMeansMaxIters
     };
 
-    let url = `${this.getBaseUrl()}:2003/preparation/${preparationId}/analyses/${analysis_type}`;
 
     console.log('name', this.AnalysisData.DatasetName);
     console.log('AnalysisName', this.AnalysisData.AnalysisName);
@@ -103,7 +103,8 @@ export class AnalysisFormComponent implements OnInit {
     console.log('MaxComponentsForDecomposition', this.AnalysisData.MaxComponentsForDecomposition);
     console.log('KMeansMaxIters', this.AnalysisData.KMeansMaxIters);
 
-    this.http.post(this.url, {
+    const url = `${environment.apiUrl}:2003/schedule/divik`;
+    this.http.post(url, {
         title: 'ChosenAnalysis',
         body: this.AnalysisData
       })
