@@ -104,10 +104,7 @@ export class AnalysisFormComponent implements OnInit {
     console.log('KMeansMaxIters', this.AnalysisData.KmeansMaxIters);
 
     const url = `${environment.apiUrl}:2003/schedule/divik`;
-    this.http.post(url, {
-        title: 'ChosenAnalysis',
-        body: this.AnalysisData
-      })
+    this.http.post(url, this.AnalysisData)
       .subscribe(
         res => {
           console.log(res);
