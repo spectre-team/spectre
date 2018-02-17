@@ -39,6 +39,7 @@ import {
 } from '@angular/material';
 import {ShortSummaryComponent} from '../divik-results/short-summary/short-summary.component';
 import {AnalysisFormComponent} from '../analysis-form/analysis-form.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import {AnalysisFormComponent} from '../analysis-form/analysis-form.component';
     MatTabsModule,
     MatExpansionModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
   declarations: [
     PreparationComponent,
