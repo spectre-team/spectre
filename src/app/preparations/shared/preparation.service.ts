@@ -24,7 +24,6 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import { Service } from '../../app.service';
 import { apiUrl } from '../../../environments/apiUrl';
-import { sprintf } from 'sprintf-js';
 
 @Injectable()
 export class PreparationService extends Service {
@@ -39,7 +38,7 @@ export class PreparationService extends Service {
 
   getPreparationById(preparationId: number): Observable<Preparation> {
     return this.http
-      .get(this.getBasePreparationUrl() +  sprintf(apiUrl.preparationUrl, preparationId), {headers: this.getHeaders()})
+      .get(this.getBasePreparationUrl() +  apiUrl.preparationUrl.format(preparationId), {headers: this.getHeaders()})
       .map(r => toPreparation(r.json()));
   }
 
