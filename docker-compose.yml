@@ -40,12 +40,18 @@ services:
         volumes:
             - data:/data
 
-    rabbitmq:
+    rabbitmq-celery-broker:
         image: rabbitmq:3.7.3-management
         hostname: 'rabbitmq'
-        ports:
-          - "5672:5672"
         restart: always
+
+    postgresql-celery-backend:
+        image: postgresql:10.2-alpine
+        hostname: 'postgresql'
+        restart: always
+        environment:
+            POSTGRES_USER: guest
+            POSTGRES_PASSWORD: guest
 
     analysis-api:
         image: spectreteam/spectre-analysis:1.0.0.25
