@@ -34,7 +34,7 @@ services:
 
     upload-api:
         restart: always
-        image: spectreteam/spectre-upload:1.0.1.88
+        image: spectreteam/spectre-upload:1.0.2.139
         ports:
             - "2002:80"
         volumes:
