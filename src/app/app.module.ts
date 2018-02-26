@@ -32,7 +32,6 @@ import { PlotlyModule } from './plotly/plotly.module';
 import { SpectrumService } from './spectra/shared/spectrum.service';
 import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
-import { MessagesService } from 'ng2-messages/ng2-messages.service';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule} from '@angular/material';
@@ -47,7 +46,6 @@ import { UploadComponent } from './upload/upload.component';
   providers: [
       HeatmapService,
       SpectrumService,
-      MessagesService,
       DivikService,
       AnalysisService,
       AnalysisListService,
