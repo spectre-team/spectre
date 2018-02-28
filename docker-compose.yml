@@ -2,6 +2,15 @@ version: '2'
 
 services:
 
+    client:
+        restart: always
+        image: spectreteam/spectre:4.0.0.53
+        ports:
+            - "80:80"
+        depends_on:
+            - visualization-api
+            - upload-api
+
     visualization-api:
         restart: always
         image: spectreteam/spectre-visualization:1.0.0.24
