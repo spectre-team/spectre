@@ -36,5 +36,18 @@ services:
             RABBITMQ_DEFAULT_USER: guest
             RABBITMQ_DEFAULT_PASS: guest
 
+    postgresql:
+        image: postgres:10.2-alpine
+        hostname: 'postgresql'
+        restart: always
+        environment:
+            POSTGRES_USER: guest
+            POSTGRES_PASSWORD: guest
+            POSTGRES_DB: celery
+        volumes:
+            - celery:/var/lib/postgresql/data
+
 volumes:
     data:
+
+    celery:
