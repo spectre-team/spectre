@@ -22,7 +22,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
-import {Service} from "../../app.service";
+import { Service } from '../../app.service';
+import { apiUrl } from '../../../environments/apiUrl';
 
 @Injectable()
 export class PreparationService extends Service {
@@ -31,13 +32,13 @@ export class PreparationService extends Service {
 
   getAll(): Observable<Preparation[]> {
     return this.http
-      .get(`${this.getBaseUrl()}/preparations`, {headers: this.getHeaders()})
+      .get(this.getBasePreparationUrl() + apiUrl.preparationsUrl, {headers: this.getHeaders()})
       .map(mapPreparations);
   }
 
   getPreparationById(preparationId: number): Observable<Preparation> {
     return this.http
-      .get(`${this.getBaseUrl()}/preparations/${preparationId}`, {headers: this.getHeaders()})
+      .get(this.getBasePreparationUrl() +  apiUrl.preparationUrl.format(preparationId), {headers: this.getHeaders()})
       .map(r => toPreparation(r.json()));
   }
 
