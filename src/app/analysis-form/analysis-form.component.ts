@@ -80,7 +80,7 @@ export class AnalysisFormComponent implements OnInit {
   public save() {
     this.AnalysisData = {
       DatasetName: this.ChosenPreparation,
-      AnalysisName: this.ChosenAnalysis,
+      AnalysisName: this.AnalysisName,
       MaxK: this.MaxK,
       Level: this.Level,
       UseLevels: this.UseLevels,
