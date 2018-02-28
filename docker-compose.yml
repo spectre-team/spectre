@@ -67,6 +67,14 @@ services:
         ports:
           - "2004:80"
 
+    divik-worker:
+        image: spectreteam/divik-worker:1.0.0-alpha
+        depends_on:
+          - rabbitmq
+          - postgresql
+        volumes:
+          - data:/data
+
 volumes:
     data:
 
