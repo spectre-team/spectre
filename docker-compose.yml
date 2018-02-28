@@ -47,6 +47,17 @@ services:
         volumes:
             - celery:/var/lib/postgresql/data
 
+    analysis-api:
+        image: spectreteam/spectre-analysis:1.0.0-alpha
+        ports:
+          - "2003:80"
+        depends_on:
+          - rabbitmq
+          - postgresql
+          - visualization-api
+        volumes:
+          - data:/data
+
 volumes:
     data:
 
