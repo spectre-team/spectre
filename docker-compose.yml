@@ -28,5 +28,13 @@ services:
         volumes:
             - data:/data
 
+    rabbitmq:
+        image: rabbitmq:3.7.3-management
+        hostname: 'rabbitmq'
+        restart: always
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+
 volumes:
     data:
