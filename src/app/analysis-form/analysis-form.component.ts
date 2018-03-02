@@ -103,7 +103,7 @@ export class AnalysisFormComponent implements OnInit {
     console.log('MaxComponentsForDecomposition', this.AnalysisData.MaxComponentsForDecomposition);
     console.log('KMeansMaxIters', this.AnalysisData.KmeansMaxIters);
 
-    const url = `${environment.apiUrl}:2003/schedule/divik`;
+    const url = `${environment.apiDivikUrl}/schedule/divik`;
     this.http.post(url, this.AnalysisData)
       .subscribe(
         res => {
