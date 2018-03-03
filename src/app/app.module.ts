@@ -41,6 +41,7 @@ import { UploadComponent } from './upload/upload.component';
 import { AnalysisService } from './algoritms/shared/analysis.service';
 import { AnalysisListService } from './algoritms/shared/analysis-list.service';
 import { MatButtonModule } from '@angular/material';
+import { FlowLayoutComponent } from './flow-layout/flow-layout.component';
 
 @NgModule({
   providers: [
@@ -57,6 +58,7 @@ import { MatButtonModule } from '@angular/material';
     PageNotFoundComponent,
     MainPageComponent,
     UploadComponent,
+    FlowLayoutComponent,
   ],
   imports: [
     BrowserModule,

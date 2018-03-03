@@ -25,7 +25,6 @@ import { PreparationListComponent } from './preparations/preparation-list/prepar
 import { MainPageComponent } from './main-page/main-page.component';
 import { AnalysisFormComponent } from './analysis-form/analysis-form.component';
 import { UploadComponent } from './upload/upload.component';
-import { AnalysisFormComponent } from './analysis-form/analysis-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: PreparationListComponent, pathMatch: 'full'}, // redirect to home page on load
@@ -33,7 +32,6 @@ const appRoutes: Routes = [
   { path: 'mainPage', component: MainPageComponent, pathMatch: 'full'},
   { path: 'analysisForm', component: AnalysisFormComponent, pathMatch: 'full'},
   { path: 'uploadDataset', component: UploadComponent, pathMatch: 'full'},
-  { path: 'analysisForm', component: AnalysisFormComponent, pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];
 
