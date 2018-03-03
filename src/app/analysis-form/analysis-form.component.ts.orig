@@ -80,7 +80,11 @@ export class AnalysisFormComponent implements OnInit {
   public save() {
     this.AnalysisData = {
       DatasetName: this.ChosenPreparation,
+<<<<<<< HEAD
+      AnalysisName: this.ChosenAnalysis,
+=======
       AnalysisName: this.AnalysisName,
+>>>>>>> feature/analysis-form
       MaxK: this.MaxK,
       Level: this.Level,
       UseLevels: this.UseLevels,
@@ -103,7 +107,11 @@ export class AnalysisFormComponent implements OnInit {
     console.log('MaxComponentsForDecomposition', this.AnalysisData.MaxComponentsForDecomposition);
     console.log('KMeansMaxIters', this.AnalysisData.KmeansMaxIters);
 
+<<<<<<< HEAD
+    const url = `${environment.apiUrl}:2003/schedule/divik`;
+=======
     const url = `${environment.apiDivikUrl}/schedule/divik`;
+>>>>>>> feature/analysis-form
     this.http.post(url, this.AnalysisData)
       .subscribe(
         res => {

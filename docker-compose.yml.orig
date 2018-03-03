@@ -2,6 +2,21 @@ version: '2'
 
 services:
 
+<<<<<<< HEAD
+    # I have used it for pushing data for testing purposes.
+    # When Maciej states, how to secure it, we may enable it.
+
+    # ftp:
+    #     restart: always
+    #     image: stilliard/pure-ftpd:hardened-1.0.36
+    #     ports:
+    #         - "30000-30009:30000-30009"
+    #         - "21:21"
+    #     volumes:
+    #         - data:/home/ftpusers/
+
+=======
+>>>>>>> feature/analysis-form
     client:
         restart: always
         image: spectreteam/spectre:4.0.0.53
@@ -28,6 +43,15 @@ services:
         volumes:
             - data:/data
 
+<<<<<<< HEAD
+    rabbitmq-celery-broker:
+        image: rabbitmq:3.7.3-management
+        hostname: 'rabbitmq'
+        restart: always
+
+    postgresql-celery-backend:
+        image: postgresql:10.2-alpine
+=======
     rabbitmq:
         image: rabbitmq:3.7.3-management
         hostname: 'rabbitmq'
@@ -38,26 +62,46 @@ services:
 
     postgresql:
         image: postgres:10.2-alpine
+>>>>>>> feature/analysis-form
         hostname: 'postgresql'
         restart: always
         environment:
             POSTGRES_USER: guest
             POSTGRES_PASSWORD: guest
+<<<<<<< HEAD
+
+    analysis-api:
+        image: spectreteam/spectre-analysis:1.0.0.25
+        environment:
+          - FLASK_APP=api.py
+        command: python -m flask run -p 80 -h 0.0.0.0
+=======
             POSTGRES_DB: celery
         volumes:
             - celery:/var/lib/postgresql/data
 
     analysis-api:
         image: spectreteam/spectre-analysis:1.0.0-alpha
+>>>>>>> feature/analysis-form
         ports:
           - "2003:80"
         depends_on:
           - rabbitmq
+<<<<<<< HEAD
+=======
           - postgresql
+>>>>>>> feature/analysis-form
           - visualization-api
         volumes:
           - data:/data
 
+<<<<<<< HEAD
+    worker:
+        image: spectreteam/spectre-analysis:1.0.0.25
+        command: celery -A spectre_analyses worker --loglevel=info
+        depends_on:
+          - rabbitmq
+=======
     celery-flower:
         image: spectreteam/spectre-analysis:1.0.0-alpha
         command: celery -A spectre_analyses flower --loglevel=info --port=80 --address=0.0.0.0
@@ -72,10 +116,14 @@ services:
         depends_on:
           - rabbitmq
           - postgresql
+>>>>>>> feature/analysis-form
         volumes:
           - data:/data
 
 volumes:
     data:
+<<<<<<< HEAD
+=======
 
     celery:
+>>>>>>> feature/analysis-form

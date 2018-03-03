@@ -1,6 +1,10 @@
 export const environment = {
   production: true,
+<<<<<<< HEAD
+  apiUrl: 'http://spectre.westeurope.cloudapp.azure.com'
+=======
   apiPreparationUrl: 'http://spectre.westeurope.cloudapp.azure.com:2001',
   apiUploadUrl: 'http://spectre.westeurope.cloudapp.azure.com:2002/api',
   apiDivikUrl: 'http://spectre.westeurope.cloudapp.azure.com:2003',
+>>>>>>> feature/analysis-form
 };

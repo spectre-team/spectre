@@ -27,7 +27,6 @@ import {Service} from '../../app.service';
 import {DivikConfig} from './divik-config';
 import {HeatmapUtil} from '../../heatmaps/shared/heatmap-util';
 import { apiUrl } from '../../../environments/apiUrl';
-import { sprintf } from 'sprintf-js';
 
 @Injectable()
 export class DivikService extends Service {
@@ -43,13 +42,13 @@ export class DivikService extends Service {
   }
 
   get(preparationId: number, divikId: number, level: number): Observable<Heatmap> {
-    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.divikResultUrl, preparationId, divikId, level);
+    const queryUrl = this.getBaseDivikUrl() + apiUrl.divikResultUrl.format(preparationId, divikId, level);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'));
   }
 
   getConfig(preparationId: number, divikId: number): Observable<DivikConfig> {
-    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.divikConfigUrl, preparationId, divikId);
+    const queryUrl = this.getBaseDivikUrl() + apiUrl.divikConfigUrl.format(preparationId, divikId);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     return response.map(toDivikConfig);
   }

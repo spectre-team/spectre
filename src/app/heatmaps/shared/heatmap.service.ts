@@ -25,7 +25,6 @@ import 'rxjs/Rx';
 import {Heatmap} from './heatmap';
 import {Service} from '../../app.service';
 import {HeatmapUtil} from './heatmap-util';
-import { sprintf } from 'sprintf-js';
 import { apiUrl } from '../../../environments/apiUrl';
 
 @Injectable()
@@ -43,7 +42,7 @@ export class HeatmapService extends Service {
 
   get(preparationId: number, channelId: number): Observable<Heatmap> {
     console.log('[HeatmapService] preparationId: ' + preparationId + ' channelId ' + channelId);
-    const queryUrl = this.getBaseUrl() + sprintf(apiUrl.heatmapUrl, preparationId, channelId);
+    const queryUrl = this.getBasePreparationUrl() + apiUrl.heatmapUrl.format(preparationId, channelId);
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
     const heatmap = response.map((res: Response) => HeatmapUtil.toHeatmap(res));
     return heatmap;

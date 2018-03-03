@@ -1,0 +1,22 @@
+export const apiUrl = {
+<<<<<<< HEAD
+  spectrumByIdUrl: ':2001/spectrum/%d?spectrumId=%d',
+  spectrumByCoordUrl: ':2001/spectrum/%d?x=%d&y=%d',
+  preparationsUrl: ':2001/preparations',
+  preparationUrl: ':2001/preparations/%s',
+  heatmapUrl: ':2001/heatmap/%s?channelId=%s&flag=false',
+  divikResultUrl: ':2001/divikResult/%s?divikId=#d&level=#s',
+  divikConfigUrl: ':2001/divikResult/%s?divikId=%s',
+  uploadUrl: ':2002/api/download'
+
+=======
+  spectrumByIdUrl: '/spectrum/{0}?spectrumId={1}',
+  spectrumByCoordUrl: '/spectrum/{0}?x={1}&y={2}',
+  preparationsUrl: '/preparations',
+  preparationUrl: '/preparations/{0}',
+  heatmapUrl: '/heatmap/{0}?channelId={1}&flag=false',
+  divikResultUrl: '/divikResult/{0}?divikId={1}&level={2}',
+  divikConfigUrl: '/divikResult/{0}?divikId={1}',
+  uploadUrl: '/download'
+>>>>>>> feature/analysis-form
+};

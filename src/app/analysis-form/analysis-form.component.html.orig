@@ -15,7 +15,23 @@
       </mat-form-field>
     </div>
       </mat-list-item>
+<<<<<<< HEAD
+      <mat-list-item role="listitem">
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Analysis"
+                        [(ngModel)]="ChosenAnalysis">
+              <mat-option *ngFor="let analysis of AnalysisToChoose"
+                          [value]="analysis.value">
+                {{ analysis.display }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+=======
 
+>>>>>>> feature/analysis-form
       <mat-list-item role="listitem">
         <div>
               <input type="text" placeholder="Analysis name" [(ngModel)]="AnalysisName">

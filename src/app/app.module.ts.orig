@@ -36,6 +36,9 @@ import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
+import { AnalysisService } from './algoritms/shared/analysis.service';
+import { AnalysisListService } from './algoritms/shared/analysis-list.service';
+import { MatButtonModule } from '@angular/material';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
 import { AnalysisService } from './algoritms/shared/analysis.service';
@@ -47,9 +50,15 @@ import { MatButtonModule } from '@angular/material';
       HeatmapService,
       SpectrumService,
       DivikService,
+<<<<<<< HEAD
+      AnalysisService,
+      AnalysisListService,
+      UploadService
+=======
       UploadService,
       AnalysisService,
       AnalysisListService,
+>>>>>>> feature/analysis-form
   ],
   declarations: [
     AppComponent,
@@ -70,7 +79,11 @@ import { MatButtonModule } from '@angular/material';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
+<<<<<<< HEAD
+    routing
+=======
     routing,
+>>>>>>> feature/analysis-form
   ],
   bootstrap: [AppComponent]
 })

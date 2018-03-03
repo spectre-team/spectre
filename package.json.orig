@@ -65,6 +65,10 @@
     "@angular/platform-browser-dynamic": "^5.2.6",
     "@angular/platform-server": "^5.2.6",
     "@angular/router": "^5.2.6",
+<<<<<<< HEAD
+    "@types/sprintf": "^0.1.0",
+=======
+>>>>>>> feature/analysis-form
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
@@ -72,6 +76,10 @@
     "ng-block-ui": "^1.0.0-beta.15",
     "primeng": "^4.2.1",
     "rxjs": "^5.5.6",
+<<<<<<< HEAD
+    "sprintf-js": "^1.1.1",
+=======
+>>>>>>> feature/analysis-form
     "typescript": "2.6.2",
     "zone.js": "^0.7.8"
   },

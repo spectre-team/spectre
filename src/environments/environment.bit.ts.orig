@@ -4,8 +4,12 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  apiPreparationUrl: 'http://localhost:2001',
-  apiUploadUrl: 'http://localhost:2002/api',
-  apiDivikUrl: 'http://localhost:2003',
+  production: true,
+<<<<<<< HEAD
+  apiUrl: 'http://vaei-bit01.aei.polsl.pl'
+=======
+  apiPreparationUrl: 'http://vaei-bit01.aei.polsl.pl:2001',
+  apiUploadUrl: 'http://vaei-bit01.aei.polsl.pl:2002/api',
+  apiDivikUrl: 'http://vaei-bit01.aei.polsl.pl:2003'
+>>>>>>> feature/analysis-form
 };
