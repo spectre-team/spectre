@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '6'
+- '8'
 sudo: required
 services:
 - docker
@@ -15,8 +15,8 @@ env:
   - CONFIGURATION=bit
 install:
 - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
-- npm install -g npm@4.4.1 --loglevel=error
-- npm install -g @angular/cli@1.0.0-rc.2 --loglevel=error
+- npm install -g npm@5.6.0 --loglevel=error
+- npm install -g @angular/cli@1.7.1 --loglevel=error
 - npm install --loglevel=error
 before_script:
 - export DISPLAY=:99.0
