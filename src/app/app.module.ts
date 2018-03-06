@@ -37,11 +37,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
-import { UploadComponent } from './upload/upload.component';
 import { AnalysisService } from './algoritms/shared/analysis.service';
 import { AnalysisListService } from './algoritms/shared/analysis-list.service';
 import { MatButtonModule } from '@angular/material';
-import { FlowLayoutComponent } from './flow-layout/flow-layout.component';
+import { JsonSchemaFormModule } from 'angular2-json-schema-form';
+
 
 @NgModule({
   providers: [
@@ -54,11 +54,8 @@ import { FlowLayoutComponent } from './flow-layout/flow-layout.component';
   ],
   declarations: [
     AppComponent,
-    PreparationListComponent,
     PageNotFoundComponent,
     MainPageComponent,
-    UploadComponent,
-    FlowLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +69,7 @@ import { FlowLayoutComponent } from './flow-layout/flow-layout.component';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
+    JsonSchemaFormModule,
     routing,
   ],
   bootstrap: [AppComponent]

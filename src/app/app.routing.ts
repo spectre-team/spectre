@@ -25,6 +25,8 @@ import { PreparationListComponent } from './preparations/preparation-list/prepar
 import { MainPageComponent } from './main-page/main-page.component';
 import { AnalysisFormComponent } from './analysis-form/analysis-form.component';
 import { UploadComponent } from './upload/upload.component';
+import {FlowLayoutComponent} from "./flow-layout/flow-layout.component";
+import {SchemaComponent} from "./schema/schema.component";
 
 const appRoutes: Routes = [
   { path: '', component: PreparationListComponent, pathMatch: 'full'}, // redirect to home page on load
@@ -32,6 +34,8 @@ const appRoutes: Routes = [
   { path: 'mainPage', component: MainPageComponent, pathMatch: 'full'},
   { path: 'analysisForm', component: AnalysisFormComponent, pathMatch: 'full'},
   { path: 'uploadDataset', component: UploadComponent, pathMatch: 'full'},
+  { path: 'flowLayout', component: FlowLayoutComponent, pathMatch: 'full'},
+  { path: 'schema', component: SchemaComponent, pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];
 

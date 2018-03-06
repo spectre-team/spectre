@@ -2,23 +2,10 @@
   <div class="mainContainer">
     <mat-list role = "list">
       <mat-list-item role="listitem">
-    <div>
-      <mat-form-field>
-        <mat-select placeholder="Preparation"
-                    [(ngModel)]="ChosenPreparation">
-          <mat-option *ngFor="let preparation of preparations"
-                      [value]="preparation.name"
-                      >
-            {{ preparation.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-      </mat-list-item>
-
-      <mat-list-item role="listitem">
         <div>
-              <input type="text" placeholder="Analysis name" [(ngModel)]="AnalysisName">
+          <mat-form-field>
+              <input matInput type="text" placeholder="Analysis name" [(ngModel)]="AnalysisName">
+          </mat-form-field>
         </div>
       </mat-list-item>
       <mat-list-item role="listitem">

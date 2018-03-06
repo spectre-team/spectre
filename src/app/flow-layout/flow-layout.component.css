@@ -1,0 +1,13 @@
+mat-card{
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+large-form-field{
+  display: flex;
+  flex-direction: column;
+}
+
+.large-form-field > * {
+  width: 100%;
+}

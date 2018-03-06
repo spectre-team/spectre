@@ -17,12 +17,11 @@
  limitations under the License.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { PreparationService } from '../preparations/shared/preparation.service';
 import { Preparation } from '../preparations/shared/preparation';
 import { IAnalysisData } from './IAnalysisData';
 import { HttpClient } from '@angular/common/http';
-import { Service } from '../app.service';
 import { environment } from '../../environments/environment';
 
 @Component({

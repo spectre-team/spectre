@@ -35,11 +35,18 @@ import { GrowlModule, TabViewModule} from 'primeng/primeng';
 import { BlockUIModule } from 'ng-block-ui';
 import {
   MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
-  MatSelectModule, MatListModule, MatCheckboxModule
+  MatSelectModule, MatListModule, MatCheckboxModule, MatStepperModule, MatOptionModule,
+  MatCardModule, MatFormFieldModule, MatGridListModule
 } from '@angular/material';
 import {ShortSummaryComponent} from '../divik-results/short-summary/short-summary.component';
 import {AnalysisFormComponent} from '../analysis-form/analysis-form.component';
 import { HttpClientModule} from '@angular/common/http';
+import {FlowLayoutComponent} from "../flow-layout/flow-layout.component";
+import {UploadComponent} from "../upload/upload.component";
+import {PreparationListComponent} from "./preparation-list/preparation-list.component";
+import {SchemaComponent} from "../schema/schema.component";
+import { JsonSchemaFormModule } from 'angular2-json-schema-form';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   imports: [
@@ -59,7 +66,15 @@ import { HttpClientModule} from '@angular/common/http';
     MatExpansionModule,
     MatListModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatStepperModule,
+    MatOptionModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatListModule,
+    MatGridListModule,
+    JsonSchemaFormModule,
+    FlexLayoutModule
   ],
   declarations: [
     PreparationComponent,
@@ -69,7 +84,11 @@ import { HttpClientModule} from '@angular/common/http';
     ShortSummaryComponent,
     AnalysisComponent,
     AnalysisListComponent,
-    AnalysisFormComponent
+    AnalysisFormComponent,
+    FlowLayoutComponent,
+    UploadComponent,
+    PreparationListComponent,
+    SchemaComponent
 ]
 })
 export class PreparationsModule {}

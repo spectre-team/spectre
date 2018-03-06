@@ -1,3 +1,49 @@
-<p>
-  flow-layout works!
-</p>
+<div class="container">
+      <mat-card>
+        <mat-horizontal-stepper>
+          <mat-step>
+            <ng-template matStepLabel>Upload or choose dataset</ng-template>
+            <mat-grid-list cols="2" rowHeight="12:1">
+                <mat-grid-tile [rowspan]="1">
+                  <h3>Upload Analysis:</h3>
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="2">
+                  <app-upload></app-upload>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                <h3>Choose from loaded ones:</h3>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                <mat-form-field class="large-form-field">
+                  <mat-select placeholder="Preparation"
+                              [(ngModel)]="ChosenPreparation">
+                    <mat-option *ngFor="let preparation of preparations"
+                                [value]="preparation.name"
+                    >
+                      {{ preparation.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <button mat-raised-button color="primary" matStepperNext>Continue</button>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Customize analysis</ng-template>
+              <app-analysis-form></app-analysis-form>
+
+            <button mat-raised-button (click)="test()">Test</button>
+
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext>Continue</button>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Run</ng-template>
+
+
+
+            <button mat-button matStepperPrevious="">Back</button>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </mat-card>
+</div>

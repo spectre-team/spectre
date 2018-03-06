@@ -1,38 +1,35 @@
-<div class="uploadContainer">
+
   <form (ngSubmit)="uploadData()" #uploadForm="ngForm">
-    <div>
-      <label class="labelStyle">
-        Dataset link
+    <div class="Container">
+      <div class="row">
+        <mat-form-field class="form-size">
+          <input matInput
+                 placeholder="Dataset link"
+                 type="text"
+                 name="linkInput"
+                 [(ngModel)]="linkInput"
+          />
+        </mat-form-field>
+      </div>
+    <div class="row">
+      <mat-form-field class="form-size">
         <input matInput
-               type='text'
-               size="50"
-               required
-               name="linkInput"
-               [(ngModel)]="linkInput"
-        />
-      </label>
-    </div>
-    <div>
-      <label>
-        Dataset name
-        <input matInput
-               type='text'
-               size="50"
-               required
+               placeholder="Dataset name"
+               type="text"
                name="nameInput"
                [(ngModel)]="nameInput"
         />
-      </label>
+      </mat-form-field>
     </div>
-    <div>
-      <button
-        mat-raised-button
-        class="mat-button"
-        type="submit"
-        [disabled]="uploadForm.form.invalid">
-        Upload dataset
-      </button>
+      <div class="row">
+        <button
+          mat-raised-button
+          class="mat-button"
+          type="submit"
+          [disabled]="uploadForm.form.invalid">
+          Upload dataset
+        </button>
+      </div>
     </div>
   </form>
   <div>{{message}}</div>
-</div>
