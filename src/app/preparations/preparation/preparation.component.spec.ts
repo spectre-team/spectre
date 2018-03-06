@@ -39,7 +39,6 @@ import { SpectrumService } from '../../spectra/shared/spectrum.service';
 import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
 import { SpectrumComponent } from '../../spectra/spectrum/spectrum.component';
 import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
-import { MessagesService, MessagesComponent } from 'ng2-messages/ng2-messages';
 import { DivikComponent } from '../../divik-results/divik/divik.component';
 import { DivikService } from '../../divik-results/shared/divik.service';
 
