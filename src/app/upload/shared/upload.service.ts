@@ -34,7 +34,7 @@ export class UploadService extends Service {
 
   uploadData(datasetLink: string, datasetName): Observable<any> {
     return this.http
-      .post(this.getBaseUploadUrl() + apiUrl.uploadUrl, {headers: this.getHeaders(), url: datasetLink, datasetName: datasetName})
+      .post(this.getBaseUploadUrl() + apiUrl.uploadUrl(), {headers: this.getHeaders(), url: datasetLink, datasetName: datasetName})
       .catch((err) => {
         return Observable.throw(err);
       });

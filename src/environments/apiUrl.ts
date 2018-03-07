@@ -1,12 +1,28 @@
 export const apiUrl = {
-  spectrumByIdUrl: '/spectrum/{0}?spectrumId={1}',
-  spectrumByCoordUrl: '/spectrum/{0}?x={1}&y={2}',
-  preparationsUrl: '/preparations',
-  preparationUrl: '/preparations/{0}',
-  heatmapUrl: '/heatmap/{0}?channelId={1}&flag=false',
-  divikResultUrl: '/divikResult/{0}?divikId={1}&level={2}',
-  divikConfigUrl: '/divikResult/{0}?divikId={1}',
-  uploadUrl: '/download',
+  spectrumByIdUrl(preparationId: number, spectrumId: number) {
+    return `/spectrum/${preparationId}?spectrumId=${spectrumId}`;
+  },
+  spectrumByCoordUrl(preparationId: number, x: number, y: number) {
+    return `/spectrum/${preparationId}?x=${x}&y=${y}`;
+  } ,
+  preparationsUrl() {
+    return `/preparations`;
+  },
+  preparationUrl(preparationId: number) {
+    return `/preparations/${preparationId}`;
+  },
+  heatmapUrl(preparationId: number, channelId: number){
+    return `/heatmap/${preparationId}?channelId=${channelId}&flag=false`;
+  },
+  divikResultUrl(preparationId: number, divikId: number, level: number) {
+    return `/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
+  },
+  divikConfigUrl(preparationId: number, divikId: number) {
+    return `/divikResult/${preparationId}?divikId=${divikId}`;
+  },
+  uploadUrl(){
+    return `/download`;
+  },
   finishedAnalysesUrl: '/results/{0}/',
   inputsSchemaUrl: '/schema/inputs/{0}/',
   inputsLayoutUrl: '/layout/inputs/{0}/',
