@@ -78,7 +78,7 @@ describe('PreparationService', () => {
     preparationService
       .getAll()
       .subscribe((response) => {
-        expect(response[0].id).toEqual(1);
+        expect(response[0].id).toEqual('1');
         expect(response[0].name).toEqual('Preparation 1');
       });
   }));
