@@ -41,10 +41,6 @@ import { SpectrumComponent } from '../../spectra/spectrum/spectrum.component';
 import { HeatmapComponent } from '../../heatmaps/heatmap/heatmap.component';
 import { DivikComponent } from '../../divik-results/divik/divik.component';
 import { DivikService } from '../../divik-results/shared/divik.service';
-import {AnalysisListComponent} from '../../algoritms/shared/analysis-list.component';
-import {AnalysisComponent} from '../../algoritms/shared/analysis.component';
-import {AnalysisListService} from '../../algoritms/shared/analysis-list.service';
-import {AnalysisService} from '../../algoritms/shared/analysis.service';
 
 describe('PreparationComponent', () => {
   let component: PreparationComponent;
@@ -54,8 +50,7 @@ describe('PreparationComponent', () => {
   beforeEach(async(() => {
     mockActivatedRoute = new MockActivatedRoute(Observable.of({id: '100'}));
     TestBed.configureTestingModule({
-      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent, MessagesComponent, AnalysisListComponent,
-        AnalysisComponent],
+      declarations: [ PreparationComponent, SpectrumComponent, HeatmapComponent, DivikComponent],
       imports: [RouterTestingModule, PlotlyModule, MatSliderModule, FormsModule, GrowlModule, TabViewModule, MatExpansionModule,
         MatInputModule, MatButtonModule, MatTabsModule, BlockUIModule, BrowserAnimationsModule, MatSelectModule
       ],
@@ -72,10 +67,7 @@ describe('PreparationComponent', () => {
           { provide: ActivatedRoute, useValue: mockActivatedRoute },
           SpectrumService,
           HeatmapService,
-          MessagesService,
-          DivikService,
-          AnalysisListService,
-          AnalysisService
+          DivikService
       ]
     })
     .compileComponents();

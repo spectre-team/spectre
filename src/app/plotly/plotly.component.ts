@@ -19,6 +19,7 @@
 
 import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, Input } from '@angular/core';
 import { GuidService } from './guid.service';
+import * as PlotlyModule from 'assets/plotly-latest.min.js';
 
 declare var Plotly: any;
 
@@ -67,7 +68,7 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
       console.log('[PlotlyComponent] nfAfterViewInit');
       Plotly.newPlot('plotly-' + this.randomId, this.data, this.layout, this.options);
-      const plotlyElement = <PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
+      const plotlyElement = <PlotlyModule.PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
       plotlyElement.on('plotly_click', (event) => this.onClickFunction(event));
       this.initialized = true;
       this.cdRef.detectChanges();

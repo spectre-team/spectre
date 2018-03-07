@@ -1,11 +1,15 @@
+.mat-toolbar
+{
+  background: #231F20;
+}
+
 #header
 {
-background-color: #231F20;
-height: 60px;
-margin: 0px;
-display: flex;
-align-items: center;
-justify-content: flex-start;
+  height: 60px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #list-button

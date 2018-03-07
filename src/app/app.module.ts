@@ -34,28 +34,24 @@ import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule, MatSidenavModule} from '@angular/material';
+import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
-import { AnalysisService } from './algoritms/shared/analysis.service';
-import { AnalysisListService } from './algoritms/shared/analysis-list.service';
-import { MatButtonModule } from '@angular/material';
-import { JsonSchemaFormModule } from 'angular2-json-schema-form';
-
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   providers: [
       HeatmapService,
       SpectrumService,
       DivikService,
-      UploadService,
-      AnalysisService,
-      AnalysisListService,
+      UploadService
   ],
   declarations: [
     AppComponent,
+    PreparationListComponent,
     PageNotFoundComponent,
     MainPageComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -68,9 +64,8 @@ import { JsonSchemaFormModule } from 'angular2-json-schema-form';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
-    MatButtonModule,
-    JsonSchemaFormModule,
-    routing,
+    MatToolbarModule,
+    routing
   ],
   bootstrap: [AppComponent]
 })
