@@ -43,9 +43,8 @@ import {AnalysisFormComponent} from '../analysis-form/analysis-form.component';
 import { HttpClientModule} from '@angular/common/http';
 import {FlowLayoutComponent} from "../flow-layout/flow-layout.component";
 import {UploadComponent} from "../upload/upload.component";
-import {PreparationListComponent} from "./preparation-list/preparation-list.component";
 import {SchemaComponent} from "../schema/schema.component";
-import { JsonSchemaFormModule } from 'angular2-json-schema-form';
+import { JsonSchemaFormModule, MaterialDesignFrameworkModule  } from 'angular2-json-schema-form';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
@@ -73,8 +72,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatFormFieldModule,
     MatListModule,
     MatGridListModule,
-    JsonSchemaFormModule,
-    FlexLayoutModule
+    JsonSchemaFormModule.forRoot(MaterialDesignFrameworkModule),
+    FlexLayoutModule,
+    MaterialDesignFrameworkModule
   ],
   declarations: [
     PreparationComponent,
@@ -87,7 +87,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AnalysisFormComponent,
     FlowLayoutComponent,
     UploadComponent,
-    PreparationListComponent,
     SchemaComponent
 ]
 })

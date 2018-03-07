@@ -51,7 +51,6 @@ import { UploadComponent } from './upload/upload.component';
     PreparationListComponent,
     PageNotFoundComponent,
     MainPageComponent,
-    UploadComponent
   ],
   imports: [
     BrowserModule,
