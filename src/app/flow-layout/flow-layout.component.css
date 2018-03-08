@@ -11,3 +11,7 @@ large-form-field{
 .large-form-field > * {
   width: 100%;
 }
+
+mat-grid-tile{
+  align-items: left;
+}

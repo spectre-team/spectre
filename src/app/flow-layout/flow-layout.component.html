@@ -3,14 +3,14 @@
         <mat-horizontal-stepper>
           <mat-step>
             <ng-template matStepLabel>Upload or choose dataset</ng-template>
-            <mat-grid-list cols="2" rowHeight="12:1">
+            <mat-grid-list cols="1" rowHeight="14:1">
                 <mat-grid-tile [rowspan]="1">
                   <h3>Upload Analysis:</h3>
                 </mat-grid-tile>
                 <mat-grid-tile [rowspan]="2">
                   <app-upload></app-upload>
                 </mat-grid-tile>
-                <mat-grid-tile>
+                <mat-grid-tile [rowspan]="1">
                 <h3>Choose from loaded ones:</h3>
                 </mat-grid-tile>
                 <mat-grid-tile>
