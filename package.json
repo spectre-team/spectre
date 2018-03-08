@@ -66,6 +66,7 @@
     "@angular/platform-browser-dynamic": "^5.2.6",
     "@angular/platform-server": "^5.2.6",
     "@angular/router": "^5.2.6",
+    "angular2-json-schema-form": "^0.7.0-alpha.1",
     "bootstrap": "^4.0.0",
     "core-js": "^2.5.3",
     "font-awesome": "^4.7.0",

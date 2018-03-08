@@ -37,7 +37,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
-import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   providers: [
