@@ -1,11 +1,10 @@
 export const apiUrl = {
-  spectrumByIdUrl: '/spectrum/%d?spectrumId=%d',
-  spectrumByCoordUrl: '/spectrum/%d?x=%d&y=%d',
+  spectrumByIdUrl: '/spectrum/{0}?spectrumId={1}',
+  spectrumByCoordUrl: '/spectrum/{0}?x={1}&y={2}',
   preparationsUrl: '/preparations',
-  preparationUrl: '/preparations/%s',
-  heatmapUrl: '/heatmap/%s?channelId=%s&flag=false',
-  divikResultUrl: '/divikResult/%s?divikId=%d&level=%s',
-  divikConfigUrl: '/divikResult/%s?divikId=%s',
+  preparationUrl: '/preparations/{0}',
+  heatmapUrl: '/heatmap/{0}?channelId={1}&flag=false',
+  divikResultUrl: '/divikResult/{0}?divikId={1}&level={2}',
+  divikConfigUrl: '/divikResult/{0}?divikId={1}',
   uploadUrl: '/download'
-
 };
