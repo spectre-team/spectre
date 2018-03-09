@@ -25,7 +25,6 @@ import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
-import { PreparationService } from './preparations/shared/preparation.service';
 import { PreparationsModule } from './preparations/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
@@ -33,19 +32,21 @@ import { SpectrumService } from './spectra/shared/spectrum.service';
 import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { MessagesService } from 'ng2-messages/ng2-messages.service';
-import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
+import { AnalysisService } from './algoritms/shared/analysis.service';
+import { AnalysisListService } from './algoritms/shared/analysis-list.service';
 
 @NgModule({
   providers: [
       HeatmapService,
       SpectrumService,
       MessagesService,
-      DivikService,
+      AnalysisService,
+      AnalysisListService,
       UploadService
   ],
   declarations: [

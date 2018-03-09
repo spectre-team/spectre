@@ -1,0 +1,27 @@
+.analysis {
+    background-color: green;
+    text-align: center;
+}
+
+.analysis-text {
+  color: #ffffff;
+}
+
+@media only screen and (min-width: 800px) {
+    div.analysis {
+        width: 500px;
+        height: 50px;
+    }
+}
+
+#main-container
+{
+  text-align: center;
+  height: 100vh;
+}
+
+#analysis-info-expansion-panel
+{
+  margin-left: 60px;
+  margin-right: 60px;
+}

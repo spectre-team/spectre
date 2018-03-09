@@ -1,0 +1,76 @@
+<div class="inline-items-container">
+  <div id="heatmapWithDownloadButton">
+    <app-heatmap
+      [heatmapData]=data>
+    </app-heatmap>
+    <a
+      [href]='downloadJsonHref'
+      download='result.json'>
+      <button
+        Mat-raised-button
+        class="mat-button">
+        Download JSON result
+      </button>
+    </a>
+    <a
+      [href]='summaryDownloadJsonHref'
+      download='summary.json'>
+      <button
+        Mat-raised-button
+        class="mat-button">
+        Download JSON summary
+      </button>
+    </a>
+  </div>
+
+
+  <div>
+    Config info:
+    <div>
+      <mat-expansion-panel class="analysis-info-expansion-panel">
+        <mat-expansion-panel-header class="expansionPanelHeader">
+          <mat-panel-title>
+            Option
+          </mat-panel-title>
+          <mat-panel-description>
+            Value
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngFor="let configElement of analysisConfigKeys">
+          <mat-form-field class="mat-form-field">
+            <input matInput disabled="true" value={{configElement}}>
+          </mat-form-field>
+          <mat-form-field class="mat-form-field">
+            <input matInput disabled="true" value={{analysisConfig[configElement]}}>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+    </div>
+
+    Summary info:
+    <div>
+      <mat-expansion-panel class="analysis-info-expansion-panel">
+        <mat-expansion-panel-header class="expansionPanelHeader">
+          <mat-panel-title>
+            Option
+          </mat-panel-title>
+          <mat-panel-description>
+            Value
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+          <div *ngFor="let summaryElement of analysisSummaryKeys">
+            <mat-form-field class="mat-form-field">
+              <input matInput disabled="true" value={{summaryElement}}>
+            </mat-form-field>
+            <mat-form-field class="mat-form-field">
+              <input matInput disabled="true" value={{analysisSummary[summaryElement]}}>
+            </mat-form-field>
+          </div>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>
+
+

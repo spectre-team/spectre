@@ -1,8 +1,8 @@
 /*
- * divik-config.ts
- * Interface describing Divik result config.
+ * analysis-name.ts
+ * Interface describing main analysis properties
  *
-   Copyright 2017 Sebastian Pustelnik
+   Copyright 2018 Sebastian Pustelnik
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,18 +16,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-export interface DivikConfig {
-  'Max K': number;
-  Level: number;
-  'Using levels': boolean;
-  Amplitude: boolean;
-  Variance: boolean;
-  'Percent size limit': number;
-  'Feature preservation limit': number;
-  Metric: string;
-  'Plotting partitions': boolean;
-  'Plotting recursively': boolean;
-  'Plotting decomposition': boolean;
-  'Plotting decomposition recursively': boolean;
-  'Max decomposition components': number;
+export interface AnalysisName {
+  name: string;
+  id: string;
+  status: string;
 }
