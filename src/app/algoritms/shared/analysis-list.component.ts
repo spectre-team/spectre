@@ -27,6 +27,7 @@ import {AnalysisName} from './analysis-name';
   selector: 'app-analysis-list',
   templateUrl: './analysis-list.component.html',
   styleUrls: ['./analysis-list.component.css'],
+  providers: [AnalysisListService]
 })
 export class AnalysisListComponent implements OnInit {
   public analysisList: AnalysisName[];
