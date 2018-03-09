@@ -100,10 +100,13 @@
         </div>
         </p-tabPanel>
       <p-tabPanel header="Divik" leftIcon="fa fa-sitemap" [headerStyle]="{'width': '165px'}">
-        <!--TODO ng-for-->
         <app-analysis-list
           [preparationId]=id
           [analysisType]="'Divik'">
+        </app-analysis-list>
+        <app-analysis-list
+          [preparationId]=id
+          [analysisType]="'GMM'">
         </app-analysis-list>
       </p-tabPanel>
     </p-tabView>

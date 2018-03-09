@@ -24,9 +24,7 @@ import 'rxjs/Rx';
 
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { Service } from '../../app.service';
-import { HeatmapUtil } from '../../heatmaps/shared/heatmap-util';
-import { DivikConfig } from '../../divik-results/shared/divik-config';
-import { DivikSummary } from '../../divik-results/shared/divik.summary';
+
 
 @Injectable()
 export class AnalysisService extends Service {
@@ -44,22 +42,22 @@ export class AnalysisService extends Service {
   get(preparationId: number, analysisType: string, analysisName: string): Observable<Heatmap> {
     const queryUrl = `${this.getBaseAnalysisUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisName}`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    return response.map((res: Response) => HeatmapUtil.toHeatmap(res, '[DivikService]'))
+    return response.map((res: Response) => res.json() as Heatmap)
       .catch(err => {
         return Observable.throw(err);
       });
   }
 
-  getConfig(preparationId: number, analysisType: string, analysisName: string): Observable<DivikConfig> {
+  getConfig(preparationId: number, analysisType: string, analysisName: string): Observable<JSON> {
     const queryUrl = `${this.getBaseAnalysisUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisName}/config`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    return response.map(res => res.json() as DivikConfig);
+    return response.map(res => res.json());
   }
 
-  getSummary(preparationId, analysisType: string, analysisName: string): Observable<DivikSummary> {
+  getSummary(preparationId, analysisType: string, analysisName: string): Observable<JSON> {
     const queryUrl = `${this.getBaseAnalysisUrl()}/preparation/${preparationId}/analyses/${analysisType}/${analysisName}/summary`;
     const response = this.http.get(queryUrl, {headers: this.getHeaders()});
-    return response.map(res => res.json() as DivikSummary);
+    return response.map(res => res.json());
   }
 }
 

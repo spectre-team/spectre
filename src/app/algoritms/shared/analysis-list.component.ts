@@ -50,6 +50,5 @@ export class AnalysisListComponent implements OnInit {
     this.analysisListService.getAnalysisList(this.preparationId, this.analysisType)
       .subscribe(analysis => this.analysisList = analysis,
         err => {});
-    // this.analysisList = this.analysisListService.getMock();
   }
 }

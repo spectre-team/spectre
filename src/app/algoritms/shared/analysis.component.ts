@@ -23,7 +23,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import 'rxjs/Rx';
 import { AnalysisService } from './analysis.service';
-import {DivikSummary} from '../../divik-results/shared/divik.summary';
 
 
 @Component({
