@@ -46,6 +46,7 @@ import {UploadComponent} from "../upload/upload.component";
 import {SchemaComponent} from "../schema/schema.component";
 import { JsonSchemaFormModule, MaterialDesignFrameworkModule  } from 'angular2-json-schema-form';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatExpansionModule,
     MatListModule,
     MatCheckboxModule,
+    BrowserModule,
     HttpClientModule,
     MatStepperModule,
     MatOptionModule,
