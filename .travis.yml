@@ -30,18 +30,17 @@ script:
 after_success:
 - |
   if [ $CONFIGURATION = "prod" ]; then
-      docker build -t spectre .
+      docker build -t spectreteam/spectre:latest -t spectreteam/spectre:beta -t spectreteam:$VERSION -t spectreteam:$VERSION-beta -t spectreteam:$VERSION-alpha .
       docker images
       if [ $TRAVIS_PULL_REQUEST = "false" ]; then
           if [ $TRAVIS_BRANCH = "master" ]; then
-              docker tag spectre spectreteam/spectre:latest
               docker push spectreteam/spectre:latest
+              docker push spectreteam/spectre:$VERSION
           elif [ $TRAVIS_BRANCH = "develop" ]; then
-              docker tag spectre spectreteam/spectre:beta
               docker push spectreteam/spectre:beta
+              docker push spectreteam/spectre:$VERSION-beta
           fi
-          docker tag spectre spectreteam/spectre:$VERSION.$TRAVIS_BUILD_NUMBER
-          docker push spectreteam/spectre:$VERSION.$TRAVIS_BUILD_NUMBER
+          docker push spectreteam/spectre:$VERSION-alpha
       fi
   fi
 notifications:
