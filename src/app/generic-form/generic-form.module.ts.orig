@@ -26,17 +26,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JsonSchemaFormModule, MaterialDesignFrameworkModule } from 'angular2-json-schema-form';
 
 import { GenericFormFetchService } from './generic-form-fetch.service';
-<<<<<<< HEAD
 import { GenericFormComponent } from './generic-form/generic-form.component';
 
-=======
->>>>>>> Add generic form fetching service
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-<<<<<<< HEAD
     BrowserModule,
     BrowserAnimationsModule,
     MaterialDesignFrameworkModule,
@@ -45,16 +41,16 @@ import { GenericFormComponent } from './generic-form/generic-form.component';
   providers: [
     GenericFormFetchService,
   ],
+<<<<<<< HEAD
+  providers: [
+    GenericFormFetchService,
+=======
   declarations: [
     GenericFormComponent
+>>>>>>> Add generic-form component
   ],
   exports: [
     GenericFormComponent
-=======
-  ],
-  providers: [
-    GenericFormFetchService,
->>>>>>> Add generic form fetching service
   ]
 })
 export class GenericFormModule { }
