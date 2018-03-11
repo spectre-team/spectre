@@ -15,14 +15,17 @@ env:
   - CONFIGURATION=bit
 install:
 - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
-- npm install -g npm@5.6.0 --loglevel=error
-- npm install -g @angular/cli@1.7.1 --loglevel=error
-- npm install --loglevel=error
+- npm install -g npm@5.6.0
+- npm install -g @angular/cli@1.7.1
+- npm install
+# following error is suppressed as we do not need all deps, according to:
+# https://github.com/npm/npm/issues/17624
+- npm list || true
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 script:
-- ng test --single-run true --reporters junit --progress false --browsers Firefox
+- ng test --single-run true --progress false --browsers Firefox
 - ng build -env=$CONFIGURATION
 after_success:
 - |
