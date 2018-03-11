@@ -26,14 +26,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JsonSchemaFormModule, MaterialDesignFrameworkModule } from 'angular2-json-schema-form';
 
 import { GenericFormFetchService } from './generic-form-fetch.service';
+import { GenericFormComponent } from './generic-form/generic-form.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialDesignFrameworkModule,
+    JsonSchemaFormModule.forRoot(MaterialDesignFrameworkModule),
   ],
   providers: [
     GenericFormFetchService,
+  ],
+  declarations: [
+    GenericFormComponent
+  ],
+  exports: [
+    GenericFormComponent
   ]
 })
 export class GenericFormModule { }
