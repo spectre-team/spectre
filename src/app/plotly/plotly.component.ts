@@ -19,6 +19,7 @@
 
 import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, Input } from '@angular/core';
 import { GuidService } from './guid.service';
+import './PlotHTMLElement';
 
 declare var Plotly: any;
 
