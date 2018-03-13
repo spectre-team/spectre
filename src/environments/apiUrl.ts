@@ -1,27 +1,29 @@
+import { environment } from './environment';
+
 export const apiUrl = {
   spectrumByIdUrl(preparationId: number, spectrumId: number) {
-    return `/spectrum/${preparationId}?spectrumId=${spectrumId}`;
+    return `${environment.apiPreparationUrl}/spectrum/${preparationId}?spectrumId=${spectrumId}`;
   },
   spectrumByCoordUrl(preparationId: number, x: number, y: number) {
-    return `/spectrum/${preparationId}?x=${x}&y=${y}`;
+    return `${environment.apiPreparationUrl}/spectrum/${preparationId}?x=${x}&y=${y}`;
   } ,
   preparationsUrl() {
-    return `/preparations`;
+    return `${environment.apiPreparationUrl}/preparations`;
   },
   preparationUrl(preparationId: number) {
-    return `/preparations/${preparationId}`;
+    return `${environment.apiPreparationUrl}/preparations/${preparationId}`;
   },
   heatmapUrl(preparationId: number, channelId: number){
-    return `/heatmap/${preparationId}?channelId=${channelId}&flag=false`;
+    return `${environment.apiPreparationUrl}/heatmap/${preparationId}?channelId=${channelId}&flag=false`;
   },
   divikResultUrl(preparationId: number, divikId: number, level: number) {
-    return `/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
+    return `${environment.apiDivikUrl}/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
   },
   divikConfigUrl(preparationId: number, divikId: number) {
-    return `/divikResult/${preparationId}?divikId=${divikId}`;
+    return `${environment.apiDivikUrl}/divikResult/${preparationId}?divikId=${divikId}`;
   },
   uploadUrl(){
-    return `/download`;
+    return `${environment.apiUploadUrl}/download`;
   },
   finishedAnalysesUrl: '/results/{0}/',
   inputsSchemaUrl: '/schema/inputs/{0}/',
