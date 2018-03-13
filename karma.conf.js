@@ -47,6 +47,7 @@ module.exports = function (config) {
         properties: {},
         xmlVersion: null
     },
+    browserNoActivityTimeout: 30000,
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
