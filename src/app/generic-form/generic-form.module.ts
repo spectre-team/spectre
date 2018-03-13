@@ -19,13 +19,21 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { JsonSchemaFormModule, MaterialDesignFrameworkModule } from 'angular2-json-schema-form';
+
+import { GenericFormFetchService } from './generic-form-fetch.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
-  declarations: [
-
+  providers: [
+    GenericFormFetchService,
   ]
 })
 export class GenericFormModule { }
