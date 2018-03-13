@@ -35,6 +35,9 @@ import {
   MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
   MatSelectModule
 } from '@angular/material';
+import {AnalysisComponent} from "../algoritms/analysis/analysis.component";
+import {PreprocessingComponent} from "../algoritms/preprocessing/preprocessing.component";
+import {ModellingComponent} from "../algoritms/modelling/modelling.component";
 
 @NgModule({
   imports: [
@@ -57,7 +60,10 @@ import {
     PreparationComponent,
     HeatmapComponent,
     SpectrumComponent,
-    DivikComponent
+    DivikComponent,
+    AnalysisComponent,
+    PreprocessingComponent,
+    ModellingComponent,
 ]
 })
 export class PreparationsModule {}
