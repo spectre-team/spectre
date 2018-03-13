@@ -2,11 +2,7 @@
  * generic-form.module.ts
  * Module with generic form.
  *
-<<<<<<< HEAD
    Copyright 2018 Grzegorz Mrukwa
-=======
-   Copyright 2017 Grzegorz Mrukwa
->>>>>>> Add generic-form module
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -23,7 +19,6 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,13 +26,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JsonSchemaFormModule, MaterialDesignFrameworkModule } from 'angular2-json-schema-form';
 
 import { GenericFormFetchService } from './generic-form-fetch.service';
+<<<<<<< HEAD
 import { GenericFormComponent } from './generic-form/generic-form.component';
 
+=======
+>>>>>>> Add generic form fetching service
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+<<<<<<< HEAD
     BrowserModule,
     BrowserAnimationsModule,
     MaterialDesignFrameworkModule,
@@ -52,14 +51,10 @@ import { GenericFormComponent } from './generic-form/generic-form.component';
   exports: [
     GenericFormComponent
 =======
-
-@NgModule({
-  imports: [
-    CommonModule
   ],
-  declarations: [
-
->>>>>>> Add generic-form module
+  providers: [
+    GenericFormFetchService,
+>>>>>>> Add generic form fetching service
   ]
 })
 export class GenericFormModule { }
