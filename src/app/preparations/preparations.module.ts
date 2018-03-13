@@ -33,7 +33,7 @@ import { GrowlModule, TabViewModule} from 'primeng/primeng';
 import { BlockUIModule } from 'ng-block-ui';
 import {
   MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
-  MatSelectModule
+  MatSelectModule, MatCardModule, MatToolbarModule
 } from '@angular/material';
 import {AnalysisComponent} from "../algoritms/analysis/analysis.component";
 import {PreprocessingComponent} from "../algoritms/preprocessing/preprocessing.component";
@@ -54,7 +54,9 @@ import {ModellingComponent} from "../algoritms/modelling/modelling.component";
     MatInputModule,
     MatButtonModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule,
+    MatToolbarModule
   ],
   declarations: [
     PreparationComponent,

@@ -1,0 +1,11 @@
+.card {
+  max-width: 600px;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+.tab-content {
+  padding: 16px;
+}
