@@ -8,31 +8,21 @@ import {AlgorithmsListService} from "./algorithms-list.service";
   providers: [AlgorithmsListService]
 })
 export class AlgorithmListComponent implements OnInit {
-  temp: string;
-  algorithms: IAlgorithm;
+  algorithms: any;
   constructor(private _algorithmListService: AlgorithmsListService) { }
 
   ngOnInit() {
     this.getAlgorithms();
-    if (this.algorithms !== undefined) {
-      console.log('Name: ', this.algorithms.name);
-    }
-
-    // let jsonObj: any = JSON.parse(this.temp);
-    // this.algorithms = <IAlgorithm>jsonObj;
-    // console.log(this.algorithms.name);
   }
 
   getAlgorithms() {
     this._algorithmListService.getAlgorithms().subscribe(
-      data => {this.temp = <string>data},
+      data => {
+        this.algorithms = data;
+        console.log(this.algorithms);
+      },
       err => console.error(err),
       () => console.log('done loading')
     );
   }
-}
-
-export interface IAlgorithm {
-  id: string;
-  name: string;
 }
