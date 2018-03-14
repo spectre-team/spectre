@@ -18,30 +18,53 @@
 */
 
 import { TestBed, async } from '@angular/core/testing';
+import { Http, BaseRequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { MockBackend } from '@angular/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/Rx';
+
+import {
+  MatExpansionModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule,
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-
-import { Http, BaseRequestOptions } from '@angular/http';
-
 import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
+import { AlgorithmExpansionPanelComponent } from './algorithm/algorithm-expansion-panel/algorithm-expansion-panel.component';
+import { AlgorithmListComponent } from './algorithm/algorithm-list/algorithm-list.component';
 
-import { MockBackend } from '@angular/http/testing';
 
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+class MockHttpClient {
+  get()  {
+    return new Observable(observer => {
+      observer.next({analysis: ['divik']});
+      observer.complete();
+    });
+  }
+}
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [
+        AlgorithmExpansionPanelComponent,
+        AlgorithmListComponent,
+        AppComponent,
+        PreparationListComponent
+      ],
       imports: [
-          [
-            RouterTestingModule,
-            MatListModule,
-            MatSidenavModule,
-            MatToolbarModule,
-            BrowserAnimationsModule
-          ]
+        RouterTestingModule,
+        MatExpansionModule,
+        MatListModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        BrowserAnimationsModule,
       ],
       providers: [
           MockBackend,
@@ -52,11 +75,8 @@ describe('AppComponent', () => {
               return new Http(backendInstance, defaultOptions);
             },
             deps: [MockBackend, BaseRequestOptions]
-          }
-      ],
-      declarations: [
-        AppComponent,
-        PreparationListComponent
+          },
+          {provide: HttpClient, useClass: MockHttpClient},
       ],
     }).compileComponents();
   }));
