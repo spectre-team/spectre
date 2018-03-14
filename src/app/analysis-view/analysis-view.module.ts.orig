@@ -19,7 +19,6 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -30,6 +29,8 @@ import {
 
 import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
 import { FinishedAnalysesService } from './finished-analyses.service';
+
+import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
 
 @NgModule({
   imports: [
@@ -45,16 +46,16 @@ import { FinishedAnalysesService } from './finished-analyses.service';
   exports: [
     AnalysisViewComponent,
   ],
+<<<<<<< HEAD
   providers: [
     FinishedAnalysesService,
-  ]
 =======
-
-@NgModule({
-  imports: [
-    CommonModule
+  declarations: [
+    AnalysisViewComponent,
   ],
-  declarations: []
->>>>>>> Add analysis-view module
+  exports: [
+    AnalysisViewComponent,
+>>>>>>> Add analysis-view component
+  ]
 })
 export class AnalysisViewModule { }

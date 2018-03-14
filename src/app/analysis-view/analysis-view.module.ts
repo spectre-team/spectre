@@ -30,6 +30,8 @@ import {
 import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
 import { FinishedAnalysesService } from './finished-analyses.service';
 
+import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
+
 @NgModule({
   imports: [
     CommonModule,
