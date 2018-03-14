@@ -18,12 +18,12 @@ export class AlgorithmListComponent implements OnInit {
       console.log('Name: ', this.algorithms.name);
     }
 
-    let jsonObj: any = JSON.parse(this.temp);
-    this.algorithms = <IAlgorithm>jsonObj;
-    console.log(this.algorithms.name);
+    // let jsonObj: any = JSON.parse(this.temp);
+    // this.algorithms = <IAlgorithm>jsonObj;
+    // console.log(this.algorithms.name);
   }
 
-  getAlgorithms(){
+  getAlgorithms() {
     this._algorithmListService.getAlgorithms().subscribe(
       data => {this.temp = <string>data},
       err => console.error(err),
