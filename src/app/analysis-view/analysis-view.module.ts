@@ -20,10 +20,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
+
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: []
+  declarations: [
+    AnalysisViewComponent,
+  ],
+  exports: [
+    AnalysisViewComponent,
+  ]
 })
 export class AnalysisViewModule { }
