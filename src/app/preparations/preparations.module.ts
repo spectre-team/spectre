@@ -33,11 +33,16 @@ import { GrowlModule, TabViewModule} from 'primeng/primeng';
 import { BlockUIModule } from 'ng-block-ui';
 import {
   MatSliderModule, MatInputModule, MatButtonModule, MatTabsModule, MatExpansionModule,
-  MatSelectModule, MatCardModule, MatToolbarModule
+  MatSelectModule, MatCardModule, MatToolbarModule, MatDividerModule
 } from '@angular/material';
 import {AnalysisComponent} from "../algoritms/analysis/analysis.component";
 import {PreprocessingComponent} from "../algoritms/preprocessing/preprocessing.component";
 import {ModellingComponent} from "../algoritms/modelling/modelling.component";
+import {AlgorithmComponent} from "../algorithm/algorithm.component";
+import {AlgorithmListComponent} from "../algorithm/algorithm-list/algorithm-list.component";
+import {AlgorithmExpansionPanelComponent} from "../algorithm/algorithm-expansion-panel/algorithm-expansion-panel.component";
+import {HttpClientModule} from "@angular/common/http";
+
 
 @NgModule({
   imports: [
@@ -56,7 +61,9 @@ import {ModellingComponent} from "../algoritms/modelling/modelling.component";
     MatTabsModule,
     MatExpansionModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDividerModule,
+    HttpClientModule,
   ],
   declarations: [
     PreparationComponent,
@@ -66,6 +73,12 @@ import {ModellingComponent} from "../algoritms/modelling/modelling.component";
     AnalysisComponent,
     PreprocessingComponent,
     ModellingComponent,
-]
+    AlgorithmComponent,
+    AlgorithmListComponent,
+    AlgorithmExpansionPanelComponent
+],
+  exports: [
+    AlgorithmExpansionPanelComponent,
+  ]
 })
 export class PreparationsModule {}

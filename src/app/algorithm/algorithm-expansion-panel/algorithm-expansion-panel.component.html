@@ -1,0 +1,27 @@
+<mat-expansion-panel class="exp-container"
+                     (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <i
+        class="fa fa-cogs"
+        aria-hidden="true">
+      </i>
+      Analysis
+    </mat-panel-title>
+    <mat-panel-description>
+      <b>{{panelOpenState ? '...less' : 'more...'}}</b>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+    <app-algorithm-list></app-algorithm-list>
+
+  <mat-divider></mat-divider>
+  <button mat-button class="button-container">
+    <i
+      class="fa fa-sliders"
+      aria-hidden="true">
+    </i>
+    Sranie</button>
+
+</mat-expansion-panel>

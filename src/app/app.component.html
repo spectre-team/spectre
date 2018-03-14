@@ -18,10 +18,11 @@
 <mat-sidenav-container>
   <mat-sidenav
     #sidenav mode="side"
-    class="app-side-nav">
+    class="app-side-nav"
+    [opened]="true">
     <mat-list>
       <div class="btn-group-vertical">
-        <button
+        <button mat-raised-button
           class="btn btn-default"
           mat-list-item routerLink="mainPage">
           <i
@@ -29,7 +30,7 @@
             aria-hidden="true">
           </i> Main Page
         </button>
-        <button
+        <button mat-raised-button
           class="btn btn-default"
           mat-list-item routerLink="preparations">
           <i
@@ -37,7 +38,7 @@
             aria-hidden="true">
           </i> Preparations
         </button>
-        <button
+        <button mat-raised-button
           class="btn btn-default"
           mat-list-item routerLink="uploadDataset">
           <i
@@ -45,30 +46,61 @@
             aria-hidden="true">
           </i> Upload dataset
         </button>
-        <button
-          class="btn btn-default"
-          mat-list-item routerLink="analysis">
-          <i
-            class="fa fa-cloud-upload"
-            aria-hidden="true">
-          </i> Analysis
-        </button>
-        <button
-          class="btn btn-default"
-          mat-list-item routerLink="preprocessing">
-          <i
-            class="fa fa-cloud-upload"
-            aria-hidden="true">
-          </i> Preprocessing
-        </button>
-        <button
-          class="btn btn-default"
-          mat-list-item routerLink="modelling">
-          <i
-            class="fa fa-cloud-upload"
-            aria-hidden="true">
-          </i> Modelling
-        </button>
+        <!--<button mat-raised-button-->
+          <!--class="btn btn-default"-->
+          <!--mat-list-item routerLink="analysis">-->
+          <!--<i-->
+            <!--class="fa fa-cloud-upload"-->
+            <!--aria-hidden="true">-->
+          <!--</i> Analysis-->
+        <!--</button>-->
+        <!--<button mat-raised-button-->
+          <!--class="btn btn-default"-->
+          <!--mat-list-item routerLink="preprocessing">-->
+          <!--<i-->
+            <!--class="fa fa-cloud-upload"-->
+            <!--aria-hidden="true">-->
+          <!--</i> Preprocessing-->
+        <!--</button>-->
+        <!--<button mat-raised-button-->
+          <!--class="btn btn-default"-->
+          <!--mat-list-item routerLink="modelling">-->
+          <!--<i-->
+            <!--class="fa fa-cloud-upload"-->
+            <!--aria-hidden="true">-->
+          <!--</i> Modelling-->
+        <!--</button>-->
+        <app-algorithm-expansion-panel></app-algorithm-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <i
+                  class="fa fa-cogs"
+                  aria-hidden="true">
+                </i>
+                Preprocessing
+              </mat-panel-title>
+              <mat-panel-description>
+                not available
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <i
+                  class="fa fa-cogs"
+                  aria-hidden="true">
+                </i>
+                Modelling
+              </mat-panel-title>
+              <mat-panel-description>
+                not available
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+          </mat-expansion-panel>
       </div>
     </mat-list>
   </mat-sidenav>

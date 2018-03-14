@@ -27,6 +27,7 @@ import { UploadComponent } from './upload/upload.component';
 import {AnalysisComponent} from "./algoritms/analysis/analysis.component";
 import {ModellingComponent} from "./algoritms/modelling/modelling.component";
 import {PreprocessingComponent} from "./algoritms/preprocessing/preprocessing.component";
+import {AlgorithmComponent} from "./algorithm/algorithm.component";
 
 const appRoutes: Routes = [
   { path: '', component: PreparationListComponent, pathMatch: 'full'}, // redirect to home page on load
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   { path: 'analysis', component: AnalysisComponent, pathMatch: 'full'},
   { path: 'preprocessing', component: PreprocessingComponent, pathMatch: 'full'},
   { path: 'modelling', component: ModellingComponent, pathMatch: 'full'},
+  { path: 'algorithmLink', component: AlgorithmComponent, pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];
 
