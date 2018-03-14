@@ -14,7 +14,9 @@ export class AlgorithmListComponent implements OnInit {
 
   ngOnInit() {
     this.getAlgorithms();
-    console.log('Name: ', this.algorithms.name);
+    if (this.algorithms !== undefined) {
+      console.log('Name: ', this.algorithms.name);
+    }
 
     let jsonObj: any = JSON.parse(this.temp);
     this.algorithms = <IAlgorithm>jsonObj;
