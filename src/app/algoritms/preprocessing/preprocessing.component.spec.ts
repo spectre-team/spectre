@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  MatCardModule,
+  MatToolbarModule,
+} from '@angular/material';
 
 import { PreprocessingComponent } from './preprocessing.component';
 
@@ -8,7 +12,11 @@ describe('PreprocessingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreprocessingComponent ]
+      declarations: [ PreprocessingComponent ],
+      imports: [
+        MatCardModule,
+        MatToolbarModule,
+      ]
     })
     .compileComponents();
   }));
