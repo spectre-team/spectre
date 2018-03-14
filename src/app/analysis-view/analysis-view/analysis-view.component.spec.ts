@@ -18,9 +18,15 @@
 */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
+
+import {
+  MatButtonModule,
+  MatCardModule,
+} from '@angular/material';
 
 import { AnalysisViewComponent } from './analysis-view.component';
 
@@ -31,10 +37,19 @@ describe('AnalysisViewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AnalysisViewComponent ],
+      imports: [
+        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        MatButtonModule,
+        MatCardModule,
+      ],
       providers: [
         {
           provide: ActivatedRoute,
-          useValue: {paramMap: Observable.of({get: (name: string) => 'divik'})}
+          useValue: {
+            paramMap: Observable.of({get: (name: string) => 'divik'}),
+            snapshot: {}
+          }
         },
       ]
     })

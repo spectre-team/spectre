@@ -19,12 +19,21 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import {
+  MatButtonModule,
+  MatCardModule,
+} from '@angular/material';
 
 import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatCardModule,
   ],
   declarations: [
     AnalysisViewComponent,

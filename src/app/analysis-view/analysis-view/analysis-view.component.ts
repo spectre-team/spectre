@@ -20,6 +20,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
+import { Analysis } from '../analysis';
+
 @Component({
   selector: 'app-analysis-view',
   templateUrl: './analysis-view.component.html',
@@ -27,7 +29,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class AnalysisViewComponent implements OnInit {
 
-  private analysisName: string;
+  private algorithmName: string;
+  private analyses: Analysis[];
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +38,11 @@ export class AnalysisViewComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(
-      (params: ParamMap) => this.analysisName = params.get('analysisName'));
+      (params: ParamMap) => this.algorithmName = params.get('algorithmName'));
+    this.analyses = [
+      {name: 'First DiviK ever', id: '1'},
+      {name: 'Another DiviK', id: '2'},
+    ];
   }
 
 }

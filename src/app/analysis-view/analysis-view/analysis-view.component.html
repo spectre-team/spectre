@@ -1,3 +1,8 @@
-<p>
-  analysis-view works!
-</p>
+<mat-card *ngFor="let analysis of analyses">
+    <mat-card-title>{{analysis.name}}</mat-card-title>
+    <mat-card-content>
+        <a routerLink="../../results/{{algorithmName}}/{{analysis.id}}">Details</a>
+    </mat-card-content>
+</mat-card>
+
+<a mat-fab routerLink="../../analysis/new/{{algorithmName}}">+</a>
