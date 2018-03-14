@@ -20,12 +20,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-<<<<<<< HEAD
 import { Analysis } from '../analysis';
+<<<<<<< HEAD
 import { FinishedAnalysesService } from '../finished-analyses.service';
-
 =======
->>>>>>> Add analysis-view component
+>>>>>>> Implement analysis-view with dummy data
+
 @Component({
   selector: 'app-analysis-view',
   templateUrl: './analysis-view.component.html',
@@ -33,20 +33,16 @@ import { FinishedAnalysesService } from '../finished-analyses.service';
 })
 export class AnalysisViewComponent implements OnInit {
 
-<<<<<<< HEAD
   private algorithmName: string;
+<<<<<<< HEAD
   private errorMessage: string;
+=======
+>>>>>>> Implement analysis-view with dummy data
   private analyses: Analysis[];
 
   constructor(
     private route: ActivatedRoute,
     private client: FinishedAnalysesService,
-=======
-  private analysisName: string;
-
-  constructor(
-    private route: ActivatedRoute,
->>>>>>> Add analysis-view component
   ) { }
 
   ngOnInit() {
@@ -59,8 +55,12 @@ export class AnalysisViewComponent implements OnInit {
           error => this.errorMessage = error.message);
       });
 =======
-      (params: ParamMap) => this.analysisName = params.get('analysisName'));
->>>>>>> Add analysis-view component
+      (params: ParamMap) => this.algorithmName = params.get('algorithmName'));
+    this.analyses = [
+      {name: 'First DiviK ever', id: '1'},
+      {name: 'Another DiviK', id: '2'},
+    ];
+>>>>>>> Implement analysis-view with dummy data
   }
 
 }

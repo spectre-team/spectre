@@ -1,6 +1,8 @@
 <<<<<<< HEAD
 <h1>{{algorithmName}}</h1>
 
+=======
+>>>>>>> Implement analysis-view with dummy data
 <mat-card *ngFor="let analysis of analyses">
     <mat-card-title>{{analysis.name}}</mat-card-title>
     <mat-card-content>
@@ -8,6 +10,7 @@
     </mat-card-content>
 </mat-card>
 
+<<<<<<< HEAD
 <mat-card *ngIf="analyses!==undefined && analyses.length===0">
     <mat-card-title>Nothing to see here yet...</mat-card-title>
     <mat-card-content>
@@ -22,9 +25,6 @@
     </mat-card-content>
 </mat-card>
 
-<a mat-fab routerLink="../../analysis/new/{{algorithmName}}">+</a>
 =======
-<p>
-  analysis-view works!
-</p>
->>>>>>> Add analysis-view component
+>>>>>>> Implement analysis-view with dummy data
+<a mat-fab routerLink="../../analysis/new/{{algorithmName}}">+</a>

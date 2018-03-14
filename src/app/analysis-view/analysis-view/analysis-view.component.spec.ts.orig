@@ -18,7 +18,6 @@
 */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-<<<<<<< HEAD
 import { ActivatedRoute, ParamMap, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Rx';
@@ -29,13 +28,10 @@ import {
   MatCardModule,
 } from '@angular/material';
 
+<<<<<<< HEAD
 import { FinishedAnalysesService } from '../finished-analyses.service';
 =======
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/observable/of';
-
->>>>>>> Add analysis-view component
+>>>>>>> Implement analysis-view with dummy data
 import { AnalysisViewComponent } from './analysis-view.component';
 
 describe('AnalysisViewComponent', () => {
@@ -45,7 +41,6 @@ describe('AnalysisViewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AnalysisViewComponent ],
-<<<<<<< HEAD
       imports: [
         RouterModule,
         RouterTestingModule.withRoutes([]),
@@ -67,13 +62,6 @@ describe('AnalysisViewComponent', () => {
             {name: 'Another DiviK', id: '2'},
           ])}
         }
-=======
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {paramMap: Observable.of({get: (name: string) => 'divik'})}
-        },
->>>>>>> Add analysis-view component
       ]
     })
     .compileComponents();
