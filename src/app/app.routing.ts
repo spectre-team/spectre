@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   { path: 'preparations', component: PreparationListComponent, pathMatch: 'full'},
   { path: 'mainPage', component: MainPageComponent, pathMatch: 'full'},
   { path: 'uploadDataset', component: UploadComponent, pathMatch: 'full'},
-  { path: 'analysis/:analysisName', component: AnalysisViewComponent, pathMatch: 'full' },
+  { path: 'analysis/:algorithmName', component: AnalysisViewComponent, pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
