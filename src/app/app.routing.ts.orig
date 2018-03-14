@@ -25,22 +25,18 @@ import { PreparationListComponent } from './preparations/preparation-list/prepar
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadComponent } from './upload/upload.component';
 import { AnalysisViewComponent } from './analysis-view/analysis-view/analysis-view.component';
-<<<<<<< HEAD
 import { NewAnalysisViewComponent } from './new-analysis-view/new-analysis-view/new-analysis-view.component';
-=======
->>>>>>> Add analysis-view to router
 
 const appRoutes: Routes = [
   { path: '', component: PreparationListComponent, pathMatch: 'full'}, // redirect to home page on load
   { path: 'preparations', component: PreparationListComponent, pathMatch: 'full'},
   { path: 'mainPage', component: MainPageComponent, pathMatch: 'full'},
   { path: 'uploadDataset', component: UploadComponent, pathMatch: 'full'},
-<<<<<<< HEAD
   { path: 'analysis/:algorithmName', component: AnalysisViewComponent, pathMatch: 'full' },
+<<<<<<< HEAD
   { path: 'analysis/new/:algorithm', component: NewAnalysisViewComponent, pathMatch: 'full'},
 =======
-  { path: 'analysis/:analysisName', component: AnalysisViewComponent, pathMatch: 'full' },
->>>>>>> Add analysis-view to router
+>>>>>>> Change routing in app module
   { path: '**', component: PageNotFoundComponent }
 ];
 
