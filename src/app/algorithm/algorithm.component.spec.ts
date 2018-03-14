@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  MatCardModule,
+  MatToolbarModule,
+} from '@angular/material';
 
 import { AlgorithmComponent } from './algorithm.component';
 
@@ -8,7 +12,11 @@ describe('AlgorithmComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlgorithmComponent ]
+      declarations: [ AlgorithmComponent ],
+      imports: [
+        MatCardModule,
+        MatToolbarModule,
+      ]
     })
     .compileComponents();
   }));
