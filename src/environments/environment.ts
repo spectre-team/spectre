@@ -8,4 +8,5 @@ export const environment = {
   apiPreparationUrl: 'http://localhost:2001',
   apiUploadUrl: 'http://localhost:2002/api',
   apiDivikUrl: 'http://localhost:2001',
+  analysisApiUrl: 'http://localhost:2003',
 };
