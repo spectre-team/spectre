@@ -39,6 +39,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
 import { AnalysisViewModule } from './analysis-view/analysis-view.module';
+import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
 
 @NgModule({
   providers: [
@@ -68,6 +69,7 @@ import { AnalysisViewModule } from './analysis-view/analysis-view.module';
     MatToolbarModule,
     routing,
     AnalysisViewModule,
+    NewAnalysisViewModule,
   ],
   bootstrap: [AppComponent]
 })
