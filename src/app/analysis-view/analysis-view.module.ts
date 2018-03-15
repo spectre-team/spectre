@@ -19,6 +19,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import {
@@ -27,10 +28,12 @@ import {
 } from '@angular/material';
 
 import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
+import { FinishedAnalysesService } from './finished-analyses.service';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule,
     MatButtonModule,
     MatCardModule,
@@ -40,6 +43,9 @@ import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
   ],
   exports: [
     AnalysisViewComponent,
+  ],
+  providers: [
+    FinishedAnalysesService,
   ]
 })
 export class AnalysisViewModule { }
