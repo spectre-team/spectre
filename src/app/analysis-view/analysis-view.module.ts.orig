@@ -19,32 +19,26 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { HttpClientModule } from '@angular/common/http';
-=======
->>>>>>> Implement analysis-view with dummy data
 import { RouterModule } from '@angular/router';
 
 import {
   MatButtonModule,
   MatCardModule,
 } from '@angular/material';
-<<<<<<< HEAD
 
 import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
 import { FinishedAnalysesService } from './finished-analyses.service';
-=======
->>>>>>> Implement analysis-view with dummy data
+<<<<<<< HEAD
 
 import { AnalysisViewComponent } from './analysis-view/analysis-view.component';
+=======
+>>>>>>> Create finished analysis service
 
 @NgModule({
   imports: [
     CommonModule,
-<<<<<<< HEAD
     HttpClientModule,
-=======
->>>>>>> Implement analysis-view with dummy data
     RouterModule,
     MatButtonModule,
     MatCardModule,
