@@ -7,5 +7,8 @@ export const apiUrl = {
   divikResultUrl: '/divikResult/{0}?divikId={1}&level={2}',
   divikConfigUrl: '/divikResult/{0}?divikId={1}',
   uploadUrl: '/download',
-  finishedAnalysesUrl: '/results/{0}',
+  finishedAnalysesUrl: '/results/{0}/',
+  inputsSchemaUrl: '/schema/inputs/{0}/',
+  inputsLayoutUrl: '/layout/inputs/{0}/',
+  scheduleUrl: '/schedule/{0}/',
 };
