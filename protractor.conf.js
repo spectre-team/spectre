@@ -28,7 +28,7 @@ exports.config = {
     var jasmineReporters = require('jasmine-reporters');
     jasmine.getEnv().addReporter(
         new jasmineReporters.JUnitXmlReporter({
-            savePath: 'C:\\projects\\spectre\\src\\Spectre.AngularClient',
+            savePath: 'C:\\projects\\spectre',
             filePrefix: 'protractor-tests',
             consolidateAll: true}));
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
