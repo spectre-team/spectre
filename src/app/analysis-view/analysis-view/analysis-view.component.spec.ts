@@ -28,6 +28,7 @@ import {
   MatCardModule,
 } from '@angular/material';
 
+import { FinishedAnalysesService } from '../finished-analyses.service';
 import { AnalysisViewComponent } from './analysis-view.component';
 
 describe('AnalysisViewComponent', () => {
@@ -51,6 +52,13 @@ describe('AnalysisViewComponent', () => {
             snapshot: {}
           }
         },
+        {
+          provide: FinishedAnalysesService,
+          useValue: { getFinished: (algorithm: string) => Observable.of([
+            {name: 'First DiviK', id: '1'},
+            {name: 'Another DiviK', id: '2'},
+          ])}
+        }
       ]
     })
     .compileComponents();

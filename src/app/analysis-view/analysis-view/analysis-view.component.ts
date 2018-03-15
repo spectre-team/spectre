@@ -21,6 +21,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Analysis } from '../analysis';
+import { FinishedAnalysesService } from '../finished-analyses.service';
 
 @Component({
   selector: 'app-analysis-view',
@@ -30,19 +31,22 @@ import { Analysis } from '../analysis';
 export class AnalysisViewComponent implements OnInit {
 
   private algorithmName: string;
+  private errorMessage: string;
   private analyses: Analysis[];
 
   constructor(
     private route: ActivatedRoute,
+    private client: FinishedAnalysesService,
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(
-      (params: ParamMap) => this.algorithmName = params.get('algorithmName'));
-    this.analyses = [
-      {name: 'First DiviK ever', id: '1'},
-      {name: 'Another DiviK', id: '2'},
-    ];
+      (params: ParamMap) => {
+        this.algorithmName = params.get('algorithmName');
+        this.client.getFinished(this.algorithmName).subscribe(
+          analyses => this.analyses = analyses,
+          error => this.errorMessage = error.message);
+      });
   }
 
 }
