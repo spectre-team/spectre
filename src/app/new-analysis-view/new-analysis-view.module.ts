@@ -19,10 +19,15 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AnalysisSchedulerService } from './analysis-scheduler.service';
+import { Service } from '../app.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
   declarations: [
 
@@ -31,7 +36,8 @@ import { CommonModule } from '@angular/common';
 
   ],
   providers: [
-
+    AnalysisSchedulerService,
+    Service,
   ]
 })
 export class NewAnalysisViewModule { }
