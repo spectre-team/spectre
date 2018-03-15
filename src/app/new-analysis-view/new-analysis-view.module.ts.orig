@@ -19,9 +19,9 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { HttpClientModule } from '@angular/common/http';
 
+<<<<<<< HEAD
 import {
   MatCardModule,
   MatSnackBarModule,
@@ -31,14 +31,21 @@ import { GenericFormModule } from '../generic-form/generic-form.module';
 import { AnalysisSchedulerService } from './analysis-scheduler.service';
 import { Service } from '../app.service';
 import { NewAnalysisViewComponent } from './new-analysis-view/new-analysis-view.component';
+=======
+import { AnalysisSchedulerService } from './analysis-scheduler.service';
+import { Service } from '../app.service';
+>>>>>>> Add analysis-scheduler service
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+<<<<<<< HEAD
     MatCardModule,
     MatSnackBarModule,
     GenericFormModule,
+=======
+>>>>>>> Add analysis-scheduler service
   ],
   declarations: [
     NewAnalysisViewComponent,
@@ -49,21 +56,6 @@ import { NewAnalysisViewComponent } from './new-analysis-view/new-analysis-view.
   providers: [
     AnalysisSchedulerService,
     Service,
-=======
-
-@NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-
-  ],
-  exports: [
-
-  ],
-  providers: [
-
->>>>>>> Create new-analysis-view module
   ]
 })
 export class NewAnalysisViewModule { }
