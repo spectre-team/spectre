@@ -41,9 +41,6 @@ import { GenericFormComponent } from './generic-form/generic-form.component';
   providers: [
     GenericFormFetchService,
   ],
-  providers: [
-    GenericFormFetchService,
-  ],
   declarations: [
     GenericFormComponent
   ],

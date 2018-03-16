@@ -25,7 +25,7 @@ import 'rxjs/add/observable/of';
 
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatListModule,
 } from '@angular/material';
 
 import { FinishedAnalysesService } from '../finished-analyses.service';
@@ -42,7 +42,7 @@ describe('AnalysisViewComponent', () => {
         RouterModule,
         RouterTestingModule.withRoutes([]),
         MatButtonModule,
-        MatCardModule,
+        MatCardModule
       ],
       providers: [
         {

@@ -71,7 +71,7 @@ import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.mod
     routing,
     AnalysisViewModule,
     AnalysisTypesListModule,
-    MatButtonModule
+    MatButtonModule,
     NewAnalysisViewModule,
   ],
   bootstrap: [AppComponent]
