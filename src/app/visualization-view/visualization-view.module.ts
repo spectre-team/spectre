@@ -24,18 +24,24 @@ import {
   MatTableModule,
 } from '@angular/material';
 
+import { PlotlyModule } from '../plotly/plotly.module';
 import { TableViewComponent } from './table-view/table-view.component';
+import { VisualizationType } from './visualization-type.enum';
+import { VisualizationViewComponent } from './visualization-view/visualization-view.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MatTableModule,
+    PlotlyModule,
   ],
   declarations: [
     TableViewComponent,
+    VisualizationViewComponent,
   ],
   exports: [
     TableViewComponent,
+    VisualizationViewComponent,
   ],
   providers: [
   ],
