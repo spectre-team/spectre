@@ -38,9 +38,20 @@ import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/mater
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
-import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
+<<<<<<< HEAD
+import { AnalysisViewModule } from './analysis-view/analysis-view.module';
+<<<<<<< HEAD
+import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
+=======
+>>>>>>> Add analysis-view to router
+=======
+<<<<<<< HEAD
 import { AnalysisViewModule } from './analysis-view/analysis-view.module';
 import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
+=======
+import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
+>>>>>>> Add Analysis-types-list component
+>>>>>>> Add Analysis-types-list component
 
 @NgModule({
   providers: [
@@ -69,9 +80,20 @@ import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.mod
     MatListModule,
     MatToolbarModule,
     routing,
+<<<<<<< HEAD
     AnalysisViewModule,
-    AnalysisTypesListModule
+<<<<<<< HEAD
     NewAnalysisViewModule,
+=======
+>>>>>>> Add analysis-view to router
+=======
+<<<<<<< HEAD
+    AnalysisViewModule,
+    NewAnalysisViewModule,
+=======
+    AnalysisTypesListModule
+>>>>>>> Add Analysis-types-list component
+>>>>>>> Add Analysis-types-list component
   ],
   bootstrap: [AppComponent]
 })

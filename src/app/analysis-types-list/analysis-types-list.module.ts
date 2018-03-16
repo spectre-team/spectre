@@ -21,6 +21,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatListModule, MatExpansionModule, MatButtonModule } from '@angular/material';
+import { AnalysisTypesListComponent } from './analysis-types-list/analysis-types-list.component';
+import {AnalysisTypesListService} from "./analysis-types-list.service";
+import {HttpClientModule} from "@angular/common/http";
+import {AnalysisNamesListComponent} from "./analysis-names-list/analysis-names-list.component";
 
 @NgModule({
   imports: [
@@ -29,7 +33,17 @@ import { MatListModule, MatExpansionModule, MatButtonModule } from '@angular/mat
     MatListModule,
     MatExpansionModule,
     MatButtonModule,
+    HttpClientModule,
   ],
-  declarations: []
+  declarations: [
+    AnalysisTypesListComponent,
+    AnalysisNamesListComponent
+  ],
+  providers: [
+    AnalysisTypesListService
+  ],
+  exports: [
+    AnalysisTypesListComponent
+  ]
 })
 export class AnalysisTypesListModule { }
