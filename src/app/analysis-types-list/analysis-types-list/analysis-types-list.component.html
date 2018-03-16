@@ -1,0 +1,20 @@
+<mat-expansion-panel *ngFor="let type of types, let i = index"
+                     (opened)="panelOpenState[i] = true"
+                     (closed)="panelOpenState[i] = false">
+  <mat-expansion-panel-header>
+  <mat-panel-title>
+    <i
+      class="fa fa-cogs"
+      aria-hidden="true">
+    </i>
+    {{type}}
+  </mat-panel-title>
+  <mat-panel-description>
+    {{panelOpenState[i] ? 'less...' : 'more...'}}
+  </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-analysis-names-list
+      [AnalysisType]="type"
+      [AnalysisNames]="algorithms[type]"
+      ></app-analysis-names-list>
+</mat-expansion-panel>
