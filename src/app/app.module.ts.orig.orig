@@ -34,24 +34,22 @@ import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import { MatListModule, MatSidenavModule, MatToolbarModule, MatButtonModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
 <<<<<<< HEAD
+=======
+import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
+>>>>>>> Change side-nav layout
 import { AnalysisViewModule } from './analysis-view/analysis-view.module';
 <<<<<<< HEAD
 import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
+<<<<<<< HEAD
 =======
 >>>>>>> Add analysis-view to router
 =======
-<<<<<<< HEAD
-import { AnalysisViewModule } from './analysis-view/analysis-view.module';
-import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
-=======
-import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
->>>>>>> Add Analysis-types-list component
->>>>>>> Add Analysis-types-list component
+>>>>>>> Change side-nav layout
 
 @NgModule({
   providers: [
@@ -80,20 +78,20 @@ import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list
     MatListModule,
     MatToolbarModule,
     routing,
-<<<<<<< HEAD
     AnalysisViewModule,
+<<<<<<< HEAD
 <<<<<<< HEAD
     NewAnalysisViewModule,
 =======
 >>>>>>> Add analysis-view to router
 =======
-<<<<<<< HEAD
-    AnalysisViewModule,
+    AnalysisTypesListModule
     NewAnalysisViewModule,
 =======
-    AnalysisTypesListModule
->>>>>>> Add Analysis-types-list component
->>>>>>> Add Analysis-types-list component
+    AnalysisTypesListModule,
+    MatButtonModule
+>>>>>>> Change side-nav layout
+>>>>>>> Change side-nav layout
   ],
   bootstrap: [AppComponent]
 })

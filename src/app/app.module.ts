@@ -34,7 +34,7 @@ import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import { MatListModule, MatSidenavModule, MatToolbarModule, MatButtonModule} from '@angular/material';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
@@ -70,7 +70,8 @@ import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.mod
     MatToolbarModule,
     routing,
     AnalysisViewModule,
-    AnalysisTypesListModule
+    AnalysisTypesListModule,
+    MatButtonModule
     NewAnalysisViewModule,
   ],
   bootstrap: [AppComponent]
