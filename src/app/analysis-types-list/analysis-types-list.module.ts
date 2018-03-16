@@ -25,6 +25,7 @@ import { AnalysisTypesListComponent } from './analysis-types-list/analysis-types
 import {AnalysisTypesListService} from "./analysis-types-list.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AnalysisNamesListComponent} from "./analysis-names-list/analysis-names-list.component";
+import {routing} from "../app.routing";
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import {AnalysisNamesListComponent} from "./analysis-names-list/analysis-names-l
     MatExpansionModule,
     MatButtonModule,
     HttpClientModule,
+    routing
   ],
   declarations: [
     AnalysisTypesListComponent,
