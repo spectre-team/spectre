@@ -6,5 +6,6 @@ export const apiUrl = {
   heatmapUrl: '/heatmap/{0}?channelId={1}&flag=false',
   divikResultUrl: '/divikResult/{0}?divikId={1}&level={2}',
   divikConfigUrl: '/divikResult/{0}?divikId={1}',
-  uploadUrl: '/download'
+  uploadUrl: '/download',
+  finishedAnalysesUrl: '/results/{0}',
 };

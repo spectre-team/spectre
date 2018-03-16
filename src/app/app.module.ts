@@ -38,6 +38,7 @@ import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/mater
 import { MainPageComponent } from './main-page/main-page.component';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
+import { AnalysisViewModule } from './analysis-view/analysis-view.module';
 
 @NgModule({
   providers: [
@@ -65,7 +66,8 @@ import { UploadComponent } from './upload/upload.component';
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
-    routing
+    routing,
+    AnalysisViewModule,
   ],
   bootstrap: [AppComponent]
 })
