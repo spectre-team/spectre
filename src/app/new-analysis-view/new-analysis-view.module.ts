@@ -21,19 +21,29 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import {
+  MatCardModule,
+  MatSnackBarModule,
+} from '@angular/material';
+
+import { GenericFormModule } from '../generic-form/generic-form.module';
 import { AnalysisSchedulerService } from './analysis-scheduler.service';
 import { Service } from '../app.service';
+import { NewAnalysisViewComponent } from './new-analysis-view/new-analysis-view.component';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    MatCardModule,
+    MatSnackBarModule,
+    GenericFormModule,
   ],
   declarations: [
-
+    NewAnalysisViewComponent,
   ],
   exports: [
-
+    NewAnalysisViewComponent,
   ],
   providers: [
     AnalysisSchedulerService,
