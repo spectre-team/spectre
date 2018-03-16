@@ -29,14 +29,13 @@ export class AnalysisTypesListComponent implements OnInit {
 
   panelOpenState : Boolean[] = [false, false, false];
   algorithmsUrl = 'http://localhost:2003/algorithms';
-  testfileUrl = 'assets/testAlgorithms.json';
   algorithms: any;
   types: string[];
 
   constructor(private fetchService: AnalysisTypesListService) { }
 
   ngOnInit() {
-    this.fetchService.getAlgorithms(this.testfileUrl).subscribe(
+    this.fetchService.getAlgorithms(this.algorithmsUrl).subscribe(
       data => {
         this.algorithms = data;
         this.types = Object.keys(this.algorithms);
