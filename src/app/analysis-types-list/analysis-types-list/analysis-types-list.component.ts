@@ -29,7 +29,7 @@ export class AnalysisTypesListComponent implements OnInit {
 
   panelOpenState : Boolean[] = [false, false, false];
   algorithmsUrl = 'http://localhost:2003/algorithms';
-  testfileUrl = 'assets/test.json';
+  testfileUrl = 'assets/testAlgorithms.json';
   algorithms: any;
   types: string[];
 
