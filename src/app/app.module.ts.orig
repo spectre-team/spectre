@@ -34,27 +34,15 @@ import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-<<<<<<< HEAD
-import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
-import { MainPageComponent } from './main-page/main-page.component';
-import { UploadService } from './upload/shared/upload.service';
-import { UploadComponent } from './upload/upload.component';
-=======
 import { MatListModule, MatSidenavModule, MatToolbarModule, MatButtonModule} from '@angular/material';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
 import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
 <<<<<<< HEAD
->>>>>>> Fix tests.
 import { AnalysisViewModule } from './analysis-view/analysis-view.module';
-<<<<<<< HEAD
 import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
 =======
-<<<<<<< HEAD
->>>>>>> Add analysis-view to router
-=======
 import {MainPageComponent} from "./main-page/main-page.component";
->>>>>>> Fix tests.
 >>>>>>> Fix tests.
 
 @NgModule({
@@ -85,16 +73,9 @@ import {MainPageComponent} from "./main-page/main-page.component";
     MatToolbarModule,
     routing,
     AnalysisViewModule,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    NewAnalysisViewModule,
-=======
->>>>>>> Add analysis-view to router
-=======
     AnalysisTypesListModule,
     MatButtonModule
     NewAnalysisViewModule,
->>>>>>> Fix tests.
   ],
   bootstrap: [AppComponent]
 })

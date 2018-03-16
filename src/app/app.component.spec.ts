@@ -30,6 +30,12 @@ import { MockBackend } from '@angular/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AnalysisTypesListComponent} from "./analysis-types-list/analysis-types-list/analysis-types-list.component";
+import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
+import {MainPageComponent} from "./main-page/main-page.component";
+import {UploadComponent} from "./upload/upload.component";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -40,7 +46,10 @@ describe('AppComponent', () => {
             MatListModule,
             MatSidenavModule,
             MatToolbarModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            AnalysisTypesListModule,
+            FormsModule,
+            ReactiveFormsModule
           ]
       ],
       providers: [
@@ -56,7 +65,10 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        PreparationListComponent
+        PreparationListComponent,
+        MainPageComponent,
+        UploadComponent,
+        PageNotFoundComponent
       ],
     }).compileComponents();
   }));
