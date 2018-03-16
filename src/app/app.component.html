@@ -18,10 +18,11 @@
 <mat-sidenav-container>
   <mat-sidenav
     #sidenav mode="side"
-    class="app-side-nav">
+    class="app-side-nav"
+    [opened]="true">
     <mat-list>
       <div class="btn-group-vertical">
-        <button
+        <button mat-raised-button
           class="btn btn-default"
           mat-list-item routerLink="mainPage">
           <i
@@ -29,7 +30,7 @@
             aria-hidden="true">
           </i> Main Page
         </button>
-        <button
+        <button mat-raised-button
           class="btn btn-default"
           mat-list-item routerLink="preparations">
           <i
@@ -37,7 +38,7 @@
             aria-hidden="true">
           </i> Preparations
         </button>
-        <button
+        <button mat-raised-button
           class="btn btn-default"
           mat-list-item routerLink="uploadDataset">
           <i
