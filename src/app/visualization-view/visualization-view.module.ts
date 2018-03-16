@@ -20,13 +20,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import {
+  MatTableModule,
+} from '@angular/material';
+
+import { TableViewComponent } from './table-view/table-view.component';
+
 @NgModule({
   imports: [
     CommonModule,
+    MatTableModule,
   ],
   declarations: [
+    TableViewComponent,
   ],
   exports: [
+    TableViewComponent,
   ],
   providers: [
   ],
