@@ -46,5 +46,4 @@ export class AnalysisTypesListComponent implements OnInit {
       }
     );
   }
-
 }
