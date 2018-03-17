@@ -73,3 +73,7 @@ height: 50px;
   margin-right: 5px;
   color: #F69736;
 }
+
+.app-content{
+  height: 100vh;
+}
