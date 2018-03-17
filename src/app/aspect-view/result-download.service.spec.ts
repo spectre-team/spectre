@@ -1,6 +1,6 @@
 /*
- * aspect-view.module.ts
- * Module for visualization of single aspect of analysis result.
+ * result-download.service.spec.ts
+ * Test results aspect download service.
  *
    Copyright 2018 Grzegorz Mrukwa
 
@@ -17,23 +17,29 @@
    limitations under the License.
 */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
+import 'rxjs/add/observable/of';
+import 'rxjs/Rx';
 
 import { Service } from '../app.service';
+import { ResultDownloadService } from './result-download.service';
 
-@NgModule({
-  declarations: [
-  ],
-  exports: [
-  ],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-  ],
-  providers: [
-    Service,
-  ],
-})
-export class AspectViewModule { }
+
+describe('ResultDownloadService', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+      ],
+      providers: [
+        ResultDownloadService,
+        Service,
+      ],
+    });
+  });
+
+  it('should be created', inject([ResultDownloadService], (service: ResultDownloadService) => {
+    expect(service).toBeTruthy();
+  }));
+});
