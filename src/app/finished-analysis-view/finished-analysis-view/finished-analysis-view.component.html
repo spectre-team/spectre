@@ -1,0 +1,12 @@
+<app-aspect-view *ngFor="let aspect of aspects"
+ [algorithm]="algorithm"
+ [id]="id"
+ [description]="aspect">
+</app-aspect-view>
+
+<mat-card *ngIf="aspects.length === 0">
+  <mat-card-title>Nothing to see here</mat-card-title>
+  <mat-card-content>
+    Developer of the {{algorithm}} pipeline didn't provide any fancy visualizations yet.
+  </mat-card-content>
+</mat-card>

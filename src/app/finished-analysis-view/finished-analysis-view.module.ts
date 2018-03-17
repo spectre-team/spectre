@@ -20,18 +20,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material';
 
 import { Service } from '../app.service';
 import { QuerySchemaDownloadService } from './query-schema-download.service';
+import { FinishedAnalysisViewComponent } from './finished-analysis-view/finished-analysis-view.component';
+import { AspectViewModule } from '../aspect-view/aspect-view.module';
 
 @NgModule({
   declarations: [
+    FinishedAnalysisViewComponent,
   ],
   exports: [
+    FinishedAnalysisViewComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
+    MatCardModule,
+    AspectViewModule,
   ],
   providers: [
     Service,
