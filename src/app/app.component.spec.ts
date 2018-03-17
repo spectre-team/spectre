@@ -28,8 +28,17 @@ import { PreparationListComponent } from './preparations/preparation-list/prepar
 import { MockBackend } from '@angular/http/testing';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import {MatCardMdImage, MatCardModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AnalysisTypesListComponent} from "./analysis-types-list/analysis-types-list/analysis-types-list.component";
+import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
+import {MainPageComponent} from "./main-page/main-page.component";
+import {UploadComponent} from "./upload/upload.component";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AnalysisViewComponent} from "./analysis-view/analysis-view/analysis-view.component";
+import {NewAnalysisViewComponent} from "./new-analysis-view/new-analysis-view/new-analysis-view.component";
+import {GenericFormModule} from "./generic-form/generic-form.module";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -40,7 +49,12 @@ describe('AppComponent', () => {
             MatListModule,
             MatSidenavModule,
             MatToolbarModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            AnalysisTypesListModule,
+            FormsModule,
+            ReactiveFormsModule,
+            MatCardModule,
+            GenericFormModule
           ]
       ],
       providers: [
@@ -56,7 +70,12 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        PreparationListComponent
+        PreparationListComponent,
+        MainPageComponent,
+        UploadComponent,
+        PageNotFoundComponent,
+        AnalysisViewComponent,
+        NewAnalysisViewComponent
       ],
     }).compileComponents();
   }));

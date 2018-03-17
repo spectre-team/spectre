@@ -1,0 +1,14 @@
+.fa-cogs
+{
+  color: #F69736;
+  margin-right: 10px;
+}
+
+mat-expansion-panel{
+  width: 300px;
+  padding: 5px;
+}
+
+.font-cont{
+  font-size: 16px;
+}
