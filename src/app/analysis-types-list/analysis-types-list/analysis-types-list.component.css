@@ -6,6 +6,7 @@
 
 mat-expansion-panel{
   width: 300px;
+  padding: 5px;
 }
 
 .font-cont{
