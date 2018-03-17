@@ -27,7 +27,6 @@ import {AnalysisTypesListService} from "./analysis-types-list.service";
 describe('AnalysisTypesListService', () => {
   let injector: TestBed;
   let service: AnalysisTypesListService;
-  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,11 +35,6 @@ describe('AnalysisTypesListService', () => {
     });
     injector = getTestBed();
     service = injector.get(AnalysisTypesListService);
-    httpMock = injector.get(HttpTestingController);
-  });
-
-  afterEach(() => {
-    httpMock.verify();
   });
 
   it('should be created',()  => {
