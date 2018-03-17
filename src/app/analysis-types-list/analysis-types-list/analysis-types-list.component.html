@@ -1,3 +1,4 @@
+<mat-accordion [displayMode]="flat">
 <mat-expansion-panel *ngFor="let type of types, let i = index"
                      (opened)="panelOpenState[i] = true"
                      (closed)="panelOpenState[i] = false">
@@ -20,3 +21,4 @@
       [AnalysisNames]="algorithms[type]"
       ></app-analysis-names-list>
 </mat-expansion-panel>
+</mat-accordion>
