@@ -18,7 +18,6 @@
 */
 
 import { TestBed, inject, getTestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 
@@ -30,7 +29,6 @@ describe('AnalysisTypesListService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
       providers: [AnalysisTypesListService]
     });
     injector = getTestBed();
