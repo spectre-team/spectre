@@ -22,20 +22,31 @@ import 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 
 import {AnalysisTypesListService} from "./analysis-types-list.service";
+import {Observable} from "rxjs/Observable";
+import {HttpClient} from "@angular/common/http";
+
+class MockHttpClient {
+  get(url) {
+    return Observable.of(
+    {
+    analysis: ['divik']
+    }
+    )
+  }
+}
 
 describe('AnalysisTypesListService', () => {
-  let injector: TestBed;
-  let service: AnalysisTypesListService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AnalysisTypesListService]
+      providers: [
+        {provide: HttpClient, useClass: MockHttpClient},
+        AnalysisTypesListService
+      ]
     });
-    injector = getTestBed();
-    service = injector.get(AnalysisTypesListService);
   });
 
-  it('should be created',()  => {
+  it('should be created', inject([AnalysisTypesListService], (service: AnalysisTypesListService) => {
     expect(service).toBeTruthy();
-  });
+  }));
 });

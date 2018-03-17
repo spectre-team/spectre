@@ -33,6 +33,8 @@ import {NewAnalysisViewComponent} from "../../new-analysis-view/new-analysis-vie
 import {PageNotFoundComponent} from "../../page-not-found/page-not-found.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {GenericFormModule} from "../../generic-form/generic-form.module";
+import {AnalysisTypesListService} from "../analysis-types-list.service";
+import {Observable} from "rxjs/Observable";
 
 describe('AnalysisNamesListComponent', () => {
   let component: AnalysisNamesListComponent;
@@ -59,6 +61,16 @@ describe('AnalysisNamesListComponent', () => {
         ReactiveFormsModule,
         MatCardModule,
         GenericFormModule
+      ],
+      providers: [
+        {
+          provide: AnalysisTypesListService,
+          useValue: {getAlgorithms: (algorithmsUrl: string) => Observable.of(
+              {
+                analysis: ['divik']
+              }
+            )}
+        }
       ]
     })
     .compileComponents();

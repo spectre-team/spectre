@@ -14,6 +14,7 @@ import {UploadComponent} from "../../upload/upload.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {GenericFormModule} from "../../generic-form/generic-form.module";
 import {AnalysisTypesListService} from "../analysis-types-list.service";
+import {Observable} from "rxjs/Observable";
 
 describe('AnalysisTypesListComponent', () => {
   let component: AnalysisTypesListComponent;
@@ -43,7 +44,14 @@ describe('AnalysisTypesListComponent', () => {
         GenericFormModule
       ],
       providers: [
-        AnalysisTypesListService
+        {
+          provide: AnalysisTypesListService,
+          useValue: {getAlgorithms: (algorithmsUrl: string) => Observable.of(
+              {
+                analysis: ['divik']
+              }
+            )},
+        }
       ]
     })
     .compileComponents();
