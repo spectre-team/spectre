@@ -14,5 +14,7 @@ export const apiUrl = {
   aspectLayoutUrl: '/layout/outputs/{0}/{1}/',
   inputsSchemaUrl: '/schema/inputs/{0}/',
   inputsLayoutUrl: '/layout/inputs/{0}/',
+  outputsSchemaUrl: '/schema/outputs/{0}/',
+  outputsLayoutUrl: '/layout/outputs/{0}/',
   scheduleUrl: '/schedule/{0}/',
 };
