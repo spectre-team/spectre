@@ -19,6 +19,10 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
+import { Service } from '../app.service';
+import { QuerySchemaDownloadService } from './query-schema-download.service';
 
 @NgModule({
   declarations: [
@@ -27,8 +31,11 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
   ],
   providers: [
+    Service,
+    QuerySchemaDownloadService,
   ],
 })
 export class FinishedAnalysisViewModule { }
