@@ -28,7 +28,7 @@ before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 script:
-- ng test --single-run true --progress false --browsers Firefox
+- ng test --single-run true --progress false --browsers Firefox --sourcemap false
 - ng build -env=$CONFIGURATION
 after_success:
 - |
