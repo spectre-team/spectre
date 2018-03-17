@@ -28,7 +28,11 @@ import { PreparationListComponent } from './preparations/preparation-list/prepar
 import { MockBackend } from '@angular/http/testing';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import {MatCardMdImage, MatCardModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardMdImage, MatCardModule, MatExpansionModule, MatListModule, MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AnalysisTypesListComponent} from "./analysis-types-list/analysis-types-list/analysis-types-list.component";
 import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
@@ -39,6 +43,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AnalysisViewComponent} from "./analysis-view/analysis-view/analysis-view.component";
 import {NewAnalysisViewComponent} from "./new-analysis-view/new-analysis-view/new-analysis-view.component";
 import {GenericFormModule} from "./generic-form/generic-form.module";
+import {HttpClientModule} from "@angular/common/http";
+import {AnalysisNamesListComponent} from "./analysis-types-list/analysis-names-list/analysis-names-list.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -54,7 +60,10 @@ describe('AppComponent', () => {
             FormsModule,
             ReactiveFormsModule,
             MatCardModule,
-            GenericFormModule
+            GenericFormModule,
+            MatExpansionModule,
+            MatButtonModule,
+            HttpClientModule
           ]
       ],
       providers: [
@@ -75,7 +84,7 @@ describe('AppComponent', () => {
         UploadComponent,
         PageNotFoundComponent,
         AnalysisViewComponent,
-        NewAnalysisViewComponent
+        NewAnalysisViewComponent,
       ],
     }).compileComponents();
   }));
