@@ -20,7 +20,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatListModule, MatExpansionModule, MatButtonModule } from '@angular/material';
+import {
+  MatListModule, MatExpansionModule, MatButtonModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { AnalysisTypesListComponent } from './analysis-types-list/analysis-types-list.component';
 import {AnalysisTypesListService} from "./analysis-types-list.service";
 import {HttpClientModule} from "@angular/common/http";
@@ -35,6 +38,7 @@ import {routing} from "../app.routing";
     MatExpansionModule,
     MatButtonModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
     routing
   ],
   declarations: [

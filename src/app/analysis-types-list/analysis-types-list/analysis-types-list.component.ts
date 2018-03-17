@@ -31,6 +31,7 @@ export class AnalysisTypesListComponent implements OnInit {
   algorithmsUrl = 'http://localhost:2003/algorithms';
   algorithms: any;
   types: string[];
+  isTableEmpty = false;
 
   constructor(private fetchService: AnalysisTypesListService) { }
 
@@ -42,6 +43,9 @@ export class AnalysisTypesListComponent implements OnInit {
         console.log(this.algorithms);
         console.log(this.types);
         console.log(this.algorithms[this.types[0]]);
+        if (this.types.length > 0) {
+          this.isTableEmpty = true;
+        }
       }
     );
   }

@@ -11,3 +11,8 @@ mat-expansion-panel{
 .font-cont{
   font-size: 16px;
 }
+
+.spinner-cont{
+  margin-left: 130px;
+  margin-top: 10px;
+}
