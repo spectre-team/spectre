@@ -18,9 +18,12 @@ install:
 - npm install -g npm@5.6.0
 - npm install -g @angular/cli@1.7.1
 - npm install
+# turned off temporarily until we resolve problem with random failures on Travis CI
+#- echo "travis_fold:start:DEPENDENCIES folding starts"
 # following error is suppressed as we do not need all deps, according to:
 # https://github.com/npm/npm/issues/17624
-- npm list || true
+#- npm list || true
+#- echo "travis_fold:end:DEPENDENCIES folding ends"
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start

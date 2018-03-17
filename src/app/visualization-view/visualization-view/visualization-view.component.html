@@ -1,0 +1,13 @@
+<div [ngSwitch]="type">
+    <app-table-view *ngSwitchCase="visualizationType.Table"
+      [columns]="data.columns"
+      [data]="data.data">
+    </app-table-view>
+
+    <app-plotly *ngSwitchCase="visualizationType.Plot"
+      [data]="data.data"
+      [layout]="data.layout">
+    </app-plotly>
+
+    <div *ngSwitchDefault>{{type}} is not handled yet.</div>
+</div>
