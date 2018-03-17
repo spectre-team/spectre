@@ -40,6 +40,7 @@ import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
 import { AnalysisViewModule } from './analysis-view/analysis-view.module';
 import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
+import { FinishedAnalysisViewModule } from './finished-analysis-view/finished-analysis-view.module';
 
 @NgModule({
   providers: [
@@ -70,6 +71,7 @@ import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.mod
     routing,
     AnalysisViewModule,
     NewAnalysisViewModule,
+    FinishedAnalysisViewModule,
   ],
   bootstrap: [AppComponent]
 })

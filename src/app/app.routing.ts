@@ -26,6 +26,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { UploadComponent } from './upload/upload.component';
 import { AnalysisViewComponent } from './analysis-view/analysis-view/analysis-view.component';
 import { NewAnalysisViewComponent } from './new-analysis-view/new-analysis-view/new-analysis-view.component';
+import { FinishedAnalysisViewComponent } from './finished-analysis-view/finished-analysis-view/finished-analysis-view.component';
 
 const appRoutes: Routes = [
   { path: '', component: PreparationListComponent, pathMatch: 'full'}, // redirect to home page on load
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
   { path: 'uploadDataset', component: UploadComponent, pathMatch: 'full'},
   { path: 'analysis/:algorithmName', component: AnalysisViewComponent, pathMatch: 'full' },
   { path: 'analysis/new/:algorithm', component: NewAnalysisViewComponent, pathMatch: 'full'},
+  { path: 'results/:algorithm/:analysis_id', component: FinishedAnalysisViewComponent, pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];
 
