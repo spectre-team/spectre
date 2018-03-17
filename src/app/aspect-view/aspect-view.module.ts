@@ -21,19 +21,33 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import {
+  MatExpansionModule,
+} from '@angular/material';
+
 import { Service } from '../app.service';
+import { AspectViewComponent } from './aspect-view/aspect-view.component';
+import { GenericFormModule } from '../generic-form/generic-form.module';
+import { VisualizationViewModule } from '../visualization-view/visualization-view.module';
+import { ResultDownloadService } from './result-download.service';
 
 @NgModule({
   declarations: [
+    AspectViewComponent,
   ],
   exports: [
+    AspectViewComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
+    MatExpansionModule,
+    GenericFormModule,
+    VisualizationViewModule,
   ],
   providers: [
     Service,
+    ResultDownloadService,
   ],
 })
 export class AspectViewModule { }

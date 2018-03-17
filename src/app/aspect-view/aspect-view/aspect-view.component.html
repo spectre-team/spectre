@@ -1,0 +1,21 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{description.friendly_name}}
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <p>{{description.description}}</p>
+
+  <app-generic-form
+    [schemaUrl]="schemaUrl"
+    [layoutUrl]="layoutUrl"
+    (onSubmit)="submit($event)">
+  </app-generic-form>
+
+  <app-visualization-view *ngIf="data !== undefined"
+    [type]="description.output_type"
+    [data]="data">
+  </app-visualization-view>
+
+</mat-expansion-panel>
