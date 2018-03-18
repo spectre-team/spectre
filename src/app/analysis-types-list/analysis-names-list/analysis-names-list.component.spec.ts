@@ -29,23 +29,16 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import {
-MatListModule,
-MatExpansionModule,
-MatButtonModule,
-MatCardModule,
-MatProgressSpinnerModule,
+  MatListModule,
+  MatExpansionModule,
+  MatButtonModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
-
-import { routing } from '../../app.routing';
-import { PreparationListComponent } from '../../preparations/preparation-list/preparation-list.component';
-import { MainPageComponent } from '../../main-page/main-page.component';
-import { UploadComponent } from '../../upload/upload.component';
-import { AnalysisViewComponent } from '../../analysis-view/analysis-view/analysis-view.component';
-import { NewAnalysisViewComponent } from '../../new-analysis-view/new-analysis-view/new-analysis-view.component';
-import { PageNotFoundComponent } from '../../page-not-found/page-not-found.component';
-import { GenericFormModule } from '../../generic-form/generic-form.module';
 
 import { AnalysisTypesListService } from '../analysis-types-list.service';
 import { AnalysisTypesListComponent } from '../analysis-types-list/analysis-types-list.component';
@@ -60,22 +53,16 @@ describe('AnalysisNamesListComponent', () => {
       declarations: [
         AnalysisNamesListComponent,
         AnalysisTypesListComponent,
-        PreparationListComponent,
-        MainPageComponent,
-        UploadComponent,
-        AnalysisViewComponent,
-        NewAnalysisViewComponent,
-        PageNotFoundComponent,
       ],
       imports: [
+        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+        ReactiveFormsModule,
         MatListModule,
         MatExpansionModule,
         MatButtonModule,
-        routing,
-        FormsModule,
-        ReactiveFormsModule,
         MatCardModule,
-        GenericFormModule,
         MatProgressSpinnerModule,
       ],
       providers: [

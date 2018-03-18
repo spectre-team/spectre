@@ -17,17 +17,20 @@
    limitations under the License.
 */
 
-import { Component, OnInit } from '@angular/core';
-import {AnalysisTypesListService} from "../analysis-types-list.service";
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import { AnalysisTypesListService } from '../analysis-types-list.service';
 
 @Component({
   selector: 'app-analysis-types-list',
   templateUrl: './analysis-types-list.component.html',
-  styleUrls: ['./analysis-types-list.component.css']
+  styleUrls: ['./analysis-types-list.component.css'],
 })
 export class AnalysisTypesListComponent implements OnInit {
 
-  panelOpenState : Boolean[] = [false, false, false];
+  panelOpenState: Boolean[] = [false, false, false];
   algorithmsUrl: string;
   algorithms: any;
   types: string[];
@@ -48,7 +51,7 @@ export class AnalysisTypesListComponent implements OnInit {
         if (this.types.length > 0) {
           this.isTableEmpty = true;
         }
-      }
+      },
     );
   }
 }

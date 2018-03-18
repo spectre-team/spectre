@@ -20,16 +20,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
 import {
   MatListModule,
   MatExpansionModule,
   MatButtonModule,
-  MatProgressSpinnerModule } from '@angular/material';
+  MatProgressSpinnerModule,
+} from '@angular/material';
+
 import { AnalysisTypesListComponent } from './analysis-types-list/analysis-types-list.component';
-import {AnalysisTypesListService} from './analysis-types-list.service';
-import {HttpClientModule} from '@angular/common/http';
-import {AnalysisNamesListComponent} from './analysis-names-list/analysis-names-list.component';
-import {routing} from '../app.routing';
+import { AnalysisTypesListService } from './analysis-types-list.service';
+import { AnalysisNamesListComponent } from './analysis-names-list/analysis-names-list.component';
 
 @NgModule({
   imports: [
@@ -40,17 +43,18 @@ import {routing} from '../app.routing';
     MatButtonModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    routing
+    RouterModule,
   ],
   declarations: [
     AnalysisTypesListComponent,
-    AnalysisNamesListComponent
+    AnalysisNamesListComponent,
   ],
   providers: [
-    AnalysisTypesListService
+    AnalysisTypesListService,
   ],
   exports: [
-    AnalysisTypesListComponent
-  ]
+    AnalysisTypesListComponent,
+  ],
 })
-export class AnalysisTypesListModule { }
+export class AnalysisTypesListModule {
+}
