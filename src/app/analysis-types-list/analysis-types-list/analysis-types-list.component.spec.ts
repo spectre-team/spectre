@@ -18,6 +18,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {GenericFormModule} from "../../generic-form/generic-form.module";
 import {AnalysisTypesListService} from "../analysis-types-list.service";
 import {Observable} from "rxjs/Observable";
+import {Service} from "../../app.service";
 
 describe('AnalysisTypesListComponent', () => {
   let component: AnalysisTypesListComponent;
@@ -55,7 +56,8 @@ describe('AnalysisTypesListComponent', () => {
                 analysis: ['divik']
               }
             )},
-        }
+        },
+        Service
       ]
     })
     .compileComponents();

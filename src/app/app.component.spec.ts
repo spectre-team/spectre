@@ -45,6 +45,7 @@ import {NewAnalysisViewComponent} from "./new-analysis-view/new-analysis-view/ne
 import {GenericFormModule} from "./generic-form/generic-form.module";
 import {HttpClientModule} from "@angular/common/http";
 import {AnalysisNamesListComponent} from "./analysis-types-list/analysis-names-list/analysis-names-list.component";
+import {Service} from "./app.service";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -75,7 +76,8 @@ describe('AppComponent', () => {
               return new Http(backendInstance, defaultOptions);
             },
             deps: [MockBackend, BaseRequestOptions]
-          }
+          },
+        Service
       ],
       declarations: [
         AppComponent,
