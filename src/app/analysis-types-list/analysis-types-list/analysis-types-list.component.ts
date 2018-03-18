@@ -19,6 +19,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import {AnalysisTypesListService} from "../analysis-types-list.service";
+import {Service} from "../../app.service";
+import {apiUrl} from "../../../environments/apiUrl";
 
 @Component({
   selector: 'app-analysis-types-list',
@@ -28,12 +30,15 @@ import {AnalysisTypesListService} from "../analysis-types-list.service";
 export class AnalysisTypesListComponent implements OnInit {
 
   panelOpenState : Boolean[] = [false, false, false];
-  algorithmsUrl = 'http://localhost:2003/algorithms';
+  algorithmsUrl: string;
   algorithms: any;
   types: string[];
   isTableEmpty = false;
 
-  constructor(private fetchService: AnalysisTypesListService) { }
+  constructor(private fetchService: AnalysisTypesListService, private urlProvider: Service) {
+    const analysisApiUrlBase = this.urlProvider.getBaseAnalysisApiUrl();
+    this.algorithmsUrl = analysisApiUrlBase + apiUrl.algorithmsUrl;
+  }
 
   ngOnInit() {
     this.fetchService.getAlgorithms(this.algorithmsUrl).subscribe(
