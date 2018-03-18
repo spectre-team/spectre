@@ -26,8 +26,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AnalysisNamesListComponent implements OnInit {
 
-  @Input() AnalysisType: string;
-  @Input() AnalysisNames: string[];
+  @Input() analysisType: string;
+  @Input() analysisNames: string[];
 
   constructor() { }
 
