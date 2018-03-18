@@ -42,7 +42,7 @@ describe('AnalysisViewComponent', () => {
         RouterModule,
         RouterTestingModule.withRoutes([]),
         MatButtonModule,
-        MatCardModule
+        MatCardModule,
       ],
       providers: [
         {

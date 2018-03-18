@@ -1,6 +1,6 @@
 /*
  * analysis-types-list.component.ts
- * Module for analysis types list.
+ * Component for analysis-types-list.
  *
    Copyright 2018 Roman Lisak
 
@@ -19,8 +19,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import {AnalysisTypesListService} from "../analysis-types-list.service";
-import {Service} from "../../app.service";
-import {apiUrl} from "../../../environments/apiUrl";
 
 @Component({
   selector: 'app-analysis-types-list',
@@ -35,12 +33,11 @@ export class AnalysisTypesListComponent implements OnInit {
   types: string[];
   isTableEmpty = false;
 
-  constructor(private fetchService: AnalysisTypesListService, private urlProvider: Service) {
-    const analysisApiUrlBase = this.urlProvider.getBaseAnalysisApiUrl();
-    this.algorithmsUrl = analysisApiUrlBase + apiUrl.algorithmsUrl;
+  constructor(private fetchService: AnalysisTypesListService) {
   }
 
   ngOnInit() {
+    this.algorithmsUrl = this.fetchService.getUrl();
     this.fetchService.getAlgorithms(this.algorithmsUrl).subscribe(
       data => {
         this.algorithms = data;

@@ -1,6 +1,6 @@
 /*
  * analysis-names-list.component.ts
- * Module for analysis names list.
+ * Tests for analysis-names-list component.
  *
    Copyright 2018 Roman Lisak
 
@@ -19,25 +19,28 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  MatListModule, MatExpansionModule, MatButtonModule, MatCardModule,
+  MatListModule,
+  MatExpansionModule,
+  MatButtonModule,
+  MatCardModule,
   MatProgressSpinnerModule
 } from '@angular/material';
-import { AnalysisTypesListComponent } from "../analysis-types-list/analysis-types-list.component";
+import { AnalysisTypesListComponent } from '../analysis-types-list/analysis-types-list.component';
 import {} from 'jasmine';
 import { AnalysisNamesListComponent } from './analysis-names-list.component';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/of';
-import {routing} from "../../app.routing";
-import {PreparationListComponent} from "../../preparations/preparation-list/preparation-list.component";
-import {MainPageComponent} from "../../main-page/main-page.component";
-import {UploadComponent} from "../../upload/upload.component";
-import {AnalysisViewComponent} from "../../analysis-view/analysis-view/analysis-view.component";
-import {NewAnalysisViewComponent} from "../../new-analysis-view/new-analysis-view/new-analysis-view.component";
-import {PageNotFoundComponent} from "../../page-not-found/page-not-found.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {GenericFormModule} from "../../generic-form/generic-form.module";
-import {AnalysisTypesListService} from "../analysis-types-list.service";
-import {Observable} from "rxjs/Observable";
+import {routing} from '../../app.routing';
+import {PreparationListComponent} from '../../preparations/preparation-list/preparation-list.component';
+import {MainPageComponent} from '../../main-page/main-page.component';
+import {UploadComponent} from '../../upload/upload.component';
+import {AnalysisViewComponent} from '../../analysis-view/analysis-view/analysis-view.component';
+import {NewAnalysisViewComponent} from '../../new-analysis-view/new-analysis-view/new-analysis-view.component';
+import {PageNotFoundComponent} from '../../page-not-found/page-not-found.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {GenericFormModule} from '../../generic-form/generic-form.module';
+import {AnalysisTypesListService} from '../analysis-types-list.service';
+import {Observable} from 'rxjs/Observable';
 
 describe('AnalysisNamesListComponent', () => {
   let component: AnalysisNamesListComponent;

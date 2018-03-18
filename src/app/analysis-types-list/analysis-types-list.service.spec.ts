@@ -21,9 +21,9 @@ import { TestBed, inject, getTestBed } from '@angular/core/testing';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 
-import {AnalysisTypesListService} from "./analysis-types-list.service";
-import {Observable} from "rxjs/Observable";
-import {HttpClient} from "@angular/common/http";
+import {AnalysisTypesListService} from './analysis-types-list.service';
+import {Observable} from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
 
 class MockHttpClient {
   get(url) {

@@ -1,6 +1,6 @@
 /*
  * analysis-types-list.module.ts
- * Module for analysis types list.
+ * Service for analysis types list.
  *
    Copyright 2018 Roman Lisak
 
@@ -21,11 +21,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
+import {apiUrl} from '../../environments/apiUrl';
+import {Service} from '../app.service';
 
 @Injectable()
 export class AnalysisTypesListService {
 
-  constructor(private client: HttpClient) { }
+  algorithmsUrl: string;
+
+  constructor(private client: HttpClient, private urlProvider: Service) {
+    const analysisApiUrlBase = this.urlProvider.getBaseAnalysisApiUrl();
+    this.algorithmsUrl = analysisApiUrlBase + apiUrl.algorithmsUrl;
+  }
+
+  getUrl(): string {
+    return this.algorithmsUrl;
+  }
 
   getAlgorithms(algorithmsUrl: string): Observable<any> {
     return this.client.get(algorithmsUrl);

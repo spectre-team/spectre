@@ -1,6 +1,6 @@
 /*
 * analysis-names-list.component.ts
-* Module for analysis types list.
+* Component for analysis names list.
 *
 Copyright 2018 Roman Lisak
 
