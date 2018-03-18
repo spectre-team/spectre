@@ -28,7 +28,7 @@ import {
 
 import { AnalysisTypesListComponent } from './analysis-types-list.component';
 import {AnalysisNamesListComponent} from '../analysis-names-list/analysis-names-list.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {routing} from '../../app.routing';
 import {PreparationListComponent} from '../../preparations/preparation-list/preparation-list.component';
 import {MainPageComponent} from '../../main-page/main-page.component';
@@ -41,6 +41,16 @@ import {GenericFormModule} from '../../generic-form/generic-form.module';
 import {AnalysisTypesListService} from '../analysis-types-list.service';
 import {Observable} from 'rxjs/Observable';
 import {Service} from '../../app.service';
+
+class MockHttpClient {
+  get(url) {
+    return Observable.of(
+      {
+        analysis: ['divik']
+      }
+    )
+  }
+}
 
 describe('AnalysisTypesListComponent', () => {
   let component: AnalysisTypesListComponent;
@@ -71,15 +81,21 @@ describe('AnalysisTypesListComponent', () => {
         MatProgressSpinnerModule
       ],
       providers: [
+        {provide: HttpClient, useClass: MockHttpClient},
         {
           provide: AnalysisTypesListService,
-          useValue: {getAlgorithms: (algorithmsUrl: string) => Observable.of(
+          useValue: {
+            getAlgorithms: (algorithmsUrl: string) => Observable.of(
               {
                 analysis: ['divik']
               }
-            )},
+            ),
+            getUrl: () => '/algorithms/'
+          }
         },
-        Service
+        {provide: Service, useValue: {
+            getBaseAnalysisApiUrl: () => 'analysis-api-url',
+          }}
       ]
     })
     .compileComponents();

@@ -42,8 +42,20 @@ describe('AnalysisTypesListService', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: HttpClient, useClass: MockHttpClient},
-        AnalysisTypesListService,
-        Service
+        {
+          provide: AnalysisTypesListService,
+          useValue: {
+            getAlgorithms: (algorithmsUrl: string) => Observable.of(
+              {
+                analysis: ['divik']
+              }
+            ),
+            getUrl: () => '/algorithms/'
+          }
+        },
+        {provide: Service, useValue: {
+            getBaseAnalysisApiUrl: () => 'analysis-api-url',
+          }}
       ]
     });
   });
