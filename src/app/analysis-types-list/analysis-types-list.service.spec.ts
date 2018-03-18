@@ -24,6 +24,7 @@ import 'rxjs/add/observable/of';
 import {AnalysisTypesListService} from './analysis-types-list.service';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
+import {Service} from "../app.service";
 
 class MockHttpClient {
   get(url) {
@@ -41,7 +42,8 @@ describe('AnalysisTypesListService', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: HttpClient, useClass: MockHttpClient},
-        AnalysisTypesListService
+        AnalysisTypesListService,
+        Service
       ]
     });
   });
