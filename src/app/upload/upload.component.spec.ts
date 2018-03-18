@@ -24,7 +24,7 @@ import { MockBackend} from '@angular/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UploadComponent } from "./upload.component";
 import { UploadService } from "./shared/upload.service";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import { By } from "@angular/platform-browser";
 
 
@@ -35,7 +35,7 @@ describe('UploadComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [UploadComponent],
-      imports: [RouterTestingModule, FormsModule, ReactiveFormsModule],
+      imports: [RouterTestingModule, FormsModule],
       providers: [
         MockBackend,
         BaseRequestOptions,
