@@ -34,10 +34,11 @@ import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
 import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
-import { MainPageComponent } from './main-page/main-page.component';
+import { MatListModule, MatSidenavModule, MatToolbarModule, MatButtonModule} from '@angular/material';
 import { UploadService } from './upload/shared/upload.service';
 import { UploadComponent } from './upload/upload.component';
+import {AnalysisTypesListModule} from "./analysis-types-list/analysis-types-list.module";
+import {MainPageComponent} from "./main-page/main-page.component";
 import { AnalysisViewModule } from './analysis-view/analysis-view.module';
 import { NewAnalysisViewModule } from './new-analysis-view/new-analysis-view.module';
 import { FinishedAnalysisViewModule } from './finished-analysis-view/finished-analysis-view.module';
@@ -70,6 +71,8 @@ import { FinishedAnalysisViewModule } from './finished-analysis-view/finished-an
     MatToolbarModule,
     routing,
     AnalysisViewModule,
+    AnalysisTypesListModule,
+    MatButtonModule,
     NewAnalysisViewModule,
     FinishedAnalysisViewModule,
   ],

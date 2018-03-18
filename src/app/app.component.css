@@ -29,7 +29,7 @@ color: #F69736;
 .app-side-nav
 {
 background-color: #fafafa;
-width: 200px;
+width: 300px;
 -webkit-box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
 -moz-box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
 box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
@@ -37,9 +37,11 @@ box-shadow: 4px 0px 16px -1px rgba(0,0,0,0.75);
 
 .btn-default
 {
-width: 200px;
-text-align: left;
-font-size: medium;
+  height: 50px;
+  width: 300px;
+  text-align: left;
+  font-size: medium;
+  padding: 5px;
 }
 
 .mat-drawer-container
@@ -55,14 +57,25 @@ height: 50px;
 
 .fa-list-ol
 {
+  margin-left: 8px;
+  margin-right: 5px;
   color: #F69736;
 }
 
 .fa-home
 {
+  margin-left: 8px;
+  margin-right: 5px;
   color: #F69736;
 }
 .fa-cloud-upload
 {
+  margin-left: 8px;
+  margin-right: 5px;
   color: #F69736;
+}
+
+.app-content
+{
+  height: 100vh;
 }

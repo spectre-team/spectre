@@ -17,4 +17,5 @@ export const apiUrl = {
   outputsSchemaUrl: '/schema/outputs/{0}/',
   outputsLayoutUrl: '/layout/outputs/{0}/',
   scheduleUrl: '/schedule/{0}/',
+  algorithmsUrl: '/algorithms/'
 };
