@@ -17,30 +17,32 @@
    limitations under the License.
 */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import 'rxjs/add/observable/of';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import {
   MatListModule,
   MatExpansionModule,
   MatButtonModule,
   MatCardModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
 } from '@angular/material';
+
+import { AnalysisTypesListService } from '../analysis-types-list.service';
 import { AnalysisTypesListComponent } from '../analysis-types-list/analysis-types-list.component';
-import {} from 'jasmine';
 import { AnalysisNamesListComponent } from './analysis-names-list.component';
-import 'rxjs/Rx';
-import 'rxjs/add/observable/of';
-import {routing} from '../../app.routing';
-import {PreparationListComponent} from '../../preparations/preparation-list/preparation-list.component';
-import {MainPageComponent} from '../../main-page/main-page.component';
-import {UploadComponent} from '../../upload/upload.component';
-import {AnalysisViewComponent} from '../../analysis-view/analysis-view/analysis-view.component';
-import {NewAnalysisViewComponent} from '../../new-analysis-view/new-analysis-view/new-analysis-view.component';
-import {PageNotFoundComponent} from '../../page-not-found/page-not-found.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {GenericFormModule} from '../../generic-form/generic-form.module';
-import {AnalysisTypesListService} from '../analysis-types-list.service';
-import {Observable} from 'rxjs/Observable';
 
 describe('AnalysisNamesListComponent', () => {
   let component: AnalysisNamesListComponent;
@@ -51,36 +53,32 @@ describe('AnalysisNamesListComponent', () => {
       declarations: [
         AnalysisNamesListComponent,
         AnalysisTypesListComponent,
-        PreparationListComponent,
-        MainPageComponent,
-        UploadComponent,
-        AnalysisViewComponent,
-        NewAnalysisViewComponent,
-        PageNotFoundComponent
       ],
       imports: [
+        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+        ReactiveFormsModule,
         MatListModule,
         MatExpansionModule,
         MatButtonModule,
-        routing,
-        FormsModule,
-        ReactiveFormsModule,
         MatCardModule,
-        GenericFormModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
       ],
       providers: [
         {
           provide: AnalysisTypesListService,
-          useValue: {getAlgorithms: (algorithmsUrl: string) => Observable.of(
+          useValue: {
+            getAlgorithms: (algorithmsUrl: string) => Observable.of(
               {
-                analysis: ['divik']
-              }
-            )}
-        }
-      ]
+                analysis: ['divik'],
+              },
+            ),
+          },
+        },
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -17,37 +17,43 @@
    limitations under the License.
 */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  MatExpansionModule,
-  MatButtonModule,
-  MatListModule,
-  MatCardModule,
-  MatProgressSpinnerModule
-} from '@angular/material';
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import {
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from 'rxjs/Observable';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {
+MatExpansionModule,
+MatButtonModule,
+MatListModule,
+MatCardModule,
+MatProgressSpinnerModule,
+} from '@angular/material';
+import {
+FormsModule,
+ReactiveFormsModule,
+} from '@angular/forms';
+
+import { Service } from '../../app.service';
 import { AnalysisTypesListComponent } from './analysis-types-list.component';
-import {AnalysisNamesListComponent} from '../analysis-names-list/analysis-names-list.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {routing} from '../../app.routing';
-import {PreparationListComponent} from '../../preparations/preparation-list/preparation-list.component';
-import {MainPageComponent} from '../../main-page/main-page.component';
-import {AnalysisViewComponent} from '../../analysis-view/analysis-view/analysis-view.component';
-import {PageNotFoundComponent} from '../../page-not-found/page-not-found.component';
-import {NewAnalysisViewComponent} from '../../new-analysis-view/new-analysis-view/new-analysis-view.component';
-import {UploadComponent} from '../../upload/upload.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {GenericFormModule} from '../../generic-form/generic-form.module';
-import {AnalysisTypesListService} from '../analysis-types-list.service';
-import {Observable} from 'rxjs/Observable';
-import {Service} from '../../app.service';
+import { AnalysisNamesListComponent } from '../analysis-names-list/analysis-names-list.component';
+import { AnalysisTypesListService } from '../analysis-types-list.service';
 
 class MockHttpClient {
   get(url) {
     return Observable.of(
       {
-        analysis: ['divik']
-      }
+        analysis: ['divik'],
+      },
     )
   }
 }
@@ -61,24 +67,19 @@ describe('AnalysisTypesListComponent', () => {
       declarations: [
         AnalysisTypesListComponent,
         AnalysisNamesListComponent,
-        PreparationListComponent,
-        MainPageComponent,
-        UploadComponent,
-        AnalysisViewComponent,
-        NewAnalysisViewComponent,
-        PageNotFoundComponent
       ],
       imports: [
+        BrowserAnimationsModule,
+        HttpClientModule,
+        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+        ReactiveFormsModule,
         MatListModule,
         MatExpansionModule,
         MatButtonModule,
-        HttpClientModule,
-        routing,
-        FormsModule,
-        ReactiveFormsModule,
         MatCardModule,
-        GenericFormModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
       ],
       providers: [
         {provide: HttpClient, useClass: MockHttpClient},
@@ -87,18 +88,20 @@ describe('AnalysisTypesListComponent', () => {
           useValue: {
             getAlgorithms: (algorithmsUrl: string) => Observable.of(
               {
-                analysis: ['divik']
-              }
+                analysis: ['divik'],
+              },
             ),
-            getUrl: () => '/algorithms/'
-          }
+            getUrl: () => '/algorithms/',
+          },
         },
-        {provide: Service, useValue: {
+        {
+          provide: Service, useValue: {
             getBaseAnalysisApiUrl: () => 'analysis-api-url',
-          }}
-      ]
+          },
+        },
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
