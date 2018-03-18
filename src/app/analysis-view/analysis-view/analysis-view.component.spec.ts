@@ -25,7 +25,7 @@ import 'rxjs/add/observable/of';
 
 import {
   MatButtonModule,
-  MatCardModule, MatListModule,
+  MatCardModule,
 } from '@angular/material';
 
 import { FinishedAnalysesService } from '../finished-analyses.service';
