@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatExpansionModule, MatButtonModule, MatListModule, MatCardModule} from "@angular/material";
+import {
+  MatExpansionModule, MatButtonModule, MatListModule, MatCardModule,
+  MatProgressSpinnerModule
+} from "@angular/material";
 
 import { AnalysisTypesListComponent } from './analysis-types-list.component';
 import {AnalysisNamesListComponent} from "../analysis-names-list/analysis-names-list.component";
@@ -41,7 +44,8 @@ describe('AnalysisTypesListComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatCardModule,
-        GenericFormModule
+        GenericFormModule,
+        MatProgressSpinnerModule
       ],
       providers: [
         {

@@ -18,7 +18,10 @@
 */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatListModule, MatExpansionModule, MatButtonModule, MatCardModule} from '@angular/material';
+import {
+  MatListModule, MatExpansionModule, MatButtonModule, MatCardModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { AnalysisTypesListComponent } from "../analysis-types-list/analysis-types-list.component";
 import {} from 'jasmine';
 import { AnalysisNamesListComponent } from './analysis-names-list.component';
@@ -60,7 +63,8 @@ describe('AnalysisNamesListComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatCardModule,
-        GenericFormModule
+        GenericFormModule,
+        MatProgressSpinnerModule
       ],
       providers: [
         {
