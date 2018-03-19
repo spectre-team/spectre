@@ -1,0 +1,21 @@
+export const apiUrl = {
+  spectrumByIdUrl: '/spectrum/{0}?spectrumId={1}',
+  spectrumByCoordUrl: '/spectrum/{0}?x={1}&y={2}',
+  preparationsUrl: '/preparations',
+  preparationUrl: '/preparations/{0}',
+  heatmapUrl: '/heatmap/{0}?channelId={1}&flag=false',
+  divikResultUrl: '/divikResult/{0}?divikId={1}&level={2}',
+  divikConfigUrl: '/divikResult/{0}?divikId={1}',
+  uploadUrl: '/download',
+  finishedAnalysesUrl: '/results/{0}/',
+  aspectResultUrl: '/results/{0}/{1}/{2}/',
+  aspectDescriptionUrl: '/schema/outputs/{0}/',
+  aspectSchemaUrl: '/schema/outputs/{0}/{1}/',
+  aspectLayoutUrl: '/layout/outputs/{0}/{1}/',
+  inputsSchemaUrl: '/schema/inputs/{0}/',
+  inputsLayoutUrl: '/layout/inputs/{0}/',
+  outputsSchemaUrl: '/schema/outputs/{0}/',
+  outputsLayoutUrl: '/layout/outputs/{0}/',
+  scheduleUrl: '/schedule/{0}/',
+  algorithmsUrl: '/algorithms/'
+};

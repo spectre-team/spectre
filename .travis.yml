@@ -1,0 +1,57 @@
+language: node_js
+node_js:
+- '8'
+sudo: required
+services:
+- docker
+env:
+  global:
+  - VERSION=5.0.1
+  - secure: o3WvEAFaEw3wQpAljJG9/NrLSMkV81aLl23BwkoYXdd4gGNuwv6CZV7Hy42FMPrDgy2IpngehiKMDr/OqaNDXrnWGuYpppgprqGfX1oRPSPF8Mgu+REdRdbsIZ4+Va8E81G9WGM3bTeUzLT6i8++gBKIsIBC2/UgHYW9Rpl0wsqIAZfYQshuOzrGJA2G8RH7p3UakVWx60wYCiSdCsqTJzFmgS/48siAMA2H3k5FYgDiKCH9XkFI3746b4Ew14eJiSmK2sT4DmFYjhS5MvoTZpiVNtBcr4rE7Ir7DHJZkR2gf4mu+/CG+78XNHu5AEP2iYyWH13xWgsOotl18iimWYkXJ9PkKdydoi0Lw9rTC3r69B1IdjE0IcakB+OkLaqtEClGRT6e0t0Likg9INlg/GwOx+ik9ZBruU4q4Izo4cbh+k8xGSRJLjKtUgowJ9msUwLP5zy+aP5Dxk7U/hXSiNh8C+kZuL8BfZZGrW+T0P1MGC2j5LeVzhmhwKlX3ARxlpSXa/1yBzQ3u1H/22EmZkF9NRIf+Fs+6n1oFkQXRh8z71Aqnb/hWEDYuWKd2vUryrHQnrh2vQPhumQ4yPlhGM2l9mOaQFT4Ko4gxkerAOvBSPO4KyX72exrS5GZ96pU8a2gqaazXpvjBTmfy10IZRNXh1Ld/VUOqzI+cU8XR2I=
+  - secure: ltoQKSge89qnXHc4FIc1oRM8KCbu4zJPrHiMF46LE8ur/P+lIHkiGURfWYa56OGrNyKSx1/ITFqqiCLSfaHZ7BSKYrjQi1pnyIjhFMPBOlKZykSKAAi254miX6fgCSlis7/FgLyobALFpxrQ1kaSFuJxlwEz1XU6eryeOguXHVU82OZGUrq+xm39f0UPGCcsjamF1R0hyHfLs+U+336CQFuziMj43TSi8O71G7ArGQutY6hoKr+ZIgTFg87DFXgVeZeJOv1DaA4N7t61vY1LIkBiS99GjUVtaViVR7pHjIobqLJv8YyCq8yiyJRhJwDfbriaQOxWvfHW9z3ks2A3lGNbmmwZPstugHgOCrtLkfdvK0RpQf6tkVVSwoMqR707HeILG3579Z1o2GGLNYQUc5kbjLswlqNfejXAr8O2h0iomuZ8XqCCOQ/YD5eKWoG9MU+3vRbxw91Q+ccY1ImeeekZVHjqsvDHR7R35Ta/kjz2g/C/BpnTrwLMShV+4Zc7s5HCALM0xIIoSMUctbl+RUidP14fsDoq84KqrGu/IN8+qIo/pDC8BTFHjhpg9Rw9XWzEAzLY5WIj3k07jVYWjiS2/uAHmyv7E5+hCwwjzEteFtUMOcx1mFJnvZlPD7dRAaJn6U/1Dfr/Yyf/BDUtq+5ILTJv+q9jWNivQ20yCeo=
+  matrix:
+  - CONFIGURATION=dev
+  - CONFIGURATION=prod
+  - CONFIGURATION=bit
+install:
+- echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
+- npm install -g npm@5.6.0
+- npm install -g @angular/cli@1.7.1
+- npm install
+# turned off temporarily until we resolve problem with random failures on Travis CI
+#- echo "travis_fold:start:DEPENDENCIES folding starts"
+# following error is suppressed as we do not need all deps, according to:
+# https://github.com/npm/npm/issues/17624
+#- npm list || true
+#- echo "travis_fold:end:DEPENDENCIES folding ends"
+before_script:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+script:
+- ng test --single-run true --progress false --browsers Firefox
+- ng build -env=$CONFIGURATION
+after_success:
+- |
+  if [ $CONFIGURATION = "prod" ]; then
+      docker build -t spectreteam/spectre:latest -t spectreteam/spectre:beta -t spectreteam/spectre:$VERSION -t spectreteam/spectre:$VERSION-beta -t spectreteam/spectre:$VERSION-alpha .
+      docker images
+      if [ $TRAVIS_PULL_REQUEST = "false" ]; then
+          if [ $TRAVIS_BRANCH = "master" ]; then
+              docker push spectreteam/spectre:latest
+              docker push spectreteam/spectre:$VERSION
+          elif [ $TRAVIS_BRANCH = "develop" ]; then
+              docker push spectreteam/spectre:beta
+              docker push spectreteam/spectre:$VERSION-beta
+          fi
+          docker push spectreteam/spectre:$VERSION-alpha
+      fi
+  fi
+notifications:
+  webhooks:
+    urls:
+      secure: dzv5OF61he1ShDQKIo8TjdZvxKauA36HIwVU8W3/eYeRK60LDr/2pAi641avANf9dGCr7z9gx+mEP7iYgIMOBPu5obZPWWl5UtpwyQzNsHWDDZ6oHjPZmRFVr2XeLazBWA+nY3LC+vXxb40Gk7YSaNN6JzVrxsbYpiluzj+A9dasAb2waXpLTsVDm8glMyPekUtwYfmOCxEyBFZ5H3oTbPGwGKPt68FW4c1rYLb099Oz2+Mhg8zAh4MaLWEbcWjM6LYw0wMcWEAP7BKvAMCgT34GTEUrZLKu0nOwphjeYDfFN34+8Ge90gQFizwA3eGUTCPR3KIil0GF5ezEIdEwBKAnPTv6J/WB5td+lJKVjGKjhusHPhj43jofgru1w2VRjzD5FdZnMoQ8K4SzEjCw04Rl6nTEIXZhNJ4BUamF0SPDYo0HobujsBhAqsdcbsUgE+ZMfWs1knlUo+cRKCIGfUj2BTfhsTc3thHXClwguQdvPwz7Sttb/mlXF8hBFFNMYgveLgwo1DFwdNXl8H7hg9MN9Az7Y/g31UKE7Uvb5NuryXVTdL/X6+s2iu4jx/rjH/zqa2Zjlm6/KcWhjlt0PXSn/Tu/bmeT/GIQk/CSpK5aLNdCgIF/TBzHWQ1kqtgMZwL1meE8dhae9Kkvj0knkeMJ5xXNnWbihTT6SxrPsAQ=
+    on_success: always
+    on_failure: always
+    on_start: never
+    on_cancel: never
+    on_error: always

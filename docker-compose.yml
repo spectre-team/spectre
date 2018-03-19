@@ -1,0 +1,81 @@
+version: '2'
+
+services:
+
+    client:
+        restart: always
+        image: spectreteam/spectre:5.0.1
+        ports:
+            - "80:80"
+        depends_on:
+            - visualization-api
+            - upload-api
+
+    visualization-api:
+        restart: always
+        image: spectreteam/spectre-visualization:1.0.0.24
+        hostname: 'visualization'
+        ports:
+            - "2001:80"
+        volumes:
+            - data:/data
+
+    upload-api:
+        restart: always
+        image: spectreteam/spectre-upload:1.0.2.139
+        ports:
+            - "2002:80"
+        volumes:
+            - data:/data
+
+    rabbitmq:
+        image: rabbitmq:3.7.3-management
+        hostname: 'rabbitmq'
+        restart: always
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+
+    postgresql:
+        image: postgres:10.2-alpine
+        hostname: 'postgresql'
+        restart: always
+        environment:
+            POSTGRES_USER: guest
+            POSTGRES_PASSWORD: guest
+            POSTGRES_DB: celery
+        volumes:
+            - celery:/var/lib/postgresql/data
+
+    analysis-api:
+        image: spectreteam/spectre-analysis:1.0.0
+        ports:
+          - "2003:80"
+        depends_on:
+          - rabbitmq
+          - postgresql
+          - visualization-api
+        volumes:
+          - data:/data
+
+    celery-flower:
+        image: spectreteam/spectre-analysis:1.0.0
+        command: celery -A spectre_analyses flower --loglevel=info --port=80 --address=0.0.0.0
+        depends_on:
+          - rabbitmq
+          - postgresql
+        ports:
+          - "2004:80"
+
+    divik-worker:
+        image: spectreteam/divik-worker:1.0.0
+        depends_on:
+          - rabbitmq
+          - postgresql
+        volumes:
+          - data:/data
+
+volumes:
+    data:
+
+    celery:

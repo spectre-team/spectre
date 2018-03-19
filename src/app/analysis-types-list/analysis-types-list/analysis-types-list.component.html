@@ -1,0 +1,26 @@
+<mat-accordion [displayMode]="flat">
+<mat-expansion-panel *ngFor="let type of types, let i = index"
+                     (opened)="panelOpenState[i] = true"
+                     (closed)="panelOpenState[i] = false">
+  <mat-expansion-panel-header>
+  <mat-panel-title>
+    <i
+      class="fa fa-cogs"
+      aria-hidden="true">
+    </i>
+    <div class="font-cont">
+      {{type}}
+    </div>
+  </mat-panel-title>
+  <mat-panel-description>
+    {{panelOpenState[i] ? 'less' : 'more'}}
+  </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-analysis-names-list
+    [analysisType]="type"
+    [analysisNames]="algorithms[type]">
+  </app-analysis-names-list>
+</mat-expansion-panel>
+</mat-accordion>
+
+<mat-spinner *ngIf="!isTableEmpty" [diameter]="30" class="spinner-cont" [color]=""></mat-spinner>
