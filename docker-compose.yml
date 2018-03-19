@@ -68,7 +68,7 @@ services:
           - "2004:80"
 
     divik-worker:
-        image: spectreteam/divik-worker:1.0.0
+        image: spectreteam/divik-worker:1
         depends_on:
           - rabbitmq
           - postgresql
