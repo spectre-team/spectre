@@ -48,7 +48,7 @@ services:
             - celery:/var/lib/postgresql/data
 
     analysis-api:
-        image: spectreteam/spectre-analysis:1.0.0
+        image: spectreteam/spectre-analysis:1
         ports:
           - "2003:80"
         depends_on:
@@ -59,7 +59,7 @@ services:
           - data:/data
 
     celery-flower:
-        image: spectreteam/spectre-analysis:1.0.0
+        image: spectreteam/spectre-analysis:1
         command: celery -A spectre_analyses flower --loglevel=info --port=80 --address=0.0.0.0
         depends_on:
           - rabbitmq
