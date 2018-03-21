@@ -4,7 +4,7 @@ services:
 
     client:
         restart: always
-        image: spectreteam/spectre:5.0.1
+        image: spectreteam/spectre:5
         ports:
             - "80:80"
         depends_on:
