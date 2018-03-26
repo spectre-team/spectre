@@ -13,9 +13,9 @@
     (onSubmit)="submit($event)">
   </app-generic-form>
 
-  <app-visualization-view *ngIf="data !== undefined"
+  <app-visualization-view *ngIf="result !== undefined"
     [type]="description.output_type"
-    [data]="data">
+    [data]="result">
   </app-visualization-view>
 
 </mat-expansion-panel>
