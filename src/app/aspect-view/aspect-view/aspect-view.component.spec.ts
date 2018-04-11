@@ -27,7 +27,6 @@ import {
   MatExpansionModule,
 } from '@angular/material';
 
-import { Service } from '../../app.service';
 import { AspectViewComponent } from './aspect-view.component';
 import { GenericFormModule } from '../../generic-form/generic-form.module';
 import { VisualizationViewModule } from '../../visualization-view/visualization-view.module';
@@ -51,7 +50,6 @@ describe('AspectViewComponent', () => {
           get: (url) => Observable.of({}),
           post: (url, data) => Observable.of({}),
         }},
-        Service,
         ResultDownloadService,
       ]
     })

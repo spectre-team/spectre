@@ -24,7 +24,6 @@ import 'rxjs/add/observable/of';
 import {AnalysisTypesListService} from './analysis-types-list.service';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
-import {Service} from "../app.service";
 
 class MockHttpClient {
   get(url) {
@@ -53,9 +52,6 @@ describe('AnalysisTypesListService', () => {
             getUrl: () => '/algorithms/'
           }
         },
-        {provide: Service, useValue: {
-            getBaseAnalysisApiUrl: () => 'analysis-api-url',
-          }}
       ]
     });
   });

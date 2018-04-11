@@ -31,7 +31,6 @@ import { AnalysisTypesListService } from '../analysis-types-list.service';
 export class AnalysisTypesListComponent implements OnInit {
 
   panelOpenState: Boolean[] = [false, false, false];
-  algorithmsUrl: string;
   algorithms: any;
   types: string[];
   isTableEmpty = false;
@@ -40,8 +39,7 @@ export class AnalysisTypesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.algorithmsUrl = this.fetchService.getUrl();
-    this.fetchService.getAlgorithms(this.algorithmsUrl).subscribe(
+    this.fetchService.getAlgorithms().subscribe(
       data => {
         this.algorithms = data;
         this.types = Object.keys(this.algorithms);

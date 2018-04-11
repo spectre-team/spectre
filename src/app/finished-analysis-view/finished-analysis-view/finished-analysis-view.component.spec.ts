@@ -27,7 +27,6 @@ import { FinishedAnalysisViewComponent } from './finished-analysis-view.componen
 import { AspectViewModule } from '../../aspect-view/aspect-view.module';
 import { QuerySchemaDownloadService } from '../query-schema-download.service';
 import { VisualizationType } from '../../visualization-view/visualization-type.enum';
-import { Service } from '../../app.service';
 import { ResultDownloadService } from '../../aspect-view/result-download.service';
 import { GenericFormFetchService } from '../../generic-form/generic-form-fetch.service';
 
@@ -59,7 +58,6 @@ describe('FinishedAnalysisViewComponent', () => {
                 },
             ])}
         },
-        Service,
         {
           provide: ResultDownloadService,
           useValue: {

@@ -22,18 +22,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
 import { apiUrl } from '../../environments/apiUrl';
-import { Service } from '../app.service';
 import { AspectDescription } from '../aspect-view/aspect-description';
 
 @Injectable()
 export class QuerySchemaDownloadService {
 
-  constructor(private client: HttpClient, private urlService: Service) { }
+  constructor(private client: HttpClient) { }
 
   getAspects(algorithm: string): Observable<AspectDescription[]> {
-    const url = this.urlService.getBaseAnalysisApiUrl()
-      + apiUrl.outputsSchemaUrl.format(algorithm);
-    return this.client.get<AspectDescription[]>(url);
+    return this.client.get<AspectDescription[]>(apiUrl.outputsSchemaUrl(algorithm));
   }
 
 }

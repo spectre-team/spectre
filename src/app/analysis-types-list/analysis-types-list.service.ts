@@ -21,25 +21,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
-import {apiUrl} from '../../environments/apiUrl';
-import {Service} from '../app.service';
+import { apiUrl } from '../../environments/apiUrl';
 
 @Injectable()
 export class AnalysisTypesListService {
 
-  algorithmsUrl: string;
 
-  constructor(private client: HttpClient, private urlProvider: Service) {
-    const analysisApiUrlBase = this.urlProvider.getBaseAnalysisApiUrl();
-    this.algorithmsUrl = analysisApiUrlBase + apiUrl.algorithmsUrl;
+  constructor(private client: HttpClient) {
   }
 
-  getUrl(): string {
-    return this.algorithmsUrl;
-  }
-
-  getAlgorithms(algorithmsUrl: string): Observable<any> {
-    return this.client.get(algorithmsUrl);
+  getAlgorithms(): Observable<any> {
+    return this.client.get(apiUrl.algorithmsUrl());
   }
 
 }

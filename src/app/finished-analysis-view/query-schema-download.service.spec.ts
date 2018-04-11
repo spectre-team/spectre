@@ -23,7 +23,6 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 import 'rxjs/Rx';
 
-import { Service } from '../app.service';
 import { QuerySchemaDownloadService } from './query-schema-download.service';
 
 class MockHttpClient {
@@ -62,7 +61,6 @@ describe('QuerySchemaDownloadService', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: HttpClient, useClass: MockHttpClient},
-        {provide: Service, useValue: {getBaseAnalysisApiUrl: () => 'api-url'}},
         QuerySchemaDownloadService,
       ]
     });
@@ -79,13 +77,6 @@ describe('QuerySchemaDownloadService', () => {
       expect(response.length).toBe(2);
       expect(response[0].aspect).toBe('summary');
       expect(response[1].aspect).toBe('negligible');
-    });
-  }));
-
-  it('asks proper API for aspects definition', inject([QuerySchemaDownloadService], (service: QuerySchemaDownloadService) => {
-    spyOn(client, 'get').and.callThrough();
-    service.getAspects('divik').subscribe(response => {
-      expect(client.get).toHaveBeenCalledWith('api-url/schema/outputs/divik/');
     });
   }));
 });

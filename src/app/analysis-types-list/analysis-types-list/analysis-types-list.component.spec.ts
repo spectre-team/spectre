@@ -43,7 +43,6 @@ FormsModule,
 ReactiveFormsModule,
 } from '@angular/forms';
 
-import { Service } from '../../app.service';
 import { AnalysisTypesListComponent } from './analysis-types-list.component';
 import { AnalysisNamesListComponent } from '../analysis-names-list/analysis-names-list.component';
 import { AnalysisTypesListService } from '../analysis-types-list.service';
@@ -92,11 +91,6 @@ describe('AnalysisTypesListComponent', () => {
               },
             ),
             getUrl: () => '/algorithms/',
-          },
-        },
-        {
-          provide: Service, useValue: {
-            getBaseAnalysisApiUrl: () => 'analysis-api-url',
           },
         },
       ],

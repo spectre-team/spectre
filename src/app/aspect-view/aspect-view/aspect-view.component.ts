@@ -20,7 +20,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { apiUrl } from '../../../environments/apiUrl';
-import { Service } from '../../app.service';
 import { AspectDescription } from '../aspect-description';
 import { ResultDownloadService } from '../result-download.service';
 
@@ -39,16 +38,14 @@ export class AspectViewComponent implements OnInit {
   private result: any;
 
   constructor(
-    private urlService: Service,
     private resultsService: ResultDownloadService,
   ) { }
 
   ngOnInit() {
     if (this.description !== undefined) {
       const aspect = this.description.aspect;
-      const baseUrl = this.urlService.getBaseAnalysisApiUrl();
-      this.schemaUrl = baseUrl + apiUrl.aspectSchemaUrl.format(this.algorithm, aspect);
-      this.layoutUrl = baseUrl + apiUrl.aspectLayoutUrl.format(this.algorithm, aspect);
+      this.schemaUrl = apiUrl.aspectSchemaUrl(this.algorithm, aspect);
+      this.layoutUrl = apiUrl.aspectLayoutUrl(this.algorithm, aspect);
     }
   }
 
