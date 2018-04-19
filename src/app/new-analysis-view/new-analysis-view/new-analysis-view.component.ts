@@ -34,6 +34,7 @@ export class NewAnalysisViewComponent implements OnInit {
   private algorithm: string;
   private layoutUrl: string;
   private schemaUrl: string;
+  private snackBarConfig = {duration: 3000};
 
   constructor(
     private scheduler: AnalysisSchedulerService,
@@ -52,9 +53,13 @@ export class NewAnalysisViewComponent implements OnInit {
   }
 
   submit(algorithmParameters: any): void {
-    this.scheduler.enqueue(this.algorithm, algorithmParameters).subscribe(
-      response => this.snackBar.open('Analysis scheduled successfully'),
-      error => this.snackBar.open('Error scheduling your analysis'));
+    this.scheduler.enqueue(this.algorithm, algorithmParameters).subscribe({
+      next: response => this.notify('Analysis scheduled successfully'),
+      error: message => this.notify('Error scheduling your analysis')});
+  }
+
+  private notify(message): void {
+    this.snackBar.open(message, '', this.snackBarConfig);
   }
 
 }
