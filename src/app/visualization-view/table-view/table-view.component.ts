@@ -34,7 +34,7 @@ export class TableViewComponent<T> implements OnInit {
     this.columnNames = this.columns.map(columnDefinition => columnDefinition.key);
   }
   @Input() data: T[];
-  private columnNames: string[] = [];
+  public columnNames: string[] = [];
 
   constructor() { }
 

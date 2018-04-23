@@ -34,9 +34,9 @@ export class AspectViewComponent implements OnInit {
   @Input() algorithm: string;
   @Input() id: string;
   @Input() description: AspectDescription;
-  private schemaUrl: string;
-  private layoutUrl: string;
-  private result: any;
+  public schemaUrl: string;
+  public layoutUrl: string;
+  public result: any;
 
   constructor(
     private urlService: Service,
@@ -52,7 +52,7 @@ export class AspectViewComponent implements OnInit {
     }
   }
 
-  private submit(query: any) {
+  public submit(query: any) {
     this.resultsService
       .getResult(this.algorithm, this.id, this.description.aspect, query)
       .subscribe(data => this.result = data);

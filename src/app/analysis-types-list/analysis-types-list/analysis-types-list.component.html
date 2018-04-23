@@ -1,4 +1,4 @@
-<mat-accordion [displayMode]="flat">
+<mat-accordion [displayMode]="displayMode">
 <mat-expansion-panel *ngFor="let type of types, let i = index"
                      (opened)="panelOpenState[i] = true"
                      (closed)="panelOpenState[i] = false">

@@ -36,9 +36,9 @@ import {
 })
 export class FinishedAnalysisViewComponent implements OnInit {
 
-  private aspects: AspectDescription[] = [];
-  private id: string;
-  private algorithm: string;
+  public aspects: AspectDescription[] = [];
+  public id: string;
+  public algorithm: string;
 
   constructor(
     private schemaService: QuerySchemaDownloadService,

@@ -31,8 +31,8 @@ export class GenericFormComponent implements OnInit {
   @Input() schemaUrl: string;
   @Input() layoutUrl: string;
   @Output() onSubmit = new EventEmitter<any>();
-  schema: any;
-  layout: any;
+  public schema: any;
+  public layout: any;
 
   constructor(private fetchService: GenericFormFetchService) { }
 

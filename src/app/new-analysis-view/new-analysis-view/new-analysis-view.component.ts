@@ -31,10 +31,10 @@ import { AnalysisSchedulerService } from '../analysis-scheduler.service';
 })
 export class NewAnalysisViewComponent implements OnInit {
 
-  private algorithm: string;
-  private layoutUrl: string;
-  private schemaUrl: string;
-  private snackBarConfig = {duration: 3000};
+  public algorithm: string;
+  public layoutUrl: string;
+  public schemaUrl: string;
+  public snackBarConfig = {duration: 3000};
 
   constructor(
     private scheduler: AnalysisSchedulerService,
