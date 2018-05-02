@@ -25,7 +25,6 @@ import {
   MatExpansionModule,
 } from '@angular/material';
 
-import { Service } from '../app.service';
 import { AspectViewComponent } from './aspect-view/aspect-view.component';
 import { GenericFormModule } from '../generic-form/generic-form.module';
 import { VisualizationViewModule } from '../visualization-view/visualization-view.module';
@@ -46,7 +45,6 @@ import { ResultDownloadService } from './result-download.service';
     VisualizationViewModule,
   ],
   providers: [
-    Service,
     ResultDownloadService,
   ],
 })

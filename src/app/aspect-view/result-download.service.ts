@@ -23,18 +23,14 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 import { apiUrl } from '../../environments/apiUrl';
-import { Service } from '../app.service';
-import '../utils/string-format.interface';
 
 @Injectable()
 export class ResultDownloadService {
 
-  constructor(private client: HttpClient, private urlService: Service) { }
+  constructor(private client: HttpClient) { }
 
   getResult(algorithm: string, id: string, aspect: string, query: any): Observable<any> {
-    const url = this.urlService.getBaseAnalysisApiUrl()
-      + apiUrl.aspectResultUrl.format(algorithm, id, aspect);
-    return this.client.post(url, query);
+    return this.client.post(apiUrl.aspectResultUrl(algorithm, id, aspect), query);
   }
 
 }

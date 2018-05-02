@@ -29,7 +29,6 @@ import {
   MatSnackBarModule
 } from '@angular/material';
 
-import { Service } from '../../app.service';
 import { GenericFormModule } from '../../generic-form/generic-form.module';
 import { GenericFormFetchService } from '../../generic-form/generic-form-fetch.service';
 import { AnalysisSchedulerService } from '../analysis-scheduler.service';
@@ -54,7 +53,6 @@ describe('NewAnalysisViewComponent', () => {
           get: (url: string) => Observable.of({}),
           post: (url: string, data: any) => Observable.of({})}},
         MatSnackBar,
-        Service,
         GenericFormFetchService,
         AnalysisSchedulerService,
         {

@@ -22,19 +22,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import { Service } from '../app.service';
 import { apiUrl } from '../../environments/apiUrl';
 import { Analysis } from './analysis';
 
 @Injectable()
 export class FinishedAnalysesService {
 
-  private url = new Service().getBaseAnalysisApiUrl() + apiUrl.finishedAnalysesUrl;
-
   constructor(private client: HttpClient) { }
 
   getFinished(algorithm: string): Observable<Analysis[]> {
-    return this.client.get<Analysis[]>(this.url.format(algorithm));
+    return this.client.get<Analysis[]>(apiUrl.finishedAnalysesUrl(algorithm));
   }
 
 }
