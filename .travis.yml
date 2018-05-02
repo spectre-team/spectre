@@ -11,6 +11,7 @@ env:
   - FIXUP=2
   - secure: o3WvEAFaEw3wQpAljJG9/NrLSMkV81aLl23BwkoYXdd4gGNuwv6CZV7Hy42FMPrDgy2IpngehiKMDr/OqaNDXrnWGuYpppgprqGfX1oRPSPF8Mgu+REdRdbsIZ4+Va8E81G9WGM3bTeUzLT6i8++gBKIsIBC2/UgHYW9Rpl0wsqIAZfYQshuOzrGJA2G8RH7p3UakVWx60wYCiSdCsqTJzFmgS/48siAMA2H3k5FYgDiKCH9XkFI3746b4Ew14eJiSmK2sT4DmFYjhS5MvoTZpiVNtBcr4rE7Ir7DHJZkR2gf4mu+/CG+78XNHu5AEP2iYyWH13xWgsOotl18iimWYkXJ9PkKdydoi0Lw9rTC3r69B1IdjE0IcakB+OkLaqtEClGRT6e0t0Likg9INlg/GwOx+ik9ZBruU4q4Izo4cbh+k8xGSRJLjKtUgowJ9msUwLP5zy+aP5Dxk7U/hXSiNh8C+kZuL8BfZZGrW+T0P1MGC2j5LeVzhmhwKlX3ARxlpSXa/1yBzQ3u1H/22EmZkF9NRIf+Fs+6n1oFkQXRh8z71Aqnb/hWEDYuWKd2vUryrHQnrh2vQPhumQ4yPlhGM2l9mOaQFT4Ko4gxkerAOvBSPO4KyX72exrS5GZ96pU8a2gqaazXpvjBTmfy10IZRNXh1Ld/VUOqzI+cU8XR2I=
   - secure: ltoQKSge89qnXHc4FIc1oRM8KCbu4zJPrHiMF46LE8ur/P+lIHkiGURfWYa56OGrNyKSx1/ITFqqiCLSfaHZ7BSKYrjQi1pnyIjhFMPBOlKZykSKAAi254miX6fgCSlis7/FgLyobALFpxrQ1kaSFuJxlwEz1XU6eryeOguXHVU82OZGUrq+xm39f0UPGCcsjamF1R0hyHfLs+U+336CQFuziMj43TSi8O71G7ArGQutY6hoKr+ZIgTFg87DFXgVeZeJOv1DaA4N7t61vY1LIkBiS99GjUVtaViVR7pHjIobqLJv8YyCq8yiyJRhJwDfbriaQOxWvfHW9z3ks2A3lGNbmmwZPstugHgOCrtLkfdvK0RpQf6tkVVSwoMqR707HeILG3579Z1o2GGLNYQUc5kbjLswlqNfejXAr8O2h0iomuZ8XqCCOQ/YD5eKWoG9MU+3vRbxw91Q+ccY1ImeeekZVHjqsvDHR7R35Ta/kjz2g/C/BpnTrwLMShV+4Zc7s5HCALM0xIIoSMUctbl+RUidP14fsDoq84KqrGu/IN8+qIo/pDC8BTFHjhpg9Rw9XWzEAzLY5WIj3k07jVYWjiS2/uAHmyv7E5+hCwwjzEteFtUMOcx1mFJnvZlPD7dRAaJn6U/1Dfr/Yyf/BDUtq+5ILTJv+q9jWNivQ20yCeo=
+  - PROD_FLAG=--target=production
   matrix:
   - CONFIGURATION=dev
   - CONFIGURATION=prod
@@ -31,7 +32,12 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 script:
 - ng test --single-run true --progress false --browsers Firefox
-- ng build -env=$CONFIGURATION --target=production
+- |
+  if [ $CONFIGURATION = "prod" ]; then
+      ng build -env=$CONFIGURATION PROD_FLAG
+  else
+      ng build -env=$CONFIGURATION
+  fi
 after_success:
 - |
   if [ $CONFIGURATION = "prod" ]; then
