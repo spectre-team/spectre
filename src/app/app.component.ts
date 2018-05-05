@@ -30,7 +30,7 @@ export class AppComponent{
 
   isMobile(){
   const innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  console.log(innerWidth);
+  
   if (innerWidth < this.minimalPixels) {
       return true;
     }
