@@ -16,9 +16,9 @@
 
 <mat-sidenav-container>
   <mat-sidenav
-    #sidenav mode="side"
+    #sidenav [mode]="isMobile() ? 'over' : 'side'"
     class="app-side-nav"
-    [opened]="true">
+    [opened]="!isMobile()">
     <mat-list>
       <div class="btn-group-vertical">
         <button mat-raised-button
