@@ -24,11 +24,12 @@ import {Component, HostListener} from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+
+export class AppComponent {
   title = 'Spectre';
   minimalPixels = 720;
 
-  isMobile(){
+  isMobile() {
   const innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   
   if (innerWidth < this.minimalPixels) {
