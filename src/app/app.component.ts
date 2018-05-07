@@ -31,13 +31,8 @@ export class AppComponent {
 
   isMobile() {
   const innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  
-  if (innerWidth < this.minimalPixels) {
-      return true;
-    }
-    else {
-      return false;
-    }
+
+    return innerWidth < this.minimalPixels;
   }
 
 }
