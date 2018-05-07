@@ -2,7 +2,6 @@ version: 5.0.1.{build}
 environment:
   appveyor_rdp_password:
     secure: Pzvx2CQjxp8eCBP+nFI2eg==
-  prod_flag: --target=production
 
 configuration:
   - dev
@@ -29,11 +28,11 @@ install:
 
 build_script:
 - cmd:
-    if(configuration == prod) {
-      ng build -env=%CONFIGURATION% prod_flag >nul 2>&1
-    } else {
+    if [%CONFIGURATION%] == ["prod"] (
+      ng build -env=%CONFIGURATION% --target=production >nul 2>&1
+    ) else (
       ng build -env=%CONFIGURATION% >nul 2>&1
-    }
+    )
 after_build:
 - cmd: 7z a WebClient-%CONFIGURATION%.zip "%APPVEYOR_BUILD_FOLDER%\dist\*" >nul 2>&1
 
