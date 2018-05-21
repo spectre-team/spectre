@@ -58,21 +58,23 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
       console.log(this.data);
       console.log('[PlotlyComponent] layout: ');
       console.log(this.layout);
-      const div = document.getElementById('plotly-' + this.randomId);
-      Plotly.deleteTraces(div, 0);
-      Plotly.addTraces(div, this.data);
+      this.createPlot();
       console.log('[PlotlyComponent] updated plotly-' + this.randomId);
     }
   }
 
   ngAfterViewInit() {
       console.log('[PlotlyComponent] nfAfterViewInit');
-      Plotly.newPlot('plotly-' + this.randomId, this.data, this.layout, this.options);
-      const plotlyElement = <PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
-      plotlyElement.on('plotly_click', (event) => this.onClickFunction(event));
-      this.initialized = true;
-      this.cdRef.detectChanges();
+      this.createPlot();
       console.log('[PlotlyComponent] created plotly-' + this.randomId);
+  }
+
+  createPlot() {
+    Plotly.newPlot('plotly-' + this.randomId, this.data, this.layout, this.options);
+    const plotlyElement = <PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
+    plotlyElement.on('plotly_click', (event) => this.onClickFunction(event));
+    this.initialized = true;
+    this.cdRef.detectChanges();
   }
 
 }
