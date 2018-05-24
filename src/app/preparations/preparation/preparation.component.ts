@@ -49,7 +49,6 @@ export class PreparationComponent implements OnInit {
   public yHeatmapSize: number;
   public minHeatmapColumn: number;
   public minHeatmapRow: number;
-  public disabledChanelIdSlider = true;
   public onClickBind: Function;
   @BlockUI() blockUI: NgBlockUI;
   public colors = [ {value:  'RdBu'}, {value: 'Greys'}, {value:  'YlGnBu'} , {value: 'Greens'}, {value:  'YlOrRd'},
@@ -88,9 +87,6 @@ export class PreparationComponent implements OnInit {
   }
 
   onChangedChannelId(event: any) {
-    if (this.disabledChanelIdSlider === true) {
-      this.showError('Please select spectrum by coordinates');
-    } else {
       this.blockUI.start('Getting heatmap...');
       this.heatmapService
         .get(this.id, this.currentChannelId)
@@ -98,7 +94,6 @@ export class PreparationComponent implements OnInit {
           this.heatmapData = this.toHeatmapDataset(heatmap);
           this.blockUI.stop();
         });
-    }
   }
 
   changeColor() {
@@ -140,23 +135,11 @@ export class PreparationComponent implements OnInit {
       .getByCoordinates(this.id, x, y)
       .subscribe(spectrum => {
         this.spectrumData = this.toSpectrumDataset(spectrum);
-        this.disableChanelIdSlider(false);
         this.showSuccess('Spectrum found');
       }, error => {
         this.spectrumData = [{}];
-        this.disableChanelIdSlider(true);
         this.showError('Spectrum not found');
       });
-  }
-
-  disableChanelIdSlider(disableFlag: boolean) {
-    if (disableFlag) {
-      this.mzValue = 0;
-      this.currentChannelId = 0;
-      this.disabledChanelIdSlider = true;
-    } else {
-      this.disabledChanelIdSlider = false;
-    }
   }
 
   showError(msg: string) {
