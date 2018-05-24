@@ -76,7 +76,7 @@ export class PreparationComponent implements OnInit {
           .getPreparationById(this.id)
           .subscribe(preparation => this.preparation = preparation);
         this.heatmapService
-          .get(this.id, 100)
+          .get(this.id, 0)
           .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
         console.log('[SpectrumComponent] layout setup');
       });
