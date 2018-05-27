@@ -70,7 +70,7 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   createPlot() {
-    Plotly.newPlot('plotly-' + this.randomId, this.data, this.layout, this.options);
+    Plotly.react('plotly-' + this.randomId, this.data, this.layout, this.options);
     const plotlyElement = <PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
     plotlyElement.on('plotly_click', (event) => this.onClickFunction(event));
     this.initialized = true;
