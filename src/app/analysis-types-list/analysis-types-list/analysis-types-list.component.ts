@@ -34,6 +34,7 @@ export class AnalysisTypesListComponent implements OnInit {
   algorithms: any;
   types: string[];
   isTableEmpty = false;
+  displayMode = "flat";
 
   constructor(private fetchService: AnalysisTypesListService) {
   }

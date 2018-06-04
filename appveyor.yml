@@ -2,6 +2,7 @@ version: 5.0.1.{build}
 environment:
   appveyor_rdp_password:
     secure: Pzvx2CQjxp8eCBP+nFI2eg==
+
 configuration:
   - dev
   - prod
@@ -26,7 +27,12 @@ install:
 - ps: C:\projects\spectre\scripts\InstallNode.ps1
 
 build_script:
-- cmd: ng build -env=%CONFIGURATION% --aot=false >nul 2>&1
+- cmd:
+    if [%CONFIGURATION%] == ["prod"] (
+      ng build -env=%CONFIGURATION% --target=production >nul 2>&1
+    ) else (
+      ng build -env=%CONFIGURATION% >nul 2>&1
+    )
 after_build:
 - cmd: 7z a WebClient-%CONFIGURATION%.zip "%APPVEYOR_BUILD_FOLDER%\dist\*" >nul 2>&1
 
