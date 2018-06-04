@@ -16,12 +16,6 @@ export const apiUrl = {
   heatmapUrl(preparationId: number, channelId: number) {
     return `${environment.apiPreparationUrl}/heatmap/${preparationId}?channelId=${channelId}&flag=false`;
   },
-  divikResultUrl(preparationId: number, divikId: number, level: number) {
-    return `${environment.apiDivikUrl}/divikResult/${preparationId}?divikId=${divikId}&level=${level}`;
-  },
-  divikConfigUrl(preparationId: number, divikId: number) {
-    return `${environment.apiDivikUrl}/divikResult/${preparationId}?divikId=${divikId}`;
-  },
   uploadUrl() {
     return `${environment.apiUploadUrl}/download`;
   },
