@@ -1,5 +1,3 @@
-<p-growl [(value)]="msgs"></p-growl>
-<block-ui [template]="blockTemplate">
 <div id="mainContainer" class="mainContainer">
   <div id="tabsManu">
     <p-tabView>
@@ -31,7 +29,6 @@
             class="slider"
             [(ngModel)]="currentChannelId"
             showTicks="true"
-            disabled="{{disabledChanelIdSlider}}"
             min="0"
             max={{mzLength}}
             step="1"
@@ -67,7 +64,6 @@
             <mat-slider
               class="slider"
               [(ngModel)]="currentChannelId"
-              disabled="{{disabledChanelIdSlider}}"
               showTicks="true"
               min="0"
               max={{mzLength}}
@@ -99,15 +95,9 @@
           </button>
         </div>
         </p-tabPanel>
-      <p-tabPanel header="Divik" leftIcon="fa fa-sitemap" [headerStyle]="{'width': '165px'}">
-        <app-divik
-          [preparationId]=id>
-        </app-divik>
-      </p-tabPanel>
     </p-tabView>
   </div>
 </div>
-</block-ui>
 
 
 

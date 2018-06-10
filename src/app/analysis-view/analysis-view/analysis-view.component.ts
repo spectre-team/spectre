@@ -30,9 +30,9 @@ import { FinishedAnalysesService } from '../finished-analyses.service';
 })
 export class AnalysisViewComponent implements OnInit {
 
-  private algorithmName: string;
-  private errorMessage: string;
-  private analyses: Analysis[];
+  public algorithmName: string;
+  public errorMessage: string;
+  public analyses: Analysis[];
 
   constructor(
     private route: ActivatedRoute,

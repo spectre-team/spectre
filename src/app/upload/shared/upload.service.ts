@@ -22,19 +22,17 @@ import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import { Service } from '../../app.service';
 import { apiUrl } from '../../../environments/apiUrl';
 
 @Injectable()
-export class UploadService extends Service {
+export class UploadService {
 
   constructor(private http: Http) {
-    super();
   }
 
   uploadData(datasetLink: string, datasetName): Observable<any> {
     return this.http
-      .post(this.getBaseUploadUrl() + apiUrl.uploadUrl, {headers: this.getHeaders(), url: datasetLink, datasetName: datasetName})
+      .post(apiUrl.uploadUrl(), {headers: this.getHeaders(), url: datasetLink, datasetName: datasetName})
       .catch((err) => {
         return Observable.throw(err);
       });

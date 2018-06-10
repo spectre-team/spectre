@@ -25,14 +25,12 @@ import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { PreparationListComponent } from './preparations/preparation-list/preparation-list.component';
-import { PreparationService } from './preparations/shared/preparation.service';
 import { PreparationsModule } from './preparations/preparations.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlotlyModule } from './plotly/plotly.module';
 import { SpectrumService } from './spectra/shared/spectrum.service';
 import { HeatmapService } from './heatmaps/shared/heatmap.service';
 import 'hammerjs';
-import { DivikService } from './divik-results/shared/divik.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatSidenavModule, MatToolbarModule, MatButtonModule} from '@angular/material';
 import { UploadService } from './upload/shared/upload.service';
@@ -47,7 +45,6 @@ import { FinishedAnalysisViewModule } from './finished-analysis-view/finished-an
   providers: [
       HeatmapService,
       SpectrumService,
-      DivikService,
       UploadService
   ],
   declarations: [

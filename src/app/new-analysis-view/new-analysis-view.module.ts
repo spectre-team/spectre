@@ -28,7 +28,6 @@ import {
 
 import { GenericFormModule } from '../generic-form/generic-form.module';
 import { AnalysisSchedulerService } from './analysis-scheduler.service';
-import { Service } from '../app.service';
 import { NewAnalysisViewComponent } from './new-analysis-view/new-analysis-view.component';
 
 @NgModule({
@@ -47,7 +46,6 @@ import { NewAnalysisViewComponent } from './new-analysis-view/new-analysis-view.
   ],
   providers: [
     AnalysisSchedulerService,
-    Service,
   ]
 })
 export class NewAnalysisViewModule { }

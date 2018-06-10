@@ -23,8 +23,6 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 import 'rxjs/Rx';
 
-import { Service } from '../app.service';
-
 import { AnalysisSchedulerService } from './analysis-scheduler.service';
 
 const scheduleUrl = 'analysis-api-url/schedule/blah/';
@@ -36,19 +34,9 @@ describe('AnalysisSchedulerService', () => {
         HttpClientModule,
       ],
       providers: [
-        {provide: Service, useValue: {
-          getBaseAnalysisApiUrl: () => 'analysis-api-url',
-        }},
         {provide: HttpClient, useValue: {
           post: (url: string, data: any): Observable<any> => {
-            if (url === scheduleUrl) {
               return Observable.of('');
-            } else {
-              return new Observable(observer => {
-                observer.error('Error: bad url used in API call');
-                observer.complete();
-              })
-            }
           }
         }},
         AnalysisSchedulerService,
@@ -58,14 +46,6 @@ describe('AnalysisSchedulerService', () => {
 
   it('should be created', inject([AnalysisSchedulerService], (service: AnalysisSchedulerService) => {
     expect(service).toBeTruthy();
-  }));
-
-  it('provides valid layout url for algorithm', inject([AnalysisSchedulerService], (service: AnalysisSchedulerService) => {
-    expect(service.formLayoutUrl('blah')).toBe('analysis-api-url/layout/inputs/blah/');
-  }));
-
-  it('provides valid schema url for algorithm', inject([AnalysisSchedulerService], (service: AnalysisSchedulerService) => {
-    expect(service.formSchemaUrl('blah')).toBe('analysis-api-url/schema/inputs/blah/');
   }));
 
   it('queries scheduler with post', inject([AnalysisSchedulerService], (service: AnalysisSchedulerService) => {

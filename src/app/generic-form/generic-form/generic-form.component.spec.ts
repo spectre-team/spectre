@@ -23,7 +23,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import { JsonSchemaFormModule, MaterialDesignFrameworkModule } from 'angular2-json-schema-form';
+import {
+  Framework,
+  FrameworkLibraryService, JsonSchemaFormModule, JsonSchemaFormService, MaterialDesignFramework,
+  MaterialDesignFrameworkModule, WidgetLibraryService
+} from 'angular2-json-schema-form';
 
 import { GenericFormFetchService } from '../generic-form-fetch.service';
 import { GenericFormComponent } from './generic-form.component';
@@ -84,7 +88,15 @@ describe('GenericFormComponent', () => {
         BrowserModule,
         BrowserAnimationsModule,
         MaterialDesignFrameworkModule,
-        JsonSchemaFormModule.forRoot(MaterialDesignFrameworkModule),
+        {
+          ngModule: JsonSchemaFormModule,
+          providers: [
+            JsonSchemaFormService,
+            FrameworkLibraryService,
+            WidgetLibraryService,
+            {provide: Framework, useClass: MaterialDesignFramework, multi: true}
+          ]
+        },
       ],
       providers: [
         {provide: GenericFormFetchService, useClass: MockFetchService},

@@ -22,33 +22,24 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
-import { Service } from '../app.service';
 import { apiUrl } from '../../environments/apiUrl';
 
 @Injectable()
 export class AnalysisSchedulerService {
 
-  private layoutUrlPattern: string;
-  private schemaUrlPattern: string;
-  private scheduleUrlPattern: string;
-
-  constructor(private client: HttpClient, private urlProvider: Service) {
-    const analysisApiUrlBase = urlProvider.getBaseAnalysisApiUrl();
-    this.layoutUrlPattern = analysisApiUrlBase + apiUrl.inputsLayoutUrl;
-    this.schemaUrlPattern = analysisApiUrlBase + apiUrl.inputsSchemaUrl;
-    this.scheduleUrlPattern = analysisApiUrlBase + apiUrl.scheduleUrl;
+  constructor(private client: HttpClient) {
   }
 
   formSchemaUrl(algorithm: string): string {
-    return this.schemaUrlPattern.format(algorithm);
+    return apiUrl.inputsLayoutUrl(algorithm);
   }
 
   formLayoutUrl(algorithm: string): string {
-    return this.layoutUrlPattern.format(algorithm);
+    return apiUrl.inputsSchemaUrl(algorithm);
   }
 
   enqueue(algorithm: string, parameters: any): Observable<any> {
-    const targetUrl = this.scheduleUrlPattern.format(algorithm);
+    const targetUrl = apiUrl.scheduleUrl(algorithm);
     return this.client.post(targetUrl, parameters);
   }
 

@@ -22,7 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/Rx';
 
-import { Service } from '../app.service';
 import { ResultDownloadService } from './result-download.service';
 
 
@@ -34,7 +33,6 @@ describe('ResultDownloadService', () => {
       ],
       providers: [
         ResultDownloadService,
-        Service,
       ],
     });
   });

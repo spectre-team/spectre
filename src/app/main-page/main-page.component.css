@@ -4,6 +4,14 @@
   height: 100vh;
 }
 
+.disclaimerText
+{
+  text-align: center;
+  margin-top: 10%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
 .imagineText
 {
   text-align: justify;

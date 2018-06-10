@@ -20,7 +20,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { apiUrl } from '../../../environments/apiUrl';
-import { Service } from '../../app.service';
 import { AspectDescription } from '../aspect-description';
 import { ResultDownloadService } from '../result-download.service';
 
@@ -34,25 +33,23 @@ export class AspectViewComponent implements OnInit {
   @Input() algorithm: string;
   @Input() id: string;
   @Input() description: AspectDescription;
-  private schemaUrl: string;
-  private layoutUrl: string;
-  private result: any;
+  public schemaUrl: string;
+  public layoutUrl: string;
+  public result: any;
 
   constructor(
-    private urlService: Service,
     private resultsService: ResultDownloadService,
   ) { }
 
   ngOnInit() {
     if (this.description !== undefined) {
       const aspect = this.description.aspect;
-      const baseUrl = this.urlService.getBaseAnalysisApiUrl();
-      this.schemaUrl = baseUrl + apiUrl.aspectSchemaUrl.format(this.algorithm, aspect);
-      this.layoutUrl = baseUrl + apiUrl.aspectLayoutUrl.format(this.algorithm, aspect);
+      this.schemaUrl = apiUrl.aspectSchemaUrl(this.algorithm, aspect);
+      this.layoutUrl = apiUrl.aspectLayoutUrl(this.algorithm, aspect);
     }
   }
 
-  private submit(query: any) {
+  public submit(query: any) {
     this.resultsService
       .getResult(this.algorithm, this.id, this.description.aspect, query)
       .subscribe(data => this.result = data);

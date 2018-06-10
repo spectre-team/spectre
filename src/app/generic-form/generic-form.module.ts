@@ -23,7 +23,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { JsonSchemaFormModule, MaterialDesignFrameworkModule } from 'angular2-json-schema-form';
+import {
+  Framework,
+  FrameworkLibraryService, JsonSchemaFormModule, JsonSchemaFormService, MaterialDesignFramework,
+  MaterialDesignFrameworkModule, WidgetLibraryService
+} from 'angular2-json-schema-form';
 
 import { GenericFormFetchService } from './generic-form-fetch.service';
 import { GenericFormComponent } from './generic-form/generic-form.component';
@@ -36,7 +40,15 @@ import { GenericFormComponent } from './generic-form/generic-form.component';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialDesignFrameworkModule,
-    JsonSchemaFormModule.forRoot(MaterialDesignFrameworkModule),
+    {
+      ngModule: JsonSchemaFormModule,
+      providers: [
+        JsonSchemaFormService,
+        FrameworkLibraryService,
+        WidgetLibraryService,
+        {provide: Framework, useClass: MaterialDesignFramework, multi: true}
+      ]
+    },
   ],
   providers: [
     GenericFormFetchService,
