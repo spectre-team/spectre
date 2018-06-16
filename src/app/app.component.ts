@@ -17,13 +17,22 @@
    limitations under the License.
 */
 
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'Spectre';
+  minimalPixels = 720;
+
+  isMobile() {
+  const innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    return innerWidth < this.minimalPixels;
+  }
+
 }
