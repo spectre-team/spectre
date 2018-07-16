@@ -18,15 +18,16 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
-import { SpectrumService} from '../../spectra/shared/spectrum.service';
-import { HeatmapService} from '../../heatmaps/shared/heatmap.service';
+import { ActivatedRoute } from '@angular/router';
+import { SpectrumService } from '../../spectra/shared/spectrum.service';
+import { HeatmapService } from '../../heatmaps/shared/heatmap.service';
 import { Spectrum } from '../../spectra/shared/spectrum';
 import { Heatmap } from '../../heatmaps/shared/heatmap';
 import { PreparationService } from '../shared/preparation.service';
 import { Preparation } from '../shared/preparation';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { isUndefined } from "util";
 
 @Component({
   selector: 'app-preparation',
@@ -51,35 +52,41 @@ export class PreparationComponent implements OnInit {
   public minHeatmapRow: number;
   public onClickBind: Function;
   @BlockUI() blockUI: NgBlockUI;
-  public colors = [ {value:  'RdBu'}, {value: 'Greys'}, {value:  'YlGnBu'} , {value: 'Greens'}, {value:  'YlOrRd'},
-    {value:  'Bluered'}, {value:  'Reds'}, {value: 'Blues'}, {value:  'Picnic'}, {value:  'Rainbow'}, {value: 'Portland'},
-    {value:  'Jet'}, {value:  'Hot'}, {value:  'Blackbody'}, {value:  'Earth'}, {value: 'Electric'}, {value:  'Viridis'}];
+  public colors = [{value: 'RdBu'}, {value: 'Greys'}, {value: 'YlGnBu'}, {value: 'Greens'}, {value: 'YlOrRd'},
+    {value: 'Bluered'}, {value: 'Reds'}, {value: 'Blues'}, {value: 'Picnic'}, {value: 'Rainbow'}, {value: 'Portland'},
+    {value: 'Jet'}, {value: 'Hot'}, {value: 'Blackbody'}, {value: 'Earth'}, {value: 'Electric'}, {value: 'Viridis'}];
   public selectedValue = 'RdBu';
   public heatmap: Heatmap;
 
   constructor(
-      private route: ActivatedRoute,
-      private spectrumService: SpectrumService,
-      private heatmapService: HeatmapService,
-      private preparationService: PreparationService,
-      private messageService: MessageService
-  ) { }
+    private route: ActivatedRoute,
+    private spectrumService: SpectrumService,
+    private heatmapService: HeatmapService,
+    private preparationService: PreparationService,
+    private messageService: MessageService
+  ) {
+  }
 
   ngOnInit() {
     this.onClickBind = this.onClickFunction.bind(this);
-      this.route.params.subscribe(params => {
-        console.log('[PreparationComponent] ngOnInit');
-        this.id = Number.parseInt(params['id']);
-        console.log(this.id);
-        console.log('[PreparationComponent] parsed id');
-        this.preparationService
-          .getPreparationById(this.id)
-          .subscribe(preparation => this.preparation = preparation);
-        this.heatmapService
-          .get(this.id, 0)
-          .subscribe(heatmap => this.heatmapData = this.toHeatmapDataset(heatmap));
-        console.log('[SpectrumComponent] layout setup');
-      });
+    this.route.params.subscribe(params => {
+      console.log('[PreparationComponent] ngOnInit');
+      this.id = Number.parseInt(params['id']);
+      console.log(this.id);
+      console.log('[PreparationComponent] parsed id');
+      this.preparationService
+        .getPreparationById(this.id)
+        .subscribe(preparation => this.preparation = preparation);
+      this.heatmapService
+        .get(this.id, 0)
+        .subscribe(heatmap => {
+            this.heatmapData = this.toHeatmapDataset(heatmap);
+            this.findInitialPointToSpectrum();
+            this.getSpectrumByCoordinates();
+          }
+        );
+      console.log('[SpectrumComponent] layout setup');
+    });
   }
 
   onInputChannelId(event: any) {
@@ -87,13 +94,13 @@ export class PreparationComponent implements OnInit {
   }
 
   onChangedChannelId(event: any) {
-      this.blockUI.start('Getting heatmap...');
-      this.heatmapService
-        .get(this.id, this.currentChannelId)
-        .subscribe(heatmap => {
-          this.heatmapData = this.toHeatmapDataset(heatmap);
-          this.blockUI.stop();
-        });
+    this.blockUI.start('Getting heatmap...');
+    this.heatmapService
+      .get(this.id, this.currentChannelId)
+      .subscribe(heatmap => {
+        this.heatmapData = this.toHeatmapDataset(heatmap);
+        this.blockUI.stop();
+      });
   }
 
   changeColor() {
@@ -118,7 +125,7 @@ export class PreparationComponent implements OnInit {
     this.xCoordinate = point.x;
     this.yCoordinate = point.y;
     this.getSpectrumByCoordinates();
-}
+  }
 
   /*
    * Parameters:
@@ -142,6 +149,16 @@ export class PreparationComponent implements OnInit {
       });
   }
 
+  findInitialPointToSpectrum() {
+    for (let i = 0; i < this.xHeatmapSize; i++)
+      for (let j = 0; j < this.yHeatmapSize; j++)
+        if (!isUndefined(this.heatmap.data[j][i])) {
+          this.xCoordinate = i;
+          this.yCoordinate = j;
+          return;
+        }
+  }
+
   showError(msg: string) {
     this.blockUI.stop();
     console.log(msg);
@@ -159,7 +176,9 @@ export class PreparationComponent implements OnInit {
 
     if (isNaN(selectNumber) || selectNumber > this.preparation.spectraNumber || selectNumber < 0) {
       this.showError('Type properly number from 0 to ' + 997);
-    } else { this.getSpectrum(selectNumber); }
+    } else {
+      this.getSpectrum(selectNumber);
+    }
   }
 
   toHeatmapDataset(heatmap: Heatmap) {
