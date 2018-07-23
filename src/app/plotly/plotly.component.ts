@@ -40,8 +40,8 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
   initialized: boolean;
 
   constructor(
-      private cdRef: ChangeDetectorRef,
-      private guid: GuidService
+    private cdRef: ChangeDetectorRef,
+    private guid: GuidService
   ) {
     this.randomId = guid.next();
     this.initialized = false;
@@ -64,15 +64,15 @@ export class PlotlyComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
-      console.log('[PlotlyComponent] nfAfterViewInit');
-      this.createPlot();
-      console.log('[PlotlyComponent] created plotly-' + this.randomId);
+    console.log('[PlotlyComponent] nfAfterViewInit');
+    this.createPlot();
+    const plotlyElement = <PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
+    plotlyElement.on('plotly_click', (event) => this.onClickFunction(event));
+    console.log('[PlotlyComponent] created plotly-' + this.randomId);
   }
 
   createPlot() {
     Plotly.react('plotly-' + this.randomId, this.data, this.layout, this.options);
-    const plotlyElement = <PlotHTMLElement> document.getElementById('plotly-' + this.randomId);
-    plotlyElement.on('plotly_click', (event) => this.onClickFunction(event));
     this.initialized = true;
     this.cdRef.detectChanges();
   }
